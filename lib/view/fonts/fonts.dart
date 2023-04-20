@@ -15,11 +15,11 @@ class DGoogleFonts {
     color: cWhite,
   );
   static final TextStyle subhighTextStyle = GoogleFonts.poppins(
-    fontSize: 25,
+    fontSize: 23,
     fontWeight: FontWeight.w500,
     color: cWhite,
   );
-   static final TextStyle subhintTextStyle = GoogleFonts.montserrat(
+   static final TextStyle subhintTextStyle = GoogleFonts.poppins(
     fontSize: 30,
     fontWeight: FontWeight.w500,
     color: cWhite,

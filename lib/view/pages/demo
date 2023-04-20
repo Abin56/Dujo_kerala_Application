@@ -1,0 +1,16 @@
+// decoration: InputDecoration(
+//                             border: InputBorder.none,
+//                             prefixIcon: IconButton(
+//                               onPressed: () {},
+//                               icon: Image.asset(AppIcons.emailIcon),
+//                             ),
+//                               suffixIcon: IconButton(
+//                                 icon: Icon(
+//                                    // _hideGetxController.isObscurefirst.value
+//                                       //  ? Icons.visibility
+//                                        // : Icons.visibility_off),
+//                                 onPressed: () {
+//                                  // _hideGetxController.toggleObscureFirst();
+//                                 },
+//                               ),
+//                           ),

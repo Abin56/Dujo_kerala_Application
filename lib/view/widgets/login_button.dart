@@ -1,13 +1,18 @@
+ // ignore_for_file: camel_case_types
+
  import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../fonts/fonts.dart';
 
+// ignore: must_be_immutable
 class loginButtonWidget extends StatelessWidget {
 
   String text;
+  
    loginButtonWidget({
+   
     required this.text,
     super.key,
   });             
@@ -18,9 +23,9 @@ class loginButtonWidget extends StatelessWidget {
       height: 60.h,
       width: 280.w,
      
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
-         color: cblue,),
+         color: adminePrimayColor,),
       child: Center(
         child: Text(
           text,

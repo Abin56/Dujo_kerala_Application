@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(423.5294196844927, 945.8823706287004),
         builder: (context, child) {
-          return const GetMaterialApp(
+          return  GetMaterialApp(
             home: SplashScreen(),
             //asdfsdf
             //sdfsdfsdf

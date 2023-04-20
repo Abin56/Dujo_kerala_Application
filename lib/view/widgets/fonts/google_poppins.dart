@@ -9,10 +9,13 @@ class GooglePoppinsWidgets extends StatelessWidget {
   double fontsize;
   FontWeight? fontWeight;
   Color? color;
+  VoidCallback? onTap;
    GooglePoppinsWidgets({
     required this.text,
     required this.fontsize,
     this.fontWeight,
+    this.color,
+    this.onTap,
     super.key,
   });
 
