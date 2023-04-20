@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../fonts/fonts.dart';
+import '../login/student login/student_login.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -37,5 +38,5 @@ class SplashScreen extends StatelessWidget {
 
 nextpage() async {
   await Future.delayed(const Duration(seconds: 3))
-      .then((value) => Get.to(const DujoLoginScren()));
+      .then((value) => Get.to(const StudentLogin()));
 }

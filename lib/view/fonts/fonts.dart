@@ -14,4 +14,14 @@ class DGoogleFonts {
     fontWeight: FontWeight.w400,
     color: cWhite,
   );
+  static final TextStyle subhighTextStyle = GoogleFonts.poppins(
+    fontSize: 25,
+    fontWeight: FontWeight.w500,
+    color: cWhite,
+  );
+   static final TextStyle subhintTextStyle = GoogleFonts.montserrat(
+    fontSize: 30,
+    fontWeight: FontWeight.w500,
+    color: cWhite,
+  );
 }
