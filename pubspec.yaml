@@ -42,7 +42,8 @@ dependencies:
   cloud_firestore:
   firebase_storage: 
   get:
-  fluttertoast: ^8.2.1
+  fluttertoast: 
+  dropdown_search: 
 
 dev_dependencies:
   flutter_test:
