@@ -36,6 +36,7 @@ class SplashScreen extends StatelessWidget {
 }
 
 nextpage() async {
-  await Future.delayed(const Duration(seconds: 3))
-      .then((value) => Get.to(const DujoLoginScren()));
+  await Future.delayed(const Duration(seconds: 3));
+   Get.off(const DujoLoginScren());
+    
 }
