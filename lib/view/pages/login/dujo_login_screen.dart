@@ -1,11 +1,12 @@
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
+
+
 import 'package:dujo_kerala_application/view/pages/login/widgets/login_screenDegin.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+
 
 import '../../colors/colors.dart';
 import '../../fonts/fonts.dart';
@@ -33,7 +34,7 @@ class DujoLoginScren extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.off(UsersLoginScreen());
+                    
                     },
                     child: Container(
                       height: 100.h,

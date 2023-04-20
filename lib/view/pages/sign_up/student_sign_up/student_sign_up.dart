@@ -82,23 +82,24 @@ class StudentSignInPageScreen extends StatelessWidget {
                     SinUpTextFromFiled(
                         text: 'Your Name',
                         hintText: 'Enter your Name',
-                        textfromController: studentNameController),
-                    Row(
+                        // textfromController: studentNameController
+                        ),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          width: 200,
+                          width: 180,
                           child: DropdownSearch<String>(
-                            selectedItem: 'Select',
+                            selectedItem: 'Gender',
                             validator: (v) => v == null ? "required field" : null,
                             items: const ['Male', 'Female', 'Others'],
                           ),
                         ),
                            Container(
-                          width: 200,
+                          width: 180,
                           child: DropdownSearch<String>(
-                            selectedItem: 'Select',
+                            selectedItem: 'Blood Group',
                             validator: (v) => v == null ? "required field" : null,
-                            items: const ['Male', 'Female', 'Others'],
+                            items: const ['A +ve','A -ve','B +ve','B -ve','O +ve','O -ve'],
                           ),
                         ),
                       ],
@@ -106,19 +107,23 @@ class StudentSignInPageScreen extends StatelessWidget {
                     SinUpTextFromFiled(
                         text: 'House Name',
                         hintText: 'Enter your House Name',
-                        textfromController: studentNameController),
+                        // textfromController: studentNameController
+                        ),
                     SinUpTextFromFiled(
                         text: 'House Number',
                         hintText: 'Enter your House Number',
-                        textfromController: studentNameController),
+                        // textfromController: studentNameController
+                        ),
                     SinUpTextFromFiled(
                         text: 'Place',
                         hintText: 'Enter your Place',
-                        textfromController: studentNameController),
+                        // textfromController: studentNameController
+                        ),
                     SinUpTextFromFiled(
                         text: 'email',
                         hintText: 'Enter your email',
-                        textfromController: studentNameController)
+                        // textfromController: studentNameController
+                        )
                   ],
                 ),
               )

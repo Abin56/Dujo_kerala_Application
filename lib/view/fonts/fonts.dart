@@ -14,4 +14,9 @@ class DGoogleFonts {
     fontWeight: FontWeight.w400,
     color: cWhite,
   );
+     static final TextStyle centerTextStyle = GoogleFonts.oswald(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: cWhite,
+  );
 }

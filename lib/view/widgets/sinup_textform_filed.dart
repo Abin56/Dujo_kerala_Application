@@ -14,10 +14,10 @@ class SinUpTextFromFiled extends StatelessWidget {
     required this.hintText,
     this.validator,
     super.key,
-    required this.textfromController,
+    // required this.textfromController,
   });
 
-  final TextEditingController textfromController;
+  // final TextEditingController textfromController;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class SinUpTextFromFiled extends StatelessWidget {
               child: Center(
                 child: TextFormField(
                   validator: validator,
-                  controller: textfromController,
+                  // controller: textfromController,
                   decoration:  InputDecoration(
                     hintText: hintText,
                     border: InputBorder.none,
