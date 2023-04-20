@@ -89,15 +89,17 @@ class StudentSignInPageScreen extends StatelessWidget {
                           width: 200,
                           child: DropdownSearch<String>(
                             selectedItem: 'Select',
-                            validator: (v) => v == null ? "required field" : null,
+                            validator: (v) =>
+                                v == null ? "required field" : null,
                             items: const ['Male', 'Female', 'Others'],
                           ),
                         ),
-                           Container(
+                        Container(
                           width: 200,
                           child: DropdownSearch<String>(
                             selectedItem: 'Select',
-                            validator: (v) => v == null ? "required field" : null,
+                            validator: (v) =>
+                                v == null ? "required field" : null,
                             items: const ['Male', 'Female', 'Others'],
                           ),
                         ),

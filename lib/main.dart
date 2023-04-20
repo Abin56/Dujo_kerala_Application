@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_application/firebase_options.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/pages/sign_up/student_sign_up/student_sign_up.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(423.5294196844927, 945.8823706287004),
         builder: (context, child) {
           return  GetMaterialApp(
-            home: StudentSignInPageScreen(),
+            home: UsersLoginScreen(),
             //asdfsdf
             //sdfsdfsdf
           );
