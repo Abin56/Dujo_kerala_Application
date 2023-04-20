@@ -1,5 +1,7 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/user_login_design.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/widgets/user_login_design.dart';
+import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,14 +40,19 @@ class UsersLoginScreen extends StatelessWidget {
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: FadeInAnimation(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              // print("object");
+                              Get.to(navigationScreens[index]);
+                            },
                             child: Container(
                               margin: EdgeInsets.only(
                                   bottom: w / 10, left: w / 20, right: w / 20),
                               decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.red, width: 0.3),
-                                color: const Color.fromARGB(252, 236, 193, 193)
+                                border: Border.all(
+                                    color:
+                                        const Color.fromARGB(255, 27, 75, 235),
+                                    width: 0.3),
+                                color: const Color.fromARGB(251, 194, 213, 246)
                                     .withOpacity(0.4),
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(16),
@@ -58,18 +65,21 @@ class UsersLoginScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: Center(
-                                child: GestureDetector(
-                                  onTap: (){
-                                    getWhichTeacher();
-                                  },
-                                  child: GoogleMonstserratWidgets(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ContainerImage(
+                                      height: 60,
+                                      width: 60,
+                                      imagePath: icons[index]),
+                                  GoogleMonstserratWidgets(
                                     text: userList[index],
                                     letterSpacing: 1,
                                     fontsize: 20,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ),
@@ -80,25 +90,22 @@ class UsersLoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+       
         ],
       )),
     );
   }
 }
 
-getWhichTeacher()  {
-  return
-  Get.bottomSheet(Container(
+getWhichTeacher() {
+  return Get.bottomSheet(Container(
     color: Colors.white,
     height: 200.h,
-    
-
     child: Row(
       children: [
         Container(
           height: 100.h,
-     
           child: Center(
             child: GoogleMonstserratWidgets(
               text: 'Teacher',
@@ -126,3 +133,16 @@ getWhichTeacher()  {
 }
 
 List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
+
+var navigationScreens = [
+  StudentLogin(),
+  StudentLogin(),
+  StudentLogin(),
+  StudentLogin(),
+];
+var icons = [
+  'assets/images/reading.png',
+  'assets/images/family.png',
+  'assets/images/guard.png',
+  'assets/images/teacher.png',
+];

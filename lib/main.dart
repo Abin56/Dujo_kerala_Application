@@ -24,10 +24,9 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(423.5294196844927, 945.8823706287004),
         builder: (context, child) {
-          return  GetMaterialApp(
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
             home: SplashScreen(),
-            //asdfsdf
-            //sdfsdfsdf
           );
         });
   }

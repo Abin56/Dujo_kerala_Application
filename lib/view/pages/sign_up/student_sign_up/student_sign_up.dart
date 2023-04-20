@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
