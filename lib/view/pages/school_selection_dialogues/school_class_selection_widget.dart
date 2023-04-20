@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'school_class_selection_controller.dart';
+import '../../../controller/schoo_selection_controller/school_class_selection_controller.dart';
 import 'widgets/school_select_dialogue_widget.dart';
 
 class SchoolClassSelectionScreen extends StatelessWidget {
