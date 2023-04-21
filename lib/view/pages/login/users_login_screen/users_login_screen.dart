@@ -1,5 +1,8 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/parent_login/parent_login.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/teacher_login/teacher_login.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/widgets/user_login_design.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -8,8 +11,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 
+import '../../../../model/Text_hiden_Controller/password_field.dart';
+import 'class_taecher_login/class_teacher_login.dart';
+
 class UsersLoginScreen extends StatelessWidget {
-  const UsersLoginScreen({super.key});
+  PasswordField hideGetxController = Get.put(PasswordField());
+
+  UsersLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +48,16 @@ class UsersLoginScreen extends StatelessWidget {
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: FadeInAnimation(
                           child: GestureDetector(
-                            onTap: () {
-                              // print("object");
-                              Get.to(navigationScreens[index]);
+                            onTap: () async {
+                              if (index == 0) {
+                                Get.to(StudentLoginScreen());
+                              } else if (index == 1) {
+                                Get.to(StudentLoginScreen());
+                              } else if (index == 2) {
+                                Get.to(StudentLoginScreen());
+                              } else if (index == 3) {
+                                getWhichTeacher();
+                              }
                             },
                             child: Container(
                               margin: EdgeInsets.only(
@@ -91,39 +106,59 @@ class UsersLoginScreen extends StatelessWidget {
               ),
             ),
           ),
-       
         ],
       )),
     );
   }
+
+  List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
 }
 
+var icons = [
+  'assets/images/reading.png',
+  'assets/images/family.png',
+  'assets/images/guard.png',
+  'assets/images/teacher.png',
+];
 getWhichTeacher() {
-  return Get.bottomSheet(Container(
+  Get.bottomSheet(Container(
     color: Colors.white,
     height: 200.h,
+    width: 200.w,
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        SizedBox(
-          height: 100.h,
-          child: Center(
-            child: GoogleMonstserratWidgets(
-              text: 'Teacher',
-              letterSpacing: 1,
-              fontsize: 20,
-              fontWeight: FontWeight.w500,
+        GestureDetector(
+          onTap: () {
+            Get.to(TeacherLoginScreen());
+          },
+          child: Container(
+            color: const Color.fromARGB(255, 171, 198, 249),
+            height: 80.h,
+            width: 200.w,
+            child: Center(
+              child: GoogleMonstserratWidgets(
+                text: 'Teacher',
+                fontsize: 19,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
-        SizedBox(
-          height: 100.h,
-          width: double.infinity.w,
-          child: Center(
-            child: GoogleMonstserratWidgets(
-              text: 'Class Teacher',
-              letterSpacing: 1,
-              fontsize: 20,
-              fontWeight: FontWeight.w500,
+        GestureDetector(
+          onTap: () {
+              Get.to(ClassTeacherLoginScreen());
+          },
+          child: Container(
+            color: const Color.fromARGB(255, 171, 198, 249),
+            height: 80.h,
+            width: 200.w,
+            child: Center(
+              child: GoogleMonstserratWidgets(
+                text: 'Class Teacher',
+                fontsize: 19,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         )
@@ -131,18 +166,3 @@ getWhichTeacher() {
     ),
   ));
 }
-
-List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
-
-var navigationScreens = [
-  StudentLogin(),
-  StudentLogin(),
-  StudentLogin(),
-  StudentLogin(),
-];
-var icons = [
-  'assets/images/reading.png',
-  'assets/images/family.png',
-  'assets/images/guard.png',
-  'assets/images/teacher.png',
-];

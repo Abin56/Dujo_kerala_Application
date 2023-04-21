@@ -16,10 +16,10 @@ import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/login_button.dart';
 import '../../../../widgets/textformfield_login.dart';
 
-class StudentLoginScreen extends StatelessWidget {
+class GuardianLoginScreen extends StatelessWidget {
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  StudentLoginScreen({super.key});
+  GuardianLoginScreen({super.key});
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

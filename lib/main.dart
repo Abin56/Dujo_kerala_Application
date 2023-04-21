@@ -1,16 +1,10 @@
-
-
-import 'package:dujo_kerala_application/sruthi/parent_sign_up.dart';
-
-import 'firebase_options.dart';
-
-
+import 'package:dujo_kerala_application/firebase_options.dart';
+import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
+import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +27,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            home:
-            ParentSignUpPage(),
-         
+            home: SplashScreen(),
           );
         });
   }

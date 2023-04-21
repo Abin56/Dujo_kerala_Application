@@ -10,7 +10,6 @@ import '../../fonts/fonts.dart';
 
 
 class SplashScreen extends StatelessWidget {
-  PasswordField hideGetxController = Get.put(PasswordField());
   SplashScreen({super.key});
 
   @override
