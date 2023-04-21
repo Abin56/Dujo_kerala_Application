@@ -14,7 +14,7 @@ import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
-import '../../../../widgets/login_button.dart';
+import '../../../../../widgets/login_button.dart';
 import '../../../../widgets/textformfield_login.dart';
 
 class StudentLogin extends StatelessWidget {

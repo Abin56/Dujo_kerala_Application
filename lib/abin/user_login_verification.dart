@@ -2,13 +2,12 @@
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
-import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
+import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
-import 'package:dujo_kerala_application/view/widgets/login_button.dart';
+import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,29 +27,13 @@ class LoginVerification extends StatelessWidget {
   TextEditingController verificationconfirmController = TextEditingController();
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: SingleChildScrollView(
         child: Column(
         children: [
-             Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                    ContainerImage(
-                        height: 60.h,
-                        width: 60.w,
-                        imagePath: 'assets/images/leptonlogo.png'),
-                    GooglePoppinsWidgets(
-                      text: "Lepton DuJo",
-                      fontsize: 15,
-                      color: cred,
-                      fontWeight: FontWeight.w600,
-                    ),
-                      ],
-                    ),
+             const leptonDujoWidget(),
                   //  kHeight20,
           ContainerImage(height: 250.h,width:double.infinity,imagePath: 'assets/images/splash.png',),
           kHeight30,
@@ -159,3 +142,4 @@ class LoginVerification extends StatelessWidget {
     );
   }
 }
+

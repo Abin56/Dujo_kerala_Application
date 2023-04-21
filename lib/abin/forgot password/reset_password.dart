@@ -7,7 +7,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
-import 'package:dujo_kerala_application/view/widgets/login_button.dart';
+import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

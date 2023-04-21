@@ -4,7 +4,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../fonts/fonts.dart';
+import '../view/fonts/fonts.dart';
 
 // ignore: must_be_immutable
 class loginButtonWidget extends StatelessWidget {

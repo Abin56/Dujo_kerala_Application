@@ -2,7 +2,7 @@ import 'package:dujo_kerala_application/view/pages/login/widgets/login_screenDeg
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../widgets/login_button.dart';
+import '../../../widgets/login_button.dart';
 import 'users_login_screen/users_login_screen.dart';
 
 class DujoLoginScren extends StatelessWidget {
