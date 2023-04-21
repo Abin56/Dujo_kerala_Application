@@ -1,12 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../model/Text_hiden_Controller/password_field.dart';
 import '../../fonts/fonts.dart';
+import '../login/users_login_screen/student login/student_login.dart';
+import '../login/users_login_screen/users_login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  PasswordField hideGetxController = Get.put(PasswordField());
+  SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +43,5 @@ class SplashScreen extends StatelessWidget {
 
 nextpage() async {
   await Future.delayed(const Duration(seconds: 3));
-   Get.off(const DujoLoginScren());
-    
+  Get.to(const DujoLoginScren());
 }

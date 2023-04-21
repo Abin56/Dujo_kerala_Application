@@ -14,9 +14,14 @@ class DGoogleFonts {
     fontWeight: FontWeight.w400,
     color: cWhite,
   );
-     static final TextStyle centerTextStyle = GoogleFonts.oswald(
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
+  static final TextStyle subhighTextStyle = GoogleFonts.poppins(
+    fontSize: 23,
+    fontWeight: FontWeight.w500,
+    color: cWhite,
+  );
+   static final TextStyle subhintTextStyle = GoogleFonts.poppins(
+    fontSize: 30,
+    fontWeight: FontWeight.w500,
     color: cWhite,
   );
 }

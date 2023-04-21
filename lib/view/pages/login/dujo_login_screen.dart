@@ -1,15 +1,9 @@
-
-
 import 'package:dujo_kerala_application/view/pages/login/widgets/login_screenDegin.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
-
-import '../../colors/colors.dart';
-import '../../fonts/fonts.dart';
+import 'package:get/get.dart';
+import '../../widgets/login_button.dart';
+import 'users_login_screen/users_login_screen.dart';
 
 class DujoLoginScren extends StatelessWidget {
   const DujoLoginScren({super.key});
@@ -22,33 +16,24 @@ class DujoLoginScren extends StatelessWidget {
         children: [
           const LoginScreenDesign(),
           Expanded(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GoogleMonstserratWidgets(
-                    text: 'Hello..',
-                    letterSpacing: 2,
-                    fontsize: 30,
-                    fontWeight: FontWeight.w500,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GoogleMonstserratWidgets(
+                  text: 'Hello..',
+                  letterSpacing: 2,
+                  fontsize: 30,
+                  fontWeight: FontWeight.w500,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.off(const UsersLoginScreen());
+                  },
+                  child: loginButtonWidget(
+                    text: 'Login',
                   ),
-                  GestureDetector(
-                    onTap: () {
-                    
-                    },
-                    child: Container(
-                      height: 100.h,
-                      color: cblue,
-                      child: Center(
-                        child: Text(
-                          "Login",
-                          style: DGoogleFonts.subHeadTextStyle,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           )
         ],

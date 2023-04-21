@@ -1,7 +1,5 @@
 import 'package:dujo_kerala_application/firebase_options.dart';
-import 'package:dujo_kerala_application/view/pages/sign_up/student_sign_up/parent_sign_up.dart';
-import 'package:dujo_kerala_application/view/pages/sign_up/student_sign_up/student_sign_up.dart';
-
+import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,10 +24,9 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(423.5294196844927, 945.8823706287004),
         builder: (context, child) {
-          return  GetMaterialApp(
-            home: ParentSignUp(),
-            //asdfsdf
-            //sdfsdfsdf
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: SplashScreen(),
           );
         });
   }

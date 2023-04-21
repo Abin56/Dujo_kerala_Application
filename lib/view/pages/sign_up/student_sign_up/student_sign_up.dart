@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
@@ -82,24 +84,25 @@ class StudentSignInPageScreen extends StatelessWidget {
                     SinUpTextFromFiled(
                         text: 'Your Name',
                         hintText: 'Enter your Name',
-                        // textfromController: studentNameController
-                        ),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        textfromController: studentNameController),
+                    Row(
                       children: [
                         Container(
-                          width: 180,
+                          width: 200,
                           child: DropdownSearch<String>(
-                            selectedItem: 'Gender',
-                            validator: (v) => v == null ? "required field" : null,
+                            selectedItem: 'Select',
+                            validator: (v) =>
+                                v == null ? "required field" : null,
                             items: const ['Male', 'Female', 'Others'],
                           ),
                         ),
-                           Container(
-                          width: 180,
+                        Container(
+                          width: 200,
                           child: DropdownSearch<String>(
-                            selectedItem: 'Blood Group',
-                            validator: (v) => v == null ? "required field" : null,
-                            items: const ['A +ve','A -ve','B +ve','B -ve','O +ve','O -ve'],
+                            selectedItem: 'Select',
+                            validator: (v) =>
+                                v == null ? "required field" : null,
+                            items: const ['Male', 'Female', 'Others'],
                           ),
                         ),
                       ],
@@ -107,23 +110,19 @@ class StudentSignInPageScreen extends StatelessWidget {
                     SinUpTextFromFiled(
                         text: 'House Name',
                         hintText: 'Enter your House Name',
-                        // textfromController: studentNameController
-                        ),
+                        textfromController: studentNameController),
                     SinUpTextFromFiled(
                         text: 'House Number',
                         hintText: 'Enter your House Number',
-                        // textfromController: studentNameController
-                        ),
+                        textfromController: studentNameController),
                     SinUpTextFromFiled(
                         text: 'Place',
                         hintText: 'Enter your Place',
-                        // textfromController: studentNameController
-                        ),
+                        textfromController: studentNameController),
                     SinUpTextFromFiled(
                         text: 'email',
                         hintText: 'Enter your email',
-                        // textfromController: studentNameController
-                        )
+                        textfromController: studentNameController)
                   ],
                 ),
               )
