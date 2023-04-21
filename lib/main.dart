@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
+            home:
+            // LoginVerification(),
+            SplashScreen(),
           );
         });
   }

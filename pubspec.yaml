@@ -45,6 +45,7 @@ dependencies:
   fluttertoast: 
   dropdown_search: 
   flutter_staggered_animations:
+  
 
 dev_dependencies:
   flutter_test:

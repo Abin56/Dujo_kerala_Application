@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dujo_kerala_application/abin/forgot%20password/forgot_password.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
@@ -92,12 +93,16 @@ class StudentLogin extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 150.w),
-                      child: GooglePoppinsWidgets(
-                        onTap: () {},
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                      child: GestureDetector(onTap: () {
+                        Get.to(ForgotPassword()); 
+                      },
+                        child: GooglePoppinsWidgets(
+                         
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(

@@ -1,4 +1,8 @@
+import 'package:dujo_kerala_application/abin/forgot%20password/forgot_password.dart';
+import 'package:dujo_kerala_application/abin/forgot%20password/reset_password.dart';
+import 'package:dujo_kerala_application/abin/user_login_verification.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/widgets/user_login_design.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
@@ -7,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+
 
 class UsersLoginScreen extends StatelessWidget {
   const UsersLoginScreen({super.key});
@@ -98,13 +103,14 @@ class UsersLoginScreen extends StatelessWidget {
   }
 }
 
+
 getWhichTeacher() {
   return Get.bottomSheet(Container(
     color: Colors.white,
     height: 200.h,
     child: Row(
       children: [
-        Container(
+        SizedBox(
           height: 100.h,
           child: Center(
             child: GoogleMonstserratWidgets(
@@ -136,9 +142,9 @@ List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
 
 var navigationScreens = [
   StudentLogin(),
-  StudentLogin(),
-  StudentLogin(),
-  StudentLogin(),
+  ForgotPassword(),
+  ResetPassword (),
+  LoginVerification(),
 ];
 var icons = [
   'assets/images/reading.png',

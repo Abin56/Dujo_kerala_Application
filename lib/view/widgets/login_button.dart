@@ -1,6 +1,6 @@
  // ignore_for_file: camel_case_types
 
- import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,6 +10,7 @@ import '../fonts/fonts.dart';
 class loginButtonWidget extends StatelessWidget {
 
   String text;
+ 
   
    loginButtonWidget({
    
@@ -20,8 +21,8 @@ class loginButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.h,
-      width: 280.w,
+      height: 70.h,
+      width:  230.w,
      
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
