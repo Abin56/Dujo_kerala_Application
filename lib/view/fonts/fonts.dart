@@ -24,4 +24,16 @@ class DGoogleFonts {
     fontWeight: FontWeight.w500,
     color: cWhite,
   );
+   static final TextStyle subHeadStyle = GoogleFonts.poppins(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: Colors.black,
+  );
+  static final TextStyle smallTextStyle = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: cblack,
+  );
+
+
 }

@@ -104,7 +104,7 @@ getWhichTeacher() {
     height: 200.h,
     child: Row(
       children: [
-        Container(
+        SizedBox(
           height: 100.h,
           child: Center(
             child: GoogleMonstserratWidgets(

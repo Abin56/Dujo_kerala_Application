@@ -65,7 +65,7 @@ class StudentSignInPageScreen extends StatelessWidget {
           kHeight10,
           Stack(
             children: [
-              Container(
+              SizedBox(
                 height: 800,
                 width: double.infinity,
                 // color: Colors.red,
@@ -74,7 +74,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                     CircleAvatar(
                       radius: 60,
                       child: Stack(
-                        children: [
+                        children: const [
                           CircleAvatar(
                               // backgroundColor: c,
                               )
@@ -87,7 +87,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                         textfromController: studentNameController),
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: DropdownSearch<String>(
                             selectedItem: 'Select',
@@ -96,7 +96,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                             items: const ['Male', 'Female', 'Others'],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: DropdownSearch<String>(
                             selectedItem: 'Select',
