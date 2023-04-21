@@ -11,7 +11,6 @@ import '../login/users_login_screen/student login/student_login.dart';
 import '../login/users_login_screen/users_login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
-  PasswordField hideGetxController = Get.put(PasswordField());
   SplashScreen({super.key});
 
   @override

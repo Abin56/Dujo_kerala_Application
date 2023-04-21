@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/login_button.dart';
+import '../search/search_school/search_school.dart';
 import 'users_login_screen/users_login_screen.dart';
 
 class DujoLoginScren extends StatelessWidget {
@@ -27,7 +28,8 @@ class DujoLoginScren extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.off(const UsersLoginScreen());
+                            Get.to(SearchSchoolScreen());
+
                   },
                   child: loginButtonWidget(
                     text: 'Login',
