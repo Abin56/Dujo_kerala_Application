@@ -13,8 +13,9 @@ class SinUpTextFromFiled extends StatelessWidget {
     required this.text,
     required this.hintText,
     this.validator,
+     required this. textfromController, 
     super.key,
-    required this.textfromController,
+   
   });
 
   final TextEditingController textfromController;
@@ -24,7 +25,7 @@ class SinUpTextFromFiled extends StatelessWidget {
     return SizedBox(
       height: 100.h,
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
+        padding: const EdgeInsets.only(left: 8.0,right: 8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,10 +41,13 @@ class SinUpTextFromFiled extends StatelessWidget {
               color: const Color.fromARGB(255, 211, 225, 236),
               child: Center(
                 child: TextFormField(
+                  
                   validator: validator,
                   controller: textfromController,
                   decoration:  InputDecoration(
                     hintText: hintText,
+                     contentPadding: EdgeInsets.all(10.h),   //  <- you can it to 0.0 for no space
+                            isDense: true,
                     border: InputBorder.none,
                   ),
                 ),

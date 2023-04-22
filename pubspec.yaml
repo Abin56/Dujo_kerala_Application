@@ -45,8 +45,7 @@ dependencies:
   fluttertoast: 
   dropdown_search: 
   flutter_staggered_animations:
-  lottie: 
-  
+  image_picker:
 
 dev_dependencies:
   flutter_test:
