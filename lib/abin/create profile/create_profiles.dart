@@ -1,35 +1,41 @@
-import 'package:dujo_kerala_application/view/colors/colors.dart';
 
+import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/widgets/user_login_design.dart';
+import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
+import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 
-import '../../../../model/Text_hiden_Controller/password_field.dart';
-import 'class_taecher_login/class_teacher_login.dart';
 
-class UsersLoginScreen extends StatelessWidget {
-  PasswordField hideGetxController = Get.put(PasswordField());
 
-  UsersLoginScreen({super.key});
+
+class ProfileCreation extends StatelessWidget {
+  const ProfileCreation({super.key});
 
   @override
   Widget build(BuildContext context) {
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: cWhite,
-      body: SafeArea(
-          child: Column(
+    return Scaffold(body: SafeArea(child: 
+    Column(children: [
+      Row(
         children: [
-          const UserLoginDesgin(),
-          Expanded(
-            child: AnimationLimiter(
-              child: GridView.count(
+          IconButtonBackWidget(color: Colors.black),
+          const leptonDujoWidget(),
+        ],
+      ),
+
+      ContainerImage(height: 250.h, width:  370.w, imagePath: 'assets/images/lap.png'),
+      kHeight20,
+      GooglePoppinsWidgets(text: 'Choose Your Profile ', fontsize: 25,color: Colors.blue,fontWeight: FontWeight.w700),
+      kHeight30,
+      Expanded(child:  AnimationLimiter(
+         child: GridView.count(
                 physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
                 padding: EdgeInsets.all(w / 60),
@@ -46,16 +52,9 @@ class UsersLoginScreen extends StatelessWidget {
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: FadeInAnimation(
                           child: GestureDetector(
-                            onTap: () async {
-                              if (index == 0) {
-                                Get.to(StudentLoginScreen());
-                              } else if (index == 1) {
-                                Get.to(StudentLoginScreen());
-                              } else if (index == 2) {
-                                Get.to(StudentLoginScreen());
-                              } else if (index == 3) {
-                                getWhichTeacher();
-                              }
+                            onTap: () {
+                              // print("object");
+                              Get.to(navigationScreens[index]);
                             },
                             child: Container(
                               margin: EdgeInsets.only(
@@ -65,7 +64,7 @@ class UsersLoginScreen extends StatelessWidget {
                                     color:
                                         const Color.fromARGB(255, 27, 75, 235),
                                     width: 0.3),
-                                color: const Color.fromARGB(251, 194, 213, 246)
+                                color: const Color.fromARGB(250, 55, 144, 207)
                                     .withOpacity(0.4),
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(16),
@@ -88,8 +87,8 @@ class UsersLoginScreen extends StatelessWidget {
                                       imagePath: icons[index]),
                                   GoogleMonstserratWidgets(
                                     text: userList[index],
-                                    letterSpacing: 1,
-                                    fontsize: 20,
+                                    letterSpacing: 0.5,
+                                    fontsize: 18.h,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ],
@@ -102,68 +101,22 @@ class UsersLoginScreen extends StatelessWidget {
                   },
                 ),
               ),
-            ),
-          ),
-        ],
-      )),
-    );
+       ),)
+    ],)),);
   }
-
-  List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
 }
 
-var icons = [
-  'assets/images/reading.png',
-  'assets/images/family.png',
-  'assets/images/guard.png',
-  'assets/images/teacher.png',
+
+List<String> userList = ['Student Profile', 'Parent Profile', 'Guardian Profile', 'Teacher Profile'];
+
+var navigationScreens = [
+  StudentLogin(),
+   StudentLogin(),
+   StudentLogin (),
+   StudentLogin(),
 ];
-getWhichTeacher() {
-  Get.bottomSheet(Container(
-    color: Colors.white,
-    height: 200.h,
-    width: 200.w,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SizedBox(
-          height: 100.h,
-          child: Center(
-            child: GoogleMonstserratWidgets(
-              text: 'Teacher',
-              letterSpacing: 1,
-              fontsize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-              Get.to(ClassTeacherLoginScreen());
-          },
-          child: Container(
-            color: const Color.fromARGB(255, 171, 198, 249),
-            height: 80.h,
-            width: 200.w,
-            child: Center(
-              child: GoogleMonstserratWidgets(
-                text: 'Class Teacher',
-                fontsize: 19,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        )
-      ],
-    ),
-  ));
-}
-
-List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
-
-
-var iconss = [
-  'assets/images/reading.png',
+var icons = [
+  'assets/images/profile.png',
   'assets/images/family.png',
   'assets/images/guard.png',
   'assets/images/teacher.png',

@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 
 import '../../../model/Text_hiden_Controller/password_field.dart';
 import '../../fonts/fonts.dart';
-import '../login/users_login_screen/student login/student_login.dart';
-import '../login/users_login_screen/users_login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});

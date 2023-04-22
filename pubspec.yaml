@@ -46,6 +46,7 @@ dependencies:
   dropdown_search: 
   flutter_staggered_animations:
   lottie: 
+  
 
 dev_dependencies:
   flutter_test:
