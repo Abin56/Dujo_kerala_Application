@@ -31,6 +31,8 @@ class DujoLoginScren extends StatelessWidget {
 
                   },
                   child: loginButtonWidget(
+                             height: 60,
+                        width: 180,
                     text: 'Login',
                   ),
                 )

@@ -4,12 +4,10 @@ import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../model/Text_hiden_Controller/password_field.dart';
 import '../../fonts/fonts.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

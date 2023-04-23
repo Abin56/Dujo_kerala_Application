@@ -1,6 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/parent_login/parent_login.dart';
 
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/teacher_login/teacher_login.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/widgets/user_login_design.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -10,7 +15,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 
 import '../../../../model/Text_hiden_Controller/password_field.dart';
-import 'class_taecher_login/class_teacher_login.dart';
+import 'class_teacher_login/class_teacher_login.dart';
 
 class UsersLoginScreen extends StatelessWidget {
   PasswordField hideGetxController = Get.put(PasswordField());
@@ -48,13 +53,19 @@ class UsersLoginScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () async {
                               if (index == 0) {
-                                Get.to(StudentLoginScreen());
+                                Get.to(StudentLoginScreen(
+                                  pageIndex: 0,
+                                ));
                               } else if (index == 1) {
-                                Get.to(StudentLoginScreen());
+                                Get.to(ParentLoginScreen(
+                                  pageIndex: 1,
+                                ));
                               } else if (index == 2) {
-                                Get.to(StudentLoginScreen());
+                                Get.to(GuardianLoginScreen(
+                                  pageIndex: 2,
+                                ));
                               } else if (index == 3) {
-                                getWhichTeacher();
+                                getWhichTeacher(3, 3);
                               }
                             },
                             child: Container(
@@ -118,7 +129,7 @@ var icons = [
   'assets/images/guard.png',
   'assets/images/teacher.png',
 ];
-getWhichTeacher() {
+getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
   Get.bottomSheet(Container(
     color: Colors.white,
     height: 200.h,
@@ -126,20 +137,31 @@ getWhichTeacher() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        SizedBox(
-          height: 100.h,
-          child: Center(
-            child: GoogleMonstserratWidgets(
-              text: 'Teacher',
-              letterSpacing: 1,
-              fontsize: 20,
-              fontWeight: FontWeight.w500,
+        GestureDetector(
+          onTap: () {
+            Get.to(TeacherLoginScreen(
+              pageIndex: teacherPageIndex,
+            ));
+          },
+          child: Container(
+            color: const Color.fromARGB(255, 171, 198, 249),
+            height: 80.h,
+            width: 200.w,
+            child: Center(
+              child: GoogleMonstserratWidgets(
+                text: 'Teacher',
+                letterSpacing: 1,
+                fontsize: 20,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
         GestureDetector(
           onTap: () {
-              Get.to(ClassTeacherLoginScreen());
+            Get.to(ClassTeacherLoginScreen(
+              pageIndex: classTeacherPageIndex,
+            ));
           },
           child: Container(
             color: const Color.fromARGB(255, 171, 198, 249),
@@ -160,7 +182,6 @@ getWhichTeacher() {
 }
 
 List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
-
 
 var iconss = [
   'assets/images/reading.png',

@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors
 
-import 'package:dujo_kerala_application/abin/forgot%20password/reset_password.dart';
+import 'package:dujo_kerala_application/view/pages/login/forgot%20password/reset_password.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 
@@ -70,7 +70,11 @@ class ForgotPassword extends StatelessWidget {
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(20),
-                                child: loginButtonWidget(text: 'Submit',),
+                                child: loginButtonWidget(
+                                           height: 60,
+                        width: 180,
+
+                                 text: 'Submit',),
                               ))      
           ]),
         ),
