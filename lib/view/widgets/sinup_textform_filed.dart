@@ -8,11 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SinUpTextFromFiled extends StatelessWidget {
   String text;
   String hintText;
+  TextInputType? keyboardType;
   String? Function(String?)? validator;
   SinUpTextFromFiled({
     required this.text,
     required this.hintText,
     this.validator,
+    this.keyboardType,
      required this. textfromController, 
     super.key,
    
@@ -41,10 +43,11 @@ class SinUpTextFromFiled extends StatelessWidget {
               color: const Color.fromARGB(255, 211, 225, 236),
               child: Center(
                 child: TextFormField(
-                  
+                  keyboardType: keyboardType,
                   validator: validator,
                   controller: textfromController,
                   decoration:  InputDecoration(
+                    
                     hintText: hintText,
                      contentPadding: EdgeInsets.all(10.h),   //  <- you can it to 0.0 for no space
                             isDense: true,

@@ -1,9 +1,10 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dujo_kerala_application/view/pages/login/forgot%20password/forgot_password.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/signin/student_sigin.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
-import 'package:dujo_kerala_application/view/pages/login/sign_up/student_sign_up/student_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,13 +14,16 @@ import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
-import '../../../../widgets/login_button.dart';
+import '../../../../../widgets/login_button.dart';
 import '../../../../widgets/textformfield_login.dart';
 
 class StudentLoginScreen extends StatelessWidget {
+  int ? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  StudentLoginScreen({super.key});
+  StudentLoginScreen({
+    this.pageIndex,
+    super.key});
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -92,12 +96,16 @@ class StudentLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 150.w),
-                      child: GooglePoppinsWidgets(
-                        onTap: () {},
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                      child: GestureDetector(onTap: () {
+                        Get.to(ForgotPassword()); 
+                      },
+                        child: GooglePoppinsWidgets(
+                         
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(
@@ -109,6 +117,8 @@ class StudentLoginScreen extends StatelessWidget {
                           }
                         },
                         child: loginButtonWidget(
+                                   height: 60,
+                        width: 180,
                           text: 'Login',
                         ),
                       ),
@@ -122,7 +132,9 @@ class StudentLoginScreen extends StatelessWidget {
                         kWidth60,
                         GestureDetector(
                           onTap: () {
-                            Get.to(StudentSignInPageScreen());
+                            Get.to(StudentSignInScreen(
+                              pageIndex: pageIndex!,
+                            ));
                           },
                           child: GooglePoppinsWidgets(
                             text: ' Sign Up',
@@ -158,3 +170,4 @@ class StudentLoginScreen extends StatelessWidget {
     );
   }
 }
+// UserSentOTPScreen

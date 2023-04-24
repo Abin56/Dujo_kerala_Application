@@ -2,24 +2,25 @@
 
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/class_teacher_login/sigin/teacher_sigin_screen.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
-import 'package:dujo_kerala_application/view/pages/login/sign_up/student_sign_up/student_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
+import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
-import '../../../../widgets/login_button.dart';
 import '../../../../widgets/textformfield_login.dart';
 
 class ClassTeacherLoginScreen extends StatelessWidget {
+  int? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  ClassTeacherLoginScreen({super.key});
+  ClassTeacherLoginScreen({this.pageIndex, super.key});
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -105,10 +106,12 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            Get.to( UsersLoginScreen());
+                            Get.to(UsersLoginScreen());
                           }
                         },
                         child: loginButtonWidget(
+                          height: 60,
+                          width: 180,
                           text: 'Login',
                         ),
                       ),
@@ -122,7 +125,9 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         kWidth60,
                         GestureDetector(
                           onTap: () {
-                            Get.to(StudentSignInPageScreen());
+                            Get.to(TeachersSignInScreen(
+                              pageIndex: 3,
+                            ));
                           },
                           child: GooglePoppinsWidgets(
                             text: ' Sign Up',

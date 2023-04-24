@@ -1,22 +1,22 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/home/home.dart';
-import 'package:dujo_kerala_application/view/widgets/container_image.dart';
-import 'package:dujo_kerala_application/view/widgets/sinup_textform_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
+import '../../../../constant/sizes/sizes.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
+import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
+import '../../../../widgets/sinup_textform_filed.dart';
+import '../../../home/home.dart';
 
-class StudentSignInPageScreen extends StatelessWidget {
-    final getImageController = Get.put(GetImage());
+class ParentSignUpPage extends StatelessWidget {
+  ParentSignUpPage({super.key});
   TextEditingController userNameController = TextEditingController();
   TextEditingController useremailController = TextEditingController();
   TextEditingController houseNameController = TextEditingController();
@@ -25,7 +25,7 @@ class StudentSignInPageScreen extends StatelessWidget {
 
   TextEditingController districtController = TextEditingController();
   TextEditingController altPhoneNoController = TextEditingController();
-  StudentSignInPageScreen({super.key});
+  final getImageController = Get.put(GetImage());
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +190,8 @@ class StudentSignInPageScreen extends StatelessWidget {
       )),
     );
   }
-   void _getCameraAndGallery(BuildContext context ) {
+
+  void _getCameraAndGallery(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {

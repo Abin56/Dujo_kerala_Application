@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/student_sign_up/student_sign_up.dart';
+import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,13 +14,15 @@ import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
-import '../../../../widgets/login_button.dart';
 import '../../../../widgets/textformfield_login.dart';
 
 class TeacherLoginScreen extends StatelessWidget {
+      int ? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  TeacherLoginScreen({super.key});
+  TeacherLoginScreen({
+    this.pageIndex,
+    super.key});
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -109,6 +112,8 @@ class TeacherLoginScreen extends StatelessWidget {
                           }
                         },
                         child: loginButtonWidget(
+                                   height: 60,
+                        width: 180,
                           text: 'Login',
                         ),
                       ),
