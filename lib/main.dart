@@ -1,4 +1,6 @@
 import 'package:dujo_kerala_application/firebase_options.dart';
+import 'package:dujo_kerala_application/sruthi/event_list.dart';
+import 'package:dujo_kerala_application/sruthi/notice_page.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
+            home: EventList(),
           );
         });
   }
