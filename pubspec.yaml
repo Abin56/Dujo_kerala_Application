@@ -38,11 +38,18 @@ dependencies:
   flutter_screenutil: 
   google_fonts: 
   firebase_database:
+  firebase_auth: 
   firebase_core:
   cloud_firestore:
   firebase_storage: 
   get:
-  fluttertoast: ^8.2.1
+  fluttertoast: 
+  dropdown_search: 
+  flutter_staggered_animations:
+  image_picker:
+  lottie: 
+  pinput:
+  flutter_bloc:
 
 dev_dependencies:
   flutter_test:

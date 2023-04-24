@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../fonts/fonts.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -36,6 +37,6 @@ class SplashScreen extends StatelessWidget {
 }
 
 nextpage() async {
-  await Future.delayed(const Duration(seconds: 3))
-      .then((value) => Get.to(const DujoLoginScren()));
+  await Future.delayed(const Duration(seconds: 3));
+  Get.to(const DujoLoginScren());
 }
