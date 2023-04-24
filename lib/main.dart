@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import 'ui team/abin/homepages/teacher home/teacher_home.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -39,9 +41,11 @@ class MyApp extends StatelessWidget {
                       if (state is AuthLoggedInState) {
                         return const SplashScreen();
                       } else if (state is AuthLoggedOutState) {
-                        return const SplashScreen();
+                        return TeacherHomeScreen();
+                       // const SplashScreen();
                       }
-                      return const SplashScreen();
+                      return  TeacherHomeScreen();
+                    // const SplashScreen();
                     },
                   )
 
