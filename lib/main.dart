@@ -1,6 +1,7 @@
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/homepages/Student%20home/student_home.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,10 @@ class MyApp extends StatelessWidget {
                       if (state is AuthLoggedInState) {
                         return const SplashScreen();
                       } else if (state is AuthLoggedOutState) {
-                        return TeacherHomeScreen();
+                        return StudentHomeScreen();
                        // const SplashScreen();
                       }
-                      return  TeacherHomeScreen();
+                      return  StudentHomeScreen();
                     // const SplashScreen();
                     },
                   )

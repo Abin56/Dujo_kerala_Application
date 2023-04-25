@@ -13,14 +13,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class StudentHomeScreen extends StatefulWidget {
   // var schoolId;
-  // var teacherEmail;
+  // 
   // var classID;
   // TeacherHomeScreen(
   //     {required this.schoolId,
-  //     required this.teacherEmail,
+  //     
   //     required this.classID,
   //     super.key});
-  static String routeName = 'TeacherHome';
+  static String routeName = '';
 
   @override
   State<StudentHomeScreen> createState() => _StudentHomeScreenState();
@@ -65,7 +65,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                           ),
                            kHeight20,
                           Text(
-                            'ID : Abin\n'
+                            'ID : \n'
                             'Class : X A',
                             style: GoogleFonts.poppins(
                                 color: Colors.white.withOpacity(0.6),
