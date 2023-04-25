@@ -7,16 +7,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-class StudentAccessories extends StatefulWidget {
-  const StudentAccessories({
+class ParentAccessories extends StatefulWidget {
+  const ParentAccessories({
     super.key,
   });
 
   @override
-  State<StudentAccessories> createState() => _StudentAccessoriesState();
+  State<ParentAccessories> createState() => _ParentAccessoriesState();
 }
 
-class _StudentAccessoriesState extends State<StudentAccessories> {
+class _ParentAccessoriesState extends State<ParentAccessories> {
   void retrieveTimeTableData() async {
   }
 

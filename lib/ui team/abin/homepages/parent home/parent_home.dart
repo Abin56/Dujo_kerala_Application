@@ -1,11 +1,13 @@
 
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides
-import 'package:dujo_kerala_application/ui%20team/abin/homepages/Student%20home/student_accessories.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/drawer/parent_drawer.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/homepages/parent%20home/parent_accessories.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 
 
@@ -26,6 +28,7 @@ class _ParentHomePageState extends State<ParentHomePage> {
   Widget build(BuildContext context) {
     var screenSize =MediaQuery.of(context).size;
         return Scaffold(
+          appBar:AppBar(backgroundColor: adminePrimayColor)  ,
       body: Column(
         children: [
           Container(
@@ -39,81 +42,29 @@ class _ParentHomePageState extends State<ParentHomePage> {
               ),
             ),
             width: double.infinity,
-            height: screenSize.width*0.8,
+            height: screenSize.width*0.7,
             padding:  EdgeInsets.all(15.h),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 20.h),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            "",
-                            style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontSize: screenSize.width/25,
-                                fontWeight: FontWeight.bold),
-                          ),
-                           kHeight20,
-                          Text(
-                            'ID : \n'
-                            'Class : X A',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white.withOpacity(0.6),
-                                 fontSize: screenSize.width/35,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                        SizedBox
-                        (
-                        width: 230.w,
-                      ),
-                       CircleAvatar(
+                  CircleAvatar(
+                    
                         backgroundColor: Colors.white,
-                        backgroundImage: const NetworkImage(''),
+                        backgroundImage: const NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO3Kbs-sPqhzk0A2i0doztmT0RLa0nGmYWYw&usqp=CAU'),
                 
-                        radius: screenSize.width/10,
+                        radius: 80.h,
                       ),
-                    ],
-                  ),
-                ),
-                 kHeight20,
-                const Divider(color: Colors.white, height: 10,),
-                 kHeight20,
-               kHeight20,
-                SizedBox(
-                  height: screenSize.width*0.3,
-
-                //   child: Column(
-                //     children: [
-                //       Text(
-                //         timeText,
-                //         style: GoogleFonts.montserrat(
-                //             color: Colors.white,
-                //             fontSize: screenSize .width/20,
-                //             fontWeight: FontWeight.bold),
-                //       ),
-                  
-                // kHeight20,
-                // Text(
-                //   dateText,
-                //   style: GoogleFonts.montserrat(
-                //       color: const Color.fromARGB(255, 255, 255, 255),
-                //       fontSize: screenSize.width/35,
-                //       fontWeight: FontWeight.w700),
-                // ),
-                //   ],
-                 // ),
-                ),
+                kWidth10,
+                GoogleMonstserratWidgets(text: 'Name :', fontsize: 18.h,color: cWhite,fontWeight: FontWeight.bold),         
+                 kWidth10,
+                 GoogleMonstserratWidgets(text: 'ID :', fontsize:16.h ,color: cWhite,fontWeight: FontWeight.bold),           
+                 GoogleMonstserratWidgets(text: 'Class : X A', fontsize: 16.h,color: cWhite,fontWeight: FontWeight.bold),
+                 kHeight20, 
               ],
             ),
           ),
 
           //other will use all the remaining height of screen
-          const StudentAccessories(
+          const ParentAccessories(
             // teacherSubject: teacherSubject,
             // classID:widget.classID ,
             // schoolId: widget.schoolId,
@@ -121,34 +72,19 @@ class _ParentHomePageState extends State<ParentHomePage> {
           ),
         ],
       ),
+       drawer:Drawer(
+        backgroundColor: cWhite,
+        child : SingleChildScrollView(
+          child: Column(
+            children: [
+              // const MyHeaderDrawer(),
+              ParentDrawer(context),
+            ],
+          ),
+        ),
+        ),
     );
   }
-  // Future<void> getTeacherDetails() async {
-  //   var vari = await FirebaseFirestore.instance
-  //       .collection("SchoolListCollection")
-  //       .doc(widget.schoolId)
-  //       .collection("Teachers")
-  //       .doc(widget.teacherEmail)
-  //       .get();
-  //   setState(() {
-  //     teacherName = vari.data()!['teacherName'];
-  //     teacherImage = vari.data()!['teacherImage'];
-  //     teacherClassID = vari.data()!['classIncharge'];
-  //   });
-  //   log(teacherImage.toString());
-  // }
-
-  // Future<void> getTeacherClass() async {
-  //   var vari = await FirebaseFirestore.instance
-  //       .collection("SchoolListCollection")
-  //       .doc(widget.schoolId)
-  //       .collection("Classes")
-  //       .doc(teacherClassID)
-  //       .get();
-  //   setState(() {
-  //     teacherClass = vari.data()!['className'];
-  //   });
-  //   log(vari.toString());
-  // }
+ 
 }
 

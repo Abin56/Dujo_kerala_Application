@@ -1,7 +1,6 @@
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
-import 'package:dujo_kerala_application/ui%20team/abin/homepages/Student%20home/student_home.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-import 'ui team/abin/homepages/teacher home/teacher_home.dart';
+import 'ui team/abin/homepages/parent home/parent_home.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,10 +42,16 @@ class MyApp extends StatelessWidget {
                       if (state is AuthLoggedInState) {
                         return const SplashScreen();
                       } else if (state is AuthLoggedOutState) {
-                        return StudentHomeScreen();
+                        return 
+                        ParentHomePage();
+                       // TeacherHomeScreen();
+                        // StudentHomeScreen();
                        // const SplashScreen();
                       }
-                      return  StudentHomeScreen();
+                      return 
+                      ParentHomePage();
+                      //TeacherHomeScreen();
+                      // StudentHomeScreen();
                     // const SplashScreen();
                     },
                   )
