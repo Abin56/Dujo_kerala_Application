@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/utils.dart';
-import '../school_class_selection_controller.dart';
+import '../../../../utils/utils.dart';
+import '../../../../controller/schoo_selection_controller/school_class_selection_controller.dart';
 import 'school_selection_dropdown_widget.dart';
 
 Future<dynamic> showDialogueSchoolSelection(BuildContext context) {

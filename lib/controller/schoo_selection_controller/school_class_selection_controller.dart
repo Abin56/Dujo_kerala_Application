@@ -1,9 +1,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'utils/utils.dart';
-import 'class_list_model.dart';
-import 'school_list_model.dart';
+import '../../utils/utils.dart';
+import '../../model/class_list_model/class_list_model.dart';
+import '../../model/schoo_list_model/school_list_model.dart';
 
 class SchoolClassSelectionController extends GetxController {
   final CollectionReference collectionReference =
