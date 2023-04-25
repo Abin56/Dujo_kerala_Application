@@ -1,8 +1,8 @@
 import 'package:dujo_kerala_application/sruthi/notice_view_page.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../view/colors/colors.dart';
@@ -23,16 +23,22 @@ class NoticePage extends StatelessWidget {
           width: double.infinity,
           height: 150,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color:  adminePrimayColor),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12.h),bottomRight: Radius.circular(12.h)),
+                  color: adminePrimayColor,),
+          child: Column(
             children: [
-              kWidth10,
-              GooglePoppinsWidgets(
-                fontsize: 34.h,
-                text: 'Notice',
-                fontWeight: FontWeight.w400,
-                color: cWhite,
+              Row(mainAxisAlignment: MainAxisAlignment.start,children: [IconButtonBackWidget(color: cWhite,)],),
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  kWidth10,
+                  GooglePoppinsWidgets(
+                    fontsize: 34.h,
+                    text: 'Notice',
+                    fontWeight: FontWeight.w400,
+                    color: cWhite,
+                  ),
+                ],
               ),
             ],
           ),

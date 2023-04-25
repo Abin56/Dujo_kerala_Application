@@ -1,9 +1,10 @@
-import 'package:dujo_kerala_application/firebase_options.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
+import 'package:dujo_kerala_application/firebase_options.dart';
 import 'package:dujo_kerala_application/sruthi/event_list.dart';
 import 'package:dujo_kerala_application/sruthi/notice_page.dart';
-import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
+import 'package:dujo_kerala_application/sruthi/user_edit_profile.dart';
+
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() async {
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -43,18 +44,16 @@ class MyApp extends StatelessWidget {
                       if (state is AuthLoggedInState) {
                         return const SplashScreen();
                       } else if (state is AuthLoggedOutState) {
-                        return const SplashScreen();
+                        return UserEditPage();
+                       // const SplashScreen();
                       }
-                      return const SplashScreen();
+                      return  UserEditPage();
+                    // const SplashScreen();
                     },
                   )
 
                   // LoginVerification(),
                   ));
-          return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: EventList(),
-          );
         });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_application/sruthi/event_display_page.dart';
+import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,43 +12,58 @@ class EventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: 200,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: adminePrimayColor
-                ),
-                child:GooglePoppinsWidgets(text: "Event List", fontsize: 34.h,color: Colors.white,),
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                      leading: const Icon(Icons.event_sharp),
-                      trailing: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EventDisplay()));
-                        },
-                        child: GooglePoppinsWidgets(
-                          text: "View",
-                          fontsize: 16.h,
-                          color: Colors.green,
-                        ),
+    //  appBar: AppBar(backgroundColor: adminePrimayColor),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height: 160,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12.h),bottomRight: Radius.circular(12.h)),
+                  color: adminePrimayColor
+                  ),
+                  child:Column(
+                    children: [
+                      Row(mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButtonBackWidget(color: cWhite,)
+                      ],),
+                      Row(mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GooglePoppinsWidgets(text: "Event List", fontsize: 34.h,color: Colors.white,),
+                        ],
                       ),
-                      title: GooglePoppinsWidgets(text: "Events", fontsize: 19.h),
-                      subtitle: GooglePoppinsWidgets(
-                          text: "Date : 00/00/00", fontsize: 14.h));
-                }),
-          ),
-        ],
+                    ],
+                  ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                        leading: const Icon(Icons.event_sharp),
+                        trailing: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EventDisplay()));
+                          },
+                          child: GooglePoppinsWidgets(
+                            text: "View",
+                            fontsize: 16.h,
+                            color: Colors.green,
+                          ),
+                        ),
+                        title: GooglePoppinsWidgets(text: "Events", fontsize: 19.h),
+                        subtitle: GooglePoppinsWidgets(
+                            text: "Date : 00/00/00", fontsize: 14.h));
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }

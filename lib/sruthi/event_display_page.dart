@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_application/sruthi/notice_view_page.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,7 +14,7 @@ class EventDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: adminePrimayColor,),
       body:Container(
         
   height: double.infinity, // set the height to fill available space
