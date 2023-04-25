@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 
 class GetImage extends GetxController {
     String? pickedImage;
-  String? pickedimagefromGallery;
     
     @override
 getCamera() async {
@@ -20,6 +19,9 @@ getCamera() async {
 
     update();
   }
+
+
+  Future<void>pickImage()async{}
   
 
   getGallery() async {

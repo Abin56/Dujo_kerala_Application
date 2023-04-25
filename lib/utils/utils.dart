@@ -12,3 +12,7 @@ void showToast({required String msg}) {
     fontSize: 16.0,
   );
 }
+
+const circularProgressIndicatotWidget = Center(
+  child: CircularProgressIndicator(),
+);
