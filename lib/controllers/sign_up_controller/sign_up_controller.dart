@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -99,7 +98,10 @@ class StudentSignUpController extends GetxController {
         imageUrl = await result.ref.getDownloadURL();
       }
 
-      firebaseData.doc(UserCredentialsController.studentModel?.docid).update({
+      //getting firebase uid and updated it to collection
+      String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
+
+      Map<String, dynamic> updatinStudenData = <String, dynamic>{
         "alPhoneNumber": altPhoneNoController.text,
         "bloodgroup": bloodGroup,
         "dateofBirth": dateOfBirthController.text,
@@ -110,7 +112,23 @@ class StudentSignUpController extends GetxController {
         "profileImageId": imageId,
         "profileImageUrl": imageUrl,
         "studentemail": emailController.text,
-      });
+        "uid": userUid
+      };
+
+      firebaseData
+          .doc(UserCredentialsController.studentModel?.docid)
+          .update(updatinStudenData);
+
+      //updating data to all students field
+
+      FirebaseFirestore.instance
+          .collection("SchoolListCollection")
+          .doc(UserCredentialsController.schoolId)
+          .collection('AllStudents')
+          .doc(UserCredentialsController.studentModel?.docid)
+          .update(updatinStudenData);
+
+      clearFields();
       Get.find<GetImage>().pickedImage.value = "";
       isLoading.value = false;
     } catch (e) {
