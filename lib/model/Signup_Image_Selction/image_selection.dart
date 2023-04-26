@@ -4,7 +4,7 @@
 
 
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 
 class GetImage extends GetxController {
@@ -12,9 +12,9 @@ class GetImage extends GetxController {
     
     @override
 getCamera() async {
-    final images = await ImagePicker().pickImage(source: ImageSource.camera);
+    // final images = await ImagePicker().pickImage(source: ImageSource.camera);
     // pickedImage = images!.path.obs;
-    pickedImage = images!.path;
+    // pickedImage = images!.path;
     
 
     update();
@@ -25,7 +25,7 @@ getCamera() async {
   
 
   getGallery() async {
-    final images = await ImagePicker().pickImage(source: ImageSource.gallery);
+    // final images = await ImagePicker().pickImage(source: ImageSource.gallery);
     update();
   }
     clearPicked() {
