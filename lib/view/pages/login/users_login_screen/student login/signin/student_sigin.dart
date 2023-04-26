@@ -64,7 +64,8 @@ class StudentSignInScreen extends StatelessWidget {
                             studentName: 'Select Student',
                             studentemail: '',
                             uid: '',
-                            whichClass: ''),
+                            whichClass: '',
+                            docid: ''),
                         validator: (v) => v == null ? "required field" : null,
                         items: studentSignUpController.classWiseStudentList,
                         itemAsString: (StudentModel u) => u.studentName,
@@ -149,6 +150,7 @@ class StudentSignInScreen extends StatelessWidget {
                           showToast(msg: "Password Missmatch");
                           return;
                         }
+
                         if (formKey.currentState!.validate()) {
                           if (UserCredentialsController
                                   .studentModel?.parentPhoneNumber !=

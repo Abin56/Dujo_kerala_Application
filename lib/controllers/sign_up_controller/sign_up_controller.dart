@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,7 +22,6 @@ class StudentSignUpController extends GetxController {
   TextEditingController districtController = TextEditingController();
   TextEditingController altPhoneNoController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
-  TextEditingController bloodGroupController = TextEditingController();
 
   User? userCredential;
   RxBool isLoading = RxBool(false);
@@ -87,17 +87,6 @@ class StudentSignUpController extends GetxController {
   //updating students data
 
   Future<void> updateStudentData() async {
-    if (confirmPasswordController.text.isEmpty ||
-        houseNameController.text.isEmpty ||
-        houseNumberController.text.isEmpty ||
-        placeController.text.isEmpty ||
-        districtController.text.isEmpty ||
-        altPhoneNoController.text.isEmpty ||
-        dateOfBirthController.text.isEmpty ||
-        bloodGroupController.text.isEmpty) {
-      showToast(msg: "All Fields are mandatory");
-      return;
-    }
     String imageId = "";
     String imageUrl = "";
     try {
@@ -110,7 +99,7 @@ class StudentSignUpController extends GetxController {
         imageUrl = await result.ref.getDownloadURL();
       }
 
-      firebaseData.doc(UserCredentialsController.studentModel?.uid).update({
+      firebaseData.doc(UserCredentialsController.studentModel?.docid).update({
         "alPhoneNumber": altPhoneNoController.text,
         "bloodgroup": bloodGroup,
         "dateofBirth": dateOfBirthController.text,
@@ -146,6 +135,20 @@ class StudentSignUpController extends GetxController {
     districtController.clear();
     altPhoneNoController.clear();
     dateOfBirthController.clear();
-    bloodGroupController.clear();
+    bloodGroup = null;
+  }
+
+  bool checkAllFieldIsEmpty() {
+    if (houseNameController.text.isEmpty ||
+        houseNumberController.text.isEmpty ||
+        placeController.text.isEmpty ||
+        districtController.text.isEmpty ||
+        altPhoneNoController.text.isEmpty ||
+        dateOfBirthController.text.isEmpty ||
+        bloodGroup == null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
