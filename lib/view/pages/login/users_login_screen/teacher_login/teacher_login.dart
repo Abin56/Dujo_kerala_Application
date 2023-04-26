@@ -25,7 +25,6 @@ class TeacherLoginScreen extends StatelessWidget {
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  SignInController signInController = Get.put(SignInController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -108,11 +107,11 @@ class TeacherLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            signInController.signInWithEmailAndPassword(
-                                emailIdController.text,
-                                passwordController.text,
-                                pageIndex ?? 5,
-                                context);
+                            // signInController.signInWithEmailAndPassword(
+                            //     emailIdController.text,
+                            //     passwordController.text,
+                            //     pageIndex ?? 5,
+                            //     context);
                           }
                         },
                         child: loginButtonWidget(
