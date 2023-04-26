@@ -10,24 +10,26 @@ StudentModel studentModelFromJson(String str) =>
 String studentModelToJson(StudentModel data) => json.encode(data.toJson());
 
 class StudentModel {
-  StudentModel(
-      {required this.admissionNumber,
-      required this.alPhoneNumber,
-      required this.bloodgroup,
-      required this.createDate,
-      required this.dateofBirth,
-      required this.district,
-      required this.gender,
-      required this.houseName,
-      required this.parentPhoneNumber,
-      required this.place,
-      required this.profileImageId,
-      required this.profileImageUrl,
-      required this.studentName,
-      required this.studentemail,
-      required this.uid,
-      required this.whichClass,
-      required this.docid});
+  StudentModel({
+    required this.admissionNumber,
+    required this.alPhoneNumber,
+    required this.bloodgroup,
+    required this.createDate,
+    required this.dateofBirth,
+    required this.district,
+    required this.gender,
+    required this.houseName,
+    required this.parentPhoneNumber,
+    required this.place,
+    required this.profileImageId,
+    required this.profileImageUrl,
+    required this.studentName,
+    required this.studentemail,
+    required this.uid,
+    required this.whichClass,
+    required this.docid,
+    required this.userRole,
+  });
 
   String admissionNumber;
   String alPhoneNumber;
@@ -46,6 +48,7 @@ class StudentModel {
   String uid;
   String whichClass;
   String docid;
+  String userRole;
 
   factory StudentModel.fromJson(Map<String, dynamic> json) => StudentModel(
       admissionNumber: json["admissionNumber"] ?? "",
@@ -64,7 +67,8 @@ class StudentModel {
       studentemail: json["studentemail"] ?? "",
       uid: json["uid"] ?? "",
       whichClass: json["whichClass"] ?? "",
-      docid: json["docid"] ?? "");
+      docid: json["docid"] ?? "",
+      userRole: json["userRole"] ?? "");
 
   Map<String, dynamic> toJson() => {
         "admissionNumber": admissionNumber,
@@ -83,6 +87,7 @@ class StudentModel {
         "studentemail": studentemail,
         "uid": uid,
         "whichClass": whichClass,
-        "docid": docid
+        "docid": docid,
+        "userRole": userRole
       };
 }

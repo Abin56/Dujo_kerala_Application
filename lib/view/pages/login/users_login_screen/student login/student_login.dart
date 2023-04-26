@@ -1,8 +1,17 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/model/student_model/student_model.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/home/home.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/signin/student_sigin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -25,7 +34,6 @@ class StudentLoginScreen extends StatelessWidget {
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  SignInController signInController = Get.put(SignInController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -110,14 +118,46 @@ class StudentLoginScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 20.h),
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            signInController.signInWithEmailAndPassword(
-                              emailIdController.text,
-                              passwordController.text,
-                              pageIndex ?? 5,
-                              context,
-                            );
+                            await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: emailIdController.text,
+                                    password: passwordController.text)
+                                .then((value) async {
+                              final user = await FirebaseFirestore.instance
+                                  .collection('SchoolListCollection')
+                                  .doc(UserCredentialsController.schoolId)
+                                  .collection(
+                                      UserCredentialsController.batchId ?? "")
+                                  .doc(UserCredentialsController.batchId)
+                                  .collection('Classes')
+                                  .doc(UserCredentialsController.classId)
+                                  .collection('Students')
+                                  .where("uid", isEqualTo: value.user?.uid)
+                                  .get();
+
+                              if (user.docs.isNotEmpty) {
+                                UserCredentialsController.studentModel =
+                                    StudentModel.fromJson(user.docs[0].data());
+                              }
+
+                              if (UserCredentialsController
+                                      .studentModel?.userRole ==
+                                  "student") {
+                                if (context.mounted) {
+                                  Navigator.pushAndRemoveUntil(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const HomeScreen();
+                                  }), (route) => false);
+
+                                  log(UserCredentialsController.schoolId
+                                      .toString());
+                                }
+                              } else {
+                                showToast(msg: "You are not a student");
+                              }
+                            });
                           }
                         },
                         child: loginButtonWidget(
