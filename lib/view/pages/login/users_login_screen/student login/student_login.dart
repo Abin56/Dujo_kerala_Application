@@ -1,23 +1,13 @@
-// ignore_for_file: must_be_immutable
-
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/model/student_model/student_model.dart';
-import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/controllers/sign_in_controller/student_sign_in_controller.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/home/home.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/signin/student_sigin.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/sign_in_controller/sign_in_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
+import '../../../../../utils/utils.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
@@ -27,15 +17,13 @@ import '../../../../widgets/textformfield_login.dart';
 import '../../sign_up/student_sign_up/student_sign_up.dart';
 
 class StudentLoginScreen extends StatelessWidget {
-  int? pageIndex;
-  PasswordField hideGetxController = Get.find<PasswordField>();
+  final int? pageIndex;
+  final PasswordField hideGetxController = Get.find<PasswordField>();
 
   StudentLoginScreen({this.pageIndex, super.key});
 
-  TextEditingController emailIdController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  final formKey = GlobalKey<FormState>();
+  final StudentSignInController signInController =
+      Get.put(StudentSignInController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +37,7 @@ class StudentLoginScreen extends StatelessWidget {
                   width: double.infinity,
                   imagePath: 'assets/images/Login_screen.png'),
               Form(
-                key: formKey,
+                key: signInController.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -75,7 +63,8 @@ class StudentLoginScreen extends StatelessWidget {
                             Icons.mail_outline,
                           ),
                         ),
-                        textEditingController: emailIdController,
+                        textEditingController:
+                            signInController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -84,7 +73,8 @@ class StudentLoginScreen extends StatelessWidget {
                         obscureText: hideGetxController.isObscurefirst.value,
                         labelText: 'Password',
                         icon: Icons.lock,
-                        textEditingController: passwordController,
+                        textEditingController:
+                            signInController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -118,54 +108,18 @@ class StudentLoginScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 20.h),
                       child: GestureDetector(
-                        onTap: () async {
-                          if (formKey.currentState!.validate()) {
-                            await FirebaseAuth.instance
-                                .signInWithEmailAndPassword(
-                                    email: emailIdController.text,
-                                    password: passwordController.text)
-                                .then((value) async {
-                              final user = await FirebaseFirestore.instance
-                                  .collection('SchoolListCollection')
-                                  .doc(UserCredentialsController.schoolId)
-                                  .collection(
-                                      UserCredentialsController.batchId ?? "")
-                                  .doc(UserCredentialsController.batchId)
-                                  .collection('Classes')
-                                  .doc(UserCredentialsController.classId)
-                                  .collection('Students')
-                                  .where("uid", isEqualTo: value.user?.uid)
-                                  .get();
-
-                              if (user.docs.isNotEmpty) {
-                                UserCredentialsController.studentModel =
-                                    StudentModel.fromJson(user.docs[0].data());
-                              }
-
-                              if (UserCredentialsController
-                                      .studentModel?.userRole ==
-                                  "student") {
-                                if (context.mounted) {
-                                  Navigator.pushAndRemoveUntil(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return const HomeScreen();
-                                  }), (route) => false);
-
-                                  log(UserCredentialsController.schoolId
-                                      .toString());
-                                }
-                              } else {
-                                showToast(msg: "You are not a student");
-                              }
-                            });
-                          }
-                        },
-                        child: loginButtonWidget(
-                          height: 60,
-                          width: 180,
-                          text: 'Login',
-                        ),
-                      ),
+                          onTap: () async {
+                            await signInController.signIn(context);
+                          },
+                          child: Obx(
+                            () => signInController.isLoading.value
+                                ? circularProgressIndicatotWidget
+                                : loginButtonWidget(
+                                    height: 60,
+                                    width: 180,
+                                    text: 'Login',
+                                  ),
+                          )),
                     ),
                     kHeight20,
                     Row(
