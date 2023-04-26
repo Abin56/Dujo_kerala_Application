@@ -27,11 +27,6 @@ class StudentSignInScreen extends StatelessWidget {
   StudentSignUpController studentSignUpController =
       Get.put(StudentSignUpController());
 
-  TextEditingController verificationIdController = TextEditingController();
-  TextEditingController verificationpasswordController =
-      TextEditingController();
-  TextEditingController verificationconfirmController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +64,8 @@ class StudentSignInScreen extends StatelessWidget {
                             studentName: 'Select Student',
                             studentemail: '',
                             uid: '',
-                            whichClass: ''),
+                            whichClass: '',
+                            docid: ''),
                         validator: (v) => v == null ? "required field" : null,
                         items: studentSignUpController.classWiseStudentList,
                         itemAsString: (StudentModel u) => u.studentName,
@@ -103,7 +99,8 @@ class StudentSignInScreen extends StatelessWidget {
                       obscureText: hideGetxController.isObscurefirst.value,
                       labelText: 'Password',
                       icon: Icons.lock,
-                      textEditingController: verificationpasswordController,
+                      textEditingController:
+                          studentSignUpController.passwordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -125,7 +122,8 @@ class StudentSignInScreen extends StatelessWidget {
                       obscureText: hideGetxController.isObscureSecond.value,
                       labelText: 'Confirm Password',
                       icon: Icons.lock,
-                      textEditingController: verificationconfirmController,
+                      textEditingController:
+                          studentSignUpController.confirmPasswordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -146,6 +144,13 @@ class StudentSignInScreen extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20.h),
                     child: GestureDetector(
                       onTap: () async {
+                        if (studentSignUpController.passwordController.text !=
+                            studentSignUpController
+                                .confirmPasswordController.text) {
+                          showToast(msg: "Password Missmatch");
+                          return;
+                        }
+
                         if (formKey.currentState!.validate()) {
                           if (UserCredentialsController
                                   .studentModel?.parentPhoneNumber !=
@@ -160,7 +165,7 @@ class StudentSignInScreen extends StatelessWidget {
                                       .passwordController.text,
                                 ));
                           } else {
-                            showToast(msg: "Please add phone number");
+                            showToast(msg: "Please select student detail.");
                           }
                         }
                       },
