@@ -1,4 +1,3 @@
-
 // ignore_for_file: must_be_immutable
 
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
@@ -10,14 +9,18 @@ class SinUpTextFromFiled extends StatelessWidget {
   String hintText;
   TextInputType? keyboardType;
   String? Function(String?)? validator;
+  bool readOnly;
+
+  void Function()? onTapFunction;
   SinUpTextFromFiled({
     required this.text,
     required this.hintText,
     this.validator,
     this.keyboardType,
-     required this. textfromController, 
+    required this.textfromController,
+    this.onTapFunction,
+    this.readOnly=false,
     super.key,
-   
   });
 
   final TextEditingController textfromController;
@@ -27,7 +30,7 @@ class SinUpTextFromFiled extends StatelessWidget {
     return SizedBox(
       height: 100.h,
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,14 +46,16 @@ class SinUpTextFromFiled extends StatelessWidget {
               color: const Color.fromARGB(255, 211, 225, 236),
               child: Center(
                 child: TextFormField(
+                  onTap: onTapFunction,
                   keyboardType: keyboardType,
                   validator: validator,
                   controller: textfromController,
-                  decoration:  InputDecoration(
-                    
+                  readOnly: readOnly,
+                  decoration: InputDecoration(
                     hintText: hintText,
-                     contentPadding: EdgeInsets.all(10.h),   //  <- you can it to 0.0 for no space
-                            isDense: true,
+                    contentPadding: EdgeInsets.all(
+                        10.h), //  <- you can it to 0.0 for no space
+                    isDense: true,
                     border: InputBorder.none,
                   ),
                 ),

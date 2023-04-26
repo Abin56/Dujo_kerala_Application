@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../model/Signup_Image_Selction/image_selection.dart';
 import '../constant/sizes/sizes.dart';
@@ -39,7 +40,7 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () async {
-                        await getImageController.getCamera();
+                        await getImageController.pickImage(ImageSource.camera);
                       },
                       child: CircleAvatar(
                         maxRadius: 20,
@@ -62,7 +63,7 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () async {
-                        await getImageController.getGallery();
+                        await getImageController.pickImage(ImageSource.gallery);
                       },
                       child: CircleAvatar(
                         maxRadius: 20,
