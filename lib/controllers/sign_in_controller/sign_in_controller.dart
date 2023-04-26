@@ -33,7 +33,7 @@ class SignInController extends GetxController {
               builder: (context) {
                 return const Scaffold(
                   body: Center(
-                    child: Text('Patent Home Screen'),
+                    child: Text('Parent Home Screen'),
                   ),
                 );
               },

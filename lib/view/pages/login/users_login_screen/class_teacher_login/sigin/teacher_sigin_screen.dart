@@ -1,9 +1,15 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/class_teacher_login/class_teacher_login.dart';
 import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
@@ -11,20 +17,67 @@ import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get.dart';
 
+import '../../../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../userVerify_Phone_OTP/get_otp..dart';
 
-class TeachersSignInScreen extends StatelessWidget {
+class TeachersSignInScreen extends StatefulWidget {
   int pageIndex;
-  PasswordField hideGetxController = Get.find<PasswordField>();
+
   TeachersSignInScreen({required this.pageIndex, super.key});
+
+  @override
+  State<TeachersSignInScreen> createState() => _TeachersSignInScreenState();
+}
+
+class _TeachersSignInScreenState extends State<TeachersSignInScreen> {
+  PasswordField hideGetxController = Get.find<PasswordField>();
 
   final formKey = GlobalKey<FormState>();
 
   TextEditingController verificationIdController = TextEditingController();
+
   TextEditingController verificationpasswordController =
       TextEditingController();
-  TextEditingController verificationconfirmController = TextEditingController();
+
+  TextEditingController verificationconfirmController = TextEditingController(); 
+
+  String? mailCheckValue;
+
+  String? so; 
+
+  Future<bool> checkMail()async{
+     final CollectionReference collectionRef = FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('Teachers');
+
+
+final QuerySnapshot querySnapshot =
+    await collectionRef.where('teacherEmail', isEqualTo: verificationIdController.text).get();
+
+
+if (querySnapshot.docs.isNotEmpty) {
+
+  log("Value is present in the collection.");
+  return true;
+} else {
+  showToast(msg: 'The mail you entered is not matching with the mail in database');
+  return false;
+}   
+
+
+
+  } 
+
+  bool passwordCheck(){
+                             
+if(verificationpasswordController.text == verificationconfirmController.text){
+  log('password matches');
+  return true;
+} else{
+  log('passwords does not match');
+  return false;
+}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +97,34 @@ class TeachersSignInScreen extends StatelessWidget {
             SizedBox(
               height: 60.h,
               width: 350.w,
-              child: DropdownSearch<String>(
-                selectedItem: 'Select Student',
-                validator: (v) => v == null ? "required field" : null,
-                items: const ['Teacher 1', 'Teacher 2', 'Teacher 3'],
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('Teachers').snapshots(),
+                builder: (context, snapshot) { 
+                  if(snapshot.connectionState == ConnectionState.waiting){
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  var dropdownItems = snapshot.data!.docs.map((doc) {
+                    mailCheckValue = doc['teacherEmail'];
+                    return DropdownMenuItem<String>(
+          value: doc['teacherEmail'],
+          child: Text(doc['teacherName']),
+        );
+                  }
+        
+    ).toList(); 
+    
+                  return DropdownButtonFormField(
+                    hint: Text('Select Teacher'),
+                    validator: (v) => v == null ? "required field" : null,
+                    items: dropdownItems, value: so,
+                    onChanged: (val){
+                      setState(() {
+                        so = val;
+                      }); 
+                      print(so);
+                    },
+                  );
+                }
               ),
             ),
             kHeight30,
@@ -120,17 +197,29 @@ class TeachersSignInScreen extends StatelessWidget {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           Get.to(UserSentOTPScreen(
-                            userpageIndex: pageIndex,
+                            userpageIndex: widget.pageIndex,
                             phoneNumber: '8089262564',
                             userEmail: 'q@gmail.com',
                             userPassword: 'Abin',
                           ));
                         }
                       },
-                      child: loginButtonWidget(
-                                 height: 60,
-                        width: 180,
-                        text: 'Submit',
+                      child: GestureDetector( 
+                        onTap: ()async{
+                          var k = await checkMail();
+                          if(passwordCheck() && k){
+                            //Navigator.push(context, MaterialPageRoute(builder:(context) => UserSentOTPScreen(phoneNumber: ),));
+                          }
+                          else{
+                            log('not okay');
+                          }
+                },
+                        child: loginButtonWidget(
+                                   height: 60,
+                          width: 180,
+                          text: 'Submit', 
+                          
+                        ),
                       ),
                     ),
                   ),

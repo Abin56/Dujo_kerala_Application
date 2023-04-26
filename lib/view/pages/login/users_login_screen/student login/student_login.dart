@@ -2,6 +2,7 @@
 
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/sign_up/teacher_sign_up/teacher_sign_up.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/signin/student_sigin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
