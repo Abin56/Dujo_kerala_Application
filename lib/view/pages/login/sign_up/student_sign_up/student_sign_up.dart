@@ -16,10 +16,12 @@ import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../utils/utils.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
+import '../../../../home/student_home/student_home.dart';
+import '../../../../home/student_home/students_main_home.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
-import '../../../home/home.dart';
+
 
 class StudentSignInPageScreen extends StatelessWidget {
   final getImageController = Get.put(GetImage());
@@ -251,7 +253,12 @@ class StudentSignInPageScreen extends StatelessWidget {
                             } else {
                               studentController
                                   .updateStudentData()
-                                  .then((value) => Get.to(const HomeScreen()));
+                                  .then((value) => 
+                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+                                     return StudentsMainHomeScreen();
+                                  },), (route) => false)
+                                  
+                                 );
                             }
                           }
                         },

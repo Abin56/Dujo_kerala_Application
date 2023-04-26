@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 
 import '../../model/student_model/student_model.dart';
 import '../../utils/utils.dart';
-import '../../view/pages/home/home.dart';
+
+import '../../view/home/student_home/students_main_home.dart';
 import '../userCredentials/user_credentials.dart';
 
 class StudentSignInController extends GetxController {
@@ -43,7 +44,7 @@ class StudentSignInController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return const HomeScreen();
+              return  StudentsMainHomeScreen();
             }), (route) => false);
           }
           isLoading.value = false;
