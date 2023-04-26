@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/controllers/sign_up_controller/sign_up_controller.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -11,13 +13,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
+import '../../../../../utils/utils.dart';
 import '../../../../../widgets/login_button.dart';
+import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 
 class StudentSignInPageScreen extends StatelessWidget {
   final getImageController = Get.put(GetImage());
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final StudentSignUpController studentController =
       Get.find<StudentSignUpController>();
@@ -78,33 +83,43 @@ class StudentSignInPageScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: const NetworkImage(
-                        "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg"),
-                    radius: 60,
-                    child: Stack(
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            _getCameraAndGallery(context);
-                          },
-                          child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: CircleAvatar(
-                              radius: 20,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 95, 92, 92),
-                              child: IconButton(
-                                icon: const Icon(Icons.camera_alt),
-                                color: Colors.white,
-                                onPressed: () async {
-                                  _getCameraAndGallery(context);
-                                },
+                  Obx(
+                    () => CircleAvatar(
+                      backgroundImage: getImageController
+                              .pickedImage.value.isEmpty
+                          ? const NetworkImage(
+                              "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg")
+                          : FileImage(
+                                  File(getImageController.pickedImage.value))
+                              as ImageProvider,
+                      radius: 60,
+                      child: Form(
+                        key: formKey,
+                        child: Stack(
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                _getCameraAndGallery(context);
+                              },
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 95, 92, 92),
+                                  child: IconButton(
+                                    icon: const Icon(Icons.camera_alt),
+                                    color: Colors.white,
+                                    onPressed: () async {
+                                      _getCameraAndGallery(context);
+                                    },
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                   kHeight10,
@@ -180,36 +195,56 @@ class StudentSignInPageScreen extends StatelessWidget {
                   ),
                   kHeight30,
                   SinUpTextFromFiled(
-                      text: 'House Name',
-                      hintText: 'Enter your House Name',
-                      textfromController:
-                          studentController.houseNameController),
+                    text: 'Date of birth',
+                    hintText: 'Date of birth',
+                    readOnly: true,
+                    textfromController: studentController.dateOfBirthController,
+                    onTapFunction: () async {
+                      studentController.dateOfBirthController.text =
+                          await dateTimePicker(context);
+                    },
+                  ),
                   SinUpTextFromFiled(
-                      keyboardType: TextInputType.number,
-                      text: 'House Number',
-                      hintText: 'Enter your House Number',
-                      textfromController:
-                          studentController.houseNumberController),
+                    text: 'House Name',
+                    hintText: 'Enter your House Name',
+                    textfromController: studentController.houseNameController,
+                    validator: checkFieldEmpty,
+                  ),
                   SinUpTextFromFiled(
-                      text: 'Place',
-                      hintText: 'Enter your Place',
-                      textfromController: studentController.placeController),
+                    keyboardType: TextInputType.number,
+                    text: 'House Number',
+                    hintText: 'Enter your House Number',
+                    textfromController: studentController.houseNumberController,
+                    validator: checkFieldEmpty,
+                  ),
                   SinUpTextFromFiled(
-                      text: 'District',
-                      hintText: 'Enter your District',
-                      textfromController: studentController.districtController),
+                    text: 'Place',
+                    hintText: 'Enter your Place',
+                    textfromController: studentController.placeController,
+                    validator: checkFieldEmpty,
+                  ),
+                  SinUpTextFromFiled(
+                    text: 'District',
+                    hintText: 'Enter your District',
+                    textfromController: studentController.districtController,
+                    validator: checkFieldEmpty,
+                  ),
                   SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
                       text: ' Al Phone Number',
                       hintText: 'Enter your Al Phone Number',
                       textfromController:
-                          studentController.altPhoneNoController),
+                          studentController.altPhoneNoController,
+                          validator: checkFieldPhoneNumberIsValid,),
                   kHeight30,
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: GestureDetector(
                       onTap: () {
-                        Get.offAll(const HomeScreen());
+                        if(formKey.currentState!.validate()){}
+                        studentController
+                            .updateStudentData()
+                            .then((value) => Get.offAll(const HomeScreen()));
                       },
                       child: loginButtonWidget(
                           height: 60, width: 180, text: 'Submit'),

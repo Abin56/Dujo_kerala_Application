@@ -3,11 +3,11 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/signin/student_sigin.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../controllers/sign_in_controller/sign_in_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
@@ -25,6 +25,7 @@ class StudentLoginScreen extends StatelessWidget {
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  SignInController signInController = Get.put(SignInController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -111,7 +112,12 @@ class StudentLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            Get.to(UsersLoginScreen());
+                            signInController.signInWithEmailAndPassword(
+                              emailIdController.text,
+                              passwordController.text,
+                              pageIndex ?? 5,
+                              context,
+                            );
                           }
                         },
                         child: loginButtonWidget(
@@ -168,4 +174,3 @@ class StudentLoginScreen extends StatelessWidget {
     );
   }
 }
-// UserSentOTPScreen
