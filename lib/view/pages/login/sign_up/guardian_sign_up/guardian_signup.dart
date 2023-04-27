@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../controllers/sign_up_controller/guardian_signup_controller.dart';
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
@@ -20,12 +21,11 @@ import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/sinup_textform_filed.dart';
 
-class ParentSignUpPage extends StatelessWidget {
-  ParentSignUpPage({super.key});
+class GuardianSignUp extends StatelessWidget {
+  GuardianSignUp({super.key});
 
   final getImageController = Get.put(GetImage());
-  ParentSignUpController parentSignUpController =
-      Get.put(ParentSignUpController());
+  GuardianController parentSignUpController = Get.put(GuardianController());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -226,10 +226,11 @@ class ParentSignUpPage extends StatelessWidget {
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
                             await parentSignUpController
-                                .updateParentData()
+                                .updateGuardianData()
                                 .then(
                                   (value) => Get.offAll(
-                                    const UnderMaintanceScreen(text: ""),
+                                    const UnderMaintanceScreen(
+                                        text: "guardian Page"),
                                   ),
                                 );
                           }
