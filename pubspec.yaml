@@ -28,26 +28,28 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cloud_firestore: null
-  cupertino_icons: ^1.0.2
-  dropdown_search: null
-  firebase_auth: null
-  firebase_core: null
-  firebase_database: null
-  firebase_storage: null
+  cloud_firestore:
+  cupertino_icons: 
+  dropdown_search:
+  firebase_auth:
+  firebase_core:
+  firebase_database:
+  firebase_storage:
   flutter:
     sdk: flutter
-  flutter_bloc: null
-  flutter_screenutil: null
-  flutter_staggered_animations: null
-  fluttertoast: null
-  get: null
-  google_fonts: null
-  image_picker: null
-  intl: ^0.18.1
-  lottie: null
-  pinput: null
-  uuid: ^3.0.7
+  flutter_bloc:
+  flutter_screenutil:
+  flutter_staggered_animations:
+  fluttertoast:
+  get:
+  google_fonts:
+  image_picker:
+  intl:
+  lottie:
+  pinput:
+  uuid: 
+  google_nav_bar: 
+  line_icons:
 
 dev_dependencies:
 
