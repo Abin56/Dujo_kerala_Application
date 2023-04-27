@@ -20,34 +20,42 @@ backgroundColor: adminePrimayColor,title: Text("Chapters"),
               child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(height: 150.h,
-                    decoration: BoxDecoration(border: Border.all(width: 0.02)),
-                      child: Padding(
-                        padding:  EdgeInsets.only(top: 20.h),
-                        child: ListTile(
-                            leading: const Icon(Icons.note_rounded),
-                            
-                            title: GooglePoppinsWidgets(text: "Chapter 1", fontsize: 19.h),
-                            
-                            subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:  EdgeInsets.only(top: 10.h),
-                                  child: GooglePoppinsWidgets(
-                                      text: "CMOS & NMOS", fontsize: 15.h),
-                                ),
-                                    
-                                    Padding(
-                                      padding:  EdgeInsets.only(top:18.h),
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          GooglePoppinsWidgets(
-                                          text: "Teacher Name : Anupama", fontsize: 15.h),
-                                        ],
+                    return InkWell(onTap: () {
+                         Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>SubjectWiseDisplay()));
+                                                     
+                    },
+                      child: Container(height: 150.h,
+                      decoration: BoxDecoration(border: Border.all(width: 0.02)),
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: 20.h),
+                          child: ListTile(
+                              leading: const Icon(Icons.note_rounded),
+                              
+                              title: GooglePoppinsWidgets(text: "Chapter 1", fontsize: 19.h),
+                              
+                              subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:  EdgeInsets.only(top: 10.h),
+                                    child: GooglePoppinsWidgets(
+                                        text: "CMOS & NMOS", fontsize: 15.h),
+                                  ),
+                                      
+                                      Padding(
+                                        padding:  EdgeInsets.only(top:18.h),
+                                        child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            GooglePoppinsWidgets(
+                                            text: "Teacher Name : Anupama", fontsize: 15.h),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                              ],
-                            )),
+                                ],
+                              )),
+                        ),
                       ),
                     );
                   }),

@@ -34,15 +34,19 @@ class HomeWorkDisplay extends StatelessWidget {
             Padding(
               padding:  EdgeInsets.all(8.h),
               child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.h) ,color: Colors.grey[100]),
-                height: double.infinity,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.h) ,),
+                height: 650.h,
                 width: 360.w,
                child: 
                    Padding(
                      padding:  EdgeInsets.all(10.h),
                      child: Column(
                        children: [
-                         
+                         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            GooglePoppinsWidgets(text: "HomeWork", fontsize: 22.h),
+                           
+                          ],),
                      
                       kHeight50,
                       Row(mainAxisAlignment: MainAxisAlignment.start,
@@ -51,7 +55,7 @@ class HomeWorkDisplay extends StatelessWidget {
                       
                        
                                              GooglePoppinsWidgets(
-                                                text: "Homework.” Merriam-Webster.com Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/homework. Accessed 27 Apr. 2023.", fontsize: 18.h,),
+                                                text: "Homework.” Merriam-Webster.com Dictionary, Merriam-Webster, . Accessed 27 Apr. 2023.", fontsize: 19.h,),
                                           kHeight10,
                                          
                                             ],
