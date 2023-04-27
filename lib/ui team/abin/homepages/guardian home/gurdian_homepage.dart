@@ -1,7 +1,7 @@
 
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides
-import 'package:dujo_kerala_application/ui%20team/abin/drawer/guardian_drawer.dart';
-import 'package:dujo_kerala_application/ui%20team/abin/drawer/parent_drawer.dart';
+import 'package:dujo_kerala_application/view/home/drawer/guardian_drawer.dart';
+import 'package:dujo_kerala_application/view/home/drawer/parent_drawer.dart';
 import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home/guardian_accessorie.dart';
 import 'package:dujo_kerala_application/ui%20team/abin/homepages/parent%20home/parent_accessories.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';

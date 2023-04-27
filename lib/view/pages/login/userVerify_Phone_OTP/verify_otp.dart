@@ -100,40 +100,42 @@ class UserVerifyOTPScreen extends StatelessWidget {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) async {
                       if (state is AuthLoggedInState) {
-                         FirebaseAuth.instance
+                        FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
-                                email: userEmail, password: userPassword);
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false, // user must tap button!
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Message'),
-                              content: SingleChildScrollView(
-                                child: ListBody(
-                                  children: const <Widget>[
-                                    Text('Verification Completed!!'),
-                                  ],
+                                email: userEmail, password: userPassword)
+                            .then((value) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Message'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: const <Widget>[
+                                      Text('Verification Completed!!'),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text('ok'),
-                                  onPressed: () {
-                                    if (userpageIndex == 0) {
-                                      Get.off(StudentSignInPageScreen());
-                                    } else if (userpageIndex == 1) {
-                                    } else if (userpageIndex == 2) {
-                                      Get.off(ParentSignUpPage());
-                                    } else if (userpageIndex == 3) {
-                                      Get.off(TeachersSignUpPage());
-                                    }
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('ok'),
+                                    onPressed: () {
+                                      if (userpageIndex == 0) {
+                                        Get.off(StudentSignInPageScreen());
+                                      } else if (userpageIndex == 1) {
+                                      } else if (userpageIndex == 2) {
+                                        Get.off(ParentSignUpPage());
+                                      } else if (userpageIndex == 3) {
+                                        Get.off(TeachersSignUpPage());
+                                      }
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        });
                       } else if (state is AuthErrorState) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

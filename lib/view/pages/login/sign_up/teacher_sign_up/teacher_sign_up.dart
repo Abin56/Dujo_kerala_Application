@@ -8,11 +8,12 @@ import 'package:get/get.dart';
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/sizes.dart';
+import '../../../../home/sample/under_maintance.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/sinup_textform_filed.dart';
-import '../../../home/home.dart';
+
 
 class TeachersSignUpPage extends StatelessWidget {
   TeachersSignUpPage({super.key});
@@ -176,7 +177,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 20),
                     child: GestureDetector(
                       onTap: () {
-                        Get.offAll(const HomeScreen());
+                        Get.offAll(const UnderMaintanceScreen());
                         
                       },
                       child: loginButtonWidget(

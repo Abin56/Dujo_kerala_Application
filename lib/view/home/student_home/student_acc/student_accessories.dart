@@ -1,11 +1,9 @@
-
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 class StudentAccessories extends StatefulWidget {
   const StudentAccessories({
@@ -17,8 +15,7 @@ class StudentAccessories extends StatefulWidget {
 }
 
 class _StudentAccessoriesState extends State<StudentAccessories> {
-  void retrieveTimeTableData() async {
-  }
+  void retrieveTimeTableData() async {}
 
   @override
   void initState() {
@@ -28,9 +25,7 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 
   @override
   Widget build(BuildContext context) {
-    final screenNavigation = [
-     
-    ];
+    final screenNavigation = [];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
@@ -42,7 +37,7 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
         padding: EdgeInsets.all(_w / 60),
         crossAxisCount: columnCount,
         children: List.generate(
-         19 ,
+          _acc_images.length,
           (int index) {
             return AnimationConfiguration.staggeredGrid(
               position: index,
@@ -111,44 +106,25 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 
 List<String> _acc_text = [
   'Attendance',
-  'Assignments',
   'Exams',
-  'Subjects',
+  'TimeTable',
   'HomeWorks',
   'Notices',
   'Events',
   'Progress Report',
+  'Sujects',
   'Teachers',
-  'Meetings',
-  'Results',
-  'leave application',
-  'complaints',
-  'TimeTable',
-  'Study Materials',
-  'Speical Classes',
-  'Achivements',
-  'Scholarship',
-  'General Instruction'
+  'Meetings'
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/classroom.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
-  'assets/images/notice.jpg',
-  'assets/images/events.png',
+  'assets/images/school_building.png',
+  'assets/images/activity.png',
   'assets/images/splash.png',
-  'assets/images/leave_apply.png',
-  'assets/images/message.png',
-  'assets/images/result.png',
-  'assets/images/leaveapplica.png',
-  'assets/images/complainta.png',
-  'assets/images/timetable.png',
-  'assets/images/study material.jpg',
-  'assets/images/speical.png',
-  'assets/images/achivement.png',
-  'assets/images/scholar.png',
-  'assets/images/instructions.png',
-
+  'assets/images/subjects.png',
+  'assets/images/teachers.png',
+  'assets/images/teachers.png',
 ];

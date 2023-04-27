@@ -1,33 +1,24 @@
-
 // ignore_for_file: override_on_non_overriding_member, unused_local_variable
 
-
-
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:get/get.dart';
-
-
+import 'package:image_picker/image_picker.dart';
 
 class GetImage extends GetxController {
-    String? pickedImage;
-  String? pickedimagefromGallery;
-    
-    @override
-getCamera() async {
-    // final images = await ImagePicker().pickImage(source: ImageSource.camera);
-    // pickedImage = images!.path.obs;
-    // pickedImage = images!.path;
-    
+  RxString pickedImage = RxString("");
 
-    update();
-  }
-  
-
-  getGallery() async {
-    // final images = await ImagePicker().pickImage(source: ImageSource.gallery);
-    update();
-  }
-    clearPicked() {
-    pickedImage = null;
+  Future<void> pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image != null) {
+        pickedImage.value = image.path;
+      }
+    } catch (e) {
+      showToast(msg: "Failed to Pick Image");
+    }
   }
 
+  clearPicked() {
+    pickedImage.value = "";
+  }
 }

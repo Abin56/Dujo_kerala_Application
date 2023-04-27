@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../view/home/sample/under_maintance.dart';
 
 class CircleAvatharImageSelectionWidget extends StatelessWidget {
-  const CircleAvatharImageSelectionWidget({
+    ImageProvider<Object>? backgroundImage;
+   CircleAvatharImageSelectionWidget({
+  this.backgroundImage,
     super.key,
   });
 
@@ -10,7 +15,8 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
-          radius: 60,
+          backgroundImage: backgroundImage,
+          radius: 90,
           child: Stack(
             children: [
               InkWell(
@@ -20,11 +26,16 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 20,
                     backgroundColor:
+                        // ignore: prefer_const_constructors
                         Color.fromARGB(255, 52, 50, 50),
-                    child: IconButton(
-                      icon: const Icon(Icons.edit),
-                      color: Colors.white,
-                      onPressed: () async {},
+                    child: Center(
+                      child: IconButton(
+                        icon: const Icon(Icons.edit),
+                        color: Colors.white,
+                        onPressed: () async {
+                            Get.to(const UnderMaintanceScreen());
+                        },
+                      ),
                     ),
                   ),
                 ),

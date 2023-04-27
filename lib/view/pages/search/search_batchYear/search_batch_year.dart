@@ -3,6 +3,10 @@
 import 'package:dujo_kerala_application/view/pages/search/search_class/search_class.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
+import '../../../../controllers/userCredentials/user_credentials.dart';
 
 class SearchBatchYearBar extends SearchDelegate {
   @override
@@ -30,15 +34,42 @@ class SearchBatchYearBar extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final List<String> suggestionList;
+    if (query.isEmpty) {
+      suggestionList = Get.find<SchoolClassSelectionController>().batchList;
+    } else {
+      suggestionList = Get.find<SchoolClassSelectionController>()
+          .batchList
+          .where((item) => item.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+
+    if (suggestionList.isEmpty) {
+      return ListTile(
+        title: GooglePoppinsWidgets(
+          text: "Result not found",
+          fontsize: 18,
+          fontWeight: FontWeight.w400,
+        ),
+      );
+    }
+
     return Scaffold(
       body: ListView.separated(
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () async {
-                await showSearch(context: context, delegate: SearchClassBar());
+                UserCredentialsController.batchId =
+                    suggestionList[index];
+                await Get.find<SchoolClassSelectionController>()
+                    .fetchAllClassData();
+                if (context.mounted) {
+                  await showSearch(
+                      context: context, delegate: SearchClassBar());
+                }
               },
               child: GooglePoppinsWidgets(
-                text: '2023 June - 2024 Feb',
+                text: suggestionList[index],
                 fontsize: 18,
                 fontWeight: FontWeight.w400,
               ),
@@ -47,7 +78,7 @@ class SearchBatchYearBar extends SearchDelegate {
           separatorBuilder: (context, index) {
             return const Divider();
           },
-          itemCount: 10),
+          itemCount: suggestionList.length),
     );
   }
 }

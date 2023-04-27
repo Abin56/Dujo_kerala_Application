@@ -1,8 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/sign_up_controller.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/home/home.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/sinup_textform_filed.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +13,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
+import '../../../../../utils/utils.dart';
 import '../../../../../widgets/login_button.dart';
+import '../../../../constant/sizes/constant.dart';
+import '../../../../home/student_home/student_home.dart';
+import '../../../../home/student_home/students_main_home.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 
-class StudentSignInPageScreen extends StatelessWidget {
-    final getImageController = Get.put(GetImage());
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController useremailController = TextEditingController();
-  TextEditingController houseNameController = TextEditingController();
-  TextEditingController houseNumberController = TextEditingController();
-  TextEditingController placeController = TextEditingController();
 
-  TextEditingController districtController = TextEditingController();
-  TextEditingController altPhoneNoController = TextEditingController();
+class StudentSignInPageScreen extends StatelessWidget {
+  final getImageController = Get.put(GetImage());
+  GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
+
+  final StudentSignUpController studentController =
+      Get.find<StudentSignUpController>();
+
   StudentSignInPageScreen({super.key});
 
   @override
@@ -79,110 +84,190 @@ class StudentSignInPageScreen extends StatelessWidget {
           kHeight10,
           Stack(children: [
             SingleChildScrollView(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: const NetworkImage(
-                        "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg"),
-                    radius: 60,
-                    child: Stack(
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            _getCameraAndGallery(context);
-                          },
-                          child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: CircleAvatar(
-                              radius: 20,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 95, 92, 92),
-                              child: IconButton(
-                                icon: const Icon(Icons.camera_alt),
-                                color: Colors.white,
-                                onPressed: () async {
-                                  _getCameraAndGallery(context);
+              child: Form(
+                key: formKey1,
+                child: Column(
+                  children: [
+                    Obx(
+                      () => CircleAvatar(
+                        backgroundImage: getImageController
+                                .pickedImage.value.isEmpty
+                            ? const NetworkImage(
+                                "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg")
+                            : FileImage(
+                                    File(getImageController.pickedImage.value))
+                                as ImageProvider,
+                        radius: 60,
+                        child: Stack(
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                _getCameraAndGallery(context);
+                              },
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 95, 92, 92),
+                                  child: IconButton(
+                                    icon: const Icon(Icons.camera_alt),
+                                    color: Colors.white,
+                                    onPressed: () async {
+                                      _getCameraAndGallery(context);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    kHeight10,
+                    GooglePoppinsWidgets(
+                      text: "ID : 8934883839",
+                      fontsize: 14,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    kWidth30,
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.h, right: 8.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GooglePoppinsWidgets(
+                            text: "Gender",
+                            fontsize: 14,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          kWidth30,
+                          SizedBox(
+                            width: 330.w,
+                            child: DropdownSearch<String>(
+                              selectedItem: 'Select Gender',
+                              validator: (v) =>
+                                  v == null ? "required field" : null,
+                              items: const ['Male', 'Female', 'Others'],
+                              onChanged: (value) {
+                                studentController.gender = value;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    kWidth30,
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.h, right: 8.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GooglePoppinsWidgets(
+                            text: "Blood Group",
+                            fontsize: 14,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          kWidth30,
+                          Flexible(
+                            child: SizedBox(
+                              width: 330.w,
+                              child: DropdownSearch<String>(
+                                selectedItem: 'Select Group',
+                                validator: (v) =>
+                                    v == null ? "required field" : null,
+                                items: const [
+                                  'A+',
+                                  'A-',
+                                  'B+',
+                                  'B-',
+                                  'AB+',
+                                  'AB-',
+                                  'O+',
+                                  'O-',
+                                ],
+                                onChanged: (value) {
+                                  studentController.bloodGroup = value;
                                 },
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  kHeight10,
-                  GooglePoppinsWidgets(
-                    text: "ID : 8934883839",
-                    fontsize: 14,
-                    fontWeight: FontWeight.w300,
-                  ),
-                  kWidth30,
-                  SinUpTextFromFiled(
-                      text: "Your Name",
-                      hintText: 'Miss Latha',
-                      textfromController: useremailController),
-                  SinUpTextFromFiled(
-                      text: "Your email",
-                      hintText: 'latha@gmailcom',
-                      textfromController: useremailController),
-                  Padding(
-                    padding: EdgeInsets.only(left: 8.h, right: 8.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GooglePoppinsWidgets(
-                          text: "Gender",
-                          fontsize: 14,
-                          fontWeight: FontWeight.w300,
-                        ),
-                        kWidth30,
-                        SizedBox(
-                          width: 330.w,
-                          child: DropdownSearch<String>(
-                            selectedItem: 'Select Gender',
-                            validator: (v) =>
-                                v == null ? "required field" : null,
-                            items: const ['Male', 'Female', 'Others'],
-                          ),
-                        ),
-                      ],
+                    kHeight30,
+                    SinUpTextFromFiled(
+                      text: 'Date of birth',
+                      hintText: 'Date of birth',
+                      readOnly: true,
+                      textfromController:
+                          studentController.dateOfBirthController,
+                      onTapFunction: () async {
+                        studentController.dateOfBirthController.text =
+                            await dateTimePicker(context);
+                      },
                     ),
-                  ),
-                  kHeight30,
-                  SinUpTextFromFiled(
+                    SinUpTextFromFiled(
                       text: 'House Name',
                       hintText: 'Enter your House Name',
-                      textfromController: houseNameController),
-                  SinUpTextFromFiled(
+                      textfromController: studentController.houseNameController,
+                      validator: checkFieldEmpty,
+                    ),
+                    SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
                       text: 'House Number',
                       hintText: 'Enter your House Number',
-                      textfromController: houseNumberController),
-                  SinUpTextFromFiled(
+                      textfromController:
+                          studentController.houseNumberController,
+                      validator: checkFieldEmpty,
+                    ),
+                    SinUpTextFromFiled(
                       text: 'Place',
                       hintText: 'Enter your Place',
-                      textfromController: placeController),
-                  SinUpTextFromFiled(
+                      textfromController: studentController.placeController,
+                      validator: checkFieldEmpty,
+                    ),
+                    SinUpTextFromFiled(
                       text: 'District',
                       hintText: 'Enter your District',
-                      textfromController: districtController),
-                  SinUpTextFromFiled(
-                      keyboardType: TextInputType.number,
-                      text: ' Al Phone Number',
-                      hintText: 'Enter your Al Phone Number',
-                      textfromController: altPhoneNoController),
-                  kHeight30,
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.offAll(const HomeScreen());
-                      },
-                      child: loginButtonWidget(
-                          height: 60, width: 180, text: 'Submit'),
+                      textfromController: studentController.districtController,
+                      validator: checkFieldEmpty,
                     ),
-                  ),
-                ],
+                    SinUpTextFromFiled(
+                      keyboardType: TextInputType.number,
+                      text: ' Alternative Phone Number',
+                      hintText: 'Enter your Al Phone Number',
+                      textfromController:
+                          studentController.altPhoneNoController,
+                      validator: checkFieldPhoneNumberIsValid,
+                    ),
+                    kHeight30,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: GestureDetector(
+                        onTap: () {
+                          if (formKey1.currentState!.validate()) {
+                            if (studentController.checkAllFieldIsEmpty()) {
+                              showToast(msg: "All Fields are mandatory");
+                              return;
+                            } else {
+                              studentController
+                                  .updateStudentData()
+                                  .then((value) => 
+                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+                                     return StudentsMainHomeScreen();
+                                  },), (route) => false)
+                                  
+                                 );
+                            }
+                          }
+                        },
+                        child: loginButtonWidget(
+                            height: 60, width: 180, text: 'Submit'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ])
@@ -190,7 +275,8 @@ class StudentSignInPageScreen extends StatelessWidget {
       )),
     );
   }
-   void _getCameraAndGallery(BuildContext context ) {
+
+  void _getCameraAndGallery(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {

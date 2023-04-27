@@ -1,7 +1,9 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/sign_up_controller.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
@@ -12,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../../../model/student_model/student_model.dart';
 import '../../../userVerify_Phone_OTP/get_otp..dart';
 
 class StudentSignInScreen extends StatelessWidget {
@@ -20,11 +24,8 @@ class StudentSignInScreen extends StatelessWidget {
   StudentSignInScreen({required this.pageIndex, super.key});
 
   final formKey = GlobalKey<FormState>();
-
-  TextEditingController verificationIdController = TextEditingController();
-  TextEditingController verificationpasswordController =
-      TextEditingController();
-  TextEditingController verificationconfirmController = TextEditingController();
+  StudentSignUpController studentSignUpController =
+      Get.put(StudentSignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +42,39 @@ class StudentSignInScreen extends StatelessWidget {
               imagePath: 'assets/images/splash.png',
             ),
             kHeight30,
-            SizedBox(
-              height: 60.h,
-              width: 350.w,
-              child: DropdownSearch<String>(
-                selectedItem: 'Select Student',
-                validator: (v) => v == null ? "required field" : null,
-                items: const ['Student 1', 'Student 2', 'Student 3'],
-              ),
-            ),
+            Obx(() => studentSignUpController.isLoading.value
+                ? circularProgressIndicatotWidget
+                : SizedBox(
+                    height: 60.h,
+                    width: 350.w,
+                    child: DropdownSearch<StudentModel>(
+                        selectedItem: StudentModel(
+                          admissionNumber: "",
+                          alPhoneNumber: "",
+                          bloodgroup: "",
+                          createDate: "",
+                          dateofBirth: "",
+                          district: "",
+                          gender: "",
+                          houseName: "",
+                          parentPhoneNumber: "",
+                          place: "",
+                          profileImageId: "",
+                          profileImageUrl: '',
+                          studentName: 'Select Student',
+                          studentemail: '',
+                          uid: '',
+                          whichClass: '',
+                          docid: '',
+                          userRole: '',
+                        ),
+                        validator: (v) => v == null ? "required field" : null,
+                        items: studentSignUpController.classWiseStudentList,
+                        itemAsString: (StudentModel u) => u.studentName,
+                        onChanged: (value) {
+                          UserCredentialsController.studentModel = value;
+                        }),
+                  )),
             kHeight30,
             Form(
               key: formKey,
@@ -67,7 +92,8 @@ class StudentSignInScreen extends StatelessWidget {
                           Icons.mail_outline,
                         ),
                       ),
-                      textEditingController: verificationIdController,
+                      textEditingController:
+                          studentSignUpController.emailController,
                       function: checkFieldEmailIsValid),
                   Obx(
                     () => SigninTextFormfield(
@@ -75,7 +101,8 @@ class StudentSignInScreen extends StatelessWidget {
                       obscureText: hideGetxController.isObscurefirst.value,
                       labelText: 'Password',
                       icon: Icons.lock,
-                      textEditingController: verificationpasswordController,
+                      textEditingController:
+                          studentSignUpController.passwordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -97,7 +124,8 @@ class StudentSignInScreen extends StatelessWidget {
                       obscureText: hideGetxController.isObscureSecond.value,
                       labelText: 'Confirm Password',
                       icon: Icons.lock,
-                      textEditingController: verificationconfirmController,
+                      textEditingController:
+                          studentSignUpController.confirmPasswordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -117,18 +145,34 @@ class StudentSignInScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 20.h),
                     child: GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        if (studentSignUpController.passwordController.text !=
+                            studentSignUpController
+                                .confirmPasswordController.text) {
+                          showToast(msg: "Password Missmatch");
+                          return;
+                        }
+
                         if (formKey.currentState!.validate()) {
-                          Get.to(UserSentOTPScreen(
-                            userpageIndex: pageIndex,
-                            phoneNumber: '8089262564',
-                            userEmail: 'q@gmail.com',
-                            userPassword: 'Abin',
-                          ));
+                          if (UserCredentialsController
+                                  .studentModel?.parentPhoneNumber !=
+                              null) {
+                            Get.to(() => UserSentOTPScreen(
+                                  userpageIndex: pageIndex,
+                                  phoneNumber:
+                                      "+91${UserCredentialsController.studentModel?.parentPhoneNumber}",
+                                  userEmail: studentSignUpController
+                                      .emailController.text,
+                                  userPassword: studentSignUpController
+                                      .passwordController.text,
+                                ));
+                          } else {
+                            showToast(msg: "Please select student detail.");
+                          }
                         }
                       },
                       child: loginButtonWidget(
-                                 height: 60,
+                        height: 60,
                         width: 180,
                         text: 'Submit',
                       ),

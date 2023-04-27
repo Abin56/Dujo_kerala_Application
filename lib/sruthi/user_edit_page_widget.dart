@@ -1,5 +1,9 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 
 class UserEditListileWidget extends StatelessWidget {
@@ -29,16 +33,16 @@ class UserEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Do you want change mail ?"),
+                title: const Text("Do you want change mail ?"),
                 actions: [
                   TextButton(
-                    child: Text("Cancel"),
+                    child: const Text("Cancel"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: Text("OK"),
+                    child: const Text("OK"),
                     onPressed: () {
                       Navigator.pop(context);
 
@@ -46,9 +50,9 @@ class UserEditListileWidget extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Update Mail"),
+                            title: const Text("Update Mail"),
                             content: TextField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   hintText: "Enter new email address"),
                               onChanged: (value) {
                                 newEmail = value;
@@ -56,9 +60,9 @@ class UserEditListileWidget extends StatelessWidget {
                             ),
                             actions: [
                               TextButton(
-                                child: Text("Update"),
+                                child: const Text("Update"),
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                Get.to(UnderMaintanceScreen());
                                 },
                               ),
                             ],

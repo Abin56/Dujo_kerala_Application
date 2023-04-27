@@ -1,34 +1,29 @@
-// ignore_for_file: must_be_immutable
-
-import 'package:dujo_kerala_application/view/pages/login/forgot%20password/forgot_password.dart';
+import 'package:dujo_kerala_application/controllers/sign_in_controller/student_sign_in_controller.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/signin/student_sigin.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
+import '../../../../../utils/utils.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../widgets/textformfield_login.dart';
+import '../../sign_up/student_sign_up/student_sign_up.dart';
 
 class StudentLoginScreen extends StatelessWidget {
-  int ? pageIndex;
-  PasswordField hideGetxController = Get.find<PasswordField>();
+  final int? pageIndex;
+  final PasswordField hideGetxController = Get.find<PasswordField>();
 
-  StudentLoginScreen({
-    this.pageIndex,
-    super.key});
+  StudentLoginScreen({this.pageIndex, super.key});
 
-  TextEditingController emailIdController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  final formKey = GlobalKey<FormState>();
+  final StudentSignInController signInController =
+      Get.put(StudentSignInController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +37,7 @@ class StudentLoginScreen extends StatelessWidget {
                   width: double.infinity,
                   imagePath: 'assets/images/Login_screen.png'),
               Form(
-                key: formKey,
+                key: signInController.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -68,7 +63,8 @@ class StudentLoginScreen extends StatelessWidget {
                             Icons.mail_outline,
                           ),
                         ),
-                        textEditingController: emailIdController,
+                        textEditingController:
+                            signInController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -77,7 +73,8 @@ class StudentLoginScreen extends StatelessWidget {
                         obscureText: hideGetxController.isObscurefirst.value,
                         labelText: 'Password',
                         icon: Icons.lock,
-                        textEditingController: passwordController,
+                        textEditingController:
+                            signInController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -96,11 +93,11 @@ class StudentLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 150.w),
-                      child: GestureDetector(onTap: () {
-                        Get.to(ForgotPassword()); 
-                      },
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(StudentSignInPageScreen());
+                        },
                         child: GooglePoppinsWidgets(
-                         
                           fontsize: 16,
                           text: 'Forgot Password?',
                           fontWeight: FontWeight.w400,
@@ -111,17 +108,18 @@ class StudentLoginScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 20.h),
                       child: GestureDetector(
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            Get.to( UsersLoginScreen());
-                          }
-                        },
-                        child: loginButtonWidget(
-                                   height: 60,
-                        width: 180,
-                          text: 'Login',
-                        ),
-                      ),
+                          onTap: () async {
+                            await signInController.signIn(context);
+                          },
+                          child: Obx(
+                            () => signInController.isLoading.value
+                                ? circularProgressIndicatotWidget
+                                : loginButtonWidget(
+                                    height: 60,
+                                    width: 180,
+                                    text: 'Login',
+                                  ),
+                          )),
                     ),
                     kHeight20,
                     Row(
@@ -170,4 +168,3 @@ class StudentLoginScreen extends StatelessWidget {
     );
   }
 }
-// UserSentOTPScreen

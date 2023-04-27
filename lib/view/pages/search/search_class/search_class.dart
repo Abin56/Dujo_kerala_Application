@@ -1,9 +1,13 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
+import 'package:dujo_kerala_application/model/class_list_model/class_list_model.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
+import '../../../../controllers/userCredentials/user_credentials.dart';
 
 class SearchClassBar extends SearchDelegate {
   @override
@@ -31,27 +35,48 @@ class SearchClassBar extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final List<ClassModel> suggestionList;
+    if (query.isEmpty) {
+      suggestionList =
+          Get.find<SchoolClassSelectionController>().classModelList;
+    } else {
+      suggestionList = Get.find<SchoolClassSelectionController>()
+          .classModelList
+          .where((item) =>
+              item.className.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+
+    if (suggestionList.isEmpty) {
+      return ListTile(
+        title: GooglePoppinsWidgets(
+          text: "Result not found",
+          fontsize: 18,
+          fontWeight: FontWeight.w400,
+        ),
+      );
+    }
     return Scaffold(
       body: SafeArea(
         child: ListView.separated(
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                    Get.off( UsersLoginScreen());
-                  
-                },
-
-                child: GooglePoppinsWidgets(
-                  text: 'Class  ${index + 1}',
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                UserCredentialsController.classId =
+                    suggestionList[index].classId;
+                Get.off(UsersLoginScreen());
+              },
+              child: GooglePoppinsWidgets(
+                  text: suggestionList[index].className,
                   fontsize: 18,
-                  fontWeight: FontWeight.w600
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const Divider();
-            },
-            itemCount: 12),
+                  fontWeight: FontWeight.w600),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const Divider();
+          },
+          itemCount: suggestionList.length,
+        ),
       ),
     );
   }
