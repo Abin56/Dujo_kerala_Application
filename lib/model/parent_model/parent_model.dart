@@ -1,86 +1,147 @@
-// To parse this JSON data, do
-//
-//     final parentModel = parentModelFromJson(jsonString);
+// // To parse this JSON data, do
+// //
+// //     final parentModel = parentModelFromJson(jsonString);
 
-import 'dart:convert';
+// import 'dart:convert';
 
-ParentModel parentModelFromJson(String str) =>
-    ParentModel.fromJson(json.decode(str));
+// ParentModel parentModelFromJson(String str) =>
+//     ParentModel.fromJson(json.decode(str));
 
-String parentModelToJson(ParentModel data) => json.encode(data.toJson());
+// String parentModelToJson(ParentModel data) => json.encode(data.toJson());
 
-class ParentModel {
-  String createdate;
-  String docid;
-  String gender;
-  String houseName;
-  String parentEmail;
-  String parentImage;
-  String parentName;
-  String parentPhoneNumber;
-  String pincode;
-  String place;
-  String profileImageId;
-  String profileImageUrl;
-  String state;
-  String uid;
-  String userRole;
-  String wStudent;
+// class ParentModel {
+//   String admissionNumber;
+//   String alPhoneNumber;
+//   String bloodgroup;
+//   String classId;
+//   String createDate;
+//   String dateofBirth;
+//   String district;
+//   String docid;
+//   String gender;
+//   String guardianId;
+//   String houseName;
+//   String parentId;
+//   String parentPhoneNumber;
+//   String place;
+//   String profileImageId;
+//   String profileImageUrl;
+//   String studentName;
+//   String studentemail;
+//   String uid;
+//   String userRole;
 
-  ParentModel({
-    required this.createdate,
-    required this.docid,
-    required this.gender,
-    required this.houseName,
-    required this.parentEmail,
-    required this.parentImage,
-    required this.parentName,
-    required this.parentPhoneNumber,
-    required this.pincode,
-    required this.place,
-    required this.profileImageId,
-    required this.profileImageUrl,
-    required this.state,
-    required this.uid,
-    required this.userRole,
-    required this.wStudent,
-  });
+//   ParentModel({
+//     required this.admissionNumber,
+//     required this.alPhoneNumber,
+//     required this.bloodgroup,
+//     required this.classId,
+//     required this.createDate,
+//     required this.dateofBirth,
+//     required this.district,
+//     required this.docid,
+//     required this.gender,
+//     required this.guardianId,
+//     required this.houseName,
+//     required this.parentId,
+//     required this.parentPhoneNumber,
+//     required this.place,
+//     required this.profileImageId,
+//     required this.profileImageUrl,
+//     required this.studentName,
+//     required this.studentemail,
+//     required this.uid,
+//     required this.userRole,
+//   });
 
-  factory ParentModel.fromJson(Map<String, dynamic> json) => ParentModel(
-        createdate: json["createdate"],
-        docid: json["docid"],
-        gender: json["gender"],
-        houseName: json["houseName"],
-        parentEmail: json["parentEmail"],
-        parentImage: json["parentImage"],
-        parentName: json["parentName"],
-        parentPhoneNumber: json["parentPhoneNumber"],
-        pincode: json["pincode"],
-        place: json["place"],
-        profileImageId: json["profileImageID"],
-        profileImageUrl: json["profileImageURL"],
-        state: json["state"],
-        uid: json["uid"],
-        userRole: json["userRole"],
-        wStudent: json["wStudent"],
-      );
+//   ParentModel copyWith({
+//     String? admissionNumber,
+//     String? alPhoneNumber,
+//     String? bloodgroup,
+//     String? classId,
+//     String? createDate,
+//     String? dateofBirth,
+//     String? district,
+//     String? docid,
+//     String? gender,
+//     String? guardianId,
+//     String? houseName,
+//     String? parentId,
+//     String? parentPhoneNumber,
+//     String? place,
+//     String? profileImageId,
+//     String? profileImageUrl,
+//     String? studentName,
+//     String? studentemail,
+//     String? uid,
+//     String? userRole,
+//   }) =>
+//       ParentModel(
+//         admissionNumber: admissionNumber ?? this.admissionNumber,
+//         alPhoneNumber: alPhoneNumber ?? this.alPhoneNumber,
+//         bloodgroup: bloodgroup ?? this.bloodgroup,
+//         classId: classId ?? this.classId,
+//         createDate: createDate ?? this.createDate,
+//         dateofBirth: dateofBirth ?? this.dateofBirth,
+//         district: district ?? this.district,
+//         docid: docid ?? this.docid,
+//         gender: gender ?? this.gender,
+//         guardianId: guardianId ?? this.guardianId,
+//         houseName: houseName ?? this.houseName,
+//         parentId: parentId ?? this.parentId,
+//         parentPhoneNumber: parentPhoneNumber ?? this.parentPhoneNumber,
+//         place: place ?? this.place,
+//         profileImageId: profileImageId ?? this.profileImageId,
+//         profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+//         studentName: studentName ?? this.studentName,
+//         studentemail: studentemail ?? this.studentemail,
+//         uid: uid ?? this.uid,
+//         userRole: userRole ?? this.userRole,
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "createdate": createdate,
-        "docid": docid,
-        "gender": gender,
-        "houseName": houseName,
-        "parentEmail": parentEmail,
-        "parentImage": parentImage,
-        "parentName": parentName,
-        "parentPhoneNumber": parentPhoneNumber,
-        "pincode": pincode,
-        "place": place,
-        "profileImageID": profileImageId,
-        "profileImageURL": profileImageUrl,
-        "state": state,
-        "uid": uid,
-        "userRole": userRole,
-        "wStudent": wStudent,
-      };
-}
+//   factory ParentModel.fromJson(Map<String, dynamic> json) => ParentModel(
+//         admissionNumber: json["admissionNumber"],
+//         alPhoneNumber: json["alPhoneNumber"],
+//         bloodgroup: json["bloodgroup"],
+//         classId: json["classID"],
+//         createDate: json["createDate"],
+//         dateofBirth: json["dateofBirth"],
+//         district: json["district"],
+//         docid: json["docid"],
+//         gender: json["gender"],
+//         guardianId: json["guardianID"],
+//         houseName: json["houseName"],
+//         parentId: json["parentID"],
+//         parentPhoneNumber: json["parentPhoneNumber"],
+//         place: json["place"],
+//         profileImageId: json["profileImageId"],
+//         profileImageUrl: json["profileImageUrl"],
+//         studentName: json["studentName"],
+//         studentemail: json["studentemail"],
+//         uid: json["uid"],
+//         userRole: json["userRole"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "admissionNumber": admissionNumber,
+//         "alPhoneNumber": alPhoneNumber,
+//         "bloodgroup": bloodgroup,
+//         "classID": classId,
+//         "createDate": createDate,
+//         "dateofBirth": dateofBirth,
+//         "district": district,
+//         "docid": docid,
+//         "gender": gender,
+//         "guardianID": guardianId,
+//         "houseName": houseName,
+//         "parentID": parentId,
+//         "parentPhoneNumber": parentPhoneNumber,
+//         "place": place,
+//         "profileImageId": profileImageId,
+//         "profileImageUrl": profileImageUrl,
+//         "studentName": studentName,
+//         "studentemail": studentemail,
+//         "uid": uid,
+//         "userRole": userRole,
+//       };
+// }

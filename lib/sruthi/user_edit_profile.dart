@@ -90,7 +90,7 @@ class UserEditPage extends StatelessWidget {
               UserEditListileWidget(
                 icon: Icons.class_rounded,
                 subtitle: GooglePoppinsWidgets(
-                    text: UserCredentialsController.studentModel!.whichClass,
+                    text: UserCredentialsController.studentModel!.classId,
                     fontsize: 19.h),
                 title: GooglePoppinsWidgets(text: "Class", fontsize: 12.h),
               ),

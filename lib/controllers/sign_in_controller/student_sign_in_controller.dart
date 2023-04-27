@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/student_model/student_model.dart';
 import '../../utils/utils.dart';
-import '../../view/pages/home/home.dart';
 import '../userCredentials/user_credentials.dart';
 
 class StudentSignInController extends GetxController {
@@ -45,7 +45,7 @@ class StudentSignInController extends GetxController {
             if (context.mounted) {
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (context) {
-                return const HomeScreen();
+                return const UnderMaintanceScreen();
               }), (route) => false);
             }
             isLoading.value = false;

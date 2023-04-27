@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
@@ -16,12 +15,10 @@ import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../utils/utils.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
-import '../../../../home/student_home/student_home.dart';
 import '../../../../home/student_home/students_main_home.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
-
 
 class StudentSignInPageScreen extends StatelessWidget {
   final getImageController = Get.put(GetImage());
@@ -251,14 +248,13 @@ class StudentSignInPageScreen extends StatelessWidget {
                               showToast(msg: "All Fields are mandatory");
                               return;
                             } else {
-                              studentController
-                                  .updateStudentData()
-                                  .then((value) => 
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-                                     return StudentsMainHomeScreen();
-                                  },), (route) => false)
-                                  
-                                 );
+                              studentController.updateStudentData().then(
+                                  (value) => Navigator.pushAndRemoveUntil(
+                                          context, MaterialPageRoute(
+                                        builder: (context) {
+                                          return StudentsMainHomeScreen();
+                                        },
+                                      ), (route) => false));
                             }
                           }
                         },

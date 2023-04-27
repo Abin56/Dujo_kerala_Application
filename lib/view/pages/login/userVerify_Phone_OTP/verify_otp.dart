@@ -124,6 +124,7 @@ class UserVerifyOTPScreen extends StatelessWidget {
                                       if (userpageIndex == 0) {
                                         Get.off(StudentSignInPageScreen());
                                       } else if (userpageIndex == 1) {
+                                        Get.off(ParentSignUpPage());
                                       } else if (userpageIndex == 2) {
                                         Get.off(ParentSignUpPage());
                                       } else if (userpageIndex == 3) {

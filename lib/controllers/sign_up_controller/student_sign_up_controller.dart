@@ -21,14 +21,14 @@ class StudentSignUpController extends GetxController {
   TextEditingController districtController = TextEditingController();
   TextEditingController altPhoneNoController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
-
-  User? userCredential;
   RxBool isLoading = RxBool(false);
   List<StudentModel> classWiseStudentList = [];
-  Uuid uuid = const Uuid();
 
   String? bloodGroup;
   String? gender;
+
+  //for photo id creation
+  Uuid uuid = const Uuid();
   CollectionReference<Map<String, dynamic>> firebaseData = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")

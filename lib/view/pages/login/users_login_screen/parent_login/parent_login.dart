@@ -2,6 +2,8 @@
 
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/sign_up/parent_sign_up/parent_sign_up.dart';
+import 'package:dujo_kerala_application/view/pages/login/sign_up/teacher_sign_up/teacher_sign_up.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,12 +19,10 @@ import '../../../../widgets/textformfield_login.dart';
 import '../student login/signin/student_sigin.dart';
 
 class ParentLoginScreen extends StatelessWidget {
-    int ? pageIndex;
+  int? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  ParentLoginScreen({
-   this.pageIndex,
-    super.key});
+  ParentLoginScreen({this.pageIndex, super.key});
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -108,12 +108,12 @@ class ParentLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            Get.to( UsersLoginScreen());
+                            Get.to(UsersLoginScreen());
                           }
                         },
                         child: loginButtonWidget(
-                                   height: 60,
-                        width: 180,
+                          height: 60,
+                          width: 180,
                           text: 'Login',
                         ),
                       ),
