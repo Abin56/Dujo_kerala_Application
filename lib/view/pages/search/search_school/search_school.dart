@@ -2,7 +2,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/search/search_school/search_school_searchdeligate.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+// import 'package:lottie/lottie.dart';
 
 import '../../../widgets/fonts/google_monstre.dart';
 
@@ -59,8 +59,8 @@ class SearchSchoolScreen extends StatelessWidget {
                   fontsize: 20,
                   fontWeight: FontWeight.w600),
               kHeight10,
-              LottieBuilder.network(
-                  'https://assets2.lottiefiles.com/packages/lf20_itvvjtah.json')
+              // LottieBuilder.network(
+              //     'https://assets2.lottiefiles.com/packages/lf20_itvvjtah.json')
             ],
           ),
         ],
