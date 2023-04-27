@@ -177,7 +177,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 20),
                     child: GestureDetector(
                       onTap: () {
-                        Get.offAll(const UnderMaintanceScreen());
+                        Get.offAll(const UnderMaintanceScreen(text: "",));
                         
                       },
                       child: loginButtonWidget(

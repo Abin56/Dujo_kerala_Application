@@ -33,7 +33,7 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
                         icon: const Icon(Icons.edit),
                         color: Colors.white,
                         onPressed: () async {
-                            Get.to(const UnderMaintanceScreen());
+                            Get.to(const UnderMaintanceScreen(text: "",));
                         },
                       ),
                     ),

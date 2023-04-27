@@ -1,3 +1,4 @@
+import '../../model/parent_model/parent_model.dart';
 import '../../model/student_model/student_model.dart';
 
 class UserCredentialsController {
@@ -5,4 +6,5 @@ class UserCredentialsController {
   static String? batchId;
   static String? classId;
   static StudentModel? studentModel;
+  static ParentModel? parentModel;
 }

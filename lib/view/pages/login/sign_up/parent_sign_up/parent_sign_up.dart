@@ -222,7 +222,7 @@ class ParentSignUpPage extends StatelessWidget {
                                 .updateParentData()
                                 .then(
                                   (value) => Get.offAll(
-                                    const UnderMaintanceScreen(),
+                                    const UnderMaintanceScreen(text: ""),
                                   ),
                                 );
                           }

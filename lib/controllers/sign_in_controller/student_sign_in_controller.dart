@@ -45,7 +45,7 @@ class StudentSignInController extends GetxController {
             if (context.mounted) {
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (context) {
-                return const UnderMaintanceScreen();
+                return const UnderMaintanceScreen(text: "Student Login",);
               }), (route) => false);
             }
             isLoading.value = false;
