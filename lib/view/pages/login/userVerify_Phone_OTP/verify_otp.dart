@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, must_be_immutable, deprecated_member_use
 
 import 'dart:developer';
+import 'package:dujo_kerala_application/view/pages/login/sign_up/guardian_sign_up/guardian_signup.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/teacher_sign_up/teacher_sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -124,8 +125,9 @@ class UserVerifyOTPScreen extends StatelessWidget {
                                       if (userpageIndex == 0) {
                                         Get.off(StudentSignInPageScreen());
                                       } else if (userpageIndex == 1) {
-                                      } else if (userpageIndex == 2) {
                                         Get.off(ParentSignUpPage());
+                                      } else if (userpageIndex == 2) {
+                                        Get.off(GuardianSignUp());
                                       } else if (userpageIndex == 3) {
                                         Get.off(TeachersSignUpPage());
                                       }
