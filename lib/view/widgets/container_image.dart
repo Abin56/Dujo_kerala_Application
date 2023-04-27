@@ -21,7 +21,7 @@ class ContainerImage extends StatelessWidget {
       height: height.h,
       width: width.w,
       decoration:
-          BoxDecoration(image: DecorationImage(image: AssetImage(imagePath))),
+          BoxDecoration(image: DecorationImage(image: AssetImage(imagePath),fit: BoxFit.fill)),
     );
   }
 }

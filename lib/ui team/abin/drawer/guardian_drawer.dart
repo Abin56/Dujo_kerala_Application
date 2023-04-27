@@ -14,7 +14,7 @@ enum DrawerSections {
   setting,
   share,
   feedback,
-  contact,
+  contact,  
   about,
 }
 
