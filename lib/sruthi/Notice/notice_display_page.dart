@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/widgets/fonts/google_poppins.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
 
 class NoticeViewPage extends StatelessWidget {
   const NoticeViewPage({super.key});

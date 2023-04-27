@@ -1,13 +1,13 @@
-import 'package:dujo_kerala_application/sruthi/edit_image_selection_widget.dart';
-import 'package:dujo_kerala_application/sruthi/user_edit_page_widget.dart';
+import 'package:dujo_kerala_application/sruthi/User%20Edit%20Profile/widget/edit_image_selection_widget.dart';
+import 'package:dujo_kerala_application/sruthi/User%20Edit%20Profile/widget/user_edit_page_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/colors/colors.dart';
-import '../view/constant/sizes/sizes.dart';
-import '../view/widgets/fonts/google_poppins.dart';
-import '../widgets/Iconbackbutton.dart';
+import '../../view/colors/colors.dart';
+import '../../view/constant/sizes/sizes.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
+import '../../widgets/Iconbackbutton.dart';
 
 class UserEditPage extends StatelessWidget {
   String newEmail = "";

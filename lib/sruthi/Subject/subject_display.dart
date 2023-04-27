@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dujo_kerala_application/sruthi/event_list.dart';
+import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
 import 'package:dujo_kerala_application/sruthi/subject_chapterwise_display.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -12,7 +12,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../view/widgets/container_image.dart';
+import '../../../view/widgets/container_image.dart';
 
 class StudentLogin extends StatelessWidget {
   const StudentLogin({super.key});
@@ -22,9 +22,9 @@ class StudentLogin extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(children: [
-          Heading_Container_Widget(
-            text: 'Subject',
-          ),
+          // Heading_Container_Widget(
+          //   text: 'Subject',
+          // ),
           Expanded(
             child: GridView.count(
               padding: const EdgeInsets.all(15),

@@ -1,13 +1,13 @@
-import 'package:dujo_kerala_application/sruthi/homework_display.dart';
+import 'package:dujo_kerala_application/sruthi/homeWork/homework_display.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/constant/sizes/sizes.dart';
-import '../view/widgets/fonts/google_poppins.dart';
-import 'Heading_Container_Widget.dart';
+import '../../view/constant/sizes/sizes.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
+
 
 class StudentHomeWorkPage extends StatelessWidget {
   const StudentHomeWorkPage({super.key});
@@ -57,7 +57,7 @@ class StudentHomeWorkPage extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         GooglePoppinsWidgets(
-                                            text: "HomeWork : ",
+                                            text: "Task : ",
                                             fontsize: 15.h),
                                              InkWell(
                                               
