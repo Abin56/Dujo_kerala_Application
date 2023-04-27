@@ -1,4 +1,6 @@
-import 'package:dujo_kerala_application/sruthi/notice_view_page.dart';
+
+
+
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/widgets/fonts/google_poppins.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
 
 class EventDisplay extends StatelessWidget {
   const EventDisplay({super.key});
@@ -14,7 +16,7 @@ class EventDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: adminePrimayColor,),
+      appBar: AppBar(backgroundColor: adminePrimayColor,title: Text("Events"),),
       body:Container(
         
   height: double.infinity, // set the height to fill available space
@@ -22,13 +24,7 @@ class EventDisplay extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.center,
   
     children: [
-      Center(
-        child: GooglePoppinsWidgets(
-          text: "Events",
-          fontsize: 24.h,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
+      
       kHeight30,
       Expanded(
         child: ListView(

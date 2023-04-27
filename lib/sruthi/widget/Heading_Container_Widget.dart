@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/colors/colors.dart';
-import '../view/widgets/fonts/google_poppins.dart';
-import '../widgets/Iconbackbutton.dart';
+import '../../view/colors/colors.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
+import '../../widgets/Iconbackbutton.dart';
 
 class Heading_Container_Widget extends StatelessWidget {
   const Heading_Container_Widget({

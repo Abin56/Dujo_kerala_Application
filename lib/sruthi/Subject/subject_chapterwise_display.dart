@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/widgets/fonts/google_poppins.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
 
 class SubjectWiseDisplay extends StatelessWidget {
   const SubjectWiseDisplay({super.key});

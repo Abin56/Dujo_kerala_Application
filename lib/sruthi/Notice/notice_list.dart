@@ -1,12 +1,13 @@
-import 'package:dujo_kerala_application/sruthi/notice_view_page.dart';
+
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/colors/colors.dart';
-import '../view/widgets/fonts/google_poppins.dart';
+import '../../view/colors/colors.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
+import 'notice_display_page.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({super.key});
@@ -16,33 +17,16 @@ class NoticePage extends StatelessWidget {
     return SafeArea(
       
       child: Scaffold(
+       appBar: AppBar(title: Row(
+         children: [
+               IconButtonBackWidget(),
+           Text("Notice List"),
+      
+         ],
+       ),backgroundColor: adminePrimayColor,),
        
           body: ListView(children: [
-        Container(
-       
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12.h),bottomRight: Radius.circular(12.h)),
-                  color: adminePrimayColor,),
-          child: Column(
-            children: [
-              Row(mainAxisAlignment: MainAxisAlignment.start,children: [IconButtonBackWidget(color: cWhite,)],),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  kWidth10,
-                  GooglePoppinsWidgets(
-                    fontsize: 34.h,
-                    text: 'Notice',
-                    fontWeight: FontWeight.w400,
-                    color: cWhite,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+        
         kHeight20,
         Container(
           color: Colors.blue[50],
@@ -60,7 +44,7 @@ class NoticePage extends StatelessWidget {
 
             ),
             trailing: InkWell(
-              child: GooglePoppinsWidgets(text: "View", fontsize: 16.h,fontWeight: FontWeight.w300,color:Colors.green
+              child: GooglePoppinsWidgets(text: "View", fontsize: 16.h,fontWeight: FontWeight.w300,color:Colors.blue
               ),
                onTap: () {
                     Navigator.push(context,MaterialPageRoute( builder: (context) =>
