@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/controllers/sign_up_controller/sign_up_controller.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/sinup_textform_filed.dart';

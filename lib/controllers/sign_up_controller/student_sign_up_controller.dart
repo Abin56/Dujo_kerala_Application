@@ -39,29 +39,6 @@ class StudentSignUpController extends GetxController {
       .doc(UserCredentialsController.classId)
       .collection("Students");
 
-//sign in with email and password firebase authentification
-  void signIn(String email, String password) async {
-    if (email.isEmpty || password.isEmpty) {
-      showToast(msg: "Fields are empty");
-      return;
-    }
-    try {
-      isLoading.value = true;
-      final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      if (result.user != null) {
-        userCredential = result.user;
-      }
-      isLoading.value = false;
-    } catch (e) {
-      showToast(msg: 'Login Failed');
-      isLoading.value = false;
-    }
-  }
-
 //fetching all students data from firebase
   Future<void> getStudentData() async {
     try {

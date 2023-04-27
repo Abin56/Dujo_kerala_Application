@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/controllers/sign_up_controller/sign_up_controller.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
