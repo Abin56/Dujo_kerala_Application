@@ -10,6 +10,8 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
+          backgroundImage: const NetworkImage(
+                        "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg"),
           radius: 60,
           child: Stack(
             children: [

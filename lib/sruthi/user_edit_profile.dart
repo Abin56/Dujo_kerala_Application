@@ -33,7 +33,10 @@ class UserEditPage extends StatelessWidget {
             children: [
               IconButtonBackWidget(
                 color: cWhite,
-              )
+                
+              ),
+              kWidth50,
+              GooglePoppinsWidgets(text: "Profile", fontsize: 22.h,color: cWhite,)
             ],
           ),
           kHeight20,
@@ -50,7 +53,7 @@ class UserEditPage extends StatelessWidget {
           )
         ]),
       ),
-      kHeight50,
+    
       Container(
         width: double.infinity,
         height: 700.h,

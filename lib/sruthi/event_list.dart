@@ -16,28 +16,7 @@ class EventList extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              height: 160,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12.h),bottomRight: Radius.circular(12.h)),
-                  color: adminePrimayColor
-                  ),
-                  child:Column(
-                    children: [
-                      Row(mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButtonBackWidget(color: cWhite,)
-                      ],),
-                      Row(mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GooglePoppinsWidgets(text: "Event List", fontsize: 34.h,color: Colors.white,),
-                        ],
-                      ),
-                    ],
-                  ),
-            ),
+            Heading_Container_Widget(text: 'Event List',),
             Expanded(
               child: ListView.builder(
                   itemCount: 5,
@@ -65,6 +44,39 @@ class EventList extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class Heading_Container_Widget extends StatelessWidget {
+  const Heading_Container_Widget({
+    super.key,
+    required this.text
+  });
+final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: double.infinity,
+      height: 160,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12.h),bottomRight: Radius.circular(12.h)),
+          color: adminePrimayColor
+          ),
+          child:Column(
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButtonBackWidget(color: cWhite,)
+              ],),
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GooglePoppinsWidgets(text: text, fontsize: 34.h,color: Colors.white,),
+                ],
+              ),
+            ],
+          ),
     );
   }
 }
