@@ -34,6 +34,7 @@ class DGoogleFonts {
     fontWeight: FontWeight.w400,
     color: cblack,
   );
+  
 
 
 }

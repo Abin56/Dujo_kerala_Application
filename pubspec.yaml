@@ -50,6 +50,9 @@ dependencies:
   lottie: 
   pinput:
   flutter_bloc:
+  date_time_picker:
+  flutter_svg:
+  
 
 dev_dependencies:
   flutter_test:
