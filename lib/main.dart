@@ -9,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'ui team/abin/studymaterial upload/study_material_upload.dart';
+
 FirebaseAuth auth = FirebaseAuth.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,11 +45,11 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return  SplashScreen();
+                      return  StudyMaterialUpload();
                     } else if (state is AuthLoggedOutState) {
-                      return  SplashScreen();
+                      return  StudyMaterialUpload();
                     }
-                    return  SplashScreen();
+                    return  StudyMaterialUpload();
                   },
                 ),
 

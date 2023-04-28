@@ -20,8 +20,8 @@ class ContainerImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height.h,
-      width: width.w,
+      height: height,
+      width: width,
       decoration:
           BoxDecoration(image: DecorationImage(image: AssetImage(imagePath),fit: BoxFit.fill)),
     );
@@ -43,8 +43,8 @@ class NetworkContainerImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height.h,
-      width: width.w,
+      height: height,
+      width: width,
       decoration: BoxDecoration(
           image: DecorationImage(image: FileImage(File(imagePath)))),
     );

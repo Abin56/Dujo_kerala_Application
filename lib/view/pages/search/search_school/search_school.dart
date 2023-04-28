@@ -2,6 +2,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/search/search_school/search_school_searchdeligate.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -48,8 +49,8 @@ class SearchSchoolScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ContainerImage(
-                      height: 80,
-                      width: 100,
+                      height: 80.h,
+                      width: 110.w,
                       imagePath: 'assets/images/leptonlogo.png'),
                 ],
               ),

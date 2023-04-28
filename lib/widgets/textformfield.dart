@@ -19,22 +19,19 @@ class TextFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(25),
-      child: TextFormField(
-        validator: function,
-        // controller: textEditingController,
-        decoration: InputDecoration(
-         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.h)
-          ), labelStyle: TextStyle(color: cblack,fontWeight: FontWeight.w600), 
+    return TextFormField(
+      validator: function,
+      // controller: textEditingController,
+      decoration: InputDecoration(
+       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.h)
+        ), labelStyle: TextStyle(color: cblack,fontWeight: FontWeight.w600), 
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255)), 
+    borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0),width: 2), 
     ),
     fillColor: cWhite, 
     filled: true,
-        
-          hintText: hintText,hintStyle: TextStyle(color: cblack)
-        ),
+      
+        hintText: hintText,hintStyle: TextStyle(color: cblack)
       ),
     );
   }
