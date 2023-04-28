@@ -11,6 +11,5 @@ class UserCredentialsController {
   static StudentModel? studentModel;
   static ParentModel? parentModel;
   static GuardianModel? guardianModel;
-  static StudentModel? studentModel;
   static TeacherModel? teacherModel;
 }
