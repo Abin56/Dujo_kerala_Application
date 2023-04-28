@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../view/widgets/fonts/google_poppins.dart';
 
-class EventDisplay extends StatelessWidget {
-  const EventDisplay({super.key});
+class EventDisplayClassLevel extends StatelessWidget {
+  const EventDisplayClassLevel({super.key});
 
   @override
   Widget build(BuildContext context) {

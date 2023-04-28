@@ -22,14 +22,14 @@ class StudentSubjectHome extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(backgroundColor: cWhite,
        title: Row(
-          children: [            
+          children: [
             IconButtonBackWidget(color: cblack),SizedBox(width: 90.h,),
             GooglePoppinsWidgets(text: "Subject", fontsize: 20.h,color: cblack,)
           ],
         ),
       //  actions: [
       //   IconButton(onPressed: () {
-        
+
       // }, icon: Icon(Icons.arrow_back_rounded),color: cblack,)],
       // title: Text('Subject'),
       ),
@@ -70,8 +70,8 @@ class StudentSubjectHome extends StatelessWidget {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
 
-                                        shape: 
-                                       
+                                        shape:
+
                                         RoundedRectangleBorder(
 
                                           borderRadius:

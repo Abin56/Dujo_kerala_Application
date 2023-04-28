@@ -1,6 +1,11 @@
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
+import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
+import 'package:dujo_kerala_application/sruthi/Meetings/meetings_list.dart';
+import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
+import 'package:dujo_kerala_application/sruthi/Subject/subject_display.dart';
+import 'package:dujo_kerala_application/sruthi/homeWork/student_homework_list.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'ui team/abin/studymaterial upload/study_material_upload.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 Future<void> main() async {
@@ -45,11 +48,11 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return  StudyMaterialUpload();
+                      return  StudentHomeWorkPage();
                     } else if (state is AuthLoggedOutState) {
-                      return  StudyMaterialUpload();
+                      return  StudentHomeWorkPage();
                     }
-                    return  StudyMaterialUpload();
+                    return  StudentHomeWorkPage();
                   },
                 ),
 
