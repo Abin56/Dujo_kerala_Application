@@ -7,9 +7,17 @@ import 'package:get/get.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../model/schoo_list_model/school_list_model.dart';
 import '../../../widgets/fonts/google_poppins.dart';
-import '../search_batchYear/search_batch_year.dart';
+import '../search_batchYear/search_batch_year.dart'; 
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SearchSchoolBar extends SearchDelegate {
+
+
+
+class SearchSchoolBar extends SearchDelegate { 
+
+
+ 
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     IconButton(
@@ -61,7 +69,11 @@ class SearchSchoolBar extends SearchDelegate {
           return GestureDetector(
             onTap: () async {
               UserCredentialsController.schoolId =
-                  suggestionList[index].schoolId;
+                  suggestionList[index].schoolId; 
+                 String PschoolID = suggestionList[index].schoolId; 
+
+              SharedPreferences prefs = await SharedPreferences.getInstance(); 
+              prefs.setString('schoolID', PschoolID);  
 
               await Get.find<SchoolClassSelectionController>()
                   .fetchBatachDetails();

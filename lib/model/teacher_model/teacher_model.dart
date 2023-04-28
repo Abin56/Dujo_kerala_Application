@@ -18,7 +18,12 @@ class TeacherModel {
       required this.place, 
       required this.gender, 
       required this.district, 
-      required this.altPhoneNo
+      required this.altPhoneNo, 
+      required this.employeeID, 
+      required this.joinDate, 
+      required this.teacherPhNo,
+      required this.docid, 
+      required this.userRole
       });
 
 String teacherName; 
@@ -29,6 +34,11 @@ String place;
 String gender; 
 String district; 
 String altPhoneNo; 
+String employeeID; 
+String joinDate;
+String teacherPhNo;
+String docid;
+String userRole;
 
 
   factory TeacherModel.fromJson(Map<String, dynamic> json) => TeacherModel(
@@ -39,7 +49,13 @@ String altPhoneNo;
       place: json["place"] ?? "", 
       gender: json["gender"]?? "",
       district: json["district"] ?? "", 
-      altPhoneNo: json["altPhoneNo"]?? ""
+      altPhoneNo: json["altPhoneNo"]?? "", 
+      employeeID:json["employeeID"]?? "",
+      joinDate: json["joinDate"]?? "",
+      teacherPhNo : json["teacherPhNo"]??"",
+      docid: json["docid"]?? "", 
+      userRole: json["userRole"]?? ""
+      
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,7 +66,12 @@ String altPhoneNo;
         "place": place, 
         "gender": gender, 
         "district": district, 
-        "altPhoneNo": altPhoneNo 
+        "altPhoneNo": altPhoneNo , 
+        "employeeID":employeeID, 
+        "joinDate" : joinDate,
+        "teacherPhNo":teacherPhNo,
+        "docid" : docid, 
+        "userRole":userRole
       };
 }
 

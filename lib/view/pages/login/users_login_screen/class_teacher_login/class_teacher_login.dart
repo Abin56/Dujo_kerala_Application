@@ -1,5 +1,8 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:math';
+
+import 'package:dujo_kerala_application/controllers/sign_in_controller/sign_in_controller.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/class_teacher_login/sigin/teacher_sigin_screen.dart';
@@ -24,6 +27,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  SignInController signInController = Get.put(SignInController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -106,7 +110,13 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            Get.to(UsersLoginScreen());
+                            signInController.signInWithEmailAndPassword(
+                                emailIdController.text,
+                                passwordController.text,
+                                pageIndex ?? 5,
+                                context);
+                          } else{
+          
                           }
                         },
                         child: loginButtonWidget(

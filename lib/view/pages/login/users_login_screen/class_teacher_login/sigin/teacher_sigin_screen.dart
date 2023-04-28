@@ -4,8 +4,10 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/teacher_signup_controller.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
+import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -35,6 +37,9 @@ class _TeachersSignInScreenState extends State<TeachersSignInScreen> {
   PasswordField hideGetxController = Get.find<PasswordField>();
 
   final formKey = GlobalKey<FormState>();
+    TeacherSignUpController teacherSignUpController =
+      Get.put(TeacherSignUpController());
+
 
   TextEditingController verificationIdController = TextEditingController();
 
@@ -94,39 +99,42 @@ if(verificationpasswordController.text == verificationconfirmController.text){
               imagePath: 'assets/images/splash.png',
             ),
             kHeight30,
-            SizedBox(
-              height: 60.h,
+            Obx(()=> teacherSignUpController.isLoading.value
+                ? circularProgressIndicatotWidget
+                : SizedBox(
+                   height: 60.h,
               width: 350.w,
-              child: StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('Teachers').snapshots(),
-                builder: (context, snapshot) { 
-                  if(snapshot.connectionState == ConnectionState.waiting){
-                    return Center(child: CircularProgressIndicator());
-                  }
-                  var dropdownItems = snapshot.data!.docs.map((doc) {
-                    mailCheckValue = doc['teacherEmail'];
-                    return DropdownMenuItem<String>(
-          value: doc['teacherEmail'],
-          child: Text(doc['teacherName']),
-        );
-                  }
-        
-    ).toList(); 
+                  child: DropdownSearch<TeacherModel>(
+                
+                        selectedItem: TeacherModel(teacherName: 'Select Teacher',
+                         teacherEmail: '', houseName: '',
+                          houseNumber: '', place: '', gender: '', 
+                          district: '', altPhoneNo: '', 
+                          employeeID: '', joinDate: '', teacherPhNo: "",
+                          docid: '', userRole: ''), 
+                             validator: (v) => v == null ? "required field" : null,
+                          items: teacherSignUpController.teachersList,
+                          itemAsString: (TeacherModel u) => u.teacherName,
+                          onChanged: (value) {
+                            UserCredentialsController.teacherModel = value;
+                            log('${value!.teacherPhNo}');
+                  }),
+          )),
+ 
     
-                  return DropdownButtonFormField(
-                    hint: Text('Select Teacher'),
-                    validator: (v) => v == null ? "required field" : null,
-                    items: dropdownItems, value: so,
-                    onChanged: (val){
-                      setState(() {
-                        so = val;
-                      }); 
-                      print(so);
-                    },
-                  );
-                }
-              ),
-            ),
+    
+                  // return DropdownButtonFormField(
+                  //   hint: Text('Select Teacher'),
+                  //   validator: (v) => v == null ? "required field" : null,
+                  //   items: dropdownItems, value: so,
+                  //   onChanged: (val){
+                  //     setState(() {
+                  //       so = val;
+                  //     }); 
+                  //     print(so);
+                  //   },
+                  // );
+            
             kHeight30,
             Form(
               key: formKey,
@@ -138,13 +146,15 @@ if(verificationpasswordController.text == verificationconfirmController.text){
                       obscureText: false,
                       hintText: 'Email id',
                       labelText: 'Enter Mail ID',
+                      
                       prefixIcon: IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.mail_outline,
                         ),
+                        
                       ),
-                      textEditingController: verificationIdController,
+                      textEditingController: teacherSignUpController.emailController,
                       function: checkFieldEmailIsValid),
                   Obx(
                     () => SigninTextFormfield(
@@ -152,7 +162,7 @@ if(verificationpasswordController.text == verificationconfirmController.text){
                       obscureText: hideGetxController.isObscurefirst.value,
                       labelText: 'Password',
                       icon: Icons.lock,
-                      textEditingController: verificationpasswordController,
+                      textEditingController: teacherSignUpController.passwordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -193,36 +203,43 @@ if(verificationpasswordController.text == verificationconfirmController.text){
                   kHeight10,
                   Padding(
                     padding: EdgeInsets.only(top: 20.h),
-                    child: GestureDetector(
-                      onTap: () {
+                    child: GestureDetector( 
+                      onTap: (){
                         if (formKey.currentState!.validate()) {
-                          Get.to(UserSentOTPScreen(
-                            userpageIndex: widget.pageIndex,
-                            phoneNumber: '8089262564',
-                            userEmail: 'q@gmail.com',
-                            userPassword: 'Abin',
-                          ));
+                        if (UserCredentialsController
+                                .teacherModel?.teacherPhNo != '' || UserCredentialsController
+                                .teacherModel?.teacherPhNo != null
+                            ) {
+                          Get.to(() => UserSentOTPScreen(
+                                userpageIndex: widget.pageIndex,
+                                phoneNumber:
+                                    "+91${UserCredentialsController.teacherModel?.teacherPhNo}",
+                                userEmail: teacherSignUpController
+                                    .emailController.text,
+                                userPassword: teacherSignUpController
+                                    .passwordController.text,
+                              ));
+                        } else {
+                          showToast(msg: "Please select student detail.");
                         }
-                      },
-                      child: GestureDetector( 
-                        onTap: ()async{
-                          var k = await checkMail();
-                          if(passwordCheck() && k){
-                            //Navigator.push(context, MaterialPageRoute(builder:(context) => UserSentOTPScreen(phoneNumber: ),));
-                          }
-                          else{
-                            log('not okay');
-                          }
-                },
-                        child: loginButtonWidget(
-                                   height: 60,
-                          width: 180,
-                          text: 'Submit', 
-                          
-                        ),
+                      }},
+                        // var k = await checkMail();
+                        // if(passwordCheck() && k){
+                        //   //Navigator.push(context, MaterialPageRoute(builder:(context) => UserSentOTPScreen(phoneNumber: ),));
+                        // }
+                        // else{
+                        //   log('not okay');
+                        // }
+              //  },
+                    
+                      child: loginButtonWidget(
+                                 height: 60,
+                        width: 180,
+                        text: 'Submit', 
+                        
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

@@ -47,6 +47,7 @@ dependencies:
   intl: ^0.18.1
   lottie: null
   pinput: null
+  shared_preferences: ^2.1.0
   uuid: ^3.0.7
 
 dev_dependencies:
