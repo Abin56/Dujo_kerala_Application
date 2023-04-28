@@ -2,12 +2,12 @@
 
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../controllers/sign_in_controller/guardian_sign_in_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
@@ -17,15 +17,13 @@ import '../../../../widgets/textformfield_login.dart';
 import '../student login/signin/student_sigin.dart';
 
 class GuardianLoginScreen extends StatelessWidget {
-    int ? pageIndex;
+  int? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  GuardianLoginScreen({
-    this.pageIndex,
-    super.key});
+  GuardianLoginScreen({this.pageIndex, super.key});
 
-  TextEditingController emailIdController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  GuardianSigninController guardianSigninController =
+      Get.put(GuardianSigninController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -67,7 +65,8 @@ class GuardianLoginScreen extends StatelessWidget {
                             Icons.mail_outline,
                           ),
                         ),
-                        textEditingController: emailIdController,
+                        textEditingController:
+                            guardianSigninController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -76,7 +75,8 @@ class GuardianLoginScreen extends StatelessWidget {
                         obscureText: hideGetxController.isObscurefirst.value,
                         labelText: 'Password',
                         icon: Icons.lock,
-                        textEditingController: passwordController,
+                        textEditingController:
+                            guardianSigninController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -108,12 +108,12 @@ class GuardianLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            Get.to( UsersLoginScreen());
+                            guardianSigninController.signIn(context);
                           }
                         },
                         child: loginButtonWidget(
-                                   height: 60,
-                        width: 180,
+                          height: 60,
+                          width: 180,
                           text: 'Login',
                         ),
                       ),

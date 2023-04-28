@@ -1,12 +1,13 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../controllers/sign_in_controller/parent_sign_in_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
@@ -17,15 +18,13 @@ import '../../../../widgets/textformfield_login.dart';
 import '../student login/signin/student_sigin.dart';
 
 class ParentLoginScreen extends StatelessWidget {
-    int ? pageIndex;
+  int? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  ParentLoginScreen({
-   this.pageIndex,
-    super.key});
+  ParentLoginScreen({this.pageIndex, super.key});
 
-  TextEditingController emailIdController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final ParentLoginController parentLoginController =
+      Get.put(ParentLoginController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -67,7 +66,8 @@ class ParentLoginScreen extends StatelessWidget {
                             Icons.mail_outline,
                           ),
                         ),
-                        textEditingController: emailIdController,
+                        textEditingController:
+                            parentLoginController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -76,7 +76,8 @@ class ParentLoginScreen extends StatelessWidget {
                         obscureText: hideGetxController.isObscurefirst.value,
                         labelText: 'Password',
                         icon: Icons.lock,
-                        textEditingController: passwordController,
+                        textEditingController:
+                            parentLoginController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -108,13 +109,17 @@ class ParentLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            Get.to( UsersLoginScreen());
+                            parentLoginController.signIn(context);
                           }
                         },
-                        child: loginButtonWidget(
-                                   height: 60,
-                        width: 180,
-                          text: 'Login',
+                        child: Obx(
+                          () => parentLoginController.isLoading.value
+                              ? circularProgressIndicatotWidget
+                              : loginButtonWidget(
+                                  height: 60,
+                                  width: 180,
+                                  text: 'Login',
+                                ),
                         ),
                       ),
                     ),

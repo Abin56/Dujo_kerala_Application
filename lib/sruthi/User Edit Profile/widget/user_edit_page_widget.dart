@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-
 class UserEditListileWidget extends StatelessWidget {
   final Widget title;
   final Widget subtitle;
@@ -62,7 +61,9 @@ class UserEditListileWidget extends StatelessWidget {
                               TextButton(
                                 child: const Text("Update"),
                                 onPressed: () {
-                                Get.to(UnderMaintanceScreen());
+                                  Get.to(UnderMaintanceScreen(
+                                    text: "",
+                                  ));
                                 },
                               ),
                             ],

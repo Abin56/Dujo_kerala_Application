@@ -28,36 +28,32 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cloud_firestore:
-  cupertino_icons: 
-  dropdown_search:
-  firebase_auth:
-  firebase_core:
-  firebase_database:
-  firebase_storage:
+  cloud_firestore: null
+  cupertino_icons: ^1.0.2
+  dropdown_search: null
+  firebase_auth: null
+  firebase_core: null
+  firebase_database: null
+  firebase_storage: null
   flutter:
     sdk: flutter
-  flutter_bloc:
-  flutter_screenutil:
-  flutter_staggered_animations:
-  fluttertoast:
-  get:
-  google_fonts:
-  image_picker:
-  intl:
-  lottie:
-  pinput:
-  uuid: 
-  google_nav_bar: 
-  line_icons:
+  flutter_bloc: null
+  flutter_screenutil: null
+  flutter_staggered_animations: null
+  flutter_svg: ^2.0.5
+  fluttertoast: null
+  get: null
+  google_fonts: null
+  google_nav_bar: null
+  image_picker: null
+  intl: ^0.18.1
+  line_icons: null
+  lottie: null
+  pinput: null
+  shared_preferences: ^2.1.0
+  uuid: ^3.0.7
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter

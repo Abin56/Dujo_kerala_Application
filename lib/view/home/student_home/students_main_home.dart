@@ -5,6 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../sample/under_maintance.dart';
+
 class StudentsMainHomeScreen extends StatefulWidget {
   // var schoolID;
   // var classID;
@@ -24,14 +25,11 @@ class StudentsMainHomeScreen extends StatefulWidget {
 class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
   int _page = 0;
 
-
   onPageChanged(int page) {
     setState(() {
       _page = page;
     });
   }
-
-
 
   @override
   void initState() {
@@ -41,12 +39,10 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      StudentHomeScreen(
-
-      ),
-      const UnderMaintanceScreen(),
-      const UnderMaintanceScreen(),
-      const UnderMaintanceScreen(),
+      StudentHomeScreen(),
+      const UnderMaintanceScreen(text: ""),
+      const UnderMaintanceScreen(text: ""),
+      const UnderMaintanceScreen(text: ""),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -71,12 +67,9 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
           ),
         ),
         child: GNav(
-
           gap: 8,
           rippleColor: Colors.grey,
-
           activeColor: Colors.white,
-
           color: Colors.white,
           tabs: const [
             GButton(
@@ -109,7 +102,6 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
           },
         ),
       ),
-
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: SingleChildScrollView(
@@ -123,6 +115,4 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
       ),
     );
   }
-
-
 }

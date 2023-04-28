@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class UnderMaintanceScreen extends StatelessWidget {
-  const UnderMaintanceScreen({super.key});
+  const UnderMaintanceScreen({super.key, required this.text});
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +27,15 @@ class UnderMaintanceScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Under Maintenance",
+                    "Under Maintenance$text",
                     style: GoogleFonts.poppins(
-                      fontSize: 18,
-                  
-                      color: Color.fromARGB(255, 34, 34, 34)
-                    ),
+                        fontSize: 18,
+                        color: const Color.fromARGB(255, 34, 34, 34)),
                   ),
                   LottieBuilder.network(
-                      'https://assets1.lottiefiles.com/packages/lf20_yyoe1mkr.json',height: 100,)
+                    'https://assets1.lottiefiles.com/packages/lf20_yyoe1mkr.json',
+                    height: 100,
+                  )
                 ],
               )
             ],

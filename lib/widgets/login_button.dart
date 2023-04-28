@@ -31,8 +31,9 @@ class loginButtonWidget extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: DGoogleFonts.subHeadTextStyle,
-        ),
+          style: DGoogleFonts.subHeadTextStyle, 
+        ), 
+        
       ),
     );
   }
