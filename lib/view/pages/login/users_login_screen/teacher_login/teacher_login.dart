@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../controllers/sign_in_controller/student_sign_in_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
@@ -17,12 +18,10 @@ import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/textformfield_login.dart';
 
 class TeacherLoginScreen extends StatelessWidget {
-      int ? pageIndex;
+  int? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
-  TeacherLoginScreen({
-    this.pageIndex,
-    super.key});
+  TeacherLoginScreen({this.pageIndex, super.key});
 
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -108,12 +107,16 @@ class TeacherLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            Get.to( UsersLoginScreen());
+                            // signInController.signInWithEmailAndPassword(
+                            //     emailIdController.text,
+                            //     passwordController.text,
+                            //     pageIndex ?? 5,
+                            //     context);
                           }
                         },
                         child: loginButtonWidget(
-                                   height: 60,
-                        width: 180,
+                          height: 60,
+                          width: 180,
                           text: 'Login',
                         ),
                       ),

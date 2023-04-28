@@ -1,6 +1,4 @@
-
-
-import '../../pages/school_selection_dialogues/utils/utils.dart';
+import 'package:flutter/foundation.dart';
 
 String stringTimeToDateConvert(String date) {
   //String dateandtime convert to "dd-mm-yyyy" this format
@@ -8,12 +6,12 @@ String stringTimeToDateConvert(String date) {
     final DateTime dateFormat = DateTime.parse(date);
     return "${dateFormat.day}-${dateFormat.month}-${dateFormat.year}";
   } catch (e) {
-    showToast(msg: e.toString());
+    if (kDebugMode) {
+      print(e);
+    }
   }
   return '';
 }
-
-
 
 String? checkFieldEmpty(String? fieldContent) {
   //<-- add String? as a return type
@@ -60,10 +58,6 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
   }
 }
 
-
-
 class TeacherLoginIDSaver {
   static String id = '';
-
 }
- 

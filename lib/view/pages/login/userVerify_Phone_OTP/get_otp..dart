@@ -55,8 +55,7 @@ class UserSentOTPScreen extends StatelessWidget {
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is AuthCodeSentState) {
-                      log("logingggggggggggggg");
-                   Get.to(   UserVerifyOTPScreen(
+                      Get.to(UserVerifyOTPScreen(
                           userpageIndex: userpageIndex,
                           phoneNumber: phoneNumber,
                           userEmail: userEmail,
@@ -76,10 +75,9 @@ class UserSentOTPScreen extends StatelessWidget {
                             // ignore: deprecated_member_use
                             primary: Colors.green.shade600),
                         onPressed: () async {
-                          String verifyNumber = "+91$phoneNumber";
                           BlocProvider.of<AuthCubit>(context)
-                              .sentOTP(verifyNumber);
-                          log(verifyNumber);
+                              .sentOTP(phoneNumber);
+                          log(phoneNumber);
                         },
                         child: const Text('Send OTP'));
                   },

@@ -1,24 +1,13 @@
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
-import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
-import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
-import 'package:dujo_kerala_application/sruthi/Subject/subject_chapterwise_display.dart';
-import 'package:dujo_kerala_application/sruthi/Subject/subject_display.dart';
-import 'package:dujo_kerala_application/sruthi/homeWork/student_homework_list.dart';
-
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-
-import 'sruthi/Study Materials/study_materials_list.dart';
-
-
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,32 +31,23 @@ class MyApp extends StatelessWidget {
           return BlocProvider(
               create: (context) => AuthCubit(),
               child: GetMaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  home: BlocBuilder<AuthCubit, AuthState>(
-                    buildWhen: (oldState, newState) {
-                      return oldState is AuthInitialState;
-                    },
-                    builder: (context, state) {
-                      if (state is AuthLoggedInState) {
-                        return const SplashScreen();
-                      } else if (state is AuthLoggedOutState) {
-                        return 
-                        StudentHomeWorkPage();
-                       // TeacherHomeScreen();
-                        // StudentHomeScreen();
-                       // const SplashScreen();
-                      }
-                      return 
+                debugShowCheckedModeBanner: false,
+                home: BlocBuilder<AuthCubit, AuthState>(
+                  buildWhen: (oldState, newState) {
+                    return oldState is AuthInitialState;
+                  },
+                  builder: (context, state) {
+                    if (state is AuthLoggedInState) {
+                      return const SplashScreen();
+                    } else if (state is AuthLoggedOutState) {
+                      return const SplashScreen();
+                    }
+                    return const SplashScreen();
+                  },
+                ),
 
-                      StudentHomeWorkPage();
-                      //TeacherHomeScreen();
-                      // StudentHomeScreen();
-                    // const SplashScreen();
-                    },
-                  )
-
-                  // LoginVerification(),
-                  ));
+                // LoginVerification(),
+              ));
         });
   }
 }

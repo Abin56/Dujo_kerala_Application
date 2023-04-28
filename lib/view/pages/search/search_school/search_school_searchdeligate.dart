@@ -1,8 +1,12 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
-import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
+import 'package:dujo_kerala_application/controllers/schoo_selection_controller/school_class_selection_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../model/schoo_list_model/school_list_model.dart';
+import '../../../widgets/fonts/google_poppins.dart';
 import '../search_batchYear/search_batch_year.dart';
 
 class SearchSchoolBar extends SearchDelegate {
@@ -10,9 +14,12 @@ class SearchSchoolBar extends SearchDelegate {
   List<Widget>? buildActions(BuildContext context) {
     IconButton(
         onPressed: () {
-          Navigator.pop(context);
+          query = "";
         },
-        icon: const Icon(Icons.clear));
+        icon: const Icon(
+          Icons.clear,
+          color: Colors.black,
+        ));
   }
 
   @override
@@ -25,21 +32,46 @@ class SearchSchoolBar extends SearchDelegate {
   }
 
   @override
-  Widget buildResults(BuildContext context) {
-    throw UnimplementedError();
-  }
-
-  @override
   Widget buildSuggestions(BuildContext context) {
+    final List<SchoolModel> suggestionList;
+    if (query.isEmpty) {
+      suggestionList =
+          Get.find<SchoolClassSelectionController>().schoolModelList;
+    } else {
+      suggestionList = Get.find<SchoolClassSelectionController>()
+          .schoolModelList
+          .where((item) =>
+              item.schoolName.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+
+    if (suggestionList.isEmpty) {
+      return ListTile(
+        title: GooglePoppinsWidgets(
+          text: "Result not found",
+          fontsize: 18,
+          fontWeight: FontWeight.w400,
+        ),
+      );
+    }
+
     return Scaffold(
       body: ListView.separated(
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () async {
-                 await showSearch(context: context, delegate: SearchBatchYearBar());
+              UserCredentialsController.schoolId =
+                  suggestionList[index].schoolId;
+
+              await Get.find<SchoolClassSelectionController>()
+                  .fetchBatachDetails();
+              if (context.mounted) {
+                await showSearch(
+                    context: context, delegate: SearchBatchYearBar());
+              }
             },
             child: GooglePoppinsWidgets(
-              text: 'Marthoma Higher Secondary School, venmoney',
+              text: suggestionList[index].schoolName,
               fontsize: 18,
               fontWeight: FontWeight.w400,
             ),
@@ -48,7 +80,13 @@ class SearchSchoolBar extends SearchDelegate {
         separatorBuilder: (context, index) {
           return const Divider();
         },
-        itemCount: 10),
+        itemCount: suggestionList.length,
+      ),
     );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return const SizedBox();
   }
 }

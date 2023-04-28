@@ -1,6 +1,6 @@
 // ignore_for_file: empty_catches, unused_element
 
-import 'package:dujo_kerala_application/ui%20team/abin/homepages/Student%20home/student_home.dart';
+import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -14,12 +14,12 @@ enum DrawerSections {
   setting,
   share,
   feedback,
-  contact,  
+  contact,
   about,
 }
 
 // ignore: non_constant_identifier_names
-Widget GuardianDrawer(context) {
+Widget ParentDrawer(context) {
   void signOut(context) async {
     final auth = FirebaseAuth.instance;
     try {
@@ -62,9 +62,9 @@ Widget GuardianDrawer(context) {
            backgroundImage: const NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO3Kbs-sPqhzk0A2i0doztmT0RLa0nGmYWYw&usqp=CAU'),),
        ),
         kWidth10,
-        GoogleMonstserratWidgets(text: 'Guardian', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
+        GoogleMonstserratWidgets(text: 'Parent', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
         kWidth10,
-        GoogleMonstserratWidgets(text: 'Guardian@email.com', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
+        GoogleMonstserratWidgets(text: 'parent@email.com', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
           ]),
         ),
 

@@ -1,7 +1,6 @@
-// ignore_for_file: non_constant_identifier_names, file_names, empty_catches, unused_element
+// ignore_for_file: empty_catches, unused_element
 
-import 'package:dujo_kerala_application/ui%20team/abin/drawer/student_drawer.dart';
-import 'package:dujo_kerala_application/ui%20team/abin/homepages/Student%20home/student_home.dart';
+import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -9,15 +8,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget TeacherDrawer(context) {
+enum DrawerSections {
+  dashboard,
+  favourites,
+  setting,
+  share,
+  feedback,
+  contact,  
+  about,
+}
+
+// ignore: non_constant_identifier_names
+Widget GuardianDrawer(context) {
   void signOut(context) async {
     final auth = FirebaseAuth.instance;
     try {
       await auth.signOut().then((value) => {
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => const Gsignin()),
-            //     (route) => false)
+            
           });
     } catch (e) {}
   }
@@ -35,13 +42,14 @@ Widget TeacherDrawer(context) {
 
   var currentPage = DrawerSections.dashboard;
   return Container(
-    color: adminePrimayColor  ,
+    color: adminePrimayColor,
     padding: const EdgeInsets.only(top: 15),
     child: Column(
+      
       // show list  of menu drawer.........................
       children: [
-         Container(
-           margin: EdgeInsets.only(top: 20.h),
+        Container(
+          margin: EdgeInsets.only(top: 20.h),
           width: double.infinity,
           height: 250.h,
           decoration: const BoxDecoration(color: adminePrimayColor),
@@ -54,34 +62,35 @@ Widget TeacherDrawer(context) {
            backgroundImage: const NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO3Kbs-sPqhzk0A2i0doztmT0RLa0nGmYWYw&usqp=CAU'),),
        ),
         kWidth10,
-        GoogleMonstserratWidgets(text: 'Teacher', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
+        GoogleMonstserratWidgets(text: 'Guardian', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
         kWidth10,
-        GoogleMonstserratWidgets(text: 'teacher@email.com', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
+        GoogleMonstserratWidgets(text: 'Guardian@email.com', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
           ]),
         ),
-        MenuItem(1, 'assets/images/attendance.png', 'Profile',
+
+
+        MenuItem(1, 'assets/images/profile.png', 'Profile',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          
+         
         }),
-        MenuItem(2, 'assets/images/exam.png', 'Exams',
+        MenuItem(2, 'assets/images/exam.png', ' Exams',
             currentPage == DrawerSections.favourites ? true : false, () {
           
         }),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable',
+        MenuItem(3, 'assets/images/library.png', ' TimeTable',
             currentPage == DrawerSections.setting ? true : false, () {
-         
-        }),
-        
-        MenuItem(4, 'assets/images/homework.png', 'Attendance',
-            currentPage == DrawerSections.contact ? true : false, () {
           
         }),
-        MenuItem(5, 'assets/images/notice.jpg', 'Notices',
-            currentPage == DrawerSections.about ? true : false, () {
+       
+        MenuItem(4, 'assets/images/homework.png', ' HomeWorks',
+            currentPage == DrawerSections.contact ? true : false, () {
          
         }),
-       
-         MenuItem(6, 'assets/images/live.jpg', ' Live Classes',
+        MenuItem(5, 'assets/images/notice.jpg', ' Notices',
+            currentPage == DrawerSections.about ? true : false, () {
+          
+        }),
+        MenuItem(6, 'assets/images/live.jpg', ' Live Classes',
             currentPage == DrawerSections.dashboard ? true : false, () {
           
         }),
@@ -97,9 +106,8 @@ Widget TeacherDrawer(context) {
             currentPage == DrawerSections.dashboard ? true : false, () {
            signOut(context);
         }),
-       
-       
-      Container(
+        
+        Container(
           color:cWhite,
           // Colors.grey.withOpacity(0.2),
           height: 200.h ,
@@ -176,3 +184,4 @@ Widget TeacherDrawer(context) {
     ),
   );
 }
+
