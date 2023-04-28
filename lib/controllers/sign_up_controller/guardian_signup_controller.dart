@@ -13,7 +13,6 @@ import '../userCredentials/user_credentials.dart';
 
 class GuardianController extends GetxController {
   TextEditingController userNameController = TextEditingController();
-  TextEditingController useremailController = TextEditingController();
   TextEditingController houseNameController = TextEditingController();
   TextEditingController houseNumberController = TextEditingController();
   TextEditingController placeController = TextEditingController();
@@ -51,11 +50,12 @@ class GuardianController extends GetxController {
 
       //getting firebase uid and updated it to collection
       String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
+      String userEmail = FirebaseAuth.instance.currentUser?.email ?? "";
 
       Map<String, dynamic> updateParentData = <String, dynamic>{
         "gender": gender ?? "",
         "houseName": houseNameController.text,
-        "parentEmail": useremailController.text,
+        "guardianEmail": userEmail,
         "pincode": pinCodeController.text,
         "place": placeController.text,
         "profileImageID": imageId,
@@ -80,7 +80,6 @@ class GuardianController extends GetxController {
 
   bool checkAllFieldIsEmpty() {
     if (userNameController.text.isEmpty ||
-        useremailController.text.isEmpty ||
         houseNameController.text.isEmpty ||
         houseNumberController.text.isEmpty ||
         placeController.text.isEmpty ||
@@ -97,7 +96,6 @@ class GuardianController extends GetxController {
 
   void clearControllers() {
     userNameController.clear();
-    useremailController.clear();
     houseNameController.clear();
     houseNumberController.clear();
     placeController.clear();

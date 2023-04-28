@@ -40,7 +40,9 @@ class ParentLoginController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return ParentLoginScreen();
+              return const UnderMaintanceScreen(
+                text: "Parent Page",
+              );
             }), (route) => false);
           }
           isLoading.value = false;

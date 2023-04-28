@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,7 @@ import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
 
-class GuardianSignin extends GetxController {
+class GuardianSigninController extends GetxController {
   RxBool isLoading = RxBool(false);
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -36,11 +35,14 @@ class GuardianSignin extends GetxController {
             user.docs[0].data(),
           );
         }
-        if (UserCredentialsController.parentModel?.userRole == "guardian") {
+
+        if (UserCredentialsController.guardianModel?.userRole == "guardian") {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return GuardianLoginScreen();
+              return const UnderMaintanceScreen(
+                text: "Guardian Page",
+              );
             }), (route) => false);
           }
           isLoading.value = false;
@@ -53,7 +55,7 @@ class GuardianSignin extends GetxController {
       });
     } catch (e) {
       isLoading.value = false;
-      showToast(msg: "Sign in failed");
+      showToast(msg: "Sign in failed $e");
     }
   }
 }

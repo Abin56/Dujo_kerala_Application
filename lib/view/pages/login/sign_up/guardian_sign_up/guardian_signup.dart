@@ -3,8 +3,8 @@
 import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/controllers/sign_up_controller/parent_sign_up_controller.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,6 @@ import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../constant/sizes/sizes.dart';
-import '../../../../home/sample/under_maintance.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
@@ -25,7 +24,7 @@ class GuardianSignUp extends StatelessWidget {
   GuardianSignUp({super.key});
 
   final getImageController = Get.put(GetImage());
-  GuardianController parentSignUpController = Get.put(GuardianController());
+  GuardianController guardianSignUpController = Get.put(GuardianController());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -131,16 +130,10 @@ class GuardianSignUp extends StatelessWidget {
                       text: "Your Name",
                       hintText: 'Miss Latha',
                       textfromController:
-                          parentSignUpController.userNameController,
+                          guardianSignUpController.userNameController,
                       validator: checkFieldEmpty,
                     ),
-                    SinUpTextFromFiled(
-                      text: "Your email",
-                      hintText: 'latha@gmailcom',
-                      textfromController:
-                          parentSignUpController.useremailController,
-                      validator: checkFieldEmailIsValid,
-                    ),
+                
                     Padding(
                       padding: EdgeInsets.only(left: 8.h, right: 8.h),
                       child: Row(
@@ -160,7 +153,7 @@ class GuardianSignUp extends StatelessWidget {
                                   v == null ? "required field" : null,
                               items: const ['Male', 'Female', 'Others'],
                               onChanged: (value) {
-                                parentSignUpController.gender = value;
+                                guardianSignUpController.gender = value;
                               },
                             ),
                           ),
@@ -172,7 +165,7 @@ class GuardianSignUp extends StatelessWidget {
                       text: 'House Name',
                       hintText: 'Enter your House Name',
                       textfromController:
-                          parentSignUpController.houseNameController,
+                          guardianSignUpController.houseNameController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
@@ -180,35 +173,35 @@ class GuardianSignUp extends StatelessWidget {
                       text: 'House Number',
                       hintText: 'Enter your House Number',
                       textfromController:
-                          parentSignUpController.houseNumberController,
+                          guardianSignUpController.houseNumberController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       text: 'Place',
                       hintText: 'Enter your Place',
                       textfromController:
-                          parentSignUpController.placeController,
+                          guardianSignUpController.placeController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       text: 'District',
                       hintText: 'Enter your District',
                       textfromController:
-                          parentSignUpController.districtController,
+                          guardianSignUpController.districtController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       text: 'State',
                       hintText: 'Enter your State',
                       textfromController:
-                          parentSignUpController.stateController,
+                          guardianSignUpController.stateController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       text: 'Pincode',
                       hintText: 'Enter your Pincode',
                       textfromController:
-                          parentSignUpController.pinCodeController,
+                          guardianSignUpController.pinCodeController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
@@ -216,7 +209,7 @@ class GuardianSignUp extends StatelessWidget {
                       text: ' Al Phone Number',
                       hintText: 'Enter your Al Phone Number',
                       textfromController:
-                          parentSignUpController.altPhoneNoController,
+                          guardianSignUpController.altPhoneNoController,
                       validator: checkFieldPhoneNumberIsValid,
                     ),
                     kHeight30,
@@ -225,18 +218,14 @@ class GuardianSignUp extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
-                            await parentSignUpController
+                            await guardianSignUpController
                                 .updateGuardianData()
-                                .then(
-                                  (value) => Get.offAll(
-                                    const UnderMaintanceScreen(
-                                        text: "guardian Page"),
-                                  ),
-                                );
+                                .then((value) =>
+                                    Get.offAll(GuardianLoginScreen()));
                           }
                         },
                         child: Obx(
-                          () => parentSignUpController.isLoading.value
+                          () => guardianSignUpController.isLoading.value
                               ? circularProgressIndicatotWidget
                               : loginButtonWidget(
                                   height: 60, width: 180, text: 'Submit'),

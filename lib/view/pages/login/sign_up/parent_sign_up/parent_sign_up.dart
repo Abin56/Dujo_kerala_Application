@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/controllers/sign_up_controller/parent_sign_up_controller.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/parent_login/parent_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,6 @@ import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../constant/sizes/sizes.dart';
-import '../../../../home/sample/under_maintance.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
@@ -134,13 +134,7 @@ class ParentSignUpPage extends StatelessWidget {
                           parentSignUpController.userNameController,
                       validator: checkFieldEmpty,
                     ),
-                    SinUpTextFromFiled(
-                      text: "Your email",
-                      hintText: 'latha@gmailcom',
-                      textfromController:
-                          parentSignUpController.useremailController,
-                      validator: checkFieldEmailIsValid,
-                    ),
+                 
                     Padding(
                       padding: EdgeInsets.only(left: 8.h, right: 8.h),
                       child: Row(
@@ -229,7 +223,7 @@ class ParentSignUpPage extends StatelessWidget {
                                 .updateParentData()
                                 .then(
                                   (value) => Get.offAll(
-                                    const UnderMaintanceScreen(text: ""),
+                                    ParentLoginScreen(),
                                   ),
                                 );
                           }

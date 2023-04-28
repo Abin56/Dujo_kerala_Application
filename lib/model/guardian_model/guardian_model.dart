@@ -1,22 +1,22 @@
 // To parse this JSON data, do
 //
-//     final parentModel = parentModelFromJson(jsonString);
+//     final guardiantModel = guardiantModelFromJson(jsonString);
 
 import 'dart:convert';
 
-GuardianModel parentModelFromJson(String str) =>
+GuardianModel guardiantModelFromJson(String str) =>
     GuardianModel.fromJson(json.decode(str));
 
-String parentModelToJson(GuardianModel data) => json.encode(data.toJson());
+String guardiantModelToJson(GuardianModel data) => json.encode(data.toJson());
 
 class GuardianModel {
   String createdate;
   String docid;
   String gender;
   String houseName;
-  String parentEmail;
-  String parentName;
-  String parentPhoneNumber;
+  String guardiantEmail;
+  String guardiantName;
+  String guardiantPhoneNumber;
   String pincode;
   String place;
   String profileImageId;
@@ -31,9 +31,9 @@ class GuardianModel {
     required this.docid,
     required this.gender,
     required this.houseName,
-    required this.parentEmail,
-    required this.parentName,
-    required this.parentPhoneNumber,
+    required this.guardiantEmail,
+    required this.guardiantName,
+    required this.guardiantPhoneNumber,
     required this.pincode,
     required this.place,
     required this.profileImageId,
@@ -49,9 +49,9 @@ class GuardianModel {
     String? docid,
     String? gender,
     String? houseName,
-    String? parentEmail,
-    String? parentName,
-    String? parentPhoneNumber,
+    String? guardiantEmail,
+    String? guardiantName,
+    String? guardiantPhoneNumber,
     String? pincode,
     String? place,
     String? profileImageId,
@@ -66,9 +66,9 @@ class GuardianModel {
         docid: docid ?? this.docid,
         gender: gender ?? this.gender,
         houseName: houseName ?? this.houseName,
-        parentEmail: parentEmail ?? this.parentEmail,
-        parentName: parentName ?? this.parentName,
-        parentPhoneNumber: parentPhoneNumber ?? this.parentPhoneNumber,
+        guardiantEmail: guardiantEmail ?? this.guardiantEmail,
+        guardiantName: guardiantName ?? this.guardiantName,
+        guardiantPhoneNumber: guardiantPhoneNumber ?? this.guardiantPhoneNumber,
         pincode: pincode ?? this.pincode,
         place: place ?? this.place,
         profileImageId: profileImageId ?? this.profileImageId,
@@ -80,21 +80,21 @@ class GuardianModel {
       );
 
   factory GuardianModel.fromJson(Map<String, dynamic> json) => GuardianModel(
-        createdate: json["createdate"],
-        docid: json["docid"],
-        gender: json["gender"],
-        houseName: json["houseName"],
-        parentEmail: json["parentEmail"],
-        parentName: json["parentName"],
-        parentPhoneNumber: json["parentPhoneNumber"],
-        pincode: json["pincode"],
-        place: json["place"],
-        profileImageId: json["profileImageID"],
-        profileImageUrl: json["profileImageURL"],
-        state: json["state"],
-        studentId: json["studentID"],
-        uid: json["uid"],
-        userRole: json["userRole"],
+        createdate: json["createdate"] ?? "",
+        docid: json["docid"] ?? "",
+        gender: json["gender"] ?? "",
+        houseName: json["houseName"] ?? "",
+        guardiantEmail: json["guardiantEmail"] ?? "",
+        guardiantName: json["guardiantName"] ?? "",
+        guardiantPhoneNumber: json["guardiantPhoneNumber"] ?? "",
+        pincode: json["pincode"] ?? "",
+        place: json["place"] ?? "",
+        profileImageId: json["profileImageID"] ?? "",
+        profileImageUrl: json["profileImageURL"] ?? "",
+        state: json["state"] ?? "",
+        studentId: json["studentID"] ?? "",
+        uid: json["uid"] ?? "",
+        userRole: json["userRole"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -102,9 +102,9 @@ class GuardianModel {
         "docid": docid,
         "gender": gender,
         "houseName": houseName,
-        "parentEmail": parentEmail,
-        "parentName": parentName,
-        "parentPhoneNumber": parentPhoneNumber,
+        "guardiantEmail": guardiantEmail,
+        "guardiantName": guardiantName,
+        "guardiantPhoneNumber": guardiantPhoneNumber,
         "pincode": pincode,
         "place": place,
         "profileImageID": profileImageId,
