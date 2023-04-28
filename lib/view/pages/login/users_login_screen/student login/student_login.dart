@@ -19,7 +19,7 @@ import '../../sign_up/student_sign_up/student_sign_up.dart';
 
 class StudentLoginScreen extends StatelessWidget {
   final int? pageIndex;
-  final PasswordField hideGetxController = Get.find<PasswordField>();
+  final PasswordField hideGetxController = Get.put(PasswordField());
 
   StudentLoginScreen({this.pageIndex, super.key});
 
