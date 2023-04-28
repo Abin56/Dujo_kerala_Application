@@ -1,11 +1,10 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../view/widgets/fonts/google_poppins.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
 
 class NoticeViewPage extends StatelessWidget {
   const NoticeViewPage({super.key});
@@ -14,7 +13,7 @@ class NoticeViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(backgroundColor:adminePrimayColor,),
+        appBar: AppBar(backgroundColor:adminePrimayColor,title: GooglePoppinsWidgets(fontsize:20.h , text: 'Notice',),),
         body: ListView(children: [
           Container(
             width: 90.w,
@@ -23,11 +22,7 @@ class NoticeViewPage extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  GooglePoppinsWidgets(
-                    text: "Notice",
-                    fontsize: 24.h,
-                    fontWeight: FontWeight.w600,
-                  ),
+                 
                   kHeight30,
                   Container(
                     height: 150,
