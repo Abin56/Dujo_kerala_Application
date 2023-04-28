@@ -16,6 +16,7 @@ class NoticeSchoolDisplayPage extends StatelessWidget {
         appBar: AppBar(backgroundColor:adminePrimayColor,title: GooglePoppinsWidgets(fontsize:20.h , text: 'Notice',),),
         body: ListView(children: [
           Container(
+            color: cblue,
             width: 90.w,
             height: 900.h,
             decoration: BoxDecoration(),
@@ -65,11 +66,15 @@ class NoticeSchoolDisplayPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Flexible(
-                                        child: GooglePoppinsWidgets(
-                                            text: "This is to inform all the students that " +
-                                                " __________________  will be  conductod" +
-                                                " __________________  at __________________ with various cultural programmes.______________ will be grace the occasion. Student who would like to occasion in various programme should contact their\nrespective classteacher latest by __________________ .",
-                                            fontsize: 19.h),
+                                        child: ListView(
+                                          children: [
+                                            GooglePoppinsWidgets(
+                                                text: "This is to inform all the students that " +
+                                                    " __________________  will be  conductod" +
+                                                    " __________________  at __________________ with various cultural programmes.______________ will be grace the occasion. Student who would like to occasion in various programme should contact their\nrespective classteacher latest by __________________ .",
+                                                fontsize: 19.h),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
