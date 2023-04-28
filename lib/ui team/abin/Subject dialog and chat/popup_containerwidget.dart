@@ -9,7 +9,7 @@ import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class PopUpcontainerWidget extends StatelessWidget {
    PopUpcontainerWidget({

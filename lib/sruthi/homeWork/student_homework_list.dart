@@ -33,80 +33,85 @@ class StudentHomeWorkPage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: () {},
-                      child: Container(
-                        height: 190.h,
-                        decoration:
-                            BoxDecoration(border: Border.all(width: 0.02)),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 18.h),
-                          child: ListTile(
-                              leading: const Icon(Icons.paste_sharp),
-                              title: GooglePoppinsWidgets(
-                                  text: "Chapter 1", fontsize: 19.h),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 10.h),
-                                    child: GooglePoppinsWidgets(
-                                        text: "Subject : Maths",
-                                        fontsize: 15.h),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 10.h),
-                                    child: Row(
-                                      children: [
-                                        GooglePoppinsWidgets(
-                                            text: "Task : ",
-                                            fontsize: 15.h),
-                                             InkWell(
-                                              
-                                                    onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomeWorkDisplay()));
-                                               },
-                                              
-                                               child: GooglePoppinsWidgets(
-                                                                         text: "View",
-                                                                         fontsize: 16.h,
-                                                                         color: Colors.blue,
-                                                                       ),
-                                             ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 10.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        GooglePoppinsWidgets(
-                                            text: "From : 00/00/00",
-                                            fontsize: 15.h),
-                                        GooglePoppinsWidgets(
-                                            text: "To : 00/00/00",
-                                            fontsize: 15.h),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 190.h,
+                            decoration:
+                                BoxDecoration(border: Border.all(width: 0.02)),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 18.h),
+                              child: ListTile(
+                                  leading: const Icon(Icons.paste_sharp),
+                                  title: GooglePoppinsWidgets(
+                                      text: "Chapter 1", fontsize: 19.h),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(top: 10.h),
                                         child: GooglePoppinsWidgets(
-                                            text: "Assigned Teacher : Anupama",
+                                            text: "Subject : Maths",
                                             fontsize: 15.h),
                                       ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 10.h),
+                                        child: Row(
+                                          children: [
+                                            GooglePoppinsWidgets(
+                                                text: "Task : ",
+                                                fontsize: 15.h),
+                                                 InkWell(
+                                                  
+                                                        onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeWorkDisplay()));
+                                                   },
+                                                  
+                                                   child: GooglePoppinsWidgets(
+                                                                             text: "View",
+                                                                             fontsize: 16.h,
+                                                                             color: Colors.blue,
+                                                                           ),
+                                                 ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 10.h),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            GooglePoppinsWidgets(
+                                                text: "From : 00/00/00",
+                                                fontsize: 15.h),
+                                            GooglePoppinsWidgets(
+                                                text: "To : 00/00/00",
+                                                fontsize: 15.h),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(top: 10.h),
+                                            child: GooglePoppinsWidgets(
+                                                text: "Assigned Teacher : Anupama",
+                                                fontsize: 15.h),
+                                          ),
+                                        ],
+                                      ),
                                     ],
-                                  ),
-                                ],
-                              )),
-                        ),
+                                  )),
+                            ),
+                          ),
+                          kHeight10
+                        ],
                       ),
                     );
                   }),

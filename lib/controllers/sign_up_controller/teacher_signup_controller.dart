@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,33 +13,35 @@ import '../../model/student_model/student_model.dart';
 import '../userCredentials/user_credentials.dart';
 import 'package:uuid/uuid.dart';
 
-class StudentSignUpController extends GetxController {
+class TeacherSignUpController extends GetxController {
   TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController comfirmPasswordController = TextEditingController();
   TextEditingController houseNameController = TextEditingController();
   TextEditingController houseNumberController = TextEditingController();
   TextEditingController placeController = TextEditingController();
   TextEditingController districtController = TextEditingController();
   TextEditingController altPhoneNoController = TextEditingController();
-  TextEditingController dateOfBirthController = TextEditingController();
+ // TextEditingController genderController = TextEditingController();
 
   User? userCredential;
   RxBool isLoading = RxBool(false);
-  List<StudentModel> classWiseStudentList = [];
+  List<TeacherModel> teachersList = [];
   Uuid uuid = const Uuid();
 
-  String? bloodGroup;
+  //String? bloodGroup;
   String? gender;
   CollectionReference<Map<String, dynamic>> firebaseData = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
-      .collection(UserCredentialsController.batchId ?? "")
-      .doc(UserCredentialsController.batchId ?? "")
-      .collection("Classes")
-      .doc(UserCredentialsController.classId)
-      .collection("Students");
+      .collection('Teachers');
+      // .collection(UserCredentialsController.batchId ?? "")
+      // .doc(UserCredentialsController.batchId ?? "")
+      // .collection("Classes")
+      // .doc(UserCredentialsController.classId)
+      // .collection("Students");
 
 //sign in with email and password firebase authentification
   void signIn(String email, String password) async {
@@ -62,30 +66,36 @@ class StudentSignUpController extends GetxController {
     }
   }
 
-//fetching all students data from firebase
-  Future<void> getStudentData() async {
+//fetching all teachers data from firebase
+  Future<void> getTeacherData() async {
     try {
       isLoading.value = true;
       final result = await firebaseData.get();
       if (result.docs.isNotEmpty) {
         for (var element in result.docs) {
-          classWiseStudentList.add(
-            StudentModel.fromJson(
+          log(element.data()["teacherPhNo"].toString());
+          teachersList.add(
+            TeacherModel.fromJson(
               element.data(),
             ),
           );
+
+          
         }
+      
       }
+
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: "Student fetching failed");
+
+      showToast(msg: e.toString());
       isLoading.value = false;
     }
   }
 
   //updating students data
 
-  Future<void> updateStudentData() async {
+  Future<void> updateTeacherData() async {
     String imageId = "";
     String imageUrl = "";
     try {
@@ -93,77 +103,54 @@ class StudentSignUpController extends GetxController {
       if (Get.find<GetImage>().pickedImage.isNotEmpty) {
         imageId = uuid.v1();
         final result = await FirebaseStorage.instance
-            .ref("files/studentsProfilePhotos/$imageId")
+            .ref("files/teacherPhotos/$imageId")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         imageUrl = await result.ref.getDownloadURL();
       }
 
-      //getting firebase uid and updated it to collection
-      String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
-
-      Map<String, dynamic> updatinStudenData = <String, dynamic>{
-        "alPhoneNumber": altPhoneNoController.text,
-        "bloodgroup": bloodGroup,
-        "dateofBirth": dateOfBirthController.text,
+      firebaseData.doc(UserCredentialsController.teacherModel?.teacherEmail).update({
+        "teacherName": nameController.text,
+        "teacherEmail": emailController.text,
         "district": districtController.text,
         "gender": gender,
         "houseName": houseNameController.text,
+        "houseNumber": houseNumberController.text,
         "place": placeController.text,
-        "profileImageId": imageId,
-        "profileImageUrl": imageUrl,
-        "studentemail": emailController.text,
-        "uid": userUid
-      };
-
-      firebaseData
-          .doc(UserCredentialsController.studentModel?.docid)
-          .update(updatinStudenData);
-
-      //updating data to all students field
-
-      FirebaseFirestore.instance
-          .collection("SchoolListCollection")
-          .doc(UserCredentialsController.schoolId)
-          .collection('AllStudents')
-          .doc(UserCredentialsController.studentModel?.docid)
-          .update(updatinStudenData);
-
-      clearFields();
+        "altPhoneNo": altPhoneNoController.text,
+        "docID": emailController.text
+      });
       Get.find<GetImage>().pickedImage.value = "";
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: "Updation Failed");
+      showToast(msg: e.toString());
       isLoading.value = false;
     }
   }
 
   @override
   void onInit() async {
-    await getStudentData();
+    await getTeacherData();
     super.onInit();
   }
 
   void clearFields() {
     emailController.clear();
-    passwordController.clear();
-    confirmPasswordController.clear();
+    nameController.clear();
     houseNameController.clear();
     houseNumberController.clear();
     placeController.clear();
     districtController.clear();
     altPhoneNoController.clear();
-    dateOfBirthController.clear();
-    bloodGroup = null;
   }
 
   bool checkAllFieldIsEmpty() {
-    if (houseNameController.text.isEmpty ||
+    if (
+      nameController.text.isEmpty || emailController.text.isEmpty||
+      houseNameController.text.isEmpty ||
         houseNumberController.text.isEmpty ||
         placeController.text.isEmpty ||
         districtController.text.isEmpty ||
-        altPhoneNoController.text.isEmpty ||
-        dateOfBirthController.text.isEmpty ||
-        bloodGroup == null) {
+        altPhoneNoController.text.isEmpty) {
       return true;
     } else {
       return false;

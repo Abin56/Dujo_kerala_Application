@@ -41,6 +41,9 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                     InkWell(
                       onTap: () async {
                         await getImageController.pickImage(ImageSource.camera);
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
+                        }
                       },
                       child: CircleAvatar(
                         maxRadius: 20,
@@ -64,6 +67,9 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                     InkWell(
                       onTap: () async {
                         await getImageController.pickImage(ImageSource.gallery);
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
+                        }
                       },
                       child: CircleAvatar(
                         maxRadius: 20,

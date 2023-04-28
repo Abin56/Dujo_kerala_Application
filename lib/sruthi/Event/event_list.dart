@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../view/colors/colors.dart';
+import '../../view/constant/sizes/sizes.dart';
 import '../../view/widgets/fonts/google_poppins.dart';
 
 class EventList extends StatelessWidget {
@@ -28,24 +29,31 @@ class EventList extends StatelessWidget {
               child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                        leading: const Icon(Icons.event_sharp),
-                        trailing: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EventDisplay()));
-                          },
-                          child: GooglePoppinsWidgets(
-                            text: "View",
-                            fontsize: 16.h,
-                            color: Colors.green,
-                          ),
+                    return Column(
+                      children: [
+                        Container(
+                          child: ListTile(
+                              leading: const Icon(Icons.event_sharp),
+                              trailing: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EventDisplay()));
+                                },
+                                child: GooglePoppinsWidgets(
+                                  text: "View",
+                                  fontsize: 16.h,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              title: GooglePoppinsWidgets(text: "Events", fontsize: 19.h),
+                              subtitle: GooglePoppinsWidgets(
+                                  text: "Date : 00/00/00", fontsize: 14.h)),
                         ),
-                        title: GooglePoppinsWidgets(text: "Events", fontsize: 19.h),
-                        subtitle: GooglePoppinsWidgets(
-                            text: "Date : 00/00/00", fontsize: 14.h));
+                      kHeight10
+                      ],
+                    );
                   }),
             ),
           ],
