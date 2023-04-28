@@ -5,6 +5,9 @@ import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
 import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/sruthi/Subject/subject_display.dart';
 import 'package:dujo_kerala_application/sruthi/homeWork/student_homework_list.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_Mainhome.dart';
+import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
+import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,11 +49,11 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return  NoticePage();
+                      return  ClassTeacherMainHomeScreen();
                     } else if (state is AuthLoggedOutState) {
-                      return  NoticePage();
+                      return  ClassTeacherMainHomeScreen();
                     }
-                    return  NoticePage();
+                    return  ClassTeacherMainHomeScreen();
                   },
                 ),
 

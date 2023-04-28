@@ -5,14 +5,24 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StudentAccessories extends StatelessWidget {
-  const StudentAccessories({
+import '../../pages/Attentence/take_attentence.dart';
+
+class ClassTeacherAccessories extends StatelessWidget {
+  const ClassTeacherAccessories({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenNavigation = [];
+    final screenNavigation = [
+      TakeAttenenceScreen(
+        batchId: '2023-June-2024-February',
+        classID: 'class1A@mthss',
+        schoolID:'MarthCheng13283' ,
+        subject: 't25LpMFzuAUHsH0PJhzF',
+        teacheremailID: 'abinjohn8089@gmail.com',
+      )
+    ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
@@ -92,6 +102,7 @@ class StudentAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
+  'Take Attendance'
   'Attendance',
   'Exams',
   'TimeTable',

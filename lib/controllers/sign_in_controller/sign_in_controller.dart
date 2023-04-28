@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../view/home/class_teacher_HOme/class_teacher_Mainhome.dart';
+
 class SignInController extends GetxController {
   Future<void> signInWithEmailAndPassword(
       String email, String password, int index, BuildContext context) async {
@@ -28,17 +30,13 @@ class SignInController extends GetxController {
         } else if (index == 1) {
         } else if (index == 2) {
         } else if (index == 3) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
+          Navigator.of(context).pushAndRemoveUntil(
+             MaterialPageRoute(
               builder: (context) {
-                return const Scaffold(
-                  body: Center(
-                    child: Text('Parent Home Screen'),
-                  ),
-                );
+                return ClassTeacherMainHomeScreen();
               },
             ),
-          );
+             (route) => false);
         }
       });
     } catch (e) {
