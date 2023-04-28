@@ -3,7 +3,10 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/main.dart';
+import 'package:dujo_kerala_application/model/student_model/student_model.dart';
+import 'package:dujo_kerala_application/view/home/student_home/students_main_home.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/user_check_controller.dart';
@@ -70,16 +73,17 @@ nextpage() async {
       final QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
-      .doc(schoolIDVal)
+      .doc(schoolIDVal?? '')
       .collection(batchIDVal!)
       .doc(batchIDVal)
       .collection("Classes")
-      .doc(classIDVal)
+      .doc(classIDVal?? '')
       .collection("Students").where('uid', isEqualTo: currentUser.uid).get();
       print(querySnapshot.docs.length );
       if (querySnapshot.docs.length == 1) {
+        UserCredentialsController.studentModel = StudentModel.fromJson(querySnapshot.docs[0].data());
  log('student!!');
-  Get.to(StudentLoginScreen());
+  Get.to(StudentsMainHomeScreen());
 } else {
   log('not a student!!');
   
