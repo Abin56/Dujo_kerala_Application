@@ -14,14 +14,16 @@ class TakeAttenenceScreen extends StatefulWidget {
   String schoolID;
   String classID;
   String teacheremailID;
-  String subject;
+  String subjectID;
+  String subjectName;
   String batchId;
 
   TakeAttenenceScreen(
       {required this.classID,
       required this.schoolID,
       required this.teacheremailID,
-      required this.subject,
+      required this.subjectID,
+      required this.subjectName,
       required this.batchId,
       super.key});
 
@@ -36,7 +38,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take Attendence'),
+        title: const Text('Take Attendence'),
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -54,6 +56,12 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
           if (snapshot.hasData) {
             return ListView.separated(
                 itemBuilder: (context, index) {
+                  final datetimeNow = DateTime.now();
+                  DateTime parseDatee = DateTime.parse(datetimeNow.toString());
+                  final DateFormat dayformatterr = DateFormat('EEEE');
+                  String dayformattedd = dayformatterr.format(parseDatee);
+                  final DateFormat formatterr = DateFormat('yy-MMMM-yyy');
+                  String formattedd = formatterr.format(parseDatee);
                   final data = AddStudentModel.fromMap(
                       snapshot.data!.docs[index].data());
                   return Container(
@@ -90,7 +98,11 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .doc(widget.classID)
                                   .collection("Attendence")
                                   .doc(formatted)
-                                  .set({"id": formatted}).then((value) {
+                                  .set({
+                                "id": formatted,
+                                'dDate': formattedd,
+                                'day': dayformattedd
+                              }, SetOptions(merge: true)).then((value) {
                                 FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
@@ -101,9 +113,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     .collection("Attendence")
                                     .doc(formatted)
                                     .collection("Subjects")
-                                    .doc(widget.subject)
+                                    .doc(widget.subjectID)
                                     .set({
-                                  "id": widget.subject,
+                                  "id": widget.subjectID,
+                                  'subject': widget.subjectName,
                                   'date': DateTime.now().toString()
                                 }).then((value) {
                                   FirebaseFirestore.instance
@@ -116,7 +129,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .collection("Attendence")
                                       .doc(formatted)
                                       .collection("Subjects")
-                                      .doc(widget.subject)
+                                      .doc(widget.subjectID)
                                       .collection('PresentList')
                                       .doc(data.studentName)
                                       .set({
@@ -129,13 +142,14 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
 
                               log(present.toString());
                             },
-                            icon: Icon(Icons.add)),
+                            icon: const Icon(Icons.add)),
                         IconButton(
                             onPressed: () async {
                               setState(() {
                                 presentlist[data.admissionNumber!] = false;
                                 log(present.toString());
                               });
+
                               final date = DateTime.now();
                               DateTime parseDate =
                                   DateTime.parse(date.toString());
@@ -151,7 +165,11 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .doc(widget.classID)
                                   .collection("Attendence")
                                   .doc(formatted)
-                                  .set({"id": formatted}).then((value) {
+                                  .set({
+                                "id": formatted,
+                                'dDate': formattedd,
+                                'day': dayformattedd
+                              }, SetOptions(merge: true)).then((value) {
                                 FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
@@ -160,9 +178,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     .collection("Attendence")
                                     .doc(formatted)
                                     .collection("Subjects")
-                                    .doc(widget.subject)
+                                    .doc(widget.subjectID)
                                     .set({
-                                  "id": widget.subject,
+                                  "id": widget.subjectID,
+                                  'subject': widget.subjectName,
                                   'date': DateTime.now().toString()
                                 }).then((value) {
                                   FirebaseFirestore.instance
@@ -175,7 +194,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .collection("Attendence")
                                       .doc(formatted)
                                       .collection("Subjects")
-                                      .doc(widget.subject)
+                                      .doc(widget.subjectID)
                                       .collection('PresentList')
                                       .doc(data.studentName)
                                       .set({
@@ -187,13 +206,13 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               });
                               log(present.toString());
                             },
-                            icon: Icon(Icons.remove))
+                            icon: const Icon(Icons.remove))
                       ],
                     ),
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return Divider();
+                  return const Divider();
                 },
                 itemCount: snapshot.data!.docs.length);
           } else {
@@ -209,12 +228,12 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
         },
         child: ButtonContainerWidget(
           curving: 10,
-          colorindex: 0,
+          colorindex: 5,
           height: 60,
           width: 130,
-          child: Center(
+          child: const Center(
               child: Text(
-            'Upload',
+            'View ',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           )),
         ),
@@ -250,7 +269,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                           .collection("Attendence")
                           .doc(formatted)
                           .collection("Subjects")
-                          .doc(widget.subject)
+                          .doc(widget.subjectID)
                           .collection('PresentList')
                           .where('present', isEqualTo: false)
                           .snapshots(),
@@ -258,8 +277,6 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                         if (snapshot.hasData) {
                           return ListView.separated(
                               itemBuilder: (context, index) {
-                                final data = AddStudentModel.fromMap(
-                                    snapshot.data!.docs[index].data());
                                 return Container(
                                   height: 40,
                                   width: double.maxFinite,
@@ -267,16 +284,17 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   child: Row(
                                     children: [
                                       Text('${index + 1}'),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 20,
                                       ),
-                                      Text(data.studentName!)
+                                      Text(snapshot.data!.docs[index]
+                                          ['studentName'])
                                     ],
                                   ),
                                 );
                               },
                               separatorBuilder: (context, index) {
-                                return Divider();
+                                return const Divider();
                               },
                               itemCount: snapshot.data!.docs.length);
                         } else {

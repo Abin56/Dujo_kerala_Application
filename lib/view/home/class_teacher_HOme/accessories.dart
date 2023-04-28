@@ -1,11 +1,13 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/teacher_subject_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../pages/Attentence/take_attentence.dart';
+import '../../pages/attentence/take_attentence.dart';
+import '../../pages/attentence/take_attentence/attendence_book_status.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   const ClassTeacherAccessories({
@@ -18,10 +20,15 @@ class ClassTeacherAccessories extends StatelessWidget {
       TakeAttenenceScreen(
         batchId: '2023-June-2024-February',
         classID: 'class1A@mthss',
-        schoolID:'MarthCheng13283' ,
-        subject: 't25LpMFzuAUHsH0PJhzF',
+        schoolID: 'MarthCheng13283',
+        subjectName: 'English',
+        subjectID: 't25LpMFzuAUHsH0PJhzF',
         teacheremailID: 'abinjohn8089@gmail.com',
-      )
+      ),
+      AttendenceBookScreen(
+          schoolId: 'MarthCheng13283',
+          batchId: '2023-June-2024-February',
+          classID: 'class1A@mthss')
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -102,8 +109,8 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Take Attendance'
-  'Attendance',
+  'Take Attendance',
+  'Attendance Book',
   'Exams',
   'TimeTable',
   'HomeWorks',
@@ -116,6 +123,7 @@ List<String> _acc_text = [
 ];
 var _acc_images = [
   'assets/images/attendance.png',
+  'assets/images/classroom.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
