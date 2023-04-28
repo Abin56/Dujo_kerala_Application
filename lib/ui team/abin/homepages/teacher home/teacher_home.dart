@@ -95,7 +95,7 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
           child: Column(
             children: [
               // const MyHeaderDrawer(),
-              TeacherDrawer(context),
+              // TeacherDrawer(context),
             ],
           ),
         ),

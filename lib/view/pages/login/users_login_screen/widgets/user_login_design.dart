@@ -29,7 +29,7 @@ class UserLoginDesgin extends StatelessWidget {
 
                     ContainerImage(
                         height: 50.h,
-                        width: 50.w,
+                        width: 65.w,
                         imagePath: 'assets/images/leptonlogo.png'),
                   ],
                 ),

@@ -148,8 +148,8 @@ class StudentLoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ContainerImage(
-                            height: 60.h,
-                            width: 60.w,
+                            height: 55.h,
+                            width: 75.w,
                             imagePath: 'assets/images/leptonlogo.png'),
                         GooglePoppinsWidgets(
                           text: "Lepton DuJo",

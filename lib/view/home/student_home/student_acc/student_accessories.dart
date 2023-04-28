@@ -5,23 +5,10 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StudentAccessories extends StatefulWidget {
+class StudentAccessories extends StatelessWidget {
   const StudentAccessories({
     super.key,
   });
-
-  @override
-  State<StudentAccessories> createState() => _StudentAccessoriesState();
-}
-
-class _StudentAccessoriesState extends State<StudentAccessories> {
-  void retrieveTimeTableData() async {}
-
-  @override
-  void initState() {
-    super.initState();
-    retrieveTimeTableData();
-  }
 
   @override
   Widget build(BuildContext context) {

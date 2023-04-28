@@ -38,8 +38,7 @@ class ButtonContainerWidget extends StatelessWidget {
             end: Alignment.centerRight,
             ),
         borderRadius: BorderRadius.all(
-          Radius.circular(curving),
-          
+          Radius.circular(curving),  
         ),
         border: Border.all(
           color: Colors.blueGrey, // set the border color

@@ -21,7 +21,7 @@ class LoginScreenDesign extends StatelessWidget {
           Center(
             child: ContainerImage(
                 height: 100.h,
-                width: 200.w,
+                width: 140.w,
                 imagePath: 'assets/images/leptonlogo.png'),
           ),
           kHeight10,

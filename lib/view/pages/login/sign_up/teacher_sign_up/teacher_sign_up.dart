@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/sizes.dart';
+import '../../../../home/class_teacher_HOme/class_teacher_Mainhome.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
@@ -218,9 +219,7 @@ class TeachersSignUpPage extends StatelessWidget {
                           return;
                         } else {
                           teacherController.updateTeacherData().then(
-                              (value) => Get.to(const UnderMaintanceScreen(
-                                    text: "Teacher Page",
-                                  )));
+                              (value) => Get.offAll(ClassTeacherMainHomeScreen()));
                         }
                       },
                       //   Get.offAll(const HomeScreen());

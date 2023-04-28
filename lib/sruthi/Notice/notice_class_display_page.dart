@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../view/widgets/fonts/google_poppins.dart';
 
-class NoticeViewPage extends StatelessWidget {
-  const NoticeViewPage({super.key});
+class NoticeClassDisplayPage extends StatelessWidget {
+  const NoticeClassDisplayPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,8 @@ class NoticeViewPage extends StatelessWidget {
           Container(
             width: 90.w,
             height: 900.h,
-            decoration: BoxDecoration(),
+           
+            decoration: BoxDecoration( ),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -40,8 +41,8 @@ class NoticeViewPage extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(8.h),
                           child: Container(
-                            height: 450,
-                            width: 360,
+                            height: 600.h,
+                            width: 360.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border:
@@ -61,18 +62,11 @@ class NoticeViewPage extends StatelessWidget {
                                     ],
                                   ),
                                   kHeight20,
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Flexible(
-                                        child: GooglePoppinsWidgets(
-                                            text: "This is to inform all the students that " +
-                                                " __________________  will be  conductod" +
-                                                " __________________  at __________________ with various cultural programmes.______________ will be grace the occasion. Student who would like to occasion in various programme should contact their\nrespective classteacher latest by __________________ .",
-                                            fontsize: 19.h),
-                                      )
-                                    ],
-                                  ),
+                                  GooglePoppinsWidgets(
+                                      text: "This is to inform all the students that " +
+                                          " __________________  will be  conductod" +
+                                          " __________________  at __________________ with various cultural programmes.______________ will be grace the occasion. Student who would like to occasion in various programme should contact their\nrespective classteacher latest by __________________ .",
+                                      fontsize: 19.h),
                                   kHeight30,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
