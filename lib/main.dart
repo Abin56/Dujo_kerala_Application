@@ -2,6 +2,8 @@ import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cub
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
 import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
+import 'package:dujo_kerala_application/sruthi/Subject/subject_display.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/studymaterial%20upload/study_material_upload.dart';
 
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,14 +49,15 @@ class MyApp extends StatelessWidget {
                         return const SplashScreen();
                       } else if (state is AuthLoggedOutState) {
                         return 
-                        EventList();
+                        StudyMaterialUpload();
+                       // StudentSubjectHome();
                        // TeacherHomeScreen();
                         // StudentHomeScreen();
                        // const SplashScreen();
                       }
-                      return
-
-                      EventList();
+                      return 
+                      StudyMaterialUpload();
+                      //StudentSubjectHome();
                       //TeacherHomeScreen();
                       // StudentHomeScreen();
                     // const SplashScreen();

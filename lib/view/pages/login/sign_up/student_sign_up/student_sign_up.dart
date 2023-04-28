@@ -250,16 +250,17 @@ class StudentSignInPageScreen extends StatelessWidget {
                             if (studentController.checkAllFieldIsEmpty()) {
                               showToast(msg: "All Fields are mandatory");
                               return;
-                            } else {
-                              studentController
-                                  .updateStudentData()
-                                  .then((value) => 
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-                                     return StudentsMainHomeScreen();
-                                  },), (route) => false)
+                            } else
+                              {
+                            //   studentController
+                            //       .updateStudentData()
+                            //       .then((value) => 
+                            //       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+                            //          return StudentsMainHomeScreen();
+                            //       },), (route) => false)
                                   
-                                 );
-                            }
+                            //      );
+                             }
                           }
                         },
                         child: loginButtonWidget(

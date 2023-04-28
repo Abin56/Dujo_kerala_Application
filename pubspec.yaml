@@ -52,6 +52,7 @@ dependencies:
   flutter_bloc:
   date_time_picker:
   flutter_svg:
+  google_nav_bar: 5.0.6
   
 
 dev_dependencies:

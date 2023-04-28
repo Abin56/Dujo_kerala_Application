@@ -1,7 +1,8 @@
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../view/home/sample/under_maintance.dart';
+
 
 class CircleAvatharImageSelectionWidget extends StatelessWidget {
     ImageProvider<Object>? backgroundImage;
@@ -18,8 +19,8 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
           backgroundImage: const NetworkImage(
                         "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg"),
           radius: 60,
-          backgroundImage: backgroundImage,
-          radius: 90,
+          // backgroundImage: backgroundImage,
+          // radius: 90,
           child: Stack(
             children: [
               InkWell(

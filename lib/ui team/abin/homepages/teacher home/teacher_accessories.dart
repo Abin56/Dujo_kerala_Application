@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 
 
+import 'package:dujo_kerala_application/ui%20team/abin/homepages/parent%20home/parent_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -78,33 +79,25 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-   //   ClassTeacherIdentifyScreen(
-         // classID: widget.classID,
-        //  schoolID: widget.schoolId,
-        //  teacheremailID: widget.teacherEmail),
-     // AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
-    ///  UnderMaintanceScreen(),
-  //    TimeTablePage(
-      //  schoolID: widget.schoolId,
-      //  classID: widget.classID,
-       // mon: mon,
-       // tues: tue,
-     //   wed: wed,
-      //  thurs: thu,
-      //  fri: fri,
-     // ),
-    //  UnderMaintanceScreen(),
-   //   AdminNoticeModelList(
-        //  schoolId: widget.schoolId, fromPage: 'visibleTeacher'),
-    //   UnderMaintanceScreen(),
-     // CreateExamNameScreen(
-       //   schooilID: widget.schoolId,
-         // classID: widget.classID,
-        //  teacherId: widget.teacherEmail),
-    // LeaveLettersListviewScreen(
-       //   schooilID: widget.schoolId, classID: widget.classID),
-    //  AdminMeetingModelList(
-         // schoolId: widget.schoolId, fromPage: 'visibleTeacher'),
+     ParentHomePage(),
+
+     ParentHomePage()
+     ,
+    ParentHomePage(),
+
+     ParentHomePage(),
+
+     ParentHomePage(),
+
+     ParentHomePage(),
+
+      ParentHomePage(),
+
+     ParentHomePage(),
+
+    ParentHomePage(),
+
+     ParentHomePage(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
