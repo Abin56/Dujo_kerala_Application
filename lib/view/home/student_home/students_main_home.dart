@@ -1,6 +1,8 @@
 import 'package:dujo_kerala_application/view/home/drawer/student_drawer.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../sample/under_maintance.dart';
 
