@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SigninTextFormfield extends StatelessWidget {
    SigninTextFormfield({
     super.key,
-    required this.textEditingController, 
+    this.textEditingController, 
      required this.labelText, 
      required this.hintText,
      this.function,
@@ -18,7 +18,7 @@ class SigninTextFormfield extends StatelessWidget {
       this. obscureText,
      
   });
-   TextEditingController textEditingController;
+   TextEditingController? textEditingController;
    String labelText;
    String hintText;
    Widget? suffixIcon;
