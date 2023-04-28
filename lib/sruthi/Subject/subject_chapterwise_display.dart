@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../view/widgets/fonts/google_poppins.dart';
+import '../Study Materials/study_materials_list.dart';
 
 class SubjectWiseDisplay extends StatelessWidget {
   const SubjectWiseDisplay({super.key});
@@ -27,7 +28,7 @@ backgroundColor: adminePrimayColor,title: Text("Chapters"),
                                           builder: (context) =>SubjectWiseDisplay()));
                                                      
                     },
-                      child: Container(height: 150.h,
+                      child: Container(height: 180.h,
                       decoration: BoxDecoration(border: Border.all(width: 0.02)),
                         child: Padding(
                           padding:  EdgeInsets.only(top: 20.h),
@@ -42,7 +43,24 @@ backgroundColor: adminePrimayColor,title: Text("Chapters"),
                                     padding:  EdgeInsets.only(top: 10.h),
                                     child: GooglePoppinsWidgets(
                                         text: "CMOS & NMOS", fontsize: 15.h),
+
                                   ),
+                                   InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => StudyMaterials()));
+                                },
+                                child: Padding(
+                                  padding:  EdgeInsets.only(top: 10.h),
+                                  child: GooglePoppinsWidgets(
+                                    text: "Study Materials",
+                                    fontsize: 16.h,
+                                    color: Colors.blueGrey,
+                                  ),
+                                ),
+                              ),
                                       
                                       Padding(
                                         padding:  EdgeInsets.only(top:18.h),

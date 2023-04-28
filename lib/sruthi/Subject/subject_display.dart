@@ -1,18 +1,13 @@
-import 'dart:math';
-
-import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
-import 'package:dujo_kerala_application/sruthi/subject_chapterwise_display.dart';
+import 'package:dujo_kerala_application/sruthi/Subject/subject_chapterwise_display.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/fonts/fonts.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../view/widgets/container_image.dart';
+import '../../widgets/Iconbackbutton.dart';
 
 class StudentLogin extends StatelessWidget {
   const StudentLogin({super.key});
@@ -20,6 +15,15 @@ class StudentLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+            title: Row(
+              children: [
+                IconButtonBackWidget(),
+                Text("Subject"),
+              ],
+            ),
+            backgroundColor: adminePrimayColor,
+          ),
       body: SafeArea(
         child: Column(children: [
           // Heading_Container_Widget(
@@ -51,13 +55,6 @@ class StudentLogin extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                // onTap: () {
-                                //   Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //           builder: (context) =>
-                                //               SubjectWiseDisplay()));
-                                // },
                                 child: Container(
                                   width: 75.w,
                                   height: 75.h,
@@ -88,23 +85,23 @@ class StudentLogin extends StatelessWidget {
                           ),
                           kHeight20,
                           InkWell(
-                             onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SubjectWiseDisplay()));
-                                },
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SubjectWiseDisplay()));
+                              },
                               child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GooglePoppinsWidgets(
-                                text: "Chemistry",
-                                fontsize: 28.h,
-                                color: cblack,
-                              ),
-                            ],
-                          )),
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GooglePoppinsWidgets(
+                                    text: "Chemistry",
+                                    fontsize: 28.h,
+                                    color: cblack,
+                                  ),
+                                ],
+                              )),
                         ]),
                   ),
 
