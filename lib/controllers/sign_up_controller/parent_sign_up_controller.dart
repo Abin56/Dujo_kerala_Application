@@ -93,6 +93,7 @@ class ParentSignUpController extends GetxController {
       return false;
     }
   }
+  //
 
   void clearControllers() {
     userNameController.clear();
