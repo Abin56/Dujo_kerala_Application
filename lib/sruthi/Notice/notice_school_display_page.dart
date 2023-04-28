@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../view/widgets/fonts/google_poppins.dart';
 
-class NoticeViewPage extends StatelessWidget {
-  const NoticeViewPage({super.key});
+class NoticeSchoolDisplayPage extends StatelessWidget {
+  const NoticeSchoolDisplayPage({super.key});
 
   @override
   Widget build(BuildContext context) {

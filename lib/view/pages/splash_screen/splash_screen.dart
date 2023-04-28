@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/main.dart';
 import 'package:dujo_kerala_application/model/student_model/student_model.dart';
-import 'package:dujo_kerala_application/view/pages/home/home.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/user_check_controller.dart';
@@ -87,7 +87,7 @@ nextpage() async {
 } else {
   log('not a student!!');
   
-  Get.to(const HomeScreen()); 
+  Get.to(const UnderMaintanceScreen(text: "",)); 
 }}
 
 

@@ -57,7 +57,7 @@ backgroundColor: adminePrimayColor,title: Text("Chapters"),
                                   child: GooglePoppinsWidgets(
                                     text: "Study Materials",
                                     fontsize: 16.h,
-                                    color: Colors.blueGrey,
+                                    color: adminePrimayColor,
                                   ),
                                 ),
                               ),
