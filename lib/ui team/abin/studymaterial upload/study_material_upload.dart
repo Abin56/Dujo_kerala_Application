@@ -1,9 +1,8 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/buttonWidget.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
-import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
-import 'package:dujo_kerala_application/widgets/login_button.dart';
+
 import 'package:dujo_kerala_application/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,7 +29,7 @@ class StudyMaterialUpload extends StatelessWidget {
       children: [
       StudyContainerWidget(
         hintText: 'Subject Name',
-        hintText1: 'Enter Chapter Name',
+        //hintText1: 'Enter Chapter Name',
         hintText2:'Enter Topic',
       hintText3:'Enter Title Name',
       
@@ -42,7 +41,7 @@ class StudyMaterialUpload extends StatelessWidget {
 class StudyContainerWidget extends StatelessWidget {
    StudyContainerWidget({
     required this.hintText,
-    required this.hintText1,
+    //required this.hintText1,
     required this.hintText2,
     required this. hintText3,
 
@@ -50,7 +49,7 @@ class StudyContainerWidget extends StatelessWidget {
     super.key,
   });
   String hintText;
-  String hintText1;
+ // String hintText1;
   String hintText2;
   String hintText3;
 
@@ -68,9 +67,21 @@ class StudyContainerWidget extends StatelessWidget {
             TextFormFieldWidget(hintText: hintText,
            // textEditingController: 
             ),
-             TextFormFieldWidget(hintText: hintText1,
+             SizedBox(
+                            width: 330.w,
+                            child: DropdownSearch<String>(
+                              selectedItem: 'Chapter',
+                              validator: (v) =>
+                                  v == null ? "required field" : null,
+                              items: const ['Chapter 1', 'Chapter 2', 'Chapter 3'],
+                              onChanged: (value) {
+                               // studentController.gender = value;
+                              },
+                            ),
+                          ),
+            // TextFormFieldWidget(hintText: hintText1,
              //textEditingController:
-              ),
+            //  ),
               TextFormFieldWidget(hintText: hintText2,
               //textEditingController: 
               ),
