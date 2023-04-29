@@ -87,7 +87,7 @@ nextpage() async {
 } else {
   log('not a student!!');
   
-  Get.to(const UnderMaintanceScreen(text: "",)); 
+  Get.to(const DujoLoginScren()); 
 }}
 
 

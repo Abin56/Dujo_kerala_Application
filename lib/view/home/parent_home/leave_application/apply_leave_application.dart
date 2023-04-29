@@ -1,30 +1,37 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, must_be_immutable, prefer_const_constructors_in_immutables, depend_on_referenced_packages, prefer_const_constructors
+// ignore_for_file: prefer_typing_uninitialized_variables, must_be_immutable
 
 import 'dart:developer';
 
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/widgets/button_container_widget.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class HomeWorkUpload extends StatefulWidget {
-  
-  HomeWorkUpload(
-      {
-      
+import '../../../../model/leave_letter_model/leave_letter.dart';
+import '../../../widgets/button_container_widget.dart';
+
+class LeaveApplicationScreen extends StatefulWidget {
+  var studentName;
+  var parentName;
+  var classID;
+  var schoolId;
+  var studentID;
+  var batchId;
+  LeaveApplicationScreen(
+      {required this.studentName,
+      required this.parentName,
+      required this.classID,
+      required this.schoolId,
+      required this.studentID,
+      required this.batchId,
       super.key});
 
   @override
-  State<HomeWorkUpload> createState() => _HomeWorkUploadState();
+  State<LeaveApplicationScreen> createState() => _LeaveApplicationScreenState();
 }
 
-class _HomeWorkUploadState extends State<HomeWorkUpload> {
+class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
   final TextEditingController _applyleaveDateController =
       TextEditingController();
   final TextEditingController _applyFromDateController =
@@ -103,30 +110,22 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-         leading: IconButton(icon: Icon( Icons.arrow_back,
-        color: cblack,
-      ),
-      onPressed: () {
-       Navigator.pop(context);
-      },
-    ),
-   backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
-          "HOME WORK",
+          "Apply Leave",
           style: GoogleFonts.montserrat(
-              color: Colors.grey, fontSize: 20, ),
+              color: Colors.grey, fontSize: 20, fontWeight: FontWeight.w700),
         ),
-        centerTitle: true,iconTheme: IconThemeData(color: cblack),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
-        //  mainAxisAlignment: MainAxisAlignment.start,
-         // crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           kHeight20,
             SizedBox(
-              height: 460.h,
+              height: 220,
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(10),
@@ -134,65 +133,67 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-      
                     Text(
-                    "Homework Tasks",
-                    style: GoogleFonts.montserrat(
-                        color: Colors.grey,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  kWidth20,
-                  Container(
-                    
-                    height: 130,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                     
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(5),
+                      "Apply Leave Date",
+                      style: GoogleFonts.montserrat(
+                          color: Colors.grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700),
                     ),
-                    child: TextFormField(
-                      controller: _leaveReasonController,
-                      minLines: 1,
-                      maxLines: 10,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                         hintText: 'Enter the questions ',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(7),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 13,
+                      ),
+                      child: Stack(
+                        alignment: AlignmentDirectional.centerEnd,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.calendar_today,
+                              color: Colors.black.withOpacity(0.3),
+                            ),
+                          ),
+                          TextFormField(
+                            controller: _applyleaveDateController,
+                            readOnly: true,
+                            onTap: () => _selectDate(context),
+                            decoration: const InputDecoration(
+                              labelText: 'DD-MM-YYYY',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                    kWidth20,
-      
-                    SizedBox( 
-                      height: 160.h,
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 90,
                       width: double.infinity,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Choose your Subject",
+                            "Choose Leave Type",
                             style: GoogleFonts.montserrat(
                                 color: Colors.grey,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
+                          kHeight10,
                           DropdownSearch<String>(
                             selectedItem: 'Select',
                             validator: (v) =>
                                 v == null ? "required field" : null,
                             items: const [
-                              "English",
-                              "Physics",
-                              "Chemistry",
-                              'Biology',
-                              'Geography'
+                              "Medical",
+                              "Family",
+                              "Sick",
+                              'Function',
+                              'Others'
                             ],
                             onChanged: (value) {
                               setState(() {
@@ -208,21 +209,19 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 13.w,right: 13.w),
+              padding: const EdgeInsets.only(left: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Time period and deadline",
+                    "Apply Leave Date",
                     style: GoogleFonts.montserrat(
                         color: Colors.grey,
                         fontSize: 13,
                         fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  kHeight10,
                   Container(
                     height: 80,
                     color: Colors.grey.withOpacity(0.1),
@@ -274,29 +273,83 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                 ],
               ),
             ),
-           kHeight30,
+            kHeight10,
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
-                 kHeight20,
+                  Text(
+                    "Reason",
+                    style: GoogleFonts.montserrat(
+                        color: Colors.grey,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  kHeight10,
+                  Container(
+                    height: 130,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: TextFormField(
+                      controller: _leaveReasonController,
+                      minLines: 1,
+                      maxLines: 10,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                        hintText: 'Respected ',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(7),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
                         onTap: () async {
                           log(_selectedLeaveType);
+                          ApplyLeveApplicationModel
+                              _addLeaveAppplicationDetails =
+                              ApplyLeveApplicationModel(
+                                  id: _applyleaveDateController.text.trim(),
+                                  applyLeaveDate:
+                                      _applyleaveDateController.text.trim(),
+                                  leaveResontype: _selectedLeaveType.toString(),
+                                  leaveFromDate:
+                                      _applyFromDateController.text.trim(),
+                                  leaveToDate:
+                                      _applyTODateController.text.trim(),
+                                  leaveReason:
+                                      _leaveReasonController.text.trim(),
+                                  studentName: widget.studentName,
+                                  studentParent: widget.parentName);
+                          ApplyLeaveLetterStatusToFireBase()
+                              .applyLeaveLetterController(
+                                  _addLeaveAppplicationDetails,
+                                  context,
+                                  widget.schoolId,
+                                  widget.classID,
+                                  widget.studentID,
+                                  _applyleaveDateController.text.trim(),
+                                  widget.studentName,
+                                  widget.batchId
+                                  );
                         },
                         child: ButtonContainerWidget(
-                          curving: 18,
+                          curving: 20,
                           colorindex: 2,
-                          height: 70.h,
-                          width: 300.w,
+                          height: 60,
+                          width: 300,
                           child: Center(
                             child: Text(
-                              "SUBMIT",
+                              "Apply Leave",
                               style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: 13,
@@ -304,9 +357,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                             ),
                           ),
                         ),
-                        
                       ),
-                      kHeight30,
                     ],
                   )
                 ],
@@ -315,6 +366,6 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
           ],
         ),
       ),
-   );
+    );
   }
 }

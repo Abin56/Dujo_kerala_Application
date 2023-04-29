@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,14 @@ class SignInController extends GetxController {
             ),
           );
         } else if (index == 1) {
+              Navigator.of(context).pushAndRemoveUntil(
+             MaterialPageRoute(
+              builder: (context) {
+                return ParentMainHomeScreen();
+              },
+            ),
+             (route) => false);
+
         } else if (index == 2) {
         } else if (index == 3) {
           Navigator.of(context).pushAndRemoveUntil(

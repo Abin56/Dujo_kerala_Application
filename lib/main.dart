@@ -3,7 +3,8 @@ import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_sta
 import 'package:dujo_kerala_application/firebase_options.dart';
 import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
 import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
-import 'package:dujo_kerala_application/sruthi/Subject/subject_display.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_screen.dart';
+import 'package:dujo_kerala_application/view/pages/Subject/subject_display.dart';
 import 'package:dujo_kerala_application/sruthi/homeWork/student_homework_list.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_Mainhome.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
