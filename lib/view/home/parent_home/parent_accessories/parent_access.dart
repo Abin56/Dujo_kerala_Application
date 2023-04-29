@@ -1,60 +1,39 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
-import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
-import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/teacher_subject_list_view.dart';
-import 'package:dujo_kerala_application/view/pages/progress_Report/all_student_list.dart';
-import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
+import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/attendence_book_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../pages/Homework/homework.dart';
-import '../../pages/Subject/subject_display.dart';
-import '../../pages/attentence/take_attentence.dart';
-import '../../pages/attentence/take_attentence/attendence_book_status.dart';
+import '../../../../controllers/get_parent&guardian/getx.dart';
+import '../progress_report/progress_report.dart';
 
-class ClassTeacherAccessories extends StatelessWidget {
-  const ClassTeacherAccessories({
+class ParentAccessories extends StatelessWidget {
+  const ParentAccessories({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-      TakeAttenenceScreen(
-        batchId: '2023-June-2024-February',
-        classID: 'class1A@mthss',
-        schoolID: 'MarthCheng13283',
-        subjectName: 'English',
-        subjectID: 't25LpMFzuAUHsH0PJhzF',
-        teacheremailID: 'abinjohn8089@gmail.com',
-      ),
       AttendenceBookScreen(
           schoolId: 'MarthCheng13283',
           batchId: '2023-June-2024-February',
           classID: 'class1A@mthss'),
-      CreateExamNameScreen(
-          schooilID: 'MarthCheng13283',
+      ProgressReportListViewScreen(
+          schoolId: 'MarthCheng13283',
           classID: 'class1A@mthss',
-          teacherId: 'abinjohn8089@gmail.com',
+          studentId: '72TQkxvaOMqbPA3zem8n',
           batchId: '2023-June-2024-February'),
-      HomeWorkUpload(
-        batchId: '2023-June-2024-February',
-        classId: 'class1A@mthss',
-        schoolID: 'MarthCheng13283',
-        teacherID: 'abinjohn8089@gmail.com',
-      ),
-      StudentSubjectHome(
-        batchId: '2023-June-2024-February',
-        classId: 'class1A@mthss',
-        schoolID: 'MarthCheng13283',
-        teacherID: 'abinjohn8089@gmail.com',
-      ),
-      LeaveLettersListviewScreen(
-          schooilID: 'MarthCheng13283',
-          batchID: '2023-June-2024-February',
-          classID: 'class1A@mthss')
+      LeaveApplicationScreen(
+          studentName: 'Edwin Edric',
+          parentName: 'JohnHinnai',
+          classID: 'class1A@mthss',
+          schoolId: 'MarthCheng13283',
+          studentID: '72TQkxvaOMqbPA3zem8n',
+          batchId: '2023-June-2024-February'),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -135,8 +114,7 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Take Attendance',
-  'Attendance Book',
+  'Attendance',
   'Exams',
   'TimeTable',
   'HomeWorks',
@@ -149,7 +127,6 @@ List<String> _acc_text = [
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/classroom.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',

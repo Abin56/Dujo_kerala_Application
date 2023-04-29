@@ -13,7 +13,13 @@ class NoticeSchoolDisplayPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(backgroundColor:adminePrimayColor,title: GooglePoppinsWidgets(fontsize:20.h , text: 'Notice',),),
+        appBar: AppBar(
+          backgroundColor: adminePrimayColor,
+          title: GooglePoppinsWidgets(
+            fontsize: 20.h,
+            text: 'Notice',
+          ),
+        ),
         body: ListView(children: [
           Container(
             color: cblue,
@@ -23,7 +29,6 @@ class NoticeSchoolDisplayPage extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 
                   kHeight30,
                   Container(
                     height: 150,

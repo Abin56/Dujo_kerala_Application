@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:dujo_kerala_application/sruthi/Subject/subject_chapterwise_display.dart';
+import 'package:dujo_kerala_application/view/pages/Subject/subject_chapterwise_display.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/fonts/fonts.dart';
