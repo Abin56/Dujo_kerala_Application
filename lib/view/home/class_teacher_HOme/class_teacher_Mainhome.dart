@@ -1,5 +1,6 @@
 import 'package:dujo_kerala_application/controllers/class_Teacher_FirebaseData_Controller/getx.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -10,8 +11,6 @@ import '../sample/under_maintance.dart';
 import 'class_teacher_home.dart';
 
 class ClassTeacherMainHomeScreen extends StatefulWidget {
-
-
   ClassTeacherMainHomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -43,9 +42,15 @@ class _ClassTeacherMainHomeScreenState
     ];
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        title: const Text("Dujo"),
-      ),
+          backgroundColor: const Color.fromARGB(255, 6, 71, 157),
+          title: const Text("Dujo"),
+          actions: [
+            IconButton(onPressed: () {
+              Get.to(
+                UsersLoginScreen()
+              );
+            }, icon: Icon(Icons.logout)),
+          ]),
       body: pages[_page],
       bottomNavigationBar: Container(
         height: 71,

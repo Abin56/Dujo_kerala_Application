@@ -50,11 +50,11 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return  ClassTeacherMainHomeScreen();
+                      return  SplashScreen();
                     } else if (state is AuthLoggedOutState) {
-                      return  ClassTeacherMainHomeScreen();
+                      return  SplashScreen();
                     }
-                    return  ClassTeacherMainHomeScreen();
+                    return  SplashScreen();
                   },
                 ),
 

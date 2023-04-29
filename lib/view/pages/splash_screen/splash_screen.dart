@@ -54,41 +54,43 @@ class SplashScreen extends StatelessWidget {
 nextpage() async {
 
   await Future.delayed(const Duration(seconds: 3)); 
-  SharedPreferences p = await SharedPreferences.getInstance(); 
-  String? schoolIDVal = p.getString('schoolID'); 
-  String? batchIDVal = p.getString('batchID');
-  String? classIDVal = p.getString('classID');
-  log('schoolID $schoolIDVal'); 
-  log('batchID: $batchIDVal'); 
-  log('classID: $classIDVal'); 
-
-   User? currentUser = auth.currentUser;
-      if (currentUser == null) {
     
- Get.to(const DujoLoginScren());
-    } else {
-      log('UID: ${currentUser.uid}'); 
+  Get.to(const DujoLoginScren());
+//   SharedPreferences p = await SharedPreferences.getInstance(); 
+//   String? schoolIDVal = p.getString('schoolID'); 
+//   String? batchIDVal = p.getString('batchID');
+//   String? classIDVal = p.getString('classID');
+//   log('schoolID $schoolIDVal'); 
+//   log('batchID: $batchIDVal'); 
+//   log('classID: $classIDVal'); 
+
+//    User? currentUser = auth.currentUser;
+//       if (currentUser == null) {
+    
+//  Get.to(const DujoLoginScren());
+//     } else {
+//       log('UID: ${currentUser.uid}'); 
       
       
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
-      .instance
-      .collection("SchoolListCollection")
-      .doc(schoolIDVal?? '')
-      .collection(batchIDVal!)
-      .doc(batchIDVal)
-      .collection("Classes")
-      .doc(classIDVal?? '')
-      .collection("Students").where('uid', isEqualTo: currentUser.uid).get();
-      print(querySnapshot.docs.length );
-      if (querySnapshot.docs.length == 1) {
-        UserCredentialsController.studentModel = StudentModel.fromJson(querySnapshot.docs[0].data());
- log('student!!');
-  Get.to(StudentLoginScreen());
-} else {
-  log('not a student!!');
+//       final QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
+//       .instance
+//       .collection("SchoolListCollection")
+//       .doc(schoolIDVal?? '')
+//       .collection(batchIDVal!)
+//       .doc(batchIDVal)
+//       .collection("Classes")
+//       .doc(classIDVal?? '')
+//       .collection("Students").where('uid', isEqualTo: currentUser.uid).get();
+//       print(querySnapshot.docs.length );
+//       if (querySnapshot.docs.length == 1) {
+//         UserCredentialsController.studentModel = StudentModel.fromJson(querySnapshot.docs[0].data());
+//  log('student!!');
+//   Get.to(StudentLoginScreen());
+// } else {
+//   log('not a student!!');
   
-  Get.to(const DujoLoginScren()); 
-}}
+//   Get.to(const DujoLoginScren()); 
+// }}
 
 
 

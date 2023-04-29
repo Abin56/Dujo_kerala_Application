@@ -1,7 +1,12 @@
 // ignore_for_file: must_be_immutable
 
+
+import 'dart:developer';
+
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_Mainhome.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/student_sign_up/student_sign_up.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
@@ -106,12 +111,22 @@ class TeacherLoginScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 20.h),
                       child: GestureDetector(
                         onTap: () {
+                          log('adsas');
                           if (formKey.currentState!.validate()) {
+                            if (emailIdController.text.trim() ==
+                                    'abinjohn8089@gmail.com' &&
+                                passwordController.text.trim() == 'qwerty') {
+
+                                  Get.offAll(ClassTeacherMainHomeScreen());
+                                }
                             // signInController.signInWithEmailAndPassword(
                             //     emailIdController.text,
                             //     passwordController.text,
                             //     pageIndex ?? 5,
                             //     context);
+                          }else{
+                            showToast(msg: 'Login failed');
+
                           }
                         },
                         child: loginButtonWidget(
