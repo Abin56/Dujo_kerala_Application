@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/students_attendence_list_view.dart';
+import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/students_attendence_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -58,7 +58,6 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                 children: List.generate(
                   snapshot.data!.docs.length,
                   (int index) {
-           
                     DateTime parseDate = DateTime.parse(
                         snapshot.data!.docs[index]['date'].toString());
                     final DateFormat formatter = DateFormat('hh : mm  a');

@@ -1,8 +1,6 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../view/widgets/fonts/google_poppins.dart';
@@ -15,9 +13,9 @@ class MeetingDisplayClassLevel extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: Text("Meetings"),
+          title: const Text("Meetings"),
         ),
-        body: Container(
+        body: SizedBox(
           height: double.infinity, // set the height to fill available space
           child: Center(
             child: Column(
@@ -52,58 +50,58 @@ class MeetingDisplayClassLevel extends StatelessWidget {
                                     fontWeight: FontWeight.w200,
                                   ),
                                   GooglePoppinsWidgets(
-                                                text: "Arts", fontsize: 19.h,),
-                                          kHeight20,
-                                         
+                                    text: "Arts",
+                                    fontsize: 19.h,
+                                  ),
+                                  kHeight20,
                                   GooglePoppinsWidgets(
                                     text: "Members to be expected : ",
                                     fontsize: 18.h,
                                     fontWeight: FontWeight.w200,
                                   ),
                                   GooglePoppinsWidgets(
-                                                text: "Principal", fontsize: 19.h,),
-                                          kHeight30,
-
-                                          GooglePoppinsWidgets(
+                                    text: "Principal",
+                                    fontsize: 19.h,
+                                  ),
+                                  kHeight30,
+                                  GooglePoppinsWidgets(
                                     text: "Speacial Guest : ",
                                     fontsize: 18.h,
                                     fontWeight: FontWeight.w200,
                                   ),
                                   GooglePoppinsWidgets(
-                                                text: "MLA", fontsize: 19.h,),
-                                          kHeight30,
-
-                                          
-                                         
-                                  
+                                    text: "MLA",
+                                    fontsize: 19.h,
+                                  ),
+                                  kHeight30,
                                   GooglePoppinsWidgets(
                                       text: "Date :",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
-                                      GooglePoppinsWidgets(
-                                                text: "00:00:00", fontsize: 19.h,),
-                                          kHeight30,
-                                         
-                                   GooglePoppinsWidgets(
+                                  GooglePoppinsWidgets(
+                                    text: "00:00:00",
+                                    fontsize: 19.h,
+                                  ),
+                                  kHeight30,
+                                  GooglePoppinsWidgets(
                                       text: "Time :",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
-                                      GooglePoppinsWidgets(
-                                                text: "00:00", fontsize: 19.h,),
-                                          kHeight30,
-                                         
-                                
-                                 
+                                  GooglePoppinsWidgets(
+                                    text: "00:00",
+                                    fontsize: 19.h,
+                                  ),
+                                  kHeight30,
                                   GooglePoppinsWidgets(
                                       text: "Venue :",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
-                                      GooglePoppinsWidgets(
-                                                text: "School Auditorium", fontsize: 19.h,),
-                                          kHeight30,
-                                         
+                                  GooglePoppinsWidgets(
+                                    text: "School Auditorium",
+                                    fontsize: 19.h,
+                                  ),
                                   kHeight30,
-                                  
+                                  kHeight30,
                                 ],
                               ),
                             ),

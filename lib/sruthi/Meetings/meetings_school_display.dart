@@ -1,23 +1,23 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../model/meeting_model/meeting_model.dart';
 import '../../view/widgets/fonts/google_poppins.dart';
 
 class MeetingDisplaySchoolLevel extends StatelessWidget {
-  const MeetingDisplaySchoolLevel({super.key});
+  const MeetingDisplaySchoolLevel({super.key, required this.meetingModel});
+  final MeetingModel meetingModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: Text("Meetings"),
+          title: const Text("Meetings"),
         ),
-        body: Container(
+        body: SizedBox(
           height: double.infinity, // set the height to fill available space
           child: Center(
             child: Column(
@@ -38,74 +38,73 @@ class MeetingDisplaySchoolLevel extends StatelessWidget {
                           width: 360.w,
                           child: Padding(
                             padding: EdgeInsets.all(10.h),
-                            child: Expanded(
-                              child: ListView(
-                                children: [
-                                  Center(
-                                    child: GooglePoppinsWidgets(
-                                        text: "Heading", fontsize: 22.h),
-                                  ),
-                                  kHeight50,
-                                  GooglePoppinsWidgets(
-                                    text: "Category :",
+                            child: ListView(
+                              children: [
+                                Center(
+                                  child: GooglePoppinsWidgets(
+                                      text: meetingModel.heading,
+                                      fontsize: 22.h),
+                                ),
+                                kHeight50,
+                                GooglePoppinsWidgets(
+                                  text: "Category :",
+                                  fontsize: 18.h,
+                                  fontWeight: FontWeight.w200,
+                                ),
+                                GooglePoppinsWidgets(
+                                  text: meetingModel.categoryOfMeeting,
+                                  fontsize: 19.h,
+                                ),
+                                kHeight20,
+                                GooglePoppinsWidgets(
+                                  text: "Members to be expected : ",
+                                  fontsize: 18.h,
+                                  fontWeight: FontWeight.w200,
+                                ),
+                                GooglePoppinsWidgets(
+                                  text: meetingModel.membersToBeExpected,
+                                  fontsize: 19.h,
+                                ),
+                                kHeight30,
+                                GooglePoppinsWidgets(
+                                  text: "Speacial Guest : ",
+                                  fontsize: 18.h,
+                                  fontWeight: FontWeight.w200,
+                                ),
+                                GooglePoppinsWidgets(
+                                  text: meetingModel.specialGuest,
+                                  fontsize: 19.h,
+                                ),
+                                kHeight30,
+                                GooglePoppinsWidgets(
+                                    text: "Date :",
                                     fontsize: 18.h,
-                                    fontWeight: FontWeight.w200,
-                                  ),
-                                  GooglePoppinsWidgets(
-                                                text: "Arts", fontsize: 19.h,),
-                                          kHeight20,
-                                         
-                                  GooglePoppinsWidgets(
-                                    text: "Members to be expected : ",
+                                    fontWeight: FontWeight.w200),
+                                GooglePoppinsWidgets(
+                                  text: meetingModel.date,
+                                  fontsize: 19.h,
+                                ),
+                                kHeight30,
+                                GooglePoppinsWidgets(
+                                    text: "Time :",
                                     fontsize: 18.h,
-                                    fontWeight: FontWeight.w200,
-                                  ),
-                                  GooglePoppinsWidgets(
-                                                text: "Principal", fontsize: 19.h,),
-                                          kHeight30,
-
-                                          GooglePoppinsWidgets(
-                                    text: "Speacial Guest : ",
+                                    fontWeight: FontWeight.w200),
+                                GooglePoppinsWidgets(
+                                  text: meetingModel.time,
+                                  fontsize: 19.h,
+                                ),
+                                kHeight30,
+                                GooglePoppinsWidgets(
+                                    text: "Venue :",
                                     fontsize: 18.h,
-                                    fontWeight: FontWeight.w200,
-                                  ),
-                                  GooglePoppinsWidgets(
-                                                text: "MLA", fontsize: 19.h,),
-                                          kHeight30,
-
-                                          
-                                         
-                                  
-                                  GooglePoppinsWidgets(
-                                      text: "Date :",
-                                      fontsize: 18.h,
-                                      fontWeight: FontWeight.w200),
-                                      GooglePoppinsWidgets(
-                                                text: "00:00:00", fontsize: 19.h,),
-                                          kHeight30,
-                                         
-                                   GooglePoppinsWidgets(
-                                      text: "Time :",
-                                      fontsize: 18.h,
-                                      fontWeight: FontWeight.w200),
-                                      GooglePoppinsWidgets(
-                                                text: "00:00", fontsize: 19.h,),
-                                          kHeight30,
-                                         
-                                
-                                 
-                                  GooglePoppinsWidgets(
-                                      text: "Venue :",
-                                      fontsize: 18.h,
-                                      fontWeight: FontWeight.w200),
-                                      GooglePoppinsWidgets(
-                                                text: "School Auditorium", fontsize: 19.h,),
-                                          kHeight30,
-                                         
-                                  kHeight30,
-                                  
-                                ],
-                              ),
+                                    fontWeight: FontWeight.w200),
+                                GooglePoppinsWidgets(
+                                  text: meetingModel.venue,
+                                  fontsize: 19.h,
+                                ),
+                                kHeight30,
+                                kHeight30,
+                              ],
                             ),
                           ),
                         ),
