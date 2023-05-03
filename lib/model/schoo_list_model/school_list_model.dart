@@ -37,17 +37,17 @@ class SchoolModel {
   String schoolName;
 
   factory SchoolModel.fromJson(Map<String, dynamic> json) => SchoolModel(
-        adminUserName: json["adminUserName"],
-        batchYear: json["batchYear"],
-        district: json["district"],
-        email: json["email"],
-        id: json["id"],
-        password: json["password"],
-        phoneNumber: json["phoneNumber"],
-        place: json["place"],
-        postedDate: json["postedDate"],
-        schoolId: json["schoolID"],
-        schoolName: json["schoolName"],
+        adminUserName: json["adminUserName"] ?? "",
+        batchYear: json["batchYear"] ?? "",
+        district: json["district"] ?? "",
+        email: json["email"] ?? "",
+        id: json["id"] ?? "",
+        password: json["password"] ?? "",
+        phoneNumber: json["phoneNumber"] ?? "",
+        place: json["place"] ?? "",
+        postedDate: json["postedDate"] ?? "",
+        schoolId: json["schoolID"] ?? "",
+        schoolName: json["schoolName"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

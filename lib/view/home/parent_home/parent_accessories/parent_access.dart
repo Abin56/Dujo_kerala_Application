@@ -1,13 +1,12 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
-import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/attendence_book_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../controllers/get_parent&guardian/getx.dart';
+import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
