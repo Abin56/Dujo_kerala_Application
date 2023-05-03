@@ -60,7 +60,8 @@ class StudentSignInController extends GetxController {
       }
     } catch (e) {
       isLoading.value = false;
-      showToast(msg: "Sign in failed");
+      showToast(msg: e.toString());
+     // showToast(msg: "Sign in failed");
     }
   }
 }

@@ -1,11 +1,9 @@
 // ignore_for_file: body_might_complete_normally_nullable
-
 import 'package:dujo_kerala_application/view/pages/search/search_class/search_class.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
 

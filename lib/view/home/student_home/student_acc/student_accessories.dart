@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/view/home/events/event_list.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -12,7 +14,19 @@ class StudentAccessories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenNavigation = [];
+    final screenNavigation = [
+     const UnderMaintanceScreen(text: 'Attendance'), 
+     const UnderMaintanceScreen(text: 'Exams'),
+     const UnderMaintanceScreen(text: 'Timetable'),
+     const UnderMaintanceScreen(text: 'Homeworks'),
+     const UnderMaintanceScreen(text: 'Notices'),
+      EventList(),
+      const UnderMaintanceScreen(text: 'Progress Report'),
+     const UnderMaintanceScreen(text: 'Subjects'),
+      const UnderMaintanceScreen(text: 'Teachers'),
+     const UnderMaintanceScreen(text: 'Meetings'),
+
+    ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
