@@ -2,10 +2,14 @@
 
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../sruthi/Meetings/meetings_list.dart';
+import '../../../../sruthi/Notice/notice_list.dart';
 
 class StudentAccessories extends StatelessWidget {
   const StudentAccessories({
@@ -15,17 +19,16 @@ class StudentAccessories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-     const UnderMaintanceScreen(text: 'Attendance'), 
-     const UnderMaintanceScreen(text: 'Exams'),
-     const UnderMaintanceScreen(text: 'Timetable'),
-     const UnderMaintanceScreen(text: 'Homeworks'),
-     const UnderMaintanceScreen(text: 'Notices'),
-      EventList(),
+      const UnderMaintanceScreen(text: 'Attendance'),
+      const UnderMaintanceScreen(text: 'Exams'),
+      const UnderMaintanceScreen(text: 'Time Table'),
+      const UnderMaintanceScreen(text: 'Home Works'),
+      const NoticePage(),
+      const UnderMaintanceScreen(text: 'Events'),
       const UnderMaintanceScreen(text: 'Progress Report'),
-     const UnderMaintanceScreen(text: 'Subjects'),
-      const UnderMaintanceScreen(text: 'Teachers'),
-     const UnderMaintanceScreen(text: 'Meetings'),
-
+      const UnderMaintanceScreen(text: 'Subjects'),
+      const UnderMaintanceScreen(text: 'Teacher'),
+      const MeetingList(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

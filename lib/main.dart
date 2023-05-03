@@ -1,13 +1,6 @@
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
-import 'package:dujo_kerala_application/sruthi/Event/event_list.dart';
-import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_screen.dart';
-import 'package:dujo_kerala_application/view/pages/Subject/subject_display.dart';
-import 'package:dujo_kerala_application/sruthi/homeWork/student_homework_list.dart';
-import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_Mainhome.dart';
-import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,18 +16,15 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await ScreenUtil.ensureScreenSize();
- 
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); 
-
-  
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-  
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
@@ -50,11 +40,11 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return  SplashScreen();
+                      return SplashScreen();
                     } else if (state is AuthLoggedOutState) {
-                      return  SplashScreen();
+                      return SplashScreen();
                     }
-                    return  SplashScreen();
+                    return SplashScreen();
                   },
                 ),
 

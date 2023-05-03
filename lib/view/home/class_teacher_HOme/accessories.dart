@@ -1,18 +1,16 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
-import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/teacher_subject_list_view.dart';
-import 'package:dujo_kerala_application/view/pages/progress_Report/all_student_list.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../pages/Attentence/take_attentence.dart';
+import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Homework/homework.dart';
 import '../../pages/Subject/subject_display.dart';
-import '../../pages/attentence/take_attentence.dart';
-import '../../pages/attentence/take_attentence/attendence_book_status.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   const ClassTeacherAccessories({

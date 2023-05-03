@@ -12,18 +12,16 @@ class SchoolClassSelectionController extends GetxController {
   List<ClassModel> classModelList = [];
   List<String> batchList = [];
 
-
   ///Application open time creating a [SchoolClassSelectionController] singleton object using Get.put()
   ///inside of init function [onInit] call [fetchAllSchoolData]
 
   Future<void> fetchAllSchoolData() async {
     schoolModelList.clear();
     try {
-      final data = await collectionReference.get();
-      for (var element in data.docs) {
-        schoolModelList
-            .add(SchoolModel.fromJson(element.data() as Map<String, dynamic>));
-      }
+      final QuerySnapshot<Map<String, dynamic>> data = await collectionReference
+          .get() as QuerySnapshot<Map<String, dynamic>>;
+      schoolModelList =
+          data.docs.map((e) => SchoolModel.fromJson(e.data())).toList();
     } catch (e) {
       showToast(msg: "School Data Error");
     }
@@ -34,19 +32,20 @@ class SchoolClassSelectionController extends GetxController {
   Future<void> fetchBatachDetails() async {
     try {
       batchList.clear();
-      QuerySnapshot<Map<String, dynamic>> data =
-          await collectionReference.doc(UserCredentialsController.schoolId).collection('BatchYear').get();
+      QuerySnapshot<Map<String, dynamic>> data = await collectionReference
+          .doc(UserCredentialsController.schoolId)
+          .collection('BatchYear')
+          .get();
 
-      for (var element in data.docs) {
-        batchList.add(element.id);
-      }
+      batchList = data.docs.map((e) => e.id).toList();
     } catch (e) {
       showToast(msg: 'Batch Selection Error');
     }
   }
 
   Future<void> fetchAllClassData() async {
-    if (UserCredentialsController.schoolId == null || UserCredentialsController.batchId == null) {
+    if (UserCredentialsController.schoolId == null ||
+        UserCredentialsController.batchId == null) {
       showToast(msg: "Some Error Occured");
       return;
     }
@@ -58,13 +57,9 @@ class SchoolClassSelectionController extends GetxController {
           .doc(UserCredentialsController.batchId)
           .collection('Classes')
           .get();
-      for (var element in data.docs) {
-        classModelList.add(
-          ClassModel.fromJson(
-            element.data(),
-          ),
-        );
-      }
+
+      classModelList =
+          data.docs.map((e) => ClassModel.fromJson(e.data())).toList();
     } catch (e) {
       showToast(msg: "Class Data Error");
     }
