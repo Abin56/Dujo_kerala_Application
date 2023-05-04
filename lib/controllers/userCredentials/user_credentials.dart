@@ -8,6 +8,7 @@ class UserCredentialsController {
   static String? schoolId;
   static String? batchId;
   static String? classId;
+  static String? userRole;
   static StudentModel? studentModel;
   static ParentModel? parentModel;
   static GuardianModel? guardianModel;

@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/helper/shared_pref_helper.dart';
 import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../view/home/sample/under_maintance.dart';
@@ -45,6 +47,11 @@ class TeacherLoginController extends GetxController {
           if (teacherModel.userRole == "teacher" ||
               teacherModel.userRole == "classTeacher") {
             UserCredentialsController.teacherModel = teacherModel;
+            //assigining shared preference user role for app close
+
+            await SharedPreferencesHelper.setString(
+                SharedPreferencesHelper.userRoleKey, 'teacher');
+
             if (context.mounted) {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const UnderMaintanceScreen(

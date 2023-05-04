@@ -42,7 +42,8 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                           child: GoogleMonstserratWidgets(
                             overflow: TextOverflow.ellipsis,
                             text: UserCredentialsController
-                                .studentModel!.studentName,
+                                    .teacherModel?.teacherName ??
+                                "",
                             fontsize: 23.sp,
                             fontWeight: FontWeight.bold,
                             color: cWhite,
@@ -57,7 +58,8 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
                                     UserCredentialsController
-                                        .studentModel!.profileImageUrl),
+                                            .teacherModel?.imageUrl ??
+                                        ""),
                                 radius: 50.r,
                               ),
                             ),
@@ -77,14 +79,14 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                   ),
                   GoogleMonstserratWidgets(
                     text:
-                        'Ad No : ${UserCredentialsController.studentModel?.admissionNumber}',
+                        'Employee ID : ${UserCredentialsController.teacherModel?.employeeID ?? ""}',
                     fontsize: 14.5.sp,
                     fontWeight: FontWeight.w500,
                     color: cWhite.withOpacity(0.8),
                   ),
                   GoogleMonstserratWidgets(
                     text:
-                        'email : ${UserCredentialsController.studentModel?.studentemail}',
+                        'email : ${UserCredentialsController.teacherModel?.teacherEmail ?? ""}',
                     fontsize: 12.sp,
                     fontWeight: FontWeight.w500,
                     color: cWhite.withOpacity(0.7),
