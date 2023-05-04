@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,7 +29,7 @@ class StudentSignUpController extends GetxController {
   String? gender;
 
   //for photo id creation
-  Uuid uuid = const Uuid();
+  Uuid uuid = const Uuid(); 
    CollectionReference<Map<String, dynamic>> finalFirebaseData = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
