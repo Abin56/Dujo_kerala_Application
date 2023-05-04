@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
@@ -10,21 +11,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../controllers/sign_in_controller/student_sign_in_controller.dart';
+import '../../../../../controllers/sign_in_controller/teacher_login_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/textformfield_login.dart';
+import '../class_teacher_login/sigin/teacher_sigup_screen.dart';
 
 class TeacherLoginScreen extends StatelessWidget {
   int? pageIndex;
   PasswordField hideGetxController = Get.find<PasswordField>();
 
   TeacherLoginScreen({this.pageIndex, super.key});
-
-  TextEditingController emailIdController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TeacherLoginController teacherLoginController =
+      Get.put(TeacherLoginController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -66,7 +68,8 @@ class TeacherLoginScreen extends StatelessWidget {
                             Icons.mail_outline,
                           ),
                         ),
-                        textEditingController: emailIdController,
+                        textEditingController:
+                            teacherLoginController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -75,7 +78,8 @@ class TeacherLoginScreen extends StatelessWidget {
                         obscureText: hideGetxController.isObscurefirst.value,
                         labelText: 'Password',
                         icon: Icons.lock,
-                        textEditingController: passwordController,
+                        textEditingController:
+                            teacherLoginController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -107,17 +111,17 @@ class TeacherLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            // signInController.signInWithEmailAndPassword(
-                            //     emailIdController.text,
-                            //     passwordController.text,
-                            //     pageIndex ?? 5,
-                            //     context);
+                            teacherLoginController.signIn(context);
                           }
                         },
-                        child: loginButtonWidget(
-                          height: 60,
-                          width: 180,
-                          text: 'Login',
+                        child: Obx(
+                          () => teacherLoginController.isLoading.value
+                              ? circularProgressIndicatotWidget
+                              : loginButtonWidget(
+                                  height: 60,
+                                  width: 180,
+                                  text: 'Login',
+                                ),
                         ),
                       ),
                     ),
@@ -130,7 +134,9 @@ class TeacherLoginScreen extends StatelessWidget {
                         kWidth60,
                         GestureDetector(
                           onTap: () {
-                            Get.to(StudentSignInPageScreen());
+                            Get.to(TeachersSignUpScreen(
+                              pageIndex: 3,
+                            ));
                           },
                           child: GooglePoppinsWidgets(
                             text: ' Sign Up',

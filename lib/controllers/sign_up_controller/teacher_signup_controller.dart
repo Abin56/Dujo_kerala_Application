@@ -9,7 +9,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/Signup_Image_Selction/image_selection.dart';
-import '../../model/student_model/student_model.dart';
 import '../userCredentials/user_credentials.dart';
 import 'package:uuid/uuid.dart';
 
@@ -17,78 +16,38 @@ class TeacherSignUpController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController comfirmPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController houseNameController = TextEditingController();
   TextEditingController houseNumberController = TextEditingController();
   TextEditingController placeController = TextEditingController();
   TextEditingController districtController = TextEditingController();
   TextEditingController altPhoneNoController = TextEditingController();
- // TextEditingController genderController = TextEditingController();
 
-  User? userCredential;
+  String name = "TeacherSignupController";
+
   RxBool isLoading = RxBool(false);
   List<TeacherModel> teachersList = [];
   Uuid uuid = const Uuid();
-
-  //String? bloodGroup;
   String? gender;
-  CollectionReference<Map<String, dynamic>> firebaseData = FirebaseFirestore
+  DocumentReference<Map<String, dynamic>> firebaseData = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
-      .doc(UserCredentialsController.schoolId)
-      .collection('Teachers');
-      // .collection(UserCredentialsController.batchId ?? "")
-      // .doc(UserCredentialsController.batchId ?? "")
-      // .collection("Classes")
-      // .doc(UserCredentialsController.classId)
-      // .collection("Students");
-
-//sign in with email and password firebase authentification
-  void signIn(String email, String password) async {
-    if (email.isEmpty || password.isEmpty) {
-      showToast(msg: "Fields are empty");
-      return;
-    }
-    try {
-      isLoading.value = true;
-      final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      if (result.user != null) {
-        userCredential = result.user;
-      }
-      isLoading.value = false;
-    } catch (e) {
-      showToast(msg: 'Login Failed');
-      isLoading.value = false;
-    }
-  }
+      .doc(UserCredentialsController.schoolId);
 
 //fetching all teachers data from firebase
   Future<void> getTeacherData() async {
     try {
       isLoading.value = true;
-      final result = await firebaseData.get();
+      final result = await firebaseData.collection("TempTeacherList").get();
       if (result.docs.isNotEmpty) {
-        for (var element in result.docs) {
-          log(element.data()["teacherPhNo"].toString());
-          teachersList.add(
-            TeacherModel.fromJson(
-              element.data(),
-            ),
-          );
-
-          
-        }
-      
+        teachersList =
+            result.docs.map((e) => TeacherModel.fromMap(e.data())).toList();
       }
 
       isLoading.value = false;
     } catch (e) {
-
-      showToast(msg: e.toString());
+      showToast(msg: 'Some error occured');
+      log(name: name, e.toString());
       isLoading.value = false;
     }
   }
@@ -107,22 +66,48 @@ class TeacherSignUpController extends GetxController {
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         imageUrl = await result.ref.getDownloadURL();
       }
-
-      firebaseData.doc(UserCredentialsController.teacherModel?.teacherEmail).update({
-        "teacherName": nameController.text,
-        "teacherEmail": emailController.text,
-        "district": districtController.text,
-        "gender": gender,
-        "houseName": houseNameController.text,
-        "houseNumber": houseNumberController.text,
-        "place": placeController.text,
-        "altPhoneNo": altPhoneNoController.text,
-        "docID": emailController.text
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      )
+          .then((value) {
+        final teacherNewModel = TeacherModel(
+          teacherName:
+              UserCredentialsController.teacherModel?.teacherName ?? "",
+          teacherEmail: emailController.text,
+          houseName: houseNameController.text,
+          houseNumber: houseNumberController.text,
+          place: placeController.text,
+          gender: gender ?? "",
+          district: districtController.text,
+          altPhoneNo: altPhoneNoController.text,
+          employeeID: UserCredentialsController.teacherModel?.employeeID ?? "",
+          createdAt: UserCredentialsController.teacherModel?.createdAt ?? "",
+          teacherPhNo:
+              UserCredentialsController.teacherModel?.teacherPhNo ?? "",
+          docid: value.user?.uid ?? "",
+          userRole: UserCredentialsController.teacherModel?.userRole ?? "",
+          imageId: imageId,
+          imageUrl: imageUrl,
+        );
+        firebaseData
+            .collection("Teachers")
+            .doc(value.user?.uid)
+            .set(teacherNewModel.toMap())
+            .then((value) {
+          firebaseData
+              .collection('TempTeacherList')
+              .doc(UserCredentialsController.teacherModel?.docid)
+              .delete();
+        });
       });
+
       Get.find<GetImage>().pickedImage.value = "";
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Failed to update teachers data");
+      log(name: name, e.toString());
       isLoading.value = false;
     }
   }
@@ -144,9 +129,9 @@ class TeacherSignUpController extends GetxController {
   }
 
   bool checkAllFieldIsEmpty() {
-    if (
-      nameController.text.isEmpty || emailController.text.isEmpty||
-      houseNameController.text.isEmpty ||
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        houseNameController.text.isEmpty ||
         houseNumberController.text.isEmpty ||
         placeController.text.isEmpty ||
         districtController.text.isEmpty ||

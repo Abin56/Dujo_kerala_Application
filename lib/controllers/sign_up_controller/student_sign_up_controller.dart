@@ -65,13 +65,8 @@ class StudentSignUpController extends GetxController {
       final result = await firebaseData.get(); 
       
       if (result.docs.isNotEmpty) {
-        for (var element in result.docs) {
-          classWiseStudentList.add(
-            StudentModel.fromJson(
-              element.data(),
-            ),
-          );
-        }
+        classWiseStudentList =
+            result.docs.map((e) => StudentModel.fromJson(e.data())).toList();
       }
       isLoading.value = false;
     } catch (e) {

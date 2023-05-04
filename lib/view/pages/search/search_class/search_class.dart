@@ -1,5 +1,7 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
+import 'dart:developer';
+
 import 'package:dujo_kerala_application/model/class_list_model/class_list_model.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
@@ -62,16 +64,16 @@ class SearchClassBar extends SearchDelegate {
         child: ListView.separated(
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () async{
-                UserCredentialsController.classId =
-                    suggestionList[index].classId;
-                Get.off(UsersLoginScreen()); 
+              onTap: () async {
+                UserCredentialsController.classId = suggestionList[index].docid;
 
-               String PclassID = suggestionList[index].classId; 
+                String PclassID = suggestionList[index].docid;
 
-                
-              SharedPreferences prefs3 = await SharedPreferences.getInstance(); 
-              prefs3.setString('classID', PclassID);
+                SharedPreferences prefs3 =
+                    await SharedPreferences.getInstance();
+                prefs3.setString('classID', PclassID);
+
+                Get.off(UsersLoginScreen());
               },
               child: GooglePoppinsWidgets(
                   text: suggestionList[index].className,

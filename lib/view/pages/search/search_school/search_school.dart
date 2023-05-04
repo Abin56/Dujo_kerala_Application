@@ -31,8 +31,11 @@ class SearchSchoolScreen extends StatelessWidget {
               ),
               const Spacer(),
               IconButton(
-                  onPressed: () {
-                    _showSearch(context);
+                  onPressed: () async {
+                    await schoolClassSelectionController.fetchAllSchoolData();
+                    if (context.mounted) {
+                      _showSearch(context);
+                    }
                   },
                   icon: const Icon(
                     Icons.search,
