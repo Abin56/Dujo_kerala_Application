@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../helper/shared_pref_helper.dart';
 import '../../../../model/schoo_list_model/school_list_model.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 import '../search_batchYear/search_batch_year.dart';
@@ -62,10 +63,9 @@ class SearchSchoolBar extends SearchDelegate {
           return GestureDetector(
             onTap: () async {
               UserCredentialsController.schoolId = suggestionList[index].docid;
-              String PschoolID = suggestionList[index].docid;
-
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setString('schoolID', PschoolID);
+              await SharedPreferencesHelper.setString(
+                  SharedPreferencesHelper.schoolIdKey,
+                  UserCredentialsController.schoolId ?? "");
 
               await Get.find<SchoolClassSelectionController>()
                   .fetchBatachDetails();

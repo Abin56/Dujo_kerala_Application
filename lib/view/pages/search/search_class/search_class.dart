@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../helper/shared_pref_helper.dart';
 
 class SearchClassBar extends SearchDelegate {
   @override
@@ -66,12 +67,11 @@ class SearchClassBar extends SearchDelegate {
             return GestureDetector(
               onTap: () async {
                 UserCredentialsController.classId = suggestionList[index].docid;
+               await SharedPreferencesHelper.setString(
+                    SharedPreferencesHelper.classIdKey,
+                    UserCredentialsController.classId ?? "");
 
-                String PclassID = suggestionList[index].docid;
-
-                SharedPreferences prefs3 =
-                    await SharedPreferences.getInstance();
-                prefs3.setString('classID', PclassID);
+                
 
                 Get.off(UsersLoginScreen());
               },

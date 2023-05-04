@@ -1,15 +1,13 @@
 import 'dart:developer';
-
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../helper/shared_pref_helper.dart';
 import '../../utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../view/home/class_teacher_HOme/class_teacher_home.dart';
+import '../../view/home/class_teacher_HOme/class_teacher_mainhome.dart';
 
 class ClassTeacherLoginController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -45,9 +43,11 @@ class ClassTeacherLoginController extends GetxController {
 
           if (teacherModel.userRole == "classTeacher") {
             UserCredentialsController.teacherModel = teacherModel;
+            await SharedPreferencesHelper.setString(
+                SharedPreferencesHelper.userRoleKey, 'classTeacher');
             if (context.mounted) {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => ClassTeacherHomeScreen()));
+                  builder: (context) => ClassTeacherMainHomeScreen()));
             }
           } else {
             showToast(msg: "You are not a class Teacher");
