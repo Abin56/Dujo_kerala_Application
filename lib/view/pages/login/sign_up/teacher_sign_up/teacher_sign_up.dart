@@ -7,16 +7,15 @@ import 'package:dujo_kerala_application/controllers/sign_up_controller/teacher_s
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/class_teacher_login/class_teacher_login.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/sizes.dart';
-import '../../../../home/class_teacher_HOme/class_teacher_Mainhome.dart';
+import '../../../../home/class_teacher_HOme/class_teacher_mainhome.dart';
 import '../../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
@@ -29,7 +28,6 @@ class TeachersSignUpPage extends StatelessWidget {
   TextEditingController houseNameController = TextEditingController();
   TextEditingController houseNumberController = TextEditingController();
   TextEditingController placeController = TextEditingController();
-
   TextEditingController districtController = TextEditingController();
   TextEditingController altPhoneNoController = TextEditingController();
 
@@ -139,15 +137,8 @@ class TeachersSignUpPage extends StatelessWidget {
                   SinUpTextFromFiled(
                     text: "Your Name",
                     hintText:
-                        '${UserCredentialsController.teacherModel!.teacherName}',
+                        UserCredentialsController.teacherModel!.teacherName??"",
                     textfromController: teacherController.nameController,
-                    validator: checkFieldEmpty,
-                  ),
-                  SinUpTextFromFiled(
-                    text: "Your email",
-                    hintText:
-                        '${UserCredentialsController.teacherModel!.teacherEmail}',
-                    textfromController: teacherController.emailController,
                     validator: checkFieldEmpty,
                   ),
                   Padding(
@@ -219,7 +210,7 @@ class TeachersSignUpPage extends StatelessWidget {
                           return;
                         } else {
                           teacherController.updateTeacherData().then(
-                              (value) => Get.offAll(ClassTeacherMainHomeScreen()));
+                              (value) => Get.offAll(ClassTeacherLoginScreen()));
                         }
                       },
                       //   Get.offAll(const HomeScreen());
