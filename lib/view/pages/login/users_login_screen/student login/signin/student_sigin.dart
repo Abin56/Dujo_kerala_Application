@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
@@ -19,12 +17,12 @@ import '../../../../../../model/student_model/student_model.dart';
 import '../../../userVerify_Phone_OTP/get_otp..dart';
 
 class StudentSignInScreen extends StatelessWidget {
-  int pageIndex;
-  PasswordField hideGetxController = Get.find<PasswordField>();
+  final int pageIndex;
+  final PasswordField hideGetxController = Get.find<PasswordField>();
   StudentSignInScreen({required this.pageIndex, super.key});
 
   final formKey = GlobalKey<FormState>();
-  StudentSignUpController studentSignUpController =
+  final StudentSignUpController studentSignUpController =
       Get.put(StudentSignUpController());
 
   @override
@@ -63,7 +61,6 @@ class StudentSignInScreen extends StatelessWidget {
                           profileImageUrl: '',
                           studentName: 'Select Student',
                           studentemail: '',
-                          uid: '',
                           docid: '',
                           userRole: '',
                           classId: '',

@@ -28,7 +28,6 @@ class StudentModel {
   String profileImageUrl;
   String studentName;
   String studentemail;
-  String uid;
   String userRole;
 
   StudentModel({
@@ -50,7 +49,6 @@ class StudentModel {
     required this.profileImageUrl,
     required this.studentName,
     required this.studentemail,
-    required this.uid,
     required this.userRole,
   });
 
@@ -73,7 +71,6 @@ class StudentModel {
     String? profileImageUrl,
     String? studentName,
     String? studentemail,
-    String? uid,
     String? userRole,
   }) =>
       StudentModel(
@@ -95,7 +92,6 @@ class StudentModel {
         profileImageUrl: profileImageUrl ?? this.profileImageUrl,
         studentName: studentName ?? this.studentName,
         studentemail: studentemail ?? this.studentemail,
-        uid: uid ?? this.uid,
         userRole: userRole ?? this.userRole,
       );
 
@@ -118,7 +114,6 @@ class StudentModel {
         profileImageUrl: json["profileImageUrl"] ?? "",
         studentName: json["studentName"] ?? "",
         studentemail: json["studentemail"] ?? "",
-        uid: json["uid"] ?? "",
         userRole: json["userRole"] ?? "",
       );
 
@@ -141,7 +136,6 @@ class StudentModel {
         "profileImageUrl": profileImageUrl,
         "studentName": studentName,
         "studentemail": studentemail,
-        "uid": uid,
         "userRole": userRole,
       };
 }

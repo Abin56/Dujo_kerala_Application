@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,19 +36,31 @@ class StudentSignUpController extends GetxController {
       .doc(UserCredentialsController.schoolId)
       .collection(UserCredentialsController.batchId ?? "")
       .doc(UserCredentialsController.batchId ?? "")
-      .collection("Classes")
+      .collection("classes")
       .doc(UserCredentialsController.classId)
       .collection("Students");
+  CollectionReference<Map<String, dynamic>> firebaseDataTemp = FirebaseFirestore
+      .instance
+      .collection("SchoolListCollection")
+      .doc(UserCredentialsController.schoolId)
+      .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId ?? "")
+      .collection("classes")
+      .doc(UserCredentialsController.classId)
+      .collection("TempStudents");
 
 //fetching all students data from firebase
   Future<void> getStudentData() async {
     try {
       isLoading.value = true;
-      final result = await firebaseData.get();
+      final result = await firebaseDataTemp.get();
+      log(result.docs.toString());
+
       if (result.docs.isNotEmpty) {
         classWiseStudentList =
             result.docs.map((e) => StudentModel.fromJson(e.data())).toList();
       }
+
       isLoading.value = false;
     } catch (e) {
       showToast(msg: "Student fetching failed");
@@ -73,32 +86,46 @@ class StudentSignUpController extends GetxController {
       //getting firebase uid and updated it to collection
       String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
-      Map<String, dynamic> updatinStudenData = <String, dynamic>{
-        "alPhoneNumber": altPhoneNoController.text,
-        "bloodgroup": bloodGroup,
-        "dateofBirth": dateOfBirthController.text,
-        "district": districtController.text,
-        "gender": gender,
-        "houseName": houseNameController.text,
-        "place": placeController.text,
-        "profileImageId": imageId,
-        "profileImageUrl": imageUrl,
-        "studentemail": emailController.text,
-        "uid": userUid
-      };
+      final studentModel = StudentModel(
+          admissionNumber:
+              UserCredentialsController.studentModel?.admissionNumber ?? "",
+          alPhoneNumber: altPhoneNoController.text,
+          bloodgroup: bloodGroup ?? "",
+          classId: UserCredentialsController.studentModel?.classId ?? "",
+          createDate: UserCredentialsController.studentModel?.createDate ?? "",
+          dateofBirth: dateOfBirthController.text,
+          district: districtController.text,
+          docid: userUid,
+          gender: gender ?? "",
+          guardianId: UserCredentialsController.studentModel?.guardianId ?? "",
+          houseName: houseNameController.text,
+          parentId: UserCredentialsController.studentModel?.parentId ?? "",
+          parentPhoneNumber:
+              UserCredentialsController.studentModel?.parentPhoneNumber ?? "",
+          place: placeController.text,
+          profileImageId: imageId,
+          profileImageUrl: imageUrl,
+          studentName:
+              UserCredentialsController.studentModel?.studentName ?? "",
+          studentemail: emailController.text,
+          userRole: UserCredentialsController.studentModel?.userRole ?? "");
 
-      firebaseData
-          .doc(UserCredentialsController.studentModel?.docid)
-          .update(updatinStudenData);
+      await firebaseData.doc(userUid).set(studentModel.toJson()).then((value) {
+        firebaseDataTemp
+            .doc(UserCredentialsController.studentModel?.docid ?? "")
+            .delete()
+            .then((value) {
+          UserCredentialsController.studentModel = studentModel;
+          //updating data to all students field
 
-      //updating data to all students field
-
-      FirebaseFirestore.instance
-          .collection("SchoolListCollection")
-          .doc(UserCredentialsController.schoolId)
-          .collection('AllStudents')
-          .doc(UserCredentialsController.studentModel?.docid)
-          .update(updatinStudenData);
+          FirebaseFirestore.instance
+              .collection("SchoolListCollection")
+              .doc(UserCredentialsController.schoolId)
+              .collection('AllStudents')
+              .doc(UserCredentialsController.studentModel?.docid)
+              .set(studentModel.toJson());
+        });
+      });
 
       clearFields();
       Get.find<GetImage>().pickedImage.value = "";
