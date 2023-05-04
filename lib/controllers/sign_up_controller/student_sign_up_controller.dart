@@ -29,21 +29,40 @@ class StudentSignUpController extends GetxController {
 
   //for photo id creation
   Uuid uuid = const Uuid();
+   CollectionReference<Map<String, dynamic>> finalFirebaseData = FirebaseFirestore
+      .instance
+      .collection("SchoolListCollection")
+      .doc(UserCredentialsController.schoolId)
+      .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId ?? "")
+      .collection("classes")
+      .doc(UserCredentialsController.classId)
+      .collection("Students"); 
+
   CollectionReference<Map<String, dynamic>> firebaseData = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
       .collection(UserCredentialsController.batchId ?? "")
       .doc(UserCredentialsController.batchId ?? "")
-      .collection("Classes")
+      .collection("classes")
       .doc(UserCredentialsController.classId)
-      .collection("Students");
+      .collection("TempStudentCollection"); 
+
 
 //fetching all students data from firebase
   Future<void> getStudentData() async {
     try {
-      isLoading.value = true;
-      final result = await firebaseData.get();
+      log('hai hello');
+        log('schoolid: ${UserCredentialsController.schoolId}');
+      log('batchIID: ${UserCredentialsController.batchId}');
+      log('classId: ${UserCredentialsController.classId}');
+
+      isLoading.value = true; 
+      
+   
+      final result = await firebaseData.get(); 
+      
       if (result.docs.isNotEmpty) {
         for (var element in result.docs) {
           classWiseStudentList.add(
@@ -63,6 +82,7 @@ class StudentSignUpController extends GetxController {
   //updating students data
 
   Future<void> updateStudentData() async {
+
     String imageId = "";
     String imageUrl = "";
     try {
@@ -90,26 +110,30 @@ class StudentSignUpController extends GetxController {
         "profileImageUrl": imageUrl,
         "studentemail": emailController.text,
         "uid": userUid
-      };
+      }; 
 
-      firebaseData
-          .doc(UserCredentialsController.studentModel?.docid)
-          .update(updatinStudenData);
+      await finalFirebaseData
+          .doc(userUid).set(updatinStudenData);
+         
+
+      await firebaseData
+          .doc(UserCredentialsController.studentModel?.docid).delete();
 
       //updating data to all students field
 
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection("SchoolListCollection")
           .doc(UserCredentialsController.schoolId)
           .collection('AllStudents')
-          .doc(UserCredentialsController.studentModel?.docid)
-          .update(updatinStudenData);
+          .doc(userUid)
+          .set(updatinStudenData);
 
       clearFields();
       Get.find<GetImage>().pickedImage.value = "";
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: "Updation Failed");
+      showToast(msg: e.toString()); 
+      log('errors is ${e.toString()}');
       isLoading.value = false;
     }
   }

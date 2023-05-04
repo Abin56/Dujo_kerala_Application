@@ -83,7 +83,9 @@ nextpage() async {
       UserCredentialsController.studentModel =
           StudentModel.fromJson(querySnapshot.docs[0].data());
       log('student!!');
-      Get.to(StudentHomeScreen());
+      //Get.to(StudentHomeScreen());
+      
+      Get.to(const DujoLoginScren());
     } else {
       log('not a student!!');
 

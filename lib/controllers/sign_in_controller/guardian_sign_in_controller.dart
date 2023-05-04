@@ -21,7 +21,9 @@ class GuardianSigninController extends GetxController {
         password: passwordController.text,
       )
           .then((value) async {
-        //fetching parent data from firebase
+        //fetching parent data from firebase 
+
+        
         QuerySnapshot<Map<String, dynamic>> user = await FirebaseFirestore
             .instance
             .collection('SchoolListCollection')
