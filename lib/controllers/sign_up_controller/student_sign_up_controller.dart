@@ -62,7 +62,7 @@ class StudentSignUpController extends GetxController {
       isLoading.value = true; 
       
    
-      final result = await firebaseData.get(); 
+      final result = await finalFirebaseData.get(); 
       
       if (result.docs.isNotEmpty) {
         classWiseStudentList =

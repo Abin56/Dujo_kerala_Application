@@ -219,7 +219,7 @@ class GuardianSignUp extends StatelessWidget {
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
                             await guardianSignUpController
-                                .updateGuardianData()
+                                .addGuardianData()
                                 .then((value) =>
                                     Get.offAll(GuardianLoginScreen()));
                           }

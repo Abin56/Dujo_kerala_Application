@@ -8,7 +8,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventDisplayClassLevel extends StatelessWidget {
-  const EventDisplayClassLevel({super.key});
+   EventDisplayClassLevel({super.key, required this.chiefGuest, required this.description, required this.eventDate, required this.eventName, required this.venue}); 
+
+  String eventName; 
+  String eventDate; 
+  String description; 
+  String venue; 
+  String chiefGuest;
+
 
   @override
   Widget build(BuildContext context) {

@@ -25,6 +25,8 @@ class UserLoginCheckController extends GetxController{
   log('batchID: $batchIDVal'); 
   log('classID: $classIDVal'); 
 
+  FirebaseAuth auth = FirebaseAuth.instance;
+
    User? currentUser = auth.currentUser;
       if (currentUser == null) {
     

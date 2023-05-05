@@ -1,7 +1,15 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/model/student_model/student_model.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/sign_up/guardian_sign_up/guardiansign.dart';
+import 'package:dujo_kerala_application/view/pages/login/userVerify_Phone_OTP/get_otp..dart';
+import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -127,7 +135,7 @@ class GuardianLoginScreen extends StatelessWidget {
                         kWidth60,
                         GestureDetector(
                           onTap: () {
-                            Get.to(StudentSignInScreen(
+                            Get.to(GuardianSignInScreen(
                               pageIndex: 2,
                             ));
                           },
@@ -165,3 +173,4 @@ class GuardianLoginScreen extends StatelessWidget {
     );
   }
 }
+

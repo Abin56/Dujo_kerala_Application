@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/sruthi/Event/event_display_school_levl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -48,14 +49,16 @@ void getFirebaseData()async {
                   // Heading_Container_Widget(text: 'Event List',),
                   Expanded(
                     child: StreamBuilder(
-                      stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(schoolIDVal).collection('AdminEvents').snapshots(),
+                      stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('AdminEvents').snapshots(),
                       builder: (context, snapshot) {
+                    
                         if(snapshot.connectionState == ConnectionState.waiting){
-                          return CircularProgressIndicator();
+                          return Center(child: CircularProgressIndicator());
                         }
                         return ListView.builder(
-                            itemCount: 5,
+                            itemCount: snapshot.data!.docs.length,
                             itemBuilder: (BuildContext context, int index) {
+                                 QueryDocumentSnapshot<Map<String, dynamic>> eventData = snapshot.data!.docs[index];
                               return Column(
                                 children: [
                                   Container(
@@ -66,7 +69,7 @@ void getFirebaseData()async {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) => EventDisplaySchoolLevel()));
+                                                    builder: (context) => EventDisplaySchoolLevel(eventName: eventData['eventName'], eventDate: eventData['eventDate'], eventDescription: eventData['eventDescription'], eventVenue: eventData['venue'], signedBy: eventData['signedBy'],)));
                                           },
                                           child: GooglePoppinsWidgets(
                                             text: "View",

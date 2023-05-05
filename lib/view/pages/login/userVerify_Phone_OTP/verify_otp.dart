@@ -139,48 +139,12 @@ class UserVerifyOTPScreen extends StatelessWidget {
                           );
                         });
                       } else if (state is AuthErrorState) {
-                        FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: userEmail, password: userPassword)
-                            .then((value) {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false, // user must tap button!
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Message'),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: const <Widget>[
-                                      Text('Verification Completed!!'),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('ok'),
-                                    onPressed: () {
-                                      if (userpageIndex == 0) {
-                                        Get.off(StudentSignInPageScreen());
-                                      } else if (userpageIndex == 1) {
-                                        Get.off(ParentSignUpPage());
-                                      } else if (userpageIndex == 2) {
-                                        Get.off(GuardianSignUp());
-                                      } else if (userpageIndex == 3) {
-                                        Get.off(TeachersSignUpPage());
-                                      }
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        });
-                        // ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(
-                        //         backgroundColor: Colors.red,
-                        //         duration: Duration(milliseconds: 2000),
-                        //         content: Text("Somthing Wrong!!!!!")));
+                       
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                backgroundColor: Colors.red,
+                                duration: Duration(milliseconds: 2000),
+                                content: Text("Something Wrong!!!!!")));
                       }
                     },
                     builder: (context, state) {

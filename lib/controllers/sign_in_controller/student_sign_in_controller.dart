@@ -35,10 +35,10 @@ class StudentSignInController extends GetxController {
               .doc(UserCredentialsController.schoolId)
               .collection(UserCredentialsController.batchId ?? "")
               .doc(UserCredentialsController.batchId)
-              .collection('Classes')
+              .collection('classes')
               .doc(UserCredentialsController.classId)
               .collection('Students')
-              .where("uid", isEqualTo: value.user?.uid)
+              .where("docid", isEqualTo: value.user?.uid)
               .get();
 
           if (user.docs.isNotEmpty) {

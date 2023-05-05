@@ -47,7 +47,7 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        title: const Text("Dujo"),
+        title: const Text("Dujo"), 
       ),
       body: pages[_page],
       bottomNavigationBar: Container(
