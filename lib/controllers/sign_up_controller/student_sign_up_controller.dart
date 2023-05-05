@@ -29,17 +29,7 @@ class StudentSignUpController extends GetxController {
   String? gender;
 
   //for photo id creation
-  Uuid uuid = const Uuid(); 
-   CollectionReference<Map<String, dynamic>> finalFirebaseData = FirebaseFirestore
-      .instance
-      .collection("SchoolListCollection")
-      .doc(UserCredentialsController.schoolId)
-      .collection(UserCredentialsController.batchId ?? "")
-      .doc(UserCredentialsController.batchId ?? "")
-      .collection("classes")
-      .doc(UserCredentialsController.classId)
-      .collection("Students"); 
-
+  Uuid uuid = const Uuid();
   CollectionReference<Map<String, dynamic>> firebaseData = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
@@ -48,26 +38,29 @@ class StudentSignUpController extends GetxController {
       .doc(UserCredentialsController.batchId ?? "")
       .collection("classes")
       .doc(UserCredentialsController.classId)
-      .collection("TempStudentCollection"); 
-
+      .collection("Students");
+  CollectionReference<Map<String, dynamic>> firebaseDataTemp = FirebaseFirestore
+      .instance
+      .collection("SchoolListCollection")
+      .doc(UserCredentialsController.schoolId)
+      .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId ?? "")
+      .collection("classes")
+      .doc(UserCredentialsController.classId)
+      .collection("TempStudents");
 
 //fetching all students data from firebase
   Future<void> getStudentData() async {
     try {
-      log('hai hello');
-        log('schoolid: ${UserCredentialsController.schoolId}');
-      log('batchIID: ${UserCredentialsController.batchId}');
-      log('classId: ${UserCredentialsController.classId}');
+      isLoading.value = true;
+      final result = await firebaseDataTemp.get();
+      log(result.docs.toString());
 
-      isLoading.value = true; 
-      
-   
-      final result = await finalFirebaseData.get(); 
-      
       if (result.docs.isNotEmpty) {
         classWiseStudentList =
             result.docs.map((e) => StudentModel.fromJson(e.data())).toList();
       }
+
       isLoading.value = false;
     } catch (e) {
       showToast(msg: "Student fetching failed");
@@ -78,7 +71,6 @@ class StudentSignUpController extends GetxController {
   //updating students data
 
   Future<void> updateStudentData() async {
-
     String imageId = "";
     String imageUrl = "";
     try {
@@ -94,42 +86,52 @@ class StudentSignUpController extends GetxController {
       //getting firebase uid and updated it to collection
       String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
-      Map<String, dynamic> updatinStudenData = <String, dynamic>{
-        "alPhoneNumber": altPhoneNoController.text,
-        "bloodgroup": bloodGroup,
-        "dateofBirth": dateOfBirthController.text,
-        "district": districtController.text,
-        "gender": gender,
-        "houseName": houseNameController.text,
-        "place": placeController.text,
-        "profileImageId": imageId,
-        "profileImageUrl": imageUrl,
-        "studentemail": emailController.text,
-        "uid": userUid
-      }; 
+      final studentModel = StudentModel(
+          admissionNumber:
+              UserCredentialsController.studentModel?.admissionNumber ?? "",
+          alPhoneNumber: altPhoneNoController.text,
+          bloodgroup: bloodGroup ?? "",
+          classId: UserCredentialsController.studentModel?.classId ?? "",
+          createDate: UserCredentialsController.studentModel?.createDate ?? "",
+          dateofBirth: dateOfBirthController.text,
+          district: districtController.text,
+          docid: userUid,
+          gender: gender ?? "",
+          guardianId: UserCredentialsController.studentModel?.guardianId ?? "",
+          houseName: houseNameController.text,
+          parentId: UserCredentialsController.studentModel?.parentId ?? "",
+          parentPhoneNumber:
+              UserCredentialsController.studentModel?.parentPhoneNumber ?? "",
+          place: placeController.text,
+          profileImageId: imageId,
+          profileImageUrl: imageUrl,
+          studentName:
+              UserCredentialsController.studentModel?.studentName ?? "",
+          studentemail: emailController.text,
+          userRole: UserCredentialsController.studentModel?.userRole ?? "");
 
-      await finalFirebaseData
-          .doc(userUid).set(updatinStudenData);
-         
+      await firebaseData.doc(userUid).set(studentModel.toJson()).then((value) {
+        firebaseDataTemp
+            .doc(UserCredentialsController.studentModel?.docid ?? "")
+            .delete()
+            .then((value) {
+          UserCredentialsController.studentModel = studentModel;
+          //updating data to all students field
 
-      await firebaseData
-          .doc(UserCredentialsController.studentModel?.docid).delete();
-
-      //updating data to all students field
-
-      await FirebaseFirestore.instance
-          .collection("SchoolListCollection")
-          .doc(UserCredentialsController.schoolId)
-          .collection('AllStudents')
-          .doc(userUid)
-          .set(updatinStudenData);
+          FirebaseFirestore.instance
+              .collection("SchoolListCollection")
+              .doc(UserCredentialsController.schoolId)
+              .collection('AllStudents')
+              .doc(UserCredentialsController.studentModel?.docid)
+              .set(studentModel.toJson());
+        });
+      });
 
       clearFields();
       Get.find<GetImage>().pickedImage.value = "";
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: e.toString()); 
-      log('errors is ${e.toString()}');
+      showToast(msg: "Updation Failed");
       isLoading.value = false;
     }
   }

@@ -1,13 +1,15 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dujo_kerala_application/controllers/sign_up_controller/parent_sign_up_controller.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/sign_up/parent_sign_up/parent_sign_up_verifcation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/sign_in_controller/parent_sign_in_controller.dart';
+import '../../../../../controllers/sign_in_controller/parent_login_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
@@ -131,8 +133,11 @@ class ParentLoginScreen extends StatelessWidget {
                             text: "Don't Have an account!", fontsize: 15),
                         kWidth60,
                         GestureDetector(
-                          onTap: () {
-                            Get.to(StudentSignInScreen(
+                          onTap: () async {
+                            ParentSignUpController parentSignUpController =
+                                Get.put(ParentSignUpController());
+                            await parentSignUpController.getAllParent();
+                            Get.to(ParentSignUpFirstScreen(
                               pageIndex: 1,
                             ));
                           },
