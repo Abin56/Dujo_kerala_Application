@@ -22,17 +22,19 @@ class ParentLoginController extends GetxController {
       )
           .then((value) async {
         //fetching parent data from firebase
-        QuerySnapshot<Map<String, dynamic>> user = await FirebaseFirestore
-            .instance
-            .collection('SchoolListCollection')
-            .doc(UserCredentialsController.schoolId)
-            .collection('Students_Parents')
-            .where("uid", isEqualTo: value.user?.uid)
-            .get();
+        final DocumentSnapshot<Map<String, dynamic>> parentData =
+            await FirebaseFirestore.instance
+                .collection('SchoolListCollection')
+                .doc(UserCredentialsController.schoolId)
+                .collection('classes')
+                .doc(UserCredentialsController.classId)
+                .collection('ParentCollection')
+                .doc(value.user?.uid)
+                .get();
 
-        if (user.docs.isNotEmpty) {
+        if (parentData.data() != null) {
           UserCredentialsController.parentModel = ParentModel.fromMap(
-            user.docs[0].data(),
+            parentData.data()!,
           );
         }
         if (UserCredentialsController.parentModel?.userRole == "parent") {
