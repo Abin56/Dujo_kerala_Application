@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/parent_login/parent_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +31,7 @@ class ParentLoginController extends GetxController {
             .get();
 
         if (user.docs.isNotEmpty) {
-          UserCredentialsController.parentModel = ParentModel.fromJson(
+          UserCredentialsController.parentModel = ParentModel.fromMap(
             user.docs[0].data(),
           );
         }
