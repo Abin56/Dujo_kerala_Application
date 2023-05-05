@@ -7,7 +7,7 @@ import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
 
-class GuardianSigninController extends GetxController {
+class GuardianLoginController extends GetxController {
   RxBool isLoading = RxBool(false);
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -22,20 +22,21 @@ class GuardianSigninController extends GetxController {
       )
           .then((value) async {
         //fetching parent data from firebase
-        QuerySnapshot<Map<String, dynamic>> user = await FirebaseFirestore
-            .instance
-            .collection('SchoolListCollection')
-            .doc(UserCredentialsController.schoolId)
-            .collection('Student_Guardian')
-            .where("uid", isEqualTo: value.user?.uid)
-            .get();
+        final DocumentSnapshot<Map<String, dynamic>> guardianData =
+            await FirebaseFirestore.instance
+                .collection('SchoolListCollection')
+                .doc(UserCredentialsController.schoolId)
+                .collection('classes')
+                .doc(UserCredentialsController.classId)
+                .collection('GuardianCollection')
+                .doc(value.user?.uid)
+                .get();
 
-        if (user.docs.isNotEmpty) {
-          UserCredentialsController.guardianModel = GuardianModel.fromJson(
-            user.docs[0].data(),
+        if (guardianData.data() != null) {
+          UserCredentialsController.guardianModel = GuardianModel.fromMap(
+            guardianData.data()!,
           );
         }
-
         if (UserCredentialsController.guardianModel?.userRole == "guardian") {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
@@ -55,7 +56,7 @@ class GuardianSigninController extends GetxController {
       });
     } catch (e) {
       isLoading.value = false;
-      showToast(msg: "Sign in failed $e");
+      showToast(msg: "Sign in failed");
     }
   }
 }
