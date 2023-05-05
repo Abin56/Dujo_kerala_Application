@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home/gurdian_homepage.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../helper/shared_pref_helper.dart';
 import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
@@ -38,12 +40,14 @@ class GuardianLoginController extends GetxController {
           );
         }
         if (UserCredentialsController.guardianModel?.userRole == "guardian") {
+          //assigining shared preference user role for app close
+
+          await SharedPreferencesHelper.setString(
+              SharedPreferencesHelper.userRoleKey, 'guardian');
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return const UnderMaintanceScreen(
-                text: "Guardian Page",
-              );
+              return GuardianHomePage();
             }), (route) => false);
           }
           isLoading.value = false;

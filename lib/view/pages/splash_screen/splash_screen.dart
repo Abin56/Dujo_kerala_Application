@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
 import 'package:dujo_kerala_application/model/student_model/student_model.dart';
 import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home/gurdian_homepage.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../helper/shared_pref_helper.dart';
+import '../../../model/guardian_model/guardian_model.dart';
 import '../../fonts/fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -86,11 +88,11 @@ nextpage() async {
       //checking user is parent
       await checkClassTeacher(firebaseFirestore, auth);
     } else if (UserCredentialsController.userRole == 'parent') {
-      Get.to(ParentHomeScreen());
+      await checkParent(firebaseFirestore, auth);
 
       //checking user is guardian
     } else if (UserCredentialsController.userRole == 'guardian') {
-      Get.to(GuardianHomePage());
+      await checkGuardian(firebaseFirestore, auth);
     } else {
       Get.to(const DujoLoginScren());
     }
@@ -149,6 +151,48 @@ Future<void> checkClassTeacher(
     UserCredentialsController.teacherModel =
         TeacherModel.fromMap(classTeacherData.data()!);
     Get.to(ClassTeacherMainHomeScreen());
+  } else {
+    showToast(msg: "Please login again");
+    Get.to(const DujoLoginScren());
+  }
+}
+
+Future<void> checkParent(
+    DocumentReference<Map<String, dynamic>> firebaseFirestore,
+    FirebaseAuth auth) async {
+  final DocumentSnapshot<Map<String, dynamic>> parentData =
+      await firebaseFirestore
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .collection('ParentCollection')
+          .doc(auth.currentUser?.uid)
+          .get();
+
+  if (parentData.data() != null) {
+    UserCredentialsController.parentModel =
+        ParentModel.fromMap(parentData.data()!);
+    Get.to(ParentHomeScreen());
+  } else {
+    showToast(msg: "Please login again");
+    Get.to(const DujoLoginScren());
+  }
+}
+
+Future<void> checkGuardian(
+    DocumentReference<Map<String, dynamic>> firebaseFirestore,
+    FirebaseAuth auth) async {
+  final DocumentSnapshot<Map<String, dynamic>> guardianData =
+      await firebaseFirestore
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .collection('GuardianCollection')
+          .doc(auth.currentUser?.uid)
+          .get();
+
+  if (guardianData.data() != null) {
+    UserCredentialsController.guardianModel =
+        GuardianModel.fromMap(guardianData.data()!);
+    Get.to(GuardianHomePage());
   } else {
     showToast(msg: "Please login again");
     Get.to(const DujoLoginScren());
