@@ -9,7 +9,7 @@ import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
-import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
+import 'package:dujo_kerala_application/view/home/student_home/students_main_home.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_home.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:flutter/material.dart';
@@ -64,11 +64,6 @@ nextpage() async {
   UserCredentialsController.userRole =
       SharedPreferencesHelper.getString(SharedPreferencesHelper.userRoleKey);
 
-  final DocumentReference<Map<String, dynamic>> firebaseFirestore =
-      FirebaseFirestore.instance
-          .collection('SchoolListCollection')
-          .doc(UserCredentialsController.schoolId);
-
   await Future.delayed(const Duration(seconds: 3));
   log("schoolId:${UserCredentialsController.schoolId}");
   log("batchId:${UserCredentialsController.batchId}");
@@ -78,6 +73,10 @@ nextpage() async {
   if (auth.currentUser == null) {
     Get.to(const DujoLoginScren());
   } else {
+    final DocumentReference<Map<String, dynamic>> firebaseFirestore =
+        FirebaseFirestore.instance
+            .collection('SchoolListCollection')
+            .doc(UserCredentialsController.schoolId);
     if (UserCredentialsController.userRole == 'student') {
       //getting studentData
       await checkStudent(firebaseFirestore, auth);
@@ -107,14 +106,14 @@ Future<void> checkStudent(
       .doc(UserCredentialsController.batchId)
       .collection('classes')
       .doc(UserCredentialsController.classId)
-      .collection('students')
+      .collection('Students')
       .doc(auth.currentUser?.uid)
       .get();
 
   if (studentData.data() != null) {
     UserCredentialsController.studentModel =
         StudentModel.fromJson(studentData.data()!);
-    Get.to(StudentHomeScreen());
+    Get.to(StudentsMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
     Get.to(const DujoLoginScren());

@@ -7,6 +7,13 @@ class SharedPreferencesHelper {
   static String userRoleKey = 'userRole';
   static late SharedPreferences _prefs;
 
+  static Future<void> clearSharedPreferenceData() async {
+    await setString(batchIdKey, "");
+    await setString(schoolIdKey, "");
+    await setString(classIdKey, "");
+    await setString(userRoleKey, "");
+  }
+
   static Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
   }
