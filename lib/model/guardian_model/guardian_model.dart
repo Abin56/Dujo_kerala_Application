@@ -1,117 +1,169 @@
-// To parse this JSON data, do
-//
-//     final guardiantModel = guardiantModelFromJson(jsonString);
-
 import 'dart:convert';
 
-GuardianModel guardiantModelFromJson(String str) =>
-    GuardianModel.fromJson(json.decode(str));
-
-String guardiantModelToJson(GuardianModel data) => json.encode(data.toJson());
-
 class GuardianModel {
-  String createdate;
-  String docid;
-  String gender;
-  String houseName;
-  String guardiantEmail;
-  String guardiantName;
-  String guardiantPhoneNumber;
-  String pincode;
-  String place;
-  String profileImageId;
-  String profileImageUrl;
-  String state;
-  String studentId;
-  String uid;
+  String? guardianName;
+  String? docid;
+  String? createdate;
+  String? guardianPhoneNumber;
+  String? guardianEmail;
+  String? studentID;
+  String? houseName;
+  String? place;
+  String? state;
+  String? pincode;
+  String? district;
+  String? gender;
+  String? profileImageID;
+  String? profileImageURL;
   String userRole;
-
   GuardianModel({
-    required this.createdate,
-    required this.docid,
-    required this.gender,
-    required this.houseName,
-    required this.guardiantEmail,
-    required this.guardiantName,
-    required this.guardiantPhoneNumber,
-    required this.pincode,
-    required this.place,
-    required this.profileImageId,
-    required this.profileImageUrl,
-    required this.state,
-    required this.studentId,
-    required this.uid,
-    required this.userRole,
+    this.guardianName,
+    this.docid,
+    this.createdate,
+    this.guardianPhoneNumber,
+    this.guardianEmail,
+    this.studentID,
+    this.houseName,
+    this.place,
+    this.state,
+    this.pincode,
+    this.district,
+    this.gender,
+    this.profileImageID,
+    this.profileImageURL,
+    this.userRole = 'parent',
   });
 
   GuardianModel copyWith({
-    String? createdate,
+    String? guardianName,
     String? docid,
-    String? gender,
+    String? createdate,
+    String? guardianPhoneNumber,
+    String? guardianEmail,
+    String? studentID,
     String? houseName,
-    String? guardiantEmail,
-    String? guardiantName,
-    String? guardiantPhoneNumber,
-    String? pincode,
     String? place,
-    String? profileImageId,
-    String? profileImageUrl,
     String? state,
-    String? studentId,
-    String? uid,
+    String? pincode,
+    String? district,
+    String? gender,
+    String? profileImageID,
+    String? profileImageURL,
     String? userRole,
-  }) =>
-      GuardianModel(
-        createdate: createdate ?? this.createdate,
-        docid: docid ?? this.docid,
-        gender: gender ?? this.gender,
-        houseName: houseName ?? this.houseName,
-        guardiantEmail: guardiantEmail ?? this.guardiantEmail,
-        guardiantName: guardiantName ?? this.guardiantName,
-        guardiantPhoneNumber: guardiantPhoneNumber ?? this.guardiantPhoneNumber,
-        pincode: pincode ?? this.pincode,
-        place: place ?? this.place,
-        profileImageId: profileImageId ?? this.profileImageId,
-        profileImageUrl: profileImageUrl ?? this.profileImageUrl,
-        state: state ?? this.state,
-        studentId: studentId ?? this.studentId,
-        uid: uid ?? this.uid,
-        userRole: userRole ?? this.userRole,
-      );
+  }) {
+    return GuardianModel(
+      guardianName: guardianName ?? this.guardianName,
+      docid: docid ?? this.docid,
+      createdate: createdate ?? this.createdate,
+      guardianPhoneNumber: guardianPhoneNumber ?? this.guardianPhoneNumber,
+      guardianEmail: guardianEmail ?? this.guardianEmail,
+      studentID: studentID ?? this.studentID,
+      houseName: houseName ?? this.houseName,
+      place: place ?? this.place,
+      state: state ?? this.state,
+      pincode: pincode ?? this.pincode,
+      district: district ?? this.district,
+      gender: gender ?? this.gender,
+      profileImageID: profileImageID ?? this.profileImageID,
+      profileImageURL: profileImageURL ?? this.profileImageURL,
+      userRole: userRole ?? this.userRole,
+    );
+  }
 
-  factory GuardianModel.fromJson(Map<String, dynamic> json) => GuardianModel(
-        createdate: json["createdate"] ?? "",
-        docid: json["docid"] ?? "",
-        gender: json["gender"] ?? "",
-        houseName: json["houseName"] ?? "",
-        guardiantEmail: json["guardiantEmail"] ?? "",
-        guardiantName: json["guardiantName"] ?? "",
-        guardiantPhoneNumber: json["guardiantPhoneNumber"] ?? "",
-        pincode: json["pincode"] ?? "",
-        place: json["place"] ?? "",
-        profileImageId: json["profileImageID"] ?? "",
-        profileImageUrl: json["profileImageURL"] ?? "",
-        state: json["state"] ?? "",
-        studentId: json["studentID"] ?? "",
-        uid: json["uid"] ?? "",
-        userRole: json["userRole"] ?? "",
-      );
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'guardianName': guardianName ?? '',
+      'docid': docid ?? '',
+      'createdate': createdate ?? '',
+      'guardianPhoneNumber': guardianPhoneNumber ?? '',
+      'guardianEmail': guardianEmail ?? '',
+      'studentID': studentID ?? '',
+      'houseName': houseName ?? '',
+      'place': place ?? '',
+      'state': state ?? '',
+      'pincode': pincode ?? '',
+      'district': district ?? '',
+      'gender': gender ?? '',
+      'profileImageID': profileImageID ?? '',
+      'profileImageURL': profileImageURL ?? '',
+      'userRole': userRole,
+    };
+  }
 
-  Map<String, dynamic> toJson() => {
-        "createdate": createdate,
-        "docid": docid,
-        "gender": gender,
-        "houseName": houseName,
-        "guardiantEmail": guardiantEmail,
-        "guardiantName": guardiantName,
-        "guardiantPhoneNumber": guardiantPhoneNumber,
-        "pincode": pincode,
-        "place": place,
-        "profileImageID": profileImageId,
-        "profileImageURL": profileImageUrl,
-        "state": state,
-        "studentID": studentId,
-        "uid": uid,
-        "userRole": userRole,
-      };
+  factory GuardianModel.fromMap(Map<String, dynamic> map) {
+    return GuardianModel(
+      guardianName:
+          map['guardianName'] != null ? map['guardianName'] as String : '',
+      docid: map['docid'] != null ? map['docid'] as String : '',
+      createdate: map['createdate'] != null ? map['createdate'] as String : '',
+      guardianPhoneNumber: map['guardianPhoneNumber'] != null
+          ? map['guardianPhoneNumber'] as String
+          : '',
+      guardianEmail:
+          map['guardianEmail'] != null ? map['guardianEmail'] as String : '',
+      studentID: map['studentID'] != null ? map['studentID'] as String : '',
+      houseName: map['houseName'] != null ? map['houseName'] as String : '',
+      place: map['place'] != null ? map['place'] as String : '',
+      state: map['state'] != null ? map['state'] as String : '',
+      pincode: map['pincode'] != null ? map['pincode'] as String : '',
+      district: map['district'] != null ? map['district'] as String : '',
+      gender: map['gender'] != null ? map['gender'] as String : '',
+      profileImageID:
+          map['profileImageID'] != null ? map['profileImageID'] as String : '',
+      profileImageURL: map['profileImageURL'] != null
+          ? map['profileImageURL'] as String
+          : '',
+      userRole: map['userRole'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory GuardianModel.fromJson(String source) =>
+      GuardianModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'GuardianModel(guardianName: $guardianName, docid: $docid, createdate: $createdate, guardianPhoneNumber: $guardianPhoneNumber, guardianEmail: $guardianEmail, studentID: $studentID, houseName: $houseName, place: $place, state: $state, pincode: $pincode, district: $district, gender: $gender, profileImageID: $profileImageID, profileImageURL: $profileImageURL, userRole: $userRole)';
+  }
+
+  @override
+  bool operator ==(covariant GuardianModel other) {
+    if (identical(this, other)) return true;
+
+    return other.guardianName == guardianName &&
+        other.docid == docid &&
+        other.createdate == createdate &&
+        other.guardianPhoneNumber == guardianPhoneNumber &&
+        other.guardianEmail == guardianEmail &&
+        other.studentID == studentID &&
+        other.houseName == houseName &&
+        other.place == place &&
+        other.state == state &&
+        other.pincode == pincode &&
+        other.district == district &&
+        other.gender == gender &&
+        other.profileImageID == profileImageID &&
+        other.profileImageURL == profileImageURL &&
+        other.userRole == userRole;
+  }
+
+  @override
+  int get hashCode {
+    return guardianName.hashCode ^
+        docid.hashCode ^
+        createdate.hashCode ^
+        guardianPhoneNumber.hashCode ^
+        guardianEmail.hashCode ^
+        studentID.hashCode ^
+        houseName.hashCode ^
+        place.hashCode ^
+        state.hashCode ^
+        pincode.hashCode ^
+        district.hashCode ^
+        gender.hashCode ^
+        profileImageID.hashCode ^
+        profileImageURL.hashCode ^
+        userRole.hashCode;
+  }
 }

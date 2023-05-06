@@ -1,8 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/model/student_model/student_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +8,12 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../model/Signup_Image_Selction/image_selection.dart';
+import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
+import '../../view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import '../userCredentials/user_credentials.dart';
 
-class GuardianController extends GetxController {
+class GuardianSignUpController extends GetxController {
   TextEditingController userNameController = TextEditingController();
   TextEditingController houseNameController = TextEditingController();
   TextEditingController houseNumberController = TextEditingController();
@@ -21,223 +21,121 @@ class GuardianController extends GetxController {
   TextEditingController districtController = TextEditingController();
   TextEditingController altPhoneNoController = TextEditingController();
   TextEditingController pinCodeController = TextEditingController();
-  TextEditingController stateController = TextEditingController(); 
+  TextEditingController stateController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  List<GuardianModel> guardianModelList = [];
 
-  
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  CollectionReference<Map<String, dynamic>> firebaseDataTemp = FirebaseFirestore
+      .instance
+      .collection("SchoolListCollection")
+      .doc(UserCredentialsController.schoolId)
+      .collection('classes')
+      .doc(UserCredentialsController.classId)
+      .collection('Temp_GuardianCollection');
 
   CollectionReference<Map<String, dynamic>> firebaseData = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
-      .collection('Student_Guardian');
+      .collection('classes')
+      .doc(UserCredentialsController.classId)
+      .collection('GuardianCollection');
 
   RxBool isLoading = RxBool(false);
 //for image uploading unique uid
   Uuid uuid = const Uuid();
 
-  String? gender; 
-  List<StudentModel> classWiseStudentList = []; 
+  String? gender;
 
-  CollectionReference<Map<String, dynamic>> finalFirebaseData = FirebaseFirestore
-      .instance
-      .collection("SchoolListCollection")
-      .doc(UserCredentialsController.schoolId)
-      .collection(UserCredentialsController.batchId ?? "")
-      .doc(UserCredentialsController.batchId ?? "")
-      .collection("classes")
-      .doc(UserCredentialsController.classId)
-      .collection("Students"); 
-
-        @override
-  void onInit() async {
-    await getStudentData();
-    super.onInit();
-  }
-
-
-
-  //updating parent signup data 
-
-   Future<void> getStudentData() async {
+  Future<void> getAllGuardian() async {
     try {
-      log('hai hello');
-        log('schoolid: ${UserCredentialsController.schoolId}');
-      log('batchIID: ${UserCredentialsController.batchId}');
-      log('classId: ${UserCredentialsController.classId}');
+      isLoading.value = true;
+      guardianModelList.clear();
+      final QuerySnapshot<Map<String, dynamic>> parentData =
+          await firebaseDataTemp.get();
 
-      isLoading.value = true; 
-      
-   
-      final result = await finalFirebaseData.get(); 
-      
-      if (result.docs.isNotEmpty) {
-        classWiseStudentList =
-            result.docs.map((e) => StudentModel.fromJson(e.data())).toList();
-      }
+      guardianModelList =
+          parentData.docs.map((e) => GuardianModel.fromMap(e.data())).toList();
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: "Student fetching failed");
+      showToast(msg: 'Something Error');
       isLoading.value = false;
     }
   }
 
-  Future<void> updateGuardianData() async { 
+  //updating parent signup data
+
+  Future<void> updateGuardianData() async {
     String imageId = "";
     String imageUrl = "";
     try {
-      isLoading.value = true; 
-      
-      if (Get.find<GetImage>().pickedImage.isNotEmpty) {
-        imageId = uuid.v1();
-        final result = await FirebaseStorage.instance
-            .ref("files/guardianProfilePhotos/$imageId")
-            .putFile(File(Get.find<GetImage>().pickedImage.value));
-        imageUrl = await result.ref.getDownloadURL();
-      } 
+      isLoading.value = true;
 
+      auth
+          .signInWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text)
+          .then((value) async {
+        if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+          imageId = uuid.v1();
+          final result = await FirebaseStorage.instance
+              .ref("files/guardianProfilePhotos/$imageId")
+              .putFile(File(Get.find<GetImage>().pickedImage.value));
+          imageUrl = await result.ref.getDownloadURL();
+          final GuardianModel guardianModel = GuardianModel(
+              createdate:
+                  UserCredentialsController.guardianModel?.createdate ?? "",
+              district: districtController.text,
+              docid: value.user?.uid,
+              gender: gender,
+              houseName: houseNameController.text,
+              guardianEmail: emailController.text,
+              guardianName:
+                  UserCredentialsController.guardianModel?.guardianName ?? "",
+              guardianPhoneNumber: UserCredentialsController
+                      .guardianModel?.guardianPhoneNumber ??
+                  "",
+              pincode: pinCodeController.text,
+              place: placeController.text,
+              profileImageID: imageId,
+              profileImageURL: imageUrl,
+              state: stateController.text,
+              studentID:
+                  UserCredentialsController.guardianModel?.studentID ?? "",
+              userRole:
+                  UserCredentialsController.guardianModel?.userRole ?? "");
 
-
-  //      Future<void> getStudentData() async {
-  //   try {
-  //     log('hai hello');
-  //       log('schoolid: ${UserCredentialsController.schoolId}');
-  //     log('batchIID: ${UserCredentialsController.batchId}');
-  //     log('classId: ${UserCredentialsController.classId}');
-
-  //     isLoading.value = true; 
-      
-   
-  //     final result = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection(UserCredentialsController.batchId!)
-  //     .doc(UserCredentialsController.batchId).collection('collectionPath')
-      
-  //     if (result.docs.isNotEmpty) {
-  //       classWiseStudentList =
-  //           result.docs.map((e) => StudentModel.fromJson(e.data())).toList();
-  //     }
-  //     isLoading.value = false;
-  //   } catch (e) {
-  //     showToast(msg: "Student fetching failed");
-  //     isLoading.value = false;
-  //   }
-  // }
+          //add data to firebase
+          await firebaseData
+              .doc(value.user?.uid)
+              .set(guardianModel.toMap())
+              .then((value) async {
+            await firebaseDataTemp
+                .doc(UserCredentialsController.guardianModel?.docid)
+                .delete()
+                .then((value) {
+              UserCredentialsController.guardianModel = guardianModel;
+            });
+          }).then((value) {
+            Get.find<GetImage>().pickedImage.value = "";
+            isLoading.value = false;
+            showToast(msg: "Successfully Created");
+            Get.offAll(
+              GuardianLoginScreen(),
+            );
+          });
+        }
+      });
 
       //getting firebase uid and updated it to collection
-      String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
-      String userEmail = FirebaseAuth.instance.currentUser?.email ?? ""; 
-
-      Map<String, dynamic> updateParentData = <String, dynamic>{
-        "gender": gender ?? "",
-        "docid" : userUid,
-        "guardianName"
-        "houseName": houseNameController.text,
-        "guardianEmail": userEmail,
-        "pincode": pinCodeController.text,
-        "place": placeController.text,
-        "profileImageID": imageId,
-        "profileImageURL": imageUrl,
-        "state": stateController.text,
-        "uid": userUid, 
-      };
-
-      firebaseData
-          .doc(
-            userUid
-          )
-          .update(updateParentData)
-          .then((value) => clearControllers());  
-
-      //FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('TempGuardiansCollection').doc().delete();
-      Get.find<GetImage>().pickedImage.value = "";
-      isLoading.value = false;
     } catch (e) {
       showToast(msg: "Updation Failed");
       isLoading.value = false;
     }
   }
-
-  Future<void> addGuardianData() async { 
-    String imageId = "";
-    String imageUrl = "";
-    try {
-      isLoading.value = true; 
-      
-      if (Get.find<GetImage>().pickedImage.isNotEmpty) {
-        imageId = uuid.v1();
-        final result = await FirebaseStorage.instance
-            .ref("files/guardianProfilePhotos/$imageId")
-            .putFile(File(Get.find<GetImage>().pickedImage.value));
-        imageUrl = await result.ref.getDownloadURL();
-      } 
-
-
-
-  //      Future<void> getStudentData() async {
-  //   try {
-  //     log('hai hello');
-  //       log('schoolid: ${UserCredentialsController.schoolId}');
-  //     log('batchIID: ${UserCredentialsController.batchId}');
-  //     log('classId: ${UserCredentialsController.classId}');
-
-  //     isLoading.value = true; 
-      
-   
-  //     final result = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection(UserCredentialsController.batchId!)
-  //     .doc(UserCredentialsController.batchId).collection('collectionPath')
-      
-  //     if (result.docs.isNotEmpty) {
-  //       classWiseStudentList =
-  //           result.docs.map((e) => StudentModel.fromJson(e.data())).toList();
-  //     }
-  //     isLoading.value = false;
-  //   } catch (e) {
-  //     showToast(msg: "Student fetching failed");
-  //     isLoading.value = false;
-  //   }
-  // }
-
-      //getting firebase uid and updated it to collection
-      String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
-      String userEmail = FirebaseAuth.instance.currentUser?.email ?? "";
-
-      Map<String, dynamic> addGuardianData = <String, dynamic>{
-        "createdate":DateTime.now(), 
-        "guardianName":userNameController.text,
-        "gender": gender ?? "",
-        "houseName": houseNameController.text,
-        "guardianEmail": userEmail,
-        "pincode": pinCodeController.text,
-        "place": placeController.text,
-        "profileImageID": imageId,
-        "profileImageURL": imageUrl,
-        "state": stateController.text,
-        "uid": userUid,
-        "guardianPhoneNumber": UserCredentialsController.studentModel!.parentPhoneNumber,
-        "docid" : userUid
-      };
-
-      firebaseData
-          .doc(
-            userUid
-          )
-          .set(addGuardianData)
-          .then((value) => clearControllers());  
-
-      final FirebaseFirestore firestore = FirebaseFirestore.instance;
-      final CollectionReference collectionRef = firestore.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('TempGuardiansCollection');
-     
-      QuerySnapshot querySnapshot = await collectionRef.where('guardianPhoneNumber', isEqualTo: UserCredentialsController.studentModel!.parentPhoneNumber).get();
-     
-      querySnapshot.docs.forEach((document) {
-    document.reference.delete();
-  });
-      Get.find<GetImage>().pickedImage.value = "";
-      isLoading.value = false;
-    } catch (e) {
-      showToast(msg: "Updation Failed");
-      isLoading.value = false;
-    }
-  }
-  
 
   bool checkAllFieldIsEmpty() {
     if (userNameController.text.isEmpty ||
@@ -254,6 +152,7 @@ class GuardianController extends GetxController {
       return false;
     }
   }
+  //
 
   void clearControllers() {
     userNameController.clear();

@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../helper/shared_pref_helper.dart';
 import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
 
@@ -38,12 +39,14 @@ class ParentLoginController extends GetxController {
           );
         }
         if (UserCredentialsController.parentModel?.userRole == "parent") {
+          //assigining shared preference user role for app close
+
+          await SharedPreferencesHelper.setString(
+              SharedPreferencesHelper.userRoleKey, 'parent');
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return const UnderMaintanceScreen(
-                text: "Parent Page",
-              );
+              return ParentHomeScreen();
             }), (route) => false);
           }
           isLoading.value = false;

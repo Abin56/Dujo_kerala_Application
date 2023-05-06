@@ -3,7 +3,14 @@
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../controllers/userCredentials/user_credentials.dart';
+import '../../../helper/shared_pref_helper.dart';
+import '../../../utils/utils.dart';
+import '../../pages/login/dujo_login_screen.dart';
 
 class ClassTeacherHeaderDrawer extends StatelessWidget {
   const ClassTeacherHeaderDrawer({Key? key}) : super(key: key);
@@ -44,6 +51,12 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                 color: Colors.black.withOpacity(0.5),
                 fontSize: 10,
                 fontWeight: FontWeight.w600),
+          ),
+          TextButton(
+            onPressed: () async {
+              await userLogOut();
+            },
+            child: const Text("Logout"),
           )
         ],
       ),
@@ -271,4 +284,3 @@ Widget emptyDisplay(String section) {
     ),
   );
 }
-
