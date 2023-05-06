@@ -3,13 +3,13 @@
 import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/guardian_signup_controller.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/sign_up_controller/guardian_signup_controller.dart';
 import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
@@ -24,7 +24,7 @@ class GuardianSignUp extends StatelessWidget {
   GuardianSignUp({super.key});
 
   final getImageController = Get.put(GetImage());
-  GuardianController guardianSignUpController = Get.put(GuardianController());
+  GuardianSignUpController guardianSignUpController = Get.put(GuardianSignUpController());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override

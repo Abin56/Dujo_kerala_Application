@@ -33,7 +33,7 @@ class GuardianSigninController extends GetxController {
             .get();
 
         if (user.docs.isNotEmpty) {
-          UserCredentialsController.guardianModel = GuardianModel.fromJson(
+          UserCredentialsController.guardianModel = GuardianModel.fromMap(
             user.docs[0].data(),
           );
         }

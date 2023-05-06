@@ -13,7 +13,6 @@ import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -29,7 +28,6 @@ class GuardianSignInScreen extends StatelessWidget {
   final guardianFormKey = GlobalKey<FormState>();
   StudentSignUpController studentSignUpController =
       Get.put(StudentSignUpController()); 
-  GuardianController guardianController = Get.put(GuardianController());
 
       String? wardDetail;
 
