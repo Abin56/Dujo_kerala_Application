@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
   const ParentHeaderDrawer({Key? key}) : super(key: key);
@@ -45,6 +46,12 @@ class ParentHeaderDrawer extends StatelessWidget {
                 color: Colors.black.withOpacity(0.5),
                 fontSize: 10,
                 fontWeight: FontWeight.w600),
+          ),
+          TextButton(
+            onPressed: () async {
+              await userLogOut();
+            },
+            child: const Text("Logout"),
           )
         ],
       ),

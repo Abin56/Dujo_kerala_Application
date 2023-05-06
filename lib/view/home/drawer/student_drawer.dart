@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
+
 class StudentsHeaderDrawer extends StatelessWidget {
   const StudentsHeaderDrawer({Key? key}) : super(key: key);
 
@@ -50,22 +52,15 @@ class StudentsHeaderDrawer extends StatelessWidget {
                 fontWeight: FontWeight.w600),
           ),
           TextButton(
-              onPressed: () async {
-                await logOut();
-              },
-              child: const Text("Logout"))
+            onPressed: () async {
+              await userLogOut();
+            },
+            child: const Text("Logout"),
+          )
         ],
       ),
     );
   }
-}
-
-Future<void> logOut() async {
-  await FirebaseAuth.instance.signOut().then((value) async {
-    await SharedPreferencesHelper.clearSharedPreferenceData();
-    UserCredentialsController.clearUserCredentials();
-    Get.offAll(() => const DujoLoginScren());
-  });
 }
 
 Widget MenuItem(int id, String image, String title, bool selected, onTap) {
