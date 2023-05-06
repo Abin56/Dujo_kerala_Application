@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../sruthi/Meetings/meetings_list.dart';
 import '../../../../sruthi/Notice/notice_list.dart';
+import '../../../pages/Subject/subject_display.dart';
 
 class StudentAccessories extends StatelessWidget {
   const StudentAccessories({
@@ -26,7 +27,7 @@ class StudentAccessories extends StatelessWidget {
       const NoticePage(),
       EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
-      const UnderMaintanceScreen(text: 'Subjects'),
+      StudentSubjectHome(),
       const UnderMaintanceScreen(text: 'Teacher'),
       const MeetingList(),
     ];

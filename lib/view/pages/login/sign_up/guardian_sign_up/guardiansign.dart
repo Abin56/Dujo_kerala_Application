@@ -69,7 +69,6 @@ class GuardianSignInScreen extends StatelessWidget {
                           profileImageUrl: '',
                           studentName: 'Select Your Ward',
                           studentemail: '',
-                          uid: '',
                           docid: '',
                           userRole: '',
                           classId: '',
