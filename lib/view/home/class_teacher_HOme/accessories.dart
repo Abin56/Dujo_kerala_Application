@@ -44,10 +44,7 @@ class ClassTeacherAccessories extends StatelessWidget {
         teacherID: 'abinjohn8089@gmail.com',
       ),
       StudentSubjectHome(
-        batchId: '2023-June-2024-February',
-        classId: 'class1A@mthss',
-        schoolID: 'MarthCheng13283',
-        teacherID: 'abinjohn8089@gmail.com',
+       
       ),
       LeaveLettersListviewScreen(
           schooilID: 'MarthCheng13283',

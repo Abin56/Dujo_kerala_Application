@@ -1,21 +1,28 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/model/student_model/student_model.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/sign_up/guardian_sign_up/guardiansign.dart';
+import 'package:dujo_kerala_application/view/pages/login/userVerify_Phone_OTP/get_otp..dart';
+import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/sign_in_controller/guardian_login_controller.dart';
-import '../../../../../controllers/sign_up_controller/guardian_signup_controller.dart';
+import '../../../../../controllers/sign_in_controller/guardian_sign_in_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/textformfield_login.dart';
-import '../../sign_up/guardian_sign_up/guardian_signup_verification_screen.dart';
+import '../student login/signin/student_sigin.dart';
 
 class GuardianLoginScreen extends StatelessWidget {
   int? pageIndex;
@@ -23,10 +30,8 @@ class GuardianLoginScreen extends StatelessWidget {
 
   GuardianLoginScreen({this.pageIndex, super.key});
 
-  GuardianSignUpController guardianSignupController =
-      Get.put(GuardianSignUpController());
-  GuardianLoginController guardianLoginController =
-      Get.put(GuardianLoginController());
+  GuardianSigninController guardianSigninController =
+      Get.put(GuardianSigninController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -69,7 +74,7 @@ class GuardianLoginScreen extends StatelessWidget {
                           ),
                         ),
                         textEditingController:
-                            guardianSignupController.emailController,
+                            guardianSigninController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -79,7 +84,7 @@ class GuardianLoginScreen extends StatelessWidget {
                         labelText: 'Password',
                         icon: Icons.lock,
                         textEditingController:
-                            guardianSignupController.passwordController,
+                            guardianSigninController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -111,7 +116,7 @@ class GuardianLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            guardianLoginController.signIn(context);
+                            guardianSigninController.signIn(context);
                           }
                         },
                         child: loginButtonWidget(
@@ -130,7 +135,7 @@ class GuardianLoginScreen extends StatelessWidget {
                         kWidth60,
                         GestureDetector(
                           onTap: () {
-                            Get.to(GuardianSignUpFirstScreen(
+                            Get.to(GuardianSignInScreen(
                               pageIndex: 2,
                             ));
                           },
@@ -168,3 +173,4 @@ class GuardianLoginScreen extends StatelessWidget {
     );
   }
 }
+

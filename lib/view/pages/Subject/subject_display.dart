@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/pages/Subject/subject_chapterwise_display.dart';
 import 'package:dujo_kerala_application/ui%20team/abin/Subject%20dialog%20and%20chat/popup_container.dart';
 
@@ -14,15 +15,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../view/widgets/container_image.dart';
 
 class StudentSubjectHome extends StatelessWidget {
-  String teacherID;
-  String schoolID;
-  String batchId;
-  String classId;
+ 
   StudentSubjectHome(
-      {required this.teacherID,
-      required this.schoolID,
-      required this.batchId,
-      required this.classId,
+      {
       super.key});
 
   @override
@@ -39,15 +34,18 @@ class StudentSubjectHome extends StatelessWidget {
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("SchoolListCollection")
-                .doc(schoolID)
-                .collection(batchId)
-                .doc(batchId)
-                .collection("Classes")
-                .doc(classId)
+                .doc(UserCredentialsController.schoolId)
+                .collection(UserCredentialsController.batchId!)
+                .doc(UserCredentialsController.batchId)
+                .collection("classes")
+                .doc(UserCredentialsController.classId)
                 .collection("subjects")
                 .snapshots(),
-            builder: (context, snapshot) {
-              return Column(children: [
+            builder: (context, snapshot) { 
+              if(snapshot.connectionState == ConnectionState.waiting)
+{
+  return Center(child: CircularProgressIndicator(),);
+}              return Column(children: [
                 Expanded(
                   child: GridView.count(
                     padding: const EdgeInsets.all(15),
@@ -121,7 +119,7 @@ class StudentSubjectHome extends StatelessWidget {
                                     Expanded(
                                         child: FittedBox(
                                             child: GooglePoppinsWidgets(
-                                      text: "Anupamah",
+                                      text: "${snapshot.data!.docs[index]['teacherName']}",
                                       fontsize: 12.h,
                                       color: Colors.grey,
                                     )))

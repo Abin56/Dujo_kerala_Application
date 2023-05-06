@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home/gurdian_homepage.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../helper/shared_pref_helper.dart';
 import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
 
-class GuardianLoginController extends GetxController {
+class GuardianSigninController extends GetxController {
   RxBool isLoading = RxBool(false);
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -23,31 +21,30 @@ class GuardianLoginController extends GetxController {
         password: passwordController.text,
       )
           .then((value) async {
-        //fetching parent data from firebase
-        final DocumentSnapshot<Map<String, dynamic>> guardianData =
-            await FirebaseFirestore.instance
-                .collection('SchoolListCollection')
-                .doc(UserCredentialsController.schoolId)
-                .collection('classes')
-                .doc(UserCredentialsController.classId)
-                .collection('GuardianCollection')
-                .doc(value.user?.uid)
-                .get();
+        //fetching parent data from firebase 
 
-        if (guardianData.data() != null) {
-          UserCredentialsController.guardianModel = GuardianModel.fromMap(
-            guardianData.data()!,
+        
+        QuerySnapshot<Map<String, dynamic>> user = await FirebaseFirestore
+            .instance
+            .collection('SchoolListCollection')
+            .doc(UserCredentialsController.schoolId)
+            .collection('Student_Guardian')
+            .where("uid", isEqualTo: value.user?.uid)
+            .get();
+
+        if (user.docs.isNotEmpty) {
+          UserCredentialsController.guardianModel = GuardianModel.fromJson(
+            user.docs[0].data(),
           );
         }
-        if (UserCredentialsController.guardianModel?.userRole == "guardian") {
-          //assigining shared preference user role for app close
 
-          await SharedPreferencesHelper.setString(
-              SharedPreferencesHelper.userRoleKey, 'guardian');
+        if (UserCredentialsController.guardianModel?.userRole == "guardian") {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return GuardianHomePage();
+              return const UnderMaintanceScreen(
+                text: "Guardian Page",
+              );
             }), (route) => false);
           }
           isLoading.value = false;
@@ -60,7 +57,7 @@ class GuardianLoginController extends GetxController {
       });
     } catch (e) {
       isLoading.value = false;
-      showToast(msg: "Sign in failed");
+      showToast(msg: "Sign in failed $e");
     }
   }
 }

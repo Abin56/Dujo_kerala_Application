@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_application/controllers/sign_in_controller/student_sign_in_controller.dart';
+import 'package:dujo_kerala_application/controllers/user_login_check_controller/user_login_check_controller.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/teacher_sign_up/teacher_sign_up.dart';
@@ -19,7 +20,8 @@ import '../../sign_up/student_sign_up/student_sign_up.dart';
 
 class StudentLoginScreen extends StatelessWidget {
   final int? pageIndex;
-  final PasswordField hideGetxController = Get.put(PasswordField());
+  final PasswordField hideGetxController = Get.put(PasswordField()); 
+  
 
   StudentLoginScreen({this.pageIndex, super.key});
 
