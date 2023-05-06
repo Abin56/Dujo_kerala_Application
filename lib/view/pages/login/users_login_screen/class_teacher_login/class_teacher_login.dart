@@ -1,12 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:math';
-
-import 'package:dujo_kerala_application/controllers/sign_in_controller/sign_in_controller.dart';
+import 'package:dujo_kerala_application/controllers/sign_in_controller/class_teacher_login_controller.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/class_teacher_login/sigin/teacher_sigin_screen.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,6 +15,7 @@ import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/textformfield_login.dart';
+import 'sigin/teacher_sigup_screen.dart';
 
 class ClassTeacherLoginScreen extends StatelessWidget {
   int? pageIndex;
@@ -25,9 +23,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
 
   ClassTeacherLoginScreen({this.pageIndex, super.key});
 
-  TextEditingController emailIdController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  SignInController signInController = Get.put(SignInController());
+  ClassTeacherLoginController teacherSigninController =
+      Get.put(ClassTeacherLoginController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -69,7 +66,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             Icons.mail_outline,
                           ),
                         ),
-                        textEditingController: emailIdController,
+                        textEditingController:
+                            teacherSigninController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -78,7 +76,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         obscureText: hideGetxController.isObscurefirst.value,
                         labelText: 'Password',
                         icon: Icons.lock,
-                        textEditingController: passwordController,
+                        textEditingController:
+                            teacherSigninController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -108,23 +107,20 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 20.h),
                       child: GestureDetector(
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            signInController.signInWithEmailAndPassword(
-                                emailIdController.text,
-                                passwordController.text,
-                                pageIndex ?? 5,
-                                context);
-                          } else{
-          
-                          }
-                        },
-                        child: loginButtonWidget(
-                          height: 60,
-                          width: 180,
-                          text: 'Login',
-                        ),
-                      ),
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              teacherSigninController.signIn(context);
+                            } else {}
+                          },
+                          child: Obx(
+                            () => teacherSigninController.isLoading.value
+                                ? circularProgressIndicatotWidget
+                                : loginButtonWidget(
+                                    height: 60,
+                                    width: 180,
+                                    text: 'Login',
+                                  ),
+                          )),
                     ),
                     kHeight20,
                     Row(
@@ -135,7 +131,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         kWidth60,
                         GestureDetector(
                           onTap: () {
-                            Get.to(TeachersSignInScreen(
+                            Get.to(TeachersSignUpScreen(
                               pageIndex: 3,
                             ));
                           },

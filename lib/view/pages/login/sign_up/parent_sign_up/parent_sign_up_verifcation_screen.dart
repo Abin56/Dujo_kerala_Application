@@ -1,6 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
+import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -13,20 +13,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../../../../model/student_model/student_model.dart';
-import '../../../userVerify_Phone_OTP/get_otp..dart';
+import '../../../../../controllers/sign_up_controller/parent_sign_up_controller.dart';
+import '../../userVerify_Phone_OTP/get_otp..dart';
 
-class StudentSignInScreen extends StatelessWidget {
+class ParentSignUpFirstScreen extends StatelessWidget {
   final int pageIndex;
   final PasswordField hideGetxController = Get.find<PasswordField>();
-  StudentSignInScreen({required this.pageIndex, super.key});
+  ParentSignUpFirstScreen({required this.pageIndex, super.key});
 
   final formKey = GlobalKey<FormState>();
-  final StudentSignUpController studentSignUpController =
-      Get.put(StudentSignUpController());
+  final ParentSignUpController parentSignUpController =
+      Get.put(ParentSignUpController());
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await parentSignUpController.getAllParent();
+    });
+
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -40,39 +44,23 @@ class StudentSignInScreen extends StatelessWidget {
               imagePath: 'assets/images/splash.png',
             ),
             kHeight30,
-            Obx(() => studentSignUpController.isLoading.value
+            Obx(() => parentSignUpController.isLoading.value
                 ? circularProgressIndicatotWidget
                 : SizedBox(
                     height: 60.h,
                     width: 350.w,
-                    child: DropdownSearch<StudentModel>(
-                        selectedItem: StudentModel(
-                          admissionNumber: "",
-                          alPhoneNumber: "",
-                          bloodgroup: "",
-                          createDate: "",
-                          dateofBirth: "",
-                          district: "",
-                          gender: "",
-                          houseName: "",
-                          parentPhoneNumber: "",
-                          place: "",
-                          profileImageId: "",
-                          profileImageUrl: '',
-                          studentName: 'Select Student',
-                          studentemail: '',
-                          docid: '',
-                          userRole: '',
-                          classId: '',
-                          guardianId: '',
-                          parentId: '',
-                        ),
-                        validator: (v) => v == null ? "required field" : null,
-                        items: studentSignUpController.classWiseStudentList,
-                        itemAsString: (StudentModel u) => u.studentName,
-                        onChanged: (value) {
-                          UserCredentialsController.studentModel = value;
-                        }),
+                    child: parentSignUpController.isLoading.value
+                        ? circularProgressIndicatotWidget
+                        : DropdownSearch<ParentModel>(
+                            selectedItem:
+                                ParentModel(parentName: "Select Parent"),
+                            validator: (v) =>
+                                v == null ? "required field" : null,
+                            items: parentSignUpController.parentModelList,
+                            itemAsString: (ParentModel u) => u.parentName ?? "",
+                            onChanged: (value) {
+                              UserCredentialsController.parentModel = value;
+                            }),
                   )),
             kHeight30,
             Form(
@@ -92,7 +80,7 @@ class StudentSignInScreen extends StatelessWidget {
                         ),
                       ),
                       textEditingController:
-                          studentSignUpController.emailController,
+                          parentSignUpController.emailController,
                       function: checkFieldEmailIsValid),
                   Obx(
                     () => SigninTextFormfield(
@@ -101,7 +89,7 @@ class StudentSignInScreen extends StatelessWidget {
                       labelText: 'Password',
                       icon: Icons.lock,
                       textEditingController:
-                          studentSignUpController.passwordController,
+                          parentSignUpController.passwordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -124,7 +112,7 @@ class StudentSignInScreen extends StatelessWidget {
                       labelText: 'Confirm Password',
                       icon: Icons.lock,
                       textEditingController:
-                          studentSignUpController.confirmPasswordController,
+                          parentSignUpController.confirmPasswordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -145,8 +133,8 @@ class StudentSignInScreen extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20.h),
                     child: GestureDetector(
                       onTap: () async {
-                        if (studentSignUpController.passwordController.text !=
-                            studentSignUpController
+                        if (parentSignUpController.passwordController.text !=
+                            parentSignUpController
                                 .confirmPasswordController.text) {
                           showToast(msg: "Password Missmatch");
                           return;
@@ -154,27 +142,29 @@ class StudentSignInScreen extends StatelessWidget {
 
                         if (formKey.currentState!.validate()) {
                           if (UserCredentialsController
-                                  .studentModel?.parentPhoneNumber !=
+                                  .parentModel?.parentPhoneNumber !=
                               null) {
                             Get.to(() => UserSentOTPScreen(
                                   userpageIndex: pageIndex,
                                   phoneNumber:
-                                      "+91${UserCredentialsController.studentModel?.parentPhoneNumber}",
-                                  userEmail: studentSignUpController
+                                      "+91${UserCredentialsController.parentModel?.parentPhoneNumber}",
+                                  userEmail: parentSignUpController
                                       .emailController.text,
-                                  userPassword: studentSignUpController
+                                  userPassword: parentSignUpController
                                       .passwordController.text,
                                 ));
                           } else {
-                            showToast(msg: "Please select student detail.");
+                            showToast(msg: "Please select parent detail.");
                           }
                         }
                       },
-                      child: loginButtonWidget(
-                        height: 60,
-                        width: 180,
-                        text: 'Submit',
-                      ),
+                      child: Obx(() =>  parentSignUpController.isLoading.value
+                          ? circularProgressIndicatotWidget
+                          : loginButtonWidget(
+                              height: 60,
+                              width: 180,
+                              text: 'Submit',
+                            ),)
                     ),
                   ),
                 ],

@@ -1,6 +1,12 @@
+// ignore_for_file: must_be_immutable
+
+import 'dart:developer';
+
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
+import 'package:dujo_kerala_application/controllers/sign_up_controller/teacher_signup_controller.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
+import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -12,18 +18,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../../../../model/student_model/student_model.dart';
 import '../../../userVerify_Phone_OTP/get_otp..dart';
 
-class StudentSignInScreen extends StatelessWidget {
-  final int pageIndex;
-  final PasswordField hideGetxController = Get.find<PasswordField>();
-  StudentSignInScreen({required this.pageIndex, super.key});
-
+class TeachersSignUpScreen extends StatelessWidget {
+  int pageIndex;
+  TeachersSignUpScreen({required this.pageIndex, super.key});
+  PasswordField hideGetxController = Get.find<PasswordField>();
   final formKey = GlobalKey<FormState>();
-  final StudentSignUpController studentSignUpController =
-      Get.put(StudentSignUpController());
+  TeacherSignUpController teacherSignUpController =
+      Get.put(TeacherSignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -40,38 +43,35 @@ class StudentSignInScreen extends StatelessWidget {
               imagePath: 'assets/images/splash.png',
             ),
             kHeight30,
-            Obx(() => studentSignUpController.isLoading.value
+            Obx(() => teacherSignUpController.isLoading.value
                 ? circularProgressIndicatotWidget
                 : SizedBox(
                     height: 60.h,
                     width: 350.w,
-                    child: DropdownSearch<StudentModel>(
-                        selectedItem: StudentModel(
-                          admissionNumber: "",
-                          alPhoneNumber: "",
-                          bloodgroup: "",
-                          createDate: "",
-                          dateofBirth: "",
-                          district: "",
-                          gender: "",
-                          houseName: "",
-                          parentPhoneNumber: "",
-                          place: "",
-                          profileImageId: "",
-                          profileImageUrl: '',
-                          studentName: 'Select Student',
-                          studentemail: '',
+                    child: DropdownSearch<TeacherModel>(
+                        selectedItem: TeacherModel(
+                          teacherName: 'Select Teacher',
+                          teacherEmail: '',
+                          houseName: '',
+                          houseNumber: '',
+                          place: '',
+                          gender: '',
+                          district: '',
+                          altPhoneNo: '',
+                          employeeID: '',
+                          createdAt: '',
+                          teacherPhNo: "",
                           docid: '',
                           userRole: '',
-                          classId: '',
-                          guardianId: '',
-                          parentId: '',
+                          imageId: '',
+                          imageUrl: '',
                         ),
                         validator: (v) => v == null ? "required field" : null,
-                        items: studentSignUpController.classWiseStudentList,
-                        itemAsString: (StudentModel u) => u.studentName,
+                        items: teacherSignUpController.teachersList,
+                        itemAsString: (TeacherModel u) => u.teacherName ?? "",
                         onChanged: (value) {
-                          UserCredentialsController.studentModel = value;
+                          UserCredentialsController.teacherModel = value;
+                          log(value?.teacherPhNo ?? "");
                         }),
                   )),
             kHeight30,
@@ -92,7 +92,7 @@ class StudentSignInScreen extends StatelessWidget {
                         ),
                       ),
                       textEditingController:
-                          studentSignUpController.emailController,
+                          teacherSignUpController.emailController,
                       function: checkFieldEmailIsValid),
                   Obx(
                     () => SigninTextFormfield(
@@ -101,7 +101,7 @@ class StudentSignInScreen extends StatelessWidget {
                       labelText: 'Password',
                       icon: Icons.lock,
                       textEditingController:
-                          studentSignUpController.passwordController,
+                          teacherSignUpController.passwordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -124,7 +124,7 @@ class StudentSignInScreen extends StatelessWidget {
                       labelText: 'Confirm Password',
                       icon: Icons.lock,
                       textEditingController:
-                          studentSignUpController.confirmPasswordController,
+                          teacherSignUpController.confirmPasswordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -144,25 +144,21 @@ class StudentSignInScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 20.h),
                     child: GestureDetector(
-                      onTap: () async {
-                        if (studentSignUpController.passwordController.text !=
-                            studentSignUpController
-                                .confirmPasswordController.text) {
-                          showToast(msg: "Password Missmatch");
-                          return;
-                        }
-
+                      onTap: () {
                         if (formKey.currentState!.validate()) {
                           if (UserCredentialsController
-                                  .studentModel?.parentPhoneNumber !=
-                              null) {
+                                      .teacherModel?.teacherPhNo !=
+                                  '' ||
+                              UserCredentialsController
+                                      .teacherModel?.teacherPhNo !=
+                                  null) {
                             Get.to(() => UserSentOTPScreen(
                                   userpageIndex: pageIndex,
                                   phoneNumber:
-                                      "+91${UserCredentialsController.studentModel?.parentPhoneNumber}",
-                                  userEmail: studentSignUpController
+                                      "+91${UserCredentialsController.teacherModel?.teacherPhNo}",
+                                  userEmail: teacherSignUpController
                                       .emailController.text,
-                                  userPassword: studentSignUpController
+                                  userPassword: teacherSignUpController
                                       .passwordController.text,
                                 ));
                           } else {
@@ -176,7 +172,7 @@ class StudentSignInScreen extends StatelessWidget {
                         text: 'Submit',
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

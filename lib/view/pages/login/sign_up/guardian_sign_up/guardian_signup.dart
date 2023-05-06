@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -24,7 +23,8 @@ class GuardianSignUp extends StatelessWidget {
   GuardianSignUp({super.key});
 
   final getImageController = Get.put(GetImage());
-  GuardianController guardianSignUpController = Get.put(GuardianController());
+  GuardianSignUpController guardianSignUpController =
+      Get.put(GuardianSignUpController());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -133,7 +133,6 @@ class GuardianSignUp extends StatelessWidget {
                           guardianSignUpController.userNameController,
                       validator: checkFieldEmpty,
                     ),
-                
                     Padding(
                       padding: EdgeInsets.only(left: 8.h, right: 8.h),
                       child: Row(
@@ -218,10 +217,7 @@ class GuardianSignUp extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
-                            await guardianSignUpController
-                                .updateGuardianData()
-                                .then((value) =>
-                                    Get.offAll(GuardianLoginScreen()));
+                            await guardianSignUpController.updateGuardianData();
                           }
                         },
                         child: Obx(

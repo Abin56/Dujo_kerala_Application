@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../../utils/utils.dart';
@@ -6,6 +8,7 @@ import '../../model/schoo_list_model/school_list_model.dart';
 import '../userCredentials/user_credentials.dart';
 
 class SchoolClassSelectionController extends GetxController {
+  String className = "SchoolClassSelectionController";
   final CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('SchoolListCollection');
   List<SchoolModel> schoolModelList = [];
@@ -24,14 +27,15 @@ class SchoolClassSelectionController extends GetxController {
           data.docs.map((e) => SchoolModel.fromJson(e.data())).toList();
     } catch (e) {
       showToast(msg: "School Data Error");
+      log(name: className, e.toString());
     }
   }
 
   ///User Click School from[SearchSchoolBar]  on tap function assign schoolId
 
   Future<void> fetchBatachDetails() async {
+    batchList.clear();
     try {
-      batchList.clear();
       QuerySnapshot<Map<String, dynamic>> data = await collectionReference
           .doc(UserCredentialsController.schoolId)
           .collection('BatchYear')
@@ -40,28 +44,30 @@ class SchoolClassSelectionController extends GetxController {
       batchList = data.docs.map((e) => e.id).toList();
     } catch (e) {
       showToast(msg: 'Batch Selection Error');
+      log(name: className, e.toString());
     }
   }
 
   Future<void> fetchAllClassData() async {
+    classModelList.clear();
     if (UserCredentialsController.schoolId == null ||
         UserCredentialsController.batchId == null) {
       showToast(msg: "Some Error Occured");
       return;
     }
     try {
-      classModelList.clear();
       final data = await collectionReference
           .doc(UserCredentialsController.schoolId)
           .collection(UserCredentialsController.batchId!)
           .doc(UserCredentialsController.batchId)
-          .collection('Classes')
+          .collection('classes')
           .get();
 
       classModelList =
-          data.docs.map((e) => ClassModel.fromJson(e.data())).toList();
+          data.docs.map((e) => ClassModel.fromMap(e.data())).toList();
     } catch (e) {
       showToast(msg: "Class Data Error");
+      log(name: className, e.toString());
     }
   }
 

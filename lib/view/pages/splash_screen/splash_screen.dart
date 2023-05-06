@@ -1,25 +1,27 @@
-// ignore_for_file: must_be_immutable
-
 import 'dart:async';
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/main.dart';
+import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
 import 'package:dujo_kerala_application/model/student_model/student_model.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home/gurdian_homepage.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_home.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
-import 'package:dujo_kerala_application/view/pages/splash_screen/user_check_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../helper/shared_pref_helper.dart';
+import '../../../model/guardian_model/guardian_model.dart';
 import '../../fonts/fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,45 +51,150 @@ class SplashScreen extends StatelessWidget {
 }
 
 nextpage() async {
-  await Future.delayed(const Duration(seconds: 3));
-  SharedPreferences p = await SharedPreferences.getInstance();
-  String? schoolIDVal = p.getString('schoolID');
-  String? batchIDVal = p.getString('batchID');
-  String? classIDVal = p.getString('classID');
-  log('schoolID $schoolIDVal');
-  log('batchID: $batchIDVal');
-  log('classID: $classIDVal');
-  User? currentUser = auth.currentUser;
+  //creating firebase auth instance
+  FirebaseAuth auth = FirebaseAuth.instance;
 
-  if (currentUser == null) {
+  //assigning shared preference value to to UserCredentialController
+  UserCredentialsController.schoolId =
+      SharedPreferencesHelper.getString(SharedPreferencesHelper.schoolIdKey);
+  UserCredentialsController.batchId =
+      SharedPreferencesHelper.getString(SharedPreferencesHelper.batchIdKey);
+  UserCredentialsController.classId =
+      SharedPreferencesHelper.getString(SharedPreferencesHelper.classIdKey);
+  UserCredentialsController.userRole =
+      SharedPreferencesHelper.getString(SharedPreferencesHelper.userRoleKey);
+
+  final DocumentReference<Map<String, dynamic>> firebaseFirestore =
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(UserCredentialsController.schoolId);
+
+  await Future.delayed(const Duration(seconds: 3));
+  log("schoolId:${UserCredentialsController.schoolId}");
+  log("batchId:${UserCredentialsController.batchId}");
+  log("classId:${UserCredentialsController.classId}");
+  log("userRole:${UserCredentialsController.userRole}");
+
+  if (auth.currentUser == null) {
     Get.to(const DujoLoginScren());
   } else {
-    log('UID: ${currentUser.uid}');
+    if (UserCredentialsController.userRole == 'student') {
+      //getting studentData
+      await checkStudent(firebaseFirestore, auth);
+    } else if (UserCredentialsController.userRole == 'teacher') {
+      //checking user is classTeacher
+      await checkTeacher(firebaseFirestore, auth);
+    } else if (UserCredentialsController.userRole == 'classTeacher') {
+      //checking user is parent
+      await checkClassTeacher(firebaseFirestore, auth);
+    } else if (UserCredentialsController.userRole == 'parent') {
+      await checkParent(firebaseFirestore, auth);
 
-    final QuerySnapshot<Map<String, dynamic>> querySnapshot =
-        await FirebaseFirestore.instance
-            .collection("SchoolListCollection")
-            .doc(schoolIDVal ?? '')
-            .collection(batchIDVal!)
-            .doc(batchIDVal)
-            .collection("Classes")
-            .doc(classIDVal ?? '')
-            .collection("Students")
-            .where('uid', isEqualTo: currentUser.uid)
-            .get();
-    print(querySnapshot.docs.length);
-    if (querySnapshot.docs.length == 1) {
-      UserCredentialsController.schoolId = schoolIDVal ?? "";
-      UserCredentialsController.batchId = batchIDVal;
-
-      UserCredentialsController.studentModel =
-          StudentModel.fromJson(querySnapshot.docs[0].data());
-      log('student!!');
-      Get.to(StudentHomeScreen());
+      //checking user is guardian
+    } else if (UserCredentialsController.userRole == 'guardian') {
+      await checkGuardian(firebaseFirestore, auth);
     } else {
-      log('not a student!!');
-
       Get.to(const DujoLoginScren());
     }
+  }
+}
+
+Future<void> checkStudent(
+    DocumentReference<Map<String, dynamic>> firebaseFirestore,
+    FirebaseAuth auth) async {
+  final studentData = await firebaseFirestore
+      .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId)
+      .collection('classes')
+      .doc(UserCredentialsController.classId)
+      .collection('students')
+      .doc(auth.currentUser?.uid)
+      .get();
+
+  if (studentData.data() != null) {
+    UserCredentialsController.studentModel =
+        StudentModel.fromJson(studentData.data()!);
+    Get.to(StudentHomeScreen());
+  } else {
+    showToast(msg: "Please login again");
+    Get.to(const DujoLoginScren());
+  }
+}
+
+Future<void> checkTeacher(
+    DocumentReference<Map<String, dynamic>> firebaseFirestore,
+    FirebaseAuth auth) async {
+  final teacherData = await firebaseFirestore
+      .collection('Teachers')
+      .doc(auth.currentUser?.uid)
+      .get();
+
+  if (teacherData.data() != null) {
+    UserCredentialsController.teacherModel =
+        TeacherModel.fromMap(teacherData.data()!);
+    Get.to(TeacherHomeScreen());
+  } else {
+    showToast(msg: "Please login again");
+    Get.to(const DujoLoginScren());
+  }
+}
+
+Future<void> checkClassTeacher(
+    DocumentReference<Map<String, dynamic>> firebaseFirestore,
+    FirebaseAuth auth) async {
+  final classTeacherData = await firebaseFirestore
+      .collection('Teachers')
+      .doc(auth.currentUser?.uid)
+      .get();
+
+  if (classTeacherData.data() != null) {
+    UserCredentialsController.teacherModel =
+        TeacherModel.fromMap(classTeacherData.data()!);
+    Get.to(ClassTeacherMainHomeScreen());
+  } else {
+    showToast(msg: "Please login again");
+    Get.to(const DujoLoginScren());
+  }
+}
+
+Future<void> checkParent(
+    DocumentReference<Map<String, dynamic>> firebaseFirestore,
+    FirebaseAuth auth) async {
+  final DocumentSnapshot<Map<String, dynamic>> parentData =
+      await firebaseFirestore
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .collection('ParentCollection')
+          .doc(auth.currentUser?.uid)
+          .get();
+
+  if (parentData.data() != null) {
+    UserCredentialsController.parentModel =
+        ParentModel.fromMap(parentData.data()!);
+    Get.to(ParentHomeScreen());
+  } else {
+    showToast(msg: "Please login again");
+    Get.to(const DujoLoginScren());
+  }
+}
+
+Future<void> checkGuardian(
+    DocumentReference<Map<String, dynamic>> firebaseFirestore,
+    FirebaseAuth auth) async {
+  final DocumentSnapshot<Map<String, dynamic>> guardianData =
+      await firebaseFirestore
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .collection('GuardianCollection')
+          .doc(auth.currentUser?.uid)
+          .get();
+
+  if (guardianData.data() != null) {
+    UserCredentialsController.guardianModel =
+        GuardianModel.fromMap(guardianData.data()!);
+    Get.to(GuardianHomePage());
+  } else {
+    showToast(msg: "Please login again");
+    Get.to(const DujoLoginScren());
   }
 }

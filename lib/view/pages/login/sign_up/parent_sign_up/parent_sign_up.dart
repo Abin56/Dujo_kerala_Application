@@ -134,7 +134,6 @@ class ParentSignUpPage extends StatelessWidget {
                           parentSignUpController.userNameController,
                       validator: checkFieldEmpty,
                     ),
-                 
                     Padding(
                       padding: EdgeInsets.only(left: 8.h, right: 8.h),
                       child: Row(
@@ -219,13 +218,7 @@ class ParentSignUpPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
-                            await parentSignUpController
-                                .updateParentData()
-                                .then(
-                                  (value) => Get.offAll(
-                                    ParentLoginScreen(),
-                                  ),
-                                );
+                            await parentSignUpController.updateParentData();
                           }
                         },
                         child: Obx(

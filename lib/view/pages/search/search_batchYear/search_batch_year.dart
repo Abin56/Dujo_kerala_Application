@@ -4,10 +4,9 @@ import 'package:dujo_kerala_application/view/pages/search/search_class/search_cl
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../helper/shared_pref_helper.dart';
 
 class SearchBatchYearBar extends SearchDelegate {
   @override
@@ -60,15 +59,11 @@ class SearchBatchYearBar extends SearchDelegate {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () async {
-                UserCredentialsController.batchId =
-                    suggestionList[index]; 
+                UserCredentialsController.batchId = suggestionList[index];
+                await SharedPreferencesHelper.setString(
+                    SharedPreferencesHelper.batchIdKey,
+                    UserCredentialsController.batchId ?? "");
 
-                     String PsbatchID = suggestionList[index]; 
-
-                      SharedPreferences prefs2 = await SharedPreferences.getInstance(); 
-              prefs2.setString('batchID', PsbatchID);  
-
-                     
                 await Get.find<SchoolClassSelectionController>()
                     .fetchAllClassData();
                 if (context.mounted) {

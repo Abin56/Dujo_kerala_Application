@@ -7,14 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/sign_in_controller/guardian_sign_in_controller.dart';
+import '../../../../../controllers/sign_in_controller/guardian_login_controller.dart';
+import '../../../../../controllers/sign_up_controller/guardian_signup_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/textformfield_login.dart';
-import '../student login/signin/student_sigin.dart';
+import '../../sign_up/guardian_sign_up/guardian_signup_verification_screen.dart';
 
 class GuardianLoginScreen extends StatelessWidget {
   int? pageIndex;
@@ -22,8 +23,10 @@ class GuardianLoginScreen extends StatelessWidget {
 
   GuardianLoginScreen({this.pageIndex, super.key});
 
-  GuardianSigninController guardianSigninController =
-      Get.put(GuardianSigninController());
+  GuardianSignUpController guardianSignupController =
+      Get.put(GuardianSignUpController());
+  GuardianLoginController guardianLoginController =
+      Get.put(GuardianLoginController());
 
   final formKey = GlobalKey<FormState>();
 
@@ -66,7 +69,7 @@ class GuardianLoginScreen extends StatelessWidget {
                           ),
                         ),
                         textEditingController:
-                            guardianSigninController.emailIdController,
+                            guardianSignupController.emailController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -76,7 +79,7 @@ class GuardianLoginScreen extends StatelessWidget {
                         labelText: 'Password',
                         icon: Icons.lock,
                         textEditingController:
-                            guardianSigninController.passwordController,
+                            guardianSignupController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -108,7 +111,7 @@ class GuardianLoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            guardianSigninController.signIn(context);
+                            guardianLoginController.signIn(context);
                           }
                         },
                         child: loginButtonWidget(
@@ -127,7 +130,7 @@ class GuardianLoginScreen extends StatelessWidget {
                         kWidth60,
                         GestureDetector(
                           onTap: () {
-                            Get.to(StudentSignInScreen(
+                            Get.to(GuardianSignUpFirstScreen(
                               pageIndex: 2,
                             ));
                           },

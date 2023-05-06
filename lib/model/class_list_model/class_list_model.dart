@@ -1,42 +1,75 @@
-// To parse this JSON data, do
-//
-//     final classModel = classModelFromJson(jsonString);
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-ClassModel classModelFromJson(String str) =>
-    ClassModel.fromJson(json.decode(str));
-
-String classModelToJson(ClassModel data) => json.encode(data.toJson());
-
 class ClassModel {
+  String className;
+  String classTeacherName;
+  String classTeacherdocid;
+  String docid;
   ClassModel({
-    required this.classId,
-    required this.classIncharge,
     required this.className,
-    required this.id,
-    required this.joinDate,
+    required this.classTeacherName,
+    required this.classTeacherdocid,
+    required this.docid,
   });
 
-  String classId;
-  String classIncharge;
-  String className;
-  String id;
-  String joinDate;
+  ClassModel copyWith({
+    String? className,
+    String? classTeacherName,
+    String? classTeacherdocid,
+    String? docid,
+  }) {
+    return ClassModel(
+      className: className ?? this.className,
+      classTeacherName: classTeacherName ?? this.classTeacherName,
+      classTeacherdocid: classTeacherdocid ?? this.classTeacherdocid,
+      docid: docid ?? this.docid,
+    );
+  }
 
-  factory ClassModel.fromJson(Map<String, dynamic> json) => ClassModel(
-        classId: json["classID"],
-        classIncharge: json["classIncharge"],
-        className: json["className"],
-        id: json["id"],
-        joinDate: json["joinDate"],
-      );
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'className': className,
+      'classTeacherName': classTeacherName,
+      'classTeacherdocid': classTeacherdocid,
+      'docid': docid,
+    };
+  }
 
-  Map<String, dynamic> toJson() => {
-        "classID": classId,
-        "classIncharge": classIncharge,
-        "className": className,
-        "id": id,
-        "joinDate": joinDate,
-      };
+  factory ClassModel.fromMap(Map<String, dynamic> map) {
+    return ClassModel(
+      className: map['className'] ?? "",
+      classTeacherName: map['classTeacherName'] ?? "",
+      classTeacherdocid: map['classTeacherdocid'] ?? "",
+      docid: map['docid'] ?? "",
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ClassModel.fromJson(String source) =>
+      ClassModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'ClassModel(className: $className, classTeacherName: $classTeacherName, classTeacherdocid: $classTeacherdocid, docid: $docid)';
+  }
+
+  @override
+  bool operator ==(covariant ClassModel other) {
+    if (identical(this, other)) return true;
+
+    return other.className == className &&
+        other.classTeacherName == classTeacherName &&
+        other.classTeacherdocid == classTeacherdocid &&
+        other.docid == docid;
+  }
+
+  @override
+  int get hashCode {
+    return className.hashCode ^
+        classTeacherName.hashCode ^
+        classTeacherdocid.hashCode ^
+        docid.hashCode;
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
+import 'package:dujo_kerala_application/model/guardian_model/guardian_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -13,20 +13,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../../../../model/student_model/student_model.dart';
-import '../../../userVerify_Phone_OTP/get_otp..dart';
+import '../../../../../controllers/sign_up_controller/guardian_signup_controller.dart';
+import '../../userVerify_Phone_OTP/get_otp..dart';
 
-class StudentSignInScreen extends StatelessWidget {
+class GuardianSignUpFirstScreen extends StatelessWidget {
   final int pageIndex;
   final PasswordField hideGetxController = Get.find<PasswordField>();
-  StudentSignInScreen({required this.pageIndex, super.key});
+  GuardianSignUpFirstScreen({required this.pageIndex, super.key});
 
   final formKey = GlobalKey<FormState>();
-  final StudentSignUpController studentSignUpController =
-      Get.put(StudentSignUpController());
+  final GuardianSignUpController guardianSignUpController =
+      Get.put(GuardianSignUpController());
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await guardianSignUpController.getAllGuardian();
+    });
+
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -40,39 +44,24 @@ class StudentSignInScreen extends StatelessWidget {
               imagePath: 'assets/images/splash.png',
             ),
             kHeight30,
-            Obx(() => studentSignUpController.isLoading.value
+            Obx(() => guardianSignUpController.isLoading.value
                 ? circularProgressIndicatotWidget
                 : SizedBox(
                     height: 60.h,
                     width: 350.w,
-                    child: DropdownSearch<StudentModel>(
-                        selectedItem: StudentModel(
-                          admissionNumber: "",
-                          alPhoneNumber: "",
-                          bloodgroup: "",
-                          createDate: "",
-                          dateofBirth: "",
-                          district: "",
-                          gender: "",
-                          houseName: "",
-                          parentPhoneNumber: "",
-                          place: "",
-                          profileImageId: "",
-                          profileImageUrl: '',
-                          studentName: 'Select Student',
-                          studentemail: '',
-                          docid: '',
-                          userRole: '',
-                          classId: '',
-                          guardianId: '',
-                          parentId: '',
-                        ),
-                        validator: (v) => v == null ? "required field" : null,
-                        items: studentSignUpController.classWiseStudentList,
-                        itemAsString: (StudentModel u) => u.studentName,
-                        onChanged: (value) {
-                          UserCredentialsController.studentModel = value;
-                        }),
+                    child: guardianSignUpController.isLoading.value
+                        ? circularProgressIndicatotWidget
+                        : DropdownSearch<GuardianModel>(
+                            selectedItem:
+                                GuardianModel(guardianName: "Select Guardian"),
+                            validator: (v) =>
+                                v == null ? "required field" : null,
+                            items: guardianSignUpController.guardianModelList,
+                            itemAsString: (GuardianModel u) =>
+                                u.guardianName ?? "",
+                            onChanged: (value) {
+                              UserCredentialsController.guardianModel = value;
+                            }),
                   )),
             kHeight30,
             Form(
@@ -92,7 +81,7 @@ class StudentSignInScreen extends StatelessWidget {
                         ),
                       ),
                       textEditingController:
-                          studentSignUpController.emailController,
+                          guardianSignUpController.emailController,
                       function: checkFieldEmailIsValid),
                   Obx(
                     () => SigninTextFormfield(
@@ -101,7 +90,7 @@ class StudentSignInScreen extends StatelessWidget {
                       labelText: 'Password',
                       icon: Icons.lock,
                       textEditingController:
-                          studentSignUpController.passwordController,
+                          guardianSignUpController.passwordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -124,7 +113,7 @@ class StudentSignInScreen extends StatelessWidget {
                       labelText: 'Confirm Password',
                       icon: Icons.lock,
                       textEditingController:
-                          studentSignUpController.confirmPasswordController,
+                          guardianSignUpController.confirmPasswordController,
                       function: checkFieldPasswordIsValid,
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -144,38 +133,42 @@ class StudentSignInScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 20.h),
                     child: GestureDetector(
-                      onTap: () async {
-                        if (studentSignUpController.passwordController.text !=
-                            studentSignUpController
-                                .confirmPasswordController.text) {
-                          showToast(msg: "Password Missmatch");
-                          return;
-                        }
-
-                        if (formKey.currentState!.validate()) {
-                          if (UserCredentialsController
-                                  .studentModel?.parentPhoneNumber !=
-                              null) {
-                            Get.to(() => UserSentOTPScreen(
-                                  userpageIndex: pageIndex,
-                                  phoneNumber:
-                                      "+91${UserCredentialsController.studentModel?.parentPhoneNumber}",
-                                  userEmail: studentSignUpController
-                                      .emailController.text,
-                                  userPassword: studentSignUpController
-                                      .passwordController.text,
-                                ));
-                          } else {
-                            showToast(msg: "Please select student detail.");
+                        onTap: () async {
+                          if (guardianSignUpController
+                                  .passwordController.text !=
+                              guardianSignUpController
+                                  .confirmPasswordController.text) {
+                            showToast(msg: "Password Missmatch");
+                            return;
                           }
-                        }
-                      },
-                      child: loginButtonWidget(
-                        height: 60,
-                        width: 180,
-                        text: 'Submit',
-                      ),
-                    ),
+
+                          if (formKey.currentState!.validate()) {
+                            if (UserCredentialsController
+                                    .guardianModel?.guardianPhoneNumber !=
+                                null) {
+                              Get.to(() => UserSentOTPScreen(
+                                    userpageIndex: pageIndex,
+                                    phoneNumber:
+                                        "+91${UserCredentialsController.guardianModel?.guardianPhoneNumber}",
+                                    userEmail: guardianSignUpController
+                                        .emailController.text,
+                                    userPassword: guardianSignUpController
+                                        .passwordController.text,
+                                  ));
+                            } else {
+                              showToast(msg: "Please select Guardian detail.");
+                            }
+                          }
+                        },
+                        child: Obx(
+                          () => guardianSignUpController.isLoading.value
+                              ? circularProgressIndicatotWidget
+                              : loginButtonWidget(
+                                  height: 60,
+                                  width: 180,
+                                  text: 'Submit',
+                                ),
+                        )),
                   ),
                 ],
               ),

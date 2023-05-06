@@ -6,7 +6,9 @@ import 'package:dujo_kerala_application/view/pages/login/users_login_screen/stud
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helper/shared_pref_helper.dart';
 import '../../model/student_model/student_model.dart';
 import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
@@ -33,10 +35,10 @@ class StudentSignInController extends GetxController {
               .doc(UserCredentialsController.schoolId)
               .collection(UserCredentialsController.batchId ?? "")
               .doc(UserCredentialsController.batchId)
-              .collection('Classes')
+              .collection('classes')
               .doc(UserCredentialsController.classId)
               .collection('Students')
-              .where("uid", isEqualTo: value.user?.uid)
+              .where("docid", isEqualTo: value.user?.uid)
               .get();
 
           if (user.docs.isNotEmpty) {
@@ -45,6 +47,8 @@ class StudentSignInController extends GetxController {
           }
 
           if (UserCredentialsController.studentModel?.userRole == "student") {
+            await SharedPreferencesHelper.setString(
+                SharedPreferencesHelper.userRoleKey, 'student');
             if (context.mounted) {
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (context) {

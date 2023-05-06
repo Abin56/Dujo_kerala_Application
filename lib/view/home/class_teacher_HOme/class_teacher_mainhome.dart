@@ -1,8 +1,10 @@
+<<<<<<< HEAD:lib/view/home/class_teacher_HOme/class_teacher_Mainhome.dart
 import 'package:dujo_kerala_application/controllers/class_Teacher_FirebaseData_Controller/getx.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
+=======
+>>>>>>> bc7157b21789056c2b9d0e632af54a2c036d9ed4:lib/view/home/class_teacher_HOme/class_teacher_mainhome.dart
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
