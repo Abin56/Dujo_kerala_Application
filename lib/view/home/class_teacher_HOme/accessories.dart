@@ -1,7 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
+import 'package:dujo_kerala_application/view/pages/attentence/take_attentence_subject_listView.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -20,14 +23,18 @@ class ClassTeacherAccessories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-      TakeAttenenceScreen(
-        batchId: '2023-June-2024-February',
-        classID: 'class1A@mthss',
-        schoolID: 'MarthCheng13283',
-        subjectName: 'English',
-        subjectID: 't25LpMFzuAUHsH0PJhzF',
-        teacheremailID: 'abinjohn8089@gmail.com',
-      ),
+      TakeAttentenceSubjectWise(
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!,
+          schoolId: UserCredentialsController.schoolId!),
+      // TakeAttenenceScreen(
+      //   batchId: UserCredentialsController.batchId!,
+      //   classID: UserCredentialsController.classId!,
+      //   schoolID: UserCredentialsController.schoolId!,
+      //   subjectName: 'English',
+      //   subjectID: 't25LpMFzuAUHsH0PJhzF',
+      //   teacheremailID: UserCredentialsController.teacherModel!.docid!,
+      // ),
       AttendenceBookScreen(
           schoolId: 'MarthCheng13283',
           batchId: '2023-June-2024-February',
@@ -43,9 +50,7 @@ class ClassTeacherAccessories extends StatelessWidget {
         schoolID: 'MarthCheng13283',
         teacherID: 'abinjohn8089@gmail.com',
       ),
-      StudentSubjectHome(
-       
-      ),
+      StudentSubjectHome(),
       LeaveLettersListviewScreen(
           schooilID: 'MarthCheng13283',
           batchID: '2023-June-2024-February',

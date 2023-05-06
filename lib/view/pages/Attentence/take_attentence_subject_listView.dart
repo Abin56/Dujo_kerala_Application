@@ -1,34 +1,34 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/students_attendence_list_view.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/pages/attentence/take_attentence.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
-import '../../../../model/teacher_model/subjects_model.dart';
-
-class AttendenceSubjectListScreen extends StatelessWidget {
+class TakeAttentenceSubjectWise extends StatelessWidget {
   String schoolId;
-  String classID;
-  String date;
   String batchId;
-  AttendenceSubjectListScreen(
-      {required this.schoolId,
+  String classID;
+  TakeAttentenceSubjectWise(
+      {required this.batchId,
       required this.classID,
-      required this.date,
-      required this.batchId,
+      required this.schoolId,
       super.key});
 
   @override
   Widget build(BuildContext context) {
+    log(batchId);
+    log(classID);
+    log(schoolId);
+    log(UserCredentialsController.teacherModel!.docid!);
     int columnCount = 3;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
-    log(classID);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select Subject'),
@@ -42,10 +42,10 @@ class AttendenceSubjectListScreen extends StatelessWidget {
             .doc(batchId)
             .collection("classes")
             .doc(classID)
-            .collection("Attendence")
-            .doc(date)
-            .collection("Subjects")
-            .orderBy("date", descending: false)
+            .collection('teachers')
+            .doc(UserCredentialsController.teacherModel!.docid)
+            .collection("teacherSubject")
+            .orderBy('subjectName', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -58,11 +58,6 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                 children: List.generate(
                   snapshot.data!.docs.length,
                   (int index) {
-                    DateTime parseDate = DateTime.parse(
-                        snapshot.data!.docs[index]['date'].toString());
-                    final DateFormat formatter = DateFormat('hh : mm  a');
-                    String formatted = formatter.format(parseDate);
-
                     return AnimationConfiguration.staggeredGrid(
                       position: index,
                       duration: const Duration(milliseconds: 200),
@@ -73,12 +68,14 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(StudentsAttendenceListViewScreen(
-                                  batchId: batchId,
-                                  subject: snapshot.data!.docs[index]['id'],
-                                  schoolId: schoolId,
+                              Get.to(TakeAttenenceScreen(
+                                subjectID:snapshot.data!.docs[index]['docid'] ,
+                                subjectName: snapshot.data!.docs[index]['subjectName'],
                                   classID: classID,
-                                  date: date));
+                                  schoolID: schoolId,
+                                  teacheremailID: UserCredentialsController
+                                      .teacherModel!.docid!,
+                                  batchId: batchId));
                             },
                             child: Container(
                               height: _h / 100,
@@ -101,34 +98,12 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                 ],
                               ),
                               child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      ' ${index + 1}. ${snapshot.data!.docs[index]['subject']} ',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    kHeight10,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'T:  ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        Text(
-                                          "${formatted}",
-                                          style: TextStyle(fontSize: 12),
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                child: Text(
+                                  snapshot.data!.docs[index]['subjectName'],
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700),
                                 ),
                               ),
                             ),
