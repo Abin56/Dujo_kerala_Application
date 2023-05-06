@@ -38,7 +38,8 @@ class SchoolLevelPage extends StatelessWidget {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) => EventDisplaySchoolLevel(eventName: eventData['eventName'],eventDate: eventData['eventDate'],eventDescription: eventData['eventDescription'], eventVenue: eventData['venue'], signedBy: eventData['signedBy'],)));
+                                                    builder: (context) => EventDisplaySchoolLevel(    )));
+
                                           },
                                           child: GooglePoppinsWidgets(
                                             text: "View",

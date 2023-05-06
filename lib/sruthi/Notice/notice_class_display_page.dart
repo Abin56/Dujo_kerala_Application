@@ -18,7 +18,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
           Container(
             width: 90.w,
             height: 900.h,
-           
+
             decoration: BoxDecoration( ),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
