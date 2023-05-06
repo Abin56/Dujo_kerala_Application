@@ -47,7 +47,7 @@ class GuardianLoginController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return GuardianHomePage();
+              return UnderMaintanceScreen(text: 'Guardian',);
             }), (route) => false);
           }
           isLoading.value = false;

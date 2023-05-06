@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,7 @@ class ParentLoginController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return ParentHomeScreen();
+              return UnderMaintanceScreen(text: 'Parent',);
             }), (route) => false);
           }
           isLoading.value = false;
