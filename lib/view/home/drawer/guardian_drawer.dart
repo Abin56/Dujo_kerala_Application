@@ -1,5 +1,6 @@
 // ignore_for_file: empty_catches, unused_element
 
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -14,7 +15,7 @@ enum DrawerSections {
   setting,
   share,
   feedback,
-  contact,  
+  contact,
   about,
 }
 
@@ -23,9 +24,7 @@ Widget GuardianDrawer(context) {
   void signOut(context) async {
     final auth = FirebaseAuth.instance;
     try {
-      await auth.signOut().then((value) => {
-            
-          });
+      await auth.signOut().then((value) => {});
     } catch (e) {}
   }
 
@@ -45,7 +44,6 @@ Widget GuardianDrawer(context) {
     color: adminePrimayColor,
     padding: const EdgeInsets.only(top: 15),
     child: Column(
-      
       // show list  of menu drawer.........................
       children: [
         Container(
@@ -54,63 +52,53 @@ Widget GuardianDrawer(context) {
           height: 250.h,
           decoration: const BoxDecoration(color: adminePrimayColor),
           child: Column(children: [
-            
-       Padding(
-         padding:  EdgeInsets.only(top: 20.h),
-         child: CircleAvatar(radius: 65.h,
-          backgroundColor: Colors.white,
-           backgroundImage: const NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO3Kbs-sPqhzk0A2i0doztmT0RLa0nGmYWYw&usqp=CAU'),),
-       ),
-        kWidth10,
-        GoogleMonstserratWidgets(text: 'Guardian', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
-        kWidth10,
-        GoogleMonstserratWidgets(text: 'Guardian@email.com', fontsize: 18,color: cWhite,fontWeight: FontWeight.bold),
+            Padding(
+              padding: EdgeInsets.only(top: 20.h),
+              child: CircleAvatar(
+                radius: 65.h,
+                backgroundColor: Colors.white,
+                backgroundImage: const NetworkImage(
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO3Kbs-sPqhzk0A2i0doztmT0RLa0nGmYWYw&usqp=CAU'),
+              ),
+            ),
+            kWidth10,
+            GoogleMonstserratWidgets(
+                text: 'Guardian',
+                fontsize: 18,
+                color: cWhite,
+                fontWeight: FontWeight.bold),
+            kWidth10,
+            GoogleMonstserratWidgets(
+                text: 'Guardian@email.com',
+                fontsize: 18,
+                color: cWhite,
+                fontWeight: FontWeight.bold),
           ]),
         ),
-
-
         MenuItem(1, 'assets/images/profile.png', 'Profile',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-         
-        }),
+            currentPage == DrawerSections.dashboard ? true : false, () {}),
         MenuItem(2, 'assets/images/exam.png', ' Exams',
-            currentPage == DrawerSections.favourites ? true : false, () {
-          
-        }),
+            currentPage == DrawerSections.favourites ? true : false, () {}),
         MenuItem(3, 'assets/images/library.png', ' TimeTable',
-            currentPage == DrawerSections.setting ? true : false, () {
-          
-        }),
-       
+            currentPage == DrawerSections.setting ? true : false, () {}),
         MenuItem(4, 'assets/images/homework.png', ' HomeWorks',
-            currentPage == DrawerSections.contact ? true : false, () {
-         
-        }),
+            currentPage == DrawerSections.contact ? true : false, () {}),
         MenuItem(5, 'assets/images/notice.jpg', ' Notices',
-            currentPage == DrawerSections.about ? true : false, () {
-          
-        }),
+            currentPage == DrawerSections.about ? true : false, () {}),
         MenuItem(6, 'assets/images/live.jpg', ' Live Classes',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          
-        }),
+            currentPage == DrawerSections.dashboard ? true : false, () {}),
         MenuItem(7, 'assets/images/rec.png', ' Recorded Classes',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-       
-        }),
+            currentPage == DrawerSections.dashboard ? true : false, () {}),
         MenuItem(8, 'assets/images/privacy.png', ' privacy and policy',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-        
-        }),
+            currentPage == DrawerSections.dashboard ? true : false, () {}),
         MenuItem(9, 'assets/images/logout.jpg', ' Logout',
             currentPage == DrawerSections.dashboard ? true : false, () {
-           signOut(context);
+          userLogOut();
         }),
-        
         Container(
-          color:cWhite,
+          color: cWhite,
           // Colors.grey.withOpacity(0.2),
-          height: 200.h ,
+          height: 200.h,
           width: double.infinity,
           child: Stack(children: [
             Positioned(
@@ -184,4 +172,3 @@ Widget GuardianDrawer(context) {
     ),
   );
 }
-

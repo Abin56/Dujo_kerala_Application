@@ -1,9 +1,15 @@
 // ignore_for_file: empty_catches, unused_element
 
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/helper/shared_pref_helper.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../utils/utils.dart';
 
 class StudentsHeaderDrawer extends StatelessWidget {
   const StudentsHeaderDrawer({Key? key}) : super(key: key);
@@ -44,6 +50,12 @@ class StudentsHeaderDrawer extends StatelessWidget {
                 color: Colors.black.withOpacity(0.5),
                 fontSize: 10,
                 fontWeight: FontWeight.w600),
+          ),
+          TextButton(
+            onPressed: () async {
+              await userLogOut();
+            },
+            child: const Text("Logout"),
           )
         ],
       ),
@@ -271,4 +283,3 @@ Widget emptyDisplay(String section) {
     ),
   );
 }
-
