@@ -39,10 +39,10 @@ class ClassTeacherAccessories extends StatelessWidget {
       const UnderMaintanceScreen(text: ''), //Exam
       const UnderMaintanceScreen(text: ''), //TimeTable
       HomeWorkUpload(
-        batchId: '2023-June-2024-February',
-        classId: 'class1A@mthss',
-        schoolID: 'MarthCheng13283',
-        teacherID: 'abinjohn8089@gmail.com',
+        batchId: UserCredentialsController.batchId!,
+        classId: UserCredentialsController.classId!,
+        schoolID:  UserCredentialsController.schoolId!,
+        teacherID:  UserCredentialsController.teacherModel!.docid!,
       ), //Home Work
       const UnderMaintanceScreen(text: ''), //Notice
       const UnderMaintanceScreen(text: ''), //Events
