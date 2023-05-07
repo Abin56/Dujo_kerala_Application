@@ -75,7 +75,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                             onTap: () {
                               Get.to(StudentsAttendenceListViewScreen(
                                   batchId: batchId,
-                                  subject: snapshot.data!.docs[index]['id'],
+                                  subject: snapshot.data!.docs[index]['docid'],
                                   schoolId: schoolId,
                                   classID: classID,
                                   date: date));

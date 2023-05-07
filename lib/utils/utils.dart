@@ -37,10 +37,37 @@ Future<String> dateTimePicker(BuildContext context) async {
   }
 }
 
-Future<void> userLogOut() async {
-  await FirebaseAuth.instance.signOut().then((value) async {
-    await SharedPreferencesHelper.clearSharedPreferenceData();
-    UserCredentialsController.clearUserCredentials();
-    Get.offAll(() => const DujoLoginScren());
-  });
+Future<void> userLogOut(BuildContext context) async {
+  return showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Logout'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[Text('Are you sure to Logout ?')],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text('ok'),
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut().then((value) async {
+                await SharedPreferencesHelper.clearSharedPreferenceData();
+                UserCredentialsController.clearUserCredentials();
+                Get.offAll(() => const DujoLoginScren());
+              });
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

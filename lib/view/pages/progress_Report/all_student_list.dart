@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../controllers/get_parent&guardian/getx.dart';
 
 class AllStudentsListScreen extends StatelessWidget {
   String schooilID;
@@ -39,7 +35,7 @@ class AllStudentsListScreen extends StatelessWidget {
                   .doc(schooilID)
                   .collection(batchId)
                   .doc(batchId)
-                  .collection("Classes")
+                  .collection("classes")
                   .doc(classID)
                   .collection("Students")
                   .orderBy('studentName', descending: false)
@@ -70,9 +66,10 @@ class AllStudentsListScreen extends StatelessWidget {
                                       teacherid: teacherId,
                                       studentId: snapshot.data!.docs[index]
                                           .data()['docid'],
-                                      dob: '',
+                                      dob: snapshot.data!.docs[index]
+                                          ['dateofBirth'],
                                       examName: examName,
-                                      rollNo:' ${index+1}',
+                                      rollNo: ' ${index + 1}',
                                       studentImage: snapshot.data!.docs[index]
                                           .data()['profileImageUrl'],
                                       studentName: snapshot.data!.docs[index]

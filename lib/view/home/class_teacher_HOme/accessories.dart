@@ -2,6 +2,7 @@
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/attentence/take_attentence_subject_listView.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,35 +27,35 @@ class ClassTeacherAccessories extends StatelessWidget {
       TakeAttentenceSubjectWise(
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
-          schoolId: UserCredentialsController.schoolId!),
-      // TakeAttenenceScreen(
-      //   batchId: UserCredentialsController.batchId!,
-      //   classID: UserCredentialsController.classId!,
-      //   schoolID: UserCredentialsController.schoolId!,
-      //   subjectName: 'English',
-      //   subjectID: 't25LpMFzuAUHsH0PJhzF',
-      //   teacheremailID: UserCredentialsController.teacherModel!.docid!,
-      // ),
+          schoolId: UserCredentialsController.schoolId!), //Take Attendance
       AttendenceBookScreen(
-          schoolId: 'MarthCheng13283',
-          batchId: '2023-June-2024-February',
-          classID: 'class1A@mthss'),
-      CreateExamNameScreen(
-          schooilID: 'MarthCheng13283',
-          classID: 'class1A@mthss',
-          teacherId: 'abinjohn8089@gmail.com',
-          batchId: '2023-June-2024-February'),
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!), //Attendance Book
+      LeaveLettersListviewScreen(
+          schooilID: UserCredentialsController.schoolId!,
+          batchID: UserCredentialsController.batchId!,
+          classID:  UserCredentialsController.classId!), //Leave letters
+      const UnderMaintanceScreen(text: ''), //Exam
+      const UnderMaintanceScreen(text: ''), //TimeTable
       HomeWorkUpload(
         batchId: '2023-June-2024-February',
         classId: 'class1A@mthss',
         schoolID: 'MarthCheng13283',
         teacherID: 'abinjohn8089@gmail.com',
-      ),
-      StudentSubjectHome(),
-      LeaveLettersListviewScreen(
-          schooilID: 'MarthCheng13283',
-          batchID: '2023-June-2024-February',
-          classID: 'class1A@mthss')
+      ), //Home Work
+      const UnderMaintanceScreen(text: ''), //Notice
+      const UnderMaintanceScreen(text: ''), //Events
+      CreateExamNameScreen(
+          schooilID: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          teacherId: UserCredentialsController.teacherModel!.docid!,
+          batchId: UserCredentialsController.batchId!), //Progress Report
+      const UnderMaintanceScreen(text: ''), //Subject
+      const UnderMaintanceScreen(text: ''), //Teachers
+      const UnderMaintanceScreen(text: ''), //Meetings
+
+      // StudentSubjectHome(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -67,7 +68,7 @@ class ClassTeacherAccessories extends StatelessWidget {
         padding: EdgeInsets.all(_w / 60),
         crossAxisCount: columnCount,
         children: List.generate(
-          _acc_images.length,
+          _acc_text.length,
           (int index) {
             return AnimationConfiguration.staggeredGrid(
               position: index,
@@ -137,6 +138,7 @@ class ClassTeacherAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Take Attendance',
   'Attendance Book',
+  'Leave Letters',
   'Exams',
   'TimeTable',
   'HomeWorks',
@@ -150,6 +152,7 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
+  'assets/images/message.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',

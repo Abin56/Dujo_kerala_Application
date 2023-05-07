@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -76,10 +77,13 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                             : Colors.red,
                     width: double.infinity,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text('${index + 1}'),
+                        kWidth20,
                         Text(snapshot.data!.docs[index]['studentName']),
+                      
+                  Spacer(),
+
                         IconButton(
                             onPressed: () async {
                               setState(() {
@@ -149,6 +153,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               log(present.toString());
                             },
                             icon: const Icon(Icons.add)),
+                            kWidth20,
                         IconButton(
                             onPressed: () async {
                               setState(() {

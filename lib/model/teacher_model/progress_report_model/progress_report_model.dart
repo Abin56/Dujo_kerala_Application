@@ -213,7 +213,7 @@ class AddProgressReportStatusToFireBase {
           .doc(schoolid)
           .collection(batchId)
           .doc(batchId)
-          .collection("Classes")
+          .collection("classes")
           .doc(classId)
           .collection("Students")
           .doc(studentID)

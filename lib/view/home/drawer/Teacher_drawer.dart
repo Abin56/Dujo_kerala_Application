@@ -49,7 +49,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              await userLogOut();
+              await userLogOut(context);
             },
             child: const Text("Logout"),
           )
