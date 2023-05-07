@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_application/sruthi/Meetings/meetings_school_display.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,10 @@ class SchoolLevelMeetingPage extends StatelessWidget {
       );
     }
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: adminePrimayColor,
+        title: const Text("Meeting"),
+      ),
       body: Column(
         children: [
           Expanded(

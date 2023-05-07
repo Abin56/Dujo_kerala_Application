@@ -2,12 +2,12 @@
 
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../../sruthi/Meetings/meetings_list.dart';
 import '../../../../sruthi/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
@@ -24,12 +24,13 @@ class StudentAccessories extends StatelessWidget {
       const UnderMaintanceScreen(text: 'Exams'),
       const UnderMaintanceScreen(text: 'Time Table'),
       const UnderMaintanceScreen(text: 'Home Works'),
-      const NoticePage(),
+      NoticePage(),
       EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
       StudentSubjectHome(),
       const UnderMaintanceScreen(text: 'Teacher'),
-      const MeetingList(),
+      //it navigate to SchoolLevel Meeting page class level meeting not found
+      SchoolLevelMeetingPage(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

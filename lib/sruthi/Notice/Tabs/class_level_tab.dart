@@ -15,9 +15,7 @@ class ClassLevelNoticePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await studentNoticeController.getSchoolLevelNotices();
-    });
+  
     return Scaffold(
         body: studentNoticeController.classLevelNoticeLists.isEmpty
             ? const Center(

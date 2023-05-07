@@ -1,14 +1,23 @@
 import 'package:dujo_kerala_application/sruthi/Notice/Tabs/class_level_tab.dart';
 import 'package:dujo_kerala_application/sruthi/Notice/Tabs/school_level_tab.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/student_controller/student_notice_controller/student_notice_controller.dart';
 import '../../view/colors/colors.dart';
 
 class NoticePage extends StatelessWidget {
-  const NoticePage({super.key});
+  NoticePage({super.key});
+  final StudentNoticeController studentNoticeController =
+      Get.put(StudentNoticeController());
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await studentNoticeController.getSchoolLevelNotices();
+      await studentNoticeController.getClassLevelNotices();
+    });
     return DefaultTabController(
       length: 2,
       child: SafeArea(
@@ -25,14 +34,16 @@ class NoticePage extends StatelessWidget {
               )
             ]),
           ),
-          body: SafeArea(
-            child: TabBarView(
-              children: [
-                ClassLevelNoticePage(),
-                SchoolLevelNoticePage(),
-              ],
-            ),
-          ),
+          body: studentNoticeController.isLoading.value
+              ? circularProgressIndicatotWidget
+              : SafeArea(
+                  child: TabBarView(
+                    children: [
+                      ClassLevelNoticePage(),
+                      SchoolLevelNoticePage(),
+                    ],
+                  ),
+                ),
         ),
       ),
     );
