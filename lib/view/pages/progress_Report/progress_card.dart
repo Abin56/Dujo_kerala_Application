@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/get_parent&guardian/getx.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -46,9 +47,11 @@ class _StudentProgressReportScreenState
     extends State<StudentProgressReportScreen> {
   String schoolName = '';
   String schoolPlace = "";
+  String className = '';
   @override
   void initState() {
     getSchoolDetails();
+    getClassDetails();
     super.initState();
   }
 
@@ -135,20 +138,9 @@ class _StudentProgressReportScreenState
                       ),
                       Row(
                         children: [
-                          Text("Class :   ${widget.classID}"),
+                          Text("Class :  ${className}"),
                         ],
                       ),
-                      // Row(
-                      //   children: [
-                      //     Text(
-                      //         "Parent :   ${widget.getxController.parentNAme.value}"),
-                      //   ],
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     Text("Gurdian :   ${widget.gurdianNAme}"),
-                      //   ],
-                      // ),
                     ],
                   ),
                 ),
@@ -159,7 +151,7 @@ class _StudentProgressReportScreenState
                       .doc(widget.schooilID)
                       .collection(widget.batchId)
                       .doc(widget.batchId)
-                      .collection("Classes")
+                      .collection("classes")
                       .doc(widget.classID)
                       .collection("subjects")
                       .snapshots(),
@@ -176,7 +168,8 @@ class _StudentProgressReportScreenState
                     );
                     log('${snapshot.data!.docs.length}');
                     if (snapshot.hasData) {
-                      return Container(
+                    if (snapshot.data!.docs.isNotEmpty) {
+                        return Container(
                         color: Colors.amber,
                         height: 600,
                         child: Column(
@@ -208,7 +201,7 @@ class _StudentProgressReportScreenState
                                         ),
                                         DataCell(
                                           Text(
-                                            '${snapshot.data!.docs[i].data()['subjectName']}',
+                                            '${snapshot.data?.docs[i].data()['subjectName']}',
                                           ),
                                         ),
                                         DataCell(TextFormField(
@@ -240,7 +233,7 @@ class _StudentProgressReportScreenState
 
                                   _examReports.add(ExamReports(
                                       obtainedMark: _obtainedMarks,
-                                      subject: snapshot.data!.docs[j]
+                                      subject: snapshot.data?.docs[j]
                                           .data()['subjectName'],
                                       totalMark: _totalMarks));
                                 }
@@ -298,7 +291,7 @@ class _StudentProgressReportScreenState
                                         });
                               },
                               child: ButtonContainerWidget(
-                                  colorindex: 0,
+                                  colorindex: 2,
                                   curving: 10,
                                   height: 40,
                                   width: 150,
@@ -314,6 +307,12 @@ class _StudentProgressReportScreenState
                           ],
                         ),
                       );
+                      
+                    }else{
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                     } else {
                       return const Center(
                         child: CircularProgressIndicator(),
@@ -335,6 +334,18 @@ class _StudentProgressReportScreenState
     setState(() {
       schoolName = vari.data()!['schoolName'];
       schoolPlace = vari.data()!['place'];
+    });
+  }
+
+  void getClassDetails() async {
+    var vari = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(widget.schooilID)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .get();
+    setState(() {
+      className = vari.data()!['className'];
     });
   }
 }

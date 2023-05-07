@@ -93,6 +93,7 @@ nextpage() async {
     } else if (UserCredentialsController.userRole == 'guardian') {
       await checkGuardian(firebaseFirestore, auth);
     } else {
+      
       Get.to(const DujoLoginScren());
     }
   }

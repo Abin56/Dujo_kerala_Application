@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -47,7 +48,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
             .doc(widget.schoolID)
             .collection(widget.batchId)
             .doc(widget.batchId)
-            .collection("Classes")
+            .collection("classes")
             .doc(widget.classID)
             .collection('Students')
             .orderBy('studentName', descending: false)
@@ -62,25 +63,32 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                   String dayformattedd = dayformatterr.format(parseDatee);
                   final DateFormat formatterr = DateFormat('yy-MMMM-yyy');
                   String formattedd = formatterr.format(parseDatee);
-                  final data = AddStudentModel.fromMap(
-                      snapshot.data!.docs[index].data());
+
                   return Container(
                     height: 60,
-                    color: presentlist[data.admissionNumber] == null
+                    color: presentlist[snapshot.data!.docs[index]
+                                ['studentName']] ==
+                            null
                         ? Colors.transparent
-                        : presentlist[data.admissionNumber] == true
+                        : presentlist[snapshot.data!.docs[index]
+                                    ['studentName']] ==
+                                true
                             ? Colors.green
                             : Colors.red,
                     width: double.infinity,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text('${index + 1}'),
-                        Text(data.studentName!),
+                        kWidth20,
+                        Text(snapshot.data!.docs[index]['studentName']),
+                      
+                  Spacer(),
+
                         IconButton(
                             onPressed: () async {
                               setState(() {
-                                presentlist[data.admissionNumber!] = true;
+                                presentlist[snapshot.data!.docs[index]
+                                    ['studentName']!] = true;
                                 log(present.toString());
                               });
                               final date = DateTime.now();
@@ -94,12 +102,12 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .doc(widget.schoolID)
                                   .collection(widget.batchId)
                                   .doc(widget.batchId)
-                                  .collection("Classes")
+                                  .collection("classes")
                                   .doc(widget.classID)
                                   .collection("Attendence")
                                   .doc(formatted)
                                   .set({
-                                "id": formatted,
+                                "docid": formatted,
                                 'dDate': formattedd,
                                 'day': dayformattedd
                               }, SetOptions(merge: true)).then((value) {
@@ -108,14 +116,14 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     .doc(widget.schoolID)
                                     .collection(widget.batchId)
                                     .doc(widget.batchId)
-                                    .collection("Classes")
+                                    .collection("classes")
                                     .doc(widget.classID)
                                     .collection("Attendence")
                                     .doc(formatted)
                                     .collection("Subjects")
                                     .doc(widget.subjectID)
                                     .set({
-                                  "id": widget.subjectID,
+                                  "docid": widget.subjectID,
                                   'subject': widget.subjectName,
                                   'date': DateTime.now().toString()
                                 }).then((value) {
@@ -124,16 +132,18 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .doc(widget.schoolID)
                                       .collection(widget.batchId)
                                       .doc(widget.batchId)
-                                      .collection("Classes")
+                                      .collection("classes")
                                       .doc(widget.classID)
                                       .collection("Attendence")
                                       .doc(formatted)
                                       .collection("Subjects")
                                       .doc(widget.subjectID)
                                       .collection('PresentList')
-                                      .doc(data.studentName)
+                                      .doc(snapshot.data!.docs[index]
+                                          ['studentName'])
                                       .set({
-                                    "studentName": data.studentName,
+                                    "studentName": snapshot.data!.docs[index]
+                                        ['studentName'],
                                     "present": true,
                                     "Date": DateTime.now().toString()
                                   });
@@ -143,10 +153,12 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               log(present.toString());
                             },
                             icon: const Icon(Icons.add)),
+                            kWidth20,
                         IconButton(
                             onPressed: () async {
                               setState(() {
-                                presentlist[data.admissionNumber!] = false;
+                                presentlist[snapshot.data!.docs[index]
+                                    ['studentName']!] = false;
                                 log(present.toString());
                               });
 
@@ -161,26 +173,26 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .doc(widget.schoolID)
                                   .collection(widget.batchId)
                                   .doc(widget.batchId)
-                                  .collection("Classes")
+                                  .collection("classes")
                                   .doc(widget.classID)
                                   .collection("Attendence")
                                   .doc(formatted)
                                   .set({
-                                "id": formatted,
+                                "docid": formatted,
                                 'dDate': formattedd,
                                 'day': dayformattedd
                               }, SetOptions(merge: true)).then((value) {
                                 FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
-                                    .collection("Classes")
+                                    .collection("classes")
                                     .doc(widget.classID)
                                     .collection("Attendence")
                                     .doc(formatted)
                                     .collection("Subjects")
                                     .doc(widget.subjectID)
                                     .set({
-                                  "id": widget.subjectID,
+                                  "docid": widget.subjectID,
                                   'subject': widget.subjectName,
                                   'date': DateTime.now().toString()
                                 }).then((value) {
@@ -189,16 +201,18 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .doc(widget.schoolID)
                                       .collection(widget.batchId)
                                       .doc(widget.batchId)
-                                      .collection("Classes")
+                                      .collection("classes")
                                       .doc(widget.classID)
                                       .collection("Attendence")
                                       .doc(formatted)
                                       .collection("Subjects")
                                       .doc(widget.subjectID)
                                       .collection('PresentList')
-                                      .doc(data.studentName)
+                                      .doc(snapshot.data!.docs[index]
+                                          ['studentName'])
                                       .set({
-                                    "studentName": data.studentName,
+                                    "studentName": snapshot.data!.docs[index]
+                                        ['studentName'],
                                     "present": false,
                                     "Date": DateTime.now().toString()
                                   });
@@ -264,7 +278,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                           .doc(widget.schoolID)
                           .collection(widget.batchId)
                           .doc(widget.batchId)
-                          .collection("Classes")
+                          .collection("classes")
                           .doc(widget.classID)
                           .collection("Attendence")
                           .doc(formatted)

@@ -34,7 +34,7 @@ class StudentsAttendenceListViewScreen extends StatelessWidget {
               .doc(schoolId)
               .collection(batchId)
               .doc(batchId)
-              .collection("Classes")
+              .collection("classes")
               .doc(classID)
               .collection("Attendence")
               .doc(date)

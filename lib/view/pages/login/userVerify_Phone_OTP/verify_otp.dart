@@ -139,11 +139,12 @@ class UserVerifyOTPScreen extends StatelessWidget {
                           );
                         });
                       } else if (state is AuthErrorState) {
+                       
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 backgroundColor: Colors.red,
                                 duration: Duration(milliseconds: 2000),
-                                content: Text("Somthing Wrong!!!!!")));
+                                content: Text("Something Wrong!!!!!")));
                       }
                     },
                     builder: (context, state) {

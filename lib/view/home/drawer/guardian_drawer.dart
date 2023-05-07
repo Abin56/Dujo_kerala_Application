@@ -93,7 +93,7 @@ Widget GuardianDrawer(context) {
             currentPage == DrawerSections.dashboard ? true : false, () {}),
         MenuItem(9, 'assets/images/logout.jpg', ' Logout',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          userLogOut();
+          userLogOut(context);
         }),
         Container(
           color: cWhite,

@@ -37,7 +37,7 @@ class CreateExamNameScreen extends StatelessWidget {
                   .doc(schooilID)
                   .collection(batchId)
                   .doc(batchId)
-                  .collection("Classes")
+                  .collection("classes")
                   .doc(classID)
                   .collection("ProgressReport")
                   .snapshots(),
@@ -62,12 +62,11 @@ class CreateExamNameScreen extends StatelessWidget {
                               child: FadeInAnimation(
                                 child: GestureDetector(
                                   onTap: () {
-                        
                                     Get.to(AllStudentsListScreen(
-                                      batchId: batchId,
+                                        batchId: batchId,
                                         teacherId: teacherId,
                                         examName: snapshot.data!.docs[index]
-                                            .data()['id'],
+                                            .data()['docid'],
                                         schooilID: schooilID,
                                         classID: classID));
                                   },
@@ -94,7 +93,8 @@ class CreateExamNameScreen extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        snapshot.data!.docs[index].data()['id'],
+                                        snapshot.data!.docs[index]
+                                            .data()['docid'],
                                         style: GoogleFonts.poppins(
                                             color: Colors.black,
                                             fontSize: 12,
@@ -156,12 +156,12 @@ class CreateExamNameScreen extends StatelessWidget {
                           .doc(schooilID)
                           .collection(batchId)
                           .doc(batchId)
-                          .collection("Classes")
+                          .collection("classes")
                           .doc(classID)
                           .collection("ProgressReport")
                           .doc(_examNameController.text.trim())
                           .set({
-                        'id': _examNameController.text.trim(),
+                        'docid': _examNameController.text.trim(),
                         'date': DateTime.now().toString()
                       }).then((value) => Get.back());
                     },
@@ -177,7 +177,7 @@ class CreateExamNameScreen extends StatelessWidget {
             },
           );
         },
-        child:const  Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

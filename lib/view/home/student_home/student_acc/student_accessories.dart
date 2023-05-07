@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/view/home/events/event_list.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -8,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../sruthi/Meetings/meetings_list.dart';
 import '../../../../sruthi/Notice/notice_list.dart';
+import '../../../pages/Subject/subject_display.dart';
 
 class StudentAccessories extends StatelessWidget {
   const StudentAccessories({
@@ -22,9 +25,9 @@ class StudentAccessories extends StatelessWidget {
       const UnderMaintanceScreen(text: 'Time Table'),
       const UnderMaintanceScreen(text: 'Home Works'),
       const NoticePage(),
-      const UnderMaintanceScreen(text: 'Events'),
+      EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
-      const UnderMaintanceScreen(text: 'Subjects'),
+      StudentSubjectHome(),
       const UnderMaintanceScreen(text: 'Teacher'),
       const MeetingList(),
     ];
@@ -114,7 +117,7 @@ List<String> _acc_text = [
   'Notices',
   'Events',
   'Progress Report',
-  'Sujects',
+  'Subjects',
   'Teachers',
   'Meetings'
 ];

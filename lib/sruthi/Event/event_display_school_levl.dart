@@ -6,10 +6,17 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../controllers/userCredentials/user_credentials.dart';
 import '../../view/widgets/fonts/google_poppins.dart';
 
 class EventDisplaySchoolLevel extends StatelessWidget {
-  const EventDisplaySchoolLevel({super.key});
+   EventDisplaySchoolLevel({super.key, required this.eventName, required this.eventDate, required this.eventDescription, required this.eventVenue, required this.signedBy}); 
+
+  String eventName; 
+  String eventDescription; 
+  String eventDate; 
+  String eventVenue; 
+  String signedBy;
 
   @override
   Widget build(BuildContext context) {
@@ -25,55 +32,62 @@ class EventDisplaySchoolLevel extends StatelessWidget {
       
       kHeight30,
       Expanded(
-        child: ListView(
-          children: [
-            Padding(
-              padding:  EdgeInsets.all(8.h),
-              child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.h),color:Colors.blue[50] ,),
-                height: 650.h,
-                width: 360.w,
-               child: 
-                   Padding(
-                     padding:  EdgeInsets.all(10.h),
-                     child: Column(
-                       children: [
-                         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                            GooglePoppinsWidgets(text: "School Day", fontsize: 22.h),
-                            Icon(Icons.event_note)
-                          ],),
-                     
-                      kHeight50,
-                      Row(mainAxisAlignment: MainAxisAlignment.start,
-                        children: [GooglePoppinsWidgets(text: "Description : ", fontsize: 18.h,fontWeight: FontWeight.w200,)],),kHeight20,
-                      
-                      
+        child: GestureDetector( 
+          onTap: (){
+            
+          print('classid: ${UserCredentialsController.classId}, schoolid: ${UserCredentialsController.schoolId}, batchid: ${UserCredentialsController.batchId}');
+                                                      
+          },
+          child: ListView(
+            children: [
+              Padding(
+                padding:  EdgeInsets.all(8.h),
+                child: Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.h),color:Colors.blue[50] ,),
+                  height: 650.h,
+                  width: 360.w,
+                 child: 
+                     Padding(
+                       padding:  EdgeInsets.all(10.h),
+                       child: Column(
+                         children: [
+                           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                              GooglePoppinsWidgets(text: eventName, fontsize: 22.h),
+                              Icon(Icons.event_note)
+                            ],),
                        
-                                             GooglePoppinsWidgets(
-                                                text: "This is to inform all the students that " + " __________________  will be  conductod" +" __________________  at __________________ with various cultural programmes.______________ will be grace the occasion. Student who would like to occasion in various programme should contact their\nrespective classteacher latest by __________________ .", fontsize: 18.h),
-                                          kHeight10,
-                                          Row(children: [
-                                            GooglePoppinsWidgets(text: "Date : 00/00/00", fontsize: 18.h,fontWeight: FontWeight.w200),
-                                            
-                                          ],),kHeight10,
-                                          Row(children: [
-                                            GooglePoppinsWidgets(text: "Venue :School Auditorium", fontsize: 18.h,fontWeight: FontWeight.w200),
-                                            
-                                          ],),kHeight30,
-                                           Row( mainAxisAlignment: MainAxisAlignment.end,
-                                           children: [
-                                            GooglePoppinsWidgets(text: "Signed By : Head Master", fontsize: 18.h,fontWeight: FontWeight.w200),
-                                            
-                                          ],),
-                                            ],
+                        kHeight50,
+                        Row(mainAxisAlignment: MainAxisAlignment.start,
+                          children: [GooglePoppinsWidgets(text: "Description : ", fontsize: 18.h,fontWeight: FontWeight.w200,)],),kHeight20,
+                        
+                        
+                         
+                                               GooglePoppinsWidgets(
+                                                  text: "${eventDescription}", fontsize: 18.h),
+                                            kHeight10,
+                                            Row(children: [
+                                              GooglePoppinsWidgets(text: "Date : ${eventDate}", fontsize: 18.h,fontWeight: FontWeight.w200),
+                                              
+                                            ],),kHeight10,
+                                            Row(children: [
+                                              GooglePoppinsWidgets(text: "Venue : ${eventVenue}", fontsize: 18.h,fontWeight: FontWeight.w200),
+                                              
+                                            ],),kHeight30,
+                                             Row( mainAxisAlignment: MainAxisAlignment.end,
+                                             children: [
+                                              GooglePoppinsWidgets(text: "Signed By : ${signedBy}", fontsize: 18.h,fontWeight: FontWeight.w200),
+                                              
+                                            ],),
+                                              ],
+                       ),
                      ),
-                   ),
-                 
-                
-                ),
-            ),
-          ],
+                   
+                  
+                  ),
+              ),
+            ],
+          ),
         ),
       ),
         

@@ -1,6 +1,10 @@
 // ignore_for_file: empty_catches, unused_element
 
+import 'dart:developer';
+
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
+import 'package:dujo_kerala_application/widgets/drop_down/select_class_classteacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,10 +58,45 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              await userLogOut();
+              return showDialog(
+                context: context,
+                barrierDismissible: false, // user must tap button!
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Change Class'),
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: <Widget>[GetClassTeacherListDropDownButton()],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('ok'),
+                        onPressed: () {
+                          if( classIDListValue?['docid']!=null){
+                             UserCredentialsController.classId =
+                              classIDListValue['docid'];
+                              SharedPreferencesHelper.setString(SharedPreferencesHelper.classIdKey, classIDListValue['docid']);
+                              Get.offAll(ClassTeacherMainHomeScreen());
+                          }
+                          
+                         
+                       
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
             },
-            child: const Text("Logout"),
-          )
+            child: const Text("Change Class"),
+          ),
+          // TextButton(
+          //   onPressed: () async {
+          //     await userLogOut();
+          //   },
+          //   child: const Text("Logout"),
+          // )
         ],
       ),
     );

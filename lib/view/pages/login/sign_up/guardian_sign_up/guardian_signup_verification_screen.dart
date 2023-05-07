@@ -1,6 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
-import 'package:dujo_kerala_application/model/guardian_model/guardian_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -14,6 +13,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../../controllers/sign_up_controller/guardian_signup_controller.dart';
+import '../../../../../model/guardian_model/guardian_model.dart';
 import '../../userVerify_Phone_OTP/get_otp..dart';
 
 class GuardianSignUpFirstScreen extends StatelessWidget {
