@@ -28,7 +28,7 @@ class NoticePage extends StatelessWidget {
           body: SafeArea(
             child: TabBarView(
               children: [
-                const ClassLevelNoticePage(),
+                ClassLevelNoticePage(),
                 SchoolLevelNoticePage(),
               ],
             ),

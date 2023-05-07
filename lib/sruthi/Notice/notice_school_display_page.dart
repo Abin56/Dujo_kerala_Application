@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../model/notice_model/notice_model.dart';
+import '../../model/notice_model/school_level_notice_model.dart';
 import '../../view/widgets/fonts/google_poppins.dart';
 
 class NoticeClassDisplayPage extends StatelessWidget {
   const NoticeClassDisplayPage({super.key, required this.noticeModel});
-  final NoticeModel noticeModel;
+  final SchoolLevelNoticeModel noticeModel;
 
   @override
   Widget build(BuildContext context) {
