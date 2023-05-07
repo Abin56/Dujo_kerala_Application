@@ -1,24 +1,18 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/pages/progress_Report/view_report/all_students.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'all_student_list.dart';
-
-class CreateExamNameScreen extends StatelessWidget {
+class ViewExamsForProgressreport extends StatelessWidget {
   String schooilID;
-  String classID;
-  String teacherId;
   String batchId;
-  TextEditingController _examNameController = TextEditingController();
-  CreateExamNameScreen(
-      {required this.schooilID,
+  String classID;
+  ViewExamsForProgressreport(
+      {required this.batchId,
       required this.classID,
-      required this.teacherId,
-      required this.batchId,
+      required this.schooilID,
       super.key});
 
   @override
@@ -62,13 +56,12 @@ class CreateExamNameScreen extends StatelessWidget {
                               child: FadeInAnimation(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.to(AllStudentsListScreen(
-                                        batchId: batchId,
-                                        teacherId: teacherId,
-                                        examName: snapshot.data!.docs[index]
-                                            .data()['docid'],
+                                    Get.to(ViewAllStudentsListScreen(
                                         schooilID: schooilID,
-                                        classID: classID));
+                                        classID: classID,
+                                        examName: snapshot.data?.docs[index]
+                                            ['docid']??'',
+                                        batchId: batchId));
                                   },
                                   child: Container(
                                     height: _h / 100,
@@ -116,69 +109,7 @@ class CreateExamNameScreen extends StatelessWidget {
                   );
                 }
               })),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          showDialog(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('Enter Exam Name'),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
-                      TextField(
-                          controller: _examNameController,
-                          decoration: InputDecoration(
-                              filled: true,
-                              fillColor:
-                                  const Color.fromARGB(255, 255, 255, 255),
-                              hintText: 'Enter Exam Name',
-
-                              // prefixIcon: Icon(Icons.email),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(19),
-                                borderSide: BorderSide.none,
-                              )),
-                          style: const TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontSize: 18,
-                          )),
-                    ],
-                  ),
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Create'),
-                    onPressed: () async {
-                      await FirebaseFirestore.instance
-                          .collection("SchoolListCollection")
-                          .doc(schooilID)
-                          .collection(batchId)
-                          .doc(batchId)
-                          .collection("classes")
-                          .doc(classID)
-                          .collection("ProgressReport")
-                          .doc(_examNameController.text.trim())
-                          .set({
-                        'docid': _examNameController.text.trim(),
-                        'date': DateTime.now().toString()
-                      }).then((value) => Get.back());
-                    },
-                  ),
-                  TextButton(
-                    child: const Text('cancel'),
-                    onPressed: () async {
-                      Get.back();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
     );
+    ;
   }
 }

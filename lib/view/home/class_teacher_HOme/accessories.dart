@@ -131,7 +131,8 @@ class ClassTeacherAccessories extends StatelessWidget {
           },
         ),
       ),
-    ));
+    ),
+    );
   }
 }
 
@@ -145,7 +146,7 @@ List<String> _acc_text = [
   'Notices',
   'Events',
   'Progress Report',
-  'Sujects',
+  'Subjects',
   'Teachers',
   'Meetings'
 ];

@@ -2,6 +2,7 @@
 
 import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 250,
+      height: 290,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -55,12 +56,6 @@ class TeacherHeaderDrawer extends StatelessWidget {
                 fontSize: 10,
                 fontWeight: FontWeight.w600),
           ),
-          TextButton(
-            onPressed: () async {
-              await userLogOut(context);
-            },
-            child: const Text("Logout"),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -89,7 +84,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
                                 SharedPreferencesHelper.setString(
                                     SharedPreferencesHelper.classIdKey,
                                     classIDListValue['docid']);
-                                Get.offAll(ClassTeacherMainHomeScreen());
+                                Get.offAll(TeacherMainHomeScreen());
                               }
                             },
                           ),
@@ -116,6 +111,17 @@ class TeacherHeaderDrawer extends StatelessWidget {
                   ))
             ],
           ),
+          UserCredentialsController.teacherModel!.userRole == 'classTeacher'
+              ? TextButton.icon(
+                  onPressed: () async {
+                    Get.offAll(ClassTeacherMainHomeScreen());
+                  },
+                  icon: const Icon(Icons.edit_note_rounded),
+                  label: const Text(
+                    'Switch to Class Teacher',
+                    style: TextStyle(color: cblack),
+                  ))
+              : const Text('')
         ],
       ),
     );

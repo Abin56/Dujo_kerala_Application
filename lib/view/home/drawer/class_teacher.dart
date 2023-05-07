@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/controllers/log_out/user_logout_controll
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_Home.dart';
 import 'package:dujo_kerala_application/widgets/drop_down/select_class_classteacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -108,9 +109,18 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                   label: const Text(
                     'Logout',
                     style: TextStyle(color: cblack),
-                  ))
+                  )),
             ],
           ),
+          TextButton.icon(
+              onPressed: () async {
+                Get.offAll(TeacherMainHomeScreen());
+              },
+              icon: const Icon(Icons.edit_note_rounded),
+              label: const Text(
+                'Switch to Teacher',
+                style: TextStyle(color: cblack),
+              ))
         ],
       ),
     );
