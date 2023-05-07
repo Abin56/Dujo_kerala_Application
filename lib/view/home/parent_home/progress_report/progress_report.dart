@@ -30,7 +30,7 @@ class ProgressReportListViewScreen extends StatelessWidget {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ExamReport List'),
+        title: const Text('Exam List'),
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -39,7 +39,7 @@ class ProgressReportListViewScreen extends StatelessWidget {
             .doc(schoolId)
             .collection(batchId)
             .doc(batchId)
-            .collection("Classes")
+            .collection("classes")
             .doc(classID)
             .collection("Students")
             .doc(studentId)
