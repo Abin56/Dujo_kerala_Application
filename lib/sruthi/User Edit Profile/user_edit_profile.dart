@@ -92,7 +92,7 @@ class UserEditPage extends StatelessWidget {
               UserEditListileWidget(
                 icon: Icons.home,
                 subtitle: GooglePoppinsWidgets(text: "Address", fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "Address", fontsize: 12.h),
+                title: GooglePoppinsWidgets(text: "Adress", fontsize: 12.h),
               ),
               
             ],

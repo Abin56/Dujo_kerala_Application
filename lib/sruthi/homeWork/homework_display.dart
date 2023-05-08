@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,10 +7,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../view/colors/colors.dart';
 import '../../view/constant/sizes/sizes.dart';
 import '../../view/widgets/fonts/google_poppins.dart';
-import '../../widgets/Iconbackbutton.dart';
 
-class HomeWorkDisplay extends StatelessWidget {
+
+class HomeWorkDisplay extends StatefulWidget {
   const HomeWorkDisplay({super.key});
+
+  @override
+  State<HomeWorkDisplay> createState() => _HomeWorkDisplayState();
+}
+
+
+class _HomeWorkDisplayState extends State<HomeWorkDisplay> {
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,62 +33,56 @@ class HomeWorkDisplay extends StatelessWidget {
           ),
           backgroundColor: adminePrimayColor,
         ),
-        body:Container(
-        
-  height: double.infinity, // set the height to fill available space
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-  
-    children: [
-      
-      kHeight30,
-      Expanded(
-        child: ListView(
+        body: Column(
+         
           children: [
-            Padding(
-              padding:  EdgeInsets.all(8.h),
-              child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.h) ,),
-                height: 650.h,
-                width: 360.w,
-               child: 
-                   Padding(
-                     padding:  EdgeInsets.all(10.h),
-                     child: Column(
-                       children: [
-                         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                            GooglePoppinsWidgets(text: "HomeWork", fontsize: 22.h),
-                           
-                          ],),
-                     
-                      kHeight50,
-                      Row(mainAxisAlignment: MainAxisAlignment.start,
-                        children: [GooglePoppinsWidgets(text: "Description : ", fontsize: 18.h,fontWeight: FontWeight.w200,)],),kHeight20,
+            kHeight30,
+            Expanded(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(18.h),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                          children: [
+                            GooglePoppinsWidgets(
+                              text: "Task",
+                              fontsize: 22.h,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
+                        kHeight50,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            GooglePoppinsWidgets(
+                              text: "Description : ",
+                              fontsize: 18.h,
+                              fontWeight: FontWeight.w200,
+                            )
+                          ],
+                        ),
+                        kHeight20,
+                        GooglePoppinsWidgets(
+                          text:
+                              "Homework.” Merriam-Webster.com Dictionary, Merriam-Webster, . Accessed 27 Apr. 2023.fncdjnfdjnjfgvnjfgvnfjgvfjdhngrjhgjrhgjrfgjuhghg juh",
+                          fontsize: 19.h,
+                        ),
+                        kHeight30,
+                        
                       
-                      
-                       
-                                             GooglePoppinsWidgets(
-                                                text: "Homework.” Merriam-Webster.com Dictionary, Merriam-Webster, . Accessed 27 Apr. 2023.", fontsize: 19.h,),
-                                          kHeight10,
-                                         
-                                            ],
-                     ),
-                   ),
-                 
-                
-                ),
+                 ] ),
+                  ),
+                ],
+
+              ),
             ),
           ],
-        ),
-      ),
-        
-    ],
-  ),
-)
-          
-        );
-
-    
+     ) );
   }
 }
+

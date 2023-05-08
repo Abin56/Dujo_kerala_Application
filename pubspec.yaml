@@ -55,6 +55,7 @@ dependencies:
   pdf: 
   flutter_launcher_icons:
   printing: 
+  file_picker: 
 
 flutter_icons:
  android: true

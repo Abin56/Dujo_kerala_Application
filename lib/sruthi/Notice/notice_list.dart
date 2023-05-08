@@ -1,4 +1,3 @@
-import 'package:dujo_kerala_application/sruthi/Notice/Tabs/class_level_tab.dart';
 import 'package:dujo_kerala_application/sruthi/Notice/Tabs/school_level_tab.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/student_controller/student_notice_controller/student_notice_controller.dart';
 import '../../view/colors/colors.dart';
+import 'Tabs/class_level_tab.dart';
 
 class NoticePage extends StatelessWidget {
   NoticePage({super.key});
@@ -25,7 +25,7 @@ class NoticePage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Notice List"),
             backgroundColor: adminePrimayColor,
-            bottom: const TabBar(tabs: [
+            bottom:  const TabBar(tabs: [
               Tab(
                 text: 'Class Level',
               ),
