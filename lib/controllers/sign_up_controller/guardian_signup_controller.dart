@@ -26,6 +26,7 @@ class GuardianSignUpController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   List<GuardianModel> guardianModelList = [];
+  //
 
   FirebaseAuth auth = FirebaseAuth.instance;
 

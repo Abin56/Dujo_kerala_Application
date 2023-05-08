@@ -1,22 +1,13 @@
-import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../drawer/Teacher_drawer.dart';
+import '../drawer/class_teacher.dart';
 import '../sample/under_maintance.dart';
 
 class TeacherMainHomeScreen extends StatefulWidget {
-  // var schoolID;
-  // var classID;
-  // var studentEmailid;
-  TeacherMainHomeScreen(
-      {
-      //   required this.schoolID,
-      // required this.classID,
-      // required this.studentEmailid,
-      Key? key})
-      : super(key: key);
+  const TeacherMainHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<TeacherMainHomeScreen> createState() => _TeacherMainHomeScreenState();
@@ -39,7 +30,7 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      StudentHomeScreen(),
+      TeacherHomeScreen(),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),
@@ -107,7 +98,7 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const TeacherHeaderDrawer(),
+              //  TeacherHeaderDrawer(),
               MyDrawerList(context),
             ],
           ),

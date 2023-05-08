@@ -40,7 +40,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
             .doc(schoolId)
             .collection(batchId)
             .doc(batchId)
-            .collection("Classes")
+            .collection("classes")
             .doc(classID)
             .collection("Attendence")
             .doc(date)
@@ -75,7 +75,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                             onTap: () {
                               Get.to(StudentsAttendenceListViewScreen(
                                   batchId: batchId,
-                                  subject: snapshot.data!.docs[index]['id'],
+                                  subject: snapshot.data!.docs[index]['docid'],
                                   schoolId: schoolId,
                                   classID: classID,
                                   date: date));

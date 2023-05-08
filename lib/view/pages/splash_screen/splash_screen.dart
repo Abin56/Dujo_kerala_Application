@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
@@ -8,17 +9,18 @@ import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home/gurdian_homepage.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_screen.dart';
 import 'package:dujo_kerala_application/view/home/student_home/students_main_home.dart';
-import 'package:dujo_kerala_application/view/home/teachers_home/teacher_home.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../helper/shared_pref_helper.dart';
 import '../../../model/guardian_model/guardian_model.dart';
 import '../../fonts/fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -93,7 +95,6 @@ nextpage() async {
     } else if (UserCredentialsController.userRole == 'guardian') {
       await checkGuardian(firebaseFirestore, auth);
     } else {
-      
       Get.to(const DujoLoginScren());
     }
   }
@@ -132,7 +133,7 @@ Future<void> checkTeacher(
   if (teacherData.data() != null) {
     UserCredentialsController.teacherModel =
         TeacherModel.fromMap(teacherData.data()!);
-    Get.to(TeacherHomeScreen());
+    Get.to(const TeacherMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
     Get.to(const DujoLoginScren());
@@ -171,7 +172,7 @@ Future<void> checkParent(
   if (parentData.data() != null) {
     UserCredentialsController.parentModel =
         ParentModel.fromMap(parentData.data()!);
-    Get.to(ParentHomeScreen());
+    Get.to(ParentMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
     Get.to(const DujoLoginScren());

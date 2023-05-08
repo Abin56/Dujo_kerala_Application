@@ -1,16 +1,23 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
+import '../../events/event_list.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
-  const ParentAccessories({
+  String studentName;
+  ParentAccessories({
+    required this.studentName,
     super.key,
   });
 
@@ -18,21 +25,28 @@ class ParentAccessories extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenNavigation = [
       AttendenceBookScreen(
-          schoolId: 'MarthCheng13283',
-          batchId: '2023-June-2024-February',
-          classID: 'class1A@mthss'),
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!), //Attendence
       ProgressReportListViewScreen(
-          schoolId: 'MarthCheng13283',
-          classID: 'class1A@mthss',
-          studentId: '72TQkxvaOMqbPA3zem8n',
-          batchId: '2023-June-2024-February'),
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: UserCredentialsController.parentModel!.studentID!,
+          batchId: UserCredentialsController.batchId!),
       LeaveApplicationScreen(
-          studentName: 'Edwin Edric',
-          parentName: 'JohnHinnai',
-          classID: 'class1A@mthss',
-          schoolId: 'MarthCheng13283',
-          studentID: '72TQkxvaOMqbPA3zem8n',
-          batchId: '2023-June-2024-February'),
+          studentName: studentName,
+          guardianName: UserCredentialsController.parentModel!.parentName!,
+          classID: UserCredentialsController.classId!,
+          schoolId: UserCredentialsController.schoolId!,
+          studentID: UserCredentialsController.parentModel!.studentID!,
+          batchId: UserCredentialsController.batchId!),
+      const UnderMaintanceScreen(text: ""),
+      NoticePage(),
+      EventList(),
+      const UnderMaintanceScreen(text: ""),
+      const UnderMaintanceScreen(text: ""),
+      const UnderMaintanceScreen(text: ""),
+      SchoolLevelMeetingPage(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

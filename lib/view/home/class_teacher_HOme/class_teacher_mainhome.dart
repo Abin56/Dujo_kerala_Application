@@ -1,14 +1,16 @@
+import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../pages/login/users_login_screen/users_login_screen.dart';
 import '../drawer/class_teacher.dart';
 import '../sample/under_maintance.dart';
-import 'class_teacher_home.dart';
 
 class ClassTeacherMainHomeScreen extends StatefulWidget {
-
-
   ClassTeacherMainHomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class ClassTeacherMainHomeScreen extends StatefulWidget {
 
 class _ClassTeacherMainHomeScreenState
     extends State<ClassTeacherMainHomeScreen> {
+  UserLogOutController userLogOutController = Get.put(UserLogOutController());
   int _page = 0;
 
   onPageChanged(int page) {
@@ -40,8 +43,28 @@ class _ClassTeacherMainHomeScreenState
     ];
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        title: const Text("Dujo"),
+          backgroundColor: const Color.fromARGB(255, 6, 71, 157),
+          title: const Text("Dujo"),
+          // actions: [
+          //   PopupMenuButton(
+          //     onSelected: (value) {
+          //       value = userLogOutController.logout.value;
+          //     },
+          //     itemBuilder: (context) => [
+          //       PopupMenuItem(
+          //         value: userLogOutController.logout.value,
+          //         onTap: () async {
+          //           userLogOutController.logout.value == true;
+          //           if (userLogOutController.logout.value == true) {
+          //             userLogOutController.logOut(context);
+          //           }
+          //         },
+          //         child: GestureDetector(
+          //             onTap: () async {}, child: const Text('Logout')),
+          //       )
+          //     ],
+          //   )
+          // ]),
       ),
       body: pages[_page],
       bottomNavigationBar: Container(
@@ -101,7 +124,7 @@ class _ClassTeacherMainHomeScreenState
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const ClassTeacherHeaderDrawer(),
+               ClassTeacherHeaderDrawer(),
               MyDrawerList(context),
             ],
           ),
