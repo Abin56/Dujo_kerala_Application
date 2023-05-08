@@ -2,19 +2,17 @@
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
+import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../pages/Attentence/take_attentence.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
-import '../../pages/Subject/subject_display.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   const ClassTeacherAccessories({
@@ -45,7 +43,7 @@ class ClassTeacherAccessories extends StatelessWidget {
         teacherID:  UserCredentialsController.teacherModel!.docid!,
       ), //Home Work
       const UnderMaintanceScreen(text: ''), //Notice
-      const UnderMaintanceScreen(text: ''), //Events
+      const EventList(),   //Events
       CreateExamNameScreen(
           schooilID: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
