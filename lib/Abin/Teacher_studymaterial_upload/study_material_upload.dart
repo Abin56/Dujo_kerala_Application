@@ -1,18 +1,16 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:dujo_kerala_application/widgets/textformfield.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+
 import '../../../view/colors/colors.dart';
 import '../../../view/widgets/button_container_widget.dart';
-import 'package:file_picker/file_picker.dart';
 
 class StudyMaterialUpload extends StatefulWidget {
   const StudyMaterialUpload({super.key});
@@ -36,7 +34,6 @@ class _StudyMaterialUploadState extends State<StudyMaterialUpload> {
       });
       result = await FilePicker.platform.pickFiles(
         type: FileType.any,
-     
         allowMultiple: false,
       );
 
@@ -61,7 +58,7 @@ class _StudyMaterialUploadState extends State<StudyMaterialUpload> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          children: [
+          children: const [
             Text("Study Materials"),
           ],
         ),
@@ -71,11 +68,11 @@ class _StudyMaterialUploadState extends State<StudyMaterialUpload> {
         child: Column(
           children: [
             kHeight10,
-            Container(
+            SizedBox(
               height: 680.w,
               width: double.infinity,
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
                     GoogleMonstserratWidgets(
@@ -183,5 +180,3 @@ class _StudyMaterialUploadState extends State<StudyMaterialUpload> {
     );
   }
 }
-
-
