@@ -9,6 +9,18 @@ class StudentMeetingController extends GetxController {
   RxBool isLoading = RxBool(false);
   List<MeetingModel> meetingLists = [];
   Future<void> getMeetings() async {
+    String visiblePerson = "";
+
+    ///this condition added for this notice widget used 3 places student,parent,guardian
+    ///so there is only one change in filtering
+    if (UserCredentialsController.userRole == "student") {
+      visiblePerson = "visibleStudent";
+    } else if (UserCredentialsController.userRole == "parent" ||
+        UserCredentialsController.userRole == "guardian") {
+      visiblePerson = "visibleGuardian";
+    } else {
+      visiblePerson = "visibleTeacher";
+    }
     try {
       isLoading.value = true;
       QuerySnapshot<Map<String, dynamic>> noticeCollection =
@@ -18,7 +30,7 @@ class StudentMeetingController extends GetxController {
               .collection(UserCredentialsController.batchId ?? "")
               .doc(UserCredentialsController.batchId ?? "")
               .collection('AdminMeeting')
-              .where("visibleStudent", isEqualTo: true)
+              .where(visiblePerson, isEqualTo: true)
               .get();
 
       meetingLists = noticeCollection.docs
