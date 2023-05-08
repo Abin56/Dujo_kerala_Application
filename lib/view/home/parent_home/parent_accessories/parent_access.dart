@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
+import '../../events/event_list.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
@@ -41,7 +42,7 @@ class ParentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!),
       const UnderMaintanceScreen(text: ""),
       NoticePage(),
-      const UnderMaintanceScreen(text: ""),
+      EventList(),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),

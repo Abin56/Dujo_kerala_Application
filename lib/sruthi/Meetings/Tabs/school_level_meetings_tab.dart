@@ -16,7 +16,10 @@ class SchoolLevelMeetingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    studentMeetingController.getMeetings();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await studentMeetingController.getMeetings();
+    });
+
     if (studentMeetingController.meetingLists.isEmpty) {
       return const Material(
         child: Center(
