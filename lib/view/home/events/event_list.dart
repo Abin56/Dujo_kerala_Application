@@ -1,9 +1,9 @@
-import 'package:dujo_kerala_application/sruthi/Event/Tabs/school_level_tab.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Tabs/class_level_tab.dart';
+import 'Tabs/school_level_tab.dart';
 
 class EventList extends StatelessWidget {
   const EventList({super.key});

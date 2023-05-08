@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/sruthi/Event/event_display_school_levl.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../widgets/fonts/google_poppins.dart';
+import '../event_display_school_level.dart';
 
 
 class SchoolLevelPage extends StatelessWidget {
@@ -38,7 +35,7 @@ class SchoolLevelPage extends StatelessWidget {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) => EventDisplaySchoolLevel(    )));
+                                                    builder: (context) => const EventDisplaySchoolLevel(    )));
 
                                           },
                                           child: GooglePoppinsWidgets(

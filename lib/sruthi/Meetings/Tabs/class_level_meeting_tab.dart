@@ -1,12 +1,9 @@
 import 'package:dujo_kerala_application/sruthi/Meetings/meetings_class_display.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../view/constant/sizes/sizes.dart';
 import '../../../view/widgets/fonts/google_poppins.dart';
-import '../../Event/event_display_class_level.dart';
 
 
 
@@ -33,7 +30,7 @@ class ClassLevelMeetingPage extends StatelessWidget {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => MeetingDisplayClassLevel()));
+                                                builder: (context) => const MeetingDisplayClassLevel()));
                                       },
                                       child: GooglePoppinsWidgets(
                                         text: "View",
@@ -60,7 +57,7 @@ class ClassLevelMeetingPage extends StatelessWidget {
                                       ],
                                     )),
                               ),
-                         Divider(),kHeight10
+                         const Divider(),kHeight10
                             ],
                           );
                         }),
