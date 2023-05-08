@@ -49,7 +49,7 @@ void getFirebaseData()async {
                   // Heading_Container_Widget(text: 'Event List',),
                   Expanded(
                     child: StreamBuilder(
-                      stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('AdminEvents').snapshots(),
+                      stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection(UserCredentialsController.batchId!).doc(UserCredentialsController.batchId).collection('AdminEvents').snapshots(),
                       builder: (context, snapshot) {
                     
                         if(snapshot.connectionState == ConnectionState.waiting){

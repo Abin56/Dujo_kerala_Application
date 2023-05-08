@@ -3,6 +3,7 @@
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/pages/exams/exam_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class StudentAccessories extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenNavigation = [
       const UnderMaintanceScreen(text: 'Attendance'),
-      const UnderMaintanceScreen(text: 'Exams'),
+      ExmNotification(),
       const UnderMaintanceScreen(text: 'Time Table'),
       const UnderMaintanceScreen(text: 'Home Works'),
       const NoticePage(),
