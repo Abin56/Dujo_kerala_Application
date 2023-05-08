@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/progress_card.dart';
+import 'package:dujo_kerala_application/view/pages/progress_Report/view_report/all_students.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -27,6 +30,22 @@ class AllStudentsListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("All Student List"),
+        actions: [
+          GestureDetector(
+              onTap: () {
+                Get.to(ViewAllStudentsListScreen(
+                    schooilID: schooilID,
+                    classID: classID,
+                    examName: examName,
+                    batchId: batchId));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                    child: GooglePoppinsWidgets(text: 'View', fontsize: 18,color: cblack,fontWeight: FontWeight.w400,)
+                ),
+              ))
+        ],
       ),
       body: SafeArea(
           child: StreamBuilder(

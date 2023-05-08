@@ -8,6 +8,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/class_teacher_login/class_teacher_login.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/teacher_login/teacher_login.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -210,7 +211,7 @@ class TeachersSignUpPage extends StatelessWidget {
                           return;
                         } else {
                           teacherController.updateTeacherData().then(
-                              (value) => Get.offAll(ClassTeacherLoginScreen()));
+                              (value) => Get.offAll(TeacherLoginScreen()));
                         }
                       },
                       //   Get.offAll(const HomeScreen());

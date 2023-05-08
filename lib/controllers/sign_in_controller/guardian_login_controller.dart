@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/homepages/guardian%20home/gurdian_homepage.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_screen.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../helper/shared_pref_helper.dart';
 import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
@@ -47,9 +48,7 @@ class GuardianLoginController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return const UnderMaintanceScreen(
-                text: 'Guardian',
-              );
+              return ParentMainHomeScreen();
             }), (route) => false);
           }
           isLoading.value = false;

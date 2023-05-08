@@ -1,49 +1,31 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/progress_report/view_progress_card.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../model/teacher_model/progress_report_model/progress_report_model.dart';
+import 'click_on_class.dart';
 
-
-class ProgressReportListViewScreen extends StatelessWidget {
-  String schoolId;
-  String classID;
-  String studentId;
-  String batchId;
-  ProgressReportListViewScreen(
-      {required this.schoolId,
-      required this.classID,
-      required this.studentId,
-      required this.batchId,
-      super.key});
+class TeacherClassListView extends StatelessWidget {
+  const TeacherClassListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     int columnCount = 3;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
-    log(classID);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Exam List'),
-      ),
-      body: SafeArea(
-          child: StreamBuilder(
+    return Expanded(
+      child: StreamBuilder(
         stream: FirebaseFirestore.instance
-      .collection("SchoolListCollection")
-            .doc(schoolId)
-            .collection(batchId)
-            .doc(batchId)
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection(UserCredentialsController.batchId!)
+            .doc(UserCredentialsController.batchId!)
             .collection("classes")
-            .doc(classID)
-            .collection("Students")
-            .doc(studentId)
-            .collection("StudentProgressReport")
+            .orderBy('className', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -56,10 +38,6 @@ class ProgressReportListViewScreen extends StatelessWidget {
                 children: List.generate(
                   snapshot.data!.docs.length,
                   (int index) {
-                    UploadProgressReportModel data =
-                        UploadProgressReportModel.fromMap(
-                            snapshot.data!.docs[index].data());
-
                     return AnimationConfiguration.staggeredGrid(
                       position: index,
                       duration: const Duration(milliseconds: 200),
@@ -70,13 +48,10 @@ class ProgressReportListViewScreen extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              log(studentId);
-                              Get.to(ViewProgressReportScreen(
-                                batchId:batchId ,
-                                wexam:data.id,
-                                  schooilID: schoolId,
-                                  classID: classID,
-                                  studentId: studentId));
+                              Get.to(ClickOnClasss(
+                                className:snapshot.data?.docs[index]['className']??"" ,
+                                classID: snapshot.data?.docs[index]['docid']??'',
+                              ));
                             },
                             child: Container(
                               height: _h / 100,
@@ -100,7 +75,7 @@ class ProgressReportListViewScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  data.whichExam,
+                                  snapshot.data?.docs[index]['className']??"",
                                   style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontSize: 12,
@@ -122,7 +97,7 @@ class ProgressReportListViewScreen extends StatelessWidget {
             );
           }
         },
-      )),
+      ),
     );
   }
 }

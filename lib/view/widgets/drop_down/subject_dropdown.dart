@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,9 +38,11 @@ class _GeClasseslListDropDownButtonState
             .doc(widget.schoolID)
             .collection(widget.batchId)
             .doc(widget.batchId)
-            .collection("Classes")
+            .collection("classes")
             .doc(widget.classId)
-            .collection('subjects')
+            .collection('teachers')
+            .doc(UserCredentialsController.teacherModel!.docid!)
+            .collection('teacherSubject')
             .get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {

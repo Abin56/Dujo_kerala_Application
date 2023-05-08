@@ -114,8 +114,6 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          //  mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             kHeight20,
             SizedBox(

@@ -1,21 +1,30 @@
 // ignore_for_file: empty_catches, unused_element
 
+import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/userCredentials/user_credentials.dart';
+import '../../../helper/shared_pref_helper.dart';
 import '../../../utils/utils.dart';
+import '../../../widgets/drop_down/select_class_classteacher.dart';
+import '../../colors/colors.dart';
+import '../class_teacher_HOme/class_teacher_Mainhome.dart';
 
 class TeacherHeaderDrawer extends StatelessWidget {
-  const TeacherHeaderDrawer({Key? key}) : super(key: key);
+  UserLogOutController userLogOutController = Get.put(UserLogOutController());
+  TeacherHeaderDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 250,
+      height: 290,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,12 +56,72 @@ class TeacherHeaderDrawer extends StatelessWidget {
                 fontSize: 10,
                 fontWeight: FontWeight.w600),
           ),
-          TextButton(
-            onPressed: () async {
-              await userLogOut(context);
-            },
-            child: const Text("Logout"),
-          )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton.icon(
+                onPressed: () async {
+                  return showDialog(
+                    context: context,
+                    barrierDismissible: false, // user must tap button!
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Change Class'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              GetClassTeacherListDropDownButton()
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('ok'),
+                            onPressed: () {
+                              if (classIDListValue?['docid'] != null) {
+                                UserCredentialsController.classId =
+                                    classIDListValue['docid'];
+                                SharedPreferencesHelper.setString(
+                                    SharedPreferencesHelper.classIdKey,
+                                    classIDListValue['docid']);
+                                Get.offAll(TeacherMainHomeScreen());
+                              }
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.class_),
+                label: const Text(
+                  "Change Class",
+                  style: TextStyle(color: cblack),
+                ),
+              ),
+              const Text('||'),
+              TextButton.icon(
+                  onPressed: () async {
+                    userLogOutController.logOut(context);
+                  },
+                  icon: const Icon(Icons.key),
+                  label: const Text(
+                    'Logout',
+                    style: TextStyle(color: cblack),
+                  ))
+            ],
+          ),
+          UserCredentialsController.teacherModel!.userRole == 'classTeacher'
+              ? TextButton.icon(
+                  onPressed: () async {
+                    Get.offAll(ClassTeacherMainHomeScreen());
+                  },
+                  icon: const Icon(Icons.edit_note_rounded),
+                  label: const Text(
+                    'Switch to Class Teacher',
+                    style: TextStyle(color: cblack),
+                  ))
+              : const Text('')
         ],
       ),
     );
