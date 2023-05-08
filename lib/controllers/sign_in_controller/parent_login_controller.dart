@@ -28,6 +28,8 @@ class ParentLoginController extends GetxController {
             await FirebaseFirestore.instance
                 .collection('SchoolListCollection')
                 .doc(UserCredentialsController.schoolId)
+                .collection(UserCredentialsController.batchId ?? "")
+                .doc(UserCredentialsController.batchId)
                 .collection('classes')
                 .doc(UserCredentialsController.classId)
                 .collection('ParentCollection')

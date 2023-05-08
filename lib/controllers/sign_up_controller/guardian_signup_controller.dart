@@ -34,6 +34,8 @@ class GuardianSignUpController extends GetxController {
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
+      .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId)
       .collection('classes')
       .doc(UserCredentialsController.classId)
       .collection('Temp_GuardianCollection');
@@ -42,6 +44,8 @@ class GuardianSignUpController extends GetxController {
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
+      .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId)
       .collection('classes')
       .doc(UserCredentialsController.classId)
       .collection('GuardianCollection');

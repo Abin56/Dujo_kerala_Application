@@ -163,6 +163,8 @@ Future<void> checkParent(
     FirebaseAuth auth) async {
   final DocumentSnapshot<Map<String, dynamic>> parentData =
       await firebaseFirestore
+          .collection(UserCredentialsController.batchId ?? "")
+          .doc(UserCredentialsController.batchId)
           .collection('classes')
           .doc(UserCredentialsController.classId)
           .collection('ParentCollection')
@@ -184,6 +186,8 @@ Future<void> checkGuardian(
     FirebaseAuth auth) async {
   final DocumentSnapshot<Map<String, dynamic>> guardianData =
       await firebaseFirestore
+          .collection(UserCredentialsController.batchId ?? "")
+          .doc(UserCredentialsController.batchId)
           .collection('classes')
           .doc(UserCredentialsController.classId)
           .collection('GuardianCollection')

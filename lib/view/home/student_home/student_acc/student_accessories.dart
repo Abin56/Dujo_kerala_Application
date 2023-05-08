@@ -40,9 +40,9 @@ class StudentAccessories extends StatelessWidget {
       const UnderMaintanceScreen(text: 'Time Table'),
       const UnderMaintanceScreen(text: 'Home Works'),
       NoticePage(),
-      EventList(),
+      const EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
-      StudentSubjectHome(),
+      const StudentSubjectHome(),
       const UnderMaintanceScreen(text: 'Teacher'),
       SchoolLevelMeetingPage(),
     ];
