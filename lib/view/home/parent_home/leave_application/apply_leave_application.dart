@@ -13,14 +13,14 @@ import '../../../widgets/button_container_widget.dart';
 
 class LeaveApplicationScreen extends StatefulWidget {
   var studentName;
-  var parentName;
+  var guardianName;
   var classID;
   var schoolId;
   var studentID;
   var batchId;
   LeaveApplicationScreen(
       {required this.studentName,
-      required this.parentName,
+      required this.guardianName,
       required this.classID,
       required this.schoolId,
       required this.studentID,
@@ -329,7 +329,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                   leaveReason:
                                       _leaveReasonController.text.trim(),
                                   studentName: widget.studentName,
-                                  studentParent: widget.parentName);
+                                  studentParent: widget.guardianName);
                           ApplyLeaveLetterStatusToFireBase()
                               .applyLeaveLetterController(
                                   _addLeaveAppplicationDetails,
