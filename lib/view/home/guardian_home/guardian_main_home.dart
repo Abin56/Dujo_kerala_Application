@@ -6,14 +6,8 @@ import 'package:line_icons/line_icons.dart';
 import '../drawer/guardian_drawer.dart';
 import 'guradian_home.dart';
 
-
 class GuardianMainHomeScreen extends StatefulWidget {
-
-  GuardianMainHomeScreen(
-      {
-
-      Key? key})
-      : super(key: key);
+  const GuardianMainHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<GuardianMainHomeScreen> createState() => _GuardianMainHomeScreenState();

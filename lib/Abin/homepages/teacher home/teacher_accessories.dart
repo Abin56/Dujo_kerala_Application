@@ -1,52 +1,50 @@
-// ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
+// ignore_for_file: must_be_immutable, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 
-import 'package:dujo_kerala_application/sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
-import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
-import 'package:dujo_kerala_application/view/home/events/event_list.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/ui%20team/abin/homepages/parent%20home/parent_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../controllers/userCredentials/user_credentials.dart';
-import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
-import '../parent_home/progress_report/progress_report.dart';
-
-class GuardianAccessories extends StatelessWidget {
-  String studentName;
-  GuardianAccessories({
-    required this.studentName,
+class TeacherAccessories extends StatefulWidget {
+  // var schoolId;
+  // var teacherEmail;
+  // var classID;
+  // var teacherSubject;
+  TeacherAccessories({
+    // required this.schoolId,
+    // required this.teacherEmail,
+    // required this.classID,
+    // required this.teacherSubject,
     super.key,
   });
 
   @override
+  State<TeacherAccessories> createState() => _TeacherAccessoriesState();
+}
+
+class _TeacherAccessoriesState extends State<TeacherAccessories> {
+  void retrieveTimeTableData() async {}
+
+  @override
+  void initState() {
+    super.initState();
+    retrieveTimeTableData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-      AttendenceBookScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendence
-      ProgressReportListViewScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          studentId: UserCredentialsController.guardianModel!.guardianName!,
-          batchId: UserCredentialsController.batchId!),
-      LeaveApplicationScreen(
-          studentName: studentName,
-          guardianName: UserCredentialsController.guardianModel!.guardianName,
-          classID: UserCredentialsController.classId!,
-          schoolId: UserCredentialsController.schoolId!,
-          studentID: UserCredentialsController.guardianModel!.guardianName,
-          batchId: UserCredentialsController.batchId!),
-      const UnderMaintanceScreen(text: ""),
-      NoticePage(),
-      const EventList(),
-      const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
-      SchoolLevelMeetingPage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
+      ParentHomePage(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -59,7 +57,7 @@ class GuardianAccessories extends StatelessWidget {
         padding: EdgeInsets.all(_w / 60),
         crossAxisCount: columnCount,
         children: List.generate(
-          _acc_images.length,
+          10,
           (int index) {
             return AnimationConfiguration.staggeredGrid(
               position: index,
@@ -127,26 +125,26 @@ class GuardianAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance',
+  'Take Attendance',
+  'Attendance Book',
   'Exams',
   'TimeTable',
   'HomeWorks',
   'Notices',
   'Events',
   'Progress Report',
-  'Sujects',
-  'Teachers',
+  'Application List',
   'Meetings'
 ];
 var _acc_images = [
   'assets/images/attendance.png',
+  'assets/images/classroom.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
-  'assets/images/school_building.png',
-  'assets/images/activity.png',
+  'assets/images/notice.jpg',
+  'assets/images/events.png',
   'assets/images/splash.png',
-  'assets/images/subjects.png',
-  'assets/images/teachers.png',
-  'assets/images/teachers.png',
+  'assets/images/leave_apply.png',
+  'assets/images/message.png',
 ];

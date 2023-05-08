@@ -31,7 +31,7 @@ class ParentAccessories extends StatelessWidget {
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
-          studentId: UserCredentialsController.parentModel!.studentID!,
+          studentId: UserCredentialsController.parentModel?.studentID ?? "",
           batchId: UserCredentialsController.batchId!),
       LeaveApplicationScreen(
           studentName: studentName,
@@ -42,7 +42,7 @@ class ParentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!),
       const UnderMaintanceScreen(text: ""),
       NoticePage(),
-      EventList(),
+      const EventList(),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),

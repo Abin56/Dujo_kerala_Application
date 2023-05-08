@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +47,7 @@ class GuardianLoginController extends GetxController {
           await SharedPreferencesHelper.setString(
               SharedPreferencesHelper.userRoleKey, 'guardian');
           if (context.mounted) {
-            Navigator.pushAndRemoveUntil(context,
-                MaterialPageRoute(builder: (context) {
-              return GuardianMainHomeScreen();
-            }), (route) => false);
+            Get.offAll(() => const GuardianMainHomeScreen());
           }
           isLoading.value = false;
         } else {
@@ -61,6 +60,7 @@ class GuardianLoginController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       showToast(msg: "Sign in failed");
+      log(e.toString());
     }
   }
 }
