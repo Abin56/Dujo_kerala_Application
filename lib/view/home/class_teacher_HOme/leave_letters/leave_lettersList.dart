@@ -31,7 +31,7 @@ class LeaveLettersListviewScreen extends StatelessWidget {
                   .doc(schooilID)
                   .collection(batchID)
                   .doc(batchID)
-                  .collection("Classes")
+                  .collection("classes")
                   .doc(classID)
                   .collection("LeaveApplication")
                   .snapshots(),
@@ -46,9 +46,7 @@ class LeaveLettersListviewScreen extends StatelessWidget {
                       children: List.generate(
                         snapshot.data!.docs.length,
                         (int index) {
-                          // ApplyLeveApplicationModel data =
-                          //     ApplyLeveApplicationModel.fromMap(
-                          //         snapshot.data!.docs[index].data());
+                
                           return AnimationConfiguration.staggeredGrid(
                             position: index,
                             duration: const Duration(milliseconds: 200),
@@ -64,7 +62,7 @@ class LeaveLettersListviewScreen extends StatelessWidget {
                                       schooilID: schooilID,
                                       classID: classID,
                                       date: snapshot.data!.docs[index]
-                                          .data()['id'],
+                                          .data()['docid'],
                                     ));
                                   },
                                   child: Container(
@@ -90,7 +88,7 @@ class LeaveLettersListviewScreen extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        snapshot.data!.docs[index].data()['id'],
+                                        snapshot.data!.docs[index].data()['docid'],
                                         style: GoogleFonts.poppins(
                                             color: Colors.black,
                                             fontSize: 12,

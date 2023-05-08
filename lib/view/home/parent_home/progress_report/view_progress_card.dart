@@ -37,7 +37,7 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
             .doc(widget.schooilID)
             .collection(widget.batchId)
             .doc(widget.batchId)
-            .collection("Classes")
+            .collection("classes")
             .doc(widget.classID)
             .collection("Students")
             .doc(widget.studentId)
@@ -45,161 +45,171 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
             .doc(widget.wexam)
             .get(),
         builder: (context, snapshot) {
+    
           if (snapshot.hasData) {
-            UploadProgressReportModel data =
-                UploadProgressReportModel.fromMap(snapshot.data!.data()!);
-            return Scaffold(
-              body: SafeArea(
-                  child: SizedBox(
-                height: double.maxFinite,
-                width: double.maxFinite,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text(
-                        data.schoolName,
-                        style: const TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Text(
-                        data.schoolPlace,
-                        style: const TextStyle(
-                            letterSpacing: 5,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      Text(
-                        data.whichExam,
-                        style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800),
-                      ),
-                      SizedBox(
-                        height: 05.h,
-                      ),
-                      Text(
-                        "Progress Report",
-                        style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontSize: 23,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            data.studentName,
-                            style: GoogleFonts.poppins(
-                                color: Colors.black,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w500),
+            if (snapshot.data!.data()!=null) {
+              UploadProgressReportModel data =
+                  UploadProgressReportModel.fromMap(snapshot.data!.data()!);
+              return Scaffold(
+                body: SafeArea(
+                    child: SizedBox(
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          data.schoolName,
+                          style: const TextStyle(
+                              fontSize: 23, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Text(
+                          data.schoolPlace,
+                          style: const TextStyle(
+                              letterSpacing: 5,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Text(
+                          data.whichExam,
+                          style: GoogleFonts.poppins(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800),
+                        ),
+                        SizedBox(
+                          height: 05.h,
+                        ),
+                        Text(
+                          "Progress Report",
+                          style: GoogleFonts.poppins(
+                              color: Colors.black,
+                              fontSize: 23,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              data.studentName,
+                              style: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(data.studentIMage),
+                              radius: 60,
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 110,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Text("Roll No :  "),
+                                    Text(data.rollNo),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Class :   ${data.wClass}"),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                        "Class Adviser :   ${data.teacherName}"),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(data.studentIMage),
-                            radius: 60,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 110,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        ),
+                        SizedBox(
+                          height: 600,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Row(
-                                children: [
-                                  const Text("Roll No :  "),
-                                  Text(data.rollNo),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text("Class :   ${data.wClass}"),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text("Class Adviser :   ${data.teacherName}"),
-                                ],
+                              SingleChildScrollView(
+                                child: DataTable(
+                                  columns: const [
+                                    DataColumn(
+                                      label: Text('No'),
+                                    ),
+                                    DataColumn(
+                                      label: Text("Subjects"),
+                                    ),
+                                    DataColumn(
+                                      label: Text('Obtained'),
+                                    ),
+                                    DataColumn(
+                                      label: Text('Total'),
+                                    ),
+                                  ],
+                                  rows: [
+                                    for (int i = 0;
+                                        i <= data.reports.length - 1;
+                                        i++)
+                                      DataRow(
+                                        cells: [
+                                          DataCell(
+                                            Text('${i + 1}'),
+                                          ),
+                                          DataCell(
+                                            Text(data.reports[i].subject),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              data.reports[i].obtainedMark
+                                                  .toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              data.reports[i].totalMark
+                                                  .toString(),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 600,
-                        child: Column(
-                          children: [
-                            SingleChildScrollView(
-                              child: DataTable(
-                                columns: const [
-                                  DataColumn(
-                                    label: Text('No'),
-                                  ),
-                                  DataColumn(
-                                    label: Text("Subjects"),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Obtained'),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Total'),
-                                  ),
-                                ],
-                                rows: [
-                                  for (int i = 0;
-                                      i <= data.reports.length-1;
-                                      i++)
-                                    DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Text('${i + 1}'),
-                                        ),
-                                        DataCell(
-                                          Text(data.reports[i].subject),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            data.reports[i].obtainedMark
-                                                .toString(),
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            data.reports[i].totalMark
-                                                .toString(),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
+                )),
+              );
+            } else {
+              return const Scaffold(
+                body:  Center(
+                  child: Text("No Records"),
                 ),
-              )),
-            );
+              );
+            }
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator.adaptive(),
             );
           }

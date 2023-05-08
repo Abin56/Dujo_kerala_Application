@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../helper/shared_pref_helper.dart';
 import '../../utils/utils.dart';
+import '../../view/home/parent_home/parent_main_home_screen.dart';
 import '../userCredentials/user_credentials.dart';
 
 class ParentLoginController extends GetxController {
@@ -47,7 +48,7 @@ class ParentLoginController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return UnderMaintanceScreen(text: 'Parent',);
+              return ParentMainHomeScreen();
             }), (route) => false);
           }
           isLoading.value = false;

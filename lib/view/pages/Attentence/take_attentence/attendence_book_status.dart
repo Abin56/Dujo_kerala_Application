@@ -37,10 +37,10 @@ class AttendenceBookScreen extends StatelessWidget {
             .doc(schoolId)
             .collection(batchId)
             .doc(batchId)
-            .collection("Classes")
+            .collection("classes")
             .doc(classID)
             .collection("Attendence")
-            .orderBy('id', descending: true)
+            .orderBy('docid', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -70,7 +70,7 @@ class AttendenceBookScreen extends StatelessWidget {
                                   batchId: batchId,
                                   schoolId: schoolId,
                                   classID: classID,
-                                  date: data.id));
+                                  date: snapshot.data!.docs[index]['docid']));
                             },
                             child: Container(
                               height: _h / 100,

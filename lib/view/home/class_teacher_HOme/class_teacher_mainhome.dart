@@ -1,5 +1,5 @@
-
-
+import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +20,7 @@ class ClassTeacherMainHomeScreen extends StatefulWidget {
 
 class _ClassTeacherMainHomeScreenState
     extends State<ClassTeacherMainHomeScreen> {
+  UserLogOutController userLogOutController = Get.put(UserLogOutController());
   int _page = 0;
 
   onPageChanged(int page) {
@@ -44,13 +45,27 @@ class _ClassTeacherMainHomeScreenState
       appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 6, 71, 157),
           title: const Text("Dujo"),
-          actions: [
-            IconButton(onPressed: () {
-              Get.to(
-                UsersLoginScreen()
-              );
-            }, icon: Icon(Icons.logout)),
-          ]),
+          // actions: [
+          //   PopupMenuButton(
+          //     onSelected: (value) {
+          //       value = userLogOutController.logout.value;
+          //     },
+          //     itemBuilder: (context) => [
+          //       PopupMenuItem(
+          //         value: userLogOutController.logout.value,
+          //         onTap: () async {
+          //           userLogOutController.logout.value == true;
+          //           if (userLogOutController.logout.value == true) {
+          //             userLogOutController.logOut(context);
+          //           }
+          //         },
+          //         child: GestureDetector(
+          //             onTap: () async {}, child: const Text('Logout')),
+          //       )
+          //     ],
+          //   )
+          // ]),
+      ),
       body: pages[_page],
       bottomNavigationBar: Container(
         height: 71,
@@ -109,7 +124,7 @@ class _ClassTeacherMainHomeScreenState
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const ClassTeacherHeaderDrawer(),
+               ClassTeacherHeaderDrawer(),
               MyDrawerList(context),
             ],
           ),

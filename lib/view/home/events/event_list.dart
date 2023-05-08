@@ -8,9 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Tabs/class_level_tab.dart';
 
-
 class EventList extends StatelessWidget {
-   EventList({super.key});
+  EventList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +18,16 @@ class EventList extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Row(
-            children: [IconButtonBackWidget(),SizedBox(width: 20.w,),
-              Text("Event List"),
+            children: [
+              IconButtonBackWidget(),
+              SizedBox(
+                width: 20.w,
+              ),
+              const Text("Event List"),
             ],
           ),
           backgroundColor: adminePrimayColor,
-          bottom: TabBar(tabs: [
+          bottom: const TabBar(tabs: [
             Tab(
               text: 'Class Level',
             ),
@@ -37,7 +40,7 @@ class EventList extends StatelessWidget {
         //  appBar: AppBar(backgroundColor: adminePrimayColor),
         body: SafeArea(
           child: TabBarView(
-            children: [ClassLevelPage(), SchoolLevelPage()],
+            children: [ ClassLevelPage(), SchoolLevelPage()],
           ),
         ),
       ),

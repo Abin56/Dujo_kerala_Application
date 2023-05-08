@@ -127,17 +127,17 @@ class ApplyLeaveLetterStatusToFireBase {
           .doc(schoolid)
           .collection(batchId)
           .doc(batchId)
-          .collection("Classes")
+          .collection("classes")
           .doc(classId)
           .collection("LeaveApplication")
           .doc(leavedocID)
-          .set({'id': leavedocID}).then((value) {
+          .set({'docid': leavedocID}).then((value) {
         firebase
             .collection("SchoolListCollection")
             .doc(schoolid)
             .collection(batchId)
             .doc(batchId)
-            .collection("Classes")
+            .collection("classes")
             .doc(classId)
             .collection("LeaveApplication")
             .doc(leavedocID)

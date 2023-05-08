@@ -1,17 +1,14 @@
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
-import 'package:dujo_kerala_application/sruthi/Testing.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'helper/shared_pref_helper.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,11 +42,11 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return TestingPage();
+                      return const SplashScreen();
                     } else if (state is AuthLoggedOutState) {
-                      return TestingPage();
+                      return const SplashScreen();
                     }
-                    return TestingPage();
+                    return const SplashScreen();
                   },
                 ),
 

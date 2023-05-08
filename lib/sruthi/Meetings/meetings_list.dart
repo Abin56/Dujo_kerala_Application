@@ -26,7 +26,7 @@ class MeetingList extends StatelessWidget {
         ),
         body: SafeArea(
           child: TabBarView(
-            children: [ClassLevelMeetingPage(), SchoolLevelMeetingPage()],
+            children: [const ClassLevelMeetingPage(), SchoolLevelMeetingPage(),],
           ),
         ),
       ),

@@ -36,7 +36,7 @@ class LeaveLettersStudentListsScreen extends StatelessWidget {
                   .doc(schooilID)
                   .collection(batchID)
                   .doc(batchID)
-                  .collection("Classes")
+                  .collection("classes")
                   .doc(classID)
                   .collection("LeaveApplication")
                   .doc(date)

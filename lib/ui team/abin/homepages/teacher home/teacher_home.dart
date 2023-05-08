@@ -26,7 +26,6 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(backgroundColor: adminePrimayColor),
       body: Column(
         children: [
           Container(
