@@ -1,4 +1,3 @@
-import 'package:dujo_kerala_application/Abin/test/test_navigation.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
@@ -43,11 +42,11 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return const NavigationCheck();
+                      return const SplashScreen();
                     } else if (state is AuthLoggedOutState) {
-                      return const NavigationCheck();
+                      return const SplashScreen();
                     }
-                    return const NavigationCheck();
+                    return const SplashScreen();
                   },
                 ),
 

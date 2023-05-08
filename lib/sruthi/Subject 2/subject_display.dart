@@ -11,19 +11,19 @@ import '../../../view/widgets/container_image.dart';
 import 'subject_chapterwise_display.dart';
 
 class SubjectList extends StatelessWidget {
-  const SubjectList({
-   Key? key}) : super(key: key);
-  
+  const SubjectList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: adminePrimayColor,
         title: Row(
-         
           children: [
-            IconButtonBackWidget(color: cWhite,),
+            IconButtonBackWidget(
+              color: cWhite,
+            ),
             GooglePoppinsWidgets(
               text: "Subject",
               fontsize: 20.h,
@@ -42,23 +42,21 @@ class SubjectList extends StatelessWidget {
             4,
             (index) => GestureDetector(
               onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          SubjectWiseDisplay()));
-                            },
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SubjectWiseDisplay()));
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: adminePrimayColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 height: 50,
-            
+
                 // ignore: sort_child_properties_last
                 child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 20.h, top: 20.h, right: 20.h),
+                  padding: EdgeInsets.only(left: 20.h, top: 20.h, right: 20.h),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -66,14 +64,14 @@ class SubjectList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                            decoration: BoxDecoration(shape:  BoxShape.circle,color: Colors.white, ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
                               child: ContainerImage(
-                                
-                                
                                 height: 70.h,
                                 imagePath: 'assets/images/teachernew.png',
                                 width: 70.w,
-                            
                               ),
                             ),
                             SizedBox(width: 10.h),
@@ -82,10 +80,9 @@ class SubjectList extends StatelessWidget {
                                 height:
                                     50, // set a fixed height for the container
                                 child: GooglePoppinsWidgets(
-                                  text:text[index],
+                                  text: text[index],
                                   fontsize: 12.h,
                                   color: Colors.white,
-                                  
                                 ),
                               ),
                             )
@@ -112,4 +109,5 @@ class SubjectList extends StatelessWidget {
     );
   }
 }
-const text =["Anu o s","Anoop","Anu","Amanda Mariya Hilari"];
+
+const text = ["Anu o s", "Anoop", "Anu", "Amanda Mariya Hilari"];

@@ -26,13 +26,11 @@ class UnderMaintanceScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FittedBox(
-                    child: Text(
-                      "Under Maintenance$text",
-                      style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          color: const Color.fromARGB(255, 34, 34, 34)),
-                    ),
+                  Text(
+                    "Under Maintenance$text",
+                    style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        color: const Color.fromARGB(255, 34, 34, 34)),
                   ),
                   LottieBuilder.network(
                     'https://assets1.lottiefiles.com/packages/lf20_yyoe1mkr.json',
