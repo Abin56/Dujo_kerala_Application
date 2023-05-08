@@ -111,10 +111,12 @@ class HomeWorkList extends StatelessWidget {
                                           GooglePoppinsWidgets(
                                               text: "Assigned Teacher:",
                                               fontsize: 15.h),
-                                          GooglePoppinsWidgets(
-                                              text: " Anupama",
-                                              fontWeight: FontWeight.bold,
-                                              fontsize: 15.h),
+                                          Flexible(
+                                            child: GooglePoppinsWidgets(
+                                                text: " Anupama Neena ",
+                                                fontWeight: FontWeight.bold,
+                                                fontsize: 15.h),
+                                          ),
                                         ],
                                       ),
                                     ),

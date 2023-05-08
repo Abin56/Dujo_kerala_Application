@@ -69,7 +69,7 @@ class _HomeWorkDisplayState extends State<HomeWorkDisplay> {
                         kHeight20,
                         GooglePoppinsWidgets(
                           text:
-                              "Homework.” Merriam-Webster.com Dictionary, Merriam-Webster, . Accessed 27 Apr. 2023.fncdjnfdjnjfgvnjfgvnfjgvfjdhngrjhgjrhgjrfgjuhghg",
+                              "Homework.” Merriam-Webster.com Dictionary, Merriam-Webster, . Accessed 27 Apr. 2023.fncdjnfdjnjfgvnjfgvnfjgvfjdhngrjhgjrhgjrfgjuhghg juh",
                           fontsize: 19.h,
                         ),
                         kHeight30,

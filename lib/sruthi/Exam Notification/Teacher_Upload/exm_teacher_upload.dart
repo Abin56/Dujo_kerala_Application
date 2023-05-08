@@ -1,9 +1,7 @@
-import 'package:dujo_kerala_application/sruthi/widget/exm_upload_textformfeild.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../view/widgets/fonts/google_poppins.dart';
@@ -14,11 +12,11 @@ class ExmNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
+      appBar: AppBar(automaticallyImplyLeading: false,
+        title: Row(mainAxisAlignment: MainAxisAlignment.start,
           children: [
             IconButtonBackWidget(),
-            Text(
+            const Text(
               "Exam Notification View",
             ),
           ],
@@ -66,7 +64,7 @@ class ExmNotification extends StatelessWidget {
               ),
             ),
                           child: ListTile(
-                              shape: BeveledRectangleBorder(
+                              shape: const BeveledRectangleBorder(
                                   side: BorderSide(color: Colors.grey, width: 0.2)),
                               
                               title: GooglePoppinsWidgets(

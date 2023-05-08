@@ -15,58 +15,56 @@ class SubjectWiseDisplay extends StatelessWidget {
         backgroundColor: Colors.white54,
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: Text("Chapters"),
+          title: const Text("Chapters"),
         ),
         body: Container(
           color: Colors.white54,
-          child: Expanded(
-            child: ListView.separated(
-              itemCount: 7,
-              separatorBuilder: (BuildContext context, int index) => kHeight10,
-              itemBuilder: (BuildContext context, int index) {
-                return ListileCardChapterWidget(leading: Icon(Icons.note_rounded), title: GooglePoppinsWidgets(
-              text: "Chapter 1", fontsize: 20.h,fontWeight: FontWeight.bold,), subtitle:Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
+          child: ListView.separated(
+            itemCount: 7,
+            separatorBuilder: (BuildContext context, int index) => kHeight10,
+            itemBuilder: (BuildContext context, int index) {
+              return ListileCardChapterWidget(leading: const Icon(Icons.note_rounded), title: GooglePoppinsWidgets(
+            text: "Chapter 1", fontsize: 20.h,fontWeight: FontWeight.bold,), subtitle:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 10.h),
+              child: GooglePoppinsWidgets(
+                  text: "CMOS & NMOS", fontsize: 15.h,fontWeight: FontWeight.bold,),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const StudyMaterials()));
+              },
+              child: Padding(
                 padding: EdgeInsets.only(top: 10.h),
                 child: GooglePoppinsWidgets(
-                    text: "CMOS & NMOS", fontsize: 15.h,fontWeight: FontWeight.bold,),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StudyMaterials()));
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(top: 10.h),
-                  child: GooglePoppinsWidgets(
-                    text: "Study Materials",
-                    fontsize: 16.h,
-                    color: adminePrimayColor,
-                  ),
+                  text: "Study Materials",
+                  fontsize: 16.h,
+                  color: adminePrimayColor,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 18.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GooglePoppinsWidgets(
-                        text: "Teacher Name : ",
-                        fontsize: 15.h,),
-                         GooglePoppinsWidgets(
-                        text: "Anupama",
-                        fontsize: 15.h,fontWeight: FontWeight.bold,),
-                  ],
-                ),
-              ),
-            ],
-          ) , trailing: null,);
-              },
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 18.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GooglePoppinsWidgets(
+                      text: "Teacher Name : ",
+                      fontsize: 15.h,),
+                       GooglePoppinsWidgets(
+                      text: "Anupama",
+                      fontsize: 15.h,fontWeight: FontWeight.bold,),
+                ],
+              ),
+            ),
+          ],
+          ) , trailing: null,);
+            },
           ),
         ),
       ),
@@ -93,7 +91,7 @@ Widget? trailing;
   Widget build(BuildContext context) {
     return Card
     (
-      child: ListTile(shape: BeveledRectangleBorder(side:BorderSide(color: cWhite) ),
+      child: ListTile(shape: const BeveledRectangleBorder(side:BorderSide(color: cWhite) ),
           leading: leading,
           title: title,
           subtitle: subtitle,
