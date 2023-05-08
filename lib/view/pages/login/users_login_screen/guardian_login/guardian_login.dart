@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../controllers/sign_in_controller/guardian_login_controller.dart';
-import '../../../../../controllers/sign_up_controller/guardian_signup_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
@@ -23,8 +22,6 @@ class GuardianLoginScreen extends StatelessWidget {
 
   GuardianLoginScreen({this.pageIndex, super.key});
 
-  GuardianSignUpController guardianSignupController =
-      Get.put(GuardianSignUpController());
   GuardianLoginController guardianLoginController =
       Get.put(GuardianLoginController());
 
@@ -69,7 +66,7 @@ class GuardianLoginScreen extends StatelessWidget {
                           ),
                         ),
                         textEditingController:
-                            guardianSignupController.emailController,
+                            guardianLoginController.emailIdController,
                         function: checkFieldEmailIsValid),
                     // Enter Password session >>>>>>>>
                     Obx(
@@ -79,7 +76,7 @@ class GuardianLoginScreen extends StatelessWidget {
                         labelText: 'Password',
                         icon: Icons.lock,
                         textEditingController:
-                            guardianSignupController.passwordController,
+                            guardianLoginController.passwordController,
                         function: checkFieldPasswordIsValid,
                         prefixIcon: IconButton(
                           onPressed: () {},
