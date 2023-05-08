@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,7 @@ import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
   String studentName;
-   ParentAccessories({
+  ParentAccessories({
     required this.studentName,
     super.key,
   });
@@ -20,22 +21,29 @@ class ParentAccessories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-       AttendenceBookScreen(
+      AttendenceBookScreen(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),//Attendence
+          classID: UserCredentialsController.classId!), //Attendence
       ProgressReportListViewScreen(
-          schoolId:  UserCredentialsController.schoolId!,
+          schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
-          studentId:UserCredentialsController.parentModel!.studentID!,
-          batchId:  UserCredentialsController.batchId!),
+          studentId: UserCredentialsController.parentModel!.studentID!,
+          batchId: UserCredentialsController.batchId!),
       LeaveApplicationScreen(
           studentName: studentName,
           parentName: UserCredentialsController.parentModel!.parentName!,
-          classID:  UserCredentialsController.classId!,
-          schoolId:  UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

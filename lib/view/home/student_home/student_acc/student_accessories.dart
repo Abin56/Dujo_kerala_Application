@@ -6,10 +6,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
-import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/attendence_book_status.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -17,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../sruthi/Meetings/meetings_list.dart';
 import '../../../../sruthi/Notice/notice_list.dart';
+import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Subject/subject_display.dart';
 
 class StudentAccessories extends StatelessWidget {
@@ -26,7 +24,9 @@ class StudentAccessories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(UserCredentialsController.studentModel!.docid,);
+    log(
+      UserCredentialsController.studentModel!.docid,
+    );
     final screenNavigation = [
       AttendenceBookScreen(
           schoolId: UserCredentialsController.schoolId!,
@@ -39,7 +39,7 @@ class StudentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!),
       const UnderMaintanceScreen(text: 'Time Table'),
       const UnderMaintanceScreen(text: 'Home Works'),
-      const NoticePage(),
+      NoticePage(),
       EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
       StudentSubjectHome(),

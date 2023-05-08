@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/helper/shared_pref_helper.dart';
 import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
-import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_Home.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

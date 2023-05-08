@@ -2,18 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/exam_notification/view_exams.dart';
-import 'package:dujo_kerala_application/view/pages/progress_Report/all_student_list.dart';
-import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
-import '../../pages/attentence/take_attentence_subject_listView.dart';
+import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
 
 class ClickOnClasss extends StatelessWidget {
@@ -43,7 +39,7 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
-                const UnderMaintanceScreen(text: ''), //TimeTable
+      const UnderMaintanceScreen(text: ''), //TimeTable
       const ViewExamsScreen(), //Exam
       const UnderMaintanceScreen(text: ''), //Home Works
       const UnderMaintanceScreen(text: ''), // Notice
@@ -57,8 +53,8 @@ class ClickOnClasss extends StatelessWidget {
       const UnderMaintanceScreen(text: ''), // Meetings
     ];
     int columnCount = 2;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text(className),
@@ -101,7 +97,7 @@ class ClickOnClasss extends StatelessWidget {
                             child: GridView.count(
                               physics: const BouncingScrollPhysics(
                                   parent: AlwaysScrollableScrollPhysics()),
-                              padding: EdgeInsets.all(_w / 60),
+                              padding: EdgeInsets.all(w / 60),
                               crossAxisCount: columnCount,
                               children: List.generate(
                                 _acc_text.length,
@@ -137,12 +133,12 @@ class ClickOnClasss extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
-                                              height: _h / 100,
+                                              height: h / 100,
                                               width: double.infinity,
                                               margin: EdgeInsets.only(
-                                                  bottom: _w / 10,
-                                                  left: _w / 50,
-                                                  right: _w / 50),
+                                                  bottom: w / 10,
+                                                  left: w / 50,
+                                                  right: w / 50),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -190,7 +186,7 @@ class ClickOnClasss extends StatelessWidget {
                       child: GridView.count(
                         physics: const BouncingScrollPhysics(
                             parent: AlwaysScrollableScrollPhysics()),
-                        padding: EdgeInsets.all(_w / 60),
+                        padding: EdgeInsets.all(w / 60),
                         crossAxisCount: columnCount,
                         children: List.generate(
                           hasDataText.length,
@@ -211,26 +207,24 @@ class ClickOnClasss extends StatelessWidget {
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color:
-                                              Colors.white.withOpacity(0.5),
-                                          borderRadius:
-                                              const BorderRadius.all(
-                                                  Radius.circular(30)),
+                                          color: Colors.white.withOpacity(0.5),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(30)),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Colors.black
-                                                  .withOpacity(0.1),
+                                              color:
+                                                  Colors.black.withOpacity(0.1),
                                               blurRadius: 40,
                                               spreadRadius: 10,
                                             ),
                                           ],
                                         ),
-                                        height: _h / 100,
+                                        height: h / 100,
                                         width: double.infinity,
                                         margin: EdgeInsets.only(
-                                            bottom: _w / 10,
-                                            left: _w / 50,
-                                            right: _w / 50),
+                                            bottom: w / 10,
+                                            left: w / 50,
+                                            right: w / 50),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
@@ -251,8 +245,7 @@ class ClickOnClasss extends StatelessWidget {
                                                   color: Colors.black
                                                       .withOpacity(0.5),
                                                   fontSize: 13,
-                                                  fontWeight:
-                                                      FontWeight.w600),
+                                                  fontWeight: FontWeight.w600),
                                             )
                                           ],
                                         ),
