@@ -13,6 +13,18 @@ class StudentNoticeController extends GetxController {
   Future<void> getSchoolLevelNotices() async {
     try {
       isLoading.value = true;
+      String visiblePerson = "";
+
+      ///this condition added for this notice widget used 3 places student,parent,guardian
+      ///so there is only one change in filtering
+      if (UserCredentialsController.userRole == "student") {
+        visiblePerson = "visibleStudent";
+      } else if (UserCredentialsController.userRole == "parent" ||
+          UserCredentialsController.userRole == "guardian") {
+        visiblePerson = "visibleGuardian";
+      } else {
+        visiblePerson = "visibleTeacher";
+      }
 
       QuerySnapshot<Map<String, dynamic>> noticeCollection =
           await FirebaseFirestore.instance
@@ -21,7 +33,7 @@ class StudentNoticeController extends GetxController {
               .collection(UserCredentialsController.batchId ?? "")
               .doc(UserCredentialsController.batchId ?? "")
               .collection('adminNotice')
-              .where("visibleStudent", isEqualTo: true)
+              .where(visiblePerson, isEqualTo: true)
               .get();
 
       schoolLevelNoticeLists = noticeCollection.docs

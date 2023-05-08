@@ -8,8 +8,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../sruthi/Meetings/meetings_list.dart';
+import '../../../../sruthi/Notice/notice_list.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
-import '../parent_notice/parent_notice_page.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
@@ -39,12 +40,12 @@ class ParentAccessories extends StatelessWidget {
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!),
       const UnderMaintanceScreen(text: "text"),
-      ParentNoticePage(),
+      NoticePage(),
       const UnderMaintanceScreen(text: "text"),
       const UnderMaintanceScreen(text: "text"),
       const UnderMaintanceScreen(text: "text"),
       const UnderMaintanceScreen(text: "text"),
-      const UnderMaintanceScreen(text: "text"),
+      const MeetingList(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
