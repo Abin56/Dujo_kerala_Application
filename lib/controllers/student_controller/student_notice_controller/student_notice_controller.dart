@@ -21,6 +21,7 @@ class StudentNoticeController extends GetxController {
               .collection(UserCredentialsController.batchId ?? "")
               .doc(UserCredentialsController.batchId ?? "")
               .collection('adminNotice')
+              .where("visibleStudent", isEqualTo: true)
               .get();
 
       schoolLevelNoticeLists = noticeCollection.docs

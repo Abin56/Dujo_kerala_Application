@@ -54,7 +54,6 @@ dependencies:
   uuid: ^3.0.7
   pdf: 
   flutter_launcher_icons:
-  pdf_viewer_flutter:
   printing: 
 
 flutter_icons:
