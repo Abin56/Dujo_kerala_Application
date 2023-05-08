@@ -31,7 +31,7 @@ class GuardianAccessories extends StatelessWidget {
           batchId:  UserCredentialsController.batchId!),
       LeaveApplicationScreen(
           studentName: studentName,
-          parentName: UserCredentialsController.guardianModel!.guardianName,
+          guardianName: UserCredentialsController.guardianModel!.guardianName,
           classID:  UserCredentialsController.classId!,
           schoolId:  UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.guardianModel!.guardianName,

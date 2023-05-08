@@ -3,12 +3,8 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
 
-import '../../../model/student_model/data_base_model.dart';
-import '../../../model/student_model/student_model.dart';
 import '../../widgets/button_container_widget.dart';
 
 class TakeAttenenceScreen extends StatefulWidget {
@@ -61,7 +57,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                   DateTime parseDatee = DateTime.parse(datetimeNow.toString());
                   final DateFormat dayformatterr = DateFormat('EEEE');
                   String dayformattedd = dayformatterr.format(parseDatee);
-                  final DateFormat formatterr = DateFormat('yy-MMMM-yyy');
+                  final DateFormat formatterr = DateFormat('dd-MMMM-yyy');
                   String formattedd = formatterr.format(parseDatee);
 
                   return Container(
@@ -82,7 +78,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                         kWidth20,
                         Text(snapshot.data!.docs[index]['studentName']),
                       
-                  Spacer(),
+                  const Spacer(),
 
                         IconButton(
                             onPressed: () async {
