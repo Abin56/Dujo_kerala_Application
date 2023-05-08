@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
-import '../progress_report/progress_report.dart';
+import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
+import '../parent_home/progress_report/progress_report.dart';
 
-class ParentAccessories extends StatelessWidget {
+class GuardianAccessories extends StatelessWidget {
   String studentName;
-   ParentAccessories({
+   GuardianAccessories({
     required this.studentName,
     super.key,
   });
@@ -27,14 +27,14 @@ class ParentAccessories extends StatelessWidget {
       ProgressReportListViewScreen(
           schoolId:  UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
-          studentId:UserCredentialsController.parentModel!.studentID!,
+          studentId:UserCredentialsController.guardianModel!.guardianName!,
           batchId:  UserCredentialsController.batchId!),
       LeaveApplicationScreen(
           studentName: studentName,
-          guardianName: UserCredentialsController.parentModel!.parentName!,
+          guardianName: UserCredentialsController.guardianModel!.guardianName,
           classID:  UserCredentialsController.classId!,
           schoolId:  UserCredentialsController.schoolId!,
-          studentID: UserCredentialsController.parentModel!.studentID!,
+          studentID: UserCredentialsController.guardianModel!.guardianName,
           batchId: UserCredentialsController.batchId!),
     ];
     int columnCount = 2;
