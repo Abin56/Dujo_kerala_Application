@@ -7,10 +7,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
+
 import '../../model/Signup_Image_Selction/image_selection.dart';
 import '../../model/student_model/student_model.dart';
 import '../userCredentials/user_credentials.dart';
-import 'package:uuid/uuid.dart';
 
 class StudentSignUpController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -78,7 +79,8 @@ class StudentSignUpController extends GetxController {
       if (Get.find<GetImage>().pickedImage.isNotEmpty) {
         imageId = uuid.v1();
         final result = await FirebaseStorage.instance
-            .ref("files/studentsProfilePhotos/$imageId")
+            .ref(
+                "files/studentsProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.studentModel?.studentName}$imageId")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         imageUrl = await result.ref.getDownloadURL();
       }
