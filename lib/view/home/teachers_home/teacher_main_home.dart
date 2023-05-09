@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../drawer/class_teacher.dart';
+import '../drawer/teacher_drawer.dart';
 import '../sample/under_maintance.dart';
 
 class TeacherMainHomeScreen extends StatefulWidget {
@@ -98,7 +98,7 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              //  TeacherHeaderDrawer(),
+               TeacherHeaderDrawer(),
               MyDrawerList(context),
             ],
           ),

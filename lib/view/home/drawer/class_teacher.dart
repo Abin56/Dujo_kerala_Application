@@ -1,7 +1,5 @@
 // ignore_for_file: empty_catches, unused_element
 
-import 'dart:developer';
-
 import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -67,7 +65,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                     barrierDismissible: false, // user must tap button!
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Change Class'),
+                        title: const Text('Select Class'),
                         content: SingleChildScrollView(
                           child: ListBody(
                             children: <Widget>[
@@ -114,7 +112,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
           ),
           TextButton.icon(
               onPressed: () async {
-                Get.offAll(TeacherMainHomeScreen());
+                Get.offAll(const TeacherMainHomeScreen());
               },
               icon: const Icon(Icons.edit_note_rounded),
               label: const Text(

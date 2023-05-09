@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,11 +8,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
-import '../../../helper/shared_pref_helper.dart';
-import '../../../widgets/drop_down/select_class_classteacher.dart';
 import '../../colors/colors.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
-import '../teachers_home/teacher_main_home.dart';
 
 class TeacherHeaderDrawer extends StatelessWidget {
   UserLogOutController userLogOutController = Get.put(UserLogOutController());
@@ -18,7 +17,8 @@ class TeacherHeaderDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+  log("message");
+      return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
       height: 290,
@@ -56,47 +56,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton.icon(
-                onPressed: () async {
-                  return showDialog(
-                    context: context,
-                    barrierDismissible: false, // user must tap button!
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Change Class'),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: <Widget>[
-                              GetClassTeacherListDropDownButton()
-                            ],
-                          ),
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            child: const Text('ok'),
-                            onPressed: () {
-                              if (classIDListValue?['docid'] != null) {
-                                UserCredentialsController.classId =
-                                    classIDListValue['docid'];
-                                SharedPreferencesHelper.setString(
-                                    SharedPreferencesHelper.classIdKey,
-                                    classIDListValue['docid']);
-                                Get.offAll(const TeacherMainHomeScreen());
-                              }
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.class_),
-                label: const Text(
-                  "Change Class",
-                  style: TextStyle(color: cblack),
-                ),
-              ),
-              const Text('||'),
+          
               TextButton.icon(
                   onPressed: () async {
                     userLogOutController.logOut(context);

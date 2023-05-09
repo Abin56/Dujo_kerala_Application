@@ -248,7 +248,6 @@ class StudentSignInPageScreen extends StatelessWidget {
                               showToast(msg: "All Fields are mandatory");
                               return;
                             } else {
-                              
                               studentController.updateStudentData().then(
                                   (value) => Navigator.pushAndRemoveUntil(
                                           context, MaterialPageRoute(
@@ -259,8 +258,10 @@ class StudentSignInPageScreen extends StatelessWidget {
                             }
                           }
                         },
-                        child: loginButtonWidget(
-                            height: 60, width: 180, text: 'Submit'),
+                        child: Obx(() => studentController.isLoading.value
+                            ? circularProgressIndicatotWidget
+                            : loginButtonWidget(
+                                height: 60, width: 180, text: 'Submit')),
                       ),
                     ),
                   ],
