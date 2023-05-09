@@ -1,16 +1,14 @@
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/controllers/get_parent&guardian/getx.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/parent_accessories/parent_access.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../sruthi/User Edit Profile/user_edit_profile.dart';
+import 'guardian_accer.dart';
 
 class GuardianHomeScreen extends StatefulWidget {
   @override
@@ -110,9 +108,7 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                 ],
               ),
             ),
-             ParentAccessories(
-              studentName: UserCredentialsController.guardianModel!.studentID!,
-             ),
+          GuardianAccessories(studentName: studentName)
           ],
         ),
       ),
