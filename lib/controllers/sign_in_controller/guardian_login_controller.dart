@@ -58,6 +58,11 @@ class GuardianLoginController extends GetxController {
           );
           isLoading.value = false;
         }
+      }).catchError((error) {
+        if (error is FirebaseAuthException) {
+          isLoading.value = false;
+          handleFirebaseError(error);
+        }
       });
     } catch (e) {
       isLoading.value = false;
