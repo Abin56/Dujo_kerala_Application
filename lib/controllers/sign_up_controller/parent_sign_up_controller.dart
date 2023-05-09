@@ -43,9 +43,9 @@ class ParentSignUpController extends GetxController {
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
-      .collection('classes')
-      .doc(UserCredentialsController.batchId)
       .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId)
+      .collection('classes')
       .doc(UserCredentialsController.classId)
       .collection('ParentCollection');
 
@@ -130,6 +130,9 @@ class ParentSignUpController extends GetxController {
           isLoading.value = false;
           showToast(msg: "Successfully Created");
           clearControllers();
+        } else {
+          isLoading.value = false;
+          showToast(msg: 'Please Upload Image');
         }
       });
 
