@@ -4,17 +4,17 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../pages/Attentence/take_attentence.dart';
+import '../../../sruthi/Event/event_list.dart';
+import '../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
+import '../../../sruthi/Notice/notice_list.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
-import '../../pages/Subject/subject_display.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   const ClassTeacherAccessories({
@@ -41,11 +41,11 @@ class ClassTeacherAccessories extends StatelessWidget {
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
-        schoolID:  UserCredentialsController.schoolId!,
-        teacherID:  UserCredentialsController.teacherModel!.docid!,
+        schoolID: UserCredentialsController.schoolId!,
+        teacherID: UserCredentialsController.teacherModel!.docid!,
       ), //Home Work
-      const UnderMaintanceScreen(text: ''), //Notice
-      const UnderMaintanceScreen(text: ''), //Events
+      NoticePage(), //Notice
+      const EventList(), //Events
       CreateExamNameScreen(
           schooilID: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
@@ -53,7 +53,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!), //Progress Report
       const UnderMaintanceScreen(text: ''), //Subject
       const UnderMaintanceScreen(text: ''), //Teachers
-      const UnderMaintanceScreen(text: ''), //Meetings
+      SchoolLevelMeetingPage(), //Meetings
 
       // StudentSubjectHome(),
     ];
@@ -61,77 +61,77 @@ class ClassTeacherAccessories extends StatelessWidget {
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
     return Expanded(
-        child: AnimationLimiter(
-      child: GridView.count(
-        physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
-        padding: EdgeInsets.all(_w / 60),
-        crossAxisCount: columnCount,
-        children: List.generate(
-          _acc_text.length,
-          (int index) {
-            return AnimationConfiguration.staggeredGrid(
-              position: index,
-              duration: const Duration(milliseconds: 300),
-              columnCount: columnCount,
-              child: ScaleAnimation(
-                duration: const Duration(milliseconds: 900),
-                curve: Curves.fastLinearToSlowEaseIn,
-                child: FadeInAnimation(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(screenNavigation[index]);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.5),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(30)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 40,
-                              spreadRadius: 10,
-                            ),
-                          ],
-                        ),
-                        height: _h / 100,
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                            bottom: _w / 10, left: _w / 50, right: _w / 50),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              height: 75,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(_acc_images[index]),
+      child: AnimationLimiter(
+        child: GridView.count(
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
+          padding: EdgeInsets.all(_w / 60),
+          crossAxisCount: columnCount,
+          children: List.generate(
+            _acc_text.length,
+            (int index) {
+              return AnimationConfiguration.staggeredGrid(
+                position: index,
+                duration: const Duration(milliseconds: 300),
+                columnCount: columnCount,
+                child: ScaleAnimation(
+                  duration: const Duration(milliseconds: 900),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  child: FadeInAnimation(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(screenNavigation[index]);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.5),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 40,
+                                spreadRadius: 10,
+                              ),
+                            ],
+                          ),
+                          height: _h / 100,
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                              bottom: _w / 10, left: _w / 50, right: _w / 50),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                height: 75,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(_acc_images[index]),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              _acc_text[index],
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.black.withOpacity(0.5),
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600),
-                            )
-                          ],
+                              Text(
+                                _acc_text[index],
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.black.withOpacity(0.5),
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
-    ),
     );
   }
 }

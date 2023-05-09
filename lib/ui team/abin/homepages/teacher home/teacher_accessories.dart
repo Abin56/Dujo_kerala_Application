@@ -1,10 +1,14 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 
-import 'package:dujo_kerala_application/ui%20team/abin/homepages/parent%20home/parent_home.dart';
+import 'package:dujo_kerala_application/sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
+import 'package:dujo_kerala_application/sruthi/Notice/Tabs/school_level_tab.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../sruthi/Event/Tabs/school_level_tab.dart';
 
 class TeacherAccessories extends StatefulWidget {
   // var schoolId;
@@ -35,16 +39,16 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
-      ParentHomePage(),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      SchoolLevelNoticePage(),
+      const SchoolLevelPage(),
+      const UnderMaintanceScreen(text: "text"),
+      const UnderMaintanceScreen(text: "text"),
+      SchoolLevelMeetingPage(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
