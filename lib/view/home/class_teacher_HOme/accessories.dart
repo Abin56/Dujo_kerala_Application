@@ -9,12 +9,12 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../sruthi/Event/event_list.dart';
 import '../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../sruthi/Notice/notice_list.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
+import '../events/event_list.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   const ClassTeacherAccessories({

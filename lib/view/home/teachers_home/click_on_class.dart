@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
+import 'package:dujo_kerala_application/sruthi/Notice/Tabs/school_level_tab.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/exam_notification/view_exams.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
+import '../events/Tabs/school_level_tab.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -42,15 +45,15 @@ class ClickOnClasss extends StatelessWidget {
       const UnderMaintanceScreen(text: ''), //TimeTable
       const ViewExamsScreen(), //Exam
       const UnderMaintanceScreen(text: ''), //Home Works
-      const UnderMaintanceScreen(text: ''), // Notice
-      const UnderMaintanceScreen(text: ''), // Events
+      SchoolLevelNoticePage(), // Notice
+      const SchoolLevelPage(), // Events
       ViewExamsForProgressreport(
           batchId: UserCredentialsController.batchId!,
           classID: classID,
           schooilID:
               UserCredentialsController.schoolId!), //Progress Report view
       const UnderMaintanceScreen(text: ''), // Subjects
-      const UnderMaintanceScreen(text: ''), // Meetings
+      SchoolLevelMeetingPage(), // Meetings
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
