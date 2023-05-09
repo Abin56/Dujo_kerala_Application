@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, must_be_immutable, deprecated_member_use
 
 import 'dart:developer';
+
 import 'package:dujo_kerala_application/view/pages/login/sign_up/guardian_sign_up/guardian_signup.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/teacher_sign_up/teacher_sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -101,7 +102,11 @@ class UserVerifyOTPScreen extends StatelessWidget {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) async {
                       if (state is AuthLoggedInState) {
-                           showDialog(
+                        FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: userEmail, password: userPassword)
+                            .then((value) {
+                          showDialog(
                             context: context,
                             barrierDismissible: false, // user must tap button!
                             builder: (BuildContext context) {
@@ -133,12 +138,7 @@ class UserVerifyOTPScreen extends StatelessWidget {
                               );
                             },
                           );
-                        // FirebaseAuth.instance
-                        //     .createUserWithEmailAndPassword(
-                        //         email: userEmail, password: userPassword)
-                        //     .then((value) {
-                       
-                        // });
+                        });
                       } else if (state is AuthErrorState) {
                        
                         ScaffoldMessenger.of(context).showSnackBar(

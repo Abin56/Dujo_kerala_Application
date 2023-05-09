@@ -129,7 +129,7 @@ class ParentSignUpPage extends StatelessWidget {
                     kWidth30,
                     SinUpTextFromFiled(
                       text: "Your Name",
-                      hintText: 'Miss Latha',
+                      hintText: 'Enter your Name',
                       textfromController:
                           parentSignUpController.userNameController,
                       validator: checkFieldEmpty,
