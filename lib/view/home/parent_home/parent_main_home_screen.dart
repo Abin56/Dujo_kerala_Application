@@ -1,20 +1,13 @@
 import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
-import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../drawer/parent_drawer.dart';
 
-
 class ParentMainHomeScreen extends StatefulWidget {
-
-  ParentMainHomeScreen(
-      {
-
-      Key? key})
-      : super(key: key);
+  const ParentMainHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<ParentMainHomeScreen> createState() => _ParentMainHomeScreenState();

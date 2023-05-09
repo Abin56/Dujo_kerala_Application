@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/model/parent_model/parent_model.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../helper/shared_pref_helper.dart';
 import '../../utils/utils.dart';
 import '../../view/home/parent_home/parent_main_home_screen.dart';
@@ -29,6 +28,8 @@ class ParentLoginController extends GetxController {
             await FirebaseFirestore.instance
                 .collection('SchoolListCollection')
                 .doc(UserCredentialsController.schoolId)
+                .collection(UserCredentialsController.batchId ?? "")
+                .doc(UserCredentialsController.batchId)
                 .collection('classes')
                 .doc(UserCredentialsController.classId)
                 .collection('ParentCollection')
@@ -48,7 +49,7 @@ class ParentLoginController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return ParentMainHomeScreen();
+              return const ParentMainHomeScreen();
             }), (route) => false);
           }
           isLoading.value = false;

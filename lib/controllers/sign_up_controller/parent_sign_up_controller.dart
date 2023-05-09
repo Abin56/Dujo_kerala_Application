@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -32,6 +33,8 @@ class ParentSignUpController extends GetxController {
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
+      .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId)
       .collection('classes')
       .doc(UserCredentialsController.classId)
       .collection('Temp_ParentCollection');
@@ -41,6 +44,8 @@ class ParentSignUpController extends GetxController {
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
       .collection('classes')
+      .doc(UserCredentialsController.batchId)
+      .collection(UserCredentialsController.batchId ?? "")
       .doc(UserCredentialsController.classId)
       .collection('ParentCollection');
 

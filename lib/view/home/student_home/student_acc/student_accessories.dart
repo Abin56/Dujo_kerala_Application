@@ -12,7 +12,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../sruthi/Meetings/meetings_list.dart';
+import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../../sruthi/Notice/notice_list.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Subject/subject_display.dart';
@@ -40,11 +40,11 @@ class StudentAccessories extends StatelessWidget {
       const UnderMaintanceScreen(text: 'Time Table'),
       const UnderMaintanceScreen(text: 'Home Works'),
       NoticePage(),
-      EventList(),
+      const EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
-      StudentSubjectHome(),
+      const StudentSubjectHome(),
       const UnderMaintanceScreen(text: 'Teacher'),
-      const MeetingList(),
+      SchoolLevelMeetingPage(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

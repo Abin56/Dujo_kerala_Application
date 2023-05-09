@@ -2,13 +2,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/home/guardian_home/guardian_accer.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../sruthi/User Edit Profile/user_edit_profile.dart';
-import 'guardian_accer.dart';
 
 class GuardianHomeScreen extends StatefulWidget {
   @override
@@ -108,7 +108,7 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                 ],
               ),
             ),
-          GuardianAccessories(studentName: studentName)
+            GuardianAccessories(studentName: studentName)
           ],
         ),
       ),
