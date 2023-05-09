@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
-import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
+import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../events/event_list.dart';
 import '../progress_report/progress_report.dart';

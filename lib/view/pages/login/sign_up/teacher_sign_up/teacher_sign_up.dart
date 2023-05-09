@@ -94,8 +94,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     () => CircleAvatar(
                       backgroundImage: getImageController
                               .pickedImage.value.isEmpty
-                          ? const NetworkImage(
-                              "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg")
+                          ? const NetworkImage(netWorkImagePathPerson)
                           : FileImage(
                                   File(getImageController.pickedImage.value))
                               as ImageProvider,

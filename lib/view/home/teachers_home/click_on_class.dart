@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
-import 'package:dujo_kerala_application/sruthi/Notice/Tabs/school_level_tab.dart';
+import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/exam_notification/view_exams.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../colors/colors.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
@@ -45,15 +46,32 @@ class ClickOnClasss extends StatelessWidget {
       const UnderMaintanceScreen(text: ''), //TimeTable
       const ViewExamsScreen(), //Exam
       const UnderMaintanceScreen(text: ''), //Home Works
-      SchoolLevelNoticePage(), // Notice
-      const SchoolLevelPage(), // Events
+
+      Scaffold(
+        appBar: AppBar(
+          backgroundColor: adminePrimayColor,
+          title: const Text("School Notice"),
+        ),
+        body: SchoolLevelNoticePage(),
+      ),
+      // Notice
+
+      Scaffold(
+        appBar: AppBar(
+          backgroundColor: adminePrimayColor,
+          title: const Text("School Events"),
+        ),
+        body: const SchoolLevelPage(),
+      ),
+      // Events
       ViewExamsForProgressreport(
           batchId: UserCredentialsController.batchId!,
           classID: classID,
           schooilID:
               UserCredentialsController.schoolId!), //Progress Report view
       const UnderMaintanceScreen(text: ''), // Subjects
-      SchoolLevelMeetingPage(), // Meetings
+      SchoolLevelMeetingPage(),
+      // Meetings
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;

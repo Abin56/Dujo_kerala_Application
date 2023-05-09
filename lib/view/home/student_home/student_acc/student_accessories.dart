@@ -12,8 +12,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
-import '../../../../sruthi/Notice/notice_list.dart';
+import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
+import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Subject/subject_display.dart';
 

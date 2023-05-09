@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../view/constant/sizes/constant.dart';
 import '../view/home/sample/under_maintance.dart';
 
 class CircleAvatharImageSelectionWidget extends StatelessWidget {
-    ImageProvider<Object>? backgroundImage;
-   CircleAvatharImageSelectionWidget({
-  this.backgroundImage,
+  ImageProvider<Object>? backgroundImage;
+  CircleAvatharImageSelectionWidget({
+    this.backgroundImage,
     super.key,
   });
 
@@ -15,10 +16,8 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
-          backgroundImage: const NetworkImage(
-                        "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg"),
+          backgroundImage: const NetworkImage(netWorkImagePathPerson),
           radius: 60,
-          
           child: Stack(
             children: [
               InkWell(
@@ -35,7 +34,9 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
                         icon: const Icon(Icons.edit),
                         color: Colors.white,
                         onPressed: () async {
-                            Get.to(const UnderMaintanceScreen(text: '',));
+                          Get.to(const UnderMaintanceScreen(
+                            text: '',
+                          ));
                         },
                       ),
                     ),
@@ -49,4 +50,3 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
     );
   }
 }
-

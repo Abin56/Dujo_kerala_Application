@@ -1,6 +1,6 @@
 import 'package:dujo_kerala_application/sruthi/Exam%20Notification/Teacher_Upload/exm_teacher_upload.dart';
-import 'package:dujo_kerala_application/sruthi/Meetings/meetings_list.dart';
-import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
+import 'package:dujo_kerala_application/view/pages/Meetings/meetings_list.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 
 import 'package:dujo_kerala_application/sruthi/Study%20Materials/study_materials_list.dart';
 import 'package:dujo_kerala_application/sruthi/homeWork/student_homework_list.dart';
