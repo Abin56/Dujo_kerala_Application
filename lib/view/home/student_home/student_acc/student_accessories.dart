@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/sruthi/Exam%20Notification/Teacher_Upload/exm_teacher_upload.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
@@ -15,6 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../../sruthi/Notice/notice_list.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
+import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Subject/subject_display.dart';
 
 class StudentAccessories extends StatelessWidget {
@@ -32,19 +34,20 @@ class StudentAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
+
+      const ExmNotification(), //Exam
+      const UnderMaintanceScreen(text: ''), //Time Table
+      const ViewHomeWorks(), // Home Works
+      NoticePage(), //Notice
+      const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: FirebaseAuth.instance.currentUser!.uid,
-          batchId: UserCredentialsController.batchId!),
-      const UnderMaintanceScreen(text: 'Time Table'),
-      const UnderMaintanceScreen(text: 'Home Works'),
-      NoticePage(),
-      const EventList(),
-      const UnderMaintanceScreen(text: 'Progress Report'),
-       StudentSubjectHome(),
-      const UnderMaintanceScreen(text: 'Teacher'),
-      SchoolLevelMeetingPage(),
+          batchId: UserCredentialsController.batchId!), //Progress Report
+      StudentSubjectHome(), //Subjects
+      const UnderMaintanceScreen(text: 'Teacher'), //Teachers
+      SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -132,7 +135,7 @@ List<String> _acc_text = [
   'Notices',
   'Events',
   'Progress Report',
-  'Subjects',
+  'Subjects/Materials',
   'Teachers',
   'Meetings'
 ];
