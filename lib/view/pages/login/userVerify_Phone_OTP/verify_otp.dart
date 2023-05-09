@@ -101,11 +101,7 @@ class UserVerifyOTPScreen extends StatelessWidget {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) async {
                       if (state is AuthLoggedInState) {
-                        FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: userEmail, password: userPassword)
-                            .then((value) {
-                          showDialog(
+                           showDialog(
                             context: context,
                             barrierDismissible: false, // user must tap button!
                             builder: (BuildContext context) {
@@ -137,7 +133,12 @@ class UserVerifyOTPScreen extends StatelessWidget {
                               );
                             },
                           );
-                        });
+                        // FirebaseAuth.instance
+                        //     .createUserWithEmailAndPassword(
+                        //         email: userEmail, password: userPassword)
+                        //     .then((value) {
+                       
+                        // });
                       } else if (state is AuthErrorState) {
                        
                         ScaffoldMessenger.of(context).showSnackBar(

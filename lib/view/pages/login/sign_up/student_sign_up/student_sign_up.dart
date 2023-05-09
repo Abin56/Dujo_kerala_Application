@@ -248,6 +248,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                               showToast(msg: "All Fields are mandatory");
                               return;
                             } else {
+                              
                               studentController.updateStudentData().then(
                                   (value) => Navigator.pushAndRemoveUntil(
                                           context, MaterialPageRoute(
