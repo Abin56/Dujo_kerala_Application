@@ -42,7 +42,7 @@ class StudentAccessories extends StatelessWidget {
       NoticePage(),
       const EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
-      const StudentSubjectHome(),
+       StudentSubjectHome(),
       const UnderMaintanceScreen(text: 'Teacher'),
       SchoolLevelMeetingPage(),
     ];

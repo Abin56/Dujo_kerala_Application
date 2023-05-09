@@ -1,18 +1,22 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/get_teacher_subject/get_sub.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../view/widgets/container_image.dart';
 import '../../../widgets/Iconbackbutton.dart';
 
 class StudentSubjectHome extends StatelessWidget {
-  const StudentSubjectHome({super.key});
+  TeacherSubjectController teacherSubjectController =
+      Get.put(TeacherSubjectController());
+  StudentSubjectHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class StudentSubjectHome extends StatelessWidget {
                 .doc(UserCredentialsController.batchId)
                 .collection("classes")
                 .doc(UserCredentialsController.classId)
-                .collection("teachers")
+                .collection("subjects")
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -57,9 +61,11 @@ class StudentSubjectHome extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
-                    children: List.generate(
-                      snapshot.data!.docs.length,
-                      (index) => Container(
+                    children:
+                        List.generate(snapshot.data!.docs.length, (index) {
+                      teacherSubjectController
+                          .getSubject(snapshot.data!.docs[index]['teacherId']);
+                      return Container(
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 90, 147, 194),
                           borderRadius: BorderRadius.circular(20),
@@ -75,7 +81,7 @@ class StudentSubjectHome extends StatelessWidget {
                               children: [
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
@@ -83,23 +89,31 @@ class StudentSubjectHome extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                       child: ContainerImage(
-                                        height: 70.h,
+                                        height: 60.h,
                                         imagePath:
                                             'assets/images/teachernew.png',
                                         width: 70.w,
                                       ),
                                     ),
                                     SizedBox(width: 10.h),
-                                    Expanded(
-                                      child: SizedBox(
-                                        height:
-                                            50, // set a fixed height for the container
-                                        child: GooglePoppinsWidgets(
-                                          text: snapshot.data!.docs[index]['teacherName'],
-                                          fontsize: 12.h,
-                                          color: Colors.white,
-                                        ),
-                                      ),
+                                    SizedBox(
+                                      height:
+                                          50, // set a fixed height for the container
+                                      child: Center(
+                                          child: FutureBuilder(
+                                              future: teacherSubjectController
+                                                  .getSubject(
+                                                      snapshot.data?.docs[index]
+                                                          ['teacherId']),
+                                              builder: (context, snap) {
+                                                return SizedBox(
+                                                  height: 40,
+                                                  width: 70,
+                                                  child: GooglePoppinsWidgets(
+                                                      text: snap.data ?? "",
+                                                      fontsize: 12),
+                                                );
+                                              })),
                                     )
                                   ],
                                 ),
@@ -108,16 +122,17 @@ class StudentSubjectHome extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     GooglePoppinsWidgets(
-                                      text: "Chemistry",
-                                      fontsize: 25.h,
+                                      text: snapshot.data!.docs[index]
+                                          ['subjectName'],
+                                      fontsize: 20.h,
                                       color: cWhite,
                                     ),
                                   ],
                                 ),
                               ]),
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ]);
