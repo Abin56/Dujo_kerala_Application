@@ -35,9 +35,9 @@ class EventList extends StatelessWidget {
         ),
 
         //  appBar: AppBar(backgroundColor: adminePrimayColor),
-        body: const SafeArea(
+        body: SafeArea(
           child: TabBarView(
-            children: [ClassLevelPage(), SchoolLevelPage()],
+            children: [ ClassLevelPage(), SchoolLevelPage()],
           ),
         ),
       ),
