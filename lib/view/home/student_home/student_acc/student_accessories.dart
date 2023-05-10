@@ -24,20 +24,15 @@ class StudentAccessories extends StatefulWidget {
   });
 
   @override
-  State<StudentAccessories> createState() => _StudentAccessoriesState(); 
-} 
+  State<StudentAccessories> createState() => _StudentAccessoriesState();
+}
 
-
-class _StudentAccessoriesState extends State<StudentAccessories> { 
-
+class _StudentAccessoriesState extends State<StudentAccessories> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-  
-  } 
-
-
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +49,14 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
           classID: UserCredentialsController.classId!,
           studentId: FirebaseAuth.instance.currentUser!.uid,
           batchId: UserCredentialsController.batchId!),
-           const StudentShowTimeTable(),
-          const UnderMaintanceScreen(text: ''),
-      
+      const StudentShowTimeTable(),
+      const UnderMaintanceScreen(text: ''),
+
       const UnderMaintanceScreen(text: 'Home Works'),
       NoticePage(),
       const EventList(),
       const UnderMaintanceScreen(text: 'Progress Report'),
-       StudentSubjectHome(),
+      StudentSubjectHome(),
       const UnderMaintanceScreen(text: 'Teacher'),
       SchoolLevelMeetingPage(),
     ];
