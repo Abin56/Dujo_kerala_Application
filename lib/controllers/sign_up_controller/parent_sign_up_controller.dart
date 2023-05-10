@@ -131,6 +131,9 @@ class ParentSignUpController extends GetxController {
           isLoading.value = false;
           showToast(msg: "Successfully Created");
           clearControllers();
+        } else {
+          isLoading.value = false;
+          showToast(msg: 'Please Upload Image');
         }
       });
 
