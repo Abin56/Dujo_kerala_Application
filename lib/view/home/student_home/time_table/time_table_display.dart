@@ -21,7 +21,14 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
     'fifthPeriod',
     'sixthPeriod',
     'seventhPeriod'
-  ];
+  ]; 
+
+  List<String>periodNumbers = [
+    '1', '2', '3', '4', '5', '6', '7'
+  ]; 
+
+  List<String>days = ['Monday', 
+  'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
   @override
   void initState() {
@@ -51,103 +58,190 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
         body: Center(
           child: 
-          StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection(UserCredentialsController.batchId!).doc(UserCredentialsController.batchId).collection('classes').doc(UserCredentialsController.classId).collection('TimeTables').snapshots(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData){
-                  return ListView.separated( 
-                shrinkWrap: true, 
-                physics: const ScrollPhysics(),
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 10,);
-                  },
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 7,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: Container(
-                              width: 100, 
-                              height: 100,
-                              color: Colors.orange,
-                              child: Center(
-                                child: Text(snapshot.data!.docs.where((element) => element.id=="Monday").first [ periodList[index]][ periodList[index]]),
-                                // child: Text(widget.mon.data()![(index == 3)
-                                //     ? 'fouthPeriod'
-                                //     : periodList[index]][periodList[index]]),
-                              ),
+          Expanded(
+            child: ListView( 
+              scrollDirection: Axis.horizontal,
+              children: [ 
+                ListView( 
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  children: [
+                    Flexible(
+                                      child: Container(
+                                        width: 100, 
+                                        height: 100,
+                                        color: Colors.orange,
+                                        child:  Center(
+                                          child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+                                          //     ? 'fouthPeriod'
+                                          //     : periodList[index]][periodList[index]]),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Container(
+                                        width: 100, 
+                                        height: 100,
+                                        color: Colors.orange,
+                                        child:  Center(
+                                          child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+                                          //     ? 'fouthPeriod'
+                                          //     : periodList[index]][periodList[index]]),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Container(
+                                        width: 100, 
+                                        height: 100,
+                                        color: Colors.orange,
+                                        child:  Center(
+                                          child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+                                          //     ? 'fouthPeriod'
+                                          //     : periodList[index]][periodList[index]]),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Container(
+                                        width: 100, 
+                                        height: 100,
+                                        color: Colors.orange,
+                                        child:  Center(
+                                          child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+                                          //     ? 'fouthPeriod'
+                                          //     : periodList[index]][periodList[index]]),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Container(
+                                        width: 100, 
+                                        height: 100,
+                                        color: Colors.orange,
+                                        child:  Center(
+                                          child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+                                          //     ? 'fouthPeriod'
+                                          //     : periodList[index]][periodList[index]]),
+                                        ),
+                                      ),
+                                    ),
+                  ],
+                ), 
+                
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection(UserCredentialsController.batchId!).doc(UserCredentialsController.batchId).collection('classes').doc(UserCredentialsController.classId).collection('TimeTables').snapshots(),
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData){
+                        return ListView.separated( 
+                      shrinkWrap: true, 
+                      physics: const ScrollPhysics(),
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 10,);
+                        },
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 7,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                    width: 100, 
+                                    height: 100,
+                                    color: Colors.orange,
+                                    child:  Center(
+                                      child: Text(periodNumbers[index], style: const TextStyle(fontWeight: FontWeight.bold),),
+                                      //     ? 'fouthPeriod'
+                                      //     : periodList[index]][periodList[index]]),
+                                    ),
+                                  ),
+                                ), 
+                                Flexible(
+                                  child: Container(
+                                    width: 100, 
+                                    height: 100,
+                                    color: Colors.orange,
+                                    child: Center(
+                                      child: Text(snapshot.data!.docs.where((element) => element.id=="Monday").first [ periodList[index]][ periodList[index]]),
+                                      // child: Text(widget.mon.data()![(index == 3)
+                                      //     ? 'fouthPeriod'
+                                      //     : periodList[index]][periodList[index]]),
+                                    ),
+                                  ),
+                                ), 
+                                Flexible(
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    color: Colors.orange,
+                                    child: Center(
+                                     child: Text(snapshot.data!.docs.where((element) => element.id=="Tuesday").first [ periodList[index]] [ periodList[index]]),
+                                      // child: Text(widget.tues.data()![(index == 3)
+                                      //     ? 'fouthPeriod'
+                                      //     : periodList[index]][periodList[index]]),
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Container(
+                                    width: 100, 
+                                    height: 100,
+                                    color: Colors.orange,
+                                    child: Center(
+                                     child: Text(snapshot.data!.docs.where((element) => element.id=="Wednesday").first[ periodList[index]] [ periodList[index]]),
+                                      // child: Text(widget.wed.data()![(index == 3)
+                                      //     ? 'fouthPeriod'
+                                      //     : periodList[index]][periodList[index]]),
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Container(
+                                    width: 100, 
+                                    height: 100,
+                                    color: Colors.orange,
+                                    child: Center(
+                                      child: Text(snapshot.data!.docs.where((element) => element.id=="Thursday").first[ periodList[index]] [ periodList[index]]),
+                                      // child: Text(widget.thurs.data()![(index == 3)
+                                      //     ? 'fouthPeriod'
+                                      //     : periodList[index]][periodList[index]]),
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    color: Colors.orange,
+                                    child: Center(
+                                      child: Text(snapshot.data!.docs.where((element) => element.id=="Friday").first[ periodList[index]] [ periodList[index]]),
+                                    //   child: Text(widget.fri.data()![(index == 3)
+                                    //       ? 'fouthPeriod'
+                                          
+                                    //       : periodList[index]][periodList[index]]),
+                                    // ),
+                                  ),
+                                ),
+                            )],
                             ),
-                          ), 
-                          Flexible(
-                            child: Container(
-                              width: 100,
-                              height: 100,
-                              color: Colors.orange,
-                              child: Center(
-                               child: Text(snapshot.data!.docs.where((element) => element.id=="Tuesday").first [ periodList[index]] [ periodList[index]]),
-                                // child: Text(widget.tues.data()![(index == 3)
-                                //     ? 'fouthPeriod'
-                                //     : periodList[index]][periodList[index]]),
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              width: 100, 
-                              height: 100,
-                              color: Colors.orange,
-                              child: Center(
-                               child: Text(snapshot.data!.docs.where((element) => element.id=="Wednesday").first[ periodList[index]] [ periodList[index]]),
-                                // child: Text(widget.wed.data()![(index == 3)
-                                //     ? 'fouthPeriod'
-                                //     : periodList[index]][periodList[index]]),
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              width: 100, 
-                              height: 100,
-                              color: Colors.orange,
-                              child: Center(
-                                child: Text(snapshot.data!.docs.where((element) => element.id=="Thursday").first[ periodList[index]] [ periodList[index]]),
-                                // child: Text(widget.thurs.data()![(index == 3)
-                                //     ? 'fouthPeriod'
-                                //     : periodList[index]][periodList[index]]),
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              width: 100,
-                              height: 100,
-                              color: Colors.orange,
-                              child: Center(
-                                child: Text(snapshot.data!.docs.where((element) => element.id=="Friday").first[ periodList[index]] [ periodList[index]]),
-                              //   child: Text(widget.fri.data()![(index == 3)
-                              //       ? 'fouthPeriod'
-                                    
-                              //       : periodList[index]][periodList[index]]),
-                              // ),
-                            ),
-                          ),
-                      )],
-                      ),
-                    );
-                  }); 
-              }  
-              if(!snapshot.hasData){
-                return const Center(child: Text('No Timetable Added'),);
-              }
-              return const Center(child: CircularProgressIndicator(),);
-            }
+                          );
+                        }); 
+                    }  
+                    if(!snapshot.hasData){
+                      return const Center(child: Text('No Timetable Added'),);
+                    }
+                    return const Center(child: CircularProgressIndicator(),);
+                  }
+                ),
+              ],
+            ),
           ),
         ));
   }
