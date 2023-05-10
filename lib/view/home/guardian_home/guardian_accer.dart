@@ -1,10 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/view/home/events/event_list.dart';
+import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
-import 'package:dujo_kerala_application/view/home/events/event_list.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -27,26 +27,27 @@ class GuardianAccessories extends StatelessWidget {
       AttendenceBookScreen(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendence
+          classID: UserCredentialsController.classId!), //Attendence 1
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: UserCredentialsController.guardianModel!.guardianName!,
-          batchId: UserCredentialsController.batchId!),
-      LeaveApplicationScreen(
-          studentName: studentName,
-          guardianName: UserCredentialsController.guardianModel!.guardianName,
-          classID: UserCredentialsController.classId!,
-          schoolId: UserCredentialsController.schoolId!,
-          studentID: UserCredentialsController.guardianModel!.guardianName,
-          batchId: UserCredentialsController.batchId!),
+          batchId: UserCredentialsController.batchId!), //exams 2
+      const StudentShowTimeTable(), //time table 3
+      const UnderMaintanceScreen(text: ""), //home work 4
+      // LeaveApplicationScreen(
+      //     studentName: studentName,
+      //     guardianName: UserCredentialsController.guardianModel!.guardianName,
+      //     classID: UserCredentialsController.classId!,
+      //     schoolId: UserCredentialsController.schoolId!,
+      //     studentID: UserCredentialsController.guardianModel!.guardianName,
+      //     batchId: UserCredentialsController.batchId!), //notices
+      NoticePage(), //notice//5
+      const EventList(), //events//6
+      const UnderMaintanceScreen(text: ""), //progress report//7
+      const UnderMaintanceScreen(text: ""), //subjects
+      SchoolLevelMeetingPage(), //meetings
       const UnderMaintanceScreen(text: ""),
-      NoticePage(),
-      const EventList(),
-      const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
-      SchoolLevelMeetingPage(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

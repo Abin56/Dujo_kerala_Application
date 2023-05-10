@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/helper/shared_pref_helper.dart';
 import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
@@ -7,10 +8,8 @@ import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_hom
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../utils/utils.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../view/home/sample/under_maintance.dart';
 
 class TeacherLoginController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -54,12 +53,17 @@ class TeacherLoginController extends GetxController {
                 SharedPreferencesHelper.userRoleKey, 'teacher');
 
             if (context.mounted) {
-              Get.offAll(TeacherMainHomeScreen());
+              Get.offAll(const TeacherMainHomeScreen());
             }
           } else {
             await firebaseAuth.signOut();
             showToast(msg: "You are not a Teacher");
           }
+        }
+      }).catchError((error) {
+        if (error is FirebaseAuthException) {
+          isLoading.value = false;
+          handleFirebaseError(error);
         }
       });
 

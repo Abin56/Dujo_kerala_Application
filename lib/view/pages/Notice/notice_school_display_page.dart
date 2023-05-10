@@ -1,11 +1,10 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../model/notice_model/school_level_notice_model.dart';
-import '../../widgets/fonts/google_poppins.dart';
 
 class NoticeClassDisplayPage extends StatelessWidget {
   const NoticeClassDisplayPage({super.key, required this.noticeModel});
@@ -17,7 +16,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: GooglePoppinsWidgets(
+          title: GooglePoppinsWidgetsNotice(
             fontsize: 20.h,
             text: 'Notice',
           ),
@@ -62,7 +61,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      GooglePoppinsWidgets(
+                                      GooglePoppinsWidgetsNotice(
                                         text: noticeModel.heading,
                                         fontsize: 22.h,
                                         fontWeight: FontWeight.w500,
@@ -70,7 +69,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                     ],
                                   ),
                                   kHeight20,
-                                  GooglePoppinsWidgets(
+                                  GooglePoppinsWidgetsNotice(
                                       text:
                                           "This is to inform all the students that  ${noticeModel.customContent}  will be  conductod ${noticeModel.dateofoccation}  at ${noticeModel.venue} with various cultural programmes.${noticeModel.chiefGuest} will be grace the occasion. Student who would like to occasion in various programme should contact their\nrespective classteacher latest by ${noticeModel.dateofoccation} .",
                                       fontsize: 19.h),
@@ -78,7 +77,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      GooglePoppinsWidgets(
+                                      GooglePoppinsWidgetsNotice(
                                         text:
                                             "Date : ${noticeModel.publishedDate}",
                                         fontsize: 17.h,
@@ -89,7 +88,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      GooglePoppinsWidgets(
+                                      GooglePoppinsWidgetsNotice(
                                           text: "Signed by: Principal",
                                           fontsize: 17.h)
                                     ],
@@ -105,6 +104,34 @@ class NoticeClassDisplayPage extends StatelessWidget {
                 ]),
           )
         ]),
+      ),
+    );
+  }
+}
+
+class GooglePoppinsWidgetsNotice extends StatelessWidget {
+  String text;
+  double fontsize;
+  FontWeight? fontWeight;
+  Color? color;
+  VoidCallback? onTap;
+  GooglePoppinsWidgetsNotice({
+    required this.text,
+    required this.fontsize,
+    this.fontWeight,
+    this.color,
+    this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.poppins(
+        fontSize: fontsize,
+        fontWeight: fontWeight,
+        color: color,
       ),
     );
   }

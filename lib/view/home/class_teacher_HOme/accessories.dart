@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/subjects/class_teacher_subjectlist.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -38,7 +39,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
       const UnderMaintanceScreen(text: ''), //Exam
-      const UnderMaintanceScreen(text: ''), //TimeTable
+      const StudentShowTimeTable(), //TimeTable
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
@@ -52,7 +53,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-      TeacherSubjectsList(), //Subject
+      const TeacherSubjectsList(), //Subject
       const UnderMaintanceScreen(text: ''), //Teachers
       SchoolLevelMeetingPage(), //Meetings
 
