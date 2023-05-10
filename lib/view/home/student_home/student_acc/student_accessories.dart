@@ -18,6 +18,7 @@ import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
+import '../time_table/time_table_display.dart';
 
 class StudentAccessories extends StatelessWidget {
   const StudentAccessories({
@@ -36,7 +37,7 @@ class StudentAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!), //Attendence
 
       const ExmNotification(), //Exam
-      const UnderMaintanceScreen(text: ''), //Time Table
+      const StudentShowTimeTable(), //Time Table
       const ViewHomeWorks(), // Home Works
       NoticePage(), //Notice
       const EventList(), //Events
@@ -149,5 +150,5 @@ var _acc_images = [
   'assets/images/splash.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/teachers.png',
+  'assets/images/library.png',
 ];

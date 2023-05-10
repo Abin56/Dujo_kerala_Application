@@ -15,6 +15,7 @@ import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
 import '../../events/event_list.dart';
+import '../../student_home/time_table/time_table_display.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
@@ -40,7 +41,7 @@ class ParentAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-      const UnderMaintanceScreen(text: ""), // Time Tabe
+      const StudentShowTimeTable(), // Time Tabe
 
       const ViewHomeWorks(), // Home Works
       NoticePage(), //Notice

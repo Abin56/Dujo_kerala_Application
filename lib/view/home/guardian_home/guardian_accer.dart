@@ -16,6 +16,7 @@ import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
 import '../parent_home/progress_report/progress_report.dart';
+import '../student_home/time_table/time_table_display.dart';
 
 class GuardianAccessories extends StatelessWidget {
   String studentName;
@@ -40,7 +41,7 @@ class GuardianAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.guardianModel!.guardianName,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-      const UnderMaintanceScreen(text: ""), // Time Tabe
+      const StudentShowTimeTable(), // Time Tabe
 
       const ViewHomeWorks(), // Home Works
       NoticePage(), //Notice
