@@ -6,21 +6,38 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
-import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Subject/subject_display.dart';
 
-class StudentAccessories extends StatelessWidget {
+class StudentAccessories extends StatefulWidget {
   const StudentAccessories({
     super.key,
   });
+
+  @override
+  State<StudentAccessories> createState() => _StudentAccessoriesState(); 
+} 
+
+
+class _StudentAccessoriesState extends State<StudentAccessories> { 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  
+  } 
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +54,9 @@ class StudentAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           studentId: FirebaseAuth.instance.currentUser!.uid,
           batchId: UserCredentialsController.batchId!),
-      const UnderMaintanceScreen(text: 'Time Table'),
+           const StudentShowTimeTable(),
+          const UnderMaintanceScreen(text: ''),
+      
       const UnderMaintanceScreen(text: 'Home Works'),
       NoticePage(),
       const EventList(),
