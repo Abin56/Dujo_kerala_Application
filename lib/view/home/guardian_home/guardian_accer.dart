@@ -1,18 +1,22 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
-import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../sruthi/Exam Notification/Teacher_Upload/exm_teacher_upload.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
+import '../../pages/Homework/view_home_work.dart';
+import '../../pages/Notice/notice_list.dart';
+import '../../pages/Subject/subject_display.dart';
 import '../parent_home/progress_report/progress_report.dart';
+import '../student_home/time_table/time_table_display.dart';
 
 class GuardianAccessories extends StatelessWidget {
   String studentName;
@@ -27,27 +31,30 @@ class GuardianAccessories extends StatelessWidget {
       AttendenceBookScreen(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendence 1
+          classID: UserCredentialsController.classId!),
+      //Attendence8
+      const ExmNotification(), // Exams
+      LeaveApplicationScreen(
+          studentName: studentName,
+          guardianName: UserCredentialsController.guardianModel!.guardianName,
+          classID: UserCredentialsController.classId!,
+          schoolId: UserCredentialsController.schoolId!,
+          studentID: UserCredentialsController.guardianModel!.guardianName,
+          batchId: UserCredentialsController.batchId!), //Leave Letter
+      const StudentShowTimeTable(), // Time Tabe
+
+      const ViewHomeWorks(), // Home Works
+      NoticePage(), //Notice
+      const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: UserCredentialsController.guardianModel!.guardianName!,
-          batchId: UserCredentialsController.batchId!), //exams 2
-      const StudentShowTimeTable(), //time table 3
-      const UnderMaintanceScreen(text: ""), //home work 4
-      // LeaveApplicationScreen(
-      //     studentName: studentName,
-      //     guardianName: UserCredentialsController.guardianModel!.guardianName,
-      //     classID: UserCredentialsController.classId!,
-      //     schoolId: UserCredentialsController.schoolId!,
-      //     studentID: UserCredentialsController.guardianModel!.guardianName,
-      //     batchId: UserCredentialsController.batchId!), //notices
-      NoticePage(), //notice//5
-      const EventList(), //events//6
-      const UnderMaintanceScreen(text: ""), //progress report//7
-      const UnderMaintanceScreen(text: ""), //subjects
-      SchoolLevelMeetingPage(), //meetings
-      const UnderMaintanceScreen(text: ""),
+          batchId: UserCredentialsController.batchId!), //Progress Report
+      StudentSubjectHome(), //Subjects
+
+      const UnderMaintanceScreen(text: ""), // Teachers
+      SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -130,6 +137,7 @@ class GuardianAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Exams',
+  'Leave Application',
   'TimeTable',
   'HomeWorks',
   'Notices',
@@ -142,6 +150,7 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/exam.png',
+  'assets/images/homework.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/school_building.png',

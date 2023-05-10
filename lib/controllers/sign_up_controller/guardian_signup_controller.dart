@@ -133,6 +133,9 @@ class GuardianSignUpController extends GetxController {
               GuardianLoginScreen(),
             );
           });
+        }else{
+          isLoading.value=false;
+          showToast(msg: 'Please Upload Image');
         }
       });
 

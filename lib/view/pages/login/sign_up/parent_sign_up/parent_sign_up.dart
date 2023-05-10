@@ -196,6 +196,7 @@ class ParentSignUpPage extends StatelessWidget {
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
+                         keyboardType: TextInputType.number,
                       text: 'Pincode',
                       hintText: 'Enter your Pincode',
                       textfromController:

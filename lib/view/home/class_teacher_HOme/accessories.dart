@@ -53,7 +53,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-      const TeacherSubjectsList(), //Subject
+      const UnderMaintanceScreen(text: ''), //Subject
       const UnderMaintanceScreen(text: ''), //Teachers
       SchoolLevelMeetingPage(), //Meetings
 
