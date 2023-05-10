@@ -43,9 +43,9 @@ class ParentSignUpController extends GetxController {
       .instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
-      .collection('classes')
-      .doc(UserCredentialsController.batchId)
       .collection(UserCredentialsController.batchId ?? "")
+      .doc(UserCredentialsController.batchId)
+      .collection('classes')
       .doc(UserCredentialsController.classId)
       .collection('ParentCollection');
 

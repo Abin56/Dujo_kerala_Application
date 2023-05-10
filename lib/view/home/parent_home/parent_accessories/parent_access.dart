@@ -1,17 +1,18 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
-import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
+import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../events/event_list.dart';
+import '../../student_home/time_table/time_table_display.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
@@ -33,6 +34,7 @@ class ParentAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           studentId: UserCredentialsController.parentModel?.studentID ?? "",
           batchId: UserCredentialsController.batchId!),
+      const StudentShowTimeTable(),
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.parentModel!.parentName!,

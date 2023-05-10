@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
@@ -33,6 +34,7 @@ class GuardianAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           studentId: UserCredentialsController.guardianModel!.guardianName!,
           batchId: UserCredentialsController.batchId!),
+          StudentShowTimeTable(),
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.guardianModel!.guardianName,
