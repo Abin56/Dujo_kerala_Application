@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
@@ -106,17 +107,20 @@ class GuardianLoginScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 20.h),
                       child: GestureDetector(
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            guardianLoginController.signIn(context);
-                          }
-                        },
-                        child: loginButtonWidget(
-                          height: 60,
-                          width: 180,
-                          text: 'Login',
-                        ),
-                      ),
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              guardianLoginController.signIn(context);
+                            }
+                          },
+                          child: Obx(
+                            () => guardianLoginController.isLoading.value
+                                ? circularProgressIndicatotWidget
+                                : loginButtonWidget(
+                                    height: 60,
+                                    width: 180,
+                                    text: 'Login',
+                                  ),
+                          )),
                     ),
                     kHeight20,
                     Row(
