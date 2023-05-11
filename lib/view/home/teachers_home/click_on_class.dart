@@ -5,7 +5,6 @@ import 'package:dujo_kerala_application/view/home/student_home/time_table/time_t
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
 import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
-import 'package:dujo_kerala_application/view/pages/exam_notification/view_exams.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -62,7 +61,7 @@ class ClickOnClasss extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
 
-      const ViewExamsScreen(), //Exam
+      const ExamNotification(), //Exam
       const StudentShowTimeTable(), //TimeTable
       const ViewHomeWorks(), //Home Works
 

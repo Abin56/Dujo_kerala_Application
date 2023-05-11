@@ -39,7 +39,7 @@ class GuardianAccessories extends StatelessWidget {
           guardianName: UserCredentialsController.guardianModel!.guardianName,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!,
-          studentID: UserCredentialsController.guardianModel!.guardianName,
+          studentID: UserCredentialsController.guardianModel!.studentID,
           batchId: UserCredentialsController.batchId!), //Leave Letter
       const StudentShowTimeTable(), // Time Tabe
 

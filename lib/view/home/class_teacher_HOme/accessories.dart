@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_lette
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/subjects/class_teacher_subjectlist.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
+import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -38,7 +39,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           schooilID: UserCredentialsController.schoolId!,
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
-      const UnderMaintanceScreen(text: ''), //Exam
+     const ExamNotification(), //Exam
       const StudentShowTimeTable(), //TimeTable
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
