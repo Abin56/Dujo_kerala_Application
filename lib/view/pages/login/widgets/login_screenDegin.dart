@@ -16,31 +16,34 @@ class LoginScreenDesign extends StatelessWidget {
     return SizedBox(
       height: 500.h,
       width: double.infinity.w,
-      child: Column(
-        children: [
-          Center(
-            child: ContainerImage(
-                height: 100.h,
-                width: 140.w,
-                imagePath: 'assets/images/leptonlogo.png'),
-          ),
-          kHeight10,
-          Text(
-            "Lepton DuJo",
-            style: DGoogleFonts.headTextStyleMont,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: ContainerImage(
-                height: 80.h,
-                width: 200.w,
-                imagePath: 'assets/images/dujo top login.png'),
-          ),
-          ContainerImage(
-              height: 200.h,
-              width: double.infinity.w,
-              imagePath: 'assets/images/leptondujobg.png'),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Column(
+          children: [
+            Center(
+              child: ContainerImage(
+                  height: 100.h,
+                  width: 140.w,
+                  imagePath: 'assets/images/leptonlogo.png'),
+            ),
+            kHeight10,
+            Text(
+              "Lepton DuJo",
+              style: DGoogleFonts.headTextStyleMont,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ContainerImage(
+                  height: 80.h,
+                  width: 200.w,
+                  imagePath: 'assets/images/dujo top login.png'),
+            ),
+            ContainerImage(
+                height: 200.h,
+                width: double.infinity.w,
+                imagePath: 'assets/images/leptondujobg.png'),
+          ],
+        ),
       ),
     );
   }

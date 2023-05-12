@@ -20,29 +20,30 @@ class SearchSchoolScreen extends StatelessWidget {
       body: SafeArea(
           child: ListView(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: GoogleMonstserratWidgets(
-                    text: "Search School   👉",
+          Padding(
+            padding: const EdgeInsets.only(left: 20, top: 10),
+            child: GestureDetector(
+              onTap: () async {
+                await schoolClassSelectionController.fetchAllSchoolData();
+                if (context.mounted) {
+                  _showSearch(context);
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GoogleMonstserratWidgets(
+                    text: "Search  School",
                     fontsize: 23,
-                    fontWeight: FontWeight.w600),
-              ),
-              const Spacer(),
-              IconButton(
-                  onPressed: () async {
-                    await schoolClassSelectionController.fetchAllSchoolData();
-                    if (context.mounted) {
-                      _showSearch(context);
-                    }
-                  },
-                  icon: const Icon(
+                  ),
+                  const Icon(
                     Icons.search,
                     size: 30,
                     weight: 300,
-                  ))
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
           kHeight50,
           Column(
@@ -58,17 +59,30 @@ class SearchSchoolScreen extends StatelessWidget {
                 ],
               ),
               GoogleMonstserratWidgets(
-                  text: "Welcome To DuJo",
+                  text: "Welcome To",
                   fontsize: 25,
                   fontWeight: FontWeight.bold),
+              kHeight20,
+              ContainerImage(
+                  height: 40.h,
+                  width: 130.w,
+                  imagePath: 'assets/images/dujoo.png'),
               kHeight20,
               GoogleMonstserratWidgets(
                   text: "Set Up Your App",
                   fontsize: 20,
                   fontWeight: FontWeight.w600),
               kHeight10,
-              LottieBuilder.network(
-                  'https://assets2.lottiefiles.com/packages/lf20_itvvjtah.json')
+              GestureDetector(
+                onTap: () async {
+                  await schoolClassSelectionController.fetchAllSchoolData();
+                  if (context.mounted) {
+                    _showSearch(context);
+                  }
+                },
+                child: LottieBuilder.network(
+                    'https://assets2.lottiefiles.com/packages/lf20_itvvjtah.json'),
+              )
             ],
           ),
         ],

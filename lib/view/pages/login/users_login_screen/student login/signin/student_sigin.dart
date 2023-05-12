@@ -4,13 +4,14 @@ import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_fie
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
-import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
+import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../../../model/student_model/student_model.dart';
@@ -28,12 +29,17 @@ class StudentSignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: ContainerImage(
+              height: 28.h,
+              width: 90.w,
+              imagePath: 'assets/images/dujoo-removebg.png'),
+          backgroundColor: const Color.fromARGB(255, 6, 71, 157)),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
           children: [
-            const leptonDujoWidget(),
-            //  kHeight20,
+            kHeight20,
             ContainerImage(
               height: 250.h,
               width: double.infinity,
@@ -177,6 +183,39 @@ class StudentSignInScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already Registered Please",
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(StudentLoginScreen(
+                            pageIndex: 3,
+                          ));
+                        },
+                        child: Text(
+                          "Login",
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.poppins(
+                              fontSize: 15,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

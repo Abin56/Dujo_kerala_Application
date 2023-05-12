@@ -3,7 +3,6 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/parent_login/parent_login.dart';
-
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/teacher_login/teacher_login.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/widgets/user_login_design.dart';
@@ -27,13 +26,19 @@ class UsersLoginScreen extends StatelessWidget {
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: cWhite,
+      appBar: AppBar(
+        title: ContainerImage(
+            height: 28.h,
+            width: 90.w,
+            imagePath: 'assets/images/dujoo-removebg.png'),
+        backgroundColor: adminePrimayColor,
+      ),
       body: SafeArea(
           child: Column(
         children: [
           const UserLoginDesgin(),
-          Expanded(
-            child: AnimationLimiter(
+          AnimationLimiter(
+            child: Expanded(
               child: GridView.count(
                 physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
@@ -70,7 +75,10 @@ class UsersLoginScreen extends StatelessWidget {
                             },
                             child: Container(
                               margin: EdgeInsets.only(
-                                  bottom: w / 10, left: w / 20, right: w / 20),
+                                  bottom: w / 10,
+                                  left: w / 20,
+                                  right: w / 20,
+                                  top: w / 20),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     color:
@@ -144,7 +152,10 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
             ));
           },
           child: Container(
-            color: const Color.fromARGB(255, 171, 198, 249),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
+              color: Color.fromARGB(255, 171, 198, 249),
+            ),
             height: 80.h,
             width: 200.w,
             child: Center(
@@ -164,7 +175,10 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
             ));
           },
           child: Container(
-            color: const Color.fromARGB(255, 171, 198, 249),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
+              color: Color.fromARGB(255, 171, 198, 249),
+            ),
             height: 80.h,
             width: 200.w,
             child: Center(

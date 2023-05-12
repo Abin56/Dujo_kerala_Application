@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/view/pages/search/search_class/search_cl
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../helper/shared_pref_helper.dart';
@@ -56,32 +57,39 @@ class SearchBatchYearBar extends SearchDelegate {
 
     return Scaffold(
       body: ListView.separated(
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () async {
-                UserCredentialsController.batchId = suggestionList[index];
-                await SharedPreferencesHelper.setString(
-                    SharedPreferencesHelper.batchIdKey,
-                    UserCredentialsController.batchId ?? "");
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () async {
+              UserCredentialsController.batchId = suggestionList[index];
+              await SharedPreferencesHelper.setString(
+                  SharedPreferencesHelper.batchIdKey,
+                  UserCredentialsController.batchId ?? "");
 
-                await Get.find<SchoolClassSelectionController>()
-                    .fetchAllClassData();
-                if (context.mounted) {
-                  await showSearch(
-                      context: context, delegate: SearchClassBar());
-                }
-              },
-              child: GooglePoppinsWidgets(
-                text: suggestionList[index],
-                fontsize: 18,
-                fontWeight: FontWeight.w400,
+              await Get.find<SchoolClassSelectionController>()
+                  .fetchAllClassData();
+              if (context.mounted) {
+                await showSearch(context: context, delegate: SearchClassBar());
+              }
+            },
+            child: Card(
+              elevation: 10,
+              shadowColor: Colors.black,
+              child: ListTile(
+                leading: const Icon(Icons.batch_prediction),
+                title: GooglePoppinsWidgets(
+                  text: suggestionList[index],
+                  fontsize: 18,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return const Divider();
-          },
-          itemCount: suggestionList.length),
+            ),
+          );
+        },
+        itemCount: suggestionList.length,
+        separatorBuilder: (context, index) {
+          return const SizedBox(height: 10);
+        },
+      ),
     );
   }
 }
