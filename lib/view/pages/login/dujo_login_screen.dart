@@ -2,8 +2,9 @@ import 'package:dujo_kerala_application/view/pages/login/widgets/login_screenDeg
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../search/search_school/search_school.dart';
+
 import '../../../widgets/login_button.dart';
+import '../search/search_school/search_school.dart';
 
 class DujoLoginScren extends StatelessWidget {
   const DujoLoginScren({super.key});
@@ -14,6 +15,9 @@ class DujoLoginScren extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           const LoginScreenDesign(),
           Expanded(
             child: Column(
