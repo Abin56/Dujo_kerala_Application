@@ -3,9 +3,11 @@
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
+import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 
 class GuardianHeaderDrawer extends StatelessWidget {
   const GuardianHeaderDrawer({Key? key}) : super(key: key);
@@ -168,9 +170,9 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-        MenuItem(6, 'assets/images/activity.png', 'Events',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
+              Get.to(const PrivacyViewScreen());
         }),
         MenuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {

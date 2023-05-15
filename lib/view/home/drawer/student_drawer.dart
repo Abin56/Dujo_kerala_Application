@@ -1,15 +1,13 @@
 // ignore_for_file: empty_catches, unused_element
 
-import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/helper/shared_pref_helper.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
+import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 
 class StudentsHeaderDrawer extends StatelessWidget {
   const StudentsHeaderDrawer({Key? key}) : super(key: key);
@@ -134,15 +132,13 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/attendance.png', 'Attendance',
+        MenuItem(1, 'assets/images/attendance.png', 'Attendence',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (ctx) => RecordedCoursesListScreen()));
+              // Get.to(const PrivacyViewScreen());
         }),
         MenuItem(2, 'assets/images/exam.png', 'Exams',
             currentPage == DrawerSections.favourites ? true : false, () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (ctx) => LiveCoursesListScreen()));
+
         }),
         MenuItem(3, 'assets/images/library.png', 'TimeTable',
             currentPage == DrawerSections.setting ? true : false, () {
@@ -172,9 +168,9 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-        MenuItem(6, 'assets/images/activity.png', 'Events',
+    MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
+              Get.to(const PrivacyViewScreen());
         }),
         MenuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {
