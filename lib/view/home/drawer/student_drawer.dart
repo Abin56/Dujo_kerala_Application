@@ -134,7 +134,7 @@ Widget MyDrawerList(context) {
       children: [
         MenuItem(1, 'assets/images/attendance.png', 'Attendence',
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+              // Get.to(const PrivacyViewScreen());
         }),
         MenuItem(2, 'assets/images/exam.png', 'Exams',
             currentPage == DrawerSections.favourites ? true : false, () {

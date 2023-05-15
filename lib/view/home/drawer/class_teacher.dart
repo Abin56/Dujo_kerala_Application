@@ -84,7 +84,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                                 SharedPreferencesHelper.setString(
                                     SharedPreferencesHelper.classIdKey,
                                     classIDListValue['docid']);
-                                Get.offAll(ClassTeacherMainHomeScreen());
+                                Get.offAll(const ClassTeacherMainHomeScreen());
                               }
                             },
                           ),

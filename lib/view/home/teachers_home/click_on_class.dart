@@ -50,7 +50,6 @@ class ClickOnClasss extends StatelessWidget {
       // Events
       SchoolLevelMeetingPage(), // Meetings
     ];
-
     final hasDataNavigation = [
       TakeAttentenceSubjectWise(
           batchId: UserCredentialsController.batchId!,

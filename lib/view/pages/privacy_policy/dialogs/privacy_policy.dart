@@ -12,8 +12,8 @@ class PrivacyViewScreen extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
         body: Zoom(
-      maxZoomWidth: 1800,
-      maxZoomHeight: 1800,
+      maxZoomWidth: screenSize.width,
+      maxZoomHeight: screenSize.height,
       canvasColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       colorScrollBars: Colors.transparent,
@@ -27,7 +27,10 @@ class PrivacyViewScreen extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemCount: photoList.length,
         itemBuilder: (context, index) {
-          return Image.network(photoList[index]);
+         return Image.network(
+            photoList[index],
+          errorBuilder: (context, child, loadingProgress) => const Center(child: CircularProgressIndicator.adaptive()),
+            );
         },
       ),
     )
@@ -67,4 +70,6 @@ const photoList = [
   'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fprivacy%20and%20policy%2Fprivacy%205.jpg?alt=media&token=b3913f7e-9d62-44c8-b0e5-4ebe3edc9cb3',
   'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fprivacy%20and%20policy%2Fprivacy%206.jpg?alt=media&token=1c5c2e8b-d77c-4753-9e4b-557a0d67573a',
   'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fprivacy%20and%20policy%2Fprivacy%207.jpg?alt=media&token=c08fa12d-ffa4-4f27-9f2d-46f3c2f060d1',
+  'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fprivacy%20and%20policy%2Fchild%20policy%201.jpg?alt=media&token=5d3a5ddb-6006-4817-9b8e-0af697f00cb2',
+  'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fprivacy%20and%20policy%2Fchild%20policy%202.jpg?alt=media&token=76204174-3c2a-4c17-b8d3-144f03aab3df'
 ];
