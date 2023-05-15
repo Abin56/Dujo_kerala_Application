@@ -46,17 +46,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   validator: checkFieldEmailIsValid),
               const SizedBox(height: 32.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: adminePrimayColor),
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    await resetPassword(_emailController.text.trim());
-                  }
-                },
-                child: isLoading
-                    ? circularProgressIndicatotWidget
-                    : const Text('Reset Password'),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: adminePrimayColor),
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await resetPassword(_emailController.text.trim());
+                    }
+                  },
+                  child: isLoading
+                      ? circularProgressIndicatotWidget
+                      : const Text('Reset Password'),
+                ),
               ),
             ],
           ),
