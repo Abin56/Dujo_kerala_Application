@@ -3,14 +3,11 @@
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
-import 'package:dujo_kerala_application/view/pages/login/sign_up/student_sign_up/student_sign_up.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/sign_in_controller/student_sign_in_controller.dart';
 import '../../../../../controllers/sign_in_controller/teacher_login_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../constant/sizes/constant.dart';
@@ -33,6 +30,13 @@ class TeacherLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: ContainerImage(
+            height: 28.h,
+            width: 90.w,
+            imagePath: 'assets/images/dujoo-removebg.png'),
+        backgroundColor: adminePrimayColor,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -97,7 +101,7 @@ class TeacherLoginScreen extends StatelessWidget {
                     ),
                     kHeight10,
                     Padding(
-                      padding: EdgeInsets.only(left: 150.w),
+                      padding: EdgeInsets.only(left: 210.w),
                       child: GooglePoppinsWidgets(
                         onTap: () {},
                         fontsize: 16,
@@ -107,7 +111,7 @@ class TeacherLoginScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20.h),
+                      padding: EdgeInsets.only(top: 60.h),
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
@@ -130,8 +134,8 @@ class TeacherLoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GooglePoppinsWidgets(
-                            text: "Don't Have an account!", fontsize: 15),
-                        kWidth60,
+                            text: "Don't Have an account?", fontsize: 15),
+                  
                         GestureDetector(
                           onTap: () {
                             Get.to(TeachersSignUpScreen(
@@ -140,28 +144,14 @@ class TeacherLoginScreen extends StatelessWidget {
                           },
                           child: GooglePoppinsWidgets(
                             text: ' Sign Up',
-                            fontsize: 18,
+                            fontsize: 19,
                             color: cblue,
+                              fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                    Center(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ContainerImage(
-                            height: 55.h,
-                            width: 75.w,
-                            imagePath: 'assets/images/leptonlogo.png'),
-                        GooglePoppinsWidgets(
-                          text: "Lepton DuJo",
-                          fontsize: 15,
-                          color: cred,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ],
-                    )),
+                 
                   ],
                 ),
               ),

@@ -205,8 +205,8 @@ class ParentSignUpPage extends StatelessWidget {
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: ' Al Phone Number',
-                      hintText: 'Enter your Al Phone Number',
+                      text: ' Alternate Number',
+                      hintText: 'Alternate Number',
                       textfromController:
                           parentSignUpController.altPhoneNoController,
                       validator: checkFieldPhoneNumberIsValid,

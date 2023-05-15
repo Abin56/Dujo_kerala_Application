@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../model/teacher_model/attentence/attendance_model.dart';
@@ -25,7 +26,7 @@ class StudentsAttendenceListViewScreen extends StatelessWidget {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Attendence List'),
+        title: const Text('Attendence List'),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
         child: StreamBuilder(

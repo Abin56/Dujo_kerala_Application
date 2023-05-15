@@ -23,7 +23,7 @@ class NoticePage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("Notice List"),
+            title: const Text("Notice"),
             backgroundColor: adminePrimayColor,
             bottom:  const TabBar(tabs: [
               Tab(

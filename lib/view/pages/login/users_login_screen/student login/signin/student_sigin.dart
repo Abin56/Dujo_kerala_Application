@@ -190,7 +190,7 @@ class StudentSignInScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already Registered Please",
+                        "Already have an account?",
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontSize: 15,
@@ -209,7 +209,7 @@ class StudentSignInScreen extends StatelessWidget {
                           "Login",
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
-                              fontSize: 15,
+                              fontSize: 19,
                               color: Colors.blue,
                               fontWeight: FontWeight.bold),
                         ),

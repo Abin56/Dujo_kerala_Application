@@ -1,5 +1,8 @@
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_home.dart';
+import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -36,10 +39,11 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
       const UnderMaintanceScreen(text: ""),
     ];
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        title: const Text("Dujo"),
-      ),
+       appBar: AppBar(
+     title: ContainerImage(
+            height: 28.h,
+            width: 90.w,
+            imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor),
       body: pages[_page],
       bottomNavigationBar: Container(
         height: 71,
@@ -72,19 +76,19 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
               iconSize: 20,
               textSize: 9,
               icon: Icons.tv,
-              text: 'ReC_Courses',
+              text: 'ReC_Classes',
             ),
             GButton(
               iconSize: 20,
               // iconSize: 10,
               textSize: 12,
               icon: Icons.laptop,
-              text: 'Live Courses',
+              text: 'Live Classes',
             ),
             GButton(
               iconSize: 20,
               icon: Icons.live_tv_sharp,
-              text: 'Hybrid',
+              text: 'Profile',
             )
           ],
           selectedIndex: _page,

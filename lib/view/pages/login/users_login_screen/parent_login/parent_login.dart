@@ -17,7 +17,6 @@ import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/textformfield_login.dart';
-import '../student login/signin/student_sigin.dart';
 
 class ParentLoginScreen extends StatelessWidget {
   int? pageIndex;
@@ -32,7 +31,13 @@ class ParentLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(
+        title: ContainerImage(
+            height: 28.h,
+            width: 90.w,
+            imagePath: 'assets/images/dujoo-removebg.png'),
+        backgroundColor: adminePrimayColor,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -97,7 +102,7 @@ class ParentLoginScreen extends StatelessWidget {
                     ),
                     kHeight10,
                     Padding(
-                      padding: EdgeInsets.only(left: 150.w),
+                      padding: EdgeInsets.only(left: 210.w),
                       child: GooglePoppinsWidgets(
                         onTap: () {},
                         fontsize: 16,
@@ -107,7 +112,7 @@ class ParentLoginScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20.h),
+                      padding: EdgeInsets.only(top: 60.h),
                       child: GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
@@ -130,8 +135,8 @@ class ParentLoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GooglePoppinsWidgets(
-                            text: "Don't Have an account!", fontsize: 15),
-                        kWidth60,
+                            text: "Don't Have an account?", fontsize: 15),
+                   
                         GestureDetector(
                           onTap: () async {
                             ParentSignUpController parentSignUpController =
@@ -143,28 +148,14 @@ class ParentLoginScreen extends StatelessWidget {
                           },
                           child: GooglePoppinsWidgets(
                             text: ' Sign Up',
-                            fontsize: 18,
+                            fontsize: 19,
                             color: cblue,
+                              fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                    Center(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ContainerImage(
-                            height: 55.h,
-                            width: 75.w,
-                            imagePath: 'assets/images/leptonlogo.png'),
-                        GooglePoppinsWidgets(
-                          text: "Lepton DuJo",
-                          fontsize: 15,
-                          color: cred,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ],
-                    )),
+                    
                   ],
                 ),
               ),

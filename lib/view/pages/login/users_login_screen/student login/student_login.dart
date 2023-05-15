@@ -136,7 +136,7 @@ class StudentLoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GooglePoppinsWidgets(
-                              text: "Don't Have an account!", fontsize: 15),
+                              text: "Don't Have an account?", fontsize: 15),
                           GestureDetector(
                             onTap: () {
                               Get.to(StudentSignInScreen(
@@ -145,7 +145,7 @@ class StudentLoginScreen extends StatelessWidget {
                             },
                             child: GooglePoppinsWidgets(
                               text: ' Sign Up',
-                              fontsize: 18,
+                              fontsize: 19,
                               color: cblue,
                               fontWeight: FontWeight.bold,
                             ),

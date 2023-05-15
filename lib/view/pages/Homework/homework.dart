@@ -2,13 +2,9 @@
 
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/button_container_widget.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -86,36 +82,27 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
     }
   }
 
-  String _selectedLeaveType = '';
+  final String _selectedLeaveType = '';
   // late Animation animation, delayedAnimation, muchDelayedAnimation, LeftCurve;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: cblack,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Colors.white,
+  
+        backgroundColor: adminePrimayColor,
         title: Text(
-          "HOME WORK",
-          style: GoogleFonts.montserrat(
-            color: Colors.grey,
+          "Home Work",
+          style: GoogleFonts.poppins(
+            color: cWhite,
             fontSize: 20,
           ),
         ),
-        centerTitle: true,
-        iconTheme: IconThemeData(color: cblack),
+  
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            kHeight20,
+       
             SizedBox(
               height: 460.h,
               width: double.infinity,
@@ -125,14 +112,15 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Homework Tasks",
-                      style: GoogleFonts.montserrat(
-                          color: Colors.grey,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    kWidth20,
+                     Text(
+                          "Homework Tasks",
+                          style: GoogleFonts.poppins(
+                              color:cblack,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold
+                              ),
+                        ),
+                    kHeight10,
                     Container(
                       height: 130,
                       width: double.infinity,
@@ -152,7 +140,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                         ),
                       ),
                     ),
-                    kWidth20,
+                    kHeight20,
                     SizedBox(
                       height: 160.h,
                       width: double.infinity,
@@ -160,15 +148,16 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Choose your Subject",
-                            style: GoogleFonts.montserrat(
-                                color: Colors.grey,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700),
-                          ),
+                             Text(
+                          "Choose your subject",
+                          style: GoogleFonts.poppins(
+                              color:cblack,
+                              fontSize: 13,
+                                fontWeight: FontWeight.bold
+                              ),
+                        ),
                           SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           GetSubjectListDropDownButton(
                               batchId: widget.batchId,
@@ -187,13 +176,14 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Time period and deadline",
-                    style: GoogleFonts.montserrat(
-                        color: Colors.grey,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700),
-                  ),
+                    Text(
+                          "Time period and deadline",
+                          style: GoogleFonts.poppins(
+                              color:cblack,
+                              fontSize: 13,
+                                fontWeight: FontWeight.bold
+                              ),
+                        ),
                   SizedBox(
                     height: 10,
                   ),
@@ -275,6 +265,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                                   widget.batchId)
                               .then((value) {
                             _taskapplyController.clear();
+                            clearFeild();
                           });
                         },
                         child: ButtonContainerWidget(
@@ -283,13 +274,14 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                           height: 70.h,
                           width: 300.w,
                           child: Center(
-                            child: Text(
-                              "SUBMIT",
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700),
-                            ),
+                            child:Text(
+                          "SUBMIT",
+                          style: GoogleFonts.poppins(
+                              color:cblack,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700
+                              ),
+                        ),
                           ),
                         ),
                       ),
@@ -303,5 +295,12 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
         ),
       ),
     );
+  }
+   void clearFeild (){
+    _taskapplyController.clear();
+     _applyFromDateController.clear();
+      _applyTODateController.clear();
+     
+         
   }
 }

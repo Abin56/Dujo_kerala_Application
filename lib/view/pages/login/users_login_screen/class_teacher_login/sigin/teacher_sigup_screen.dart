@@ -8,15 +8,17 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
 import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/widgets/Leptonlogoandtext.dart';
+import 'package:dujo_kerala_application/view/pages/login/users_login_screen/teacher_login/teacher_login.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
-import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
+import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../userVerify_Phone_OTP/get_otp..dart';
 
@@ -30,13 +32,19 @@ class TeachersSignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(
+        title: ContainerImage(
+            height: 28.h,
+            width: 90.w,
+            imagePath: 'assets/images/dujoo-removebg.png'),
+        backgroundColor: adminePrimayColor,
+      ),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
           children: [
-            const leptonDujoWidget(),
-            //  kHeight20,
+        
+             kHeight20,
             ContainerImage(
               height: 250.h,
               width: double.infinity,
@@ -172,6 +180,39 @@ class TeachersSignUpScreen extends StatelessWidget {
                         text: 'Submit',
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have an account?",
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(TeacherLoginScreen(
+                            pageIndex: 3,
+                          ));
+                        },
+                        child: Text(
+                          "Login",
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.poppins(
+                              fontSize: 19,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),

@@ -20,7 +20,7 @@ class EventList extends StatelessWidget {
               SizedBox(
                 width: 20.w,
               ),
-              const Text("Event List"),
+              const Text("Event"),
             ],
           ),
           backgroundColor: adminePrimayColor,
@@ -35,7 +35,7 @@ class EventList extends StatelessWidget {
         ),
 
         //  appBar: AppBar(backgroundColor: adminePrimayColor),
-        body: SafeArea(
+        body: const SafeArea(
           child: TabBarView(
             children: [ ClassLevelPage(), SchoolLevelPage()],
           ),

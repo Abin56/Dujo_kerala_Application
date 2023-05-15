@@ -101,24 +101,26 @@ class StudentSubjectHome extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(width: 10.h),
-                                      SizedBox(
-                                        height:
-                                            50, // set a fixed height for the container
-                                        child: Center(
-                                            child: FutureBuilder(
-                                                future: teacherSubjectController
-                                                    .getSubject(
-                                                        snapshot.data?.docs[index]
-                                                            ['teacherId']),
-                                                builder: (context, snap) {
-                                                  return SizedBox(
-                                                    height: 40,
-                                                    width: 70,
-                                                    child: GooglePoppinsWidgets(
-                                                        text: snap.data ?? "",
-                                                        fontsize: 12),
-                                                  );
-                                                })),
+                                      Expanded(
+                                        child: SizedBox(
+                                          height:
+                                              50, // set a fixed height for the container
+                                          child: Center(
+                                              child: FutureBuilder(
+                                                  future: teacherSubjectController
+                                                      .getSubject(
+                                                          snapshot.data?.docs[index]
+                                                              ['teacherId']),
+                                                  builder: (context, snap) {
+                                                    return SizedBox(
+                                                      height: 40,
+                                                      width: 70,
+                                                      child: GooglePoppinsWidgets(
+                                                          text: snap.data ?? "",
+                                                          fontsize: 12),
+                                                    );
+                                                  })),
+                                        ),
                                       )
                                     ],
                                   ),

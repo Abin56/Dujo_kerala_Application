@@ -1,6 +1,5 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,13 +12,13 @@ class ExmNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+   
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            IconButtonBackWidget(),
-            const Text(
-              "Exam Notification View",
+          children: const [
+ 
+            Text(
+              "Exam Notification",
             ),
           ],
         ),

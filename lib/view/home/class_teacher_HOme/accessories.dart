@@ -2,7 +2,6 @@
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
-import 'package:dujo_kerala_application/view/home/class_teacher_HOme/subjects/class_teacher_subjectlist.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
@@ -91,7 +90,7 @@ class ClassTeacherAccessories extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.5),
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(30)),
+                                const BorderRadius.all(Radius.circular(10)),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.1),
@@ -103,7 +102,7 @@ class ClassTeacherAccessories extends StatelessWidget {
                           height: _h / 100,
                           width: double.infinity,
                           margin: EdgeInsets.only(
-                              bottom: _w / 10, left: _w / 50, right: _w / 50),
+                              top: _w / 30, left: _w / 30, right: _w / 30),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [

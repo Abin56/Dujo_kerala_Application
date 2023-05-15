@@ -231,8 +231,8 @@ class StudentSignInPageScreen extends StatelessWidget {
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: ' Alternative Phone Number',
-                      hintText: 'Enter your Al Phone Number',
+                      text: ' Alternate Phone Number',
+                      hintText: 'Alternate Phone Number',
                       textfromController:
                           studentController.altPhoneNoController,
                       validator: checkFieldPhoneNumberIsValid,
