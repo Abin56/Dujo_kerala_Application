@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../view/constant/sizes/constant.dart';
 
 class CircleAvatharImageSelectionWidget extends StatelessWidget {
@@ -12,7 +13,14 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
-          backgroundImage: const NetworkImage(netWorkImagePathPerson),
+          backgroundImage:
+              UserCredentialsController.studentModel?.profileImageUrl == null ||
+                      UserCredentialsController
+                          .studentModel!.profileImageUrl.isEmpty
+                  ? const NetworkImage(netWorkImagePathPerson)
+                  : NetworkImage(
+                      UserCredentialsController.studentModel?.profileImageUrl ??
+                          " ") as ImageProvider,
           radius: 60,
           child: Stack(
             children: [

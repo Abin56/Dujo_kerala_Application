@@ -11,8 +11,7 @@ import '../../view/widgets/fonts/google_poppins.dart';
 import '../../widgets/Iconbackbutton.dart';
 
 class UserEditPage extends StatelessWidget {
-  String newEmail = "";
-  UserEditPage({super.key});
+  const UserEditPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,76 +59,76 @@ class UserEditPage extends StatelessWidget {
       SizedBox(
         width: double.infinity,
         height: 700.h,
-        child: Expanded(
-          child: ListView(
-            children: [
-              UserEditListileWidget(
-                icon: Icons.person,
-                subtitle: GooglePoppinsWidgets(
-                    text: UserCredentialsController.studentModel?.studentName ??
-                        "",
-                    fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "Name", fontsize: 12.h),
-              ),
-              UserEditListileWidget(
-                icon: Icons.call,
-                subtitle: GooglePoppinsWidgets(
-                    text: UserCredentialsController
-                            .studentModel?.parentPhoneNumber ??
-                        "",
-                    fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "Phone No.", fontsize: 12.h),
-              ),
-              UserEditListileWidget(
-                icon: Icons.email,
-                subtitle: GooglePoppinsWidgets(
-                    text:
-                        UserCredentialsController.studentModel?.studentemail ??
-                            "",
-                    fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "Email", fontsize: 12.h),
-                editicon: Icons.edit,
-              ),
-              UserEditListileWidget(
-                icon: Icons.class_rounded,
-                subtitle: GooglePoppinsWidgets(
-                    text: UserCredentialsController.studentModel?.classId ?? "",
-                    fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "Class", fontsize: 12.h),
-              ),
-              UserEditListileWidget(
-                icon: Icons.bloodtype_outlined,
-                subtitle:
-                    GooglePoppinsWidgets(text: "Blood Group", fontsize: 19.h),
-                title: GooglePoppinsWidgets(
-                    text: UserCredentialsController.studentModel?.bloodgroup ??
-                        "",
-                    fontsize: 12.h),
-              ),
-              UserEditListileWidget(
-                icon: Icons.home,
-                subtitle: GooglePoppinsWidgets(
-                    text:
-                        UserCredentialsController.studentModel?.houseName ?? "",
-                    fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "Address", fontsize: 12.h),
-              ),
-            ],
-          ),
+        child: ListView(
+          children: [
+            UserEditListileWidget(
+              icon: Icons.person,
+              subtitle: GooglePoppinsWidgets(
+                  text:
+                      UserCredentialsController.studentModel?.studentName ?? "",
+                  fontsize: 19.h),
+              title: GooglePoppinsWidgets(text: "Name", fontsize: 12.h),
+            ),
+            UserEditListileWidget(
+              icon: Icons.call,
+              subtitle: GooglePoppinsWidgets(
+                  text: UserCredentialsController
+                          .studentModel?.parentPhoneNumber ??
+                      "",
+                  fontsize: 19.h),
+              title: GooglePoppinsWidgets(text: "Phone No.", fontsize: 12.h),
+            ),
+            UserEditListileWidget(
+              icon: Icons.email,
+              subtitle: GooglePoppinsWidgets(
+                  text: UserCredentialsController.studentModel?.studentemail ??
+                      "",
+                  fontsize: 19.h),
+              title: GooglePoppinsWidgets(text: "Email", fontsize: 12.h),
+              editicon: Icons.edit,
+            ),
+            UserEditListileWidget(
+              icon: Icons.class_rounded,
+              subtitle: FutureBuilder(
+                  future: getClassName(
+                      UserCredentialsController.studentModel?.classId ?? ""),
+                  builder: (context, snapshot) {
+                    return GooglePoppinsWidgets(
+                        text: snapshot.data ?? " ", fontsize: 19.h);
+                  }),
+              title: GooglePoppinsWidgets(text: "Class", fontsize: 12.h),
+            ),
+            UserEditListileWidget(
+              icon: Icons.bloodtype_outlined,
+              subtitle:
+                  GooglePoppinsWidgets(text: "Blood Group", fontsize: 19.h),
+              title: GooglePoppinsWidgets(
+                  text:
+                      UserCredentialsController.studentModel?.bloodgroup ?? "",
+                  fontsize: 12.h),
+            ),
+            UserEditListileWidget(
+              icon: Icons.home,
+              subtitle: GooglePoppinsWidgets(
+                  text: UserCredentialsController.studentModel?.houseName ?? "",
+                  fontsize: 19.h),
+              title: GooglePoppinsWidgets(text: "Address", fontsize: 12.h),
+            ),
+          ],
         ),
       ),
     ])));
   }
 
-  Future<String> getClassName(String classId) async{
+  Future<String> getClassName(String classId) async {
     try {
-  final result=await    FirebaseFirestore.instance
+      final result = await FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)
           .collection('classes')
           .doc(UserCredentialsController.classId)
           .get();
-          return result.data()?["className"];
+      return result.data()?["className"];
     } catch (e) {
       return " ";
     }
