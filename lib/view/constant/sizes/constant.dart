@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+const String netWorkImagePathPerson =
+    "https://www.seekpng.com/png/full/202-2024994_profile-icon-profile-logo-no-background.png";
+
 String stringTimeToDateConvert(String date) {
   //String dateandtime convert to "dd-mm-yyyy" this format
   try {

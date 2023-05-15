@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../model/teacher_model/attentence/attendance_model.dart';
 import 'teacher_subject_list_view.dart';
@@ -23,12 +23,13 @@ class AttendenceBookScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int columnCount = 3;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     log(classID);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Attendence Book'),
+        backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -48,7 +49,7 @@ class AttendenceBookScreen extends StatelessWidget {
               child: GridView.count(
                 physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
-                padding: EdgeInsets.all(_w / 60),
+                padding: EdgeInsets.all(w / 60),
                 crossAxisCount: columnCount,
                 children: List.generate(
                   snapshot.data!.docs.length,
@@ -73,12 +74,12 @@ class AttendenceBookScreen extends StatelessWidget {
                                   date: snapshot.data!.docs[index]['docid']));
                             },
                             child: Container(
-                              height: _h / 100,
+                              height: h / 100,
                               width: double.infinity,
                               margin: EdgeInsets.only(
-                                  bottom: _w / 10,
-                                  left: _w / 50,
-                                  right: _w / 50),
+                                  bottom: w / 10,
+                                  left: w / 50,
+                                  right: w / 50),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(212, 67, 30, 203)
                                     .withOpacity(0.1),
@@ -92,24 +93,26 @@ class AttendenceBookScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    snapshot.data!.docs[index]['dDate'],
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  Text(
-                                    snapshot.data!.docs[index]['day'],
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ],
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      snapshot.data!.docs[index]['dDate'],
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      snapshot.data!.docs[index]['day'],
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

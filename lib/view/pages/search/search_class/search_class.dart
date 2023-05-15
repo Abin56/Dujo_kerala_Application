@@ -1,13 +1,10 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
-import 'dart:developer';
-
 import 'package:dujo_kerala_application/model/class_list_model/class_list_model.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
@@ -67,22 +64,27 @@ class SearchClassBar extends SearchDelegate {
             return GestureDetector(
               onTap: () async {
                 UserCredentialsController.classId = suggestionList[index].docid;
-               await SharedPreferencesHelper.setString(
+                await SharedPreferencesHelper.setString(
                     SharedPreferencesHelper.classIdKey,
                     UserCredentialsController.classId ?? "");
 
-                
-
                 Get.off(UsersLoginScreen());
               },
-              child: GooglePoppinsWidgets(
-                  text: suggestionList[index].className,
-                  fontsize: 18,
-                  fontWeight: FontWeight.w600),
+              child: Card(
+                elevation: 10,
+                shadowColor: Colors.black,
+                child: ListTile(
+                  leading: const Icon(Icons.class_),
+                  title: GooglePoppinsWidgets(
+                      text: suggestionList[index].className,
+                      fontsize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
             );
           },
           separatorBuilder: (context, index) {
-            return const Divider();
+            return const SizedBox(height: 10);
           },
           itemCount: suggestionList.length,
         ),

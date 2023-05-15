@@ -87,7 +87,8 @@ class GuardianSignUpController extends GetxController {
         if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
           imageId = uuid.v1();
           final result = await FirebaseStorage.instance
-              .ref("files/guardianProfilePhotos/$imageId")
+              .ref(
+                  "files/guardianProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.guardianModel?.guardianName ?? ""}/$imageId")
               .putFile(File(Get.find<GetImage>().pickedImage.value));
           imageUrl = await result.ref.getDownloadURL();
           final GuardianModel guardianModel = GuardianModel(

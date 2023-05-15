@@ -28,14 +28,14 @@ class EventDisplaySchoolLevel extends StatelessWidget {
         child: ListView(
           children: [
             Padding(
-              padding:  EdgeInsets.all(8.h),
+              padding:  EdgeInsets.all(17.h),
               child: Container(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.h),color:Colors.blue[50] ,),
                 height: 650.h,
                 width: 360.w,
                child: 
                    Padding(
-                     padding:  EdgeInsets.all(10.h),
+                     padding:  EdgeInsets.all(15.h),
                      child: Column(
                        children: [
                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -31,7 +31,7 @@ class SigninTextFormfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h,
+      height: 75.h,
       width: 360.w,
       child: TextFormField(
     validator: function,

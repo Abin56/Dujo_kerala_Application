@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/list_student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -18,11 +19,12 @@ class LeaveLettersListviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int columnCount = 3;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Leave Letters"),
+        backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -41,7 +43,7 @@ class LeaveLettersListviewScreen extends StatelessWidget {
                     child: GridView.count(
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
-                      padding: EdgeInsets.all(_w / 60),
+                      padding: EdgeInsets.all(w / 60),
                       crossAxisCount: columnCount,
                       children: List.generate(
                         snapshot.data!.docs.length,
@@ -66,12 +68,12 @@ class LeaveLettersListviewScreen extends StatelessWidget {
                                     ));
                                   },
                                   child: Container(
-                                    height: _h / 100,
+                                    height: h / 100,
                                     width: double.infinity,
                                     margin: EdgeInsets.only(
-                                        bottom: _w / 10,
-                                        left: _w / 50,
-                                        right: _w / 50),
+                                        bottom: w / 10,
+                                        left: w / 50,
+                                        right: w / 50),
                                     decoration: BoxDecoration(
                                       color:
                                           const Color.fromARGB(212, 67, 30, 203)

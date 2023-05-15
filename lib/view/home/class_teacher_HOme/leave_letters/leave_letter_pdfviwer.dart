@@ -1,7 +1,8 @@
 import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -48,7 +49,7 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
     final DateTime timeNow = DateTime.now();
     final String liveDate = formatCurrentDate(timeNow);
 
-    if (this.mounted) {
+    if (mounted) {
       setState(() {
         dateText = liveDate;
       });
@@ -93,7 +94,7 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
               );
               // await nextpage();
             },
-            child: Center(
+            child: const Center(
               child:CircularProgressIndicator.adaptive()
             ),
           )
@@ -104,7 +105,7 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
   }
 
   nextpage() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     Printing.layoutPdf(
                 onLayout: (PdfPageFormat format) {
                   return buildPdf(format);
@@ -128,29 +129,29 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
             children: [
               pw.Text(
                 'To',
-                style: pw.TextStyle(fontSize: 16),
+                style: const pw.TextStyle(fontSize: 16),
               ),
               pw.Text(
                 'The Teacher/Pricipal',
-                style: pw.TextStyle(fontSize: 16),
+                style: const pw.TextStyle(fontSize: 16),
               ),
               pw.Text(
                 'Marthoma Higher Secondary School',
-                style: pw.TextStyle(fontSize: 16),
+                style: const pw.TextStyle(fontSize: 16),
               ),
               pw.Text(
                 'Venmoney',
-                style: pw.TextStyle(fontSize: 16),
+                style: const pw.TextStyle(fontSize: 16),
               ),
               pw.SizedBox(height: 05),
               pw.Text(
                 'Subject : Leave Applicaton',
-                style: pw.TextStyle(fontSize: 16),
+                style: const pw.TextStyle(fontSize: 16),
               ),
               pw.SizedBox(height: 20),
               pw.Text(
                 'Dear Mr./Mrs  AbinJohn',
-                style: pw.TextStyle(fontSize: 16),
+                style: const pw.TextStyle(fontSize: 16),
               ),
               pw.SizedBox(height: 20),
               pw.Row(
@@ -161,29 +162,29 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
                       children: [
                         pw.Text(
                           'With due respect, I would like to inform you that',
-                          style: pw.TextStyle(fontSize: 15),
+                          style: const pw.TextStyle(fontSize: 15),
                         ),
-                        pw.Text('Due to ', style: pw.TextStyle(fontSize: 16)),
+                        pw.Text('Due to ', style: const pw.TextStyle(fontSize: 16)),
                         pw.Text(
                             '   Therefore, I request you to please consider our situation and grant me a total of \n  Day days leave from Date to Date. I am enclosing ___ your reference  ',
-                            style: pw.TextStyle(fontSize: 16)),
+                            style: const pw.TextStyle(fontSize: 16)),
                         pw.Text(
                             'If you have any questions, please feel free to contact me directly. Looking forward to your replay. ',
-                            style: pw.TextStyle(fontSize: 16)),
+                            style: const pw.TextStyle(fontSize: 16)),
                         pw.SizedBox(height: 10),
                         pw.Text('Thank you ',
-                            style: pw.TextStyle(fontSize: 16)),
+                            style: const pw.TextStyle(fontSize: 16)),
                         pw.SizedBox(height: 20),
                         pw.Text('Yours sincerely ',
-                            style: pw.TextStyle(fontSize: 16)),
+                            style: const pw.TextStyle(fontSize: 16)),
                         pw.SizedBox(height: 10),
                         pw.Text('ParenntNAme ',
                             style: pw.TextStyle(
                                 fontWeight: pw.FontWeight.bold, fontSize: 16)),
                         pw.SizedBox(height: 10),
-                        pw.Text('Date ', style: pw.TextStyle(fontSize: 16)),
+                        pw.Text('Date ', style: const pw.TextStyle(fontSize: 16)),
                         pw.SizedBox(height: 05),
-                        pw.Text('Place', style: pw.TextStyle(fontSize: 16)),
+                        pw.Text('Place', style: const pw.TextStyle(fontSize: 16)),
                       ])
                 ],
               ),

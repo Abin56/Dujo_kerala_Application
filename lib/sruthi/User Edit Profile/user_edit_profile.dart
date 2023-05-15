@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/sruthi/User%20Edit%20Profile/widget/edit_image_selection_widget.dart';
 import 'package:dujo_kerala_application/sruthi/User%20Edit%20Profile/widget/user_edit_page_widget.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../controllers/userCredentials/user_credentials.dart';
 import '../../view/colors/colors.dart';
 import '../../view/constant/sizes/sizes.dart';
 import '../../view/widgets/fonts/google_poppins.dart';
@@ -33,17 +34,20 @@ class UserEditPage extends StatelessWidget {
             children: [
               IconButtonBackWidget(
                 color: cWhite,
-                
               ),
               kWidth50,
-              GooglePoppinsWidgets(text: "Profile", fontsize: 22.h,color: cWhite,)
+              GooglePoppinsWidgets(
+                text: "Profile",
+                fontsize: 22.h,
+                color: cWhite,
+              )
             ],
           ),
           kHeight20,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stack(children: [
+              Stack(children: const [
                 SingleChildScrollView(
                   child: CircleAvatharImageSelectionWidget(),
                 ),
@@ -53,55 +57,81 @@ class UserEditPage extends StatelessWidget {
           )
         ]),
       ),
-    
-      Container(
+      SizedBox(
         width: double.infinity,
         height: 700.h,
         child: Expanded(
           child: ListView(
             children: [
-            
               UserEditListileWidget(
                 icon: Icons.person,
-                subtitle: GooglePoppinsWidgets(text: "Anu", fontsize: 19.h),
+                subtitle: GooglePoppinsWidgets(
+                    text: UserCredentialsController.studentModel?.studentName ??
+                        "",
+                    fontsize: 19.h),
                 title: GooglePoppinsWidgets(text: "Name", fontsize: 12.h),
               ),
               UserEditListileWidget(
                 icon: Icons.call,
-                subtitle:
-                    GooglePoppinsWidgets(text: "9867543223", fontsize: 19.h),
+                subtitle: GooglePoppinsWidgets(
+                    text: UserCredentialsController
+                            .studentModel?.parentPhoneNumber ??
+                        "",
+                    fontsize: 19.h),
                 title: GooglePoppinsWidgets(text: "Phone No.", fontsize: 12.h),
               ),
               UserEditListileWidget(
                 icon: Icons.email,
-                subtitle:
-                    GooglePoppinsWidgets(text: "anu@gmail.com", fontsize: 19.h),
+                subtitle: GooglePoppinsWidgets(
+                    text:
+                        UserCredentialsController.studentModel?.studentemail ??
+                            "",
+                    fontsize: 19.h),
                 title: GooglePoppinsWidgets(text: "Email", fontsize: 12.h),
                 editicon: Icons.edit,
               ),
               UserEditListileWidget(
                 icon: Icons.class_rounded,
-                subtitle: GooglePoppinsWidgets(text: "9 A", fontsize: 19.h),
+                subtitle: GooglePoppinsWidgets(
+                    text: UserCredentialsController.studentModel?.classId ?? "",
+                    fontsize: 19.h),
                 title: GooglePoppinsWidgets(text: "Class", fontsize: 12.h),
               ),
               UserEditListileWidget(
                 icon: Icons.bloodtype_outlined,
-                subtitle: GooglePoppinsWidgets(text: "Blood Group", fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "A -ve", fontsize: 12.h),
+                subtitle:
+                    GooglePoppinsWidgets(text: "Blood Group", fontsize: 19.h),
+                title: GooglePoppinsWidgets(
+                    text: UserCredentialsController.studentModel?.bloodgroup ??
+                        "",
+                    fontsize: 12.h),
               ),
               UserEditListileWidget(
                 icon: Icons.home,
-                subtitle: GooglePoppinsWidgets(text: "Address", fontsize: 19.h),
-                title: GooglePoppinsWidgets(text: "Adress", fontsize: 12.h),
+                subtitle: GooglePoppinsWidgets(
+                    text:
+                        UserCredentialsController.studentModel?.houseName ?? "",
+                    fontsize: 19.h),
+                title: GooglePoppinsWidgets(text: "Address", fontsize: 12.h),
               ),
-              
             ],
           ),
         ),
       ),
     ])));
   }
+
+  Future<String> getClassName(String classId) async{
+    try {
+  final result=await    FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(UserCredentialsController.schoolId)
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .get();
+          return result.data()?["className"];
+    } catch (e) {
+      return " ";
+    }
+  }
 }
-
-
-

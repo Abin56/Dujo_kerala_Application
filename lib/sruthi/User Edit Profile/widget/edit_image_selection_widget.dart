@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../view/constant/sizes/constant.dart';
+
 class CircleAvatharImageSelectionWidget extends StatelessWidget {
   const CircleAvatharImageSelectionWidget({
     super.key,
@@ -10,8 +12,7 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
-          backgroundImage: const NetworkImage(
-                        "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg"),
+          backgroundImage: const NetworkImage(netWorkImagePathPerson),
           radius: 60,
           child: Stack(
             children: [
@@ -21,8 +22,7 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor:
-                        Color.fromARGB(255, 52, 50, 50),
+                    backgroundColor: const Color.fromARGB(255, 52, 50, 50),
                     child: IconButton(
                       icon: const Icon(Icons.edit),
                       color: Colors.white,
@@ -38,4 +38,3 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
     );
   }
 }
-

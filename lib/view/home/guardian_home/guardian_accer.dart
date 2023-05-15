@@ -1,10 +1,9 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
-import 'package:dujo_kerala_application/sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
-import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -14,8 +13,10 @@ import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../sruthi/Exam Notification/Teacher_Upload/exm_teacher_upload.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Homework/view_home_work.dart';
+import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
 import '../parent_home/progress_report/progress_report.dart';
+import '../student_home/time_table/time_table_display.dart';
 
 class GuardianAccessories extends StatelessWidget {
   String studentName;
@@ -38,9 +39,9 @@ class GuardianAccessories extends StatelessWidget {
           guardianName: UserCredentialsController.guardianModel!.guardianName,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!,
-          studentID: UserCredentialsController.guardianModel!.guardianName,
+          studentID: UserCredentialsController.guardianModel!.studentID,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-      const UnderMaintanceScreen(text: ""), // Time Tabe
+      const StudentShowTimeTable(), // Time Tabe
 
       const ViewHomeWorks(), // Home Works
       NoticePage(), //Notice
@@ -136,6 +137,7 @@ class GuardianAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Exams',
+  'Leave Application',
   'TimeTable',
   'HomeWorks',
   'Notices',
@@ -148,6 +150,7 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/exam.png',
+  'assets/images/homework.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/school_building.png',

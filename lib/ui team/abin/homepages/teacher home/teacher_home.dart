@@ -1,10 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides
-import 'package:dujo_kerala_application/ui%20team/abin/homepages/teacher%20home/teacher_accessories.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../Abin/homepages/teacher home/teacher_accessories.dart';
 
 class TeacherHomeScreen extends StatefulWidget {
   static String routeName = 'TeacherHome';

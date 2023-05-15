@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
@@ -30,6 +31,13 @@ class GuardianLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: ContainerImage(
+            height: 28.h,
+            width: 90.w,
+            imagePath: 'assets/images/dujoo-removebg.png'),
+        backgroundColor: adminePrimayColor,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -94,7 +102,7 @@ class GuardianLoginScreen extends StatelessWidget {
                     ),
                     kHeight10,
                     Padding(
-                      padding: EdgeInsets.only(left: 150.w),
+                      padding: EdgeInsets.only(left: 210.w),
                       child: GooglePoppinsWidgets(
                         onTap: () {},
                         fontsize: 16,
@@ -104,27 +112,30 @@ class GuardianLoginScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20.h),
+                      padding: EdgeInsets.only(top: 60.h),
                       child: GestureDetector(
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            guardianLoginController.signIn(context);
-                          }
-                        },
-                        child: loginButtonWidget(
-                          height: 60,
-                          width: 180,
-                          text: 'Login',
-                        ),
-                      ),
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              guardianLoginController.signIn(context);
+                            }
+                          },
+                          child: Obx(
+                            () => guardianLoginController.isLoading.value
+                                ? circularProgressIndicatotWidget
+                                : loginButtonWidget(
+                                    height: 60,
+                                    width: 180,
+                                    text: 'Login',
+                                  ),
+                          )),
                     ),
                     kHeight20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GooglePoppinsWidgets(
-                            text: "Don't Have an account!", fontsize: 15),
-                        kWidth60,
+                            text: "Don't Have an account?", fontsize: 15),
+                    
                         GestureDetector(
                           onTap: () {
                             Get.to(GuardianSignUpFirstScreen(
@@ -133,28 +144,14 @@ class GuardianLoginScreen extends StatelessWidget {
                           },
                           child: GooglePoppinsWidgets(
                             text: ' Sign Up',
-                            fontsize: 18,
+                            fontsize: 19,
                             color: cblue,
+                              fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                    Center(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ContainerImage(
-                            height: 55.h,
-                            width: 75.w,
-                            imagePath: 'assets/images/leptonlogo.png'),
-                        GooglePoppinsWidgets(
-                          text: "Lepton DuJo",
-                          fontsize: 15,
-                          color: cred,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ],
-                    )),
+                   
                   ],
                 ),
               ),

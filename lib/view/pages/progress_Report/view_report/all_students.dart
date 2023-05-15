@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/view_progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -24,7 +25,7 @@ class ViewAllStudentsListScreen extends StatelessWidget {
     double _h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("All Student List"),
+        title: const Text("All Student List"),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(

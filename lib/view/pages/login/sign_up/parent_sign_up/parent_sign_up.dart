@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/controllers/sign_up_controller/parent_sign_up_controller.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
-import 'package:dujo_kerala_application/view/pages/login/users_login_screen/parent_login/parent_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -88,8 +87,7 @@ class ParentSignUpPage extends StatelessWidget {
                       () => CircleAvatar(
                         backgroundImage: getImageController
                                 .pickedImage.value.isEmpty
-                            ? const NetworkImage(
-                                "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg")
+                            ? const NetworkImage(netWorkImagePathPerson)
                             : FileImage(
                                     File(getImageController.pickedImage.value))
                                 as ImageProvider,
@@ -207,8 +205,8 @@ class ParentSignUpPage extends StatelessWidget {
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: ' Al Phone Number',
-                      hintText: 'Enter your Al Phone Number',
+                      text: ' Alternate Number',
+                      hintText: 'Alternate Number',
                       textfromController:
                           parentSignUpController.altPhoneNoController,
                       validator: checkFieldPhoneNumberIsValid,

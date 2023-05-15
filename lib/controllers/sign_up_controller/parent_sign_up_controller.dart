@@ -86,7 +86,8 @@ class ParentSignUpController extends GetxController {
         if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
           imageId = uuid.v1();
           final result = await FirebaseStorage.instance
-              .ref("files/parentProfilePhotos/$imageId")
+              .ref(
+                  "files/parentProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.parentModel?.parentName}$imageId")
               .putFile(File(Get.find<GetImage>().pickedImage.value));
           imageUrl = await result.ref.getDownloadURL();
           final ParentModel parentModel = ParentModel(

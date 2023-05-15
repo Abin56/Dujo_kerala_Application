@@ -79,7 +79,8 @@ class StudentSignUpController extends GetxController {
       if (Get.find<GetImage>().pickedImage.isNotEmpty) {
         imageId = uuid.v1();
         final result = await FirebaseStorage.instance
-            .ref("files/studentsProfilePhotos/$imageId")
+            .ref(
+                "files/studentsProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.studentModel?.studentName}$imageId")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         imageUrl = await result.ref.getDownloadURL();
       }

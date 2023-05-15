@@ -4,8 +4,10 @@ import 'dart:developer';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/controllers/get_student_detail/get_student_details.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -122,15 +124,15 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
       } else {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: adminePrimayColor,
             title: Text(
               "Apply Leave",
-              style: GoogleFonts.montserrat(
-                  color: Colors.grey,
+              style: GoogleFonts.poppins(
+                
                   fontSize: 20,
-                  fontWeight: FontWeight.w700),
+                 ),
             ),
-            centerTitle: true,
+        
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -148,14 +150,14 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                       children: [
                         Text(
                           "Apply Leave Date",
-                          style: GoogleFonts.montserrat(
-                              color: Colors.grey,
+                          style: GoogleFonts.poppins(
+                              color:cblack,
                               fontSize: 13,
-                              fontWeight: FontWeight.w700),
+                              ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            top: 13,
+                          padding:  EdgeInsets.only(
+                            top: 10.h,
                           ),
                           child: Stack(
                             alignment: AlignmentDirectional.centerEnd,
@@ -189,13 +191,13 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Choose Leave Type",
-                                style: GoogleFonts.montserrat(
-                                    color: Colors.grey,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w700),
+                               Text(
+                          "Choose Leave Type",
+                          style: GoogleFonts.poppins(
+                              color:cblack,
+                              fontSize: 13,
                               ),
+                        ),
                               kHeight10,
                               DropdownSearch<String>(
                                 selectedItem: 'Select',
@@ -222,18 +224,18 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.only(left: 10,right: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Apply Leave Date",
-                        style: GoogleFonts.montserrat(
-                            color: Colors.grey,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700),
-                      ),
+                       Text(
+                          "Apply Leave Date",
+                          style: GoogleFonts.poppins(
+                              color:cblack,
+                              fontSize: 13,
+                              ),
+                        ),
                       kHeight10,
                       Container(
                         height: 80,
@@ -288,17 +290,17 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                 ),
                 kHeight10,
                 Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 20),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Reason",
-                        style: GoogleFonts.montserrat(
-                            color: Colors.grey,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700),
-                      ),
+                  Text(
+                          "Reason",
+                          style: GoogleFonts.poppins(
+                              color:cblack,
+                              fontSize: 13,
+                              ),
+                        ),
                       kHeight10,
                       Container(
                         height: 130,
@@ -354,6 +356,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                       _applyleaveDateController.text.trim(),
                                       widget.studentName,
                                       widget.batchId);
+                                      clearFeild();
                             },
                             child: ButtonContainerWidget(
                               curving: 20,
@@ -363,10 +366,10 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                               child: Center(
                                 child: Text(
                                   "Apply Leave",
-                                  style: GoogleFonts.montserrat(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.white,
                                       fontSize: 13,
-                                      fontWeight: FontWeight.w700),
+                                ),
                                 ),
                               ),
                             ),
@@ -382,5 +385,12 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
         );
       }
     });
+  }
+  void clearFeild (){
+    _applyleaveDateController.clear();
+     _applyFromDateController.clear();
+      _applyTODateController.clear();
+       _leaveReasonController.clear();
+         
   }
 }

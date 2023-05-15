@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
-import 'package:dujo_kerala_application/sruthi/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +9,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../sruthi/Exam Notification/Teacher_Upload/exm_teacher_upload.dart';
-import '../../../../sruthi/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Homework/view_home_work.dart';
+import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
+import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
 import '../../events/event_list.dart';
+import '../../student_home/time_table/time_table_display.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
@@ -40,7 +41,7 @@ class ParentAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-      const UnderMaintanceScreen(text: ""), // Time Tabe
+      const StudentShowTimeTable(), // Time Tabe
 
       const ViewHomeWorks(), // Home Works
       NoticePage(), //Notice
@@ -86,7 +87,7 @@ class ParentAccessories extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.5),
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(30)),
+                              const BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -98,16 +99,19 @@ class ParentAccessories extends StatelessWidget {
                         height: _h / 100,
                         width: double.infinity,
                         margin: EdgeInsets.only(
-                            bottom: _w / 10, left: _w / 50, right: _w / 50),
+                            top: _w / 30, left: _w / 30, right: _w / 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              height: 75,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(_acc_images[index]),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Container(
+                                height: 75,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(_acc_images[index]),
+                                  ),
                                 ),
                               ),
                             ),
@@ -155,6 +159,7 @@ var _acc_images = [
   'assets/images/activity.png',
   'assets/images/splash.png',
   'assets/images/subjects.png',
+  'assets/images/teachers.png',
   'assets/images/teachers.png',
   'assets/images/teachers.png',
 ];

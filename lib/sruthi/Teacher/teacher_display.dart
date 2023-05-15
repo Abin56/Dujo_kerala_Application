@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../view/colors/colors.dart';
+import '../../view/constant/sizes/constant.dart';
 import '../../view/constant/sizes/sizes.dart';
 import '../../view/widgets/fonts/google_poppins.dart';
 import '../../widgets/Iconbackbutton.dart';
@@ -46,7 +47,7 @@ class TeacherDisplay extends StatelessWidget {
                             leading: const CircleAvatar(
                               radius: 25,
                               backgroundImage: NetworkImage(
-                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHQYMHHvI6NnOaZp9iU5Wa1MOhAwxzE0oRRw&usqp=CAU"),
+                                  netWorkImagePathPerson),
                             ),
                             title: Padding(
                               padding: EdgeInsets.only(top: 10.h),

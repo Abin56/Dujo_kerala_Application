@@ -94,8 +94,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     () => CircleAvatar(
                       backgroundImage: getImageController
                               .pickedImage.value.isEmpty
-                          ? const NetworkImage(
-                              "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg")
+                          ? const NetworkImage(netWorkImagePathPerson)
                           : FileImage(
                                   File(getImageController.pickedImage.value))
                               as ImageProvider,
@@ -196,8 +195,8 @@ class TeachersSignUpPage extends StatelessWidget {
                   ),
                   SinUpTextFromFiled(
                     keyboardType: TextInputType.number,
-                    text: ' Al Phone Number',
-                    hintText: 'Enter your Al Phone Number',
+                    text: ' Alternate Number',
+                    hintText: 'Alternate Number',
                     textfromController: teacherController.altPhoneNoController,
                     validator: checkFieldEmpty,
                   ),

@@ -60,33 +60,35 @@ class SubjectList extends StatelessWidget {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                              child: ContainerImage(
-                                height: 70.h,
-                                imagePath: 'assets/images/teachernew.png',
-                                width: 70.w,
-                              ),
-                            ),
-                            SizedBox(width: 10.h),
-                            Expanded(
-                              child: SizedBox(
-                                height:
-                                    50, // set a fixed height for the container
-                                child: GooglePoppinsWidgets(
-                                  text: text[index],
-                                  fontsize: 12.h,
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
+                                child: ContainerImage(
+                                  height: 70.h,
+                                  imagePath: 'assets/images/teachernew.png',
+                                  width: 70.w,
+                                ),
                               ),
-                            )
-                          ],
+                              SizedBox(width: 10.w),
+                          
+                                 SizedBox(
+                                  height:
+                                      50.h, // set a fixed height for the container
+                                  child: GooglePoppinsWidgets(
+                                    text: text[index],
+                                    fontsize: 12.h,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              
+                            ],
+                          ),
                         ),
                         kHeight20,
                         Row(

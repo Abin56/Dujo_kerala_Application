@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../view/widgets/container_image.dart';
+import '../../../sruthi/Study Materials/study_materials_list.dart';
 import '../../../widgets/Iconbackbutton.dart';
 
 class StudentSubjectHome extends StatelessWidget {
@@ -65,71 +66,78 @@ class StudentSubjectHome extends StatelessWidget {
                         List.generate(snapshot.data!.docs.length, (index) {
                       teacherSubjectController
                           .getSubject(snapshot.data!.docs[index]['teacherId']);
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 90, 147, 194),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        height: 50,
-
-                        // ignore: sort_child_properties_last
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: 20.h, top: 20.h, right: 20.h),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
+                      return GestureDetector( 
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyMaterials()));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 90, 147, 194),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          height: 50,
+                      
+                          // ignore: sort_child_properties_last
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: 20.h, top: 20.h, right: 20.h),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white,
+                                        ),
+                                        child: ContainerImage(
+                                          height: 60.h,
+                                          imagePath:
+                                              'assets/images/teachernew.png',
+                                          width: 70.w,
+                                        ),
                                       ),
-                                      child: ContainerImage(
-                                        height: 60.h,
-                                        imagePath:
-                                            'assets/images/teachernew.png',
-                                        width: 70.w,
+                                      SizedBox(width: 10.h),
+                                      Expanded(
+                                        child: SizedBox(
+                                          height:
+                                              50, // set a fixed height for the container
+                                          child: Center(
+                                              child: FutureBuilder(
+                                                  future: teacherSubjectController
+                                                      .getSubject(
+                                                          snapshot.data?.docs[index]
+                                                              ['teacherId']),
+                                                  builder: (context, snap) {
+                                                    return SizedBox(
+                                                      height: 40,
+                                                      width: 70,
+                                                      child: GooglePoppinsWidgets(
+                                                          text: snap.data ?? "",
+                                                          fontsize: 12),
+                                                    );
+                                                  })),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  kHeight20,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GooglePoppinsWidgets(
+                                        text: snapshot.data!.docs[index]
+                                            ['subjectName'],
+                                        fontsize: 20.h,
+                                        color: cWhite,
                                       ),
-                                    ),
-                                    SizedBox(width: 10.h),
-                                    SizedBox(
-                                      height:
-                                          50, // set a fixed height for the container
-                                      child: Center(
-                                          child: FutureBuilder(
-                                              future: teacherSubjectController
-                                                  .getSubject(
-                                                      snapshot.data?.docs[index]
-                                                          ['teacherId']),
-                                              builder: (context, snap) {
-                                                return SizedBox(
-                                                  height: 40,
-                                                  width: 70,
-                                                  child: GooglePoppinsWidgets(
-                                                      text: snap.data ?? "",
-                                                      fontsize: 12),
-                                                );
-                                              })),
-                                    )
-                                  ],
-                                ),
-                                kHeight20,
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    GooglePoppinsWidgets(
-                                      text: snapshot.data!.docs[index]
-                                          ['subjectName'],
-                                      fontsize: 20.h,
-                                      color: cWhite,
-                                    ),
-                                  ],
-                                ),
-                              ]),
+                                    ],
+                                  ),
+                                ]),
+                          ),
                         ),
                       );
                     }),

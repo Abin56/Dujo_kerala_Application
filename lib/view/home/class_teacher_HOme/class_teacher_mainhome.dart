@@ -1,17 +1,18 @@
 import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
-import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_home.dart';
+import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../pages/login/users_login_screen/users_login_screen.dart';
 import '../drawer/class_teacher.dart';
 import '../sample/under_maintance.dart';
 
 class ClassTeacherMainHomeScreen extends StatefulWidget {
-  ClassTeacherMainHomeScreen({Key? key}) : super(key: key);
+  const ClassTeacherMainHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<ClassTeacherMainHomeScreen> createState() =>
@@ -40,11 +41,14 @@ class _ClassTeacherMainHomeScreenState
       ClassTeacherHomeScreen(),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),
+      const UnderMaintanceScreen(text: ""),
     ];
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-          title: const Text("Dujo"),
+       appBar: AppBar(
+     title: ContainerImage(
+            height: 28.h,
+            width: 90.w,
+            imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor),
           // actions: [
           //   PopupMenuButton(
           //     onSelected: (value) {
@@ -65,7 +69,7 @@ class _ClassTeacherMainHomeScreenState
           //     ],
           //   )
           // ]),
-      ),
+     
       body: pages[_page],
       bottomNavigationBar: Container(
         height: 71,
@@ -98,19 +102,19 @@ class _ClassTeacherMainHomeScreenState
               iconSize: 20,
               textSize: 9,
               icon: Icons.tv,
-              text: 'ReC_Courses',
+              text: 'ReC_Classes',
             ),
             GButton(
               iconSize: 20,
               // iconSize: 10,
               textSize: 12,
               icon: Icons.laptop,
-              text: 'Live Courses',
+              text: 'Live Classes',
             ),
             GButton(
               iconSize: 20,
               icon: Icons.live_tv_sharp,
-              text: 'Hybrid',
+              text: 'Profile',
             )
           ],
           selectedIndex: _page,

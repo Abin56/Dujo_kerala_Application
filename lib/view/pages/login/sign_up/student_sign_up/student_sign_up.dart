@@ -89,8 +89,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                       () => CircleAvatar(
                         backgroundImage: getImageController
                                 .pickedImage.value.isEmpty
-                            ? const NetworkImage(
-                                "https://img.freepik.com/premium-photo/teenager-student-girl-yellow-pointing-finger-side_1368-40175.jpg")
+                            ? const NetworkImage(netWorkImagePathPerson)
                             : FileImage(
                                     File(getImageController.pickedImage.value))
                                 as ImageProvider,
@@ -232,8 +231,8 @@ class StudentSignInPageScreen extends StatelessWidget {
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: ' Alternative Phone Number',
-                      hintText: 'Enter your Al Phone Number',
+                      text: ' Alternate Phone Number',
+                      hintText: 'Alternate Phone Number',
                       textfromController:
                           studentController.altPhoneNoController,
                       validator: checkFieldPhoneNumberIsValid,
