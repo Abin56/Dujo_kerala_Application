@@ -27,10 +27,22 @@ class PrivacyViewScreen extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemCount: photoList.length,
         itemBuilder: (context, index) {
-         return Image.network(
+          return Image.network(
             photoList[index],
-          errorBuilder: (context, child, loadingProgress) => const Center(child: CircularProgressIndicator.adaptive()),
-            );
+            fit: BoxFit.fill,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+          );
         },
       ),
     )
