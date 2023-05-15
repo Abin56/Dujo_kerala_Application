@@ -1,8 +1,8 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EventDisplayClassLevel extends StatelessWidget {
   const EventDisplayClassLevel(
@@ -52,7 +52,7 @@ class EventDisplayClassLevel extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  GooglePoppinsWidgets(
+                                  GooglePoppinseventClassLevelWidgets(
                                       text: eventName, fontsize: 22.h),
                                   const Icon(Icons.event_note)
                                 ],
@@ -61,20 +61,22 @@ class EventDisplayClassLevel extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  GooglePoppinsWidgets(
-                                    text: "Description : ",
-                                    fontsize: 18.h,
-                                    fontWeight: FontWeight.w200,
+                                  Flexible(
+                                    child: GooglePoppinseventClassLevelWidgets(
+                                      text: "Description : ",
+                                      fontsize: 18.h,
+                                      fontWeight: FontWeight.w200,
+                                    ),
                                   )
                                 ],
                               ),
                               kHeight20,
-                              GooglePoppinsWidgets(
+                              GooglePoppinseventClassLevelWidgets(
                                   text: description, fontsize: 18.h),
                               kHeight10,
                               Row(
                                 children: [
-                                  GooglePoppinsWidgets(
+                                  GooglePoppinseventClassLevelWidgets(
                                       text: "Date :$eventDate",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
@@ -83,7 +85,7 @@ class EventDisplayClassLevel extends StatelessWidget {
                               kHeight10,
                               Row(
                                 children: [
-                                  GooglePoppinsWidgets(
+                                  GooglePoppinseventClassLevelWidgets(
                                       text: "Venue :$venue",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
@@ -93,7 +95,7 @@ class EventDisplayClassLevel extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  GooglePoppinsWidgets(
+                                  GooglePoppinseventClassLevelWidgets(
                                       text: "Signed By : $signedBy",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
@@ -110,5 +112,34 @@ class EventDisplayClassLevel extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+class GooglePoppinseventClassLevelWidgets extends StatelessWidget {
+  String text;
+  double fontsize;
+  FontWeight? fontWeight;
+  Color? color;
+  VoidCallback? onTap;
+  GooglePoppinseventClassLevelWidgets({
+    required this.text,
+    required this.fontsize,
+    this.fontWeight,
+    this.color,
+    this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      overflow: TextOverflow.ellipsis,
+      style: GoogleFonts.poppins(
+        fontSize: fontsize,
+        fontWeight: fontWeight,
+        color: color,
+      ),
+    );
   }
 }
