@@ -30,6 +30,7 @@ class ClickOnClasss extends StatelessWidget {
       const UnderMaintanceScreen(text: ''), // Events
       const UnderMaintanceScreen(text: ''), // Meetings
     ];
+    
     final hasDataNavigation = [
       TakeAttentenceSubjectWise(
           batchId: UserCredentialsController.batchId!,

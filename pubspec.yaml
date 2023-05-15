@@ -56,6 +56,9 @@ dependencies:
   flutter_launcher_icons:
   printing: 
   file_picker: 
+  url_launcher: 
+  flutter_markdown:
+  zoom_widget:
 
 flutter_icons:
  android: true

@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../colors/colors.dart';
+import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
 
 class TeacherHeaderDrawer extends StatelessWidget {
@@ -194,9 +195,9 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-        menuItem(6, 'assets/images/activity.png', 'Events',
+      menuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
+              Get.to(const PrivacyViewScreen());
         }),
         menuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {

@@ -13,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../helper/shared_pref_helper.dart';
+import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 
 class ClassTeacherHeaderDrawer extends StatelessWidget {
   UserLogOutController userLogOutController = Get.put(UserLogOutController());
@@ -234,9 +235,9 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-        MenuItem(6, 'assets/images/activity.png', 'Events',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
+              Get.to(const PrivacyViewScreen());
         }),
         MenuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {

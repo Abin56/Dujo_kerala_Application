@@ -11,7 +11,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../sruthi/Exam Notification/Teacher_Upload/exm_teacher_upload.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
+import '../../pages/Homework/view_home_work.dart';
+import '../../pages/Subject/subject_display.dart';
 import '../parent_home/progress_report/progress_report.dart';
 
 class GuardianAccessories extends StatelessWidget {
@@ -27,26 +30,30 @@ class GuardianAccessories extends StatelessWidget {
       AttendenceBookScreen(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendence
-      ProgressReportListViewScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          studentId: UserCredentialsController.guardianModel!.guardianName!,
-          batchId: UserCredentialsController.batchId!),
+          classID: UserCredentialsController.classId!),
+      //Attendence8
+      const ExmNotification(), // Exams
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.guardianModel!.guardianName,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.guardianModel!.guardianName,
-          batchId: UserCredentialsController.batchId!),
-      const UnderMaintanceScreen(text: ""),
-      NoticePage(),
-      const EventList(),
-      const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
-      SchoolLevelMeetingPage(),
+          batchId: UserCredentialsController.batchId!), //Leave Letter
+      const UnderMaintanceScreen(text: ""), // Time Tabe
+
+      const ViewHomeWorks(), // Home Works
+      NoticePage(), //Notice
+      const EventList(), //Events
+      ProgressReportListViewScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: UserCredentialsController.guardianModel!.guardianName!,
+          batchId: UserCredentialsController.batchId!), //Progress Report
+      StudentSubjectHome(), //Subjects
+
+      const UnderMaintanceScreen(text: ""), // Teachers
+      SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
