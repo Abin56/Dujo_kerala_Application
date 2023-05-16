@@ -49,7 +49,7 @@ class GuardianAccessories extends StatelessWidget {
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
-          studentId: UserCredentialsController.guardianModel!.guardianName!,
+          studentId: UserCredentialsController.guardianModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Progress Report
       StudentSubjectHome(), //Subjects
 

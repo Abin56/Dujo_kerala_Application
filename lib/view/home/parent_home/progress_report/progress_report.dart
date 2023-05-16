@@ -29,6 +29,7 @@ class ProgressReportListViewScreen extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     log(classID);
+        log(studentId);
     return Scaffold(
       appBar: AppBar(
         title: const Text(''),backgroundColor: adminePrimayColor,
@@ -100,17 +101,13 @@ class ProgressReportListViewScreen extends StatelessWidget {
                                 ],
                               ),
                               child: Center(
-                                child: Column(crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
+                                child:    Text(
                                       data.whichExam,
                                       style: GoogleFonts.poppins(
                                           color: Colors.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w700),
                                     ),
-                                  ],
-                                ),
                               ),
                             ),
                           ),
