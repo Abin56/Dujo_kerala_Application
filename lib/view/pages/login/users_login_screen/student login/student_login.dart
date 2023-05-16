@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
 import '../../../../../utils/utils.dart';
+import '../../../../../widgets/forget_password_page.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
@@ -103,7 +104,12 @@ class StudentLoginScreen extends StatelessWidget {
                       padding: EdgeInsets.only(left: 210.w),
                       child: GestureDetector(
                         onTap: () {
-                          Get.to(StudentSignInPageScreen());
+                              Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen(),
+                            ),
+                          );
                         },
                         child: GooglePoppinsWidgets(
                           fontsize: 16,
