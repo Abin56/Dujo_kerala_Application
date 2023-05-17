@@ -31,6 +31,7 @@ dependencies:
   cloud_firestore: null
   cupertino_icons: ^1.0.2
   dropdown_search: null
+  file_picker: null
   firebase_auth: null
   firebase_core: null
   firebase_database: null
@@ -38,6 +39,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: null
+  flutter_launcher_icons: null
+  flutter_markdown: null
   flutter_screenutil: null
   flutter_staggered_animations: null
   flutter_svg: ^2.0.5
@@ -49,21 +52,18 @@ dependencies:
   intl: ^0.18.1
   line_icons: null
   lottie: null
+  pdf: null
   pinput: null
+  printing: null
   shared_preferences: ^2.1.0
+  url_launcher: null
   uuid: ^3.0.7
-  pdf: 
-  flutter_launcher_icons:
-  printing: 
-  file_picker: 
-  url_launcher: 
-  flutter_markdown:
-  zoom_widget:
+  zoom_widget: null
 
 flutter_icons:
- android: true
- ios: true
- image_path: "assets/images/leptonlogo.png"
+  android: true
+  ios: true
+  image_path: "assets/images/leptonlogo.png"
 
 dev_dependencies:
   flutter_lints: ^2.0.0

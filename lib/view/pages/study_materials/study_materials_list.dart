@@ -1,8 +1,8 @@
-import 'package:dujo_kerala_application/sruthi/Subject%202/subject_chapterwise_display.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../sruthi/Subject 2/subject_chapterwise_display.dart';
 import '../../colors/colors.dart';
 import '../../widgets/fonts/google_poppins.dart';
 

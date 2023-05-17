@@ -1,18 +1,14 @@
-import 'package:dujo_kerala_application/sruthi/Exam%20Notification/Teacher_Upload/exm_teacher_upload.dart';
-import 'package:dujo_kerala_application/view/pages/Meetings/meetings_list.dart';
-import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
-
 import 'package:dujo_kerala_application/sruthi/Study%20Materials/study_materials_list.dart';
 import 'package:dujo_kerala_application/sruthi/homeWork/student_homework_list.dart';
-
-
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/Meetings/meetings_list.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../sruthi/Subject 2/subject_display.dart';
+import '../view/pages/exams/exam_display.dart';
 
 class TestingPage extends StatelessWidget {
   const TestingPage({super.key});
@@ -20,7 +16,7 @@ class TestingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Student View')),
+      appBar: AppBar(title: const Text('Student View')),
       body: Column(
           //crossAxisAlignment: CrossAxisAlignment.start,
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,7 +33,7 @@ class TestingPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => SubjectList())));
+                              builder: ((context) => const SubjectList())));
                     },
                     child: Containerwidget(text: 'Subject Student View')),
                 kWidth30,
@@ -60,7 +56,7 @@ class TestingPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => StudyMaterials())));
+                              builder: ((context) => const StudyMaterials())));
                     },
                     child:
                         Containerwidget(text: 'study material view Student')),
@@ -70,15 +66,12 @@ class TestingPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => ExmNotification())));
+                              builder: ((context) => const ExmNotification())));
                     },
                     child: Containerwidget(text: 'Exm Noti student')),
               ],
             ),
-            
-
-
-             kHeight20,
+            kHeight20,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -89,15 +82,14 @@ class TestingPage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: ((context) => NoticePage())));
                     },
-                    child:
-                        Containerwidget(text: 'Notice view Student')),
+                    child: Containerwidget(text: 'Notice view Student')),
                 kWidth30,
                 InkWell(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => MeetingList())));
+                              builder: ((context) => const MeetingList())));
                     },
                     child: Containerwidget(text: 'Meeting View student')),
               ],
@@ -122,7 +114,7 @@ class Containerwidget extends StatelessWidget {
       child: Center(
           child: Text(
         text,
-        style: TextStyle(fontSize: 20),
+        style: const TextStyle(fontSize: 20),
       )),
     );
   }

@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -14,6 +13,7 @@ import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
+import '../../../pages/teacher_list/teacher_list.dart';
 import '../../events/event_list.dart';
 import '../../student_home/time_table/time_table_display.dart';
 import '../progress_report/progress_report.dart';
@@ -53,7 +53,7 @@ class ParentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!), //Progress Report
       StudentSubjectHome(), //Subjects
 
-      const UnderMaintanceScreen(text: ""), // Teachers
+      TeacherSubjectWiseList(), //Teachers
       SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;

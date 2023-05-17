@@ -103,7 +103,7 @@ class TeacherLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 210.w),
-                      child: GooglePoppinsWidgets(
+                      child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -112,10 +112,12 @@ class TeacherLoginScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                        child: GooglePoppinsWidgets(
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(

@@ -104,19 +104,21 @@ class GuardianLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 210.w),
-                      child: GooglePoppinsWidgets(
+                      child: GestureDetector(
                         onTap: () {
-                              Navigator.of(context).push(
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
                                   const ForgotPasswordScreen(),
                             ),
                           );
                         },
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                        child: GooglePoppinsWidgets(
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(
@@ -143,7 +145,6 @@ class GuardianLoginScreen extends StatelessWidget {
                       children: [
                         GooglePoppinsWidgets(
                             text: "Don't Have an account?", fontsize: 15),
-                    
                         GestureDetector(
                           onTap: () {
                             Get.to(GuardianSignUpFirstScreen(
@@ -154,12 +155,11 @@ class GuardianLoginScreen extends StatelessWidget {
                             text: ' Sign Up',
                             fontsize: 19,
                             color: cblue,
-                              fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                   
                   ],
                 ),
               ),
