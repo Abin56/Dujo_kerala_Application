@@ -2,7 +2,6 @@
 
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -15,6 +14,7 @@ import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
+import '../../pages/teacher_list/teacher_list.dart';
 import '../parent_home/progress_report/progress_report.dart';
 import '../student_home/time_table/time_table_display.dart';
 
@@ -53,7 +53,7 @@ class GuardianAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!), //Progress Report
       StudentSubjectHome(), //Subjects
 
-      const UnderMaintanceScreen(text: ""), // Teachers
+      TeacherSubjectWiseList(), //Teachers
       SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;

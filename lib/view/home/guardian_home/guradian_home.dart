@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../sruthi/User Edit Profile/user_edit_profile.dart';
+import '../../constant/sizes/constant.dart';
 
 class GuardianHomeScreen extends StatefulWidget {
   @override
@@ -52,13 +53,13 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.to(UserEditPage());
+                                Get.to(const UserEditPage());
                               },
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
                                     UserCredentialsController
                                             .guardianModel!.profileImageURL ??
-                                        ''),
+                                        netWorkImagePathPerson),
                                 radius: 50.r,
                               ),
                             ),
