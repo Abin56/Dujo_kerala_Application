@@ -1,20 +1,25 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/widgets/textformfield.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../view/colors/colors.dart';
 import '../../../view/widgets/button_container_widget.dart';
 
 class UploadStudyMaterial extends StatefulWidget {
-  UploadStudyMaterial({super.key, required this.subjectID});
+  UploadStudyMaterial({super.key, required this.subjectID, required this.subjectName, required this.chapterName});
 
   String subjectID;
+  String subjectName;
+  String chapterName;
 
   @override
   State<UploadStudyMaterial> createState() => _UploadStudyMaterialState();
@@ -28,7 +33,41 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
 
   File? filee;
 
-  void pickAFile() {}
+  Future<String> pickAFile(file) async{
+    try{
+          // log('gggggg${studentListValue?['studentName']}');
+       String uid2 = const Uuid().v1();
+      //isImageUpload.value = true; 
+      
+      UploadTask uploadTask =  FirebaseStorage.instance.ref()
+      .child("files/studymaterials/${widget.subjectName}/${widget.chapterName}/$uid2")
+      .putData(file);  
+
+      final TaskSnapshot snap = await uploadTask;
+      String downloadUrl = await snap.ref.getDownloadURL(); 
+      log('downloadUrl $downloadUrl');  
+
+      return downloadUrl;
+
+ 
+
+      // final path =   'teachernotes/${pickedFile!.name}';
+      //          final file =  pickedFile!.bytes;
+      //          log('this is path: $path');
+      //          final ref = FirebaseStorage.instance.ref().child(path);
+      //          ref.putData(file!);
+      //          log('completed ${ref.fullPath}'); 
+
+   ///////////////////////////////////////////////////////   
+ 
+     
+      
+     } catch(e){
+      log(e.toString()); 
+      return e.toString();
+     }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +126,9 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                                 });
                               } else {
                                 print('No file selected');
-                              }
+                              } 
+
+                              pickAFile(filee);
                       },
                       child: Container(
                         height: 130.h,

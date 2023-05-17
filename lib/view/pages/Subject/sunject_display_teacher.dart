@@ -62,7 +62,7 @@ class SubjectWiseDisplayTeacher extends StatelessWidget {
                             builder: (context) =>  
                             
                             //StudyMaterials() 
-                     UploadStudyMaterial(subjectID: subjectID,)
+                     UploadStudyMaterial(subjectID: subjectID,chapterName: snapshot.data!.docs[index]['chapterName'], subjectName: snapshot.data!.docs[index]['subjectName'],)
                             
                             ));
                   },
