@@ -28,44 +28,38 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cloud_firestore: null
+  cloud_firestore: 
   cupertino_icons: ^1.0.2
-  dropdown_search: null
-  firebase_auth: null
-  firebase_core: null
-  firebase_database: null
-  firebase_storage: null
+  dropdown_search: 
+  firebase_auth: 
+  firebase_core: 
+  firebase_database: 
+  firebase_storage: 
   flutter:
     sdk: flutter
-  flutter_bloc: null
-  flutter_launcher_icons: null
-  flutter_markdown: null
-  flutter_screenutil: null
-  flutter_staggered_animations: null
+  flutter_bloc: 
+  flutter_launcher_icons: 
+  flutter_markdown: 
+  flutter_screenutil: 
+  flutter_staggered_animations: 
   flutter_svg: ^2.0.5
-  fluttertoast: null
-  get: null
-  google_fonts: null
-  google_nav_bar: null
-  image_picker: null
+  fluttertoast: 
+  get: 
+  google_fonts: 
+  google_nav_bar: 
+  image_picker: 
   intl: ^0.18.1
-  line_icons: null
-  lottie: null
-  pdf: null
-  pinput: null
-  printing: null
-  shared_preferences: ^2.1.0
-  url_launcher: null
-  uuid: ^3.0.7
+  line_icons: 
+  lottie: 
   pdf: 
-  flutter_launcher_icons:
+  pinput: 
   printing: 
-  file_picker: 
+  shared_preferences: ^2.1.0
   url_launcher: 
-  flutter_markdown:
-  zoom_widget:
+  uuid: ^3.0.7
+  file_picker: 
   omni_jitsi_meet: ^1.0.13
-  zoom_widget: null
+  zoom_widget: 
 
 flutter_icons:
   android: true

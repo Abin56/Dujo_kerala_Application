@@ -52,7 +52,7 @@ android {
         applicationId "in.DujoSchools.leptonCommunications"
         minSdkVersion 24
         multiDexEnabled true
-        targetSdkVersion 33
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
