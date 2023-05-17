@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
@@ -15,6 +14,7 @@ import '../../colors/colors.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/view_home_work.dart';
+import '../../pages/Subject/teacher_display_subjects.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../events/Tabs/school_level_tab.dart';
 
@@ -86,7 +86,7 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID,
           schooilID:
               UserCredentialsController.schoolId!), //Progress Report view
-      const UnderMaintanceScreen(text: ''), // Subjects
+       TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
     ];

@@ -42,19 +42,19 @@ class ExamUploadTextFormFeild extends StatelessWidget {
               fontWeight: FontWeight.w300,
               text: text,
             ),
-            Container(
+            SizedBox(
               height: 70.h,
               width: double.infinity,
               // color: const Color.fromARGB(255, 211, 225, 236),
               child: Center(
                 child: TextFormField(
-                     
+                     controller: textfromController,
                     
                       // keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                          hintText: hintText,
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.all(7),
+                        border: const OutlineInputBorder(),
+                        contentPadding: const EdgeInsets.all(7),
                       ),
                     ),
               ),

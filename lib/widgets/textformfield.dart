@@ -21,7 +21,7 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: function,
-      // controller: textEditingController,
+      controller: textEditingController,
       decoration: InputDecoration(
        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.h)
         ), labelStyle: TextStyle(color: cblack,fontWeight: FontWeight.w600), 

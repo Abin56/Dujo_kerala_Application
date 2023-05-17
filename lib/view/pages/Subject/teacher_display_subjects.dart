@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/get_teacher_subject/get_sub.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/sruthi/subject_chapter_upload.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
@@ -13,10 +14,10 @@ import 'package:get/get.dart';
 import '../../../../view/widgets/container_image.dart';
 import '../../../widgets/Iconbackbutton.dart';
 
-class StudentSubjectHome extends StatelessWidget {
+class TeacherSubjectHome extends StatelessWidget {
   TeacherSubjectController teacherSubjectController =
       Get.put(TeacherSubjectController());
-  StudentSubjectHome({super.key});
+  TeacherSubjectHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,9 @@ class StudentSubjectHome extends StatelessWidget {
                 .doc(UserCredentialsController.batchId)
                 .collection("classes")
                 .doc(UserCredentialsController.classId)
-                .collection("subjects")
+                .collection('teachers')
+                .doc(UserCredentialsController.teacherModel!.docid)
+                .collection('teacherSubject')
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -64,14 +67,14 @@ class StudentSubjectHome extends StatelessWidget {
                     children:
                         List.generate(snapshot.data!.docs.length, (index) {
                       teacherSubjectController
-                          .getSubject(snapshot.data!.docs[index]['teacherId']);
+                          .getSubject(snapshot.data!.docs[index]['teacherdocid']);
                       return GestureDetector( 
                         onTap: (){
-                          // Navigator.push(context, MaterialPageRoute(builder: (context)=> 
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> 
                           
-                          // StudyMaterials()
-                          
-                          // ));
+                          //StudyMaterials()
+                          ChapterUpoload(subjectID: snapshot.data!.docs[index]['docid'],)
+                          ));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -113,7 +116,7 @@ class StudentSubjectHome extends StatelessWidget {
                                                   future: teacherSubjectController
                                                       .getSubject(
                                                           snapshot.data?.docs[index]
-                                                              ['teacherId']),
+                                                              ['teacherdocid']),
                                                   builder: (context, snap) {
                                                     return SizedBox(
                                                       height: 40,
