@@ -59,6 +59,7 @@ dependencies:
   url_launcher: 
   flutter_markdown:
   zoom_widget:
+  omni_jitsi_meet: ^1.0.13
 
 flutter_icons:
  android: true
