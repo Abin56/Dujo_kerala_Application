@@ -11,6 +11,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../sruthi/Subject 2/subject_display.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
@@ -53,7 +54,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-      const UnderMaintanceScreen(text: ''), //Subject
+      const SubjectList(), //Subject
       const UnderMaintanceScreen(text: ''), //Teachers
       SchoolLevelMeetingPage(), //Meetings
 
