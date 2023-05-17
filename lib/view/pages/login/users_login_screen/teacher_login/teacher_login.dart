@@ -3,6 +3,7 @@
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/widgets/forget_password_page.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -102,12 +103,21 @@ class TeacherLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 210.w),
-                      child: GooglePoppinsWidgets(
-                        onTap: () {},
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen(),
+                            ),
+                          );
+                        },
+                        child: GooglePoppinsWidgets(
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(
@@ -135,7 +145,6 @@ class TeacherLoginScreen extends StatelessWidget {
                       children: [
                         GooglePoppinsWidgets(
                             text: "Don't Have an account?", fontsize: 15),
-                  
                         GestureDetector(
                           onTap: () {
                             Get.to(TeachersSignUpScreen(
@@ -146,12 +155,11 @@ class TeacherLoginScreen extends StatelessWidget {
                             text: ' Sign Up',
                             fontsize: 19,
                             color: cblue,
-                              fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                 
                   ],
                 ),
               ),

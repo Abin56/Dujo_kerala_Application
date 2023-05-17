@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+5
+version: 1.0.0+6
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
@@ -38,6 +38,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: null
+  flutter_launcher_icons: null
+  flutter_markdown: null
   flutter_screenutil: null
   flutter_staggered_animations: null
   flutter_svg: ^2.0.5
@@ -49,8 +51,11 @@ dependencies:
   intl: ^0.18.1
   line_icons: null
   lottie: null
+  pdf: null
   pinput: null
+  printing: null
   shared_preferences: ^2.1.0
+  url_launcher: null
   uuid: ^3.0.7
   pdf: 
   flutter_launcher_icons:
@@ -60,11 +65,12 @@ dependencies:
   flutter_markdown:
   zoom_widget:
   omni_jitsi_meet: ^1.0.13
+  zoom_widget: null
 
 flutter_icons:
- android: true
- ios: true
- image_path: "assets/images/leptonlogo.png"
+  android: true
+  ios: true
+  image_path: "assets/images/leptonlogo.png"
 
 dev_dependencies:
   flutter_lints: ^2.0.0

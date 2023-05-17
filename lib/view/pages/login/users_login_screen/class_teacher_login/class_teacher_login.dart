@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
+import '../../../../../widgets/forget_password_page.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
@@ -30,7 +31,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: ContainerImage(
             height: 28.h,
             width: 90.w,
@@ -102,12 +104,21 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 210.w),
-                      child: GooglePoppinsWidgets(
-                        onTap: () {},
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen(),
+                            ),
+                          );
+                        },
+                        child: GooglePoppinsWidgets(
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(
@@ -134,7 +145,6 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                       children: [
                         GooglePoppinsWidgets(
                             text: "Don't Have an account?", fontsize: 15),
-                  
                         GestureDetector(
                           onTap: () {
                             Get.to(TeachersSignUpScreen(
@@ -145,12 +155,11 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             text: ' Sign Up',
                             fontsize: 19,
                             color: cblue,
-                              fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                    
                   ],
                 ),
               ),

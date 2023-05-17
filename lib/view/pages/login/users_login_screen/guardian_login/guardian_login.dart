@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../../../../controllers/sign_in_controller/guardian_login_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
+import '../../../../../widgets/forget_password_page.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
@@ -103,12 +104,21 @@ class GuardianLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 210.w),
-                      child: GooglePoppinsWidgets(
-                        onTap: () {},
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen(),
+                            ),
+                          );
+                        },
+                        child: GooglePoppinsWidgets(
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(
@@ -135,7 +145,6 @@ class GuardianLoginScreen extends StatelessWidget {
                       children: [
                         GooglePoppinsWidgets(
                             text: "Don't Have an account?", fontsize: 15),
-                    
                         GestureDetector(
                           onTap: () {
                             Get.to(GuardianSignUpFirstScreen(
@@ -146,12 +155,11 @@ class GuardianLoginScreen extends StatelessWidget {
                             text: ' Sign Up',
                             fontsize: 19,
                             color: cblue,
-                              fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                   
                   ],
                 ),
               ),

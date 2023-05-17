@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../../../controllers/sign_in_controller/parent_login_controller.dart';
 import '../../../../../model/Text_hiden_Controller/password_field.dart';
+import '../../../../../widgets/forget_password_page.dart';
 import '../../../../../widgets/login_button.dart';
 import '../../../../constant/sizes/constant.dart';
 import '../../../../widgets/container_image.dart';
@@ -31,7 +32,8 @@ class ParentLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: ContainerImage(
             height: 28.h,
             width: 90.w,
@@ -103,12 +105,21 @@ class ParentLoginScreen extends StatelessWidget {
                     kHeight10,
                     Padding(
                       padding: EdgeInsets.only(left: 210.w),
-                      child: GooglePoppinsWidgets(
-                        onTap: () {},
-                        fontsize: 16,
-                        text: 'Forgot Password?',
-                        fontWeight: FontWeight.w400,
-                        color: adminePrimayColor,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen(),
+                            ),
+                          );
+                        },
+                        child: GooglePoppinsWidgets(
+                          fontsize: 16,
+                          text: 'Forgot Password?',
+                          fontWeight: FontWeight.w400,
+                          color: adminePrimayColor,
+                        ),
                       ),
                     ),
                     Padding(
@@ -136,7 +147,6 @@ class ParentLoginScreen extends StatelessWidget {
                       children: [
                         GooglePoppinsWidgets(
                             text: "Don't Have an account?", fontsize: 15),
-                   
                         GestureDetector(
                           onTap: () async {
                             ParentSignUpController parentSignUpController =
@@ -150,12 +160,11 @@ class ParentLoginScreen extends StatelessWidget {
                             text: ' Sign Up',
                             fontsize: 19,
                             color: cblue,
-                              fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                    
                   ],
                 ),
               ),
