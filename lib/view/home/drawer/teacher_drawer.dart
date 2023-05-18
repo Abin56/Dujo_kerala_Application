@@ -11,6 +11,7 @@ import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../colors/colors.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
+import '../general_instructions/general_instructions.dart';
 
 class TeacherHeaderDrawer extends StatelessWidget {
   UserLogOutController userLogOutController = Get.put(UserLogOutController());
@@ -18,8 +19,8 @@ class TeacherHeaderDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  log("message");
-      return Container(
+    log("message");
+    return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
       height: 290,
@@ -57,7 +58,6 @@ class TeacherHeaderDrawer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-          
               TextButton.icon(
                   onPressed: () async {
                     userLogOutController.logOut(context);
@@ -72,7 +72,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
           UserCredentialsController.teacherModel!.userRole == 'classTeacher'
               ? TextButton.icon(
                   onPressed: () async {
-                    Get.offAll(ClassTeacherMainHomeScreen());
+                    Get.offAll(const ClassTeacherMainHomeScreen());
                   },
                   icon: const Icon(Icons.edit_note_rounded),
                   label: const Text(
@@ -195,18 +195,25 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-      menuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+        menuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+          Get.to(const PrivacyViewScreen());
         }),
         menuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
         }),
+
         // menuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
         //     currentPage == DrawerSections.dashboard ? true : false, () {
         //   signOut(context);
         // }),
+        menuItem(8, 'assets/images/information.png', 'General Instructions',
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(
+            () => GeneralInstruction(),
+          );
+        }),
         kHeight10,
         kHeight10,
         kHeight10,

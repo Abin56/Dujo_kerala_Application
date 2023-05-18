@@ -18,6 +18,7 @@ import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
+import '../../general_instructions/general_instructions.dart';
 import '../time_table/time_table_display.dart';
 
 class StudentAccessories extends StatelessWidget {
@@ -49,6 +50,7 @@ class StudentAccessories extends StatelessWidget {
       StudentSubjectHome(), //Subjects
       TeacherSubjectWiseList(), //Teachers
       SchoolLevelMeetingPage(), //Meetings
+      
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -141,7 +143,7 @@ List<String> _acc_text = [
   'Progress Report',
   'Subjects/Materials',
   'Teachers',
-  'Meetings'
+  'Meetings',
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -154,4 +156,5 @@ var _acc_images = [
   'assets/images/subjects.png',
   'assets/images/teachers.png',
   'assets/images/library.png',
+
 ];

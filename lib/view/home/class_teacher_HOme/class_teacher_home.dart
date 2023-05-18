@@ -1,14 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/accessories.dart';
-import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-
-import '../../../sruthi/User Edit Profile/user_edit_profile.dart';
 
 class ClassTeacherHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -49,7 +46,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Get.to(UserEditPage());
+                                      //  Get.to(UserEditPage());
                                     },
                                     child: Container(
                                       height: 100,
