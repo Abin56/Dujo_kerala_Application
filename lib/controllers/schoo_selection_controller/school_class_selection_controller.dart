@@ -7,7 +7,7 @@ import '../../model/class_list_model/class_list_model.dart';
 import '../../model/schoo_list_model/school_list_model.dart';
 import '../userCredentials/user_credentials.dart';
 
-class SchoolClassSelectionController extends GetxController {
+class   SchoolClassSelectionController extends GetxController {
   String className = "SchoolClassSelectionController";
   final CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('SchoolListCollection');
