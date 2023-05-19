@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/controllers/get_teacher_subject/get_sub.
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/Subject/student/chapter_display.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,6 +73,8 @@ class StudentSubjectHome extends StatelessWidget {
                           // StudyMaterials()
                           
                           // ));
+
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChapterDisplay(subjectID: snapshot.data!.docs[index]['docid']),));
                         },
                         child: Container(
                           decoration: BoxDecoration(

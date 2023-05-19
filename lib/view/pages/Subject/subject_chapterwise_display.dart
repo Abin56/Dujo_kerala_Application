@@ -47,10 +47,10 @@ backgroundColor: adminePrimayColor,title: Text("Chapters"),
                                   ),
                                    InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => StudyMaterials()));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => StudyMaterials(subjectID:,)));
                                 },
                                 child: Padding(
                                   padding:  EdgeInsets.only(top: 10.h),

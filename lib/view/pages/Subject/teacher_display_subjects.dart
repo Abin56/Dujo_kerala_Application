@@ -75,6 +75,8 @@ class TeacherSubjectHome extends StatelessWidget {
                           //StudyMaterials()
                           ChapterUpoload(subjectID: snapshot.data!.docs[index]['docid'],)
                           ));
+
+                         // ChapterDisplay(subjectID: snapshot.data!.docs[index]['docid'],)));
                         },
                         child: Container(
                           decoration: BoxDecoration(
