@@ -1,6 +1,7 @@
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/class_level_meeting_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 
 import '../../colors/colors.dart';
 
@@ -15,12 +16,12 @@ class MeetingList extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Meeting List"),
           backgroundColor: adminePrimayColor,
-          bottom: const TabBar(tabs: [
+          bottom:  TabBar(tabs: [
             Tab(
-              text: 'Class Level',
+              text: 'Class Level'.tr,
             ),
             Tab(
-              text: 'School Level',
+              text: 'School Level'.tr,
             )
           ]),
         ),

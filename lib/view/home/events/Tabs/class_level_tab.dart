@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../../../model/event_model/class_event_model.dart';
 import '../event_display_class_level.dart';
@@ -69,7 +70,7 @@ class ClassLevelPage extends StatelessWidget {
                                                       )));
                                         },
                                         child: GooglePoppinsWidgets(
-                                          text: "View",
+                                          text: "View".tr,
                                           fontsize: 16.h,
                                           color: Colors.green,
                                         ),

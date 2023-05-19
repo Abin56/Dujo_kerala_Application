@@ -1,19 +1,16 @@
 import 'dart:developer';
 
+import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SelectLanguage extends StatelessWidget {
   final List locale = [
-    {'name': 'ENGLISH', 'locale': Locale('en', 'US')},
-    {'name': 'ಕನ್ನಡ', 'locale': Locale('kn', 'IN')},
-    {'name': 'हिंदी', 'locale': Locale('hi', 'IN')},
-    {'name': 'മലയാളം', 'locale': Locale('ml', 'IN')},
+    {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
+    {'name': 'ಕನ್ನಡ', 'locale': const Locale('kn', 'IN')},
+    {'name': 'हिंदी', 'locale': const Locale('hi', 'IN')},
+    {'name': 'മലയാളം', 'locale': const Locale('ml', 'IN')},
   ];
   updateLanguage(Locale locale) {
     Get.back();
@@ -26,7 +23,7 @@ class SelectLanguage extends StatelessWidget {
       builder: (context) {
         return AlertDialog(
           title: Text("Choose a Language".tr),
-          content: Container(
+          content: SizedBox(
             width: double.maxFinite,
             child: ListView.separated(
                 shrinkWrap: true,
@@ -44,7 +41,7 @@ class SelectLanguage extends StatelessWidget {
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return Divider();
+                  return const Divider();
                 },
                 itemCount: locale.length),
           ),
@@ -73,20 +70,20 @@ class SelectLanguage extends StatelessWidget {
                   },
                   child: Text('Change Language'.tr)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            // Container(
-            //   height: 50,
-            //   width: 100,
-            //   decoration:
-            //       BoxDecoration(borderRadius: BorderRadius.circular(30)),
-            //   child: ElevatedButton(
-            //       onPressed: () async {
-            //         Get.offAll(Onboardingpage());
-            //       },
-            //       child: Text('Next'.tr)),
-            // ),
+            Container(
+              height: 50,
+              width: 130,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(30)),
+              child: ElevatedButton(
+                  onPressed: () async {
+                    Get.offAll(const SplashScreen());
+                  },
+                  child: Text('Next'.tr)),
+            ),
           ],
         ),
       ),

@@ -30,7 +30,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Subject'),backgroundColor: adminePrimayColor,
+        title:  Text('Select Subject'.tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(

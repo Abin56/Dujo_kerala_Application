@@ -60,7 +60,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                         ? circularProgressIndicatotWidget
                         : DropdownSearch<ParentModel>(
                             selectedItem:
-                                ParentModel(parentName: "Select Parent"),
+                                ParentModel(parentName: "Select Parent".tr),
                             validator: (v) =>
                                 v == null ? "required field" : null,
                             items: parentSignUpController.parentModelList,
@@ -78,7 +78,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                   kHeight10,
                   SigninTextFormfield(
                       obscureText: false,
-                      hintText: 'Email id',
+                      hintText: 'Email id'.tr,
                       labelText: 'Enter Mail ID',
                       prefixIcon: IconButton(
                         onPressed: () {},
@@ -91,7 +91,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                       function: checkFieldEmailIsValid),
                   Obx(
                     () => SigninTextFormfield(
-                      hintText: 'Password',
+                      hintText: 'Password'.tr,
                       obscureText: hideGetxController.isObscurefirst.value,
                       labelText: 'Password',
                       icon: Icons.lock,
@@ -114,7 +114,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                   ),
                   Obx(
                     () => SigninTextFormfield(
-                      hintText: 'Confirm Password',
+                      hintText: 'Confirm Password'.tr,
                       obscureText: hideGetxController.isObscureSecond.value,
                       labelText: 'Confirm Password',
                       icon: Icons.lock,
@@ -143,7 +143,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                         if (parentSignUpController.passwordController.text !=
                             parentSignUpController
                                 .confirmPasswordController.text) {
-                          showToast(msg: "Password Missmatch");
+                          showToast(msg: "Password Missmatch".tr);
                           return;
                         }
 
@@ -170,7 +170,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                           : loginButtonWidget(
                               height: 60,
                               width: 180,
-                              text: 'Submit',
+                              text: 'Submit'.tr,
                             ),)
                     ),
                   ),
@@ -181,7 +181,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already have an account?",
+                        "Already have an account?".tr,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontSize: 15,
@@ -197,7 +197,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                           ));
                         },
                         child: Text(
-                          "Login",
+                          "Login".tr,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
                               fontSize: 19,

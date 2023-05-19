@@ -7,6 +7,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/button_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -91,7 +92,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
   
         backgroundColor: adminePrimayColor,
         title: Text(
-          "Home Work",
+          "HomeWorks.".tr,
           style: GoogleFonts.poppins(
             color: cWhite,
             fontSize: 20,

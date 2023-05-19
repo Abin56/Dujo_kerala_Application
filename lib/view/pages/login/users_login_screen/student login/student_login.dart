@@ -55,7 +55,7 @@ class StudentLoginScreen extends StatelessWidget {
                       padding: EdgeInsets.only(right: 140.w),
                       child: GoogleMonstserratWidgets(
                         fontsize: 45,
-                        text: 'Login',
+                        text: 'Login'.tr,
                         color: cblack,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.5,
@@ -64,7 +64,7 @@ class StudentLoginScreen extends StatelessWidget {
                     kHeight10,
                     SigninTextFormfield(
                         obscureText: false,
-                        hintText: 'Email id',
+                        hintText: 'Email id'.tr,
                         labelText: 'Enter Mail ID',
                         prefixIcon: IconButton(
                           onPressed: () {},
@@ -78,7 +78,7 @@ class StudentLoginScreen extends StatelessWidget {
                     // Enter Password session >>>>>>>>
                     Obx(
                       () => SigninTextFormfield(
-                        hintText: 'Password',
+                        hintText: 'Password'.tr,
                         obscureText: hideGetxController.isObscurefirst.value,
                         labelText: 'Password',
                         icon: Icons.lock,
@@ -113,7 +113,7 @@ class StudentLoginScreen extends StatelessWidget {
                         },
                         child: GooglePoppinsWidgets(
                           fontsize: 16,
-                          text: 'Forgot Password?',
+                          text: 'Forgot Password?'.tr,
                           fontWeight: FontWeight.w400,
                           color: adminePrimayColor,
                         ),
@@ -131,7 +131,7 @@ class StudentLoginScreen extends StatelessWidget {
                                 : loginButtonWidget(
                                     height: 60,
                                     width: 180,
-                                    text: 'Login',
+                                    text: 'Login'.tr,
                                   ),
                           )),
                     ),
@@ -142,7 +142,7 @@ class StudentLoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GooglePoppinsWidgets(
-                              text: "Don't Have an account?", fontsize: 15),
+                              text: "Don't Have an account?".tr, fontsize: 15),
                           GestureDetector(
                             onTap: () {
                               Get.to(StudentSignInScreen(
@@ -150,7 +150,7 @@ class StudentLoginScreen extends StatelessWidget {
                               ));
                             },
                             child: GooglePoppinsWidgets(
-                              text: ' Sign Up',
+                              text: ' Sign Up'.tr,
                               fontsize: 19,
                               color: cblue,
                               fontWeight: FontWeight.bold,

@@ -33,7 +33,7 @@ class SchoolLevelMeetingPage extends StatelessWidget {
           : Scaffold(backgroundColor: Colors.white70,
               appBar: AppBar(
                 backgroundColor: adminePrimayColor,
-                title: const Text("Meeting"),
+                title:  Text("Meetings".tr),
               ),
               body: Column(
                 children: [
@@ -70,7 +70,7 @@ class SchoolLevelMeetingPage extends StatelessWidget {
                                               );
                                             },
                                             child: GooglePoppinsWidgets(
-                                              text: "View",
+                                              text: "View".tr,
                                               fontsize: 16.h,
                                               color: Colors.blue,
                                             ),

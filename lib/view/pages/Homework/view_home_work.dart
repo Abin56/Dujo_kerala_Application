@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../constant/sizes/sizes.dart';
@@ -23,7 +24,7 @@ class ViewHomeWorks extends StatelessWidget {
         title: Row(
           children: [
             kHeight20,
-            GooglePoppinsWidgets(text: "HomeWork", fontsize: 20.h)
+            GooglePoppinsWidgets(text: "HomeWorks".tr, fontsize: 20.h)
           ],
         ),
         backgroundColor: adminePrimayColor,
