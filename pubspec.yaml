@@ -29,7 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cloud_firestore: 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: 
   dropdown_search: 
   firebase_auth: 
   firebase_core: 
@@ -42,26 +42,26 @@ dependencies:
   flutter_markdown: 
   flutter_screenutil: 
   flutter_staggered_animations: 
-  flutter_svg: ^2.0.5
+  flutter_svg: 
   fluttertoast: 
   get: 
   google_fonts: 
   google_nav_bar: 
   image_picker: 
-  intl: ^0.18.1
+  intl: 
   line_icons: 
   lottie: 
   pdf: 
   pinput: 
-  printing: 
-  shared_preferences: ^2.1.0
+  printing:
+  shared_preferences: 
   url_launcher: 
-  uuid: ^3.0.7
+  uuid: 
   file_picker: 
   omni_jitsi_meet: ^1.0.13
   zoom_widget: 
-  flutter_filereader: ^3.0.0 
-  pdfx: ^2.3.0
+  flutter_filereader: 
+  pdfx: 
 
 flutter_icons:
   android: true
