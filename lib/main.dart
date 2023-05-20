@@ -1,7 +1,6 @@
-import 'package:dujo_kerala_application/controllers/bloc/user_phone_otp/auth_state.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
 import 'package:dujo_kerala_application/view/language/language.dart';
-import 'package:dujo_kerala_application/view/language/select_language/select_language.dart';
+import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'controllers/bloc/user_phone_otp/auth_cubit.dart';
+import 'controllers/bloc/user_phone_otp/auth_state.dart';
 import 'helper/shared_pref_helper.dart';
 
 Future<void> main() async {
@@ -40,19 +40,17 @@ class MyApp extends StatelessWidget {
                   translations: GetxLanguage(),
                 locale: const Locale('en', 'US'),
                 debugShowCheckedModeBanner: false,
-                // home: SelectLanguage(),
                 home: BlocBuilder<AuthCubit, AuthState>(
                   buildWhen: (oldState, newState) {
                     return oldState is AuthInitialState;
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return  SelectLanguage();
+                      return const SplashScreen();
                     } else if (state is AuthLoggedOutState) {
-                      return  SelectLanguage();
+                      return const SplashScreen();
                     }
-                    ///
-                    return  SelectLanguage();
+                    return const SplashScreen();
                   },
                 ),
 
@@ -60,4 +58,3 @@ class MyApp extends StatelessWidget {
         });
   }
 }
-//////////////////iugiuiuiuiugiugiug
