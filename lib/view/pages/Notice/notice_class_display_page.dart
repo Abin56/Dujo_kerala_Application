@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 import '../../widgets/fonts/google_poppins.dart';
 
@@ -16,7 +17,8 @@ class NoticeClassDisplayPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("Notice"),
+          title:  Text("Notices.".tr
+          ),
         ),
         body: SizedBox(
           height: double.infinity, // set the height to fill available space

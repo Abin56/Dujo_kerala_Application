@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StudentShowTimeTable extends StatefulWidget {
@@ -60,7 +61,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor, title: const Text('Time Table'),),
+    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor, title:  Text('TimeTable'.tr),),
         body: StreamBuilder(
           stream:  FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection(UserCredentialsController.batchId!).doc(UserCredentialsController.batchId).collection('classes').doc(UserCredentialsController.classId).collection('TimeTables').snapshots(),
           builder: (context, snapshot) {

@@ -2,6 +2,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../widgets/container_image.dart';
 
@@ -24,15 +25,19 @@ class UserLoginDesgin extends StatelessWidget {
             child: GooglePoppinsWidgets(
               fontsize: 28,
               fontWeight: FontWeight.w700,
-              text: 'Welcome..',
+              text: 'Welcome..'.tr,
             ),
           ),
           kHeight10,
-          Center(
-            child: GooglePoppinsWidgets(
-              fontsize: 23,
-              fontWeight: FontWeight.w500,
-              text: 'Select Who You Are ?',
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50.h),
+            child: Container(
+              child: GooglePoppinsWidgets(
+                fontsize: 23,
+                fontWeight: FontWeight.w500,
+                text: 'Select Who You Are ?'.tr,
+              ),
+              
             ),
           ),
           kHeight10,

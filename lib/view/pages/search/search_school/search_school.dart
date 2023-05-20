@@ -33,7 +33,7 @@ class SearchSchoolScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GoogleMonstserratWidgets(
-                    text: "Search  School",
+                    text: "Search  School".tr,
                     fontsize: 23,
                   ),
                   const Icon(
@@ -59,7 +59,7 @@ class SearchSchoolScreen extends StatelessWidget {
                 ],
               ),
               GoogleMonstserratWidgets(
-                  text: "Welcome To",
+                  text: "Welcome To".tr,
                   fontsize: 25,
                   fontWeight: FontWeight.bold),
               kHeight20,
@@ -69,7 +69,7 @@ class SearchSchoolScreen extends StatelessWidget {
                   imagePath: 'assets/images/dujoo.png'),
               kHeight20,
               GoogleMonstserratWidgets(
-                  text: "Set Up Your App",
+                  text: "Set Up Your App".tr,
                   fontsize: 20,
                   fontWeight: FontWeight.w600),
               kHeight10,

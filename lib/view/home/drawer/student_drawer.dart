@@ -3,6 +3,7 @@
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,8 +18,8 @@ class StudentsHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 250,
-      padding: const EdgeInsets.only(bottom: 20),
+      height: 270,
+      padding:  EdgeInsets.only(bottom: 20,top: 15.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -53,7 +54,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
             onPressed: () async {
               await userLogOut(context);
             },
-            child: const Text("Logout"),
+            child:   Text("Logout",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19.h),),
           )
         ],
       ),
@@ -195,7 +196,7 @@ Widget MyDrawerList(context) {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    children: const [
+                    children:  const [
                       Text(
                         "Developed by",
                         style: TextStyle(
@@ -207,7 +208,7 @@ Widget MyDrawerList(context) {
               ),
             ),
             Positioned(
-                top: 38,
+                top: 40,
                 left: 30,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,

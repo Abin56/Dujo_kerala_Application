@@ -20,7 +20,7 @@ class GooglePoppinsWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      overflow: TextOverflow.ellipsis,
+      // overflow: TextOverflow.ellipsis,
       style: GoogleFonts.poppins(
         fontSize: fontsize,
         fontWeight: fontWeight,

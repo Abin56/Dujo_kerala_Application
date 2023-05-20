@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/view/home/drawer/student_drawer.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -78,29 +79,29 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
           rippleColor: Colors.grey,
           activeColor: Colors.white,
           color: Colors.white,
-          tabs: const [
+          tabs:  [
             GButton(
                 iconSize: 20,
                 icon: LineIcons.home,
-                text: 'Home',
+                text: 'Home'.tr,
                 style: GnavStyle.google),
             GButton(
               iconSize: 20,
               textSize: 9,
               icon: Icons.tv,
-              text: 'ReC_Classes',
+              text: 'ReC_Classes'.tr,
             ),
             GButton(
               iconSize: 20,
               // iconSize: 10,
               textSize: 12,
               icon: Icons.laptop,
-              text: 'Live Classes',
+              text: 'Live Classes'.tr,
             ),
             GButton(
               iconSize: 20,
-              icon: Icons.live_tv_sharp,
-              text: 'Profile',
+              icon: Icons.person,
+              text: 'Profile'.tr,
             )
           ],
           selectedIndex: _page,

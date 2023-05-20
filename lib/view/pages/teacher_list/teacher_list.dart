@@ -18,8 +18,8 @@ class TeacherSubjectWiseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Teacher's List",
+        title:  Text(
+          "Teachers".tr,
         ),
         backgroundColor: adminePrimayColor,
       ),
@@ -118,7 +118,7 @@ class TeacherSubjectWiseList extends StatelessWidget {
                                                         MainAxisAlignment.end,
                                                     children: [
                                                       GooglePoppinsWidgets(
-                                                        text: "Subject :",
+                                                        text: "Subject :".tr,
                                                         fontsize: 14.h,
                                                         fontWeight:
                                                             FontWeight.bold,

@@ -2,6 +2,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../view/widgets/fonts/google_poppins.dart';
 
@@ -15,10 +16,10 @@ class ExmNotification extends StatelessWidget {
    
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children:  [
  
             Text(
-              "Exam Notification",
+              "Exam Notification".tr,
             ),
           ],
         ),
