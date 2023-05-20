@@ -11,7 +11,7 @@ class LiveRoomController extends GetxController {
       .collection('SchoolListCollection')
       .doc(UserCredentialsController.schoolId)
       .collection(UserCredentialsController.batchId!)
-      .doc(UserCredentialsController.batchId)
+      .doc(UserCredentialsController.batchId!)
       .collection('Classes')
       .doc(UserCredentialsController.classId)
       .collection('LiveRooms');
@@ -22,8 +22,9 @@ class LiveRoomController extends GetxController {
     String docid,
     String roomID,
     String ownerName,
-  ) {
+  ) async{
     final liveModel = LiveRoomModel(
+      createDate: DateTime.now().toString(),
         roomName: roomName,
         scheduleTime: scheduleTime,
         docid: docid,
@@ -32,10 +33,9 @@ class LiveRoomController extends GetxController {
         activateLive: false);
 
     firebaseFirestore
-        .doc(UserCredentialsController.classId)
-        .set({}).then((value) {
+        .doc(liveModel.docid)
+        .set(liveModel.toJson()).then((value) {
       showToast(msg: 'Room Created Successfully');
-      Navigator.pop(context);
     });
   }
 }
