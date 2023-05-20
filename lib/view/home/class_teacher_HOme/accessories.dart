@@ -2,6 +2,7 @@
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/my_students.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
@@ -11,12 +12,12 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../sruthi/Subject 2/subject_display.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
 import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../pages/Notice/notice_list.dart';
+import '../../pages/Subject/subject_display.dart';
 import '../events/event_list.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
@@ -54,11 +55,13 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-      const SubjectList(), //Subject
+       StudentSubjectHome(), //Subject
       const UnderMaintanceScreen(text: ''), //Teachers
       SchoolLevelMeetingPage(), //Meetings
 
-      // StudentSubjectHome(),
+      // StudentSubjectHome(), 
+
+      const MyStudents()  //My students
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -151,7 +154,8 @@ List<String> _acc_text = [
   'Progress Report',
   'Subjects',
   'Teachers',
-  'Meetings'
+  'Meetings', 
+  'My Students'
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -165,5 +169,6 @@ var _acc_images = [
   'assets/images/splash.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/teachers.png',
+  'assets/images/teachers.png', 
+  'assets/images/mystudents.png'
 ];

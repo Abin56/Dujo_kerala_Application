@@ -1,20 +1,29 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/Subject/show_teacher_studymaterials.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/widgets/textformfield.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../view/colors/colors.dart';
 import '../../../view/widgets/button_container_widget.dart';
 
 class UploadStudyMaterial extends StatefulWidget {
-  UploadStudyMaterial({super.key, required this.subjectID});
+  UploadStudyMaterial({super.key, required this.subjectID, required this.subjectName, required this.chapterID,required this.chapterName});
 
   String subjectID;
+  String subjectName;
+  String chapterName;
+  String chapterID;
 
   @override
   State<UploadStudyMaterial> createState() => _UploadStudyMaterialState();
@@ -27,8 +36,78 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
   TextEditingController titleController = TextEditingController(); 
 
   File? filee;
+  String downloadUrl = '';
 
-  void pickAFile() {}
+  Future<String> pickAFile(file) async{
+    try{
+          // log('gggggg${studentListValue?['studentName']}');
+       String uid2 = const Uuid().v1();
+      //isImageUpload.value = true; 
+      
+      UploadTask uploadTask =  FirebaseStorage.instance.ref()
+      .child("files/studymaterials/${widget.subjectName}/${widget.chapterName}/$uid2")
+      .putFile(file);  
+
+      final TaskSnapshot snap = await uploadTask;
+       downloadUrl = await snap.ref.getDownloadURL(); 
+      log('downloadUrl $downloadUrl');  
+
+      return downloadUrl;
+
+ 
+
+      // final path =   'teachernotes/${pickedFile!.name}';
+      //          final file =  pickedFile!.bytes;
+      //          log('this is path: $path');
+      //          final ref = FirebaseStorage.instance.ref().child(path);
+      //          ref.putData(file!);
+      //          log('completed ${ref.fullPath}'); 
+
+   ///////////////////////////////////////////////////////   
+ 
+     
+      
+     } catch(e){
+      log(e.toString()); 
+      return e.toString();
+     }
+
+  } 
+
+  uploadToFirebase(){ 
+
+    try{
+      String uid = const Uuid().v1();
+     FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .collection('subjects')
+        .doc(widget.subjectID)
+        .collection('Chapters')
+        .doc(widget.chapterID)
+        .collection('StudyMaterials')
+        .doc(uid)
+        .set({
+          'subjectName': widget.subjectName, 
+          'chapterName': widget.chapterName, 
+          'chapterID': widget.chapterID,
+          'subjectID': widget.subjectID, 
+          'topicName': topicController.text, 
+          'title': titleController.text, 
+          'downloadUrl' : downloadUrl,
+          'docid': uid, 
+          'uploadedBy': UserCredentialsController.teacherModel!.teacherName
+
+        });
+    } 
+    catch(e){
+      log(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +124,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
         ),
         backgroundColor: Colors.white,
         title: Text(
-          "Study Material",
+          "Study Material", 
           style: GoogleFonts.montserrat(
             color: Colors.grey,
             fontSize: 20,
@@ -87,7 +166,9 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                                 });
                               } else {
                                 print('No file selected');
-                              }
+                              } 
+
+                             
                       },
                       child: Container(
                         height: 130.h,
@@ -138,11 +219,15 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                     ),
                     kHeight20,
                     TextFormFieldWidget(
+                      textEditingController: titleController,
                       hintText: 'Enter Title',
                     ),
                     kHeight40,
                     GestureDetector(
-                      onTap: () {},
+                      onTap: ()async {
+                         await pickAFile(filee);
+                         uploadToFirebase();
+                      },
                       child: ButtonContainerWidget(
                         curving: 18,
                         colorindex: 2,
@@ -151,6 +236,27 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                         child: Center(
                           child: Text(
                             "SUBMIT",
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                    ), 
+                    kHeight20,
+                    GestureDetector(
+                      onTap: ()async {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyMaterials(subjectID: widget.subjectID,chapterID: widget.chapterID,)));
+                      },
+                      child: ButtonContainerWidget(
+                        curving: 18,
+                        colorindex: 2,
+                        height: 60.w,
+                        width: 300.w,
+                        child: Center(
+                          child: Text(
+                            "UPLOADED STUDY MATERIALS",
                             style: GoogleFonts.montserrat(
                                 color: Colors.white,
                                 fontSize: 13,

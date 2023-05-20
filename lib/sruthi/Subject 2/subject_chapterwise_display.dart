@@ -34,10 +34,10 @@ class SubjectWiseDisplay extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const StudyMaterials()));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const StudyMaterials()));
               },
               child: Padding(
                 padding: EdgeInsets.only(top: 10.h),

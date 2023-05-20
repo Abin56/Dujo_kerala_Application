@@ -39,9 +39,10 @@ class ChapterUpoload extends StatelessWidget {
       'chapterNumber': chapterNumberController.text,
       'chapterName': chapterNameController.text,
       'subjectName': subjectNameController.text,
-      'docid': id
+      'docid': id, 
+      'uploadedBy': UserCredentialsController.teacherModel!.teacherName.toString()
     }).then((value) {
-        chapterNameController.clear ; 
+        chapterNameController.clear() ; 
         chapterNumberController.clear(); 
         subjectNameController.clear();
     }
