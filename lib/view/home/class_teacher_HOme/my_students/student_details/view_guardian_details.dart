@@ -1,71 +1,44 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
-import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_guardian_details.dart';
-import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_parent_details.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_students_details.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-class ViewStudentsDetails extends StatefulWidget {
-   ViewStudentsDetails({super.key, required this.studentDetail}); 
+class ViewGuardianDetails extends StatefulWidget {
+   ViewGuardianDetails({super.key, required this.studentID, required this.documentSnapshot});
 
-  QueryDocumentSnapshot<Map<String, dynamic>> studentDetail;
+  String studentID;
   DocumentSnapshot? documentSnapshot;
 
   @override
-  State<ViewStudentsDetails> createState() => _ViewStudentsDetailsState();
+  State<ViewGuardianDetails> createState() => _ViewGuardianDetailsState();
 }
 
-class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
-  Future<void> fetchDocument() async {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  try {
-    QuerySnapshot querySnapshot = await firestore
-        .collection('SchoolListCollection')
-              .doc(UserCredentialsController.schoolId)
-              .collection(UserCredentialsController.batchId!)
-              .doc(UserCredentialsController.batchId)
-              .collection('classes')
-              .doc(UserCredentialsController.classId)
-              .collection('ParentCollection')
-        .where('studentID', isEqualTo: widget.studentDetail['docid'])
-        .get();
-
-    // Access the first document that matches the condition
-    if (querySnapshot.size > 0) {
-     widget.documentSnapshot =  querySnapshot.docs[0];
-      Object? data =  widget.documentSnapshot!.data();
-      log(data.toString());  // log the document data
-    } else {
-      log('No matching document found.');
-    }
-  } catch (e) {
-    log('Error: $e');
-  }
-}
-
-@override
-  void initState() {
-    // TODO: implement initState
-    super.initState(); 
-    fetchDocument();
-  }
-
+class _ViewGuardianDetailsState extends State<ViewGuardianDetails> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: cWhite,
-        resizeToAvoidBottomInset: false,
-        body: ListView(
+        appBar: AppBar(
+          title: const Text('Parent Details'),
+        ),
+        body: FutureBuilder(
+          future: FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+                .doc(UserCredentialsController.schoolId)
+                .collection(UserCredentialsController.batchId!)
+                .doc(UserCredentialsController.batchId)
+                .collection('classes')
+                .doc(UserCredentialsController.classId)
+                .collection('GuardianCollection')
+          .where('studentID', isEqualTo: widget.studentID)
+          .get(),
+          builder: (context, snapshot) {
+            if(snapshot.hasData){
+               return ListView(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,17 +53,16 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                    height: screenSize.height,
                       width: double.infinity,
                   child: Container(
-                    
                     margin: EdgeInsets.only(
                       top: 55.h,left: 20.h,
                       right: 20.h,bottom: 30.h),
-
                     height: screenSize.height,
                     width: double.infinity,
                     decoration:  BoxDecoration(
                       color: Colors.blue.withOpacity(0.9),
                       borderRadius: BorderRadius.all(
                       Radius.circular(22.w)
+                      
                         )
                         ),
                     child: 
@@ -109,7 +81,7 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                              const Icon(Icons.person_4,color: cWhite,),
                              SizedBox(width: 20.h,),
 
-                            TextWidget(text: 'Student Name : ${widget.studentDetail['studentName'].toString().capitalize}',),
+                             TextWidget(text: 'Student Name : ${snapshot.data!.docs[0]['guardianName']}',),
                           ],
                         ),
 
@@ -121,7 +93,7 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                             const Icon(Icons.phone,color: cWhite,),
                              SizedBox(width: 20.h,),
                             
-                            TextWidget(text: 'Parent Phone Number : ${widget.studentDetail['parentPhoneNumber']}',),
+                             TextWidget(text: 'Parent Phone Number : ${snapshot.data!.docs[0]['guardianPhoneNumber']}',),
                           ],
                         ),
 
@@ -147,7 +119,7 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                             const Icon(Icons.mail,color: cWhite,),
                              SizedBox(width: 20.h,),
 
-                            TextWidget(text: 'Student Email : ${widget.studentDetail['studentemail']}',),
+                             TextWidget(text: 'Parent Email : ${snapshot.data!.docs[0]['guardianEmail']}',),
                           ],
                         ),
 
@@ -161,24 +133,13 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                             const Icon(Icons.bloodtype,color: cWhite,),
                              SizedBox(width: 20.h,),
 
-                             TextWidget(text: 'Blood Group: ${widget.studentDetail['bloodgroup']}',),
+                              TextWidget(text: 'Place: ${snapshot.data!.docs[0]['place']}',),
                           ],
                         ),
                         
                            const Divider(color: cWhite,),
                             //SizedBox(width: 20.h,),
                             // SizedBox(width: 20.h,),
-
-                        Row(
-                          children: [
-                               const Icon(Icons.numbers,color: cWhite,),
-                             SizedBox(width: 20.h,),
-
-                            TextWidget(text: 'Admission Number : ${widget.studentDetail['admissionNumber']}',),
-                          ],
-                        ),
-                        
-                           const Divider(color: cWhite,),
 
                          //SizedBox(width: 20.h,),
                             // SizedBox(width: 20.h,),
@@ -208,44 +169,23 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                               radius: 130.h,
                               backgroundColor:
                                 cblack,
-                              backgroundImage: NetworkImage(widget.studentDetail['profileImageUrl']),
+                              backgroundImage:  NetworkImage('${snapshot.data!.docs[0]['profileImageURL']}'),
                               ),
                     ),
                  ],
                 ),
-                MaterialButton(onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ViewParentDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot! ,)));
-                }, color: Colors.blue, child: const Text('View Parent Details', style: TextStyle(color: Colors.white),),), 
-                kHeight20, 
-                MaterialButton(onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  ViewGuardianDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot!)));
-                }, color: Colors.blue, child: const Text('View Guardian Details', style: TextStyle(color: Colors.white),),)
+                
               ],
             ),  
           ], 
           
-        ),
+        );
+            }
+            return const Center(child: CircularProgressIndicator());
+           
+          },)
+      //  body:(widget.documentSnapshot == null)? const Text('data'): Text(widget.documentSnapshot?['parentName'])
       ),
     );
   }
 }
-
-class TextWidget extends StatelessWidget {
-  const TextWidget({
-    required this.text,
-    super.key,
-  });
-final String text;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-     // set a fixed height for the container
-      child: GooglePoppinsWidgets(
-        text:text,
-        fontsize: 14.h,
-        color: Colors.white,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
-  }

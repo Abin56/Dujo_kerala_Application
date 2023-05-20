@@ -60,7 +60,8 @@ dependencies:
   file_picker: 
   omni_jitsi_meet: ^1.0.13
   zoom_widget: 
-  flutter_filereader: ^3.0.0
+  flutter_filereader: ^3.0.0 
+  pdfx: ^2.3.0
 
 flutter_icons:
   android: true

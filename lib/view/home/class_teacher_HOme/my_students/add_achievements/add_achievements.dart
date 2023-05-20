@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +27,7 @@ class _AddAchievementsState extends State<AddAchievements> {
   TextEditingController descriptionController = TextEditingController();
 
   bool loadingStatus = false;
+  final _formKey = GlobalKey<FormState>();
 
   void addClassTeacherAchievementsToFirebase(){ 
 
@@ -75,78 +79,101 @@ class _AddAchievementsState extends State<AddAchievements> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, 
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-                CircleAvatar(
-                           radius: 80,
-                           backgroundImage: NetworkImage(widget.studentDetail['profileImageUrl']),
-                         ), kHeight20,
-            Text(widget.studentDetail['studentName'].toString().capitalize!, style: GoogleFonts.poppins(fontSize: 18), ),
-            kHeight20,
-             Padding(
-               padding: const EdgeInsets.only(right: 10.0, left: 10),
-               child: Container(
-                 decoration: BoxDecoration(
-                 borderRadius: BorderRadius.circular(10.0), // Adjust the value for the desired curve
-                 border: Border.all(
-                   color: Colors.grey, // Border color
-                   width: 1.0, // Border width
-                 )),
-                 child: TextFormField(
-                  controller: achievementController,
-                   decoration: const InputDecoration(
-                     border: InputBorder.none, // Remove the default underline
-                     contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
-                     hintText: 'Achievement', // Placeholder text
-                   ),),
-               ),
-             ),
-             kHeight20,
-              Padding(
-               padding: const EdgeInsets.only(right: 10.0, left: 10),
-               child: Container(
-                 decoration: BoxDecoration(
-                 borderRadius: BorderRadius.circular(10.0), // Adjust the value for the desired curve
-                 border: Border.all(
-                   color: Colors.grey, // Border color
-                   width: 1.0, // Border width
-                 )),
-                 child: TextFormField(
-                  controller: dateOfAchievementController,
-                   decoration: const InputDecoration(
-                     border: InputBorder.none, // Remove the default underline
-                     contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
-                     hintText: 'Date of Achievement', // Placeholder text
-                   ),),
-               ),
-             ), kHeight20,
-              Padding(
-               padding: const EdgeInsets.only(right: 10.0, left: 10),
-               child: Container(
-                 decoration: BoxDecoration(
-                 borderRadius: BorderRadius.circular(10.0), // Adjust the value for the desired curve
-                 border: Border.all(
-                   color: Colors.grey, // Border color
-                   width: 1.0, // Border width
-                 )),
-                 child: TextFormField(
-                  controller: descriptionController,
-                   decoration: const InputDecoration(
-                     border: InputBorder.none, // Remove the default underline
-                     contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
-                     hintText: 'Description', // Placeholder text
-                   ),),
-               ),
-             ),kHeight20, 
-            (loadingStatus==true)? const Center(child: CircularProgressIndicator(),): MaterialButton(onPressed: (){
-              addClassTeacherAchievementsToFirebase();
-             }, color: Colors.blue, child: const Text('Add Achievement', style: TextStyle(color: Colors.white),),)
-      
-      
-          ]
+      body: SafeArea(
+        child: Center(
+          child: Form(key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButtonBackWidget(color: cblack,),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center, 
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                          CircleAvatar(
+                                     radius: 80,
+                                     backgroundImage: NetworkImage(widget.studentDetail['profileImageUrl']),
+                                   ), kHeight20,
+                      Text(widget.studentDetail['studentName'].toString().capitalize!, style: GoogleFonts.poppins(fontSize: 18), ),
+                      kHeight20,
+                       Padding(
+                         padding: const EdgeInsets.only(right: 10.0, left: 10),
+                         child: Container(
+                           decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(10.0), // Adjust the value for the desired curve
+                           border: Border.all(
+                             color: Colors.grey, // Border color
+                             width: 1.0, // Border width
+                           )),
+                           child: TextFormField(
+                        
+                            validator: checkFieldEmpty,
+                            controller: achievementController,
+                             decoration: const InputDecoration(
+                               border: InputBorder.none, // Remove the default underline
+                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               hintText: 'Achievement', // Placeholder text
+                             ),),
+                         ),
+                       ),
+                       kHeight20,
+                        Padding(
+                         padding: const EdgeInsets.only(right: 10.0, left: 10),
+                         child: Container(
+                           decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(10.0), // Adjust the value for the desired curve
+                           border: Border.all(
+                             color: Colors.grey, // Border color
+                             width: 1.0, // Border width
+                           )),
+                           child: TextFormField(
+                            validator: checkFieldEmpty,
+                            controller: dateOfAchievementController,
+                             decoration: const InputDecoration(
+                               border: InputBorder.none, // Remove the default underline
+                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               hintText: 'Date of Achievement', // Placeholder text
+                             ),),
+                         ),
+                       ), kHeight20,
+                        Padding(
+                         padding: const EdgeInsets.only(right: 10.0, left: 10),
+                         child: Container(
+                           decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(10.0), // Adjust the value for the desired curve
+                           border: Border.all(
+                             color: Colors.grey, // Border color
+                             width: 1.0, // Border width
+                           )),
+                           child: TextFormField(
+                            validator: checkFieldEmpty,
+                            controller: descriptionController,
+                             decoration: const InputDecoration(
+                               border: InputBorder.none, // Remove the default underline
+                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               hintText: 'Description', // Placeholder text
+                             ),),
+                         ),
+                       ),kHeight20, 
+                      (loadingStatus==true)? const Center(
+                        child: CircularProgressIndicator(),): MaterialButton(
+                          onPressed: (){
+                             if (_formKey.currentState!.validate()) {
+                        addClassTeacherAchievementsToFirebase();
+                             }
+                       }, color: Colors.blue,
+                        child: const Text('Add Achievement', 
+                        style: TextStyle(color: Colors.white),),)
+                      
+                      
+                    ]
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       )
     );

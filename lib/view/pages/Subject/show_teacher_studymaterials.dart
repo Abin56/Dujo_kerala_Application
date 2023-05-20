@@ -116,12 +116,13 @@ class StudyMaterials extends StatelessWidget {
                      ); 
                   
                } 
+
                
-                  if(snapshot.connectionState == ConnectionState.waiting){
+                 else if(snapshot.connectionState == ConnectionState.waiting){
                     return const Center(child: CircularProgressIndicator(),);
                     
                   } 
-                  return const Text('No Study Materials Uploaded Yet!');
+                  return const Center(child: Text('No Study Materials Uploaded Yet!'));
                
               }
             ))) ;

@@ -1,6 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/view/home/student_home/student_acc/student_accessories.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_classes_list.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -54,7 +53,7 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.to(UserEditPage());
+                                Get.to(const UserEditPage());
                               },
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(

@@ -87,6 +87,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pdfx/pdfx.dart';
+//import 'package:flutter_pdfview/flutter_pdfview.dart';
 //import 'package:flutter_file_view/flutter_file_view.dart';
 //import 'package:flutter_pdfview/flutter_pdfview.dart';
 
@@ -106,12 +108,20 @@ class _PDFViewPageState extends State<PDFViewPage> {
   int currentPage = 0;
   bool isReady = false;
 
- // PDFViewController? controller; 
+  //PDFViewController? controller; 
+  late PdfController pdfController; 
+  
+  
+  loadController(){
+    pdfController = PdfController(document: PdfDocument.openFile(widget.pdfPath));
+  }
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState(); 
+    loadController();
     log('HWGED: ${widget.pdfPath}');
   }
 
@@ -121,7 +131,7 @@ class _PDFViewPageState extends State<PDFViewPage> {
       appBar: AppBar(
         title: const Text('PDF Viewer'),
       ), 
- 
+      body: PdfView(controller: pdfController)
       // body: Stack(
       //   children: <Widget>[
       //     PDFView(
