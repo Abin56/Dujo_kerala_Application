@@ -56,7 +56,7 @@ class ListofRoomsScreen extends StatelessWidget {
                             onPressed: () async {
                        
                             
-                              Get.to(  LiveClassRoom(roomID: data.roomID));
+                              Get.to(  LiveClassRoom(roomID: data.roomID,docId: data.docid,teacherName: data.ownerName,));
                     
                             },
                             icon: const Icon(Icons.flash_on_outlined),
