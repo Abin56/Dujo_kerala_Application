@@ -27,7 +27,7 @@ class CreateExamNameScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Exam List"),backgroundColor: adminePrimayColor,
+        title:  Text("Exam List".tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(

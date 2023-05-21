@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/view_report/all_students.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -18,11 +19,11 @@ class ViewExamsForProgressreport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int columnCount = 3;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Exam List"),
+        title:  Text("Exam List".tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -41,7 +42,7 @@ class ViewExamsForProgressreport extends StatelessWidget {
                     child: GridView.count(
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
-                      padding: EdgeInsets.all(_w / 60),
+                      padding: EdgeInsets.all(w / 60),
                       crossAxisCount: columnCount,
                       children: List.generate(
                         snapshot.data!.docs.length,
@@ -64,12 +65,12 @@ class ViewExamsForProgressreport extends StatelessWidget {
                                         batchId: batchId));
                                   },
                                   child: Container(
-                                    height: _h / 100,
+                                    height: h / 100,
                                     width: double.infinity,
                                     margin: EdgeInsets.only(
-                                        bottom: _w / 10,
-                                        left: _w / 50,
-                                        right: _w / 50),
+                                        bottom: w / 10,
+                                        left: w / 50,
+                                        right: w / 50),
                                     decoration: BoxDecoration(
                                       color:
                                           const Color.fromARGB(212, 67, 30, 203)
@@ -110,6 +111,5 @@ class ViewExamsForProgressreport extends StatelessWidget {
                 }
               })),
     );
-    ;
   }
 }

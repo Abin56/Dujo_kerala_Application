@@ -39,10 +39,7 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
   @override
   void initState() {
     super.initState();
-
-  } 
-
-
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +51,11 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
     ];
     return Scaffold(
       appBar: AppBar(
-     title: ContainerImage(
-            height: 28.h,
-            width: 90.w,
-            imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor),
+          title: ContainerImage(
+              height: 28.h,
+              width: 90.w,
+              imagePath: 'assets/images/dujoo-removebg.png'),
+          backgroundColor: adminePrimayColor),
       body: pages[_page],
       bottomNavigationBar: Container(
         height: 71,
@@ -75,40 +73,43 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
             ],
           ),
         ),
-        child: GNav(
-          gap: 8,
-          rippleColor: Colors.grey,
-          activeColor: Colors.white,
-          color: Colors.white,
-          tabs:  [
-            GButton(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: GNav(
+            gap: 8,
+            rippleColor: Colors.grey,
+            activeColor: Colors.white,
+            color: Colors.white,
+            tabs: [
+              GButton(
+                  iconSize: 20,
+                  icon: LineIcons.home,
+                  text: 'Home'.tr,
+                  style: GnavStyle.google),
+              GButton(
                 iconSize: 20,
-                icon: LineIcons.home,
-                text: 'Home'.tr,
-                style: GnavStyle.google),
-            GButton(
-              iconSize: 20,
-              textSize: 9,
-              icon: Icons.tv,
-              text: 'ReC_Classes'.tr,
-            ),
-            GButton(
-              iconSize: 20,
-              // iconSize: 10,
-              textSize: 12,
-              icon: Icons.laptop,
-              text: 'Live Classes'.tr,
-            ),
-            GButton(
-              iconSize: 20,
-              icon: Icons.person,
-              text: 'Profile'.tr,
-            )
-          ],
-          selectedIndex: _page,
-          onTabChange: (value) {
-            onPageChanged(value);
-          },
+                textSize: 9,
+                icon: Icons.tv,
+                text: 'Recorded Classes'.tr,
+              ),
+              GButton(
+                iconSize: 20,
+                // iconSize: 10,
+                textSize: 12,
+                icon: Icons.laptop,
+                text: 'Live Classes'.tr,
+              ),
+              GButton(
+                iconSize: 20,
+                icon: Icons.chat,
+                text: 'Chat gpt'.tr,
+              )
+            ],
+            selectedIndex: _page,
+            onTabChange: (value) {
+              onPageChanged(value);
+            },
+          ),
         ),
       ),
       drawer: Drawer(

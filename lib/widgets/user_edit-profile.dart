@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/edit_image_selection_widget.dart';
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/user_edit_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../colors/colors.dart';
-import '../../../constant/sizes/sizes.dart';
-import '../../../widgets/fonts/google_poppins.dart';
-import '../../../../widgets/Iconbackbutton.dart';
+import '../../controllers/userCredentials/user_credentials.dart';
+import '../../view/colors/colors.dart';
+import '../../view/constant/sizes/sizes.dart';
+import '../../view/widgets/fonts/google_poppins.dart';
+import '../../widgets/Iconbackbutton.dart';
+import '../sruthi/edit_image_selection_widget.dart';
+import '../view/home/student_home/Student Edit Profile/widget/user_edit_page_widget.dart';
 
-class StudentProfileEditPage extends StatelessWidget {
-  const StudentProfileEditPage({super.key});
+class UserEditPage extends StatelessWidget {
+  const UserEditPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class StudentProfileEditPage extends StatelessWidget {
               IconButtonBackWidget(
                 color: cWhite,
               ),
-              kWidth50,
+             
               GooglePoppinsWidgets(
                 text: "Profile".tr,
                 fontsize: 22.h,
@@ -47,7 +47,7 @@ class StudentProfileEditPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stack(children: const [
+              Stack(children:  [
                 SingleChildScrollView(
                   child: CircleAvatharImageSelectionWidget(),
                 ),
@@ -131,7 +131,7 @@ class StudentProfileEditPage extends StatelessWidget {
           .get();
       return result.data()?["className"];
     } catch (e) {
-      return " ";
-    }
-  }
+      return " ";
+}
+}
 }

@@ -25,14 +25,15 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 280,
+      height: 300,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          kHeight30,
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 100,
+            height: 90,
             width: 150,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
@@ -43,7 +44,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
             ),
           ),
           Text(
-            "DuJo App",
+            "Lepton Dujo",
             style: GoogleFonts.montserrat(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
           ),
@@ -67,7 +68,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                     barrierDismissible: false, // user must tap button!
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Select Class'),
+                        title:  Text('Select Class'.tr),
                         content: SingleChildScrollView(
                           child: ListBody(
                             children: <Widget>[
@@ -95,9 +96,9 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.class_),
-                label: const Text(
-                  "Change Class",
-                  style: TextStyle(color: cblack),
+                label:  Text(
+                  "Change Class".tr,
+                  style: const TextStyle(color: cblack),
                 ),
               ),
               const Text('||'),
@@ -106,9 +107,9 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                     userLogOutController.logOut(context);
                   },
                   icon: const Icon(Icons.key),
-                  label: const Text(
-                    'Logout',
-                    style: TextStyle(color: cblack),
+                  label:  Text(
+                    'Logout'.tr,
+                    style: const TextStyle(color: cblack),
                   )),
             ],
           ),
@@ -198,17 +199,17 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/attendance.png', 'Attendance',
+        MenuItem(1, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // Navigator.of(context).push(
           //     MaterialPageRoute(builder: (ctx) => RecordedCoursesListScreen()));
         }),
-        MenuItem(2, 'assets/images/exam.png', 'Exams',
+        MenuItem(2, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
           // Navigator.of(context).push(
           //     MaterialPageRoute(builder: (ctx) => LiveCoursesListScreen()));
         }),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable',
+        MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           // termsAndConditions(context);
         }),
@@ -216,11 +217,11 @@ Widget MyDrawerList(context) {
         //     currentPage == DrawerSections.share ? true : false, () async {
         //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
         // }),
-        MenuItem(4, 'assets/images/homework.png', 'HomeWorks',
+        MenuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
           // contactus(context);
         }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices',
+        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           // showAboutDialog(
           //     context: context,
@@ -236,11 +237,11 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report',
+        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
         }),
@@ -295,7 +296,7 @@ Widget MyDrawerList(context) {
                       width: 06,
                     ),
                     Text(
-                      "Lepton Plus Communications",
+                      "Lepton Communications",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,

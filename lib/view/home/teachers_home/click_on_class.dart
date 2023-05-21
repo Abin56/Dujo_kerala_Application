@@ -35,7 +35,7 @@ class ClickOnClasss extends StatelessWidget {
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Notice"),
+          title:  Text("Notices".tr),
         ),
         body: SchoolLevelNoticePage(),
       ),
@@ -43,7 +43,7 @@ class ClickOnClasss extends StatelessWidget {
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Events"),
+          title:  Text("Events".tr),
         ),
         body: const SchoolLevelPage(),
       ),
@@ -67,7 +67,7 @@ class ClickOnClasss extends StatelessWidget {
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Notice"),
+          title: const Text("Notices"),
         ),
         body: SchoolLevelNoticePage(),
       ),
@@ -76,7 +76,7 @@ class ClickOnClasss extends StatelessWidget {
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Events"),
+          title: const Text("Events"),
         ),
         body: const SchoolLevelPage(),
       ),
@@ -121,7 +121,7 @@ class ClickOnClasss extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'You have no access in this class',
+                                'You have no access in this class'.tr,
                                 style: GoogleFonts.montserrat(
                                     color: Colors.black.withOpacity(0.8),
                                     fontSize: 18,
@@ -309,12 +309,12 @@ class ClickOnClasss extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance Book',
-  'Exams',
-  'TimeTable',
-  'Notices',
-  'Events',
-  'Meetings',
+  'Attendence Book'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Meetings'.tr,
 ];
 var _acc_images = [
   'assets/images/classroom.png',
@@ -337,14 +337,14 @@ var hasDataImages = [
   'assets/images/teachers.png',
 ];
 List<String> hasDataText = [
-  'Take Attendance',
-  'Attendance Book',
-  'Exams',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Subjects',
-  'Meetings',
+  'Take Attendance'.tr,
+  'Attendence Book'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Meetings'.tr,
 ];
