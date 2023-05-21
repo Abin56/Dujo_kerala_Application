@@ -23,7 +23,7 @@ class _ViewGuardianDetailsState extends State<ViewGuardianDetails> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Parent Details'),
+          title: const Text('Guardian Details'),
         ),
         body: FutureBuilder(
           future: FirebaseFirestore.instance
@@ -37,7 +37,17 @@ class _ViewGuardianDetailsState extends State<ViewGuardianDetails> {
           .where('studentID', isEqualTo: widget.studentID)
           .get(),
           builder: (context, snapshot) {
+
+            //  if(snapshot.data!.docs[0].exists){
+            //   return const Text('data');
+            // }
+
+            
+            if(snapshot.hasError){
+              return const Text('data');
+            }
             if(snapshot.hasData){
+             
                return ListView(
           children: [
             Column(
@@ -93,7 +103,7 @@ class _ViewGuardianDetailsState extends State<ViewGuardianDetails> {
                             const Icon(Icons.phone,color: cWhite,),
                              SizedBox(width: 20.h,),
                             
-                             TextWidget(text: 'Parent Phone Number : ${snapshot.data!.docs[0]['guardianPhoneNumber']}',),
+                             TextWidget(text: 'Guardian Phone Number : ${snapshot.data!.docs[0]['guardianPhoneNumber']}',),
                           ],
                         ),
 
@@ -119,7 +129,7 @@ class _ViewGuardianDetailsState extends State<ViewGuardianDetails> {
                             const Icon(Icons.mail,color: cWhite,),
                              SizedBox(width: 20.h,),
 
-                             TextWidget(text: 'Parent Email : ${snapshot.data!.docs[0]['guardianEmail']}',),
+                             TextWidget(text: 'Guardian Email : ${snapshot.data!.docs[0]['guardianEmail']}',),
                           ],
                         ),
 
@@ -181,6 +191,11 @@ class _ViewGuardianDetailsState extends State<ViewGuardianDetails> {
           
         );
             }
+            if(snapshot.data == null){
+              return const Center(child: CircularProgressIndicator());
+            }
+            
+
             return const Center(child: CircularProgressIndicator());
            
           },)
