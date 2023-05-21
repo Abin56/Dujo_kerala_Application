@@ -38,7 +38,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: 
-  flutter_launcher_icons: 
   flutter_markdown: 
   flutter_screenutil: 
   flutter_staggered_animations: 
@@ -51,7 +50,6 @@ dependencies:
   intl: 
   line_icons: 
   lottie: 
-  pdf: 
   pinput: 
   printing:
   shared_preferences: 
@@ -61,17 +59,24 @@ dependencies:
   omni_jitsi_meet: ^1.0.13
   zoom_widget: 
   flutter_filereader: 
-  pdfx: 
+  pdf_viewer_flutter:
+  syncfusion_flutter_pdf:
+  pdf: ^3.8.4
+  path_provider: 
+  advance_pdf_viewer2: ^2.0.4
+  syncfusion_flutter_pdfviewer: ^21.2.5
 
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/leptonlogo.png"
+  image_path: "assets/images/leptonlogo2.png"
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
-    sdk: flutter
+    sdk: flutter 
+  flutter_launcher_icons: ^0.13.1
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

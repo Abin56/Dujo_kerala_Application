@@ -17,6 +17,7 @@ class ViewStudentsDetails extends StatefulWidget {
 
   QueryDocumentSnapshot<Map<String, dynamic>> studentDetail;
   DocumentSnapshot? documentSnapshot;
+  bool stat = false;
 
   @override
   State<ViewStudentsDetails> createState() => _ViewStudentsDetailsState();
@@ -42,6 +43,9 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
 
     // Access the first document that matches the condition
     if (querySnapshot.size > 0) {
+      setState(() {
+        widget.stat = true;
+      });
      widget.documentSnapshot =  querySnapshot.docs[0];
       Object? data =  widget.documentSnapshot!.data();
       log(data.toString());  // log the document data

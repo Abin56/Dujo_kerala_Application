@@ -81,8 +81,11 @@ class _ViewParentDetailsState extends State<ViewParentDetails> {
 
             // if(snapshot.data!.docs[0].exists){
             //   return const Text('data');
-            // }
-            if(snapshot.hasData){
+            // } 
+
+            if(snapshot.hasData 
+           // || snapshot.data!.docs[0].exists
+            ){
                return ListView(
           children: [
             Column(
