@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/Subject/view_study_material.dart';
+import 'package:dujo_kerala_application/view/pages/Subject/student/pf.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../sruthi/Subject 2/subject_chapterwise_display.dart';
+import '../../../sruthi/Subject 2/subject_chapterwise_display.dart'; 
 
 
 class StudyMaterials extends StatelessWidget {
@@ -107,10 +107,13 @@ class StudyMaterials extends StatelessWidget {
                                   onTap: () {
                                     Navigator.push(context, MaterialPageRoute(builder: (context)=> 
                                   //  //ViewStudyMaterials(urlPdf: snapshot.data!.docs[index]['downloadUrl']) 
-                                   PDFViewPage(pdfPath: snapshot.data!.docs[index]['downloadUrl'],)
-                                   
+                                  // PDFViewPage(pdfPath: snapshot.data!.docs[index]['downloadUrl'],)
+                                  //  PDFSectionScreen()
+                                  //PDFSectionScreen(urlPdf: 'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fstudymaterials%2FEnglish%2FJohny%20Johny%2Ffab221c0-f545-11ed-829a-11b8e7490871?alt=media&token=21f0bd88-b03e-41fd-8267-8a013aa3e80d',) 
+
+                                  PF()
                                   ));
-                                  },
+                                  },                                                    
                                 ),
                               );}
                      ); 
@@ -128,6 +131,9 @@ class StudyMaterials extends StatelessWidget {
             ))) ;
                 }
   }
+
+  
+  
 
 
 

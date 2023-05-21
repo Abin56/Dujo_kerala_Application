@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/show_student_achievements.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -165,7 +166,11 @@ class _AddAchievementsState extends State<AddAchievements> {
                              }
                        }, color: Colors.blue,
                         child: const Text('Add Achievement', 
-                        style: TextStyle(color: Colors.white),),)
+                        style: TextStyle(color: Colors.white),),), 
+                        kHeight20, 
+                        MaterialButton(onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>  ShowStudentAchievements(studentID: widget.studentDetail['docid'],)));
+                        }, color: Colors.blue,child: Text('Show Achievements of ${widget.studentDetail['studentName'].toString().capitalize}', style: const TextStyle(color: Colors.white),),)
                       
                       
                     ]

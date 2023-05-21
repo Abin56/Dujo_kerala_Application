@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/add_achievements/add_achievements.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_students_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyStudents extends StatelessWidget {
   const MyStudents({super.key});
@@ -44,7 +45,7 @@ class MyStudents extends StatelessWidget {
                       child: ListTile(
                         //tileColor: Colors.green.withOpacity(0.5),
                         leading:  Text('${index + 1}'),
-                        title: Text(snapshot.data!.docs[index]['studentName']), 
+                        title: Text(snapshot.data!.docs[index]['studentName'].toString().capitalize.toString()), 
                         trailing: PopupMenuButton<String>(
             onSelected: (value) {
               // Handle menu item selection
