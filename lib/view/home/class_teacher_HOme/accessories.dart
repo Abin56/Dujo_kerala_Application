@@ -140,18 +140,18 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Take Attendance',
-  'Attendance Book',
-  'Leave Letters',
-  'Exams',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Subjects',
-  'Teachers',
-  'Meetings'
+  'Take Attendance'.tr,
+  'Attendence Book'.tr,
+  'Leave Letter'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Teachers'.tr,
+  'Meetings'.tr
 ];
 var _acc_images = [
   'assets/images/attendance.png',

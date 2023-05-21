@@ -129,16 +129,16 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
 }
 
 List<String> _acc_text = [
-  'Take Attendance',
-  'Attendance Book',
-  'Exams',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Application List',
-  'Meetings'
+  'Take Attendance'.tr,
+  'Attendence Book'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Application List'.tr,
+  'Meetings'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',

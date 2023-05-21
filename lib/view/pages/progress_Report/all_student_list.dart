@@ -27,7 +27,7 @@ class AllStudentsListScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("All Student List"),backgroundColor: adminePrimayColor,
+        title:  Text("All Student List".tr),backgroundColor: adminePrimayColor,
       //   actions: [
       //     GestureDetector(
       //         onTap: () {

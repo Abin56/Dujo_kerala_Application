@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:zoom_widget/zoom_widget.dart';
 
@@ -10,7 +11,7 @@ class PrivacyViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     log(double.maxFinite.toString());
     var screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return Scaffold(appBar: AppBar(title: const Text('Privacy Policy'),backgroundColor: adminePrimayColor,),
         body: Zoom(
       maxZoomWidth: screenSize.width,
       maxZoomHeight: screenSize.height,

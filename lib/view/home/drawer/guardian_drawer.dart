@@ -17,14 +17,14 @@ class GuardianHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 250,
+      height: 270,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 100,
+            height: 0,
             width: 150,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
@@ -35,7 +35,7 @@ class GuardianHeaderDrawer extends StatelessWidget {
             ),
           ),
           Text(
-            "DuJo App",
+            "Lepton Dujo",
             style: GoogleFonts.montserrat(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
           ),
@@ -53,7 +53,7 @@ class GuardianHeaderDrawer extends StatelessWidget {
             onPressed: () async {
               await userLogOut(context);
             },
-            child: const Text("Logout"),
+            child: Text("Logout".tr),
           )
         ],
       ),
@@ -132,17 +132,17 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/attendance.png', 'Attendance',
+        MenuItem(1, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // Navigator.of(context).push(
           //     MaterialPageRoute(builder: (ctx) => RecordedCoursesListScreen()));
         }),
-        MenuItem(2, 'assets/images/exam.png', 'Exams',
+        MenuItem(2, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
           // Navigator.of(context).push(
           //     MaterialPageRoute(builder: (ctx) => LiveCoursesListScreen()));
         }),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable',
+        MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           // termsAndConditions(context);
         }),
@@ -150,11 +150,11 @@ Widget MyDrawerList(context) {
         //     currentPage == DrawerSections.share ? true : false, () async {
         //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
         // }),
-        MenuItem(4, 'assets/images/homework.png', 'HomeWorks',
+        MenuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
           // contactus(context);
         }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices',
+        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           // showAboutDialog(
           //     context: context,
@@ -170,15 +170,15 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
               Get.to(const PrivacyViewScreen());
         }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report',
+        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
         }),
-        MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
+        MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
         }),
@@ -221,7 +221,7 @@ Widget MyDrawerList(context) {
                       width: 06,
                     ),
                     Text(
-                      "Lepton Plus Communications",
+                      "Lepton Communications",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,

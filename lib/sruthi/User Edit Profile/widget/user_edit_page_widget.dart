@@ -32,16 +32,16 @@ class UserEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("Do you want change mail ?"),
+                title:  Text("Do you want change mail ?".tr),
                 actions: [
                   TextButton(
-                    child: const Text("Cancel"),
+                    child:  Text("Cancel".tr),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: const Text("OK"),
+                    child:  Text("Ok".tr),
                     onPressed: () {
                       Navigator.pop(context);
 
@@ -49,17 +49,17 @@ class UserEditListileWidget extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text("Update Mail"),
+                            title:  Text("Update Mail".tr),
                             content: TextField(
-                              decoration: const InputDecoration(
-                                  hintText: "Enter new email address"),
+                              decoration:  InputDecoration(
+                                  hintText: "Enter new email address".tr),
                               onChanged: (value) {
                                 newEmail = value;
                               },
                             ),
                             actions: [
                               TextButton(
-                                child: const Text("Update"),
+                                child:  Text("Update".tr),
                                 onPressed: () {
                                   Get.to(UnderMaintanceScreen(
                                     text: "",

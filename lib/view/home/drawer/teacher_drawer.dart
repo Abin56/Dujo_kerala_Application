@@ -22,14 +22,15 @@ class TeacherHeaderDrawer extends StatelessWidget {
       return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 290,
+      height: 300,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          kHeight30,
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 100,
+            height: 90,
             width: 150,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
@@ -40,7 +41,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
             ),
           ),
           Text(
-            "DuJo App",
+            "Lepton DuJo",
             style: GoogleFonts.montserrat(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
           ),
@@ -63,21 +64,21 @@ class TeacherHeaderDrawer extends StatelessWidget {
                     userLogOutController.logOut(context);
                   },
                   icon: const Icon(Icons.key),
-                  label: const Text(
-                    'Logout',
-                    style: TextStyle(color: cblack),
+                  label:  Text(
+                    'Logout'.tr,
+                    style: const TextStyle(color: cblack),
                   ))
             ],
           ),
           UserCredentialsController.teacherModel!.userRole == 'classTeacher'
               ? TextButton.icon(
                   onPressed: () async {
-                    Get.offAll(ClassTeacherMainHomeScreen());
+                    Get.offAll(const ClassTeacherMainHomeScreen());
                   },
                   icon: const Icon(Icons.edit_note_rounded),
-                  label: const Text(
-                    'Switch to Class Teacher',
-                    style: TextStyle(color: cblack),
+                  label:  Text(
+                    'Switch to Class Teacher'.tr,
+                    style: const TextStyle(color: cblack),
                   ))
               : const Text('')
         ],
@@ -157,17 +158,17 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        menuItem(1, 'assets/images/attendance.png', 'Attendance',
+        menuItem(1, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // Navigator.of(context).push(
           //     MaterialPageRoute(builder: (ctx) => RecordedCoursesListScreen()));
         }),
-        menuItem(2, 'assets/images/exam.png', 'Exams',
+        menuItem(2, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
           // Navigator.of(context).push(
           //     MaterialPageRoute(builder: (ctx) => LiveCoursesListScreen()));
         }),
-        menuItem(3, 'assets/images/library.png', 'TimeTable',
+        menuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           // termsAndConditions(context);
         }),
@@ -175,11 +176,11 @@ Widget MyDrawerList(context) {
         //     currentPage == DrawerSections.share ? true : false, () async {
         //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
         // }),
-        menuItem(4, 'assets/images/homework.png', 'HomeWorks',
+        menuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
           // contactus(context);
         }),
-        menuItem(5, 'assets/images/school_building.png', 'Notices',
+        menuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           // showAboutDialog(
           //     context: context,
@@ -195,11 +196,11 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-      menuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+      menuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
               Get.to(const PrivacyViewScreen());
         }),
-        menuItem(7, 'assets/images/splash.png', 'Progress Report',
+        menuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
         }),
@@ -248,7 +249,7 @@ Widget MyDrawerList(context) {
                       width: 06,
                     ),
                     Text(
-                      "Lepton Plus Communications",
+                      "Lepton Communications",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,

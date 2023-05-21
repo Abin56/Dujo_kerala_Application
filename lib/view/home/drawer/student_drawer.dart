@@ -19,14 +19,15 @@ class StudentsHeaderDrawer extends StatelessWidget {
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
       height: 270,
-      padding:  EdgeInsets.only(bottom: 20,top: 15.h),
+      padding: EdgeInsets.only(bottom: 20, top: 15.h),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.spacearound,
         children: [
+          SizedBox(height: 30.h),
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 100,
-            width: 150,
+            height: 90.h,
+            width: 150.h,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -36,7 +37,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
             ),
           ),
           Text(
-            "DuJo App",
+            "Lepton DuJo",
             style: GoogleFonts.montserrat(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
           ),
@@ -54,7 +55,10 @@ class StudentsHeaderDrawer extends StatelessWidget {
             onPressed: () async {
               await userLogOut(context);
             },
-            child:   Text("Logout",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19.h),),
+            child: Text(
+              "Logout".tr,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.h),
+            ),
           )
         ],
       ),
@@ -133,15 +137,13 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/attendance.png', 'Attendence',
+        MenuItem(1, 'assets/images/attendance.png', 'Attendence'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-              // Get.to(const PrivacyViewScreen());
+          // Get.to(const PrivacyViewScreen());
         }),
-        MenuItem(2, 'assets/images/exam.png', 'Exams',
-            currentPage == DrawerSections.favourites ? true : false, () {
-
-        }),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable',
+        MenuItem(2, 'assets/images/exam.png', 'Exams'.tr,
+            currentPage == DrawerSections.favourites ? true : false, () {}),
+        MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           // termsAndConditions(context);
         }),
@@ -149,11 +151,11 @@ Widget MyDrawerList(context) {
         //     currentPage == DrawerSections.share ? true : false, () async {
         //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
         // }),
-        MenuItem(4, 'assets/images/homework.png', 'HomeWorks',
+        MenuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
           // contactus(context);
         }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices',
+        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           // showAboutDialog(
           //     context: context,
@@ -169,11 +171,11 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-    MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+          Get.to(const PrivacyViewScreen());
         }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report',
+        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
         }),
@@ -196,7 +198,7 @@ Widget MyDrawerList(context) {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    children:  const [
+                    children: const [
                       Text(
                         "Developed by",
                         style: TextStyle(
@@ -222,7 +224,7 @@ Widget MyDrawerList(context) {
                       width: 06,
                     ),
                     Text(
-                      "Lepton Plus Communications",
+                      "Lepton Communications",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
