@@ -15,7 +15,7 @@ void showToast({required String msg}) {
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.red,
-    textColor: Colors.white,
+    textColor: Colors.white,  
     fontSize: 16.0,
   );
 }

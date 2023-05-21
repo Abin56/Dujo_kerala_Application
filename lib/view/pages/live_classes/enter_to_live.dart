@@ -2,15 +2,23 @@
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:omni_jitsi_meet/jitsi_meet.dart';
+
+import '../../../controllers/userCredentials/user_credentials.dart';
 
 class LiveClassRoom extends StatefulWidget {
   String roomID;
-  final studentname = 'df';
+  String docId;
+  String teacherName;
   LiveClassRoom({
     Key? key,
+    required this.teacherName,
+    required this.docId,
     required this.roomID,
   }) : super(key: key);
 
@@ -19,6 +27,7 @@ class LiveClassRoom extends StatefulWidget {
 }
 
 class _LiveClassRoomState extends State<LiveClassRoom> {
+  final GlobalKey<FormState> updateFormkey = GlobalKey<FormState>();
   //final serverText = TextEditingController(text: "https://test.scipro.in/");
   final roomText = TextEditingController(text: "");
   final subjectText = TextEditingController(text: "");
@@ -34,42 +43,45 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
+      home: Form(
+        key: updateFormkey,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text(''),
           ),
-          child: kIsWeb
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: width * 0.30,
-                      child: meetConfig(),
-                    ),
-                    SizedBox(
-                        width: width * 0.60,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Colors.white54,
-                              child: SizedBox(
-                                width: width * 0.60 * 0.70,
-                                height: width * 0.60 * 0.70,
-                                child: JitsiMeetConferencing(
-                                  extraJS: const [
-                                    // extraJs setup example
-                                    '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
-                                  ],
-                                ),
-                              )),
-                        ))
-                  ],
-                )
-              : meetConfig(),
+          body: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+            ),
+            child: kIsWeb
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: width * 0.30,
+                        child: meetConfig(),
+                      ),
+                      SizedBox(
+                          width: width * 0.60,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                                color: Colors.white54,
+                                child: SizedBox(
+                                  width: width * 0.60 * 0.70,
+                                  height: width * 0.60 * 0.70,
+                                  child: JitsiMeetConferencing(
+                                    extraJS: const [
+                                      // extraJs setup example
+                                      '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
+                                    ],
+                                  ),
+                                )),
+                          ))
+                    ],
+                  )
+                : meetConfig(),
+          ),
         ),
       ),
     );
@@ -82,17 +94,17 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
           const SizedBox(
             height: 16.0,
           ),
-          //TextField(
-          //controller: serverText,
-          // decoration: InputDecoration(
-          //      border: OutlineInputBorder(),
-          //      labelText: "Server URL",
-          //       hintText: "Hint: Leave empty for meet.jitsi.si"),
-          // ),
           const SizedBox(
             height: 14.0,
           ),
-          TextField(
+          TextFormField(
+            validator: (value) {
+              if (roomText.text.isEmpty) {
+                return 'Please Enter RoomID';
+              } else {
+                return null;
+              }
+            },
             controller: roomText,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
@@ -102,15 +114,21 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
           const SizedBox(
             height: 14.0,
           ),
-
           const SizedBox(
             height: 14.0,
           ),
-          TextField(
+          TextFormField(
+            validator: (value) {
+              if (roomText.text.isEmpty) {
+                return 'Please Enter Your Name';
+              } else {
+                return null;
+              }
+            },
             controller: nameText,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
-              labelText: widget.studentname,
+              labelText: widget.teacherName,
             ),
           ),
           const SizedBox(
@@ -141,22 +159,120 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
             height: 48.0,
             thickness: 2.0,
           ),
-          SizedBox(
-            height: 64.0,
-            width: double.maxFinite,
-            child: ElevatedButton(
-              onPressed: () {
-                _joinMeeting();
-              },
-              child: const Text(
-                "Join Meeting",
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue)),
-            ),
-          ),
+          FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('SchoolListCollection')
+                  .doc(UserCredentialsController.schoolId)
+                  .collection(UserCredentialsController.batchId!)
+                  .doc(UserCredentialsController.batchId!)
+                  .collection('Classes')
+                  .doc(UserCredentialsController.classId)
+                  .collection('LiveRooms')
+                  .doc(widget.docId)
+                  .get(),
+              builder: (context, snapss) {
+                if (snapss.hasData) {
+                  if (snapss.data?.data()!['activateLive'] == false) {
+                    return SizedBox(
+                      height: 64.0,
+                      width: double.maxFinite,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (updateFormkey.currentState!.validate() &&
+                              widget.roomID == roomText.text &&
+                              widget.teacherName == nameText.text) {
+                            _joinMeeting();
+                            Future.delayed(const Duration(seconds: 10))
+                                .then((value) async {
+                              await FirebaseFirestore.instance
+                                  .collection('SchoolListCollection')
+                                  .doc(UserCredentialsController.schoolId)
+                                  .collection(
+                                      UserCredentialsController.batchId!)
+                                  .doc(UserCredentialsController.batchId!)
+                                  .collection('Classes')
+                                  .doc(UserCredentialsController.classId)
+                                  .collection('LiveRooms')
+                                  .doc(widget.docId)
+                                  .update({'activateLive': true}).then((value) {
+                                print(
+                                    "workingggggggggggggggggggggggggggggggggggg");
+                                showToast(msg: 'Live is ON');
+                              });
+                            });
+                          } else {
+                            return showToast(
+                                msg:
+                                    'Please check RoomID are same or YourName ');
+                          }
+                        },
+                        child: const Text(
+                          "Join Meeting",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.blue)),
+                      ),
+                    );
+                  } else {
+                    return const Center();
+                  }
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
+          FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('SchoolListCollection')
+                  .doc(UserCredentialsController.schoolId)
+                  .collection(UserCredentialsController.batchId!)
+                  .doc(UserCredentialsController.batchId!)
+                  .collection('Classes')
+                  .doc(UserCredentialsController.classId)
+                  .collection('LiveRooms')
+                  .doc(widget.docId)
+                  .get(),
+              builder: (context, snap) {
+                if (snap.hasData) {
+                  if (snap.data?.data()!['activateLive'] == true) {
+                    return SizedBox(
+                      height: 64.0,
+                      width: double.maxFinite,
+                      child: ElevatedButton(
+                        onPressed: () async {
+
+                              await FirebaseFirestore.instance
+                                  .collection('SchoolListCollection')
+                                  .doc(UserCredentialsController.schoolId)
+                                  .collection(
+                                      UserCredentialsController.batchId!)
+                                  .doc(UserCredentialsController.batchId!)
+                                  .collection('Classes')
+                                  .doc(UserCredentialsController.classId)
+                                  .collection('LiveRooms')
+                                  .doc(widget.docId).delete().then((value) => Get.back());
+                        },
+                        child: const Text(
+                          "End Live Room",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.blue)),
+                      ),
+                    );
+                  } else {
+                    return const Center();
+                  }
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
           const SizedBox(
             height: 48.0,
           ),

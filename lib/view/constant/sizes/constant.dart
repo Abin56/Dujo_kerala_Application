@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 const String netWorkImagePathPerson =
     "https://www.seekpng.com/png/full/202-2024994_profile-icon-profile-logo-no-background.png";
@@ -64,3 +65,4 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
 class TeacherLoginIDSaver {
   static String id = '';
 }
+const uuid = Uuid();

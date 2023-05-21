@@ -14,6 +14,7 @@ class LiveRoomModel {
       required this.docid,
       required this.roomID,
       required this.ownerName,
+      required this.createDate,
       required this.activateLive});
 
   String roomName;
@@ -21,6 +22,7 @@ class LiveRoomModel {
   String docid;
   String roomID;
   String ownerName;
+  String createDate;
   bool activateLive = false;
   factory LiveRoomModel.fromJson(Map<String, dynamic> json) => LiveRoomModel(
         roomName: json["roomName"] ?? '',
@@ -28,6 +30,7 @@ class LiveRoomModel {
         docid: json["docid"] ?? '',
         roomID: json["roomID"] ?? '',
         ownerName: json["ownerName"] ?? '',
+         createDate: json["createDate"] ?? '',
         activateLive: json["activateLive"] ?? false,
       );
 
@@ -37,6 +40,7 @@ class LiveRoomModel {
         "docid": docid,
         "roomID": roomID,
         "ownerName": ownerName,
+               "createDate": createDate,
         "activateLive": activateLive,
       };
 }
