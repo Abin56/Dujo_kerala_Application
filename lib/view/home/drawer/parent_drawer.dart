@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
+import '../general_instructions/general_instructions.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
   const ParentHeaderDrawer({Key? key}) : super(key: key);
@@ -170,9 +171,9 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-    MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+          Get.to(const PrivacyViewScreen());
         }),
         MenuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {
@@ -181,6 +182,12 @@ Widget MyDrawerList(context) {
         MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
+        }),
+        MenuItem(9, 'assets/images/information.png', 'General Instructions',
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(
+            () => GeneralInstruction(),
+          );
         }),
         kHeight,
         kHeight,

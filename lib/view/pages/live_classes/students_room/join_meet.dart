@@ -3,31 +3,30 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
+import 'package:dujo_kerala_application/view/home/student_home/students_main_home.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:omni_jitsi_meet/jitsi_meet.dart';
 
-import '../../../controllers/userCredentials/user_credentials.dart';
-
-class LiveClassRoom extends StatefulWidget {
+class StudentLiveClassRoom extends StatefulWidget {
   String roomID;
   String docId;
-  String teacherName;
-  LiveClassRoom({
+  String studentName;
+  StudentLiveClassRoom({
     Key? key,
-    required this.teacherName,
+    required this.studentName,
     required this.docId,
     required this.roomID,
   }) : super(key: key);
 
   @override
-  State<LiveClassRoom> createState() => _LiveClassRoomState();
+  State<StudentLiveClassRoom> createState() => Student_LiveClassRoomState();
 }
 
-class _LiveClassRoomState extends State<LiveClassRoom> {
+class Student_LiveClassRoomState extends State<StudentLiveClassRoom> {
   final GlobalKey<FormState> updateFormkey = GlobalKey<FormState>();
   //final serverText = TextEditingController(text: "https://test.scipro.in/");
   final roomText = TextEditingController(text: "");
@@ -129,7 +128,7 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
             controller: nameText,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
-              labelText: widget.teacherName,
+              labelText: widget.studentName,
             ),
           ),
           const SizedBox(
@@ -173,7 +172,7 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
                   .get(),
               builder: (context, snapss) {
                 if (snapss.hasData) {
-                  if (snapss.data?.data()!['activateLive'] == false) {
+                  if (snapss.data?.data()!['activateLive'] == true) {
                     return SizedBox(
                       height: 64.0,
                       width: double.maxFinite,
@@ -181,26 +180,10 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
                         onPressed: () async {
                           if (updateFormkey.currentState!.validate() &&
                               widget.roomID == roomText.text &&
-                              widget.teacherName == nameText.text) {
-                            _joinMeeting();
-                            Future.delayed(const Duration(seconds: 10))
-                                .then((value) async {
-                              await FirebaseFirestore.instance
-                                  .collection('SchoolListCollection')
-                                  .doc(UserCredentialsController.schoolId)
-                                  .collection(
-                                      UserCredentialsController.batchId!)
-                                  .doc(UserCredentialsController.batchId!)
-                                  .collection('Classes')
-                                  .doc(UserCredentialsController.classId)
-                                  .collection('LiveRooms')
-                                  .doc(widget.docId)
-                                  .update({'activateLive': true}).then((value) {
-                                print(
-                                    "workingggggggggggggggggggggggggggggggggggg");
-                                showToast(msg: 'Live is ON');
-                              });
-                            });
+                              widget.studentName == nameText.text) {
+                            _joinMeeting().then((value) =>          Get.offAll(const StudentsMainHomeScreen()));
+                   
+                          
                           } else {
                             return showToast(
                                 msg:
@@ -214,55 +197,6 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateColor.resolveWith(
                                 (states) => Colors.blue)),
-                      ),
-                    );
-                  } else {
-                    return const Center();
-                  }
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              }),
-          FutureBuilder(
-              future: FirebaseFirestore.instance
-                  .collection('SchoolListCollection')
-                  .doc(UserCredentialsController.schoolId)
-                  .collection(UserCredentialsController.batchId!)
-                  .doc(UserCredentialsController.batchId!)
-                  .collection('Classes')
-                  .doc(UserCredentialsController.classId)
-                  .collection('LiveRooms')
-                  .doc(widget.docId)
-                  .get(),
-              builder: (context, snap) {
-                if (snap.hasData) {
-                  if (snap.data?.data()!['activateLive'] == true) {
-                    return SizedBox(
-                      height: 64.0,
-                      width: double.maxFinite,
-                      child: GestureDetector(
-                        onTap: () async {
-                          await FirebaseFirestore.instance
-                              .collection('SchoolListCollection')
-                              .doc(UserCredentialsController.schoolId)
-                              .collection(UserCredentialsController.batchId!)
-                              .doc(UserCredentialsController.batchId!)
-                              .collection('Classes')
-                              .doc(UserCredentialsController.classId)
-                              .collection('LiveRooms')
-                              .doc(widget.docId)
-                              .delete()
-                              .then((value) => Get.back());
-                        },
-                        child: Container(
-                          height: 64,
-                          color: Colors.red,
-                          child:Center(
-                            child: GooglePoppinsWidgets(text: 'End This Live Room', fontsize: 16,color: Colors.white,fontWeight: FontWeight.w400,),
-                          )
-                        ),
                       ),
                     );
                   } else {
@@ -300,7 +234,7 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
     });
   }
 
-  _joinMeeting() async {
+  Future<void>_joinMeeting() async {
     //String? serverUrl = serverText.text.trim().isEmpty ? null : serverText.text;
     String serverUrl = "https://live.leptondujo.com/";
 

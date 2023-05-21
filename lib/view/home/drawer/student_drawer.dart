@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
+import '../general_instructions/general_instructions.dart';
 
 class StudentsHeaderDrawer extends StatelessWidget {
   const StudentsHeaderDrawer({Key? key}) : super(key: key);
@@ -135,12 +136,10 @@ Widget MyDrawerList(context) {
       children: [
         MenuItem(1, 'assets/images/attendance.png', 'Attendence',
             currentPage == DrawerSections.dashboard ? true : false, () {
-              // Get.to(const PrivacyViewScreen());
+          // Get.to(const PrivacyViewScreen());
         }),
         MenuItem(2, 'assets/images/exam.png', 'Exams',
-            currentPage == DrawerSections.favourites ? true : false, () {
-
-        }),
+            currentPage == DrawerSections.favourites ? true : false, () {}),
         MenuItem(3, 'assets/images/library.png', 'TimeTable',
             currentPage == DrawerSections.setting ? true : false, () {
           // termsAndConditions(context);
@@ -169,13 +168,19 @@ Widget MyDrawerList(context) {
           //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
           //     ]);
         }),
-    MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+          Get.to(const PrivacyViewScreen());
         }),
         MenuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {
           // signOut(context);
+        }),
+        MenuItem(8, 'assets/images/information.png', 'General Instructions',
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(
+            () => GeneralInstruction(),
+          );
         }),
         // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
         //     currentPage == DrawerSections.dashboard ? true : false, () {

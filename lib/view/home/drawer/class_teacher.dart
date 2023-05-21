@@ -14,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../helper/shared_pref_helper.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
+import '../general_instructions/general_instructions.dart';
 
 class ClassTeacherHeaderDrawer extends StatelessWidget {
   UserLogOutController userLogOutController = Get.put(UserLogOutController());
@@ -237,7 +238,7 @@ Widget MyDrawerList(context) {
         }),
         MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+          Get.to(const PrivacyViewScreen());
         }),
         MenuItem(7, 'assets/images/splash.png', 'Progress Report',
             currentPage == DrawerSections.dashboard ? true : false, () {
@@ -247,6 +248,12 @@ Widget MyDrawerList(context) {
         //     currentPage == DrawerSections.dashboard ? true : false, () {
         //   signOut(context);
         // }),
+        MenuItem(8, 'assets/images/information.png', 'General Instructions',
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(
+            () => GeneralInstruction(),
+          );
+        }),
         kHeight10,
         kHeight10,
         kHeight10,
