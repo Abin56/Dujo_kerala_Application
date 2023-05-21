@@ -10,7 +10,7 @@ import '../../../../../widgets/Iconbackbutton.dart';
 class ViewParentDetails extends StatefulWidget {
    ViewParentDetails({super.key,required this.documentSnapshot, required this.studentID});
 
-  DocumentSnapshot? documentSnapshot;
+  DocumentSnapshot documentSnapshot;
   DocumentSnapshot? documentSnapshott;
   String studentID;
   QuerySnapshot? querySnapshot;
@@ -77,7 +77,11 @@ class _ViewParentDetailsState extends State<ViewParentDetails> {
                 .collection('ParentCollection')
           .where('studentID', isEqualTo: widget.studentID)
           .get(),
-          builder: (context, snapshot) {
+          builder: (context, snapshot) { 
+
+            // if(snapshot.data!.docs[0].exists){
+            //   return const Text('data');
+            // }
             if(snapshot.hasData){
                return ListView(
           children: [
@@ -225,7 +229,7 @@ class _ViewParentDetailsState extends State<ViewParentDetails> {
             return const Center(child: CircularProgressIndicator());
            
           },)
-      //  body:(widget.documentSnapshot == null)? const Text('data'): Text(widget.documentSnapshot?['parentName'])
+       // body:(widget.documentSnapshot == null)? const Text('data'): Text(widget.documentSnapshot?['parentName'])
       ),
     );
   }

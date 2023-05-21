@@ -38,6 +38,8 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
         .where('studentID', isEqualTo: widget.studentDetail['docid'])
         .get();
 
+       // querySnapshot.docs[0].exists;
+
     // Access the first document that matches the condition
     if (querySnapshot.size > 0) {
      widget.documentSnapshot =  querySnapshot.docs[0];
@@ -214,12 +216,16 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                  ],
                 ),
                 MaterialButton(onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ViewParentDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot! ,)));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> 
+                  // vpd(studentID:  widget.studentDetail['docid'],)));
+              // VPD(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot! , )));
+                  ViewParentDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot! ,)));
                 }, color: Colors.blue, child: const Text('View Parent Details', style: TextStyle(color: Colors.white),),), 
                 kHeight20, 
                 MaterialButton(onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  ViewGuardianDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot!)));
-                }, color: Colors.blue, child: const Text('View Guardian Details', style: TextStyle(color: Colors.white),),)
+                }, color: Colors.blue, child: const Text('View Guardian Details', style: TextStyle(color: Colors.white),),), 
+                kHeight20
               ],
             ),  
           ], 
