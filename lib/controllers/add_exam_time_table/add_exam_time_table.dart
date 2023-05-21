@@ -1,62 +1,60 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../model/exam_list_model/add_ex_timeTable.dart';
+import '../../utils/utils.dart';
+import '../userCredentials/user_credentials.dart';
+
 class AddExamTimeTableController extends GetxController {
-  Future<void> uploadSubject(
-    String collectionName,
-    String examdocID,
-    String subject,
-    TimeOfDay startingtime,
-    TimeOfDay endingtime,
-    String examDate,
-  ) async {
- 
+  uploadSubject(
+      String collectionName,
+      String examdocID,
+      String subject,
+      dynamic startingtime,
+      dynamic endingtime,
+      String examDate,
+      String fromTime,
+      String totime,
+    BuildContext context,
+
+      ) async {
     final docids = subject + uuid.v1();
-    // String formatTimeWithoutPeriod1 = formatTimeWithoutPeriod(startingtime);
-    //   String formatTimeWithoutPeriod2 = formatTimeWithoutPeriod(startingtime);
- Duration getTimeDifferences = getTimeDifference(startingtime, endingtime);
- final x =
- getTimeDifferences.inMinutes
- ;
-//  log(x.toString());
-        // log('geting ${getTimeDifferences.toString()}');
-        // var results = getTimeDifferences.toString().split('.');
-    // String extractSubstring2 = extractSubstring(startingtime, 'P');
+    Duration getTimeDifferences = getTimeDifference(startingtime, endingtime);
+    final x = getTimeDifferences.inMinutes;
+    final y = getTimeDifferences.inHours;
+    final data = AddExamTimeTableModel(
+        docid: docids,
+        subject: subject,
+        startingtime: fromTime,
+        endingtime: totime,
+        hours: x <= 60 || x ==120 ?'${y}hrs' : '${x}mins',
+        examDate: examDate);
+    log('docid ${data.docid}');
+    log('subject ${data.subject}');
+    log('startingtime ${data.startingtime}');
+    log('hours ${data.hours}');
+    log('examDate ${data.examDate}');
 
-    // TimeOfDay time1 = parseTimeString(startingtime);
-    // TimeOfDay time2 = parseTimeString(endingtime);
-    // Duration diff = getTimeDifference(time1, time2);
-    // log('collectionName ${collectionName.toString()}');
-    // log('examdocID ${examdocID.toString()}');
-    // log('subject ${subject.toString()}');
-    // log('startingtime ${startingtime.toString()}');
-    // log('endingtime ${endingtime.toString()}');
-    // log('examDate ${examDate.toString()}');
-    // log('time1 ${time1.toString()}');
-    // log('time2 ${time2.toString()}');
-    // log('diff  ${diff.toString()}');
-    // final data = AddExamTimeTableModel(
-    //     docid: docids,
-    //     subject: subject,
-    //     startingtime: startingtime,
-    //     endingtime: endingtime,
-    //     hours: x<=60?x:x/60,
-    //     examDate: examDate);
-
-    // FirebaseFirestore.instance
-    //     .collection('SchoolListCollection')
-    //     .doc(UserCredentialsController.schoolId)
-    //     .collection(UserCredentialsController.batchId!)
-    //     .doc(UserCredentialsController.batchId!)
-    //     .collection(collectionName)
-    //     .doc(examdocID)
-    //     .collection('subjects')
-    //     .doc(docids)
-    //     .set(data.toMap())
-    //     .then((value) {
-    //   showToast(msg: 'Added Subject');
-    // });
+    await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId!)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .collection(collectionName)
+        .doc(examdocID)
+        .collection('subjects')
+        .doc(docids)
+        .set(data.toMap())
+        .then((value) {
+      showToast(msg: 'Added Subject');
+      Navigator.pop(context);
+    });
   }
 
   String formatTimeWithoutPeriod(TimeOfDay timeOfDay) {
@@ -73,14 +71,6 @@ class AddExamTimeTableController extends GetxController {
     return '$hour:$minute';
   }
 
-  TimeOfDay parseTimeString(String timeString) {
-    List<String> parts = timeString.split(':');
-    int hour = int.parse(parts[0]);
-    int minute = int.parse(parts[1]);
-
-    return TimeOfDay(hour: hour, minute: minute);
-  }
-
   Duration getTimeDifference(TimeOfDay time1, TimeOfDay time2) {
     DateTime now = DateTime.now();
     DateTime dateTime1 =
@@ -93,16 +83,5 @@ class AddExamTimeTableController extends GetxController {
     }
 
     return dateTime2.difference(dateTime1);
-  }
-
-  String extractSubstring(String text, String targetLetter) {
-    int startIndex = 0;
-    int targetIndex = text.indexOf(targetLetter);
-
-    if (targetIndex >= 0) {
-      return text.substring(startIndex, targetIndex);
-    } else {
-      return text;
-    }
   }
 }

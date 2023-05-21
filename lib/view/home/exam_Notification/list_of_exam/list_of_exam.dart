@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../widgets/drop_down/subject_dropdown.dart';
+import '../../../widgets/drop_down/all_subject_drop_down.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
 class ViewSchoolExamScreen extends StatelessWidget {
@@ -29,9 +29,9 @@ class ViewSchoolExamScreen extends StatelessWidget {
             )
           ]),
         ),
-        body: SafeArea(
+        body: const SafeArea(
           child: TabBarView(
-            children: [TPublicLevel(), const TStateLevel()],
+            children: [TPublicLevel(), TStateLevel()],
           ),
         ),
       ),
@@ -39,14 +39,28 @@ class ViewSchoolExamScreen extends StatelessWidget {
   }
 }
 
-class TPublicLevel extends StatelessWidget {
+class TPublicLevel extends StatefulWidget {
+  const TPublicLevel({super.key});
+
+  @override
+  State<TPublicLevel> createState() => _TPublicLevelState();
+}
+
+class _TPublicLevelState extends State<TPublicLevel> {
   AddExamTimeTableController addExamTimeTableController =
       Get.put(AddExamTimeTableController());
+
   final TextEditingController _timeController = TextEditingController();
+
   final TextEditingController _stimeController = TextEditingController();
+
   TextEditingController applynewBatchYearContoller = TextEditingController();
+
   DateTime? _selectedDateForApplyDate;
-  TPublicLevel({super.key});
+
+  TimeOfDay? time1;
+
+  TimeOfDay? time2;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +118,7 @@ class TPublicLevel extends StatelessWidget {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                GetSubjectListDropDownButton(
+                GetAllSubjectListDropDownButton(
                     batchId: UserCredentialsController.batchId!,
                     classId: UserCredentialsController.classId!,
                     schoolID: UserCredentialsController.schoolId!),
@@ -205,13 +219,18 @@ class TPublicLevel extends StatelessWidget {
             TextButton(
               child: const Text('Add'),
               onPressed: () {
-                // addExamTimeTableController.uploadSubject(
-                //     'Public Level',
-                //     examdocID,
-                //     subjectListValue!['subjectName'],
-                //     _timeController.text.trim(),
-                //     _stimeController.text.trim(),
-                //     applynewBatchYearContoller.text.trim());
+                addExamTimeTableController.uploadSubject(
+                    'Public Level',
+                    examdocID,
+                    allsubjectListValue!['subjectName'],
+                    time1!,
+                    time2!,
+                    applynewBatchYearContoller.text.trim(),
+                    _timeController.text.trim(),
+                    _stimeController.text.trim(),
+                    context);
+                _timeController.clear();
+                _stimeController.clear();
               },
             ),
           ],
@@ -230,6 +249,9 @@ class TPublicLevel extends StatelessWidget {
       final String formattedTime = selectedTime.format(context);
 
       _timeController.text = formattedTime;
+      setState(() {
+        time1 = selectedTime;
+      });
     }
   }
 
@@ -242,6 +264,9 @@ class TPublicLevel extends StatelessWidget {
     if (selectedTime != null) {
       final String formattedTime = selectedTime.format(context);
       _stimeController.text = formattedTime;
+      setState(() {
+        time2 = selectedTime;
+      });
     }
   }
 
@@ -275,7 +300,6 @@ const containerColor = [
 ];
 
 class TStateLevel extends StatefulWidget {
-
   const TStateLevel({super.key});
 
   @override
@@ -284,7 +308,7 @@ class TStateLevel extends StatefulWidget {
 
 class _TStateLevelState extends State<TStateLevel> {
   TimeOfDay? time1;
-   TimeOfDay? time2;
+  TimeOfDay? time2;
   AddExamTimeTableController addExamTimeTableController =
       Get.put(AddExamTimeTableController());
 
@@ -352,7 +376,7 @@ class _TStateLevelState extends State<TStateLevel> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                GetSubjectListDropDownButton(
+                GetAllSubjectListDropDownButton(
                     batchId: UserCredentialsController.batchId!,
                     classId: UserCredentialsController.classId!,
                     schoolID: UserCredentialsController.schoolId!),
@@ -456,10 +480,13 @@ class _TStateLevelState extends State<TStateLevel> {
                 addExamTimeTableController.uploadSubject(
                     'State Level',
                     examdocID,
-                    subjectListValue!['subjectName'],
+                    allsubjectListValue!['subjectName'],
                     time1!,
                     time2!,
-                    applynewBatchYearContoller.text.trim());
+                    applynewBatchYearContoller.text.trim(),
+                    _timeController.text.trim(),
+                    _stimeController.text.trim(),
+                    context);
               },
             ),
           ],
@@ -475,17 +502,16 @@ class _TStateLevelState extends State<TStateLevel> {
     );
 
     if (selectedTime != null) {
-      
       final String formattedTime = selectedTime.format(context);
       _timeController.text = formattedTime;
       setState(() {
-      time1=  selectedTime ;
+        time1 = selectedTime;
       });
     }
   }
 
   Future<void> selectTimesec(BuildContext context) async {
-     TimeOfDay? selectedTime = await showTimePicker(
+    TimeOfDay? selectedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
     );
@@ -493,10 +519,9 @@ class _TStateLevelState extends State<TStateLevel> {
     if (selectedTime != null) {
       final String formattedTime = selectedTime.format(context);
       _stimeController.text = formattedTime;
-         setState(() {
-        time2 =selectedTime ;
+      setState(() {
+        time2 = selectedTime;
       });
-
     }
   }
 

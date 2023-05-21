@@ -13,11 +13,9 @@ class ExmNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-   
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children:  [
- 
+          children: [
             Text(
               "Exam Notification".tr,
             ),
@@ -111,6 +109,14 @@ class ExmNotification extends StatelessWidget {
 }
 
 const containerColor = [
+  Colors.blue,
+  Colors.green,
+  Colors.yellow,
+  Colors.orange,
+  Colors.pink,
+  Colors.purple,
+  Colors.grey,
+  Colors.black,
   Colors.blue,
   Colors.green,
   Colors.yellow,

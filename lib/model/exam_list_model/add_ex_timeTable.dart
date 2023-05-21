@@ -5,8 +5,8 @@ class AddExamTimeTableModel {
 
   String docid;
   String subject;
-  String startingtime;
-  String endingtime;
+  dynamic startingtime;
+  dynamic endingtime;
   dynamic hours;
   String examDate;
   AddExamTimeTableModel({
@@ -22,8 +22,8 @@ class AddExamTimeTableModel {
   AddExamTimeTableModel copyWith({
     String? docid,
     String? subject,
-    String? startingtime,
-    String? endingtime,
+    dynamic? startingtime,
+    dynamic? endingtime,
     dynamic? hours,
     String? examDate,
   }) {
@@ -52,8 +52,8 @@ class AddExamTimeTableModel {
     return AddExamTimeTableModel(
       docid: map['docid'] as String,
       subject: map['subject'] as String,
-      startingtime: map['startingtime'] as String,
-      endingtime: map['endingtime'] as String,
+      startingtime: map['startingtime'] as dynamic,
+      endingtime: map['endingtime'] as dynamic,
       hours: map['hours'] as dynamic,
       examDate: map['examDate'] as String,
     );

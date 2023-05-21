@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../exam_time_table.dart';
+
 class AddTimeTable extends StatelessWidget {
   const AddTimeTable({super.key});
 
@@ -25,10 +27,15 @@ class AddTimeTable extends StatelessWidget {
                 child: const Text('Upload Time tabel'),
               ),
             ),
-            SizedBox(
-              height: 50.h,
-              width: 130.w,
-              child: const Text('View Time Table'),
+            GestureDetector(
+              onTap: () {
+                   Get.to(const ExmNotifications());
+              },
+              child: SizedBox(
+                height: 50.h,
+                width: 130.w,
+                child: const Text('View Time Table'),
+              ),
             ),
           ],
         ),
