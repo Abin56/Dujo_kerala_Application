@@ -57,14 +57,10 @@ dependencies:
   uuid: 
   file_picker: 
   omni_jitsi_meet: ^1.0.13
-  zoom_widget: 
+  zoom_widget:
   pdf_viewer_flutter:
-  syncfusion_flutter_pdf:
-  pdf: ^3.8.4
-  path_provider: 
-  advance_pdf_viewer2: ^2.0.4
-  syncfusion_flutter_pdfviewer: ^21.2.5
-
+  pdf:
+  path_provider:
 flutter_icons:
   android: true
   ios: true
