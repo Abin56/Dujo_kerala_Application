@@ -3,7 +3,6 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
-import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -17,6 +16,7 @@ import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../events/Tabs/school_level_tab.dart';
+import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -30,7 +30,7 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
-      const ExamNotification(), //Exam
+      const UserExmNotifications(), //Exam
       const StudentShowTimeTable(), //Time Table
       Scaffold(
         appBar: AppBar(
@@ -60,7 +60,7 @@ class ClickOnClasss extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
 
-      const ExamNotification(), //Exam
+      const UserExmNotifications(), //Exam
       const StudentShowTimeTable(), //TimeTable
       const ViewHomeWorks(), //Home Works
 

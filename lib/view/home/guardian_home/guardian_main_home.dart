@@ -89,7 +89,7 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
             GButton(
               iconSize: 20,
               icon: Icons.chat,
-              text: 'chat gpt'.tr,
+              text: 'Chat With bot'.tr,
             )
           ],
           selectedIndex: _page,

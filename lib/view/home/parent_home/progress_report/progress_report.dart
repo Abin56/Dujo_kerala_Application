@@ -32,7 +32,7 @@ class ProgressReportListViewScreen extends StatelessWidget {
         log(studentId);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(''),backgroundColor: adminePrimayColor,
+        title:  Text('Progress Report'.tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(

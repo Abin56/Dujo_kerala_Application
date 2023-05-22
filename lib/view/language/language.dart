@@ -211,7 +211,10 @@ class GetxLanguage extends Translations {
           'Read': 'വായിക്കുക',
           'Feed your mind': "നിങ്ങളുടെ മനസ്സിനെ പോഷിപ്പിക്കുക",
           'Change the World': "ലോകത്തെ മാറ്റുക",
-
+'Add Subject to TimeTable':'',
+'State Level':'',
+'Public Level':'',
+'Exams'
           'page': 'പേജ്',
           'selected': 'തിരഞ്ഞെടുത്തത്',
           'School Student Home': 'സ്കൂൾ സ്റ്റുഡന്റ് ഹോം',

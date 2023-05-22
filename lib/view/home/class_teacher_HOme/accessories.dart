@@ -162,7 +162,7 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
-  'assets/images/message.png',
+  'assets/images/leaveapplica.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',

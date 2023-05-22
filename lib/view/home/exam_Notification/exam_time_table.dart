@@ -11,7 +11,7 @@ class ExmNotifications extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
+        appBar: AppBar(title: const Text('Exams'),
           backgroundColor: adminePrimayColor,
           bottom: const TabBar(tabs: [
             Tab(

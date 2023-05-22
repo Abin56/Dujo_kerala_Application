@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/model/exam_list_model/add_ex_timeTable.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,6 +24,7 @@ class UsersExamTimeTableViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Exam TimeTable'),backgroundColor: adminePrimayColor,),
       body: SafeArea(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance

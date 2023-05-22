@@ -62,44 +62,41 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
             ],
           ),
         ),
-        child: SingleChildScrollView(
-           scrollDirection: Axis.horizontal,
-          child: GNav(
-            gap: 8,
-            rippleColor: Colors.grey,
-            activeColor: Colors.white,
-            color: Colors.white,
-            tabs:  [
-              GButton(
-                  iconSize: 20,
-                  icon: LineIcons.home,
-                  text: 'Home'.tr,
-                  style: GnavStyle.google),
-              GButton(
+        child: GNav(
+          gap: 8,
+          rippleColor: Colors.grey,
+          activeColor: Colors.white,
+          color: Colors.white,
+          tabs:  [
+            GButton(
                 iconSize: 20,
-                textSize: 9,
-                icon: Icons.tv,
-                text: 'Recorded Classes'.tr,
-              ),
-              GButton(
-                iconSize: 20,
-                // iconSize: 10,
-                textSize: 12,
-                icon: Icons.laptop,
-                text: 'Live Classes'.tr,
-              ),
-              GButton(
-                iconSize: 20,
-                icon: Icons.chat,
-                text: 'Chat gpt'.tr,
-              )
+                icon: LineIcons.home,
+                text: 'Home'.tr,
+                style: GnavStyle.google),
+            GButton(
+              iconSize: 20,
+              textSize: 9,
+              icon: Icons.tv,
+              text: 'Recorded Classes'.tr,
+            ),
+            GButton(
+              iconSize: 20,
+              // iconSize: 10,
+              textSize: 12,
+              icon: Icons.laptop,
+              text: 'Live Classes'.tr,
+            ),
+            GButton(
+              iconSize: 20,
+              icon: Icons.chat,
+              text: 'Chat With Bot'.tr,
+            )
     
-            ],
-            selectedIndex: _page,
-            onTabChange: (value) {
-              onPageChanged(value);
-            },
-          ),
+          ],
+          selectedIndex: _page,
+          onTabChange: (value) {
+            onPageChanged(value);
+          },
         ),
       ),
       drawer: Drawer(

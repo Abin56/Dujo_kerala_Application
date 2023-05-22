@@ -114,8 +114,8 @@ class _ClassTeacherMainHomeScreenState
             ),
             GButton(
               iconSize: 20,
-              icon: Icons.live_tv_sharp,
-              text: 'Chat gpt'.tr,
+              icon: Icons.chat,
+              text: 'Chat With bot'.tr,
             )
           ],
           selectedIndex: _page,

@@ -1,6 +1,14 @@
 // ignore_for_file: empty_catches, unused_element
 
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_list_view/user_exam_acc.dart';
+import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
+import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
+import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -137,15 +145,32 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
+          MenuItem(1, 'assets/images/information.png', 'General Instructions',
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(
+            () => GeneralInstruction(),
+          );
+        }),
         MenuItem(1, 'assets/images/attendance.png', 'Attendence'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // Get.to(const PrivacyViewScreen());
+           Get.to(
+            () =>  AttendenceBookScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!),
+          );
         }),
         MenuItem(2, 'assets/images/exam.png', 'Exams'.tr,
-            currentPage == DrawerSections.favourites ? true : false, () {}),
+            currentPage == DrawerSections.favourites ? true : false, () {
+               Get.to(
+            () => const UserExmNotifications(),
+          );
+            }),
         MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-          // termsAndConditions(context);
+          Get.to(
+            () => const StudentShowTimeTable(),
+          );
         }),
         // MenuItem(4, "Share", Icons.share,
         //     currentPage == DrawerSections.share ? true : false, () async {
@@ -153,23 +178,15 @@ Widget MyDrawerList(context) {
         // }),
         MenuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-          // contactus(context);
+          Get.to(
+            () => const ViewHomeWorks(),
+          );
         }),
         MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
-          // showAboutDialog(
-          //     context: context,
-          //     applicationIcon: const Image(
-          //       image: AssetImage('assets/images/SCIPRO.png'),
-          //       height: 100,
-          //       width: 100,
-          //     ),
-          //     applicationName: "SCI PRO",
-          //     applicationVersion: '1.0.2',
-          //     children: [
-          //       const Text(
-          //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
-          //     ]);
+           Get.to(
+            () => NoticePage(),
+          );
         }),
         MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
@@ -177,7 +194,13 @@ Widget MyDrawerList(context) {
         }),
         MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
+           Get.to(
+            () => ProgressReportListViewScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: FirebaseAuth.instance.currentUser!.uid,
+          batchId: UserCredentialsController.batchId!),
+          );
         }),
         // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
         //     currentPage == DrawerSections.dashboard ? true : false, () {
