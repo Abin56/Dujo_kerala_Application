@@ -46,7 +46,7 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
     List<Widget> pages = [
       StudentHomeScreen(),
       const UnderMaintanceScreen(text: ""),
-     StudentsRoomListScreen(),
+     const StudentsRoomListScreen(),
       const UnderMaintanceScreen(text: ""),
     ];
     return Scaffold(
