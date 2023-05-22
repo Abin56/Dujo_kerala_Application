@@ -58,7 +58,7 @@ dependencies:
   file_picker: 
   omni_jitsi_meet: ^1.0.13
   zoom_widget: 
-\  pdf_viewer_flutter:
+  pdf_viewer_flutter:
   syncfusion_flutter_pdf:
   pdf: ^3.8.4
   path_provider: 
