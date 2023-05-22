@@ -79,9 +79,9 @@ class _ViewParentDetailsState extends State<ViewParentDetails> {
           .get(),
           builder: (context, snapshot) { 
 
-            // if(snapshot.data!.docs[0].exists){
-            //   return const Text('data');
-            // } 
+            if(!snapshot.data!.docs[0].exists){
+              return const Text('data');
+            } 
 
             if(snapshot.hasData 
            // || snapshot.data!.docs[0].exists
@@ -232,7 +232,7 @@ class _ViewParentDetailsState extends State<ViewParentDetails> {
             return const Center(child: CircularProgressIndicator());
            
           },)
-       // body:(widget.documentSnapshot == null)? const Text('data'): Text(widget.documentSnapshot?['parentName'])
+      //  body:(widget.documentSnapshot == null)? const Text('data'): Text(widget.documentSnapshot['parentName'])
       ),
     );
   }

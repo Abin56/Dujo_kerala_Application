@@ -78,7 +78,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                 .doc(UserCredentialsController.schoolId)
                                 .collection(UserCredentialsController.batchId!)
                                 .doc(UserCredentialsController.batchId!)
-                                .collection('Classes')
+                                .collection('classes')
                                 .doc(UserCredentialsController.classId)
                                 .collection('LiveRooms')
                                 .snapshots(),

@@ -44,42 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCvnr3tZft-N4oPk0g_StLM5-HaZYY2ws8',
-    appId: '1:1019389632971:web:73f653f467a7d5dc06164e',
-    messagingSenderId: '1019389632971',
-    projectId: 'dujo-kerala-schools-1a6c5',
-    authDomain: 'dujo-kerala-schools-1a6c5.firebaseapp.com',
-    storageBucket: 'dujo-kerala-schools-1a6c5.appspot.com',
-    measurementId: 'G-NBQ0J2X8HQ',
+    apiKey: 'AIzaSyBPaQ4Ga-d_wTd9pCiU_kMTllMeuVblSP0',
+    appId: '1:512252187081:web:29a9843fc66f17bc6f5818',
+    messagingSenderId: '512252187081',
+    projectId: 'leptondujokerala',
+    authDomain: 'leptondujokerala.firebaseapp.com',
+    storageBucket: 'leptondujokerala.appspot.com',
+    measurementId: 'G-QC6SR6TLE0',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDfP_OzJhm2Dr7XIe_xvXzP_QsbdsDemK4',
-    appId: '1:1019389632971:android:c92299d71d542fab06164e',
-    messagingSenderId: '1019389632971',
-    projectId: 'dujo-kerala-schools-1a6c5',
-    storageBucket: 'dujo-kerala-schools-1a6c5.appspot.com',
+    apiKey: 'AIzaSyAPYQ232se8EQjwRWXEyrpD6S280gIWh1w',
+    appId: '1:512252187081:android:1ff4a847cb30eeea6f5818',
+    messagingSenderId: '512252187081',
+    projectId: 'leptondujokerala',
+    storageBucket: 'leptondujokerala.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAsAZB-W_pgt1Sf07Nmb8Oi3mgAjrra0L4',
-    appId: '1:1019389632971:ios:b41aa06411cb81ae06164e',
-    messagingSenderId: '1019389632971',
-    projectId: 'dujo-kerala-schools-1a6c5',
-    storageBucket: 'dujo-kerala-schools-1a6c5.appspot.com',
-    androidClientId: '1019389632971-1h818bij5go8q5t9ob99jvb2lbhv1nu1.apps.googleusercontent.com',
-    iosClientId: '1019389632971-q3fbnncg1vav95pbgp6efj3g9i08kj4u.apps.googleusercontent.com',
-    iosBundleId: 'com.example.dujoApplication',
+    apiKey: 'AIzaSyC6NLxGfZp2jQxtGXWH-rlNb0zmguZYK-8',
+    appId: '1:512252187081:ios:1d8e4087fc57b46b6f5818',
+    messagingSenderId: '512252187081',
+    projectId: 'leptondujokerala',
+    storageBucket: 'leptondujokerala.appspot.com',
+    iosClientId: '512252187081-l7s9amrdki7u3o9gom1qr4nbg9b04afi.apps.googleusercontent.com',
+    iosBundleId: 'com.example.dujoKeralaApplication',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAsAZB-W_pgt1Sf07Nmb8Oi3mgAjrra0L4',
-    appId: '1:1019389632971:ios:b41aa06411cb81ae06164e',
-    messagingSenderId: '1019389632971',
-    projectId: 'dujo-kerala-schools-1a6c5',
-    storageBucket: 'dujo-kerala-schools-1a6c5.appspot.com',
-    androidClientId: '1019389632971-1h818bij5go8q5t9ob99jvb2lbhv1nu1.apps.googleusercontent.com',
-    iosClientId: '1019389632971-q3fbnncg1vav95pbgp6efj3g9i08kj4u.apps.googleusercontent.com',
-    iosBundleId: 'com.example.dujoApplication',
+    apiKey: 'AIzaSyC6NLxGfZp2jQxtGXWH-rlNb0zmguZYK-8',
+    appId: '1:512252187081:ios:1d8e4087fc57b46b6f5818',
+    messagingSenderId: '512252187081',
+    projectId: 'leptondujokerala',
+    storageBucket: 'leptondujokerala.appspot.com',
+    iosClientId: '512252187081-l7s9amrdki7u3o9gom1qr4nbg9b04afi.apps.googleusercontent.com',
+    iosBundleId: 'com.example.dujoKeralaApplication',
   );
 }
