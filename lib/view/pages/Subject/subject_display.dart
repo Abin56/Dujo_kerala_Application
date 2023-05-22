@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/Subject/student/chapter_display.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +56,9 @@ class StudentSubjectHome extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
-              return Column(children: [
+            
+             if(snapshot.hasData){
+               return Column(children: [
                 Expanded(
                   child: GridView.count(
                     padding: const EdgeInsets.all(15),
@@ -64,8 +67,14 @@ class StudentSubjectHome extends StatelessWidget {
                     mainAxisSpacing: 12,
                     children:
                         List.generate(snapshot.data!.docs.length, (index) {
-                      teacherSubjectController
+                          if(snapshot.data!.docs[index]['teacherId']!=null || snapshot.data!.docs[index]['teacherId']!=''){
+                             teacherSubjectController
                           .getSubject(snapshot.data!.docs[index]['teacherId']);
+                          }
+                          else{
+                            return SizedBox();
+                          }
+                     
                       return GestureDetector( 
                         onTap: (){
                           // Navigator.push(context, MaterialPageRoute(builder: (context)=> 
@@ -150,6 +159,7 @@ class StudentSubjectHome extends StatelessWidget {
                   ),
                 ),
               ]);
+             } return GoogleMonstserratWidgets(text: 'No Subjects Added!', fontsize: 14,);
             }),
       ),
     );

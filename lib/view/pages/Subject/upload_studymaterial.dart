@@ -24,6 +24,7 @@ class UploadStudyMaterial extends StatefulWidget {
   String subjectName;
   String chapterName;
   String chapterID;
+  bool stat = false;
 
   @override
   State<UploadStudyMaterial> createState() => _UploadStudyMaterialState();
@@ -40,6 +41,9 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
 
   Future<String> pickAFile(file) async{
     try{
+        setState(() {
+      widget.stat = true;
+    });
           // log('gggggg${studentListValue?['studentName']}');
        String uid2 = const Uuid().v1();
       //isImageUpload.value = true; 
@@ -51,6 +55,9 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
       final TaskSnapshot snap = await uploadTask;
        downloadUrl = await snap.ref.getDownloadURL(); 
       log('downloadUrl $downloadUrl');  
+        setState(() {
+      widget.stat = true;
+    });
 
       return downloadUrl;
 
@@ -69,14 +76,18 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
       
      } catch(e){
       log(e.toString()); 
+        setState(() {
+      widget.stat = true;
+    });
       return e.toString();
      }
 
   } 
 
   uploadToFirebase(){ 
-
+    
     try{
+    
       String uid = const Uuid().v1();
      FirebaseFirestore.instance
         .collection('SchoolListCollection')
@@ -102,11 +113,30 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
           'docid': uid, 
           'uploadedBy': UserCredentialsController.teacherModel!.teacherName
 
-        });
+        }).then((value) => showDialog(context: context, builder: (context){
+          return AlertDialog(
+            title: const Text('Study Materials'), 
+            content: const Text('New Study Material Added!'),
+            actions: [
+              MaterialButton(onPressed: (){
+                Navigator.pop(context);
+              }, child: const Text('OK'),)
+            ],
+          );
+        }));
+
+          setState(() {
+      widget.stat = false;
+    });
     } 
     catch(e){
       log(e.toString());
+           setState(() {
+      widget.stat = false;
+    });
+
     }
+
   }
 
   @override
@@ -223,12 +253,12 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                       hintText: 'Enter Title',
                     ),
                     kHeight40,
-                    GestureDetector(
+                (widget.stat == true)? const Center(child: CircularProgressIndicator(),): GestureDetector(
                       onTap: ()async {
                          await pickAFile(filee);
                          uploadToFirebase();
                       },
-                      child: ButtonContainerWidget(
+                      child:  ButtonContainerWidget(
                         curving: 18,
                         colorindex: 2,
                         height: 60.w,

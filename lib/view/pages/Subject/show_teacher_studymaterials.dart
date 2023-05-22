@@ -111,7 +111,7 @@ class StudyMaterials extends StatelessWidget {
                                   //  PDFSectionScreen()
                                   //PDFSectionScreen(urlPdf: 'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fstudymaterials%2FEnglish%2FJohny%20Johny%2Ffab221c0-f545-11ed-829a-11b8e7490871?alt=media&token=21f0bd88-b03e-41fd-8267-8a013aa3e80d',) 
 
-                                  PDFSectionScreen(urlPdf: 'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fstudymaterials%2FEnglish%20%2FTwinkle%20Twinkle%20%2F42725b60-f546-11ed-829a-11b8e7490871?alt=media&token=26fc75c8-8a39-4a24-8f30-804bf3d41a3b',)
+                                  PDFSectionScreen(urlPdf: snapshot.data!.docs[index]['downloadUrl'],)
                                   ));
                                   },                                                    
                                 ),
