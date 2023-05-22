@@ -36,7 +36,7 @@ class StudentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
 
-       const UserExmNotifications(), //Exam
+      const UserExmNotifications(), //Exam
       const StudentShowTimeTable(), //Time Table
       const ViewHomeWorks(), // Home Works
       NoticePage(), //Notice
@@ -49,7 +49,6 @@ class StudentAccessories extends StatelessWidget {
       StudentSubjectHome(), //Subjects
       TeacherSubjectWiseList(), //Teachers
       SchoolLevelMeetingPage(), //Meetings
-      
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -143,7 +142,6 @@ List<String> _acc_text = [
   'Subjects/Materials'.tr,
   'Teachers'.tr,
   'Meetings'.tr
-
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -156,5 +154,4 @@ var _acc_images = [
   'assets/images/subjects.png',
   'assets/images/teachers.png',
   'assets/images/library.png',
-
 ];
