@@ -114,7 +114,7 @@ class _ClassTeacherMainHomeScreenState
             ),
             GButton(
               iconSize: 20,
-              icon: Icons.chair,
+              icon: Icons.chat,
               text: 'Chat With Bot'.tr,
             )
           ],
