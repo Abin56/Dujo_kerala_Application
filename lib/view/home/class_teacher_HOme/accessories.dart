@@ -145,7 +145,7 @@ class ClassTeacherAccessories extends StatelessWidget {
 List<String> _acc_text = [
 
   'Take Attendance'.tr,
-  'Attendance Book'.tr,
+  'Attendence Book'.tr,
   'Leave Letters'.tr,
   'Exams'.tr,
   'TimeTable'.tr,
@@ -156,7 +156,7 @@ List<String> _acc_text = [
   'Subjects'.tr,
   'Teachers'.tr,
   'Meetings'.tr, 
-  'My Students.tr'
+  'My Students.'
 
 ];
 var _acc_images = [

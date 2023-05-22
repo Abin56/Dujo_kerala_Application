@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_viewer_flutter/pdf_viewer_flutter.dart';
 
+
 class PDFSectionScreen extends StatefulWidget {
   var urlPdf;
   PDFSectionScreen({super.key, required this.urlPdf});

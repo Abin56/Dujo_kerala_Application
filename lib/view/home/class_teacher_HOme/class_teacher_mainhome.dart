@@ -103,7 +103,7 @@ class _ClassTeacherMainHomeScreenState
               iconSize: 20,
               textSize: 9,
               icon: Icons.tv,
-              text: 'ReC_Classes'.tr,
+              text: 'Recorded Classes'.tr,
             ),
             GButton(
               iconSize: 20,
@@ -115,7 +115,7 @@ class _ClassTeacherMainHomeScreenState
             GButton(
               iconSize: 20,
               icon: Icons.live_tv_sharp,
-              text: 'Profile'.tr,
+              text: 'Chat gpt'.tr,
             )
           ],
           selectedIndex: _page,

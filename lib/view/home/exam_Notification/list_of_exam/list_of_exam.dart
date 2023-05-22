@@ -3,7 +3,10 @@ import 'package:dujo_kerala_application/controllers/add_exam_time_table/add_exam
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/exam_list_model/exam_list.model.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -15,17 +18,18 @@ class ViewSchoolExamScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: adminePrimayColor,
-          bottom: const TabBar(tabs: [
+          backgroundColor: adminePrimayColor,title: Text("Exam TimeTable".tr),
+          bottom:  TabBar(tabs: [
             Tab(
-              text: 'Public Level',
+              text: 'Public Level'.tr,
             ),
             Tab(
-              text: 'State Level',
+              text: 'State Level'.tr,
             )
           ]),
         ),
@@ -89,14 +93,32 @@ class _TPublicLevelState extends State<TPublicLevel> {
                           onTap: () {
                             _addSubjectsToServer(context, data.docid);
                           },
-                          child: SizedBox(
-                            height: 100,
-                            child: Text(data.examName),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 10.h,left: 10.h,right: 10.h),
+                             height:120.h,
+                             width: 80.w,
+                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.h),color:adminePrimayColor,),
+                            
+                            child:Padding(
+                               padding:  EdgeInsets.only(top: 20.h,left: 20.w),
+                              child: Column(
+                               mainAxisAlignment: MainAxisAlignment.start,
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                
+                                  GooglePoppinsWidgets(text:"Exam Name  :   ${data.examName}", fontsize: 16.h,color: cWhite),
+                                  SizedBox(height: 5.w,),
+                                      GooglePoppinsWidgets(text:"Published date :  ${stringTimeToDateConvert(data.publishDate)}", fontsize: 14.h,color: cWhite,),
+                                      SizedBox(height: 5.w,),
+                                          GooglePoppinsWidgets(text:"Starting date :  ${data.startingDate}", fontsize: 14.h,color: cWhite),
+                                ],
+                              ),
+                            ) ,
                           ),
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const Divider();
+                        return  SizedBox(height: 10.h,);
                       },
                       itemCount: snaps.data!.docs.length);
                 }
@@ -107,118 +129,136 @@ class _TPublicLevelState extends State<TPublicLevel> {
               }
             }));
   }
-
+  final _formKey = GlobalKey<FormState>();
   _addSubjectsToServer(BuildContext context, String examdocID) async {
+  
     return showDialog(
+      
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add Subject to TimeTable'),
+          title:  GooglePoppinsWidgets(text: 'Add Subject to TimeTable'.tr,fontsize: 14.w),
           content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                GetAllSubjectListDropDownButton(
-                    batchId: UserCredentialsController.batchId!,
-                    classId: UserCredentialsController.classId!,
-                    schoolID: UserCredentialsController.schoolId!),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GooglePoppinsWidgets(
-                      fontsize: 12,
-                      fontWeight: FontWeight.w300,
-                      text: 'Starting Time : ',
-                    ),
-                    SizedBox(
-                      height: 50,
-                      width: 150,
-                      child: Center(
-                          child: TextFormField(
-                        validator: (value) {
-                          if (_timeController.text.isEmpty) {
-                            return "Please select Time";
-                          } else {
-                            return null;
-                          }
-                        },
-                        controller: _timeController,
-                        decoration: const InputDecoration(
-                          hintText: '  Selected Time',
-                        ),
-                        readOnly: true,
-                      )),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          selectTime(context);
-                        },
-                        icon: const Icon(Icons.timer))
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GooglePoppinsWidgets(
-                      fontsize: 12,
-                      fontWeight: FontWeight.w300,
-                      text: 'End Time : ',
-                    ),
-                    SizedBox(
-                      height: 50,
-                      width: 150,
-                      child: Center(
-                          child: TextFormField(
-                        validator: (value) {
-                          if (_stimeController.text.isEmpty) {
-                            return "Please select Time";
-                          } else {
-                            return null;
-                          }
-                        },
-                        controller: _stimeController,
-                        decoration: const InputDecoration(
-                          hintText: '  Selected Time',
-                        ),
-                        readOnly: true,
-                      )),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          selectTimesec(context);
-                        },
-                        icon: const Icon(Icons.timer))
-                  ],
-                ),
-                TextFormField(
-                  validator: (value) {
-                    if (applynewBatchYearContoller.text.isEmpty) {
-                      return 'Invalid';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: applynewBatchYearContoller,
-                  readOnly: true,
-                  onTap: () => _selectDate(context),
-                  decoration: const InputDecoration(
-                    labelText: 'DD-MM-YYYY',
-                    border: OutlineInputBorder(),
+            
+            child: Form(
+              key: _formKey,
+              child: ListBody(
+                children: <Widget>[
+                  
+                  GetAllSubjectListDropDownButton(
+                      batchId: UserCredentialsController.batchId!,
+                      classId: UserCredentialsController.classId!,
+                      schoolID: UserCredentialsController.schoolId!),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // GooglePoppinsWidgets(
+                      //   fontsize: 12,
+                      //   fontWeight: FontWeight.w300,
+            
+                      //   text: 'Starting Time : ',
+                      // ),
+                      SizedBox(
+                        height: 70.w,
+                        width: 200.w,
+                        child: Center(
+                            child: TextFormField(
+                          validator: (value) {
+                            if (_timeController.text.isEmpty) {
+                              return "Please select Time";
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _timeController,
+                          decoration:  InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(5.w))),
+                        
+                            labelText: 'Starting Time'.tr,
+                          ),
+                          readOnly: true,
+                        )),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            selectTime(context);
+                          },
+                          icon:  const Icon(Icons.timer))
+                    ],
                   ),
-                ),
-              ],
+                  SizedBox(height: 10.h,),
+            
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // GooglePoppinsWidgets(
+                      //   fontsize: 12,
+                      //   fontWeight: FontWeight.w300,
+                      //   text: 'End Time       : ',
+                      // ),
+                      kHeight10,
+                      SizedBox(
+                        height: 70.w,
+                        width: 200.w,
+                        child: Center(
+                            child: TextFormField(
+                          validator: (value) {
+                            if (_stimeController.text.isEmpty) {
+                              return "Please select Time";
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _stimeController,
+                          decoration:  InputDecoration(
+                             border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(5.w))),
+                            
+                            labelText: 'EndTime'.tr
+                          ),
+                          readOnly: true,
+                        )),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            selectTimesec(context);
+                          },
+                          icon: const Icon(Icons.timer))
+                    ],
+                  ),SizedBox(height: 10.h,),
+                  TextFormField(
+                    validator: (value) {
+                      if (applynewBatchYearContoller.text.isEmpty) {
+                        return 'Invalid';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: applynewBatchYearContoller,
+                    readOnly: true,
+                    onTap: () => _selectDate(context),
+                    decoration: const InputDecoration(
+                      labelText: 'DD-MM-YYYY',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child:  Text('Cancel'.tr),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Add'),
-              onPressed: () {
+              child:  Text('Add'.tr),
+              onPressed: () async{
+                if (_formKey.currentState!.validate()){
                 addExamTimeTableController.uploadSubject(
                     'Public Level',
                     examdocID,
@@ -231,7 +271,7 @@ class _TPublicLevelState extends State<TPublicLevel> {
                     context);
                 _timeController.clear();
                 _stimeController.clear();
-              },
+               } },
             ),
           ],
         );
@@ -329,7 +369,7 @@ class _TStateLevelState extends State<TStateLevel> {
                 .doc(UserCredentialsController.schoolId)
                 .collection(UserCredentialsController.batchId!)
                 .doc(UserCredentialsController.batchId!)
-                .collection('State Level')
+                .collection('State Level'.tr)
                 .snapshots(),
             builder: (context, snaps) {
               if (snaps.hasData) {
@@ -347,14 +387,41 @@ class _TStateLevelState extends State<TStateLevel> {
                           onTap: () async {
                             _addSubjectsToServer(context, data.docid);
                           },
-                          child: SizedBox(
-                            height: 100,
-                            child: Text(data.examName),
+
+
+
+
+
+                          child: Padding(
+                            padding:  EdgeInsets.only(left: 10.h,right: 10.h),
+                            child: Container(
+                               margin: EdgeInsets.only(top: 10.h,left: 10.h,right: 10.h),
+                             height:120.h,
+                             width: 80.w,
+                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.h),color:adminePrimayColor,),
+
+
+                              child:Padding(
+                               padding:  EdgeInsets.only(top: 20.h,left: 20.w),
+                              child: Column(
+                               mainAxisAlignment: MainAxisAlignment.start,
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                
+                                  GooglePoppinsWidgets(text:"Exam Name  :   ${data.examName}", fontsize: 16.h,color: cWhite),
+                                  SizedBox(height: 5.w,),
+                                      GooglePoppinsWidgets(text:"Published date :  ${stringTimeToDateConvert(data.publishDate)}", fontsize: 14.h,color: cWhite,),
+                                      SizedBox(height: 5.w,),
+                                          GooglePoppinsWidgets(text:"Starting date :  ${data.startingDate}", fontsize: 14.h,color: cWhite),
+                                ],
+                              ),
+                            ) ,
+                              ),
                           ),
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const Divider();
+                        return SizedBox(height: 10.h,);
                       },
                       itemCount: snaps.data!.docs.length);
                 }
@@ -366,118 +433,129 @@ class _TStateLevelState extends State<TStateLevel> {
             }));
   }
 
+final _formKey = GlobalKey<FormState>();
+
   _addSubjectsToServer(BuildContext context, String examdocID) async {
     return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add Subject to TimeTable'),
+          title:  Text('Add Subject to TimeTable'.tr),
           content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                GetAllSubjectListDropDownButton(
-                    batchId: UserCredentialsController.batchId!,
-                    classId: UserCredentialsController.classId!,
-                    schoolID: UserCredentialsController.schoolId!),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GooglePoppinsWidgets(
-                      fontsize: 12,
-                      fontWeight: FontWeight.w300,
-                      text: 'Starting Time : ',
+            child: Form(
+              key: _formKey,
+              child: ListBody(
+                children: <Widget>[
+                  GetAllSubjectListDropDownButton(
+                      batchId: UserCredentialsController.batchId!,
+                      classId: UserCredentialsController.classId!,
+                      schoolID: UserCredentialsController.schoolId!),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // GooglePoppinsWidgets(
+                      //   fontsize: 12,
+                      //   fontWeight: FontWeight.w300,
+                      //   text: 'Starting Time : ',
+                      // ),
+                      SizedBox(
+                        height: 50.h,
+                        width: 200.w,
+                        child: Center(
+                            child: TextFormField(
+                          validator: (value) {
+                            if (_timeController.text.isEmpty) {
+                              return "Please select Time";
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _timeController,
+                          decoration:  InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5.w))
+                      ),
+                             labelText: 'Starting Time'.tr,
+                          ),
+                          readOnly: true,
+                        )),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            selectTime(context);
+                          },
+                          icon: const Icon(Icons.timer))
+                    ],
+                  ),kHeight10,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // GooglePoppinsWidgets(
+                      //   fontsize: 12,
+                      //   fontWeight: FontWeight.w300,
+                      //   text: 'End Time : ',
+                      // ),
+                      SizedBox(
+                        height: 50.h,
+                        width: 200.w,
+                        child: Center(
+                            child: TextFormField(
+                          validator: (value) {
+                            if (_stimeController.text.isEmpty) {
+                              return "Please select Time";
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _stimeController,
+                          decoration:  InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5.w))),
+                            
+                            labelText: 'End Time'.tr,
+                          ),
+                          readOnly: true,
+                        )),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            selectTimesec(context);
+                          },
+                          icon: const Icon(Icons.timer))
+                    ],
+                  ),kHeight10,
+                  TextFormField(
+                    validator: (value) {
+                      if (applynewBatchYearContoller.text.isEmpty) {
+                        return 'Invalid';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: applynewBatchYearContoller,
+                    readOnly: true,
+                    onTap: () => _selectDate(context),
+                    decoration: const InputDecoration(
+                      labelText: 'DD-MM-YYYY',
+                      border: OutlineInputBorder(),
                     ),
-                    SizedBox(
-                      height: 50,
-                      width: 150,
-                      child: Center(
-                          child: TextFormField(
-                        validator: (value) {
-                          if (_timeController.text.isEmpty) {
-                            return "Please select Time";
-                          } else {
-                            return null;
-                          }
-                        },
-                        controller: _timeController,
-                        decoration: const InputDecoration(
-                          hintText: '  Selected Time',
-                        ),
-                        readOnly: true,
-                      )),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          selectTime(context);
-                        },
-                        icon: const Icon(Icons.timer))
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GooglePoppinsWidgets(
-                      fontsize: 12,
-                      fontWeight: FontWeight.w300,
-                      text: 'End Time : ',
-                    ),
-                    SizedBox(
-                      height: 50,
-                      width: 150,
-                      child: Center(
-                          child: TextFormField(
-                        validator: (value) {
-                          if (_stimeController.text.isEmpty) {
-                            return "Please select Time";
-                          } else {
-                            return null;
-                          }
-                        },
-                        controller: _stimeController,
-                        decoration: const InputDecoration(
-                          hintText: '  Selected Time',
-                        ),
-                        readOnly: true,
-                      )),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          selectTimesec(context);
-                        },
-                        icon: const Icon(Icons.timer))
-                  ],
-                ),
-                TextFormField(
-                  validator: (value) {
-                    if (applynewBatchYearContoller.text.isEmpty) {
-                      return 'Invalid';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: applynewBatchYearContoller,
-                  readOnly: true,
-                  onTap: () => _selectDate(context),
-                  decoration: const InputDecoration(
-                    labelText: 'DD-MM-YYYY',
-                    border: OutlineInputBorder(),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child:  Text('Cancel'.tr),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Add'),
-              onPressed: () {
-                addExamTimeTableController.uploadSubject(
+              child:  Text('Add'.tr),
+              onPressed: () async{
+
+                if (_formKey.currentState!.validate()){
+                  addExamTimeTableController.uploadSubject(
                     'State Level',
                     examdocID,
                     allsubjectListValue!['subjectName'],
@@ -486,9 +564,13 @@ class _TStateLevelState extends State<TStateLevel> {
                     applynewBatchYearContoller.text.trim(),
                     _timeController.text.trim(),
                     _stimeController.text.trim(),
-                    context);
-              },
-            ),
+                    context);}
+                     applynewBatchYearContoller.clear();
+                    _timeController.clear();
+                    _stimeController.clear();
+          
+              },)
+               
           ],
         );
       },
