@@ -64,7 +64,7 @@ class TeacherSubjectHome extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
-                    children:
+                    children: 
                         List.generate(snapshot.data!.docs.length, (index) {
                       teacherSubjectController
                           .getSubject(snapshot.data!.docs[index]['teacherdocid']);

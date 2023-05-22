@@ -157,7 +157,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                     GestureDetector( 
                       onTap: ()async{
                          FilePickerResult? result =
-                                  await FilePicker.platform.pickFiles();
+                                  await FilePicker.platform.pickFiles(allowedExtensions: ['pdf'], type: FileType.custom);
 
                               if (result != null) {
                                 File file = File(result.files.single.path!); 

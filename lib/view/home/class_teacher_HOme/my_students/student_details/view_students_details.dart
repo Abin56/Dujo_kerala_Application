@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_guardian_details.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/viewgd.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/viewpd.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
@@ -228,7 +228,8 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                 }, color: Colors.blue, child: const Text('View Parent Details', style: TextStyle(color: Colors.white),),), 
                 kHeight20, 
                 MaterialButton(onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  ViewGuardianDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot!)));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  
+                  ViewGD(studentID: widget.studentDetail['docid']!)));
                 }, color: Colors.blue, child: const Text('View Guardian Details', style: TextStyle(color: Colors.white),),), 
                 kHeight20
               ],

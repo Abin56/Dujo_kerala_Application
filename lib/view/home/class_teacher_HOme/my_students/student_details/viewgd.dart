@@ -3,23 +3,24 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_students_details.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../controllers/userCredentials/user_credentials.dart';
 
-class ViewPD extends StatefulWidget {
-   ViewPD({super.key, required this.studentID});
+class ViewGD extends StatefulWidget {
+   ViewGD({super.key, required this.studentID});
 
   String studentID;
   DocumentSnapshot? documentSnapshot;
 
   @override
-  State<ViewPD> createState() => _ViewPDState();
+  State<ViewGD> createState() => _ViewGDState();
 }
 
-class _ViewPDState extends State<ViewPD> { 
+class _ViewGDState extends State<ViewGD> { 
 
   loadDocument()async{
     try{
@@ -30,7 +31,7 @@ class _ViewPDState extends State<ViewPD> {
                 .doc(UserCredentialsController.batchId)
                 .collection('classes')
                 .doc(UserCredentialsController.classId)
-                .collection('ParentCollection')
+                .collection('GuardianCollection')
           .where('studentID', isEqualTo: widget.studentID)
           .get();
 
@@ -61,7 +62,7 @@ class _ViewPDState extends State<ViewPD> {
   Widget build(BuildContext context) {
      var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: (widget.documentSnapshot == null)? const Text('NULL'): ListView(
+      body: (widget.documentSnapshot == null)? Center(child: GoogleMonstserratWidgets(text: 'Guardian Details not available',fontsize: 14,)): ListView(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,7 +105,7 @@ class _ViewPDState extends State<ViewPD> {
                              const Icon(Icons.person_4,color: cWhite,),
                              SizedBox(width: 20.h,),
 
-                             TextWidget(text: 'Student Name : ${widget.documentSnapshot!['parentName']}',),
+                             TextWidget(text: 'Student Name : ${widget.documentSnapshot!['guardianName']}',),
                           ],
                         ),
 
@@ -116,7 +117,7 @@ class _ViewPDState extends State<ViewPD> {
                             const Icon(Icons.phone,color: cWhite,),
                              SizedBox(width: 20.h,),
                             
-                             TextWidget(text: 'Parent Phone Number : ${widget.documentSnapshot!['parentPhoneNumber']}',),
+                             TextWidget(text: 'Parent Phone Number : ${widget.documentSnapshot!['guardianPhoneNumber']}',),
                           ],
                         ),
 
@@ -142,7 +143,7 @@ class _ViewPDState extends State<ViewPD> {
                             const Icon(Icons.mail,color: cWhite,),
                              SizedBox(width: 20.h,),
 
-                             TextWidget(text: 'Parent Email : ${widget.documentSnapshot!['parentEmail']}',),
+                             TextWidget(text: 'Parent Email : ${widget.documentSnapshot!['guardianEmail']}',),
                           ],
                         ),
 

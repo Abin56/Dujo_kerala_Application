@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_students_details.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,7 +62,7 @@ class _ViewPDState extends State<ViewPD> {
   Widget build(BuildContext context) {
      var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: (widget.documentSnapshot == null)? const Text('NULL'): ListView(
+      body: (widget.documentSnapshot == null)? Center(child: GoogleMonstserratWidgets(text: 'Parent Details not available',fontsize: 14,)) : ListView(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
