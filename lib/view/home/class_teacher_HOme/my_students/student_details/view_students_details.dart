@@ -5,7 +5,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_guardian_details.dart';
-import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_parent_details.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/viewpd.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
@@ -221,9 +221,10 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                 ),
                 MaterialButton(onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> 
+                  ViewPD(studentID: widget.studentDetail['docid'])));
                   // vpd(studentID:  widget.studentDetail['docid'],)));
               // VPD(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot! , )));
-                  ViewParentDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot! ,)));
+                //  ViewParentDetails(studentID: widget.studentDetail['docid'],documentSnapshot: widget.documentSnapshot! ,)));
                 }, color: Colors.blue, child: const Text('View Parent Details', style: TextStyle(color: Colors.white),),), 
                 kHeight20, 
                 MaterialButton(onPressed: (){
