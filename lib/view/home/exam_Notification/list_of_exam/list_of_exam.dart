@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../utils/utils.dart';
 import '../../../widgets/drop_down/all_subject_drop_down.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
@@ -269,9 +270,12 @@ class _TPublicLevelState extends State<TPublicLevel> {
                     _timeController.text.trim(),
                     _stimeController.text.trim(),
                     context);
+                   // .then((value) => showToast(msg: 'Successfully Added'));
+                    }
                 _timeController.clear();
                 _stimeController.clear();
-               } },
+                applynewBatchYearContoller.clear();
+                },
             ),
           ],
         );
@@ -564,12 +568,14 @@ final _formKey = GlobalKey<FormState>();
                     applynewBatchYearContoller.text.trim(),
                     _timeController.text.trim(),
                     _stimeController.text.trim(),
-                    context);}
+                    context);
+                   // .then((value) => showToast(msg: 'Successfully Added'));
+                    }
                      applynewBatchYearContoller.clear();
                     _timeController.clear();
                     _stimeController.clear();
           
-              },)
+              })
                
           ],
         );

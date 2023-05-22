@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/add_achievements/add_achievements.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_students_details.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class MyStudents extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Students'),
+        title:  Text('My Students'.tr),backgroundColor: adminePrimayColor,
        
       ),
       body: StreamBuilder(

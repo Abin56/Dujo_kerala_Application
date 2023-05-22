@@ -156,7 +156,7 @@ List<String> _acc_text = [
   'Subjects'.tr,
   'Teachers'.tr,
   'Meetings'.tr, 
-  'My Students.'
+  'My Students'.tr
 
 ];
 var _acc_images = [

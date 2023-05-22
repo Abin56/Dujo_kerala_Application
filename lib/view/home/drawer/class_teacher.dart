@@ -4,7 +4,13 @@ import 'package:dujo_kerala_application/controllers/log_out/user_logout_controll
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
+import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
+import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence_subject_listView.dart';
+import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
+import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:dujo_kerala_application/widgets/drop_down/select_class_classteacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -199,62 +205,74 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/attendance.png', 'Attendance'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (ctx) => RecordedCoursesListScreen()));
-        }),
-        MenuItem(2, 'assets/images/exam.png', 'Exams'.tr,
-            currentPage == DrawerSections.favourites ? true : false, () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (ctx) => LiveCoursesListScreen()));
-        }),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
-            currentPage == DrawerSections.setting ? true : false, () {
-          // termsAndConditions(context);
-        }),
-        // MenuItem(4, "Share", Icons.share,
-        //     currentPage == DrawerSections.share ? true : false, () async {
-        //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
-        // }),
-        MenuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
-            currentPage == DrawerSections.contact ? true : false, () {
-          // contactus(context);
-        }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
-            currentPage == DrawerSections.about ? true : false, () {
-          // showAboutDialog(
-          //     context: context,
-          //     applicationIcon: const Image(
-          //       image: AssetImage('assets/images/SCIPRO.png'),
-          //       height: 100,
-          //       width: 100,
-          //     ),
-          //     applicationName: "SCI PRO",
-          //     applicationVersion: '1.0.2',
-          //     children: [
-          //       const Text(
-          //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
-          //     ]);
-        }),
-        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
-        }),
-        // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
-        //     currentPage == DrawerSections.dashboard ? true : false, () {
-        //   signOut(context);
-        // }),
-        MenuItem(8, 'assets/images/information.png', 'General Instructions',
+        MenuItem(1, 'assets/images/information.png', 'General Instructions',
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
           );
         }),
+        MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+ Get.to(
+            () => TakeAttentenceSubjectWise(          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!,
+          schoolId: UserCredentialsController.schoolId!
+            
+            ),
+          );
+        }),
+        MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
+            currentPage == DrawerSections.favourites ? true : false, () {
+  Get.to(
+            () =>  const AddTimeTable()  ,   
+          );
+        }),
+        MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
+            currentPage == DrawerSections.setting ? true : false, () {
+       Get.to(
+            () => const StudentShowTimeTable(),
+          );
+        }),
+        // MenuItem(4, "Share", Icons.share,
+        //     currentPage == DrawerSections.share ? true : false, () async {
+        //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
+        // }),
+        MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
+            currentPage == DrawerSections.contact ? true : false, () {
+         Get.to(
+            () =>   HomeWorkUpload(
+        batchId: UserCredentialsController.batchId!,
+        classId: UserCredentialsController.classId!,
+        schoolID: UserCredentialsController.schoolId!,
+        teacherID: UserCredentialsController.teacherModel!.docid!,
+      ),
+          );
+        }),
+        MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+            currentPage == DrawerSections.about ? true : false, () {
+          Get.to(
+            () => NoticePage(),
+          );
+        }),
+        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(const PrivacyViewScreen());
+        }),
+        MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+           Get.to(
+            () => CreateExamNameScreen(
+          schooilID: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          teacherId: UserCredentialsController.teacherModel!.docid!,
+          batchId: UserCredentialsController.batchId!),
+          );
+        }),
+        // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
+        //     currentPage == DrawerSections.dashboard ? true : false, () {
+        //   signOut(context);
+        // }),
+        
         kHeight10,
         kHeight10,
         kHeight10,

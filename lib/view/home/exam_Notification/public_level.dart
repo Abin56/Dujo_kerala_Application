@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/list_of_exam/time_table_view.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
@@ -44,7 +46,47 @@ class PublicLevel extends StatelessWidget {
                           },
                           child: SizedBox(
                             height: 100,
-                            child: Text(data.examName),
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  top: 10.h, left: 10.h, right: 10.h),
+                              height: 120.h,
+                              width: 80.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.h),
+                                color: adminePrimayColor,
+                              ),
+                              //child: Text(data.examName)
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 20.h, left: 20.w),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    GooglePoppinsWidgets(
+                                        text: "Exam Name  :   ${data.examName}",
+                                        fontsize: 16.h,
+                                        color: cWhite),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    GooglePoppinsWidgets(
+                                      text:
+                                          "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
+                                      fontsize: 14.h,
+                                      color: cWhite,
+                                    ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    GooglePoppinsWidgets(
+                                        text:
+                                            "Starting date :  ${data.startingDate}",
+                                        fontsize: 14.h,
+                                        color: cWhite),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -61,5 +103,3 @@ class PublicLevel extends StatelessWidget {
             }));
   }
 }
-
-
