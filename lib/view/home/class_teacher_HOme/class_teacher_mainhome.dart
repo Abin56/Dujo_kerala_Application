@@ -114,7 +114,7 @@ class _ClassTeacherMainHomeScreenState
             ),
             GButton(
               iconSize: 20,
-              icon: Icons.chat,
+              icon: Icons.chair,
               text: 'Chat With Bot'.tr,
             )
           ],
@@ -134,7 +134,7 @@ class _ClassTeacherMainHomeScreenState
             ],
           ),
         ),
-      ),
-    );
-  }
+),
+);
+}
 }
