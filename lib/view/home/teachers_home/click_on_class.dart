@@ -30,7 +30,7 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
-      const UserExmNotifications(), //Exam
+            const UserExmNotifications(),  //Exam
       const StudentShowTimeTable(), //Time Table
       Scaffold(
         appBar: AppBar(
