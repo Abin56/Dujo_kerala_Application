@@ -5,7 +5,6 @@ import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_lette
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/my_students.dart';
 import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -19,6 +18,7 @@ import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
 import '../events/event_list.dart';
+import '../exam_Notification/teacher_adding/add_subject.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   const ClassTeacherAccessories({
@@ -40,7 +40,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           schooilID: UserCredentialsController.schoolId!,
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
-     const ExamNotification(), //Exam
+      const AddTimeTable(), //Exam
       const StudentShowTimeTable(), //TimeTable
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
@@ -143,19 +143,21 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Take Attendance',
-  'Attendance Book',
-  'Leave Letters',
-  'Exams',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Subjects',
-  'Teachers',
-  'Meetings', 
-  'My Students'
+
+  'Take Attendance'.tr,
+  'Attendance Book'.tr,
+  'Leave Letters'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Teachers'.tr,
+  'Meetings'.tr, 
+  'My Students.tr'
+
 ];
 var _acc_images = [
   'assets/images/attendance.png',

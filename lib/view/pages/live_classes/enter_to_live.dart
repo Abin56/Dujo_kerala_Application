@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -241,27 +242,27 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
                     return SizedBox(
                       height: 64.0,
                       width: double.maxFinite,
-                      child: ElevatedButton(
-                        onPressed: () async {
-
-                              await FirebaseFirestore.instance
-                                  .collection('SchoolListCollection')
-                                  .doc(UserCredentialsController.schoolId)
-                                  .collection(
-                                      UserCredentialsController.batchId!)
-                                  .doc(UserCredentialsController.batchId!)
-                                  .collection('Classes')
-                                  .doc(UserCredentialsController.classId)
-                                  .collection('LiveRooms')
-                                  .doc(widget.docId).delete().then((value) => Get.back());
+                      child: GestureDetector(
+                        onTap: () async {
+                          await FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(UserCredentialsController.schoolId)
+                              .collection(UserCredentialsController.batchId!)
+                              .doc(UserCredentialsController.batchId!)
+                              .collection('Classes')
+                              .doc(UserCredentialsController.classId)
+                              .collection('LiveRooms')
+                              .doc(widget.docId)
+                              .delete()
+                              .then((value) => Get.back());
                         },
-                        child: const Text(
-                          "End Live Room",
-                          style: TextStyle(color: Colors.white),
+                        child: Container(
+                          height: 64,
+                          color: Colors.red,
+                          child:Center(
+                            child: GooglePoppinsWidgets(text: 'End This Live Room', fontsize: 16,color: Colors.white,fontWeight: FontWeight.w400,),
+                          )
                         ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateColor.resolveWith(
-                                (states) => Colors.blue)),
                       ),
                     );
                   } else {

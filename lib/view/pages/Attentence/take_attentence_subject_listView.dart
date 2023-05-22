@@ -30,7 +30,7 @@ class TakeAttentenceSubjectWise extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Subject'),backgroundColor: adminePrimayColor,
+        title:  Text('Select Subject'.tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(

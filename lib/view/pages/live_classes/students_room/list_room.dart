@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/model/live_room_model/live_room_model.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/pages/live_classes/students_room/join_meet.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class StudentsRoomListScreen extends StatelessWidget {
   const StudentsRoomListScreen({super.key});
@@ -10,7 +13,6 @@ class StudentsRoomListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -32,7 +34,21 @@ class StudentsRoomListScreen extends StatelessWidget {
             } else {
               return ListView.separated(
                   itemBuilder: (context, index) {
-                    return Container();
+                    final data = LiveRoomModel.fromJson(
+                        snapshot.data!.docs[index].data());
+                    return SizedBox(
+                        height: 100,
+                        child: data.activateLive == true
+                            ? IconButton(
+                                onPressed: () async {
+                                  Get.to(StudentLiveClassRoom(
+                                      studentName: UserCredentialsController
+                                          .studentModel!.studentName,
+                                      docId: data.docid,
+                                      roomID: data.roomID));
+                                },
+                                icon: const Icon(Icons.join_full))
+                            : const Text(''));
                   },
                   separatorBuilder: (context, index) {
                     return const Divider();

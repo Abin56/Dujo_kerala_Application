@@ -1,4 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
+import 'dart:developer';
+
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_acc/student_accessories.dart';
@@ -7,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../sruthi/User Edit Profile/user_edit_profile.dart';
+import 'Student Edit Profile/user_edit_profile.dart';
 
 class StudentHomeScreen extends StatefulWidget {
   static String routeName = '';
@@ -52,12 +54,16 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.to(const UserEditPage());
+                                Get.to(const StudentProfileEditPage());
                               },
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
                                     UserCredentialsController
                                         .studentModel!.profileImageUrl),
+                                onBackgroundImageError:
+                                    (exception, stackTrace) {
+                                  log(exception.toString());
+                                },
                                 radius: 50.r,
                               ),
                             ),

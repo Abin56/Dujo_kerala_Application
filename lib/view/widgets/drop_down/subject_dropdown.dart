@@ -48,8 +48,8 @@ class _GeClasseslListDropDownButtonState
           if (snapshot.hasData) {
             return DropdownButtonFormField(
               hint: subjectListValue == null
-                  ? const Text(
-                      "Select subject",
+                  ?  Text(
+                      "Select subject".tr,
                       style: TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
                     )

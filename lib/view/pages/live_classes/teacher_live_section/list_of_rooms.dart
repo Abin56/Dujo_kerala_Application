@@ -54,10 +54,11 @@ class ListofRoomsScreen extends StatelessWidget {
                             text: 'Room ID : ${data.roomID}', fontsize: 20),
                         TextButton.icon(
                             onPressed: () async {
-                       
-                            
-                              Get.to(  LiveClassRoom(roomID: data.roomID,docId: data.docid,teacherName: data.ownerName,));
-                    
+                              Get.to(LiveClassRoom(
+                                roomID: data.roomID,
+                                docId: data.docid,
+                                teacherName: data.ownerName,
+                              ));
                             },
                             icon: const Icon(Icons.flash_on_outlined),
                             label: const Text('Start Live'))

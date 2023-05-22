@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../model/teacher_model/progress_report_model/progress_report_model.dart';
@@ -49,6 +51,9 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
               UploadProgressReportModel data =
                   UploadProgressReportModel.fromMap(snapshot.data!.data()!);
               return Scaffold(
+                  appBar: AppBar(
+        title:  Text("Progress Report".tr),backgroundColor: adminePrimayColor,
+      ),
                 body: SafeArea(
                     child: SizedBox(
                   height: double.maxFinite,

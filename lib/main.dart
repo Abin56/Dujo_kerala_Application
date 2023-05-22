@@ -18,8 +18,8 @@ Future<void> main() async {
   );
   await ScreenUtil.ensureScreenSize();
   //creating shared preference
-  await SharedPreferencesHelper.initPrefs(); 
-   ScreenUtil.ensureScreenSize();
+  await SharedPreferencesHelper.initPrefs();
+  ScreenUtil.ensureScreenSize();
 
   runApp(const MyApp());
 }
@@ -34,10 +34,11 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(423.5294196844927, 945.8823706287004),
         builder: (context, child) {
+      
           return BlocProvider(
               create: (context) => AuthCubit(),
               child: GetMaterialApp(
-                  translations: GetxLanguage(),
+                translations: GetxLanguage(),
                 locale: const Locale('en', 'US'),
                 debugShowCheckedModeBanner: false,
                 home: BlocBuilder<AuthCubit, AuthState>(
@@ -46,14 +47,13 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return  SelectLanguage();
+                      return SelectLanguage();
                     } else if (state is AuthLoggedOutState) {
-                      return  SelectLanguage();
+                      return SelectLanguage();
                     }
-                    return  SelectLanguage();
+                    return SelectLanguage();
                   },
                 ),
-
               ));
         });
   }

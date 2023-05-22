@@ -51,9 +51,9 @@ class TeachersSignUpPage extends StatelessWidget {
                 Row(
                   children: [
                     ContainerImage(
-                        height: 100.h,
+                        height: 70.h,
                         width: 100.w,
-                        imagePath: 'assets/images/leptonlogo.png'),
+                        imagePath: 'assets/images/leptonlogo2.png'),
                     GoogleMonstserratWidgets(
                       text: 'Lepton Dujo',
                       fontsize: 20,
@@ -64,14 +64,14 @@ class TeachersSignUpPage extends StatelessWidget {
                 GooglePoppinsWidgets(
                   fontsize: 20,
                   fontWeight: FontWeight.w400,
-                  text: 'Welcome..',
+                  text: 'Welcome..'.tr,
                 ),
                 kHeight20,
                 Center(
                   child: GooglePoppinsWidgets(
                     fontsize: 24,
                     fontWeight: FontWeight.w600,
-                    text: 'Sign up',
+                    text: 'Sign up'.tr,
                   ),
                 ),
                 kHeight10,
@@ -79,7 +79,7 @@ class TeachersSignUpPage extends StatelessWidget {
                   child: GooglePoppinsWidgets(
                     fontsize: 20,
                     fontWeight: FontWeight.w300,
-                    text: 'Personal Data',
+                    text: 'Personal Data'.tr,
                   ),
                 ),
               ],
@@ -134,7 +134,7 @@ class TeachersSignUpPage extends StatelessWidget {
                   ),
                   kWidth30,
                   SinUpTextFromFiled(
-                    text: "Your Name",
+                    text: "Your Name".tr,
                     hintText:
                         UserCredentialsController.teacherModel!.teacherName ??
                             "",
@@ -147,21 +147,23 @@ class TeachersSignUpPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GooglePoppinsWidgets(
-                          text: "Gender",
+                          text: "Gender".tr,
                           fontsize: 14,
                           fontWeight: FontWeight.w300,
                         ),
                         kWidth30,
-                        SizedBox(
-                          width: 330.w,
-                          child: DropdownSearch<String>(
-                            selectedItem: 'Select Gender',
-                            validator: (v) =>
-                                v == null ? "required field" : null,
-                            items: const ['Male', 'Female', 'Others'],
-                            onChanged: (val) {
-                              teacherController.gender = val;
-                            },
+                        Flexible(
+                          child: SizedBox(
+                            width: 330.w,
+                            child: DropdownSearch<String>(
+                              selectedItem: 'Select Gender'.tr,
+                              validator: (v) =>
+                                  v == null ? "required field" : null,
+                              items:  ['Male'.tr, 'Female'.tr, 'Others'.tr],
+                              onChanged: (val) {
+                                teacherController.gender = val;
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -169,34 +171,34 @@ class TeachersSignUpPage extends StatelessWidget {
                   ),
                   kHeight30,
                   SinUpTextFromFiled(
-                    text: 'House Name',
-                    hintText: 'Enter your House Name',
+                    text: 'House Name'.tr,
+                    hintText: 'Enter your House Name'.tr,
                     textfromController: teacherController.houseNameController,
                     validator: checkFieldEmpty,
                   ),
                   SinUpTextFromFiled(
                     keyboardType: TextInputType.number,
-                    text: 'House Number',
-                    hintText: 'Enter your House Number',
+                    text: 'House Number'.tr,
+                    hintText: 'Enter your House Number'.tr,
                     textfromController: teacherController.houseNumberController,
                     validator: checkFieldEmpty,
                   ),
                   SinUpTextFromFiled(
-                    text: 'Place',
-                    hintText: 'Enter your Place',
+                    text: 'Place'.tr,
+                    hintText: 'Enter your Place'.tr,
                     textfromController: teacherController.placeController,
                     validator: checkFieldEmpty,
                   ),
                   SinUpTextFromFiled(
-                    text: 'District',
-                    hintText: 'Enter your District',
+                    text: 'District'.tr,
+                    hintText: 'Enter your District'.tr,
                     textfromController: teacherController.districtController,
                     validator: checkFieldEmpty,
                   ),
                   SinUpTextFromFiled(
                     keyboardType: TextInputType.number,
-                    text: ' Alternate Number',
-                    hintText: 'Alternate Number',
+                    text: ' Alternate Number'.tr,
+                    hintText: 'Alternate Number'.tr,
                     textfromController: teacherController.altPhoneNoController,
                     validator: checkFieldEmpty,
                   ),
@@ -219,7 +221,7 @@ class TeachersSignUpPage extends StatelessWidget {
                       child: Obx(() => teacherController.isLoading.value
                           ? circularProgressIndicatotWidget
                           : loginButtonWidget(
-                              height: 60, width: 180, text: 'Submit')),
+                              height: 60, width: 180, text: 'Submit'.tr)),
                     ),
                   ),
                 ],

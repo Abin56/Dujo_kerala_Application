@@ -93,29 +93,29 @@ class _ClassTeacherMainHomeScreenState
           rippleColor: Colors.grey,
           activeColor: Colors.white,
           color: Colors.white,
-          tabs: const [
+          tabs:  [
             GButton(
                 iconSize: 20,
                 icon: LineIcons.home,
-                text: 'Home',
+                text: 'Home'.tr,
                 style: GnavStyle.google),
             GButton(
               iconSize: 20,
               textSize: 9,
               icon: Icons.tv,
-              text: 'ReC_Classes',
+              text: 'ReC_Classes'.tr,
             ),
             GButton(
               iconSize: 20,
               // iconSize: 10,
               textSize: 12,
               icon: Icons.laptop,
-              text: 'Live Classes',
+              text: 'Live Classes'.tr,
             ),
             GButton(
               iconSize: 20,
               icon: Icons.live_tv_sharp,
-              text: 'Profile',
+              text: 'Profile'.tr,
             )
           ],
           selectedIndex: _page,

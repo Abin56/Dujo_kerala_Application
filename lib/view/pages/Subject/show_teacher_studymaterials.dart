@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/Subject/student/pf.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../sruthi/Subject 2/subject_chapterwise_display.dart'; 
+import '../../../sruthi/Subject 2/subject_chapterwise_display.dart';
+import '../pdf_viewer/pdf_viewer.dart'; 
 
 
 class StudyMaterials extends StatelessWidget {
@@ -111,7 +111,7 @@ class StudyMaterials extends StatelessWidget {
                                   //  PDFSectionScreen()
                                   //PDFSectionScreen(urlPdf: 'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fstudymaterials%2FEnglish%2FJohny%20Johny%2Ffab221c0-f545-11ed-829a-11b8e7490871?alt=media&token=21f0bd88-b03e-41fd-8267-8a013aa3e80d',) 
 
-                                  PF()
+                                  PDFSectionScreen(urlPdf: 'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2Fstudymaterials%2FEnglish%20%2FTwinkle%20Twinkle%20%2F42725b60-f546-11ed-829a-11b8e7490871?alt=media&token=26fc75c8-8a39-4a24-8f30-804bf3d41a3b',)
                                   ));
                                   },                                                    
                                 ),
