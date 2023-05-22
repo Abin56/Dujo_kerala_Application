@@ -27,6 +27,7 @@ class AddExamTimeTableController extends GetxController {
     final x = getTimeDifferences.inMinutes;
     final y = getTimeDifferences.inHours;
     final data = AddExamTimeTableModel(
+      createDate: DateTime.now().toString(),
         docid: docids,
         subject: subject,
         startingtime: fromTime,

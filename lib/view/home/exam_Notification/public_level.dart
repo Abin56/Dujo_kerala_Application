@@ -36,7 +36,7 @@ class PublicLevel extends StatelessWidget {
                             snaps.data!.docs[index].data());
                         return GestureDetector(
                           onTap: () {
-                            Get.to(ExamTimeTableViewScreen(
+                            Get.to(TeacherExamTimeTableViewScreen(
                                 examID: data.docid,
                                 collectionName: 'Public Level',
                                 date: stringTimeToDateConvert(data.publishDate),
@@ -62,13 +62,4 @@ class PublicLevel extends StatelessWidget {
   }
 }
 
-const containerColor = [
-  Colors.blue,
-  Colors.green,
-  Colors.yellow,
-  Colors.orange,
-  Colors.pink,
-  Colors.purple,
-  Colors.grey,
-  Colors.black
-];
+

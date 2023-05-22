@@ -1,15 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/model/exam_list_model/exam_list.model.dart';
+import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_list_view/user_exam_list_view.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/userCredentials/user_credentials.dart';
-import '../../../model/exam_list_model/exam_list.model.dart';
-import '../../constant/sizes/constant.dart';
-import 'list_of_exam/time_table_view.dart';
+import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../constant/sizes/constant.dart';
+import '../list_of_exam/time_table_view.dart';
 
-class StateLevel extends StatelessWidget {
-  const StateLevel({super.key});
+
+
+class UserStateLevel extends StatelessWidget {
+  const UserStateLevel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class StateLevel extends StatelessWidget {
                             snaps.data!.docs[index].data());
                         return GestureDetector(
                           onTap: () {
-                            Get.to(TeacherExamTimeTableViewScreen(
+                            Get.to(UsersExamTimeTableViewScreen(
                                 examID: data.docid,
                                 collectionName: 'State Level',
                                 date: stringTimeToDateConvert(data.publishDate),

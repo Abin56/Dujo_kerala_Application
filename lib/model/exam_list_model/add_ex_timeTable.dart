@@ -9,6 +9,7 @@ class AddExamTimeTableModel {
   dynamic endingtime;
   dynamic hours;
   String examDate;
+  String createDate;
   AddExamTimeTableModel({
     required this.docid,
     required this.subject,
@@ -16,8 +17,9 @@ class AddExamTimeTableModel {
     required this.endingtime,
     required this.hours,
     required this.examDate,
+    required this.createDate,
   });
-  
+
 
   AddExamTimeTableModel copyWith({
     String? docid,
@@ -26,6 +28,7 @@ class AddExamTimeTableModel {
     dynamic? endingtime,
     dynamic? hours,
     String? examDate,
+    String? createDate,
   }) {
     return AddExamTimeTableModel(
       docid: docid ?? this.docid,
@@ -34,6 +37,7 @@ class AddExamTimeTableModel {
       endingtime: endingtime ?? this.endingtime,
       hours: hours ?? this.hours,
       examDate: examDate ?? this.examDate,
+      createDate: createDate ?? this.createDate,
     );
   }
 
@@ -45,6 +49,7 @@ class AddExamTimeTableModel {
       'endingtime': endingtime,
       'hours': hours,
       'examDate': examDate,
+      'createDate': createDate,
     };
   }
 
@@ -56,6 +61,7 @@ class AddExamTimeTableModel {
       endingtime: map['endingtime'] as dynamic,
       hours: map['hours'] as dynamic,
       examDate: map['examDate'] as String,
+      createDate: map['createDate'] as String,
     );
   }
 
@@ -65,7 +71,7 @@ class AddExamTimeTableModel {
 
   @override
   String toString() {
-    return 'AddExamTimeTableModel(docid: $docid, subject: $subject, startingtime: $startingtime, endingtime: $endingtime, hours: $hours, examDate: $examDate)';
+    return 'AddExamTimeTableModel(docid: $docid, subject: $subject, startingtime: $startingtime, endingtime: $endingtime, hours: $hours, examDate: $examDate, createDate: $createDate)';
   }
 
   @override
@@ -78,7 +84,8 @@ class AddExamTimeTableModel {
       other.startingtime == startingtime &&
       other.endingtime == endingtime &&
       other.hours == hours &&
-      other.examDate == examDate;
+      other.examDate == examDate &&
+      other.createDate == createDate;
   }
 
   @override
@@ -88,6 +95,7 @@ class AddExamTimeTableModel {
       startingtime.hashCode ^
       endingtime.hashCode ^
       hours.hashCode ^
-      examDate.hashCode;
+      examDate.hashCode ^
+      createDate.hashCode;
   }
 }

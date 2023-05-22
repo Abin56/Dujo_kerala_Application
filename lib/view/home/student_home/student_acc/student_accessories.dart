@@ -3,7 +3,6 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/sruthi/Exam%20Notification/Teacher_Upload/exm_teacher_upload.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +17,7 @@ import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
-import '../../general_instructions/general_instructions.dart';
+import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../time_table/time_table_display.dart';
 
 class StudentAccessories extends StatelessWidget {
@@ -37,7 +36,7 @@ class StudentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
 
-      const ExmNotification(), //Exam
+       const UserExmNotifications(), //Exam
       const StudentShowTimeTable(), //Time Table
       const ViewHomeWorks(), // Home Works
       NoticePage(), //Notice
