@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AuthCubit(),
               child: GetMaterialApp(
                 translations: GetxLanguage(),
-                locale: const Locale('en', 'US'),
+                locale: const Locale('en', 'US'),     
                 debugShowCheckedModeBanner: false,
                 home: BlocBuilder<AuthCubit, AuthState>(
                   buildWhen: (oldState, newState) {

@@ -88,14 +88,22 @@ class _ClassTeacherMainHomeScreenState
             ],
           ),
         ),
-        child: GNav(
-          gap: 8,
-          rippleColor: Colors.grey,
-          activeColor: Colors.white,
-          color: Colors.white,
-          tabs:  [
-            GButton(
+        child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+          child: GNav(
+            gap: 8,
+            rippleColor: Colors.grey,
+            activeColor: Colors.white,
+            color: Colors.white,
+            tabs:  [
+              GButton(
+                  iconSize: 20,
+                  icon: LineIcons.home,
+                  text: 'Home'.tr,
+                  style: GnavStyle.google),
+              GButton(
                 iconSize: 20,
+<<<<<<< HEAD
                 icon: LineIcons.home,
                 text: 'Home'.tr,
                 style: GnavStyle.google),
@@ -122,6 +130,30 @@ class _ClassTeacherMainHomeScreenState
           onTabChange: (value) {
             onPageChanged(value);
           },
+=======
+                textSize: 9,
+                icon: Icons.tv,
+                text: 'Recorded Classes'.tr,
+              ),
+              GButton(
+                iconSize: 20,
+                // iconSize: 10,
+                textSize: 12,
+                icon: Icons.laptop,
+                text: 'Live Classes'.tr,
+              ),
+              GButton(
+                iconSize: 20,
+                icon: Icons.live_tv_sharp,
+                text: 'Chat gpt'.tr,
+              )
+            ],
+            selectedIndex: _page,
+            onTabChange: (value) {
+              onPageChanged(value);
+            },
+          ),
+>>>>>>> 42c5f6f377de97f8801553fbcbc781566398ef2e
         ),
       ),
       drawer: Drawer(

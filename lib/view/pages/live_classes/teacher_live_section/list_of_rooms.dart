@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../constant/sizes/sizes.dart';
+import '../../../widgets/fonts/google_poppins.dart';
 
 class ListofRoomsScreen extends StatelessWidget {
   const ListofRoomsScreen({super.key});
@@ -36,35 +38,95 @@ class ListofRoomsScreen extends StatelessWidget {
                   final data =
                       LiveRoomModel.fromJson(snapshot.data!.docs[index].data());
                   return Container(
-                    color: const Color.fromARGB(255, 199, 196, 196),
                     height: 200,
+                    color: Colors.grey.withOpacity(0.3),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         GoogleMonstserratWidgets(
-                            text: data.scheduleTime, fontsize: 20),
-                        GoogleMonstserratWidgets(
-                            text: 'Room Name : ${data.roomName}', fontsize: 20),
-                        GoogleMonstserratWidgets(
-                            text: 'Time ${data.scheduleTime}', fontsize: 20),
-                        GoogleMonstserratWidgets(
-                            text: 'Creator : ${data.ownerName}', fontsize: 20),
-                        GoogleMonstserratWidgets(
-                            text: data.scheduleTime, fontsize: 20),
-                        GoogleMonstserratWidgets(
-                            text: 'Room ID : ${data.roomID}', fontsize: 20),
-                        TextButton.icon(
-                            onPressed: () async {
-                              Get.to(LiveClassRoom(
-                                roomID: data.roomID,
-                                docId: data.docid,
-                                teacherName: data.ownerName,
-                              ));
-                            },
-                            icon: const Icon(Icons.flash_on_outlined),
-                            label: const Text('Start Live'))
+                          text: data.roomName,
+                          fontsize: 20,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                        ),
+                        kHeight10,
+                        Row(
+                          children: [
+                            GooglePoppinsWidgets(
+                              text: '   Assign Teacher :  ',
+                              fontsize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            GoogleMonstserratWidgets(
+                              text: ' ${data.ownerName}',
+                              fontsize: 16,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            GooglePoppinsWidgets(
+                              text: '   Room ID :',
+                              fontsize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            GoogleMonstserratWidgets(
+                              text: ' ${data.roomID}',
+                              fontsize: 16,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            GooglePoppinsWidgets(
+                              text: '   ScheduleTime : ',
+                              fontsize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            GoogleMonstserratWidgets(
+                              text: ' ${data.scheduleTime}',
+                              fontsize: 16,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () async {
+                                  Get.to(LiveClassRoom(
+                                      teacherName: data.ownerName,
+                                      docId: data.docid,
+                                      roomID: data.roomID));
+                                },
+                                child: Container(
+                                  color: Colors.green,
+                                  height: 40,
+                                  width: 200,
+                                  child: Center(
+                                    child: GoogleMonstserratWidgets(
+                                      text: 'Start Live',
+                                      fontsize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   );
+                  return null;
                 },
                 separatorBuilder: (context, index) {
                   return const Divider();

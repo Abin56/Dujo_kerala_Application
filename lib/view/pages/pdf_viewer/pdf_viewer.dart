@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_viewer_flutter/pdf_viewer_flutter.dart';
-
 
 class PDFSectionScreen extends StatefulWidget {
   var urlPdf;
@@ -16,7 +16,6 @@ class PDFSectionScreen extends StatefulWidget {
 }
 
 class _PDFSectionScreenState extends State<PDFSectionScreen> {
-  
   String _pefFilePath = "";
 
   @override
@@ -45,7 +44,6 @@ class _PDFSectionScreenState extends State<PDFSectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log(widget.urlPdf);
     routingPDfPage(context);
     return const Scaffold(
       body: Center(
@@ -57,7 +55,6 @@ class _PDFSectionScreenState extends State<PDFSectionScreen> {
 
   routingPDfPage(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 1));
-
 
     // ignore: use_build_context_synchronously
     Navigator.of(context).push(MaterialPageRoute(
@@ -78,7 +75,7 @@ class PDFViewerScreen extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-               Navigator.pop(context);
+                Get.back();
               },
               icon: const Icon(Icons.arrow_back)),
           title: const Text("PDF Document"),
