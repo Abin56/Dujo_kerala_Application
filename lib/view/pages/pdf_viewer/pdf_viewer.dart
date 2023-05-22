@@ -45,11 +45,13 @@ class _PDFSectionScreenState extends State<PDFSectionScreen> {
   @override
   Widget build(BuildContext context) {
     routingPDfPage(context);
-    return const Scaffold(
-      body: Center(
-          child: CircularProgressIndicator(
-        color: Colors.red,
-      )),
+    return const SafeArea(
+      child: Scaffold(
+        body: Center(
+            child: CircularProgressIndicator(
+          color: Colors.red,
+        )),
+      ),
     );
   }
 

@@ -55,7 +55,7 @@ class ChapterDisplay extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    if(UserCredentialsController.userRole == 'teacher' || UserCredentialsController.userRole == 'classTeacher'){
+                    if(UserCredentialsController.userRole == 'teacher'){
                       Navigator.push(
                         context,
                         MaterialPageRoute(

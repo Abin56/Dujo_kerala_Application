@@ -40,6 +40,7 @@ class ClickOnClasss extends StatelessWidget {
         body: SchoolLevelNoticePage(),
       ),
       // Notice
+      TeacherSubjectHome(),
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
@@ -313,6 +314,7 @@ List<String> _acc_text = [
   'Exams'.tr,
   'TimeTable'.tr,
   'Notices'.tr,
+  'Subjects'.tr,
   'Events'.tr,
   'Meetings'.tr,
 ];
@@ -321,6 +323,7 @@ var _acc_images = [
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/school_building.png',
+  'assets/images/subjects.png',
   'assets/images/activity.png',
   'assets/images/teachers.png',
 ];
