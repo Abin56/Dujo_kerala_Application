@@ -10,7 +10,7 @@ import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
 
 class AddExamTimeTableController extends GetxController {
-  uploadSubject(
+  Future<void>uploadSubject(
       String collectionName,
       String examdocID,
       String subject,
@@ -53,7 +53,7 @@ class AddExamTimeTableController extends GetxController {
         .doc(docids)
         .set(data.toMap())
         .then((value) {
-      showToast(msg: 'Added Subject');
+      showToast(msg: '');
       Navigator.pop(context);
     });
   }

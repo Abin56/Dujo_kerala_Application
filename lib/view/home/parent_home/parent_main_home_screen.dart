@@ -91,7 +91,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
               GButton(
                 iconSize: 20,
                 icon: Icons.chat,
-                text: 'Chat gpt'.tr,
+                text: 'Chat With bot'.tr,
               )
             ],
             selectedIndex: _page,

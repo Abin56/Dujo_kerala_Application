@@ -44,7 +44,7 @@ class AddTimeTable extends StatelessWidget {
                 child: SizedBox(
                   height: 80.h,
                   width: 250.w,
-                  child:  Center(child: GooglePoppinsWidgets(text: 'View TimeTabel', fontsize: 15.w,color: cWhite,),)),
+                  child:  Center(child: GooglePoppinsWidgets(text: 'View TimeTable', fontsize: 15.w,color: cWhite,),)),
                 ),
             ),
           ],
