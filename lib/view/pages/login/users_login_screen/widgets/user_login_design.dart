@@ -34,7 +34,7 @@ class UserLoginDesgin extends StatelessWidget {
             child: Container(
               child: GooglePoppinsWidgets(
                 fontsize: 23,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w500, 
                 text: 'Select Who You Are ?'.tr,
               ),
               
