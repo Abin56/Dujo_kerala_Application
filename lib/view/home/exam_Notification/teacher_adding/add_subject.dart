@@ -1,9 +1,12 @@
 
+import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/list_of_exam/list_of_exam.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/fonts/google_poppins.dart';
 import '../exam_time_table.dart';
 
 class AddTimeTable extends StatelessWidget {
@@ -12,30 +15,37 @@ class AddTimeTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+          backgroundColor: adminePrimayColor,title: const Text('Exam TimeTable'),),
       body: SafeArea(
           child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+        
           children: [
             GestureDetector(
               onTap: () {
                 Get.to(const ViewSchoolExamScreen());
               },
-              child: SizedBox(
-                height: 50.h,
-                width: 130.w,
-                child: const Text('Upload Time tabel'),
+              child: Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: adminePrimayColor),
+                child: SizedBox(
+                  height: 80.h,
+                  width: 250.w,
+                  child:  Center(child: GooglePoppinsWidgets(text: 'Upload TimeTabel', fontsize: 15.w,color: cWhite,),)),
+                ),
               ),
-            ),
+            kHeight30,
             GestureDetector(
               onTap: () {
                    Get.to(const ExmNotifications());
               },
-              child: SizedBox(
-                height: 50.h,
-                width: 130.w,
-                child: const Text('View Time Table'),
-              ),
+              child:  Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: adminePrimayColor),
+                child: SizedBox(
+                  height: 80.h,
+                  width: 250.w,
+                  child:  Center(child: GooglePoppinsWidgets(text: 'View TimeTabel', fontsize: 15.w,color: cWhite,),)),
+                ),
             ),
           ],
         ),

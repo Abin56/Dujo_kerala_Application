@@ -159,7 +159,7 @@ class TeachersSignUpPage extends StatelessWidget {
                               selectedItem: 'Select Gender'.tr,
                               validator: (v) =>
                                   v == null ? "required field" : null,
-                              items:  ['Male'.tr, 'Female'.tr, 'Others'.tr],
+                              items:  ['Male', 'Female', 'Others'],
                               onChanged: (val) {
                                 teacherController.gender = val;
                               },

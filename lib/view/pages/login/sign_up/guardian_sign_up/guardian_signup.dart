@@ -150,7 +150,7 @@ class GuardianSignUp extends StatelessWidget {
                                 selectedItem: 'Select Gender'.tr,
                                 validator: (v) =>
                                     v == null ? "required field" : null,
-                                items:  ['Male'.tr, 'Female'.tr, 'Others'.tr],
+                                items:  ['Male', 'Female', 'Others'],
                                 onChanged: (value) {
                                   guardianSignUpController.gender = value;
                                 },

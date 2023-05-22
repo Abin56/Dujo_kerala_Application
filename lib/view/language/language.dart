@@ -94,9 +94,7 @@ class GetxLanguage extends Translations {
 'Enter your Name':'നിങ്ങളുടെ പേര് നൽകുക',
 'Gender':'ജെൻഡർ ',
 'Select Gender':'സെലക്ട് ജെൻഡർ',
-'Male':'ആൺ',
-'Female':'സ്ത്രീ',
-'Others':'മറ്റുള്ളവ',
+
 'House Name':'വീടിന്റെ പേര്',
 'Enter your House Name':'നിങ്ങളുടെ വീടിന്റെ പേര് നൽകുക',
 'House Number':'House Number',
