@@ -257,12 +257,16 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
                               .then((value) => Get.back());
                         },
                         child: Container(
-                          height: 64,
-                          color: Colors.red,
-                          child:Center(
-                            child: GooglePoppinsWidgets(text: 'End This Live Room', fontsize: 16,color: Colors.white,fontWeight: FontWeight.w400,),
-                          )
-                        ),
+                            height: 64,
+                            color: Colors.red,
+                            child: Center(
+                              child: GooglePoppinsWidgets(
+                                text: 'End This Live Room',
+                                fontsize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )),
                       ),
                     );
                   } else {
@@ -350,41 +354,41 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
       featureFlags[FeatureFlagEnum.CALL_INTEGRATION_ENABLED] = false;
     }
     // Define meetings options here
-    var options = JitsiMeetingOptions(room: roomText.text)
-      ..serverURL = serverUrl
-      ..subject = subjectText.text
-      ..userDisplayName = nameText.text
-      ..userEmail = emailText.text
-      ..iosAppBarRGBAColor = iosAppBarRGBAColor.text
-      ..audioOnly = isAudioOnly
-      ..audioMuted = isAudioMuted
-      ..videoMuted = isVideoMuted
-      ..featureFlags?.addAll(featureFlags)
-      ..webOptions = {
-        "roomName": roomText.text,
-        "width": "100%",
-        "height": "100%",
-        "enableWelcomePage": false,
-        "enableNoAudioDetection": true,
-        "enableNoisyMicDetection": true,
-        "enableClosePage": false,
-        "prejoinPageEnabled": false,
-        "hideConferenceTimer": true,
-        "disableInviteFunctions": true,
-        "chromeExtensionBanner": null,
-        "configOverwrite": {
-          "prejoinPageEnabled": false,
-          "disableDeepLinking": true,
-          "enableLobbyChat": false,
-          "enableClosePage": false,
-          "toolbarButtons": [
-            "microphone",
-            "camera",
-            "hangup",
-          ]
-        },
-        "userInfo": {"email": emailText.text, "displayName": nameText.text}
-      };
+    var options = JitsiMeetingOptions(room: roomText.text);
+    // ..serverURL = serverUrl
+    // ..subject = subjectText.text
+    // ..userDisplayName = nameText.text
+    // ..userEmail = emailText.text
+    // ..iosAppBarRGBAColor = iosAppBarRGBAColor.text
+    // ..audioOnly = isAudioOnly
+    // ..audioMuted = isAudioMuted
+    // ..videoMuted = isVideoMuted
+    // ..featureFlags?.addAll(featureFlags)
+    // ..webOptions = {
+    //   "roomName": roomText.text,
+    //   "width": "100%",
+    //   "height": "100%",
+    //   "enableWelcomePage": false,
+    //   "enableNoAudioDetection": true,
+    //   "enableNoisyMicDetection": true,
+    //   "enableClosePage": false,
+    //   "prejoinPageEnabled": false,
+    //   "hideConferenceTimer": true,
+    //   "disableInviteFunctions": true,
+    //   "chromeExtensionBanner": null,
+    //   "configOverwrite": {
+    //     "prejoinPageEnabled": false,
+    //     "disableDeepLinking": true,
+    //     "enableLobbyChat": false,
+    //     "enableClosePage": false,
+    //     "toolbarButtons": [
+    //       "microphone",
+    //       "camera",
+    //       "hangup",
+    //     ]
+    //   },
+    //   "userInfo": {"email": emailText.text, "displayName": nameText.text}
+    // };
 
     await JitsiMeet.joinMeeting(
       options,

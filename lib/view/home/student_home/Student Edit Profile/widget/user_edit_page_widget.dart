@@ -61,16 +61,16 @@ class UserEditListileWidget extends StatelessWidget {
                                 controller: emailController,
                                 decoration: const InputDecoration(
                                     hintText: "Enter new email address"),
-                                onChanged: (value) {
-                                  if (_formKey.currentState!.validate()) {
-                                    changeEmail(emailController.text,context);
-                                  }
-                                },
                               ),
                               actions: [
                                 TextButton(
                                   child: const Text("Update"),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      changeEmail(
+                                          emailController.text, context);
+                                    }
+                                  },
                                 ),
                               ],
                             ),

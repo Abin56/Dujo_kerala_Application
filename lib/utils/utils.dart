@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,7 +15,7 @@ void showToast({required String msg}) {
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.red,
-    textColor: Colors.white,  
+    textColor: Colors.white,
     fontSize: 16.0,
   );
 }
@@ -45,21 +43,21 @@ Future<void> userLogOut(BuildContext context) async {
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title:  Text('Logout'.tr),
+        title: Text('Logout'.tr),
         content: SingleChildScrollView(
           child: ListBody(
-            children:  <Widget>[Text('Are you sure to Logout ?'.tr)],
+            children: <Widget>[Text('Are you sure to Logout ?'.tr)],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child:  Text('Cancel'.tr),
+            child: Text('Cancel'.tr),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child:  Text('Ok'.tr),
+            child: Text('Ok'.tr),
             onPressed: () async {
               await FirebaseAuth.instance.signOut().then((value) async {
                 await SharedPreferencesHelper.clearSharedPreferenceData();
@@ -96,14 +94,43 @@ void handleFirebaseError(FirebaseAuthException error) {
 
 Future<void> changeEmail(String newEmail, BuildContext context) async {
   try {
-    FirebaseAuth.instance.currentUser?.updateEmail(newEmail).then((value) {
-      showToast(msg: "Successfully Updated");
-      Navigator.pop(context);
-    }).onError((error, stackTrace) {
-      log(error.toString());
-      showToast(msg: "Something Went Wrong");
+    await FirebaseAuth.instance.currentUser?.verifyBeforeUpdateEmail(newEmail);
+    await FirebaseAuth.instance.signOut().then((value) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const DujoLoginScren();
+      }));
     });
-  } catch (e) {
-    log(e.toString());
+  } on FirebaseAuthException catch (e) {
+    String errorMessage = '';
+
+    switch (e.code) {
+      case 'requires-recent-login':
+        errorMessage =
+            'This action requires recent authentication. Please log in again.';
+        break;
+      case 'email-already-in-use':
+        errorMessage =
+            'The email address is already in use by another account.';
+        break;
+      case 'invalid-email':
+        errorMessage = 'The email address is invalid.';
+        break;
+      case 'too-many-requests':
+        errorMessage = 'Too many requests. Please try again later.';
+        break;
+      case 'user-disabled':
+        errorMessage = 'The user account has been disabled.';
+        break;
+      case 'user-not-found':
+        errorMessage = 'The user account was not found.';
+        break;
+      case 'weak-password':
+        errorMessage = 'The password is too weak.';
+        break;
+      default:
+        errorMessage = 'An error occurred. Please try again.';
+    }
+
+    showToast(msg: errorMessage);
   }
 }
