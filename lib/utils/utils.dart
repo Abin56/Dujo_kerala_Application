@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -89,5 +91,19 @@ void handleFirebaseError(FirebaseAuthException error) {
     default:
       showToast(msg: 'Something went wrong');
       break;
+  }
+}
+
+Future<void> changeEmail(String newEmail, BuildContext context) async {
+  try {
+    FirebaseAuth.instance.currentUser?.updateEmail(newEmail).then((value) {
+      showToast(msg: "Successfully Updated");
+      Navigator.pop(context);
+    }).onError((error, stackTrace) {
+      log(error.toString());
+      showToast(msg: "Something Went Wrong");
+    });
+  } catch (e) {
+    log(e.toString());
   }
 }

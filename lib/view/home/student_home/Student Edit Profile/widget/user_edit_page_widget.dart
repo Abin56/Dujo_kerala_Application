@@ -1,16 +1,18 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
+import '../../../../../utils/utils.dart';
 
 class UserEditListileWidget extends StatelessWidget {
   final Widget title;
   final Widget subtitle;
   final IconData icon;
   final IconData? editicon;
+  final _formKey = GlobalKey<FormState>();
   String newEmail = "";
+
   UserEditListileWidget({
     super.key,
     required this.title,
@@ -48,25 +50,30 @@ class UserEditListileWidget extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text("Update Mail"),
-                            content: TextField(
-                              decoration: const InputDecoration(
-                                  hintText: "Enter new email address"),
-                              onChanged: (value) {
-                                newEmail = value;
-                              },
-                            ),
-                            actions: [
-                              TextButton(
-                                child: const Text("Update"),
-                                onPressed: () {
-                                  Get.to(UnderMaintanceScreen(
-                                    text: "",
-                                  ));
+                          final TextEditingController emailController =
+                              TextEditingController();
+                          return Form(
+                            key: _formKey,
+                            child: AlertDialog(
+                              title: const Text("Update Mail"),
+                              content: TextFormField(
+                                validator: checkFieldEmailIsValid,
+                                controller: emailController,
+                                decoration: const InputDecoration(
+                                    hintText: "Enter new email address"),
+                                onChanged: (value) {
+                                  if (_formKey.currentState!.validate()) {
+                                    changeEmail(emailController.text,context);
+                                  }
                                 },
                               ),
-                            ],
+                              actions: [
+                                TextButton(
+                                  child: const Text("Update"),
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
                           );
                         },
                       );
