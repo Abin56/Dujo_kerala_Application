@@ -128,7 +128,7 @@ class UsersLoginScreen extends StatelessWidget {
     );
   }
 
-  List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
+  List<String> userList = ['Student'.tr, 'Parent'.tr, 'Guardian'.tr, 'Teacher'.tr];
 }
 
 var icons = [
@@ -160,7 +160,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
             width: 200.w,
             child: Center(
               child: GoogleMonstserratWidgets(
-                text: 'Teacher',
+                text: 'Teacher'.tr,
                 letterSpacing: 1,
                 fontsize: 20,
                 fontWeight: FontWeight.w500,
@@ -183,7 +183,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
             width: 200.w,
             child: Center(
               child: GoogleMonstserratWidgets(
-                text: 'Class Teacher',
+                text: 'Class Teacher'.tr,
                 fontsize: 19,
                 fontWeight: FontWeight.w600,
               ),
@@ -195,7 +195,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
   ));
 }
 
-List<String> userList = ['Student', 'Parent', 'Guardian', 'Teacher'];
+List<String> userList = ['Student'.tr, 'Parent'.tr, 'Guardian'.tr, 'Teacher'.tr];
 
 var iconss = [
   'assets/images/reading.png',

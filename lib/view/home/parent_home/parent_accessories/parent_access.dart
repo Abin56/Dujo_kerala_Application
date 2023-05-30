@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../../sruthi/Exam Notification/Teacher_Upload/exm_teacher_upload.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
@@ -15,6 +14,7 @@ import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../events/event_list.dart';
+import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../../student_home/time_table/time_table_display.dart';
 import '../progress_report/progress_report.dart';
 
@@ -33,7 +33,7 @@ class ParentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!),
       //Attendence
-      const ExmNotification(), // Exams
+       const UserExmNotifications(), // Exams
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.parentModel!.parentName!,
@@ -138,17 +138,17 @@ class ParentAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance',
-  'Exams',
-  'Leave Letter',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Sujects',
-  'Teachers',
-  'Meetings'
+  'Attendance'.tr,
+  'Exams'.tr,
+  'Leave Letter'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Teachers'.tr,
+  'Meetings'.tr
 ];
 var _acc_images = [
   'assets/images/attendance.png',

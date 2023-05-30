@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class SubjectChat extends StatelessWidget {
   const SubjectChat({super.key});
@@ -90,7 +91,7 @@ class SubjectChat extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Write message...",
+                          hintText: "Write message...".tr,
                           hintStyle: TextStyle(color: Colors.black54),
                           border: InputBorder.none),
                     ),

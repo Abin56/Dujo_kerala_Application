@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
-import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -15,8 +13,10 @@ import '../../colors/colors.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/view_home_work.dart';
+import '../../pages/Subject/teacher_display_subjects.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../events/Tabs/school_level_tab.dart';
+import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -30,20 +30,21 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
-      const ExamNotification(), //Exam
+            const UserExmNotifications(),  //Exam
       const StudentShowTimeTable(), //Time Table
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Notice"),
+          title:  Text("Notices".tr),
         ),
         body: SchoolLevelNoticePage(),
       ),
       // Notice
+      TeacherSubjectHome(),
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Events"),
+          title:  Text("Events".tr),
         ),
         body: const SchoolLevelPage(),
       ),
@@ -60,14 +61,14 @@ class ClickOnClasss extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
 
-      const ExamNotification(), //Exam
+      const UserExmNotifications(), //Exam
       const StudentShowTimeTable(), //TimeTable
       const ViewHomeWorks(), //Home Works
 
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Notice"),
+          title: const Text("Notices"),
         ),
         body: SchoolLevelNoticePage(),
       ),
@@ -76,7 +77,7 @@ class ClickOnClasss extends StatelessWidget {
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("School Events"),
+          title: const Text("Events"),
         ),
         body: const SchoolLevelPage(),
       ),
@@ -86,7 +87,7 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID,
           schooilID:
               UserCredentialsController.schoolId!), //Progress Report view
-      const UnderMaintanceScreen(text: ''), // Subjects
+       TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
     ];
@@ -121,7 +122,7 @@ class ClickOnClasss extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'You have no access in this class',
+                                'You have no access in this class'.tr,
                                 style: GoogleFonts.montserrat(
                                     color: Colors.black.withOpacity(0.8),
                                     fontSize: 18,
@@ -309,18 +310,20 @@ class ClickOnClasss extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance Book',
-  'Exams',
-  'TimeTable',
-  'Notices',
-  'Events',
-  'Meetings',
+  'Attendence Book'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'Notices'.tr,
+  'Subjects'.tr,
+  'Events'.tr,
+  'Meetings'.tr,
 ];
 var _acc_images = [
   'assets/images/classroom.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/school_building.png',
+  'assets/images/subjects.png',
   'assets/images/activity.png',
   'assets/images/teachers.png',
 ];
@@ -337,14 +340,14 @@ var hasDataImages = [
   'assets/images/teachers.png',
 ];
 List<String> hasDataText = [
-  'Take Attendance',
-  'Attendance Book',
-  'Exams',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Subjects',
-  'Meetings',
+  'Take Attendance'.tr,
+  'Attendence Book'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Meetings'.tr,
 ];

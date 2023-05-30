@@ -28,7 +28,7 @@ class AttendenceBookScreen extends StatelessWidget {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Attendence Book'),
+        title:  Text('Attendence Book'.tr),
         backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(

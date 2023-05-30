@@ -1,14 +1,22 @@
 // ignore_for_file: empty_catches, unused_element
 
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_list_view/user_exam_acc.dart';
+import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
+import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
+import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
-import '../general_instructions/general_instructions.dart';
 
 class StudentsHeaderDrawer extends StatelessWidget {
   const StudentsHeaderDrawer({Key? key}) : super(key: key);
@@ -18,15 +26,16 @@ class StudentsHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 250,
-      padding: const EdgeInsets.only(bottom: 20),
+      height: 270,
+      padding: EdgeInsets.only(bottom: 20, top: 15.h),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.spacearound,
         children: [
+          SizedBox(height: 30.h),
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 100,
-            width: 150,
+            height: 90.h,
+            width: 150.h,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -36,7 +45,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
             ),
           ),
           Text(
-            "DuJo App",
+            "Lepton DuJo",
             style: GoogleFonts.montserrat(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
           ),
@@ -54,7 +63,10 @@ class StudentsHeaderDrawer extends StatelessWidget {
             onPressed: () async {
               await userLogOut(context);
             },
-            child: const Text("Logout"),
+            child: Text(
+              "Logout".tr,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.h),
+            ),
           )
         ],
       ),
@@ -133,52 +145,61 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/attendance.png', 'Attendence',
+          MenuItem(1, 'assets/images/information.png', 'General Instructions',
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // Get.to(const PrivacyViewScreen());
+          Get.to(
+            () => GeneralInstruction(),
+          );
         }),
-        MenuItem(2, 'assets/images/exam.png', 'Exams',
-            currentPage == DrawerSections.favourites ? true : false, () {}),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable',
+        MenuItem(1, 'assets/images/attendance.png', 'Attendence'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+           Get.to(
+            () =>  AttendenceBookScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!),
+          );
+        }),
+        MenuItem(2, 'assets/images/exam.png', 'Exams'.tr,
+            currentPage == DrawerSections.favourites ? true : false, () {
+               Get.to(
+            () => const UserExmNotifications(),
+          );
+            }),
+        MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-          // termsAndConditions(context);
+          Get.to(
+            () => const StudentShowTimeTable(),
+          );
         }),
         // MenuItem(4, "Share", Icons.share,
         //     currentPage == DrawerSections.share ? true : false, () async {
         //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
         // }),
-        MenuItem(4, 'assets/images/homework.png', 'HomeWorks',
+        MenuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-          // contactus(context);
+          Get.to(
+            () => const ViewHomeWorks(),
+          );
         }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices',
+        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
-          // showAboutDialog(
-          //     context: context,
-          //     applicationIcon: const Image(
-          //       image: AssetImage('assets/images/SCIPRO.png'),
-          //       height: 100,
-          //       width: 100,
-          //     ),
-          //     applicationName: "SCI PRO",
-          //     applicationVersion: '1.0.2',
-          //     children: [
-          //       const Text(
-          //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
-          //     ]);
+           Get.to(
+            () => NoticePage(),
+          );
         }),
-        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report',
+        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
-        }),
-        MenuItem(8, 'assets/images/information.png', 'General Instructions',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => GeneralInstruction(),
+           Get.to(
+            () => ProgressReportListViewScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: FirebaseAuth.instance.currentUser!.uid,
+          batchId: UserCredentialsController.batchId!),
           );
         }),
         // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
@@ -212,7 +233,7 @@ Widget MyDrawerList(context) {
               ),
             ),
             Positioned(
-                top: 38,
+                top: 40,
                 left: 30,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -226,7 +247,7 @@ Widget MyDrawerList(context) {
                       width: 06,
                     ),
                     Text(
-                      "Lepton Plus Communications",
+                      "Lepton Communications",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -281,6 +302,6 @@ Widget emptyDisplay(String section) {
           textAlign: TextAlign.center,
         ),
       ],
-    ),
-  );
+),
+);
 }

@@ -1,6 +1,14 @@
 // ignore_for_file: non_constant_identifier_names, duplicate_ignore, empty_catches, unused_element
 
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_list_view/user_exam_acc.dart';
+import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
+import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
+import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
+import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,24 +16,26 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
-import '../general_instructions/general_instructions.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
-  const ParentHeaderDrawer({Key? key}) : super(key: key);
+
+   const ParentHeaderDrawer({
+    Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 250,
+      height: 270,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          kHeight30,
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 100,
+            height: 90,
             width: 150,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
@@ -36,7 +46,7 @@ class ParentHeaderDrawer extends StatelessWidget {
             ),
           ),
           Text(
-            "DuJo App",
+            "Lepton DuJo",
             style: GoogleFonts.montserrat(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
           ),
@@ -54,7 +64,7 @@ class ParentHeaderDrawer extends StatelessWidget {
             onPressed: () async {
               await userLogOut(context);
             },
-            child: const Text("Logout"),
+            child:  Text("Logout".tr),
           )
         ],
       ),
@@ -133,62 +143,75 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/attendance.png', 'Attendance',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (ctx) => RecordedCoursesListScreen()));
-        }),
-        MenuItem(2, 'assets/images/exam.png', 'Exams',
-            currentPage == DrawerSections.favourites ? true : false, () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (ctx) => LiveCoursesListScreen()));
-        }),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable',
-            currentPage == DrawerSections.setting ? true : false, () {
-          // termsAndConditions(context);
-        }),
-        // MenuItem(4, "Share", Icons.share,
-        //     currentPage == DrawerSections.share ? true : false, () async {
-        //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
-        // }),
-        MenuItem(4, 'assets/images/homework.png', 'HomeWorks',
-            currentPage == DrawerSections.contact ? true : false, () {
-          // contactus(context);
-        }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices',
-            currentPage == DrawerSections.about ? true : false, () {
-          // showAboutDialog(
-          //     context: context,
-          //     applicationIcon: const Image(
-          //       image: AssetImage('assets/images/SCIPRO.png'),
-          //       height: 100,
-          //       width: 100,
-          //     ),
-          //     applicationName: "SCI PRO",
-          //     applicationVersion: '1.0.2',
-          //     children: [
-          //       const Text(
-          //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
-          //     ]);
-        }),
-        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
-        }),
-        MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          // signOut(context);
-        }),
-        MenuItem(9, 'assets/images/information.png', 'General Instructions',
+           MenuItem(1, 'assets/images/information.png', 'General Instructions',
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
           );
         }),
+        MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+Get.to(
+            () =>      AttendenceBookScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!),
+          );
+        }),
+        MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
+            currentPage == DrawerSections.favourites ? true : false, () {
+   Get.to(
+            () => const UserExmNotifications(),
+          );
+        }),
+        MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
+            currentPage == DrawerSections.setting ? true : false, () {
+         Get.to(
+            () => const StudentShowTimeTable(),
+          );
+        }),
+        // MenuItem(4, "Share", Icons.share,
+        //     currentPage == DrawerSections.share ? true : false, () async {
+        //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
+        // }),
+        MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
+            currentPage == DrawerSections.contact ? true : false, () {
+             Get.to(
+            () => const ViewHomeWorks(),
+          );
+        }),
+        MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+            currentPage == DrawerSections.about ? true : false, () {
+          Get.to(
+            () => NoticePage(),
+          );
+        }),
+    MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+              Get.to(const PrivacyViewScreen());
+        }),
+        MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+         Get.to(
+            () =>       ProgressReportListViewScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: UserCredentialsController.parentModel?.studentID ?? "",
+          batchId: UserCredentialsController.batchId!),
+          );
+        }),
+        // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave'.tr,
+        //     currentPage == DrawerSections.dashboard ? true : false, () {
+        //   // Get.to(
+        //   //   () =>    LeaveApplicationScreen(
+        //   // studentName: studentName,
+        //   // guardianName: UserCredentialsController.parentModel!.parentName!,
+        //   // classID: UserCredentialsController.classId!,
+        //   // schoolId: UserCredentialsController.schoolId!,
+        //   // studentID: UserCredentialsController.parentModel!.studentID!,
+        //   // batchId: UserCredentialsController.batchId!),
+        //   // );
+        // }),
         kHeight,
         kHeight,
         Container(
@@ -228,7 +251,7 @@ Widget MyDrawerList(context) {
                       width: 06,
                     ),
                     Text(
-                      "Lepton Plus Communications",
+                      "Lepton Communications",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -283,6 +306,6 @@ Widget emptyDisplay(String section) {
           textAlign: TextAlign.center,
         ),
       ],
-    ),
-  );
+),
+);
 }

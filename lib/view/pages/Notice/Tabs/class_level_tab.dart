@@ -46,7 +46,7 @@ class ClassLevelNoticePage extends StatelessWidget {
                               ),
                               trailing: InkWell(
                                 child: GooglePoppinsWidgets(
-                                    text: "View",
+                                    text: "View".tr,
                                     fontsize: 16.h,
                                     fontWeight: FontWeight.w300,
                                     color: Colors.blue),

@@ -24,7 +24,7 @@ class DujoLoginScren extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GoogleMonstserratWidgets(
-                  text: 'Hello..',
+                  text: 'Hello..'.tr,
                   letterSpacing: 2,
                   fontsize: 30,
                   fontWeight: FontWeight.w500,
@@ -36,7 +36,7 @@ class DujoLoginScren extends StatelessWidget {
                   child: loginButtonWidget(
                     height: 60,
                     width: 180,
-                    text: 'Login',
+                    text: 'Login'.tr,
                   ),
                 )
               ],

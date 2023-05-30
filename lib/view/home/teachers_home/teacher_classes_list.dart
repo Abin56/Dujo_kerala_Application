@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,8 +13,8 @@ class TeacherClassListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int columnCount = 3;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Expanded(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -33,7 +31,7 @@ class TeacherClassListView extends StatelessWidget {
               child: GridView.count(
                 physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
-                padding: EdgeInsets.all(_w / 60),
+                padding: EdgeInsets.all(w / 60),
                 crossAxisCount: columnCount,
                 children: List.generate(
                   snapshot.data!.docs.length,
@@ -54,12 +52,12 @@ class TeacherClassListView extends StatelessWidget {
                               ));
                             },
                             child: Container(
-                              height: _h / 100,
+                              height: h / 100,
                               width: double.infinity,
                               margin: EdgeInsets.only(
-                                  bottom: _w / 10,
-                                  left: _w / 50,
-                                  right: _w / 50),
+                                  bottom: w / 10,
+                                  left: w / 50,
+                                  right: w / 50),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(212, 67, 30, 203)
                                     .withOpacity(0.1),

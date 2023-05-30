@@ -42,7 +42,7 @@ class GuardianSignUp extends StatelessWidget {
                 Row(
                   children: [
                     ContainerImage(
-                        height: 100.h,
+                        height: 70.h,
                         width: 100.w,
                         imagePath: 'assets/images/leptonlogo.png'),
                     GoogleMonstserratWidgets(
@@ -55,14 +55,14 @@ class GuardianSignUp extends StatelessWidget {
                 GooglePoppinsWidgets(
                   fontsize: 20,
                   fontWeight: FontWeight.w400,
-                  text: 'Welcome..',
+                  text: 'Welcome..'.tr,
                 ),
                 kHeight20,
                 Center(
                   child: GooglePoppinsWidgets(
                     fontsize: 24,
                     fontWeight: FontWeight.w600,
-                    text: 'Sign up',
+                    text: 'Sign up'.tr,
                   ),
                 ),
                 kHeight10,
@@ -70,7 +70,7 @@ class GuardianSignUp extends StatelessWidget {
                   child: GooglePoppinsWidgets(
                     fontsize: 20,
                     fontWeight: FontWeight.w300,
-                    text: 'Personal Data',
+                    text: 'Personal Data'.tr,
                   ),
                 ),
               ],
@@ -126,8 +126,8 @@ class GuardianSignUp extends StatelessWidget {
                     ),
                     kWidth30,
                     SinUpTextFromFiled(
-                      text: "Your Name",
-                      hintText: 'Enter your Name',
+                      text: "Your Name".tr,
+                      hintText: 'Enter your Name'.tr,
                       textfromController:
                           guardianSignUpController.userNameController,
                       validator: checkFieldEmpty,
@@ -138,21 +138,23 @@ class GuardianSignUp extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GooglePoppinsWidgets(
-                            text: "Gender",
+                            text: "Gender".tr,
                             fontsize: 14,
                             fontWeight: FontWeight.w300,
                           ),
                           kWidth30,
-                          SizedBox(
-                            width: 330.w,
-                            child: DropdownSearch<String>(
-                              selectedItem: 'Select Gender',
-                              validator: (v) =>
-                                  v == null ? "required field" : null,
-                              items: const ['Male', 'Female', 'Others'],
-                              onChanged: (value) {
-                                guardianSignUpController.gender = value;
-                              },
+                          Flexible(
+                            child: SizedBox(
+                              width: 330.w,
+                              child: DropdownSearch<String>(
+                                selectedItem: 'Select Gender'.tr,
+                                validator: (v) =>
+                                    v == null ? "required field" : null,
+                                items:  ['Male', 'Female', 'Others'],
+                                onChanged: (value) {
+                                  guardianSignUpController.gender = value;
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -160,53 +162,53 @@ class GuardianSignUp extends StatelessWidget {
                     ),
                     kHeight30,
                     SinUpTextFromFiled(
-                      text: 'House Name',
-                      hintText: 'Enter your House Name',
+                      text: 'House Name'.tr,
+                      hintText: 'Enter your House Name'.tr,
                       textfromController:
                           guardianSignUpController.houseNameController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: 'House Number',
-                      hintText: 'Enter your House Number',
+                      text: 'House Number'.tr,
+                      hintText: 'Enter your House Number'.tr,
                       textfromController:
                           guardianSignUpController.houseNumberController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
-                      text: 'Place',
-                      hintText: 'Enter your Place',
+                      text: 'Place'.tr,
+                      hintText: 'Enter your Place'.tr,
                       textfromController:
                           guardianSignUpController.placeController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
-                      text: 'District',
-                      hintText: 'Enter your District',
+                      text: 'District'.tr,
+                      hintText: 'Enter your District'.tr,
                       textfromController:
                           guardianSignUpController.districtController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
-                      text: 'State',
-                      hintText: 'Enter your State',
+                      text: 'State'.tr,
+                      hintText: 'Enter your State'.tr,
                       textfromController:
                           guardianSignUpController.stateController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                          keyboardType: TextInputType.number,
-                      text: 'Pincode',
-                      hintText: 'Enter your Pincode',
+                      text: 'Pincode'.tr,
+                      hintText: 'Enter your Pincode'.tr,
                       textfromController:
                           guardianSignUpController.pinCodeController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: ' Alternate Number',
-                      hintText: 'Alternate Number',
+                      text: ' Alternate Number'.tr,
+                      hintText: 'Alternate Number'.tr,
                       textfromController:
                           guardianSignUpController.altPhoneNoController,
                       validator: checkFieldPhoneNumberIsValid,
@@ -224,7 +226,7 @@ class GuardianSignUp extends StatelessWidget {
                           () => guardianSignUpController.isLoading.value
                               ? circularProgressIndicatotWidget
                               : loginButtonWidget(
-                                  height: 60, width: 180, text: 'Submit'),
+                                  height: 60, width: 180, text: 'Submit'.tr),
                         ),
                       ),
                     ),

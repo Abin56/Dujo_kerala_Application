@@ -7,6 +7,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/button_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -91,7 +92,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
   
         backgroundColor: adminePrimayColor,
         title: Text(
-          "Home Work",
+          "HomeWorks".tr,
           style: GoogleFonts.poppins(
             color: cWhite,
             fontSize: 20,
@@ -113,7 +114,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                      Text(
-                          "Homework Tasks",
+                          "Homework Tasks".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,
@@ -134,7 +135,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                         maxLines: 10,
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
-                          hintText: 'Assign Here for Tasks ',
+                          hintText: 'Assign Here for Tasks'.tr,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(7),
                         ),
@@ -149,7 +150,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                              Text(
-                          "Choose your subject",
+                          "Choose your subject".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,
@@ -177,7 +178,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                     Text(
-                          "Time period and deadline",
+                          "Time period and deadline".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,
@@ -207,8 +208,8 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                             controller: _applyFromDateController,
                             readOnly: true,
                             onTap: () => _selectFromDate(context),
-                            decoration: const InputDecoration(
-                              labelText: 'From',
+                            decoration:  InputDecoration(
+                              labelText: 'From'.tr,
                               border: OutlineInputBorder(),
                             ),
                           ),
@@ -226,8 +227,8 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                             controller: _applyTODateController,
                             readOnly: true,
                             onTap: () => _selectToDate(context),
-                            decoration: const InputDecoration(
-                              labelText: 'To',
+                            decoration:  InputDecoration(
+                              labelText: 'To'.tr,
                               border: OutlineInputBorder(),
                             ),
                           ),
@@ -275,7 +276,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                           width: 300.w,
                           child: Center(
                             child:Text(
-                          "SUBMIT",
+                          "Submit".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,

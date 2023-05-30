@@ -53,10 +53,10 @@ class TestingPage extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => const StudyMaterials())));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: ((context) => const StudyMaterials())));
                     },
                     child:
                         Containerwidget(text: 'study material view Student')),

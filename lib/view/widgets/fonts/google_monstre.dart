@@ -25,7 +25,7 @@ class GoogleMonstserratWidgets extends StatelessWidget {
     return Text(
       
       text,
-      overflow: overflow,
+      overflow: overflow, maxLines: 1,
       style: GoogleFonts.montserrat(
         letterSpacing: letterSpacing,
         fontSize: fontsize,

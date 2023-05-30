@@ -15,6 +15,7 @@ import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
 import '../../pages/teacher_list/teacher_list.dart';
+import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../general_instructions/general_instructions.dart';
 import '../parent_home/progress_report/progress_report.dart';
 import '../student_home/time_table/time_table_display.dart';
@@ -34,7 +35,7 @@ class GuardianAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!),
       //Attendence8
-      const ExmNotification(), // Exams
+      const UserExmNotifications(), // Exams
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.guardianModel!.guardianName,
@@ -136,22 +137,22 @@ class GuardianAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance',
-  'Exams',
-  'Leave Application',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Sujects',
-  'Teachers',
-  'Meetings'
+  'Attendance'.tr,
+  'Exams'.tr,
+  'Leave Application'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Teachers'.tr,
+  'Meetings'.tr
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/exam.png',
-  'assets/images/homework.png',
+  'assets/images/leaveapplica.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/school_building.png',

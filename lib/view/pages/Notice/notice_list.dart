@@ -23,14 +23,14 @@ class NoticePage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("Notice"),
+            title:  Text("Notices".tr),
             backgroundColor: adminePrimayColor,
-            bottom:  const TabBar(tabs: [
+            bottom:   TabBar(tabs: [
               Tab(
-                text: 'Class Level',
+                text: 'Class Level'.tr,
               ),
               Tab(
-                text: 'School Level',
+                text: 'School Level'.tr,
               )
             ]),
           ),

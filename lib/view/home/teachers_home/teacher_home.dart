@@ -5,6 +5,8 @@ import 'package:dujo_kerala_application/view/home/teachers_home/teacher_classes_
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class TeacherHomeScreen extends StatefulWidget {
   static String routeName = '';
@@ -50,7 +52,7 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // Get.to(UserEditPage());
+                                // Get.to(const UserEditPage());
                               },
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(

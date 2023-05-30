@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/view/home/teachers_home/teacher_home.dar
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -66,30 +67,31 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
           rippleColor: Colors.grey,
           activeColor: Colors.white,
           color: Colors.white,
-          tabs: const [
+          tabs:  [
             GButton(
                 iconSize: 20,
                 icon: LineIcons.home,
-                text: 'Home',
+                text: 'Home'.tr,
                 style: GnavStyle.google),
             GButton(
               iconSize: 20,
               textSize: 9,
               icon: Icons.tv,
-              text: 'ReC_Classes',
+              text: 'Recorded Classes'.tr,
             ),
             GButton(
               iconSize: 20,
               // iconSize: 10,
               textSize: 12,
               icon: Icons.laptop,
-              text: 'Live Classes',
+              text: 'Live Classes'.tr,
             ),
             GButton(
               iconSize: 20,
-              icon: Icons.live_tv_sharp,
-              text: 'Profile',
+              icon: Icons.chat,
+              text: 'Chat With Bot'.tr,
             )
+    
           ],
           selectedIndex: _page,
           onTabChange: (value) {

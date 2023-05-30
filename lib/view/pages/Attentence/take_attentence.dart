@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../widgets/button_container_widget.dart';
@@ -36,7 +37,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Take Attendence'),backgroundColor: adminePrimayColor,
+        title:  Text('Take Attendence'.tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -242,9 +243,9 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
           colorindex: 5,
           height: 60,
           width: 130,
-          child: const Center(
+          child:  Center(
               child: Text(
-            'View ',
+            'View'.tr,
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           )),
         ),

@@ -17,7 +17,7 @@ void showToast({required String msg}) {
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.red,
-    textColor: Colors.white,
+    textColor: Colors.white,  
     fontSize: 16.0,
   );
 }
@@ -45,21 +45,21 @@ Future<void> userLogOut(BuildContext context) async {
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Logout'),
+        title:  Text('Logout'.tr),
         content: SingleChildScrollView(
           child: ListBody(
-            children: const <Widget>[Text('Are you sure to Logout ?')],
+            children:  <Widget>[Text('Are you sure to Logout ?'.tr)],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('cancel'),
+            child:  Text('Cancel'.tr),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: const Text('ok'),
+            child:  Text('Ok'.tr),
             onPressed: () async {
               await FirebaseAuth.instance.signOut().then((value) async {
                 await SharedPreferencesHelper.clearSharedPreferenceData();

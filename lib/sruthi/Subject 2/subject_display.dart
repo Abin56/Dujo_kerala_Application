@@ -6,7 +6,6 @@ import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../view/widgets/container_image.dart';
 import 'subject_chapterwise_display.dart';
 
@@ -53,8 +52,6 @@ class SubjectList extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 height: 50,
-
-                // ignore: sort_child_properties_last
                 child: Padding(
                   padding: EdgeInsets.only(left: 20.h, top: 20.h, right: 20.h),
                   child: Column(

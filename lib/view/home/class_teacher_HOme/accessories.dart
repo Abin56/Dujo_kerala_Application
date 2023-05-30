@@ -2,9 +2,8 @@
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
+import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/my_students.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/pages/exam_notification/add_exam.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -16,7 +15,10 @@ import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
 import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../pages/Notice/notice_list.dart';
+import '../../pages/Subject/subject_display.dart';
+import '../../pages/teacher_list/teacher_list.dart';
 import '../events/event_list.dart';
+import '../exam_Notification/teacher_adding/add_subject.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   const ClassTeacherAccessories({
@@ -38,7 +40,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           schooilID: UserCredentialsController.schoolId!,
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
-     const ExamNotification(), //Exam
+      const AddTimeTable(), //Exam
       const StudentShowTimeTable(), //TimeTable
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
@@ -53,11 +55,13 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-      const UnderMaintanceScreen(text: ''), //Subject
-      const UnderMaintanceScreen(text: ''), //Teachers
+       StudentSubjectHome(), //Subject
+     TeacherSubjectWiseList(), //Teachers
       SchoolLevelMeetingPage(), //Meetings
 
-      // StudentSubjectHome(),
+      // StudentSubjectHome(), 
+
+      const MyStudents()  //My students
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -139,23 +143,26 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Take Attendance',
-  'Attendance Book',
-  'Leave Letters',
-  'Exams',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Subjects',
-  'Teachers',
-  'Meetings'
+
+  'Take Attendance'.tr,
+  'Attendence Book'.tr,
+  'Leave Letters'.tr,
+  'Exams'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Teachers'.tr,
+  'Meetings'.tr, 
+  'My Students'.tr
+
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
-  'assets/images/message.png',
+  'assets/images/leaveapplica.png',
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
@@ -164,5 +171,6 @@ var _acc_images = [
   'assets/images/splash.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/teachers.png',
+  'assets/images/teachers.png', 
+  'assets/images/mystudents.png'
 ];

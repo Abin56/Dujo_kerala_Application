@@ -44,7 +44,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                 Row(
                   children: [
                     ContainerImage(
-                        height: 100.h,
+                        height: 70.h,
                         width: 100.w,
                         imagePath: 'assets/images/leptonlogo.png'),
                     GoogleMonstserratWidgets(
@@ -57,14 +57,14 @@ class StudentSignInPageScreen extends StatelessWidget {
                 GooglePoppinsWidgets(
                   fontsize: 20,
                   fontWeight: FontWeight.w400,
-                  text: 'Welcome..',
+                  text: 'Welcome..'.tr,
                 ),
                 kHeight20,
                 Center(
                   child: GooglePoppinsWidgets(
                     fontsize: 24,
                     fontWeight: FontWeight.w600,
-                    text: 'Sign up',
+                    text: 'Sign up'.tr,
                   ),
                 ),
                 kHeight10,
@@ -72,7 +72,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                   child: GooglePoppinsWidgets(
                     fontsize: 20,
                     fontWeight: FontWeight.w300,
-                    text: 'Personal Data',
+                    text: 'Personal Data'.tr,
                   ),
                 ),
               ],
@@ -133,21 +133,23 @@ class StudentSignInPageScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GooglePoppinsWidgets(
-                            text: "Gender",
+                            text: "Gender".tr,
                             fontsize: 14,
                             fontWeight: FontWeight.w300,
                           ),
                           kWidth30,
-                          SizedBox(
-                            width: 330.w,
-                            child: DropdownSearch<String>(
-                              selectedItem: 'Select Gender',
-                              validator: (v) =>
-                                  v == null ? "required field" : null,
-                              items: const ['Male', 'Female', 'Others'],
-                              onChanged: (value) {
-                                studentController.gender = value;
-                              },
+                          Flexible(
+                            child: SizedBox(
+                              width: 330.w,
+                              child: DropdownSearch<String>(
+                                selectedItem: 'Select Gender'.tr,
+                                validator: (v) =>
+                                    v == null ? "required field" : null,
+                                items: ['Male', 'Female', 'Others'],
+                                onChanged: (value) {
+                                  studentController.gender = value;
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -160,7 +162,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GooglePoppinsWidgets(
-                            text: "Blood Group",
+                            text: "Blood Group".tr,
                             fontsize: 14,
                             fontWeight: FontWeight.w300,
                           ),
@@ -169,7 +171,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                             child: SizedBox(
                               width: 330.w,
                               child: DropdownSearch<String>(
-                                selectedItem: 'Select Group',
+                                selectedItem: 'Select Group'.tr,
                                 validator: (v) =>
                                     v == null ? "required field" : null,
                                 items: const [
@@ -193,8 +195,8 @@ class StudentSignInPageScreen extends StatelessWidget {
                     ),
                     kHeight30,
                     SinUpTextFromFiled(
-                      text: 'Date of birth',
-                      hintText: 'Date of birth',
+                      text: 'Date of birth'.tr,
+                      hintText: 'Date of birth'.tr,
                       readOnly: true,
                       textfromController:
                           studentController.dateOfBirthController,
@@ -204,35 +206,35 @@ class StudentSignInPageScreen extends StatelessWidget {
                       },
                     ),
                     SinUpTextFromFiled(
-                      text: 'House Name',
-                      hintText: 'Enter your House Name',
+                      text: 'House Name'.tr,
+                      hintText: 'Enter your House Name'.tr,
                       textfromController: studentController.houseNameController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: 'House Number',
-                      hintText: 'Enter your House Number',
+                      text: 'House Number'.tr,
+                      hintText: 'Enter your House Number'.tr,
                       textfromController:
                           studentController.houseNumberController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
-                      text: 'Place',
-                      hintText: 'Enter your Place',
+                      text: 'Place'.tr,
+                      hintText: 'Enter your Place'.tr,
                       textfromController: studentController.placeController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
-                      text: 'District',
-                      hintText: 'Enter your District',
+                      text: 'District'.tr,
+                      hintText: 'Enter your District'.tr,
                       textfromController: studentController.districtController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
                       keyboardType: TextInputType.number,
-                      text: ' Alternate Phone Number',
-                      hintText: 'Alternate Phone Number',
+                      text: ' Alternate Number'.tr,
+                      hintText: 'Alternate Number'.tr,
                       textfromController:
                           studentController.altPhoneNoController,
                       validator: checkFieldPhoneNumberIsValid,
@@ -260,7 +262,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                         child: Obx(() => studentController.isLoading.value
                             ? circularProgressIndicatotWidget
                             : loginButtonWidget(
-                                height: 60, width: 180, text: 'Submit')),
+                                height: 60, width: 180, text: 'Submit'.tr)),
                       ),
                     ),
                   ],

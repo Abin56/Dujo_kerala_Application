@@ -126,7 +126,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
           appBar: AppBar(
             backgroundColor: adminePrimayColor,
             title: Text(
-              "Apply Leave",
+              "Apply Leave".tr,
               style: GoogleFonts.poppins(
                 
                   fontSize: 20,
@@ -149,7 +149,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Apply Leave Date",
+                          "Apply Leave Date".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,
@@ -192,7 +192,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                                Text(
-                          "Choose Leave Type",
+                          "Choose Leave Type".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,
@@ -200,15 +200,15 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                         ),
                               kHeight10,
                               DropdownSearch<String>(
-                                selectedItem: 'Select',
+                                selectedItem: 'Select'.tr,
                                 validator: (v) =>
                                     v == null ? "required field" : null,
-                                items: const [
-                                  "Medical",
-                                  "Family",
-                                  "Sick",
-                                  'Function',
-                                  'Others'
+                                items: [
+                                  "Medical".tr,
+                                  "Family".tr,
+                                  "Sick".tr,
+                                  'Function'.tr,
+                                  'Others'.tr
                                 ],
                                 onChanged: (value) {
                                   setState(() {
@@ -230,7 +230,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                        Text(
-                          "Apply Leave Date",
+                          "Apply Leave Date".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,
@@ -257,9 +257,9 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                 controller: _applyFromDateController,
                                 readOnly: true,
                                 onTap: () => _selectFromDate(context),
-                                decoration: const InputDecoration(
-                                  labelText: 'From',
-                                  border: OutlineInputBorder(),
+                                decoration: InputDecoration(
+                                  labelText: 'From'.tr,
+                                  border: const OutlineInputBorder(),
                                 ),
                               ),
                             ),
@@ -276,9 +276,9 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                 controller: _applyTODateController,
                                 readOnly: true,
                                 onTap: () => _selectToDate(context),
-                                decoration: const InputDecoration(
-                                  labelText: 'To',
-                                  border: OutlineInputBorder(),
+                                decoration:  InputDecoration(
+                                  labelText: 'To'.tr,
+                                  border: const OutlineInputBorder(),
                                 ),
                               ),
                             ),
@@ -295,7 +295,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                   Text(
-                          "Reason",
+                          "Reason".tr,
                           style: GoogleFonts.poppins(
                               color:cblack,
                               fontSize: 13,
@@ -365,7 +365,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                               width: 300,
                               child: Center(
                                 child: Text(
-                                  "Apply Leave",
+                                  "Apply Leave".tr,
                                   style: GoogleFonts.poppins(
                                       color: Colors.white,
                                       fontSize: 13,

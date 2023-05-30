@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../model/teacher_model/progress_report_model/progress_report_model.dart';
@@ -43,12 +45,15 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
             .doc(widget.wexam)
             .get(),
         builder: (context, snapshot) {
-    
           if (snapshot.hasData) {
-            if (snapshot.data!.data()!=null) {
+            if (snapshot.data!.data() != null) {
               UploadProgressReportModel data =
                   UploadProgressReportModel.fromMap(snapshot.data!.data()!);
               return Scaffold(
+                appBar: AppBar(
+                  title: Text("Progress Report".tr),
+                  backgroundColor: adminePrimayColor,
+                ),
                 body: SafeArea(
                     child: SizedBox(
                   height: double.maxFinite,
@@ -127,17 +132,50 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
                                     Text(data.rollNo),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    Text("Class :   ${data.wClass}"),
-                                  ],
+                                FutureBuilder(
+                                               future: FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(widget.schooilID)
+                                        .collection(widget.batchId)
+                                        .doc(widget.batchId)
+                                        .collection("classes")
+                                        .doc(widget.classID)
+                                        .get(),
+                                  builder: (context,snaos) {
+                                    if (snaos.hasData) {
+                                               return Row(
+                                      children: [
+                                        Text("Class :   ${snaos.data?.data()!['className']}"),
+                                      ],
+                                    );
+                                      
+                                    } else {
+                                        return const Text('');
+                                      }
+                           
+                                  }
                                 ),
-                                Row(
-                                  children: [
-                                    Text(
-                                        "Class Adviser :   ${data.teacherName}"),
-                                  ],
-                                ),
+                                FutureBuilder(
+                                    future: FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(widget.schooilID)
+                                        .collection(widget.batchId)
+                                        .doc(widget.batchId)
+                                        .collection("classes")
+                                        .doc(widget.classID)
+                                        .get(),
+                                    builder: (context, snaos) {
+                                      if (snaos.hasData) {
+                                        return Row(
+                                          children: [
+                                            Text(
+                                                "Class Adviser :   ${snaos.data?.data()!['classTeacherName']}"),
+                                          ],
+                                        );
+                                      } else {
+                                        return const Text('');
+                                      }
+                                    }),
                               ],
                             ),
                           ),
@@ -201,7 +239,7 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
               );
             } else {
               return const Scaffold(
-                body:  Center(
+                body: Center(
                   child: Text("No Records"),
                 ),
               );
