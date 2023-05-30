@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/edit_image_selection_widget.dart';
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/user_edit_page_widget.dart';
+import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/student_profile_edit_listtile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../widgets/Iconbackbutton.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/sizes/sizes.dart';
 import '../../../widgets/fonts/google_poppins.dart';
-import '../../../../widgets/Iconbackbutton.dart';
 
 class StudentProfileEditPage extends StatelessWidget {
   const StudentProfileEditPage({super.key});
@@ -62,7 +62,7 @@ class StudentProfileEditPage extends StatelessWidget {
         height: 700.h,
         child: ListView(
           children: [
-            UserEditListileWidget(
+            StudentEditListileWidget(
               icon: Icons.person,
               subtitle: GooglePoppinsWidgets(
                   text:
@@ -70,7 +70,7 @@ class StudentProfileEditPage extends StatelessWidget {
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Name".tr, fontsize: 12.h),
             ),
-            UserEditListileWidget(
+            StudentEditListileWidget(
               icon: Icons.call,
               subtitle: GooglePoppinsWidgets(
                   text: UserCredentialsController
@@ -79,7 +79,7 @@ class StudentProfileEditPage extends StatelessWidget {
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Phone No.".tr, fontsize: 12.h),
             ),
-            UserEditListileWidget(
+            StudentEditListileWidget(
               icon: Icons.email,
               subtitle: GooglePoppinsWidgets(
                   text: UserCredentialsController.studentModel?.studentemail ??
@@ -88,7 +88,7 @@ class StudentProfileEditPage extends StatelessWidget {
               title: GooglePoppinsWidgets(text: "Email".tr, fontsize: 12.h),
               editicon: Icons.edit,
             ),
-            UserEditListileWidget(
+            StudentEditListileWidget(
               icon: Icons.class_rounded,
               subtitle: FutureBuilder(
                   future: getClassName(
@@ -99,7 +99,7 @@ class StudentProfileEditPage extends StatelessWidget {
                   }),
               title: GooglePoppinsWidgets(text: "Class".tr, fontsize: 12.h),
             ),
-            UserEditListileWidget(
+            StudentEditListileWidget(
               icon: Icons.bloodtype_outlined,
               subtitle:
                   GooglePoppinsWidgets(text: "Blood Group".tr, fontsize: 19.h),
@@ -108,7 +108,7 @@ class StudentProfileEditPage extends StatelessWidget {
                       UserCredentialsController.studentModel?.bloodgroup ?? "",
                   fontsize: 12.h),
             ),
-            UserEditListileWidget(
+            StudentEditListileWidget(
               icon: Icons.home,
               subtitle: GooglePoppinsWidgets(
                   text: UserCredentialsController.studentModel?.houseName ?? "",

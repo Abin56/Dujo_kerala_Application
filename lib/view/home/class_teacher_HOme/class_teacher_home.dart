@@ -151,10 +151,6 @@ import 'package:dujo_kerala_application/view/home/class_teacher_HOme/accessories
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-
-import '../../../widgets/user_edit-profile.dart';
-
 
 class ClassTeacherHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -192,10 +188,10 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                         UserCredentialsController.teacherModel?.imageUrl == null
                             ? kHeight
                             : GestureDetector(
-                              onTap: () {
-                                        Get.to(const UserEditPage());
-                                      },
-                              child: Stack(
+                                onTap: () {
+                                  //Get.to(const UserEditPage());
+                                },
+                                child: Stack(
                                   children: [
                                     Container(
                                       height: 100,
@@ -219,13 +215,13 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       child: CircleAvatar(
                                         backgroundColor: cWhite,
                                         radius: 12.r,
-                                        child:
-                                            const Center(child: Icon(Icons.info)),
+                                        child: const Center(
+                                            child: Icon(Icons.info)),
                                       ),
                                     ),
                                   ],
                                 ),
-                            ),
+                              ),
                       ],
                     ),
                   ),
@@ -280,6 +276,6 @@ Widget MenuItem(int id, String image, String title, bool selected, onTap) {
           ],
         ),
       ),
-),
-);
+    ),
+  );
 }
