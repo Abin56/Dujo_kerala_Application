@@ -15,7 +15,6 @@ import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/textformfield_login.dart';
-import '../../sign_up/student_sign_up/student_sign_up.dart';
 
 class StudentLoginScreen extends StatelessWidget {
   final int? pageIndex;
@@ -52,10 +51,10 @@ class StudentLoginScreen extends StatelessWidget {
                   children: [
                     // Enter Mail id Session >>>>>>>
                     Padding(
-                      padding: EdgeInsets.only(right: 140.w),
+                      padding: EdgeInsets.only(right: 140.w,left: 10.w),
                       child: GoogleMonstserratWidgets(
-                        fontsize: 45,
-                        text: 'Login'.tr,
+                        fontsize: 30.w,
+                        text: 'Student Login'.tr,
                         color: cblack,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.5,
