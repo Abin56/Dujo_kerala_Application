@@ -1,21 +1,64 @@
 import 'dart:developer';
 
+import 'package:dujo_kerala_application/view/pages/push_notifications/notification_services.dart';
 import 'package:dujo_kerala_application/view/pages/splash_screen/splash_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class SelectLanguage extends StatelessWidget {
+class SelectLanguage extends StatefulWidget {
+  SelectLanguage({super.key});
+
+  @override
+  State<SelectLanguage> createState() => _SelectLanguageState();
+}
+
+class _SelectLanguageState extends State<SelectLanguage> {
+
+  NotificationServices notificationServices = NotificationServices();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userRequestPermission();
+    notificationServices.firebaseInit(context);
+    notificationServices.setupInteractMessage(context);
+  }
   final List locale = [
     {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
     {'name': 'ಕನ್ನಡ', 'locale': const Locale('kn', 'IN')},
     {'name': 'हिंदी', 'locale': const Locale('hi', 'IN')},
     {'name': 'മലയാളം', 'locale': const Locale('ml', 'IN')},
   ];
+
   updateLanguage(Locale locale) {
     Get.back();
     Get.updateLocale(locale);
   }
+
+
+  void userRequestPermission() async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    log('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    log('User granted provisional permission');
+  } else {
+    log('User declined or has not accepted permission');
+  }
+}
 
   builddialog(BuildContext context) {
     showDialog(
@@ -49,8 +92,6 @@ class SelectLanguage extends StatelessWidget {
       },
     );
   }
-
-  SelectLanguage({super.key});
 
   @override
   Widget build(BuildContext context) {

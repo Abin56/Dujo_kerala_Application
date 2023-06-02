@@ -20,14 +20,14 @@ class StudentsAttendenceListViewScreen extends StatelessWidget {
       required this.batchId,
       required this.date,
       required this.subject,
-      super.key});
+      super.key}); 
 
   @override
   Widget build(BuildContext context) {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Attendence List'.tr),backgroundColor: adminePrimayColor,
+        title:  Text('Attendance List'.tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
         child: StreamBuilder(
