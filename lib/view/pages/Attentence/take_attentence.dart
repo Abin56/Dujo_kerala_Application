@@ -40,8 +40,12 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   Map<String, bool?> presentlist = {};
   String timer = '';
   List<String> tokenList = [];
+  List<String> tokenList2 = [];
+  DateTime? attendanceTime;
 
-  List<Map<String, dynamic>> parentListOfAbsentees = [];
+
+  List<Map<String, dynamic>> parentListOfAbsentees = []; 
+  List<Map<String, dynamic>> guardianListOfAbsentees = []; 
 
   Future<void> sendPushMessage(String token, String body, String title) async {
     try {
@@ -390,6 +394,9 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
               child: const Text('ok'),
               onPressed: () async {
                 Navigator.of(context).pop();
+                attendanceTime = DateTime.now();
+                 String formattedDate = DateFormat.yMMMMd().format(attendanceTime!);
+                  String formattedTime = DateFormat.jm().format(DateTime.now()); 
                 Future<QuerySnapshot<Map<String, dynamic>>> absentStudentsList =
                     FirebaseFirestore.instance
                         .collection("SchoolListCollection")
@@ -404,7 +411,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                         .doc(widget.subjectID)
                         .collection('PresentList')
                         .where('present', isEqualTo: false)
-                        .get();
+                        .get(); 
+
 
                 QuerySnapshot<Map<String, dynamic>> snapshot =
                     await absentStudentsList;
@@ -420,10 +428,26 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                         .collection("classes")
                         .doc(widget.classID)
                         .collection('ParentCollection')
+                        .get(); 
+
+                Future<QuerySnapshot<Map<String, dynamic>>> guardianss =
+                    FirebaseFirestore.instance
+                        .collection("SchoolListCollection")
+                        .doc(widget.schoolID)
+                        .collection(widget.batchId)
+                        .doc(widget.batchId)
+                        .collection("classes")
+                        .doc(widget.classID)
+                        .collection('GuardianCollection')
                         .get();
 
                 QuerySnapshot<Map<String, dynamic>> snapshot2 = await parentss;
                 List<Map<String, dynamic>> parentsList =
+                    snapshot2.docs.map((doc) => doc.data()).toList();  
+
+
+                 QuerySnapshot<Map<String, dynamic>> snapshot3 = await guardianss;
+                List<Map<String, dynamic>> guardiansList =
                     snapshot2.docs.map((doc) => doc.data()).toList();
 
                 bool isValueEqual = false;
@@ -442,17 +466,42 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                   //parentListOfAbsentees
                 }
 
+                 for (var item1 in guardiansList) {
+                  for (var item2 in mappedAbsentStudentsList) {
+                    if (item1['studentID'] == item2['uid']) {
+                      log('yesss!!!!!');
+                      guardianListOfAbsentees.add(item1);
+
+                      log('THE GLIST : ${parentListOfAbsentees.length.toString()}');
+                      isValueEqual = true;
+                      break;
+                    }
+                  }
+                  //parentListOfAbsentees
+                }
+
                 log('HWG: $parentListOfAbsentees');
                 for (var k in parentListOfAbsentees) {
                   tokenList.add(k['deviceToken']);
+                } 
+
+                    for (var r in guardianListOfAbsentees) {
+                  tokenList2.add(r['deviceToken']);
                 }
 
-                Timer(const Duration(seconds: 50), () {
+
+                Timer(Duration(hours: int.parse(timer)), () {
                   // Function to be executed after the duration
 
                   for (var l in tokenList) {
                     for (var i = 0; i < tokenList.length; i++) {
-                      sendPushMessage(tokenList[i], 'Sir/Madam, your ward was absent today.', 'Absent Notification');
+                      sendPushMessage(tokenList[i], 'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.', 'Absent Notification');
+                    }
+                  } 
+
+                   for (var m in tokenList2) {
+                    for (var i = 0; i < tokenList2.length; i++) {
+                      sendPushMessage(tokenList2[i], 'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.', 'Absent Notification');
                     }
                   }
                 });

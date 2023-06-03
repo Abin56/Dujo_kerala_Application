@@ -113,7 +113,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
     super.initState();
     getDeviceToken();
     
-    sendPushMessage( deviceToken, 'Hello Everyone', 'DUJO APP');
+ //   sendPushMessage( deviceToken, 'Hello Everyone', 'DUJO APP');
     
     
   }
