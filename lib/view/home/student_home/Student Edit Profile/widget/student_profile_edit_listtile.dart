@@ -4,7 +4,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../controllers/student_controller/student_profile_edit/student_profile_edit_controller.dart';
+import '../../../../../controllers/student_controller/profile_edit_controllers/student_profile_edit_controller.dart';
 
 class StudentEditListileWidget extends StatelessWidget {
   final Widget title;

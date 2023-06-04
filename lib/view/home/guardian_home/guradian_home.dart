@@ -6,8 +6,10 @@ import 'package:dujo_kerala_application/view/home/guardian_home/guardian_accer.d
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../constant/sizes/constant.dart';
+import '../student_home/Student Edit Profile/guardian_edit_profile.dart';
 
 class GuardianHomeScreen extends StatefulWidget {
   @override
@@ -51,7 +53,7 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                //  Get.to(const UserEditPage());
+                                Get.to(const GuardianEditProfileScreen());
                               },
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
