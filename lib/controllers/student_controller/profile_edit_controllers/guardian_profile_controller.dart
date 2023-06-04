@@ -30,7 +30,7 @@ class GuardianProfileController {
               .collection('classes')
               .doc(UserCredentialsController.classId)
               .collection('GuardianCollection')
-              .doc(UserCredentialsController.parentModel?.docid)
+              .doc(UserCredentialsController.guardianModel?.docid)
               .update({'guardianEmail': newEmail});
 
           showToast(msg: 'Successfully Updated');

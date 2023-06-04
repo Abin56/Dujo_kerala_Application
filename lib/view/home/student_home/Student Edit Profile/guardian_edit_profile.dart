@@ -1,5 +1,4 @@
 import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/edit_image_selection_widget.dart';
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/student_profile_edit_listtile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -63,14 +62,15 @@ class GuardianEditProfileScreen extends StatelessWidget {
         height: 700.h,
         child: ListView(
           children: [
-            StudentEditListileWidget(
+            GuardianEditListileWidget(
               icon: Icons.person,
               subtitle: GooglePoppinsWidgets(
-                  text: UserCredentialsController.guardianModel?.guardianName ?? "",
+                  text: UserCredentialsController.guardianModel?.guardianName ??
+                      "",
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Name".tr, fontsize: 12.h),
             ),
-            StudentEditListileWidget(
+            GuardianEditListileWidget(
               icon: Icons.call,
               subtitle: GooglePoppinsWidgets(
                   text: UserCredentialsController
@@ -79,19 +79,21 @@ class GuardianEditProfileScreen extends StatelessWidget {
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Phone No.".tr, fontsize: 12.h),
             ),
-            StudentEditListileWidget(
+            GuardianEditListileWidget(
               icon: Icons.email,
               subtitle: GooglePoppinsWidgets(
                   text:
-                      UserCredentialsController.guardianModel?.guardianEmail ?? "",
+                      UserCredentialsController.guardianModel?.guardianEmail ??
+                          "",
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Email".tr, fontsize: 12.h),
               editicon: Icons.edit,
             ),
-            StudentEditListileWidget(
+            GuardianEditListileWidget(
               icon: Icons.home,
               subtitle: GooglePoppinsWidgets(
-                  text: UserCredentialsController.guardianModel?.houseName ?? "",
+                  text:
+                      UserCredentialsController.guardianModel?.houseName ?? "",
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Address".tr, fontsize: 12.h),
             ),

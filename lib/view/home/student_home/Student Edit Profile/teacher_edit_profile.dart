@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/edit_image_selection_widget.dart';
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/student_profile_edit_listtile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -64,7 +63,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
         height: 700.h,
         child: ListView(
           children: [
-            StudentEditListileWidget(
+            TeacherEditListileWidget(
               icon: Icons.person,
               subtitle: GooglePoppinsWidgets(
                   text:
@@ -72,7 +71,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Name".tr, fontsize: 12.h),
             ),
-            StudentEditListileWidget(
+            TeacherEditListileWidget(
               icon: Icons.call,
               subtitle: GooglePoppinsWidgets(
                   text:
@@ -80,7 +79,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Phone No.".tr, fontsize: 12.h),
             ),
-            StudentEditListileWidget(
+            TeacherEditListileWidget(
               icon: Icons.email,
               subtitle: GooglePoppinsWidgets(
                   text: UserCredentialsController.teacherModel?.teacherEmail ??
@@ -89,7 +88,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
               title: GooglePoppinsWidgets(text: "Email".tr, fontsize: 12.h),
               editicon: Icons.edit,
             ),
-            StudentEditListileWidget(
+            TeacherEditListileWidget(
               icon: Icons.class_rounded,
               subtitle: FutureBuilder(
                   future: getClassName(
@@ -100,7 +99,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
                   }),
               title: GooglePoppinsWidgets(text: "Class".tr, fontsize: 12.h),
             ),
-            StudentEditListileWidget(
+            TeacherEditListileWidget(
               icon: Icons.home,
               subtitle: GooglePoppinsWidgets(
                   text: UserCredentialsController.teacherModel?.houseName ?? "",
