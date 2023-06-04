@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,7 +16,7 @@ void showToast({required String msg}) {
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.red,
-    textColor: Colors.white,  
+    textColor: Colors.white,
     fontSize: 16.0,
   );
 }
@@ -43,21 +44,21 @@ Future<void> userLogOut(BuildContext context) async {
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title:  Text('Logout'.tr),
+        title: Text('Logout'.tr),
         content: SingleChildScrollView(
           child: ListBody(
-            children:  <Widget>[Text('Are you sure to Logout ?'.tr)],
+            children: <Widget>[Text('Are you sure to Logout ?'.tr)],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child:  Text('Cancel'.tr),
+            child: Text('Cancel'.tr),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child:  Text('Ok'.tr),
+            child: Text('Ok'.tr),
             onPressed: () async {
               await FirebaseAuth.instance.signOut().then((value) async {
                 await SharedPreferencesHelper.clearSharedPreferenceData();
@@ -91,3 +92,5 @@ void handleFirebaseError(FirebaseAuthException error) {
       break;
   }
 }
+
+

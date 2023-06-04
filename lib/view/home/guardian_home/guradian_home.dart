@@ -10,8 +10,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../constant/sizes/constant.dart';
+import '../student_home/Student Edit Profile/guardian_edit_profile.dart';
 
 class GuardianHomeScreen extends StatefulWidget {
   @override
@@ -96,7 +98,7 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                //  Get.to(const UserEditPage());
+                                Get.to(const GuardianEditProfileScreen());
                               },
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
