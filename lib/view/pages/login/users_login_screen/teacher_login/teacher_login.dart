@@ -53,10 +53,10 @@ class TeacherLoginScreen extends StatelessWidget {
                   children: [
                     // Enter Mail id Session >>>>>>>
                     Padding(
-                      padding: EdgeInsets.only(right: 140.w),
+                      padding: EdgeInsets.only(right: 140.w,left: 10.w),
                       child: GoogleMonstserratWidgets(
-                        fontsize: 45,
-                        text: 'Login'.tr,
+                        fontsize: 30.w,
+                        text: 'Teacher Login'.tr,
                         color: cblack,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.5,
