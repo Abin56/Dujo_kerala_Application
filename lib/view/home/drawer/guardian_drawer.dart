@@ -10,6 +10,7 @@ import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart'
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,15 +26,15 @@ class GuardianHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 270,
+      height: 270.h,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 0,
-            width: 150,
+            height: 100.h,
+            width: 150.h,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(

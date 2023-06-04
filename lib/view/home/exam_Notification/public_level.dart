@@ -44,12 +44,12 @@ class PublicLevel extends StatelessWidget {
                                 date: stringTimeToDateConvert(data.publishDate),
                                 examName: data.examName));
                           },
-                          child: SizedBox(
-                            height: 100,
+                          
+                         
                             child: Container(
                               margin: EdgeInsets.only(
                                   top: 10.h, left: 10.h, right: 10.h),
-                              height: 120.h,
+                              height: 135.h,
                               width: 80.w,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.h),
@@ -57,7 +57,7 @@ class PublicLevel extends StatelessWidget {
                               ),
                               //child: Text(data.examName)
                               child: Padding(
-                                padding: EdgeInsets.only(top: 20.h, left: 20.w),
+                                padding: EdgeInsets.only(top: 12.h, left: 20.w),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class PublicLevel extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
+                          
                         );
                       },
                       separatorBuilder: (context, index) {

@@ -46,46 +46,49 @@ class UserStateLevel extends StatelessWidget {
                                 date: stringTimeToDateConvert(data.publishDate),
                                 examName: data.examName));
                           },
-                          child: SizedBox(
-                            height: 100,
+                          
                             child: Container(
                                 margin: EdgeInsets.only(
                                     top: 10.h, left: 10.h, right: 10.h),
-                                height: 120.h,
+                                height: 135.h,
                                 width: 80.w,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.h),
                                   color: adminePrimayColor,
                                 ),
-                              child: Column(
-                                children: [
-                                //  Text(data.examName),
-
-                                 GooglePoppinsWidgets(
+                              child: Padding(
+                                padding:  EdgeInsets.only(top: 12.h,left: 10.h),
+                                child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                  //  Text(data.examName),
+                              
+                                   GooglePoppinsWidgets(
+                                            text:
+                                                "Exam Name  :   ${data.examName}",
+                                            fontsize: 16.h,
+                                            color: cWhite),
+                                        SizedBox(
+                                          height: 5.w,
+                                        ),
+                                        GooglePoppinsWidgets(
                                           text:
-                                              "Exam Name  :   ${data.examName}",
-                                          fontsize: 16.h,
-                                          color: cWhite),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      GooglePoppinsWidgets(
-                                        text:
-                                            "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
-                                        fontsize: 14.h,
-                                        color: cWhite,
-                                      ),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      GooglePoppinsWidgets(
-                                          text:
-                                              "Starting date :  ${data.startingDate}",
+                                              "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
                                           fontsize: 14.h,
-                                          color: cWhite),
-                                ],
+                                          color: cWhite,
+                                        ),
+                                        SizedBox(
+                                          height: 5.w,
+                                        ),
+                                        GooglePoppinsWidgets(
+                                            text:
+                                                "Starting date :  ${data.startingDate}",
+                                            fontsize: 14.h,
+                                            color: cWhite),
+                                  ],
+                                ),
                               )),
-                          ),
+                          
                         );
                       },
                       separatorBuilder: (context, index) {

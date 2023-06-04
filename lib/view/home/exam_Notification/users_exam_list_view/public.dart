@@ -29,7 +29,7 @@ class UserPublicLevel extends StatelessWidget {
                 if (snaps.data!.docs.isEmpty) {
                   return Center(
                     child: GooglePoppinsWidgets(
-                        text: 'No Records Found', fontsize: 20),
+                        text: 'No Records Found', fontsize: 20.h),
                   );
                 } else {
                   return ListView.separated(
@@ -44,52 +44,52 @@ class UserPublicLevel extends StatelessWidget {
                                 date: stringTimeToDateConvert(data.publishDate),
                                 examName: data.examName));
                           },
-                          child: SizedBox(
-                            height: 100,
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 10.h, left: 10.h, right: 10.h),
-                                height: 120.h,
-                                width: 80.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.h),
-                                  color: adminePrimayColor,
-                                ),
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 20.h, left: 20.w),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      // Text(data.examName),
-
-                                      GooglePoppinsWidgets(
-                                          text:
-                                              "Exam Name  :   ${data.examName}",
-                                          fontsize: 16.h,
-                                          color: cWhite),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      GooglePoppinsWidgets(
-                                        text:
-                                            "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
-                                        fontsize: 14.h,
-                                        color: cWhite,
-                                      ),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      GooglePoppinsWidgets(
-                                          text:
-                                              "Starting date :  ${data.startingDate}",
-                                          fontsize: 14.h,
-                                          color: cWhite),
-                                    ],
+                          child: Expanded(
+                           
+                              child: Container(
+                                  margin: EdgeInsets.only(
+                                      top: 10.h, left: 10.h, right: 10.h),
+                                  height: 135.h,
+                                  width: 80.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.h),
+                                    color: adminePrimayColor,
                                   ),
-                                )),
+                                  child: Padding(
+                                    padding:  EdgeInsets.only(top: 12.h,left: 10.h),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                        // Text(data.examName),
+                                      children: [
+                                                              
+                                        GooglePoppinsWidgets(
+                                            text:
+                                                "Exam Name  :   ${data.examName}",
+                                            fontsize: 16.h,
+                                            color: cWhite),
+                                        SizedBox(
+                                          height: 5.w,
+                                        ),
+                                        GooglePoppinsWidgets(
+                                          text:
+                                              "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
+                                          fontsize: 14.h,
+                                          color: cWhite,
+                                        ),
+                                        SizedBox(
+                                          height: 5.w,
+                                        ),
+                                        GooglePoppinsWidgets(
+                                            text:
+                                                "Starting date :  ${data.startingDate}",
+                                            fontsize: 14.h,
+                                            color: cWhite),
+                                      ],
+                                    ),
+                                  )),
+                            
                           ),
                         );
                       },

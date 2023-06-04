@@ -26,7 +26,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 270,
+      height: 270.h,
       padding: EdgeInsets.only(bottom: 20, top: 15.h),
       child: Column(
         //mainAxisAlignment: MainAxisAlignment.spacearound,
@@ -37,6 +37,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
             height: 90.h,
             width: 150.h,
             decoration: const BoxDecoration(
+             // color: cred,
               shape: BoxShape.circle,
               image: DecorationImage(
                 image: NetworkImage(
@@ -47,7 +48,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
           Text(
             "Lepton DuJo",
             style: GoogleFonts.montserrat(
-                color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
+                color: Colors.black, fontSize: 25.h, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
             height: 1,
@@ -56,7 +57,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
             "Watch and Guide      \n  Let them Study",
             style: GoogleFonts.poppins(
                 color: Colors.black.withOpacity(0.5),
-                fontSize: 10,
+                fontSize: 10.h,
                 fontWeight: FontWeight.w600),
           ),
           TextButton(
@@ -65,7 +66,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
             },
             child: Text(
               "Logout".tr,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.h),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.h),
             ),
           )
         ],
@@ -80,12 +81,12 @@ Widget MenuItem(int id, String image, String title, bool selected, onTap) {
     child: InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding:  EdgeInsets.all(15.0.h),
         child: Row(
           children: [
             Expanded(
               child: Container(
-                height: 30,
+                height: 30.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     image: DecorationImage(image: AssetImage(image))),
@@ -211,7 +212,7 @@ Widget MyDrawerList(context) {
         kHeight10,
         Container(
           color: Colors.grey.withOpacity(0.2),
-          height: 200,
+          height: 200.h,
           width: double.infinity,
           child: Stack(children: [
             Positioned(
@@ -233,8 +234,8 @@ Widget MyDrawerList(context) {
               ),
             ),
             Positioned(
-                top: 40,
-                left: 30,
+                top: 40.h,
+                left: 30.h,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -273,9 +274,9 @@ Widget MyDrawerList(context) {
                       ),
                     ],
                   ),
-                  const Text(
+                   Text(
                     "    1.0.0",
-                    style: TextStyle(color: Colors.black, fontSize: 11.5),
+                    style: TextStyle(color: Colors.black, fontSize: 11.5.h),
                   ),
                 ],
               ),
@@ -294,9 +295,9 @@ Widget emptyDisplay(String section) {
       children: [
         Text(
           "No $section Found",
-          style: const TextStyle(
+          style:  TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 25.h,
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,

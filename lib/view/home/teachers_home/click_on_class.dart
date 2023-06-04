@@ -322,10 +322,10 @@ var _acc_images = [
   'assets/images/classroom.png',
   'assets/images/exam.png',
   'assets/images/library.png',
-  'assets/images/school_building.png',
+  'assets/images/notices.png',
   'assets/images/subjects.png',
   'assets/images/activity.png',
-  'assets/images/teachers.png',
+  'assets/images/meetings.png',
 ];
 var hasDataImages = [
   'assets/images/attendance.png',
@@ -333,11 +333,11 @@ var hasDataImages = [
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
-  'assets/images/school_building.png',
+  'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/splash.png',
+  'assets/images/progressreport.png',
   'assets/images/subjects.png',
-  'assets/images/teachers.png',
+  'assets/images/meetings.png',
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,

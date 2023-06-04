@@ -140,7 +140,7 @@ var _acc_images = [
   'assets/images/events.png',
   'assets/images/splash.png',
   'assets/images/leave_apply.png',
-  'assets/images/message.png',
+  'assets/images/leaveapplica.png',
   'assets/images/result.png',
   'assets/images/leaveapplica.png',
   'assets/images/complainta.png',

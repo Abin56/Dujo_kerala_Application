@@ -10,7 +10,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../utils/utils.dart';
 import '../../../widgets/drop_down/all_subject_drop_down.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
@@ -400,7 +399,7 @@ class _TStateLevelState extends State<TStateLevel> {
                             padding:  EdgeInsets.only(left: 10.h,right: 10.h),
                             child: Container(
                                margin: EdgeInsets.only(top: 10.h,left: 10.h,right: 10.h),
-                             height:120.h,
+                             height:140.h,
                              width: 80.w,
                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.h),color:adminePrimayColor,),
 
@@ -412,7 +411,7 @@ class _TStateLevelState extends State<TStateLevel> {
                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                 
-                                  GooglePoppinsWidgets(text:"Exam Name  :   ${data.examName}", fontsize: 16.h,color: cWhite),
+                                  GooglePoppinsWidgets(text:"Exam Nam  :   ${data.examName}", fontsize: 16.h,color: cWhite),
                                   SizedBox(height: 5.w,),
                                       GooglePoppinsWidgets(text:"Published date :  ${stringTimeToDateConvert(data.publishDate)}", fontsize: 14.h,color: cWhite,),
                                       SizedBox(height: 5.w,),
