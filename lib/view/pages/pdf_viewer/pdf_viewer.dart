@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,12 +46,18 @@ class _PDFSectionScreenState extends State<PDFSectionScreen> {
   @override
   Widget build(BuildContext context) {
     routingPDfPage(context);
-    return const SafeArea(
+    return  SafeArea(
       child: Scaffold(
-        body: Center(
-            child: CircularProgressIndicator(
-          color: Colors.red,
-        )),
+      appBar: AppBar(title: Text("Study Material"),backgroundColor: adminePrimayColor,),
+        body:  Column(
+          children: const [
+            Center(
+                child: CircularProgressIndicator(
+              color: Colors.red,
+            )),
+           
+          ],
+        ),
       ),
     );
   }

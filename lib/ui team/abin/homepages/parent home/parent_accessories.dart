@@ -136,7 +136,7 @@ var _acc_images = [
   'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
-  'assets/images/notice.jpg',
+  'assets/images/notices.png',
   'assets/images/events.png',
   'assets/images/splash.png',
   'assets/images/leave_apply.png',

@@ -9,14 +9,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
-import '../../../sruthi/Exam Notification/Teacher_Upload/exm_teacher_upload.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
 import '../../pages/teacher_list/teacher_list.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
-import '../general_instructions/general_instructions.dart';
 import '../parent_home/progress_report/progress_report.dart';
 import '../student_home/time_table/time_table_display.dart';
 
@@ -155,10 +153,10 @@ var _acc_images = [
   'assets/images/leaveapplica.png',
   'assets/images/library.png',
   'assets/images/homework.png',
-  'assets/images/school_building.png',
+  'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/splash.png',
+  'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/teachers.png',
+  'assets/images/meetings.png',
 ];
