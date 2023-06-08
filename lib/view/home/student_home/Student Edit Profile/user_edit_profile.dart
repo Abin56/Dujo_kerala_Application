@@ -47,7 +47,7 @@ class StudentProfileEditPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stack(children: const [
+              Stack(children: [
                 SingleChildScrollView(
                   child: CircleAvatharImageSelectionWidget(),
                 ),
