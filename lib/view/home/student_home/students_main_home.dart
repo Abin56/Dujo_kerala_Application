@@ -8,6 +8,7 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../../widgets/container_image.dart';
 import '../sample/under_maintance.dart';
 
@@ -46,8 +47,8 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
     List<Widget> pages = [
       StudentHomeScreen(),
       const UnderMaintanceScreen(text: ""),
-     const StudentsRoomListScreen(),
-      const UnderMaintanceScreen(text: ""),
+      const StudentsRoomListScreen(),
+      const ChatScreen(),
     ];
     return Scaffold(
       appBar: AppBar(
