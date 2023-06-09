@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../model/Signup_Image_Selction/image_selection.dart';
+import '../../view/constant/sizes/constant.dart';
 import '../userCredentials/user_credentials.dart';
 
 class TeacherSignUpController extends GetxController {
@@ -98,6 +99,10 @@ class TeacherSignUpController extends GetxController {
             .doc(value.user?.uid)
             .set(teacherNewModel.toMap())
             .then((value) {
+          FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: UserEmailandPasswordSaver.userEmail,
+              password: UserEmailandPasswordSaver.userPassword);
+        }).then((value) {
           firebaseData
               .collection('TempTeacherList')
               .doc(UserCredentialsController.teacherModel?.docid)

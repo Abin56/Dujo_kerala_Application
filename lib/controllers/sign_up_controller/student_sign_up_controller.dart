@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +126,12 @@ class StudentSignUpController extends GetxController {
               .doc(UserCredentialsController.schoolId)
               .collection('AllStudents')
               .doc(UserCredentialsController.studentModel?.docid)
-              .set(studentModel.toJson());
+              .set(studentModel.toJson())
+              .then((value) {
+            FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: UserEmailandPasswordSaver.userEmail,
+                password: UserEmailandPasswordSaver.userPassword);
+          });
         });
       });
 
