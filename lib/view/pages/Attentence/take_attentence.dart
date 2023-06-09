@@ -1,15 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../widgets/button_container_widget.dart';
@@ -38,74 +33,11 @@ class TakeAttenenceScreen extends StatefulWidget {
 class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   bool? present;
   Map<String, bool?> presentlist = {};
-  String timer = '';
-  List<String> tokenList = [];
-  List<String> tokenList2 = [];
-  DateTime? attendanceTime;
-
-
-  List<Map<String, dynamic>> parentListOfAbsentees = []; 
-  List<Map<String, dynamic>> guardianListOfAbsentees = []; 
-
-  Future<void> sendPushMessage(String token, String body, String title) async {
-    try {
-      final reponse = await http.post(
-        Uri.parse('https://fcm.googleapis.com/fcm/send'),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-          'Authorization':
-              'key=AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp'
-        },
-        body: jsonEncode(
-          <String, dynamic>{
-            'priority': 'high',
-            'data': <String, dynamic>{
-              'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-              'status': 'done',
-              'body': body,
-              'title': title,
-            },
-            "notification": <String, dynamic>{
-              'title': title,
-              'body': body,
-              'android_channel_id': 'high_importance_channel'
-            },
-            'to': token,
-          },
-        ),
-      );
-      log(reponse.body.toString());
-    } catch (e) {
-      if (kDebugMode) {
-        log("error push Notification");
-      }
-    }
-  }
-
-  Future<void> getTime() async {
-    DocumentSnapshot<Map<String, dynamic>> timersnap = await FirebaseFirestore
-        .instance
-        .collection('SchoolListCollection')
-        .doc(UserCredentialsController.schoolId)
-        .collection('Notifications')
-        .doc('Attendance')
-        .get();
-    log(timersnap.data()!['timeToDeliverAbsenceNotification']);
-    timer = timersnap.data()!['timeToDeliverAbsenceNotification'];
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getTime();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take Attendance'.tr),
+        title: Text('Take Attendence'.tr),
         backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
@@ -159,6 +91,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               final date = DateTime.now();
                               DateTime parseDate =
                                   DateTime.parse(date.toString());
+                              final month = DateFormat('MMMM-yyyy');
+                              String monthwise = month.format(parseDate);
                               final DateFormat formatter =
                                   DateFormat('dd-MM-yyyy');
                               String formatted = formatter.format(parseDate);
@@ -170,13 +104,9 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .collection("classes")
                                   .doc(widget.classID)
                                   .collection("Attendence")
-                                  .doc(formatted)
-                                  .set({
-                                "docid": formatted,
-                                'dDate': formattedd,
-                                'day': dayformattedd
-                              }, SetOptions(merge: true)).then((value) {
-                                FirebaseFirestore.instance
+                                  .doc(monthwise)
+                                  .set({'id': monthwise}).then((value) async {
+                                await FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
                                     .collection(widget.batchId)
@@ -184,14 +114,14 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     .collection("classes")
                                     .doc(widget.classID)
                                     .collection("Attendence")
+                                    .doc(monthwise)
+                                    .collection(monthwise)
                                     .doc(formatted)
-                                    .collection("Subjects")
-                                    .doc(widget.subjectID)
                                     .set({
-                                  "docid": widget.subjectID,
-                                  'subject': widget.subjectName,
-                                  'date': DateTime.now().toString()
-                                }).then((value) {
+                                  "docid": formatted,
+                                  'dDate': formattedd,
+                                  'day': dayformattedd
+                                }, SetOptions(merge: true)).then((value) {
                                   FirebaseFirestore.instance
                                       .collection("SchoolListCollection")
                                       .doc(widget.schoolID)
@@ -200,18 +130,38 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .collection("classes")
                                       .doc(widget.classID)
                                       .collection("Attendence")
+                                      .doc(monthwise)
+                                      .collection(monthwise)
                                       .doc(formatted)
                                       .collection("Subjects")
                                       .doc(widget.subjectID)
-                                      .collection('PresentList')
-                                      .doc(snapshot.data!.docs[index]
-                                          ['studentName'])
                                       .set({
-                                    "studentName": snapshot.data!.docs[index]
-                                        ['studentName'],
-                                    "uid": snapshot.data!.docs[index]['docid'],
-                                    "present": true,
-                                    "Date": DateTime.now().toString()
+                                    "docid": widget.subjectID,
+                                    'subject': widget.subjectName,
+                                    'date': DateTime.now().toString()
+                                  }).then((value) {
+                                    FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(widget.schoolID)
+                                        .collection(widget.batchId)
+                                        .doc(widget.batchId)
+                                        .collection("classes")
+                                        .doc(widget.classID)
+                                        .collection("Attendence")
+                                        .doc(monthwise)
+                                        .collection(monthwise)
+                                        .doc(formatted)
+                                        .collection("Subjects")
+                                        .doc(widget.subjectID)
+                                        .collection('PresentList')
+                                        .doc(snapshot.data!.docs[index]
+                                            ['studentName'])
+                                        .set({
+                                      "studentName": snapshot.data!.docs[index]
+                                          ['studentName'],
+                                      "present": true,
+                                      "Date": DateTime.now().toString()
+                                    });
                                   });
                                 });
                               });
@@ -231,10 +181,13 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               final date = DateTime.now();
                               DateTime parseDate =
                                   DateTime.parse(date.toString());
+                              final month = DateFormat('MMMM-yyyy');
+                              String monthwise = month.format(parseDate);
+
                               final DateFormat formatter =
                                   DateFormat('dd-MM-yyyy');
                               String formatted = formatter.format(parseDate);
-                              await FirebaseFirestore.instance
+                                      await FirebaseFirestore.instance
                                   .collection("SchoolListCollection")
                                   .doc(widget.schoolID)
                                   .collection(widget.batchId)
@@ -242,6 +195,19 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .collection("classes")
                                   .doc(widget.classID)
                                   .collection("Attendence")
+                                  .doc(monthwise).set({
+                                    'id':monthwise
+                                  }).then((value) async{
+await FirebaseFirestore.instance
+                                  .collection("SchoolListCollection")
+                                  .doc(widget.schoolID)
+                                  .collection(widget.batchId)
+                                  .doc(widget.batchId)
+                                  .collection("classes")
+                                  .doc(widget.classID)
+                                  .collection("Attendence")
+                                  .doc(monthwise)
+                                  .collection(monthwise)
                                   .doc(formatted)
                                   .set({
                                 "docid": formatted,
@@ -254,6 +220,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     .collection("classes")
                                     .doc(widget.classID)
                                     .collection("Attendence")
+                                    .doc(monthwise)
+                                    .collection(monthwise)
                                     .doc(formatted)
                                     .collection("Subjects")
                                     .doc(widget.subjectID)
@@ -270,6 +238,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .collection("classes")
                                       .doc(widget.classID)
                                       .collection("Attendence")
+                                      .doc(monthwise)
+                                      .collection(monthwise)
                                       .doc(formatted)
                                       .collection("Subjects")
                                       .doc(widget.subjectID)
@@ -279,12 +249,14 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .set({
                                     "studentName": snapshot.data!.docs[index]
                                         ['studentName'],
-                                    "uid": snapshot.data!.docs[index]['docid'],
                                     "present": false,
                                     "Date": DateTime.now().toString()
                                   });
                                 });
                               });
+
+                                  });
+                              
                               log(present.toString());
                             },
                             icon: const Icon(Icons.remove))
@@ -314,9 +286,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
           width: 130,
           child: Center(
               child: Text(
-            'Confirm'.tr,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white),
+            'View'.tr,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           )),
         ),
       ),
@@ -332,6 +303,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
+        final month = DateFormat('MMMM-yyyy');
+        String monthwise = month.format(parseDate);
         return AlertDialog(
           title: const Text('Absent List'),
           content: SingleChildScrollView(
@@ -349,6 +322,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                           .collection("classes")
                           .doc(widget.classID)
                           .collection("Attendence")
+                          .doc(monthwise)
+                          .collection(monthwise)
                           .doc(formatted)
                           .collection("Subjects")
                           .doc(widget.subjectID)
@@ -392,134 +367,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
           actions: <Widget>[
             TextButton(
               child: const Text('ok'),
-              onPressed: () async {
+              onPressed: () {
                 Navigator.of(context).pop();
-                attendanceTime = DateTime.now();
-                 String formattedDate = DateFormat.yMMMMd().format(attendanceTime!);
-                  String formattedTime = DateFormat.jm().format(DateTime.now()); 
-                Future<QuerySnapshot<Map<String, dynamic>>> absentStudentsList =
-                    FirebaseFirestore.instance
-                        .collection("SchoolListCollection")
-                        .doc(widget.schoolID)
-                        .collection(widget.batchId)
-                        .doc(widget.batchId)
-                        .collection("classes")
-                        .doc(widget.classID)
-                        .collection("Attendence")
-                        .doc(formatted)
-                        .collection("Subjects")
-                        .doc(widget.subjectID)
-                        .collection('PresentList')
-                        .where('present', isEqualTo: false)
-                        .get(); 
-
-
-                QuerySnapshot<Map<String, dynamic>> snapshot =
-                    await absentStudentsList;
-                List<Map<String, dynamic>> mappedAbsentStudentsList =
-                    snapshot.docs.map((doc) => doc.data()).toList();
-
-                Future<QuerySnapshot<Map<String, dynamic>>> parentss =
-                    FirebaseFirestore.instance
-                        .collection("SchoolListCollection")
-                        .doc(widget.schoolID)
-                        .collection(widget.batchId)
-                        .doc(widget.batchId)
-                        .collection("classes")
-                        .doc(widget.classID)
-                        .collection('ParentCollection')
-                        .get(); 
-
-                Future<QuerySnapshot<Map<String, dynamic>>> guardianss =
-                    FirebaseFirestore.instance
-                        .collection("SchoolListCollection")
-                        .doc(widget.schoolID)
-                        .collection(widget.batchId)
-                        .doc(widget.batchId)
-                        .collection("classes")
-                        .doc(widget.classID)
-                        .collection('GuardianCollection')
-                        .get();
-
-                QuerySnapshot<Map<String, dynamic>> snapshot2 = await parentss;
-                List<Map<String, dynamic>> parentsList =
-                    snapshot2.docs.map((doc) => doc.data()).toList();  
-
-
-                 QuerySnapshot<Map<String, dynamic>> snapshot3 = await guardianss;
-                List<Map<String, dynamic>> guardiansList =
-                    snapshot2.docs.map((doc) => doc.data()).toList();
-
-                bool isValueEqual = false;
-
-                for (var item1 in parentsList) {
-                  for (var item2 in mappedAbsentStudentsList) {
-                    if (item1['studentID'] == item2['uid']) {
-                      log('yesss!!!!!');
-                      parentListOfAbsentees.add(item1);
-
-                      log('THE LIST : ${parentListOfAbsentees.length.toString()}');
-                      isValueEqual = true;
-                      break;
-                    }
-                  }
-                  //parentListOfAbsentees
-                }
-
-                 for (var item1 in guardiansList) {
-                  for (var item2 in mappedAbsentStudentsList) {
-                    if (item1['studentID'] == item2['uid']) {
-                      log('yesss!!!!!');
-                      guardianListOfAbsentees.add(item1);
-
-                      log('THE GLIST : ${parentListOfAbsentees.length.toString()}');
-                      isValueEqual = true;
-                      break;
-                    }
-                  }
-                  //parentListOfAbsentees
-                }
-
-                log('HWG: $parentListOfAbsentees');
-                for (var k in parentListOfAbsentees) {
-                  tokenList.add(k['deviceToken']);
-                } 
-
-                    for (var r in guardianListOfAbsentees) {
-                  tokenList2.add(r['deviceToken']);
-                }
-
-
-                Timer(Duration(minutes: int.parse(timer)), () {
-                  // Function to be executed after the duration
-
-                  for (var l in tokenList) {
-                    for (var i = 0; i < tokenList.length; i++) {
-                      sendPushMessage(tokenList[i], 'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.', 'Absent Notification');
-                    }
-                  } 
-
-                   for (var m in tokenList2) {
-                    for (var i = 0; i < tokenList2.length; i++) {
-                      sendPushMessage(tokenList2[i], 'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.', 'Absent Notification');
-                    }
-                  }
-                });
-
-                //                        for (String searchValue in mappedAbsentStudentsList[0]['uid']) {
-                // QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
-                //     .collection(collectionPath)
-                //     .where('propertyName', isEqualTo: searchValue)
-                //     .get();
-
-                // FirebaseFirestore.instance //how to check whether a list of items property value is equal to property of another list values (in loop)
-                //           .collection("SchoolListCollection")
-                //           .doc(widget.schoolID)
-                //           .collection(widget.batchId)
-                //           .doc(widget.batchId)
-                //           .collection("classes")
-                //           .doc(widget.classID)
-                //           .collection('ParentCollection')
               },
             ),
           ],

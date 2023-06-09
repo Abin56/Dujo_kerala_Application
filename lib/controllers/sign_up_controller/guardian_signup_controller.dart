@@ -10,6 +10,7 @@ import 'package:uuid/uuid.dart';
 import '../../model/Signup_Image_Selction/image_selection.dart';
 import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
+import '../../view/constant/sizes/constant.dart';
 import '../../view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import '../userCredentials/user_credentials.dart';
 
@@ -118,7 +119,11 @@ class GuardianSignUpController extends GetxController {
           await firebaseData
               .doc(value.user?.uid)
               .set(guardianModel.toMap())
-              .then((value) async {
+              .then((value) {
+            FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: UserEmailandPasswordSaver.userEmail,
+                password: UserEmailandPasswordSaver.userPassword);
+          }).then((value) async {
             await firebaseDataTemp
                 .doc(UserCredentialsController.guardianModel?.docid)
                 .delete()
@@ -133,8 +138,8 @@ class GuardianSignUpController extends GetxController {
               GuardianLoginScreen(),
             );
           });
-        }else{
-          isLoading.value=false;
+        } else {
+          isLoading.value = false;
           showToast(msg: 'Please Upload Image');
         }
       });

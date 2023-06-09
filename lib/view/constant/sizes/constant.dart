@@ -65,4 +65,8 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
 class TeacherLoginIDSaver {
   static String id = '';
 }
+class UserEmailandPasswordSaver{
+  static String userEmail='';
+  static String userPassword='';
+}
 const uuid = Uuid();

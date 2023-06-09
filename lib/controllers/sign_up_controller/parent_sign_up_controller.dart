@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +116,11 @@ class ParentSignUpController extends GetxController {
           await firebaseData
               .doc(value.user?.uid)
               .set(parentModel.toMap())
-              .then((value) async {
+              .then((value) {
+            FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: UserEmailandPasswordSaver.userEmail,
+                password: UserEmailandPasswordSaver.userPassword);
+          }).then((value) async {
             await firebaseDataTemp
                 .doc(UserCredentialsController.parentModel?.docid)
                 .delete()
