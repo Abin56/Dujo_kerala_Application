@@ -26,7 +26,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 270.h,
+      height: 300,
       padding: EdgeInsets.only(bottom: 20, top: 15.h),
       child: Column(
         //mainAxisAlignment: MainAxisAlignment.spacearound,

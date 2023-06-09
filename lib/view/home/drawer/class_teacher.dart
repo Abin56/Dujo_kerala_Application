@@ -31,7 +31,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
     return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 300,
+      height: 310,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

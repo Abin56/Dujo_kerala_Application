@@ -160,7 +160,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
             width: 200.w,
             child: Center(
               child: GoogleMonstserratWidgets(
-                text: 'Teacher Login'.tr,
+                text: 'Teacher '.tr,
                 letterSpacing: 1,
                 fontsize: 20,
                 fontWeight: FontWeight.w500,
@@ -185,7 +185,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
               child: GoogleMonstserratWidgets(
                 text: 'Class Teacher'.tr,
                 fontsize: 19,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

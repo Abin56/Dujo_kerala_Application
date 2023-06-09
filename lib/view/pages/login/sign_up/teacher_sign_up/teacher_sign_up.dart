@@ -136,8 +136,8 @@ class TeachersSignUpPage extends StatelessWidget {
                   SinUpTextFromFiled(
                     text: "Your Name".tr,
                     hintText:
-                        UserCredentialsController.teacherModel!.teacherName ??
-                            "",
+                        //UserCredentialsController.teacherModel!.teacherName ??
+                            "Enter Your Name",
                     textfromController: teacherController.nameController,
                     validator: checkFieldEmpty,
                   ),
@@ -159,7 +159,7 @@ class TeachersSignUpPage extends StatelessWidget {
                               selectedItem: 'Select Gender'.tr,
                               validator: (v) =>
                                   v == null ? "required field" : null,
-                              items:  ['Male', 'Female', 'Others'],
+                              items:  const ['Male', 'Female', 'Others'],
                               onChanged: (val) {
                                 teacherController.gender = val;
                               },

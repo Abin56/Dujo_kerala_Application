@@ -32,22 +32,35 @@ class ClassTeacherAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!), //Take Attendance
-      AttendenceBookScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendance Book
-      LeaveLettersListviewScreen(
+
+          const StudentShowTimeTable(), //TimeTable
+
+          LeaveLettersListviewScreen(
           schooilID: UserCredentialsController.schoolId!,
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
-      const AddTimeTable(), //Exam
-      const StudentShowTimeTable(), //TimeTable
+
+          
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
         schoolID: UserCredentialsController.schoolId!,
         teacherID: UserCredentialsController.teacherModel!.docid!,
       ), //Home Work
+    
+    const MyStudents() , //My students
+
+     StudentSubjectHome(), //Subject
+
+     SchoolLevelMeetingPage(), //Meetings
+
+      AttendenceBookScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!), //Attendance Book
+      
+      const AddTimeTable(), //Exam
+    
       NoticePage(), //Notice
       const EventList(), //Events
       CreateExamNameScreen(
@@ -55,13 +68,12 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-       StudentSubjectHome(), //Subject
+      
      TeacherSubjectWiseList(), //Teachers
-      SchoolLevelMeetingPage(), //Meetings
-
+      
       // StudentSubjectHome(), 
 
-      const MyStudents()  //My students
+      
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -145,10 +157,11 @@ class ClassTeacherAccessories extends StatelessWidget {
 List<String> _acc_text = [
 
   'Take Attendance'.tr,
+  'TimeTable'.tr,
+  
   'Attendence Book'.tr,
   'Leave Letters'.tr,
   'Exams'.tr,
-  'TimeTable'.tr,
   'HomeWorks'.tr,
   'Notices'.tr,
   'Events'.tr,
@@ -161,10 +174,11 @@ List<String> _acc_text = [
 ];
 var _acc_images = [
   'assets/images/attendance.png',
+  'assets/images/library.png',
   'assets/images/classroom.png',
   'assets/images/leaveapplica.png',
   'assets/images/exam.png',
-  'assets/images/library.png',
+  
   'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',

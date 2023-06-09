@@ -490,7 +490,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                 }
 
 
-                Timer(Duration(hours: int.parse(timer)), () {
+                Timer(Duration(minutes: int.parse(timer)), () {
                   // Function to be executed after the duration
 
                   for (var l in tokenList) {
