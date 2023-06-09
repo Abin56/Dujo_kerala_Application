@@ -113,7 +113,10 @@ class StudentSignUpController extends GetxController {
           studentemail: emailController.text,
           userRole: UserCredentialsController.studentModel?.userRole ?? "");
 
-      await firebaseData.doc(userUid).set(studentModel.toJson()).then((value) {
+      await
+      
+       firebaseData.doc(userUid).set(studentModel.toJson())
+       .then((value) {
         firebaseDataTemp
             .doc(UserCredentialsController.studentModel?.docid ?? "")
             .delete()
@@ -126,12 +129,7 @@ class StudentSignUpController extends GetxController {
               .doc(UserCredentialsController.schoolId)
               .collection('AllStudents')
               .doc(UserCredentialsController.studentModel?.docid)
-              .set(studentModel.toJson())
-              .then((value) {
-            FirebaseAuth.instance.createUserWithEmailAndPassword(
-                email: UserEmailandPasswordSaver.userEmail,
-                password: UserEmailandPasswordSaver.userPassword);
-          });
+              .set(studentModel.toJson());
         });
       });
 

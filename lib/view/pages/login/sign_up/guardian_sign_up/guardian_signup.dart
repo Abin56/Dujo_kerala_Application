@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -219,7 +220,14 @@ class GuardianSignUp extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
+                                                      FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: UserEmailandPasswordSaver.userEmail,
+                                  password:
+                                      UserEmailandPasswordSaver.userPassword).then((value) async {
                             await guardianSignUpController.updateGuardianData();
+
+                                      });
                           }
                         },
                         child: Obx(

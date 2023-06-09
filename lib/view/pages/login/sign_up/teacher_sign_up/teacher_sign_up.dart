@@ -9,6 +9,7 @@ import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -137,7 +138,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     text: "Your Name".tr,
                     hintText:
                         //UserCredentialsController.teacherModel!.teacherName ??
-                            "Enter Your Name",
+                        "Enter Your Name",
                     textfromController: teacherController.nameController,
                     validator: checkFieldEmpty,
                   ),
@@ -159,7 +160,7 @@ class TeachersSignUpPage extends StatelessWidget {
                               selectedItem: 'Select Gender'.tr,
                               validator: (v) =>
                                   v == null ? "required field" : null,
-                              items:  const ['Male', 'Female', 'Others'],
+                              items: const ['Male', 'Female', 'Others'],
                               onChanged: (val) {
                                 teacherController.gender = val;
                               },
@@ -211,9 +212,15 @@ class TeachersSignUpPage extends StatelessWidget {
                           showToast(msg: "All Fields are mandatory");
                           return;
                         } else {
-                          teacherController
-                              .updateTeacherData()
-                              .then((value) => Get.offAll(UsersLoginScreen()));
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: UserEmailandPasswordSaver.userEmail,
+                                  password:
+                                      UserEmailandPasswordSaver.userPassword)
+                              .then((value) {
+                            teacherController.updateTeacherData().then(
+                                (value) => Get.offAll(UsersLoginScreen()));
+                          });
                         }
                       },
                       //   Get.offAll(const HomeScreen());

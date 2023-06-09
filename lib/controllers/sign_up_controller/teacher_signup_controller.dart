@@ -94,21 +94,19 @@ class TeacherSignUpController extends GetxController {
           imageId: imageId,
           imageUrl: imageUrl,
         );
-        firebaseData
+                 firebaseData
             .collection("Teachers")
             .doc(value.user?.uid)
             .set(teacherNewModel.toMap())
-            .then((value) {
-          FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: UserEmailandPasswordSaver.userEmail,
-              password: UserEmailandPasswordSaver.userPassword);
-        }).then((value) {
+        .then((value) {
           firebaseData
               .collection('TempTeacherList')
               .doc(UserCredentialsController.teacherModel?.docid)
               .delete();
         });
-      });
+              
+            });
+
 
       Get.find<GetImage>().pickedImage.value = "";
       isLoading.value = false;
