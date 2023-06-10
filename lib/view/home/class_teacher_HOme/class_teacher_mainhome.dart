@@ -51,26 +51,6 @@ class _ClassTeacherMainHomeScreenState
             height: 28.h,
             width: 90.w,
             imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor),
-          // actions: [
-          //   PopupMenuButton(
-          //     onSelected: (value) {
-          //       value = userLogOutController.logout.value;
-          //     },
-          //     itemBuilder: (context) => [
-          //       PopupMenuItem(
-          //         value: userLogOutController.logout.value,
-          //         onTap: () async {
-          //           userLogOutController.logout.value == true;
-          //           if (userLogOutController.logout.value == true) {
-          //             userLogOutController.logOut(context);
-          //           }
-          //         },
-          //         child: GestureDetector(
-          //             onTap: () async {}, child: const Text('Logout')),
-          //       )
-          //     ],
-          //   )
-          // ]),
      
       body: pages[_page],
       bottomNavigationBar: Container(

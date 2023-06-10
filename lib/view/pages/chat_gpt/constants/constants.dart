@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-Color scaffoldBackgroundColors = const Color(0xFF343541);
-Color cardColor = const Color(0xFF444654);
+Color scaffoldBackgroundColors = const Color.fromARGB(255, 195, 198, 233);
+Color cardColor = const Color.fromARGB(255, 197, 203, 240);
 
 // List<String> models = [
 //   'Model1',

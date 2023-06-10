@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/constants.dart';
 import '../providers/chats_provider.dart';
 import '../providers/models_provider.dart';
 import '../widgets/chat_widget.dart';
@@ -28,6 +27,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _listScrollController = ScrollController();
     textEditingController = TextEditingController();
     focusNode = FocusNode();
+  
     super.initState();
   }
 
@@ -45,24 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
-      backgroundColor: const Color(0xFF343541),
-      // appBar: AppBar(
-      //   backgroundColor: const Color(0xFF444654),
-      //   elevation: 2,
-      //   leading: Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: Image.asset(AssetsManager.openaiLogo),
-      //   ),
-      //   title: const Text("chat with AI"),
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () async {
-      //   await Services.showModalSheet(context: context);
-      //       },
-      //       icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
-      //     ),
-      //   ],
-      // ),
+      backgroundColor: const Color.fromARGB(255, 197, 203, 240),
       body: SafeArea(
         child: Column(
           children: [
@@ -83,7 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             if (_isTyping) ...[
               const SpinKitThreeBounce(
-                color: Colors.white,
+                color: Colors.black,
                 size: 18,
               ),
             ],
@@ -91,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
               height: 15,
             ),
             Material(
-              color: cardColor,
+              color: Colors.black.withOpacity(0.2),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -99,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     Expanded(
                       child: TextField(
                         focusNode: focusNode,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                         controller: textEditingController,
                         onSubmitted: (value) async {
                           await sendMessageFCT(
@@ -107,8 +90,9 @@ class _ChatScreenState extends State<ChatScreen> {
                               chatProvider: chatProvider);
                         },
                         decoration: const InputDecoration.collapsed(
-                            hintText: "How can I help you",
-                            hintStyle: TextStyle(color: Colors.grey)),
+                            hintText: "How can I help you ?",
+                            hintStyle: TextStyle(
+                                color: Color.fromARGB(255, 33, 33, 33))),
                       ),
                     ),
                     IconButton(
@@ -119,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         icon: const Icon(
                           Icons.send,
-                          color: Colors.white,
+                          color: Colors.black,
                         ))
                   ],
                 ),
@@ -147,7 +131,7 @@ class _ChatScreenState extends State<ChatScreen> {
           content: TextWidget(
             label: "You cant send multiple messages at a time",
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 226, 152, 146),
         ),
       );
       return;

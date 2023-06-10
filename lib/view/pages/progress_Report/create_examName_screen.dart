@@ -126,18 +126,16 @@ class CreateExamNameScreen extends StatelessWidget {
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      TextField(
+                      TextFormField(
+                        
                           controller: _examNameController,
                           decoration: InputDecoration(
-                              filled: true,
-                              fillColor:
-                                  const Color.fromARGB(255, 255, 255, 255),
+                            
                               hintText: 'Enter Exam Name',
 
                               // prefixIcon: Icon(Icons.email),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(19),
-                                borderSide: BorderSide.none,
                               )),
                           style: const TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),

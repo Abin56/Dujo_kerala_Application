@@ -1,5 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
-
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
@@ -41,28 +39,30 @@ class ChatWidget extends StatelessWidget {
                   child: chatIndex == 0
                       ? TextWidget(
                           label: msg,
+                          color: Colors.black,
                         )
                       : shouldAnimate
                           ? DefaultTextStyle(
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16),
-                              child: AnimatedTextKit(
-                                  isRepeatingAnimation: false,
-                                  repeatForever: false,
-                                  displayFullTextOnTap: true,
-                                  totalRepeatCount: 1,
-                                  animatedTexts: [
-                                    TyperAnimatedText(
-                                      msg.trim(),
-                                    ),
-                                  ]),
+                                  child: Text(msg.trim()),
+                              // child: AnimatedTextKit(
+                              //     isRepeatingAnimation: false,
+                              //     repeatForever: false,
+                              //     displayFullTextOnTap: true,
+                              //     totalRepeatCount: 1,
+                              //     animatedTexts: [
+                              //       TyperAnimatedText(
+                              //         msg.trim(),
+                              //       ),
+                              //     ]),
                             )
                           : Text(
                               msg.trim(),
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16),
                             ),
@@ -75,14 +75,14 @@ class ChatWidget extends StatelessWidget {
                         children: const [
                           Icon(
                             Icons.thumb_up_alt_outlined,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           SizedBox(
                             width: 5,
                           ),
                           Icon(
                             Icons.thumb_down_alt_outlined,
-                            color: Colors.white,
+                            color: Colors.black,
                           )
                         ],
                       ),
