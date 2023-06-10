@@ -82,7 +82,7 @@ class GuardianSignUpController extends GetxController {
 
       auth
           .signInWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text)
+              email: emailController.text.trim(), password: passwordController.text.trim())
           .then((value) async {
         if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
           imageId = uuid.v1();

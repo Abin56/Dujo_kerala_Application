@@ -140,9 +140,9 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20.h),
                     child: GestureDetector(
                       onTap: () async {
-                        if (parentSignUpController.passwordController.text !=
+                        if (parentSignUpController.passwordController.text.trim() !=
                             parentSignUpController
-                                .confirmPasswordController.text) {
+                                .confirmPasswordController.text.trim()) {
                           showToast(msg: "Password Missmatch".tr);
                           return;
                         }
@@ -156,9 +156,9 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                                   phoneNumber:
                                       "+91${UserCredentialsController.parentModel?.parentPhoneNumber}",
                                   userEmail: parentSignUpController
-                                      .emailController.text,
+                                      .emailController.text.trim(),
                                   userPassword: parentSignUpController
-                                      .passwordController.text,
+                                      .passwordController.text.trim,
                                 ));
                           } else {
                             showToast(msg: "Please select parent detail.");

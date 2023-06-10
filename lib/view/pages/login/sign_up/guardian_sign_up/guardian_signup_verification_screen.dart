@@ -143,9 +143,9 @@ class GuardianSignUpFirstScreen extends StatelessWidget {
                     child: GestureDetector(
                         onTap: () async {
                           if (guardianSignUpController
-                                  .passwordController.text !=
+                                  .passwordController.text.trim() !=
                               guardianSignUpController
-                                  .confirmPasswordController.text) {
+                                  .confirmPasswordController.text.trim()) {
                             showToast(msg: "Password Missmatch");
                             return;
                           }
@@ -159,9 +159,9 @@ class GuardianSignUpFirstScreen extends StatelessWidget {
                                     phoneNumber:
                                         "+91${UserCredentialsController.guardianModel?.guardianPhoneNumber}",
                                     userEmail: guardianSignUpController
-                                        .emailController.text,
+                                        .emailController.text.trim(),
                                     userPassword: guardianSignUpController
-                                        .passwordController.text,
+                                        .passwordController.text.trim(),
                                   ));
                             } else {
                               showToast(msg: "Please select Guardian detail.");

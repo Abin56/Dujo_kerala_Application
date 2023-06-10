@@ -101,16 +101,16 @@ class StudentSignUpController extends GetxController {
           docid: userUid,
           gender: gender ?? "",
           guardianId: UserCredentialsController.studentModel?.guardianId ?? "",
-          houseName: houseNameController.text,
+          houseName: houseNameController.text.trim(),
           parentId: UserCredentialsController.studentModel?.parentId ?? "",
           parentPhoneNumber:
               UserCredentialsController.studentModel?.parentPhoneNumber ?? "",
-          place: placeController.text,
+          place: placeController.text.trim(),
           profileImageId: imageId,
           profileImageUrl: imageUrl,
           studentName:
               UserCredentialsController.studentModel?.studentName ?? "",
-          studentemail: emailController.text,
+          studentemail: emailController.text.trim(),
           userRole: UserCredentialsController.studentModel?.userRole ?? "");
 
       await
