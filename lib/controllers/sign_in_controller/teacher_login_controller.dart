@@ -28,8 +28,8 @@ class TeacherLoginController extends GetxController {
       isLoading.value = true;
       await firebaseAuth
           .signInWithEmailAndPassword(
-        email: emailIdController.text,
-        password: passwordController.text,
+        email: emailIdController.text.trim(),
+        password: passwordController.text.trim(),
       )
           .then((value) async {
         final DocumentSnapshot<Map<String, dynamic>> result =
