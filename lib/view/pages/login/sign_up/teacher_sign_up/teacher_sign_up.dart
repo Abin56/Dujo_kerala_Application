@@ -212,43 +212,49 @@ class TeachersSignUpPage extends StatelessWidget {
                           showToast(msg: "All Fields are mandatory");
                           return;
                         } else {
-                          FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                                  email: UserEmailandPasswordSaver.userEmail,
-                                  password:
-                                      UserEmailandPasswordSaver.userPassword)
-                              .then((value) {
-                            teacherController.updateTeacherData().then((value) {
-                              return showDialog(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('Message'),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(
-                                        children: const <Widget>[
-                                          Text(
-                                              'Your Profile Created Successfully,\nPlease Login again')
-                                        ],
+                          if (getImageController.pickedImage.value.isEmpty) {
+                            return showToast(msg: 'Please upload your image');
+                          } else {
+                            FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: UserEmailandPasswordSaver.userEmail,
+                                    password:
+                                        UserEmailandPasswordSaver.userPassword)
+                                .then((value) {
+                              teacherController
+                                  .updateTeacherData()
+                                  .then((value) {
+                                return showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Message'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'Your Profile Created Successfully,\nPlease Login again')
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text('Ok'),
-                                        onPressed: () {
-                                          Get.offAll(UsersLoginScreen());
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Ok'),
+                                          onPressed: () {
+                                            Get.offAll(UsersLoginScreen());
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              });
+                              // .then(
+                              //     (value) =>);
                             });
-                            // .then(
-                            //     (value) =>);
-                          });
+                          }
                         }
                       },
                       //   Get.offAll(const HomeScreen());
