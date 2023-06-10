@@ -227,41 +227,41 @@ class ParentSignUpPage extends StatelessWidget {
                                     password:
                                         UserEmailandPasswordSaver.userPassword)
                                 .then((value) async {
-                              await parentSignUpController.updateParentData()        .then((value) {
-                                          return showDialog(
-                                            context: context,
-                                            barrierDismissible:
-                                                false, // user must tap button!
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text('Message'),
-                                                content: SingleChildScrollView(
-                                                  child: ListBody(
-                                                    children: const <Widget>[
-                                                      Text(
-                                                          'Your Profile Created Successfully,\nPlease Login again')
-                                                    ],
-                                                  ),
-                                                ),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: const Text('Ok'),
-                                                    onPressed: () {
-                                                      Navigator
-                                                          .pushAndRemoveUntil(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                        builder: (context) {
-                                                          return ParentLoginScreen();
-                                                        },
-                                                      ), (route) => false);
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        });
+                              await parentSignUpController
+                                  .updateParentData()
+                                  .then((value) {
+                                return showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Message'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'Your Profile Created Successfully,\nPlease Login again')
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Ok'),
+                                          onPressed: () {
+                                            Navigator.pushAndRemoveUntil(
+                                                context, MaterialPageRoute(
+                                              builder: (context) {
+                                                return ParentLoginScreen();
+                                              },
+                                            ), (route) => false);
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              });
                             });
                           }
                         },

@@ -14,7 +14,7 @@ class StudentSignInController extends GetxController {
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> signIn(BuildContext context) async {
+  Future<void>  signIn(BuildContext context) async {
     try {
       isLoading.value = true;
       await FirebaseAuth.instance

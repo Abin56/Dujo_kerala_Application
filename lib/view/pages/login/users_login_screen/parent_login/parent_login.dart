@@ -126,9 +126,7 @@ class ParentLoginScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 60.h),
                       child: GestureDetector(
                         onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            parentLoginController.signIn(context);
-                          }
+                      parentLoginController.signIn(context);
                         },
                         child: Obx(
                           () => parentLoginController.isLoading.value
