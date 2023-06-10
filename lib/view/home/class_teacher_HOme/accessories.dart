@@ -57,9 +57,7 @@ class ClassTeacherAccessories extends StatelessWidget {
      StudentSubjectHome(), //Subject
 
      SchoolLevelMeetingPage(), //Meetings
-
-      
-      
+ 
       const AddTimeTable(), //Exam
     
       NoticePage(), //Notice

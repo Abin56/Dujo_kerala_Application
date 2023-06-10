@@ -77,9 +77,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
               //                       child: Container(
               //                         width: 100, 
               //                         height: 100,
-              //                         color: Colors.orange,
+              //                         color: const Color.fromARGB(255, 141, 188, 226),
               //                         child:  Center(
-              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
               //                           //     ? 'fouthPeriod'
               //                           //     : periodList[index]][periodList[index]]),
               //                         ),
@@ -89,9 +89,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
               //                       child: Container(
               //                         width: 100, 
               //                         height: 100,
-              //                         color: Colors.orange,
+              //                         color: const Color.fromARGB(255, 141, 188, 226),
               //                         child:  Center(
-              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
               //                           //     ? 'fouthPeriod'
               //                           //     : periodList[index]][periodList[index]]),
               //                         ),
@@ -101,9 +101,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
               //                       child: Container(
               //                         width: 100, 
               //                         height: 100,
-              //                         color: Colors.orange,
+              //                         color: const Color.fromARGB(255, 141, 188, 226),
               //                         child:  Center(
-              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
               //                           //     ? 'fouthPeriod'
               //                           //     : periodList[index]][periodList[index]]),
               //                         ),
@@ -113,9 +113,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
               //                       child: Container(
               //                         width: 100, 
               //                         height: 100,
-              //                         color: Colors.orange,
+              //                         color: const Color.fromARGB(255, 141, 188, 226),
               //                         child:  Center(
-              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
               //                           //     ? 'fouthPeriod'
               //                           //     : periodList[index]][periodList[index]]),
               //                         ),
@@ -125,9 +125,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
               //                       child: Container(
               //                         width: 100, 
               //                         height: 100,
-              //                         color: Colors.orange,
+              //                         color: const Color.fromARGB(255, 141, 188, 226),
               //                         child:  Center(
-              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold),),
+              //                           child: Text(periodNumbers[0], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
               //                           //     ? 'fouthPeriod'
               //                           //     : periodList[index]][periodList[index]]),
               //                         ),
@@ -143,7 +143,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
 
                     // if(snapshot.data!.docs.isEmpty){
       
-                    //  return  Center(child: Text('No Timetable Added', style: GoogleFonts.poppins(fontWeight: FontWeight.bold),));
+                    //  return  Center(child: Text('No Timetable Added', style: GoogleFonts.poppins(fontWeight: FontWeight.bold,color: cWhite),));
                     // }
                     
                       return SingleChildScrollView(
@@ -159,9 +159,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                    child: Container(
                                                                  width: 100, 
                                                                  height: 100,
-                                                                 color: Colors.orange,
+                                                                 color: const Color.fromARGB(255, 141, 188, 226),
                                                                  child:  const Center(
-                                    child: Text('DAY', style: TextStyle(fontWeight: FontWeight.bold),),
+                                    child: Text('DAY', style: TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
                                     //     ? 'fouthPeriod'
                                     //     : periodList[index]][periodList[index]]),
                                                                  ),
@@ -171,9 +171,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                  child: Container(
                                   width: 100, 
                                   height: 100,
-                                  color: Colors.orange,
+                                  color: const Color.fromARGB(255, 141, 188, 226),
                                   child:  const Center(
-                                    child: Text('Monday', style: TextStyle(fontWeight: FontWeight.bold),),
+                                    child: Text('Monday', style: TextStyle(fontWeight: FontWeight.bold,color: cWhite,),),
                                     //     ? 'fouthPeriod'
                                     //     : periodList[index]][periodList[index]]),
                                   ),
@@ -183,9 +183,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                  child: Container(
                                   width: 100, 
                                   height: 100,
-                                  color: Colors.orange,
+                                  color: const Color.fromARGB(255, 141, 188, 226),
                                   child:  const Center(
-                                    child: Text('Tuesday', style: TextStyle(fontWeight: FontWeight.bold),),
+                                    child: Text('Tuesday', style: TextStyle(fontWeight: FontWeight.bold,color: cWhite,),),
                                     //     ? 'fouthPeriod'
                                     //     : periodList[index]][periodList[index]]),
                                   ),
@@ -195,9 +195,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                  child: Container(
                                   width: 100, 
                                   height: 100,
-                                  color: Colors.orange,
+                                  color: const Color.fromARGB(255, 141, 188, 226),
                                   child:  const Center(
-                                    child: Text('Wednesday', style: TextStyle(fontWeight: FontWeight.bold),),
+                                    child: Text('Wednesday', style: TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
                                     //     ? 'fouthPeriod'
                                     //     : periodList[index]][periodList[index]]),
                                   ),
@@ -207,9 +207,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                  child: Container(
                                   width: 100, 
                                   height: 100,
-                                  color: Colors.orange,
+                                  color: const Color.fromARGB(255, 141, 188, 226),
                                   child:  const Center(
-                                    child: Text('Thursday', style: TextStyle(fontWeight: FontWeight.bold),),
+                                    child: Text('Thursday', style: TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
                                     //     ? 'fouthPeriod'
                                     //     : periodList[index]][periodList[index]]),
                                   ),
@@ -219,9 +219,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                  child: Container(
                                   width: 100, 
                                   height: 100,
-                                  color: Colors.orange,
+                                  color: const Color.fromARGB(255, 141, 188, 226),
                                   child:  const Center(
-                                    child: Text('Friday', style: TextStyle(fontWeight: FontWeight.bold),),
+                                    child: Text('Friday', style: TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
                                     //     ? 'fouthPeriod'
                                     //     : periodList[index]][periodList[index]]),
                                   ),
@@ -249,9 +249,9 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                       child: Container(
                                         width: 100, 
                                         height: 100,
-                                        color: Colors.orange,
+                                        color: const Color.fromARGB(255, 141, 188, 226),
                                         child:  Center(
-                                          child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(periodNumbers[index], style: const TextStyle(fontWeight: FontWeight.bold),),
+                                          child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(periodNumbers[index], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
                                           //     ? 'fouthPeriod'
                                           //     : periodList[index]][periodList[index]]),
                                         ),
@@ -261,7 +261,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                       child: Container(
                                         width: 100, 
                                         height: 100,
-                                        color: Colors.orange,
+                                        color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
                                           child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Monday").first [ periodList[index]][ periodList[index]]),
                                           // child: Text(widget.mon.data()![(index == 3)
@@ -274,7 +274,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                       child: Container(
                                         width: 100,
                                         height: 100,
-                                        color: Colors.orange,
+                                        color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
                                          child: (snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Tuesday").first [ periodList[index]] [ periodList[index]]),
                                           // child: Text(widget.tues.data()![(index == 3)
@@ -287,7 +287,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                       child: Container(
                                         width: 100, 
                                         height: 100,
-                                        color: Colors.orange,
+                                        color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
                                          child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Wednesday").first[ periodList[index]] [ periodList[index]]),
                                           // child: Text(widget.wed.data()![(index == 3)
@@ -300,7 +300,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                       child: Container(
                                         width: 100, 
                                         height: 100,
-                                        color: Colors.orange,
+                                        color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
                                           child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Thursday").first[ periodList[index]] [ periodList[index]]),
                                           // child: Text(widget.thurs.data()![(index == 3)
@@ -313,7 +313,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                       child: Container(
                                         width: 100,
                                         height: 100,
-                                        color: Colors.orange,
+                                        color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
                                           child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Friday").first[ periodList[index]] [ periodList[index]]),
                                         //   child: Text(widget.fri.data()![(index == 3)

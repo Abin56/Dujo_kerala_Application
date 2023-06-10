@@ -49,30 +49,28 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                             color: cWhite,
                           ),
                         ),
-                        Stack(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(const TeacherEditProfileScreen());
-                              },
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    UserCredentialsController
-                                            .teacherModel?.imageUrl ??
-                                        ""),
-                                radius: 50.r,
-                              ),
+                        GestureDetector(
+                          onTap: () {
+                             Get.to(const TeacherEditProfileScreen());
+                          },
+                          child: Container(
+                            child: Stack(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      UserCredentialsController
+                                              .teacherModel?.imageUrl ??
+                                          ""),
+                                  radius: 50.r,
+                                ),
+                                Positioned(
+                                  right: 6.r,
+                                  bottom: 1.r,
+                                  child: const Center(child: Icon(Icons.info)),
+                                ),
+                              ],
                             ),
-                            Positioned(
-                              right: 6.r,
-                              bottom: 1.r,
-                              child: CircleAvatar(
-                                backgroundColor: cWhite,
-                                radius: 12.r,
-                                child: const Center(child: Icon(Icons.info)),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),

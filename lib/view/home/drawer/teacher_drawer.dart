@@ -10,11 +10,13 @@ import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../colors/colors.dart';
+import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
 
@@ -58,7 +60,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
             "Watch and Guide      \n  Let them Study",
             style: GoogleFonts.poppins(
                 color: Colors.black.withOpacity(0.5),
-                fontSize: 10,
+                fontSize: 10.w,
                 fontWeight: FontWeight.w600),
           ),
           Row(
@@ -173,7 +175,10 @@ Widget MyDrawerList(context) {
         menuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
 Get.to(
-            () => GeneralInstruction(),
+            () => AttendenceBookScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!), //Attendance Book,
           );
         }),
         menuItem(3, 'assets/images/exam.png', 'Exams'.tr,
@@ -222,10 +227,7 @@ Get.to(
             () => NoticePage(),
           );
         }),
-      menuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
-        }),
+      
         menuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
        Get.to(
@@ -235,6 +237,10 @@ Get.to(
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!),
           );
+        }),
+        menuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+              Get.to(const PrivacyViewScreen());
         }),
         // menuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
         //     currentPage == DrawerSections.dashboard ? true : false, () {
