@@ -7,6 +7,7 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../drawer/guardian_drawer.dart';
 import 'guradian_home.dart';
 
@@ -37,7 +38,7 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
       GuardianHomeScreen(),
       const UnderMaintanceScreen(text: ""),
       const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
+         const ChatScreen(),
     ];
     return Scaffold(
        appBar: AppBar(

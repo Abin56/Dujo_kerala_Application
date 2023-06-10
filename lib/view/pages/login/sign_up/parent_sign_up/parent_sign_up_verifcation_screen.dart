@@ -158,7 +158,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                                   userEmail: parentSignUpController
                                       .emailController.text.trim(),
                                   userPassword: parentSignUpController
-                                      .passwordController.text.trim,
+                                      .passwordController.text.trim(),
                                 ));
                           } else {
                             showToast(msg: "Please select parent detail.");

@@ -246,55 +246,60 @@ class StudentSignInPageScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           if (formKey1.currentState!.validate()) {
-                            if (studentController.checkAllFieldIsEmpty()) {
-                              showToast(msg: "All Fields are mandatory");
-                              return;
+                            if (getImageController.pickedImage.value.isEmpty) {
+                              return showToast(msg: 'Please upload your image');
                             } else {
-                              FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email:
-                                          UserEmailandPasswordSaver.userEmail,
-                                      password: UserEmailandPasswordSaver
-                                          .userPassword)
-                                  .then((value) => {
-                                        studentController
-                                            .updateStudentData()
-                                            .then((value) {
-                                          return showDialog(
-                                            context: context,
-                                            barrierDismissible:
-                                                false, // user must tap button!
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text('Message'),
-                                                content: SingleChildScrollView(
-                                                  child: ListBody(
-                                                    children: const <Widget>[
-                                                      Text(
-                                                          'Your Profile Created Successfully,\nPlease Login again')
-                                                    ],
+                              if (studentController.checkAllFieldIsEmpty()) {
+                                showToast(msg: "All Fields are mandatory");
+                                return;
+                              } else {
+                                FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
+                                        email:
+                                            UserEmailandPasswordSaver.userEmail,
+                                        password: UserEmailandPasswordSaver
+                                            .userPassword)
+                                    .then((value) => {
+                                          studentController
+                                              .updateStudentData()
+                                              .then((value) {
+                                            return showDialog(
+                                              context: context,
+                                              barrierDismissible:
+                                                  false, // user must tap button!
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text('Message'),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                    child: ListBody(
+                                                      children: const <Widget>[
+                                                        Text(
+                                                            'Your Profile Created Successfully,\nPlease Login again')
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: const Text('Ok'),
-                                                    onPressed: () {
-                                                      Navigator
-                                                          .pushAndRemoveUntil(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                        builder: (context) {
-                                                          return StudentLoginScreen();
-                                                        },
-                                                      ), (route) => false);
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        })
-                                      });
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: const Text('Ok'),
+                                                      onPressed: () {
+                                                        Navigator
+                                                            .pushAndRemoveUntil(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                          builder: (context) {
+                                                            return StudentLoginScreen();
+                                                          },
+                                                        ), (route) => false);
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          })
+                                        });
+                              }
                             }
                           }
                         },

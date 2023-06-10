@@ -7,6 +7,8 @@ import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../pages/chat_gpt/screens/chat_screen.dart';
+import '../../pages/live_classes/teacher_live_section/create_room.dart';
 import '../drawer/teacher_drawer.dart';
 import '../sample/under_maintance.dart';
 
@@ -36,15 +38,16 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
     List<Widget> pages = [
       TeacherHomeScreen(),
       const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
-      const UnderMaintanceScreen(text: ""),
+      CreateRoomScreen(),
+      const ChatScreen(),
     ];
     return Scaffold(
-       appBar: AppBar(
-     title: ContainerImage(
-            height: 28.h,
-            width: 90.w,
-            imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor),
+      appBar: AppBar(
+          title: ContainerImage(
+              height: 28.h,
+              width: 90.w,
+              imagePath: 'assets/images/dujoo-removebg.png'),
+          backgroundColor: adminePrimayColor),
       body: pages[_page],
       bottomNavigationBar: Container(
         height: 71,
@@ -67,7 +70,7 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
           rippleColor: Colors.grey,
           activeColor: Colors.white,
           color: Colors.white,
-          tabs:  [
+          tabs: [
             GButton(
                 iconSize: 20,
                 icon: LineIcons.home,
@@ -91,7 +94,6 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
               icon: Icons.chat,
               text: 'Chat With Bot'.tr,
             )
-    
           ],
           selectedIndex: _page,
           onTabChange: (value) {
@@ -104,7 +106,7 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-               TeacherHeaderDrawer(),
+              TeacherHeaderDrawer(),
               MyDrawerList(context),
             ],
           ),

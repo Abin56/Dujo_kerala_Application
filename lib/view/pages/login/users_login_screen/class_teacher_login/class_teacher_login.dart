@@ -54,7 +54,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                   children: [
                     // Enter Mail id Session >>>>>>>
                     Padding(
-                      padding: EdgeInsets.only(right: 140.w,left: 10.w),
+                      padding: EdgeInsets.only(right: 140.w, left: 10.w),
                       child: GoogleMonstserratWidgets(
                         fontsize: 25.w,
                         text: 'Class Teacher Login'.tr,
@@ -125,9 +125,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 60.h),
                       child: GestureDetector(
                           onTap: () {
-                            if (formKey.currentState!.validate()) {
-                              teacherSigninController.signIn(context);
-                            } else {}
+                            teacherSigninController.signIn(context);
                           },
                           child: Obx(
                             () => teacherSigninController.isLoading.value
