@@ -21,8 +21,8 @@ class GuardianLoginController extends GetxController {
       isLoading.value = true;
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-        email: emailIdController.text,
-        password: passwordController.text,
+        email: emailIdController.text.trim(),
+        password: passwordController.text.trim(),
       )
           .then((value) async {
         //fetching parent data from firebase
