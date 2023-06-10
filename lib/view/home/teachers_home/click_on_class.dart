@@ -30,8 +30,11 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
+          const StudentShowTimeTable(), //Time Table
+          TeacherSubjectHome(), // Subjects
+          SchoolLevelMeetingPage(), // Meetings
             const UserExmNotifications(),  //Exam
-      const StudentShowTimeTable(), //Time Table
+      
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
@@ -40,7 +43,7 @@ class ClickOnClasss extends StatelessWidget {
         body: SchoolLevelNoticePage(),
       ),
       // Notice
-      TeacherSubjectHome(),
+      
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
@@ -49,7 +52,7 @@ class ClickOnClasss extends StatelessWidget {
         body: const SchoolLevelPage(),
       ),
       // Events
-      SchoolLevelMeetingPage(), // Meetings
+      
     ];
     final hasDataNavigation = [
       TakeAttentenceSubjectWise(
@@ -60,9 +63,12 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
+           const StudentShowTimeTable(), //TimeTable
+           
+      SchoolLevelMeetingPage(),// Meetings
 
       const UserExmNotifications(), //Exam
-      const StudentShowTimeTable(), //TimeTable
+     
       const ViewHomeWorks(), //Home Works
 
       Scaffold(
@@ -87,9 +93,8 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID,
           schooilID:
               UserCredentialsController.schoolId!), //Progress Report view
-       TeacherSubjectHome(), // Subjects
-      SchoolLevelMeetingPage(),
-      // Meetings
+       
+      
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
@@ -125,7 +130,7 @@ class ClickOnClasss extends StatelessWidget {
                                 'You have no access in this class'.tr,
                                 style: GoogleFonts.montserrat(
                                     color: Colors.black.withOpacity(0.8),
-                                    fontSize: 18,
+                                    fontSize: 18.w,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -162,7 +167,7 @@ class ClickOnClasss extends StatelessWidget {
                                                     .withOpacity(0.5),
                                                 borderRadius:
                                                     const BorderRadius.all(
-                                                        Radius.circular(30)),
+                                                        Radius.circular(10)),
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: Colors.black
@@ -175,9 +180,9 @@ class ClickOnClasss extends StatelessWidget {
                                               height: h / 100,
                                               width: double.infinity,
                                               margin: EdgeInsets.only(
-                                                  bottom: w / 10,
-                                                  left: w / 50,
-                                                  right: w / 50),
+                                                  bottom: w / 30,
+                                                  left: w / 30,
+                                                  right: w / 30),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -248,7 +253,7 @@ class ClickOnClasss extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.5),
                                           borderRadius: const BorderRadius.all(
-                                              Radius.circular(30)),
+                                              Radius.circular(10)),
                                           boxShadow: [
                                             BoxShadow(
                                               color:
@@ -261,9 +266,9 @@ class ClickOnClasss extends StatelessWidget {
                                         height: h / 100,
                                         width: double.infinity,
                                         margin: EdgeInsets.only(
-                                            bottom: w / 10,
-                                            left: w / 50,
-                                            right: w / 50),
+                                            bottom: w / 30,
+                                            left: w / 30,
+                                            right: w / 30),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
@@ -311,21 +316,21 @@ class ClickOnClasss extends StatelessWidget {
 
 List<String> _acc_text = [
   'Attendence Book'.tr,
-  'Exams'.tr,
   'TimeTable'.tr,
-  'Notices'.tr,
   'Subjects'.tr,
-  'Events'.tr,
   'Meetings'.tr,
+  'Exams'.tr,  
+  'Notices'.tr,  
+  'Events'.tr,  
 ];
 var _acc_images = [
   'assets/images/classroom.png',
-  'assets/images/exam.png',
   'assets/images/library.png',
-  'assets/images/notices.png',
   'assets/images/subjects.png',
-  'assets/images/activity.png',
-  'assets/images/meetings.png',
+   'assets/images/meetings.png',
+  'assets/images/exam.png',  
+  'assets/images/notices.png',
+    'assets/images/activity.png', 
 ];
 var hasDataImages = [
   'assets/images/attendance.png',

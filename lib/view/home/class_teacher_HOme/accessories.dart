@@ -32,6 +32,10 @@ class ClassTeacherAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!), //Take Attendance
+          AttendenceBookScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!), //Attendance Book
 
           const StudentShowTimeTable(), //TimeTable
 
@@ -54,10 +58,7 @@ class ClassTeacherAccessories extends StatelessWidget {
 
      SchoolLevelMeetingPage(), //Meetings
 
-      AttendenceBookScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendance Book
+      
       
       const AddTimeTable(), //Exam
     
@@ -157,34 +158,33 @@ class ClassTeacherAccessories extends StatelessWidget {
 List<String> _acc_text = [
 
   'Take Attendance'.tr,
-  'TimeTable'.tr,
-  
   'Attendence Book'.tr,
+  'TimeTable'.tr,  
   'Leave Letters'.tr,
-  'Exams'.tr,
-  'HomeWorks'.tr,
+    'HomeWorks'.tr,
+    'My Students'.tr,
+    'Subjects'.tr,
+    'Meetings'.tr,
+    'Exams'.tr,
   'Notices'.tr,
   'Events'.tr,
-  'Progress Report'.tr,
-  'Subjects'.tr,
-  'Teachers'.tr,
-  'Meetings'.tr, 
-  'My Students'.tr
-
+  'Progress Report'.tr,  
+  'Teachers'.tr,  
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/library.png',
-  'assets/images/classroom.png',
+   'assets/images/classroom.png',
+  'assets/images/library.png', 
   'assets/images/leaveapplica.png',
-  'assets/images/exam.png',
-  
   'assets/images/homework.png',
+  'assets/images/mystudents.png',
+   'assets/images/subjects.png',
+   'assets/images/meetings.png',
+  'assets/images/exam.png',  
   'assets/images/notices.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
-  'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/meetings.png', 
-  'assets/images/mystudents.png'
+   
+  
 ];

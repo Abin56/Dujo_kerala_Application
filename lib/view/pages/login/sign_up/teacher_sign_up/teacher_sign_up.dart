@@ -54,7 +54,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     ContainerImage(
                         height: 70.h,
                         width: 100.w,
-                        imagePath: 'assets/images/leptonlogo2.png'),
+                        imagePath: 'assets/images/leptonlogo.png'),
                     GoogleMonstserratWidgets(
                       text: 'Lepton Dujo',
                       fontsize: 20,

@@ -84,7 +84,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                         ),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text('ok'),
+                            child: const Text('Ok'),
                             onPressed: () {
                               if (classIDListValue?['docid'] != null) {
                                 UserCredentialsController.classId =

@@ -118,7 +118,7 @@ class TeacherExamTimeTableViewScreen extends StatelessWidget {
                                                     },
                                                   ),
                                                   TextButton(
-                                                    child: const Text('ok'),
+                                                    child: const Text('Ok'),
                                                     onPressed: () {
                                                       FirebaseFirestore.instance
                                                           .collection(

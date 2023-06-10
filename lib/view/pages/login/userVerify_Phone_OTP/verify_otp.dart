@@ -124,7 +124,7 @@ class UserVerifyOTPScreen extends StatelessWidget {
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('ok'),
+                                  child: const Text('Ok'),
                                   onPressed: () {
                                     if (userpageIndex == 0) {
                                       Get.off(StudentSignInPageScreen());
