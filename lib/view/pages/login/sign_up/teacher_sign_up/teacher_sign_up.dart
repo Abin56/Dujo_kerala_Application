@@ -36,6 +36,27 @@ class TeachersSignUpPage extends StatelessWidget {
 
   final TeacherSignUpController teacherController =
       Get.find<TeacherSignUpController>();
+      
+  // final ImageProvider imageProvider;
+  // final double radius;
+      
+  // ValidatedCircleAvatar({
+  //   required this.imageProvider,
+  //   required this.radius,
+  // });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // Validate the imageProvider here (add your validation logic)
+//     final isValid = true; // Replace with your own validation check
+
+//     return CircleAvatar(
+//       backgroundImage: isValid ? imageProvider : null,
+//       radius: radius,
+//       child: isValid ? null : Icon(Icons.error), // Display an error icon if the avatar is not valid
+//     );
+//   }
+// }
 
   @override
   Widget build(BuildContext context) {
