@@ -12,7 +12,12 @@ import '../../../constant/sizes/sizes.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
 class ParentEditProfileScreen extends StatelessWidget {
-  const ParentEditProfileScreen({super.key});
+  const 
+  
+  
+  
+  
+  ParentEditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

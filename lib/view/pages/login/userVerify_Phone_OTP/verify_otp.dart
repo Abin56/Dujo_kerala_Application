@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/guardian_sign_up/guardian_signup.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/teacher_sign_up/teacher_sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -102,45 +103,45 @@ class UserVerifyOTPScreen extends StatelessWidget {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) async {
                       if (state is AuthLoggedInState) {
-                        FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: userEmail, password: userPassword)
-                            .then((value) {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false, // user must tap button!
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Message'),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: const <Widget>[
-                                      Text('Verification Completed!!'),
-                                    ],
-                                  ),
+                        // FirebaseAuth.instance
+                        //     .createUserWithEmailAndPassword(
+                        //         email: userEmail, password: userPassword)
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            UserEmailandPasswordSaver.userEmail = userEmail;
+                            UserEmailandPasswordSaver.userPassword =
+                                userPassword;
+                            return AlertDialog(
+                              title: const Text('Message'),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: const <Widget>[
+                                    Text('Verification Completed!!'),
+                                  ],
                                 ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('ok'),
-                                    onPressed: () {
-                                      if (userpageIndex == 0) {
-                                        Get.off(StudentSignInPageScreen());
-                                      } else if (userpageIndex == 1) {
-                                        Get.off(ParentSignUpPage());
-                                      } else if (userpageIndex == 2) {
-                                        Get.off(GuardianSignUp());
-                                      } else if (userpageIndex == 3) {
-                                        Get.off(TeachersSignUpPage());
-                                      }
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        });
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text('ok'),
+                                  onPressed: () {
+                                    if (userpageIndex == 0) {
+                                      Get.off(StudentSignInPageScreen());
+                                    } else if (userpageIndex == 1) {
+                                      Get.off(ParentSignUpPage());
+                                    } else if (userpageIndex == 2) {
+                                      Get.off(GuardianSignUp());
+                                    } else if (userpageIndex == 3) {
+                                      Get.off(TeachersSignUpPage());
+                                    }
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       } else if (state is AuthErrorState) {
-                       
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 backgroundColor: Colors.red,

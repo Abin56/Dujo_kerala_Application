@@ -12,7 +12,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import '../student_home/Student Edit Profile/parent_edit_profile.dart';
 
 class ParentHomeScreen extends StatefulWidget {
   @override
@@ -154,7 +157,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                //Get.to(UserEditPage());
+                                Get.to(ParentEditProfileScreen());
                                 sendPushMessage(
                                     deviceToken,
                                     'sdf',

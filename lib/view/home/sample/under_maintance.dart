@@ -1,5 +1,4 @@
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -20,7 +19,7 @@ class UnderMaintanceScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
          
             children: [
-                 IconButtonBackWidget(),
+                
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

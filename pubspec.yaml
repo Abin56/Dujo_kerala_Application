@@ -61,12 +61,11 @@ dependencies:
   pdf_viewer_flutter:
   pdf:
   path_provider:
-  flutter_local_notifications: ^14.1.1
-  firebase_messaging: ^14.6.2
-  http: ^0.13.6
-  provider:
-  animated_text_kit:
-  flutter_spinkit:
+  provider: 
+  animated_text_kit: 
+  flutter_spinkit: 
+  flutter_local_notifications:
+  firebase_messaging:
 flutter_icons:
   android: true
   ios: true
