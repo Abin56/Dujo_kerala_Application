@@ -6,10 +6,9 @@ import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_l
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/language/select_language/select_language.dart';
-import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
+import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/attendence_book_status_month.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +37,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
             height: 90.h,
             width: 150.h,
             decoration: const BoxDecoration(
-              // color: cred,
+             // color: cred,
               shape: BoxShape.circle,
               image: DecorationImage(
                 image: NetworkImage(
@@ -49,9 +48,7 @@ class StudentsHeaderDrawer extends StatelessWidget {
           Text(
             "Lepton DuJo",
             style: GoogleFonts.montserrat(
-                color: Colors.black,
-                fontSize: 25.h,
-                fontWeight: FontWeight.w600),
+                color: Colors.black, fontSize: 25.h, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
             height: 1,
@@ -84,7 +81,7 @@ Widget MenuItem(int id, String image, String title, bool selected, onTap) {
     child: InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.all(15.0.h),
+        padding:  EdgeInsets.all(15.0.h),
         child: Row(
           children: [
             Expanded(
@@ -149,28 +146,28 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/information.png', 'General Instructions',
+          MenuItem(1, 'assets/images/information.png', 'General Instructions',
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
           );
         }),
-        MenuItem(2, 'assets/images/attendance.png', 'Attendence'.tr,
+        MenuItem(1, 'assets/images/attendance.png', 'Attendence'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => AttendenceBookScreen(
-                schoolId: UserCredentialsController.schoolId!,
-                batchId: UserCredentialsController.batchId!,
-                classID: UserCredentialsController.classId!),
+           Get.to(
+            () =>  AttendenceBookScreenSelectMonth(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!),
           );
         }),
-        MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
+        MenuItem(2, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
-          Get.to(
+               Get.to(
             () => const UserExmNotifications(),
           );
-        }),
-        MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
+            }),
+        MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           Get.to(
             () => const StudentShowTimeTable(),
@@ -180,39 +177,36 @@ Widget MyDrawerList(context) {
         //     currentPage == DrawerSections.share ? true : false, () async {
         //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
         // }),
-        MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
+        MenuItem(4, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
           Get.to(
             () => const ViewHomeWorks(),
           );
         }),
-        MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
-          Get.to(
+           Get.to(
             () => NoticePage(),
           );
         }),
-
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => ProgressReportListViewScreen(
-                schoolId: UserCredentialsController.schoolId!,
-                classID: UserCredentialsController.classId!,
-                studentId: FirebaseAuth.instance.currentUser!.uid,
-                batchId: UserCredentialsController.batchId!),
-          );
-        }),
-
-        MenuItem(8, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
-        MenuItem(9, 'assets/images/languages.png', 'Change Language'.tr,
+        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.offAll(const SelectLanguage());
+           Get.to(
+            () => ProgressReportListViewScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: FirebaseAuth.instance.currentUser!.uid,
+          batchId: UserCredentialsController.batchId!),
+          );
         }),
-
+        // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
+        //     currentPage == DrawerSections.dashboard ? true : false, () {
+        //   signOut(context);
+        // }),
         kHeight10,
         kHeight10,
         kHeight10,
@@ -280,7 +274,7 @@ Widget MyDrawerList(context) {
                       ),
                     ],
                   ),
-                  Text(
+                   Text(
                     "    1.0.0",
                     style: TextStyle(color: Colors.black, fontSize: 11.5.h),
                   ),
@@ -301,7 +295,7 @@ Widget emptyDisplay(String section) {
       children: [
         Text(
           "No $section Found",
-          style: TextStyle(
+          style:  TextStyle(
             color: Colors.white,
             fontSize: 25.h,
             fontWeight: FontWeight.bold,
@@ -309,6 +303,6 @@ Widget emptyDisplay(String section) {
           textAlign: TextAlign.center,
         ),
       ],
-    ),
-  );
+),
+);
 }

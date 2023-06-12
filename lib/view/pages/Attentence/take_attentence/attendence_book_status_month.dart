@@ -8,18 +8,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../model/teacher_model/attentence/attendance_model.dart';
-import 'teacher_subject_list_view.dart';
+import 'attendence_book_status.dart';
 
-class AttendenceBookScreen extends StatelessWidget {
+class AttendenceBookScreenSelectMonth extends StatelessWidget {
   String schoolId;
   String classID;
   String batchId;
-  String month;
-  AttendenceBookScreen(
+  AttendenceBookScreenSelectMonth(
       {required this.schoolId,
       required this.batchId,
       required this.classID,
-      required this.month,
       super.key});
 
   @override
@@ -30,7 +28,7 @@ class AttendenceBookScreen extends StatelessWidget {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Attendance Book'.tr),
+        title: Text('Attendence Book'.tr),
         backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
@@ -42,8 +40,8 @@ class AttendenceBookScreen extends StatelessWidget {
             .doc(batchId)
             .collection("classes")
             .doc(classID)
-            .collection("Attendence").doc(month).collection(month).orderBy('docid', descending: true)
-          
+            .collection("Attendence")
+            .orderBy('id', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -69,20 +67,19 @@ class AttendenceBookScreen extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(AttendenceSubjectListScreen(
-                                month: month,
-                                  batchId: batchId,
-                                  schoolId: schoolId,
-                                  classID: classID,
-                                  date: snapshot.data!.docs[index]['docid']));
+                              Get.to(AttendenceBookScreen(
+                                batchId: batchId,
+                                schoolId: schoolId,
+                                classID: classID,
+                                month: snapshot.data!.docs[index]['id'],
+
+                              ));
                             },
                             child: Container(
                               height: h / 100,
                               width: double.infinity,
                               margin: EdgeInsets.only(
-                                  bottom: w / 10,
-                                  left: w / 50,
-                                  right: w / 50),
+                                  bottom: w / 10, left: w / 50, right: w / 50),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(212, 67, 30, 203)
                                     .withOpacity(0.1),
@@ -101,19 +98,19 @@ class AttendenceBookScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      snapshot.data!.docs[index]['dDate'],
+                                      snapshot.data!.docs[index]['id'],
                                       style: GoogleFonts.poppins(
                                           color: Colors.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w700),
                                     ),
-                                    Text(
-                                      snapshot.data!.docs[index]['day'],
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                    // Text(
+                                    //   snapshot.data!.docs[index]['day'],
+                                    //   style: GoogleFonts.poppins(
+                                    //       color: Colors.black,
+                                    //       fontSize: 12,
+                                    //       fontWeight: FontWeight.w700),
+                                    // ),
                                   ],
                                 ),
                               ),
