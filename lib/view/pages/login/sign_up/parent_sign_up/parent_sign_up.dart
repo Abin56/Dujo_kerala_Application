@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/controllers/sign_up_controller/parent_sign_up_controller.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ import '../../../../widgets/container_image.dart';
 import '../../../../widgets/fonts/google_monstre.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
 import '../../../../widgets/sinup_textform_filed.dart';
+import '../../users_login_screen/parent_login/parent_login.dart';
 
 class ParentSignUpPage extends StatelessWidget {
   ParentSignUpPage({super.key});
@@ -150,7 +152,7 @@ class ParentSignUpPage extends StatelessWidget {
                                 selectedItem: 'Select Gender'.tr,
                                 validator: (v) =>
                                     v == null ? "required field" : null,
-                                items:  ['Male', 'Female', 'Others'],
+                                items: ['Male', 'Female', 'Others'],
                                 onChanged: (value) {
                                   parentSignUpController.gender = value;
                                 },
@@ -198,7 +200,7 @@ class ParentSignUpPage extends StatelessWidget {
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
-                         keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       text: 'Pincode'.tr,
                       hintText: 'Enter your Pincode'.tr,
                       textfromController:
@@ -219,7 +221,53 @@ class ParentSignUpPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
-                            await parentSignUpController.updateParentData();
+                            if (getImageController.pickedImage.value.isEmpty) {
+                              return showToast(msg: 'Please upload your image');
+                            } else {
+                              FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email:
+                                          UserEmailandPasswordSaver.userEmail,
+                                      password: UserEmailandPasswordSaver
+                                          .userPassword)
+                                  .then((value) async {
+                                await parentSignUpController
+                                    .updateParentData()
+                                    .then((value) {
+                                  return showDialog(
+                                    context: context,
+                                    barrierDismissible:
+                                        false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Message'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: const <Widget>[
+                                              Text(
+                                                  'Your Profile Created Successfully,\nPlease Login again')
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text('Ok'),
+                                            onPressed: () {
+                                              Navigator.pushAndRemoveUntil(
+                                                  context, MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ParentLoginScreen();
+                                                },
+                                              ), (route) => false);
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                });
+                              });
+                            }
                           }
                         },
                         child: Obx(

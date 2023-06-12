@@ -14,13 +14,13 @@ class StudentSignInController extends GetxController {
   TextEditingController emailIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> signIn(BuildContext context) async {
+  Future<void>  signIn(BuildContext context) async {
     try {
       isLoading.value = true;
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-        email: emailIdController.text,
-        password: passwordController.text,
+        email: emailIdController.text.trim(),
+        password: passwordController.text.trim(),
       )
           .then((value) async {
         final user = await FirebaseFirestore.instance
@@ -45,7 +45,7 @@ class StudentSignInController extends GetxController {
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return StudentsMainHomeScreen();
+              return const StudentsMainHomeScreen();
             }), (route) => false);
           }
           isLoading.value = false;

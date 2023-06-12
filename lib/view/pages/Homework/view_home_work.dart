@@ -199,7 +199,7 @@ class ViewHomeWorks extends StatelessWidget {
                                                               TextButton(
                                                                 child:
                                                                     const Text(
-                                                                        'ok'),
+                                                                        'Ok'),
                                                                 onPressed: () {
                                                                   Navigator.of(
                                                                           context)

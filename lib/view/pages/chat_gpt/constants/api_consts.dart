@@ -1,2 +1,2 @@
 String BASE_URL = "https://api.openai.com/v1/chat";
-String API_KEY = "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";
+String API_KEY = "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";

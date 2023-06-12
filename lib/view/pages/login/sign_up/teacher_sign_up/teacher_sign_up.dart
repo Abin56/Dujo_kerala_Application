@@ -9,6 +9,7 @@ import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/users_login_screen.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -35,6 +36,27 @@ class TeachersSignUpPage extends StatelessWidget {
 
   final TeacherSignUpController teacherController =
       Get.find<TeacherSignUpController>();
+      
+  // final ImageProvider imageProvider;
+  // final double radius;
+      
+  // ValidatedCircleAvatar({
+  //   required this.imageProvider,
+  //   required this.radius,
+  // });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // Validate the imageProvider here (add your validation logic)
+//     final isValid = true; // Replace with your own validation check
+
+//     return CircleAvatar(
+//       backgroundImage: isValid ? imageProvider : null,
+//       radius: radius,
+//       child: isValid ? null : Icon(Icons.error), // Display an error icon if the avatar is not valid
+//     );
+//   }
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +75,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     ContainerImage(
                         height: 70.h,
                         width: 100.w,
-                        imagePath: 'assets/images/leptonlogo2.png'),
+                        imagePath: 'assets/images/leptonlogo.png'),
                     GoogleMonstserratWidgets(
                       text: 'Lepton Dujo',
                       fontsize: 20,
@@ -137,7 +159,7 @@ class TeachersSignUpPage extends StatelessWidget {
                     text: "Your Name".tr,
                     hintText:
                         //UserCredentialsController.teacherModel!.teacherName ??
-                            "Enter Your Name",
+                        "Enter Your Name",
                     textfromController: teacherController.nameController,
                     validator: checkFieldEmpty,
                   ),
@@ -159,7 +181,7 @@ class TeachersSignUpPage extends StatelessWidget {
                               selectedItem: 'Select Gender'.tr,
                               validator: (v) =>
                                   v == null ? "required field" : null,
-                              items:  const ['Male', 'Female', 'Others'],
+                              items: const ['Male', 'Female', 'Others'],
                               onChanged: (val) {
                                 teacherController.gender = val;
                               },
@@ -211,9 +233,49 @@ class TeachersSignUpPage extends StatelessWidget {
                           showToast(msg: "All Fields are mandatory");
                           return;
                         } else {
-                          teacherController
-                              .updateTeacherData()
-                              .then((value) => Get.offAll(UsersLoginScreen()));
+                          if (getImageController.pickedImage.value.isEmpty) {
+                            return showToast(msg: 'Please upload your image');
+                          } else {
+                            FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: UserEmailandPasswordSaver.userEmail,
+                                    password:
+                                        UserEmailandPasswordSaver.userPassword)
+                                .then((value) {
+                              teacherController
+                                  .updateTeacherData()
+                                  .then((value) {
+                                return showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Message'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'Your Profile Created Successfully,\nPlease Login again')
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Ok'),
+                                          onPressed: () {
+                                            Get.offAll(UsersLoginScreen());
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              });
+                              // .then(
+                              //     (value) =>);
+                            });
+                          }
                         }
                       },
                       //   Get.offAll(const HomeScreen());

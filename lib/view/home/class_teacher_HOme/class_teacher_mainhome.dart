@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../drawer/class_teacher.dart';
 import '../sample/under_maintance.dart';
 
@@ -42,7 +43,7 @@ class _ClassTeacherMainHomeScreenState
       ClassTeacherHomeScreen(),
       const UnderMaintanceScreen(text: ""),
       CreateRoomScreen(),
-      const UnderMaintanceScreen(text: ""),
+    const ChatScreen(),
     ];
     return Scaffold(
        appBar: AppBar(

@@ -48,7 +48,7 @@ class SearchBatchYearBar extends SearchDelegate {
     if (suggestionList.isEmpty) {
       return ListTile(
         title: GooglePoppinsWidgets(
-          text: "Result not found",
+          text: "Batchs not found",
           fontsize: 18,
           fontWeight: FontWeight.w400,
         ),

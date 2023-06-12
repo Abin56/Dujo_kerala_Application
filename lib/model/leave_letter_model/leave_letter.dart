@@ -160,7 +160,7 @@ class ApplyLeaveLetterStatusToFireBase {
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('ok'),
+                    child: const Text('Ok'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

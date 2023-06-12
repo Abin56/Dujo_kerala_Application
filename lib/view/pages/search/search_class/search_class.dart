@@ -51,7 +51,7 @@ class SearchClassBar extends SearchDelegate {
     if (suggestionList.isEmpty) {
       return ListTile(
         title: GooglePoppinsWidgets(
-          text: "Result not found",
+          text: "Classes not found",
           fontsize: 18,
           fontWeight: FontWeight.w400,
         ),

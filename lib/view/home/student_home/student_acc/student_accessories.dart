@@ -35,19 +35,18 @@ class StudentAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
-
-      const UserExmNotifications(), //Exam
-      const StudentShowTimeTable(), //Time Table
-      const ViewHomeWorks(), // Home Works
+           const StudentShowTimeTable(), //Time Table
+            const ViewHomeWorks(), // Home Works
+            StudentSubjectHome(), //Subjects
+      TeacherSubjectWiseList(), //Teachers
+      const UserExmNotifications(), //Exam     
       NoticePage(), //Notice
       const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: FirebaseAuth.instance.currentUser!.uid,
-          batchId: UserCredentialsController.batchId!), //Progress Report
-      StudentSubjectHome(), //Subjects
-      TeacherSubjectWiseList(), //Teachers
+          batchId: UserCredentialsController.batchId!), //Progress Report      
       SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;
@@ -133,25 +132,25 @@ class StudentAccessories extends StatelessWidget {
 
 List<String> _acc_text = [
   'Attendance'.tr,
-  'Exams'.tr,
   'TimeTable'.tr,
   'HomeWorks'.tr,
-  'Notices'.tr,
-  'Events'.tr,
-  'Progress Report'.tr,
   'Subjects/Materials'.tr,
   'Teachers'.tr,
+  'Exams'.tr,  
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,  
   'Meetings'.tr
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/exam.png',
-  'assets/images/library.png',
-  'assets/images/homework.png',
+   'assets/images/library.png',
+   'assets/images/homework.png',
+   'assets/images/subjects.png',
+   'assets/images/teachers.png',
+  'assets/images/exam.png',  
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
-  'assets/images/subjects.png',
-  'assets/images/teachers.png',
+  'assets/images/progressreport.png',  
   'assets/images/meetings.png',
 ];

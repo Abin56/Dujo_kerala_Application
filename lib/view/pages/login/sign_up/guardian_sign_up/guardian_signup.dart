@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -150,7 +151,7 @@ class GuardianSignUp extends StatelessWidget {
                                 selectedItem: 'Select Gender'.tr,
                                 validator: (v) =>
                                     v == null ? "required field" : null,
-                                items:  ['Male', 'Female', 'Others'],
+                                items: ['Male', 'Female', 'Others'],
                                 onChanged: (value) {
                                   guardianSignUpController.gender = value;
                                 },
@@ -198,7 +199,7 @@ class GuardianSignUp extends StatelessWidget {
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
-                         keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       text: 'Pincode'.tr,
                       hintText: 'Enter your Pincode'.tr,
                       textfromController:
@@ -219,7 +220,20 @@ class GuardianSignUp extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           if (formKey.currentState?.validate() ?? false) {
-                            await guardianSignUpController.updateGuardianData();
+                            if (getImageController.pickedImage.value.isEmpty) {
+                              return showToast(msg: 'Please upload your image');
+                            } else {
+                              FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email:
+                                          UserEmailandPasswordSaver.userEmail,
+                                      password: UserEmailandPasswordSaver
+                                          .userPassword)
+                                  .then((value) async {
+                                await guardianSignUpController
+                                    .updateGuardianData();
+                              });
+                            }
                           }
                         },
                         child: Obx(

@@ -82,7 +82,7 @@ class ParentSignUpController extends GetxController {
 
       auth
           .signInWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text)
+              email: emailController.text.trim(), password: passwordController.text.trim())
           .then((value) async {
         if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
           imageId = uuid.v1();
@@ -116,22 +116,19 @@ class ParentSignUpController extends GetxController {
           await firebaseData
               .doc(value.user?.uid)
               .set(parentModel.toMap())
-              .then((value) {
-            FirebaseAuth.instance.createUserWithEmailAndPassword(
-                email: UserEmailandPasswordSaver.userEmail,
-                password: UserEmailandPasswordSaver.userPassword);
-          }).then((value) async {
+      .then((value) async {
             await firebaseDataTemp
                 .doc(UserCredentialsController.parentModel?.docid)
                 .delete()
                 .then((value) {
               UserCredentialsController.parentModel = parentModel;
             });
-          }).then(
-            (value) => Get.offAll(
-              ParentLoginScreen(),
-            ),
-          );
+          });
+          // .then(
+          //   (value) => Get.offAll(
+          //     ParentLoginScreen(),
+          //   ),
+          // );
           Get.find<GetImage>().pickedImage.value = "";
           isLoading.value = false;
           showToast(msg: "Successfully Created");

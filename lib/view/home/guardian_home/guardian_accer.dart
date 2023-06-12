@@ -33,7 +33,6 @@ class GuardianAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!),
       //Attendence8
-      const UserExmNotifications(), // Exams
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.guardianModel!.guardianName,
@@ -41,10 +40,18 @@ class GuardianAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.guardianModel!.studentID,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-      const StudentShowTimeTable(), // Time Tabe
+          NoticePage(), //Notice
+          const ViewHomeWorks(), // Home Works
+           const StudentShowTimeTable(), // Time Table
+            SchoolLevelMeetingPage(), //Meetings
 
-      const ViewHomeWorks(), // Home Works
-      NoticePage(), //Notice
+
+      const UserExmNotifications(), // Exams
+      
+     
+
+      
+      
       const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
@@ -54,7 +61,7 @@ class GuardianAccessories extends StatelessWidget {
       StudentSubjectHome(), //Subjects
 
       TeacherSubjectWiseList(), //Teachers
-      SchoolLevelMeetingPage(), //Meetings
+     
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -136,27 +143,30 @@ class GuardianAccessories extends StatelessWidget {
 
 List<String> _acc_text = [
   'Attendance'.tr,
-  'Exams'.tr,
   'Leave Application'.tr,
-  'TimeTable'.tr,
-  'HomeWorks'.tr,
   'Notices'.tr,
+  'HomeWorks'.tr,
+  'TimeTable'.tr,
+  'Meetings'.tr,
+
+  'Exams'.tr,  
   'Events'.tr,
   'Progress Report'.tr,
   'Subjects'.tr,
   'Teachers'.tr,
-  'Meetings'.tr
+  
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/exam.png',
   'assets/images/leaveapplica.png',
-  'assets/images/library.png',
-  'assets/images/homework.png',
-  'assets/images/notices.png',
+   'assets/images/notices.png',
+   'assets/images/homework.png',
+   'assets/images/library.png',
+   'assets/images/meetings.png',
+  'assets/images/exam.png', 
   'assets/images/activity.png',
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/meetings.png',
+  
 ];

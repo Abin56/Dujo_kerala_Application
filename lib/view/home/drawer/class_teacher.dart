@@ -84,7 +84,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                         ),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text('ok'),
+                            child: const Text('Ok'),
                             onPressed: () {
                               if (classIDListValue?['docid'] != null) {
                                 UserCredentialsController.classId =
@@ -254,10 +254,7 @@ Widget MyDrawerList(context) {
             () => NoticePage(),
           );
         }),
-        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
+      
         MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
            Get.to(
@@ -267,6 +264,11 @@ Widget MyDrawerList(context) {
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!),
           );
+        }),
+
+          MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(const PrivacyViewScreen());
         }),
         // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
         //     currentPage == DrawerSections.dashboard ? true : false, () {

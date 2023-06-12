@@ -10,7 +10,6 @@ import 'package:uuid/uuid.dart';
 import '../../model/Signup_Image_Selction/image_selection.dart';
 import '../../model/guardian_model/guardian_model.dart';
 import '../../utils/utils.dart';
-import '../../view/constant/sizes/constant.dart';
 import '../../view/pages/login/users_login_screen/guardian_login/guardian_login.dart';
 import '../userCredentials/user_credentials.dart';
 
@@ -83,7 +82,7 @@ class GuardianSignUpController extends GetxController {
 
       auth
           .signInWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text)
+              email: emailController.text.trim(), password: passwordController.text.trim())
           .then((value) async {
         if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
           imageId = uuid.v1();
@@ -119,11 +118,7 @@ class GuardianSignUpController extends GetxController {
           await firebaseData
               .doc(value.user?.uid)
               .set(guardianModel.toMap())
-              .then((value) {
-            FirebaseAuth.instance.createUserWithEmailAndPassword(
-                email: UserEmailandPasswordSaver.userEmail,
-                password: UserEmailandPasswordSaver.userPassword);
-          }).then((value) async {
+         .then((value) async {
             await firebaseDataTemp
                 .doc(UserCredentialsController.guardianModel?.docid)
                 .delete()

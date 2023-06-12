@@ -71,14 +71,14 @@ class TeacherSignUpController extends GetxController {
       }
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       )
           .then((value) {
         final teacherNewModel = TeacherModel(
           teacherName:
               UserCredentialsController.teacherModel?.teacherName ?? "",
-          teacherEmail: emailController.text,
+          teacherEmail: emailController.text.trim(),
           houseName: houseNameController.text,
           houseNumber: houseNumberController.text,
           place: placeController.text,
@@ -94,21 +94,19 @@ class TeacherSignUpController extends GetxController {
           imageId: imageId,
           imageUrl: imageUrl,
         );
-        firebaseData
+                 firebaseData
             .collection("Teachers")
             .doc(value.user?.uid)
             .set(teacherNewModel.toMap())
-            .then((value) {
-          FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: UserEmailandPasswordSaver.userEmail,
-              password: UserEmailandPasswordSaver.userPassword);
-        }).then((value) {
+        .then((value) {
           firebaseData
               .collection('TempTeacherList')
               .doc(UserCredentialsController.teacherModel?.docid)
               .delete();
         });
-      });
+              
+            });
+
 
       Get.find<GetImage>().pickedImage.value = "";
       isLoading.value = false;
