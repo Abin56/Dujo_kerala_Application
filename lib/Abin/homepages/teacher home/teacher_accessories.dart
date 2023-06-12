@@ -130,7 +130,7 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
 
 List<String> _acc_text = [
   'Take Attendance'.tr,
-  'Attendence Book'.tr,
+  'Attendance Book'.tr,
   'Exams'.tr,
   'TimeTable'.tr,
   'HomeWorks'.tr,

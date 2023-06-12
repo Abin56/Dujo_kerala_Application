@@ -21,7 +21,7 @@ class DatedAttendenceListViewScreen extends StatelessWidget {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Attendence Book'),
+        title: const Text('Attendance Book'),
       ),
       body: SafeArea(
         child: StreamBuilder(

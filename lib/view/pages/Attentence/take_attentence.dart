@@ -37,7 +37,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take Attendence'.tr),
+        title: Text('Take Attendance'.tr),
         backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(

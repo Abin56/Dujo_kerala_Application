@@ -156,7 +156,7 @@ class ClassTeacherAccessories extends StatelessWidget {
 List<String> _acc_text = [
 
   'Take Attendance'.tr,
-  'Attendence Book'.tr,
+  'Attendance Book'.tr,
   'TimeTable'.tr,  
   'Leave Letters'.tr,
     'HomeWorks'.tr,
