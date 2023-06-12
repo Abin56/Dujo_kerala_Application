@@ -13,6 +13,7 @@ class StudentsAttendenceListViewScreen extends StatelessWidget {
   String date;
   String subject;
   String batchId;
+  String month;
 
   StudentsAttendenceListViewScreen(
       {required this.schoolId,
@@ -20,14 +21,16 @@ class StudentsAttendenceListViewScreen extends StatelessWidget {
       required this.batchId,
       required this.date,
       required this.subject,
-      super.key}); 
+      required this.month,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Attendance List'.tr),backgroundColor: adminePrimayColor,
+        title: Text('Attendance List'.tr),
+        backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
         child: StreamBuilder(
@@ -39,6 +42,8 @@ class StudentsAttendenceListViewScreen extends StatelessWidget {
               .collection("classes")
               .doc(classID)
               .collection("Attendence")
+              .doc(month)
+              .collection(month)
               .doc(date)
               .collection("Subjects")
               .doc(subject)

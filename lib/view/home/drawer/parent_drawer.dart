@@ -6,16 +6,15 @@ import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_l
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
+import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
@@ -153,7 +152,7 @@ Widget MyDrawerList(context) {
         MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
 Get.to(
-            () =>      AttendenceBookScreen(
+            () =>      AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!),

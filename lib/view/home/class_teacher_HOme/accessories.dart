@@ -10,12 +10,12 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
 import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
+import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/teacher_list/teacher_list.dart';
 import '../events/event_list.dart';
 import '../exam_Notification/teacher_adding/add_subject.dart';
@@ -33,34 +33,38 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!), //Take Attendance
 
-          const StudentShowTimeTable(), //TimeTable
+      const StudentShowTimeTable(), //TimeTable
+      AttendenceBookScreenSelectMonth(
+        batchId: UserCredentialsController.batchId!,
+        classID: UserCredentialsController.classId!,
+        schoolId: UserCredentialsController.schoolId!,
+      ),
 
-          LeaveLettersListviewScreen(
+      LeaveLettersListviewScreen(
           schooilID: UserCredentialsController.schoolId!,
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
 
-          
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
         schoolID: UserCredentialsController.schoolId!,
         teacherID: UserCredentialsController.teacherModel!.docid!,
       ), //Home Work
-    
-    const MyStudents() , //My students
 
-     StudentSubjectHome(), //Subject
+      const MyStudents(), //My students
 
-     SchoolLevelMeetingPage(), //Meetings
+      StudentSubjectHome(), //Subject
 
-      AttendenceBookScreen(
+      SchoolLevelMeetingPage(), //Meetings
+
+      AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
-      
+
       const AddTimeTable(), //Exam
-    
+
       NoticePage(), //Notice
       const EventList(), //Events
       CreateExamNameScreen(
@@ -68,12 +72,10 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-      
-     TeacherSubjectWiseList(), //Teachers
-      
-      // StudentSubjectHome(), 
 
-      
+      TeacherSubjectWiseList(), //Teachers
+
+      // StudentSubjectHome(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -155,10 +157,8 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-
   'Take Attendance'.tr,
   'TimeTable'.tr,
-  
   'Attendence Book'.tr,
   'Leave Letters'.tr,
   'Exams'.tr,
@@ -168,9 +168,8 @@ List<String> _acc_text = [
   'Progress Report'.tr,
   'Subjects'.tr,
   'Teachers'.tr,
-  'Meetings'.tr, 
+  'Meetings'.tr,
   'My Students'.tr
-
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -178,13 +177,12 @@ var _acc_images = [
   'assets/images/classroom.png',
   'assets/images/leaveapplica.png',
   'assets/images/exam.png',
-  
   'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/meetings.png', 
+  'assets/images/meetings.png',
   'assets/images/mystudents.png'
 ];
