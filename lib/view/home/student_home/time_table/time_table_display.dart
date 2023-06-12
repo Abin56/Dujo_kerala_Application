@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
@@ -36,22 +34,24 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();  
+
+    
+      
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight, 
-       DeviceOrientation.landscapeLeft, 
+      DeviceOrientation.landscapeLeft, 
     ]
-    );
-    log(UserCredentialsController.classId!);
+    );     
+    super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
+  //  TODO: implement dispose
     SystemChrome.setPreferredOrientations(
       [
-      DeviceOrientation.landscapeRight, 
-       DeviceOrientation.landscapeLeft, 
+      // DeviceOrientation.landscapeRight, 
+      //  DeviceOrientation.landscapeLeft, 
        DeviceOrientation.portraitUp, 
        DeviceOrientation.portraitDown
     ]

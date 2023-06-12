@@ -8,6 +8,7 @@ import 'package:dujo_kerala_application/view/pages/chat_gpt/providers/models_pro
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -32,7 +33,11 @@ Future<void> main() async {
   //creating shared preference
   await SharedPreferencesHelper.initPrefs();
   ScreenUtil.ensureScreenSize();
-
+  
+   SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   runApp(const MyApp());
 }
 
