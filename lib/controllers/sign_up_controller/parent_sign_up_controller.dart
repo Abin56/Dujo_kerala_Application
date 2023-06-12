@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:uuid/uuid.dart';
 import '../../model/Signup_Image_Selction/image_selection.dart';
 import '../../model/parent_model/parent_model.dart';
 import '../../utils/utils.dart';
-import '../../view/pages/login/users_login_screen/parent_login/parent_login.dart';
 import '../userCredentials/user_credentials.dart';
 
 class ParentSignUpController extends GetxController {
@@ -78,13 +76,13 @@ class ParentSignUpController extends GetxController {
     String imageId = "";
     String imageUrl = "";
     try {
-      isLoading.value = true;
-
-      auth
-          .signInWithEmailAndPassword(
-              email: emailController.text.trim(), password: passwordController.text.trim())
-          .then((value) async {
-        if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+      if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+        auth
+            .signInWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim())
+            .then((value) async {
+          isLoading.value = true;
           imageId = uuid.v1();
           final result = await FirebaseStorage.instance
               .ref(
@@ -116,7 +114,7 @@ class ParentSignUpController extends GetxController {
           await firebaseData
               .doc(value.user?.uid)
               .set(parentModel.toMap())
-      .then((value) async {
+              .then((value) async {
             await firebaseDataTemp
                 .doc(UserCredentialsController.parentModel?.docid)
                 .delete()
@@ -133,11 +131,11 @@ class ParentSignUpController extends GetxController {
           isLoading.value = false;
           showToast(msg: "Successfully Created");
           clearControllers();
-        } else {
-          isLoading.value = false;
-          showToast(msg: 'Please Upload Image');
-        }
-      });
+        });
+      } else {
+        isLoading.value = false;
+        showToast(msg: 'Please Upload Image');
+      }
 
       //getting firebase uid and updated it to collection
     } catch (e) {

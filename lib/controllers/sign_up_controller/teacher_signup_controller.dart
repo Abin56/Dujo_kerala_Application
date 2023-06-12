@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../model/Signup_Image_Selction/image_selection.dart';
-import '../../view/constant/sizes/constant.dart';
 import '../userCredentials/user_credentials.dart';
 
 class TeacherSignUpController extends GetxController {
@@ -60,56 +59,57 @@ class TeacherSignUpController extends GetxController {
     String imageId = "";
     String imageUrl = "";
     try {
-      isLoading.value = true;
       if (Get.find<GetImage>().pickedImage.isNotEmpty) {
+        isLoading.value = true;
         imageId = uuid.v1();
         final result = await FirebaseStorage.instance
             .ref(
                 "files/teacherPhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.teacherModel?.teacherName}$imageId")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         imageUrl = await result.ref.getDownloadURL();
-      }
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      )
-          .then((value) {
-        final teacherNewModel = TeacherModel(
-          teacherName:
-              UserCredentialsController.teacherModel?.teacherName ?? "",
-          teacherEmail: emailController.text.trim(),
-          houseName: houseNameController.text,
-          houseNumber: houseNumberController.text,
-          place: placeController.text,
-          gender: gender ?? "",
-          district: districtController.text,
-          altPhoneNo: altPhoneNoController.text,
-          employeeID: UserCredentialsController.teacherModel?.employeeID ?? "",
-          createdAt: UserCredentialsController.teacherModel?.createdAt ?? "",
-          teacherPhNo:
-              UserCredentialsController.teacherModel?.teacherPhNo ?? "",
-          docid: value.user?.uid ?? "",
-          userRole: UserCredentialsController.teacherModel?.userRole ?? "",
-          imageId: imageId,
-          imageUrl: imageUrl,
-        );
-                 firebaseData
-            .collection("Teachers")
-            .doc(value.user?.uid)
-            .set(teacherNewModel.toMap())
-        .then((value) {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        )
+            .then((value) {
+          final teacherNewModel = TeacherModel(
+            teacherName:
+                UserCredentialsController.teacherModel?.teacherName ?? "",
+            teacherEmail: emailController.text.trim(),
+            houseName: houseNameController.text,
+            houseNumber: houseNumberController.text,
+            place: placeController.text,
+            gender: gender ?? "",
+            district: districtController.text,
+            altPhoneNo: altPhoneNoController.text,
+            employeeID:
+                UserCredentialsController.teacherModel?.employeeID ?? "",
+            createdAt: UserCredentialsController.teacherModel?.createdAt ?? "",
+            teacherPhNo:
+                UserCredentialsController.teacherModel?.teacherPhNo ?? "",
+            docid: value.user?.uid ?? "",
+            userRole: UserCredentialsController.teacherModel?.userRole ?? "",
+            imageId: imageId,
+            imageUrl: imageUrl,
+          );
           firebaseData
-              .collection('TempTeacherList')
-              .doc(UserCredentialsController.teacherModel?.docid)
-              .delete();
+              .collection("Teachers")
+              .doc(value.user?.uid)
+              .set(teacherNewModel.toMap())
+              .then((value) {
+            firebaseData
+                .collection('TempTeacherList')
+                .doc(UserCredentialsController.teacherModel?.docid)
+                .delete();
+          });
         });
-              
-            });
 
-
-      Get.find<GetImage>().pickedImage.value = "";
-      isLoading.value = false;
+        Get.find<GetImage>().pickedImage.value = "";
+        isLoading.value = false;
+      } else {
+        showToast(msg: "Please upload profile image");
+      }
     } catch (e) {
       showToast(msg: "Failed to update teachers data");
       log(name: name, e.toString());

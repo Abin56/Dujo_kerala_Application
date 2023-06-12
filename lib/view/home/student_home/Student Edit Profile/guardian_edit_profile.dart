@@ -1,14 +1,15 @@
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/edit_image_selection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/student_controller/profile_edit_controllers/guardian_profile_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../widgets/Iconbackbutton.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/sizes/constant.dart';
 import '../../../constant/sizes/sizes.dart';
+import '../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
 class GuardianEditProfileScreen extends StatelessWidget {
@@ -49,7 +50,7 @@ class GuardianEditProfileScreen extends StatelessWidget {
             children: [
               Stack(children: [
                 SingleChildScrollView(
-                  child: CircleAvatharImageSelectionWidget(),
+                  child: CircleAvatharImageSelectionWidgetGuardian(),
                 ),
                 kHeight20,
               ]),
@@ -224,5 +225,100 @@ class GuardianEditListileWidget extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class CircleAvatharImageSelectionWidgetGuardian extends StatelessWidget {
+  CircleAvatharImageSelectionWidgetGuardian({
+    super.key,
+  });
+  final GetImage getImageController = Get.put(GetImage());
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CircleAvatar(
+          backgroundImage:
+              UserCredentialsController.guardianModel?.profileImageID == null ||
+                      UserCredentialsController
+                          .guardianModel!.profileImageID!.isEmpty
+                  ? const NetworkImage(netWorkImagePathPerson)
+                  : NetworkImage(
+                      UserCredentialsController.guardianModel?.profileImageID ??
+                          " ") as ImageProvider,
+          radius: 60,
+          child: Stack(
+            children: [
+              InkWell(
+                onTap: () async {
+                  _getCameraAndGallery(context);
+                },
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: const Color.fromARGB(255, 52, 50, 50),
+                    child: IconButton(
+                      icon: const Icon(Icons.edit),
+                      color: Colors.white,
+                      onPressed: () async {},
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  void _getCameraAndGallery(BuildContext context) {
+    showModalBottomSheet(
+      enableDrag: false,
+      isDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return BottomProfilePhotoContainerWidget(
+          getImageController: getImageController,
+        );
+      },
+    ).then((value) {
+      if (getImageController.pickedImage.value.isNotEmpty) {
+        showDialog(
+          context: context,
+          barrierDismissible:
+              false, // Added to prevent dialog dismissal on tap outside
+          builder: (context) {
+            return Obx(
+              () => Get.find<GuardianProfileController>().isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : AlertDialog(
+                      title:
+                          const Text('Do you want to change profile picture?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Get.find<GuardianProfileController>()
+                                .updateGuardianProfilePicture();
+                          },
+                          child: const Text('Update'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            getImageController.pickedImage.value = '';
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ],
+                    ),
+            );
+          },
+        );
+      }
+    });
   }
 }
