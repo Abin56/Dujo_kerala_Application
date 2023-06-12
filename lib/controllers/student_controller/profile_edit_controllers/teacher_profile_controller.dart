@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/shared_pref_helper.dart';
+import '../../../model/Signup_Image_Selction/image_selection.dart';
+import '../../../model/teacher_model/teacher_model.dart';
 import '../../../utils/utils.dart';
+import '../../../view/home/teachers_home/teacher_main_home.dart';
 import '../../../view/pages/login/dujo_login_screen.dart';
 import '../../userCredentials/user_credentials.dart';
 
@@ -73,6 +79,43 @@ class TeacherProfileController {
       }
 
       showToast(msg: errorMessage);
+    }
+  }
+
+  Future<void> updateTeacherProfilePicture() async {
+    try {
+      if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+        isLoading.value = true;
+        final result = await FirebaseStorage.instance
+            .ref(
+                "files/teacherPhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.teacherModel?.imageId}")
+            .putFile(File(Get.find<GetImage>().pickedImage.value));
+        final imageUrl = await result.ref.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection("Teachers")
+            .doc(UserCredentialsController.teacherModel?.docid)
+            .update({"imageUrl": imageUrl});
+
+        isLoading.value = false;
+        Get.find<GetImage>().pickedImage.value = "";
+        final teacherData = await FirebaseFirestore.instance
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection('Teachers')
+            .doc(UserCredentialsController.teacherModel?.docid)
+            .get();
+
+        if (teacherData.data() != null) {
+          UserCredentialsController.teacherModel =
+              TeacherModel.fromMap(teacherData.data()!);
+          Get.offAll(const TeacherMainHomeScreen());
+        }
+      }
+    } catch (e) {
+      isLoading.value = false;
+      showToast(msg: "Something Went Wrong");
     }
   }
 }

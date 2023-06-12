@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 
 import '../../../helper/shared_pref_helper.dart';
 import '../../../model/Signup_Image_Selction/image_selection.dart';
+import '../../../model/student_model/student_model.dart';
 import '../../../utils/utils.dart';
+import '../../../view/home/student_home/students_main_home.dart';
 import '../../../view/pages/login/dujo_login_screen.dart';
 import '../../userCredentials/user_credentials.dart';
 
@@ -90,7 +92,7 @@ class StudentProfileEditController {
     }
   }
 
-  Future<void> updateProfilePicture() async {
+  Future<void> updateStudentProfilePicture() async {
     try {
       if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
         isLoading.value = true;
@@ -118,6 +120,23 @@ class StudentProfileEditController {
             .update({"profileImageUrl": imageUrl});
         showToast(msg: "Update successfully");
         isLoading.value = false;
+        Get.find<GetImage>().pickedImage.value = "";
+        final studentData = await FirebaseFirestore.instance
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection(UserCredentialsController.batchId ?? "")
+            .doc(UserCredentialsController.batchId)
+            .collection('classes')
+            .doc(UserCredentialsController.classId)
+            .collection('Students')
+            .doc(UserCredentialsController.studentModel?.docid ?? "")
+            .get();
+
+        if (studentData.data() != null) {
+          UserCredentialsController.studentModel =
+              StudentModel.fromJson(studentData.data()!);
+          Get.offAll(const StudentsMainHomeScreen());
+        }
       }
     } catch (e) {
       isLoading.value = false;
