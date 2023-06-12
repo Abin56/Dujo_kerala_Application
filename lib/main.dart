@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'controllers/bloc/user_phone_otp/auth_state.dart';
 import 'helper/shared_pref_helper.dart';
+import 'view/pages/splash_screen/splash_screen.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log('Handling  a background message ${message.messageId}');
@@ -33,11 +34,17 @@ Future<void> main() async {
   await SharedPreferencesHelper.initPrefs();
   ScreenUtil.ensureScreenSize();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  ///[languageCode]and[countryCode] will be change [updateLanguage] function on select language page
+  final String languageCode =
+      SharedPreferencesHelper.getString("langCode") ?? "en";
+  final String countryCode =
+      SharedPreferencesHelper.getString("langCode") ?? "US";
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +66,7 @@ class MyApp extends StatelessWidget {
               ],
               child: GetMaterialApp(
                 translations: GetxLanguage(),
-                locale: const Locale('en', 'US'),
+                locale: Locale(languageCode, countryCode),
                 debugShowCheckedModeBanner: false,
                 home: BlocBuilder<AuthCubit, AuthState>(
                   buildWhen: (oldState, newState) {
@@ -67,11 +74,25 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return SelectLanguage();
+                      if (SharedPreferencesHelper.getString("langCode") !=
+                          null) {
+                        return const SplashScreen();
+                      } else {
+                        return const SelectLanguage();
+                      }
                     } else if (state is AuthLoggedOutState) {
-                      return SelectLanguage();
+                      if (SharedPreferencesHelper.getString("langCode") !=
+                          null) {
+                        return const SplashScreen();
+                      } else {
+                        return const SelectLanguage();
+                      }
                     }
-                    return SelectLanguage();
+                    if (SharedPreferencesHelper.getString("langCode") != null) {
+                      return const SplashScreen();
+                    } else {
+                      return const SelectLanguage();
+                    }
                   },
                 ),
               ),

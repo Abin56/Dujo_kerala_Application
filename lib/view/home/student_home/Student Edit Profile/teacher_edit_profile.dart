@@ -48,7 +48,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stack(children: [
+              Stack(children: const [
                 SingleChildScrollView(
                   child: CircleAvatharImageSelectionWidget(),
                 ),

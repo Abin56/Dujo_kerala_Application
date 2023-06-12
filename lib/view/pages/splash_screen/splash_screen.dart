@@ -115,7 +115,7 @@ Future<void> checkStudent(
   if (studentData.data() != null) {
     UserCredentialsController.studentModel =
         StudentModel.fromJson(studentData.data()!);
-    Get.to(StudentsMainHomeScreen());
+    Get.to(const StudentsMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
     Get.to(const DujoLoginScren());
@@ -151,7 +151,7 @@ Future<void> checkClassTeacher(
   if (classTeacherData.data() != null) {
     UserCredentialsController.teacherModel =
         TeacherModel.fromMap(classTeacherData.data()!);
-    Get.to(ClassTeacherMainHomeScreen());
+    Get.to(const ClassTeacherMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
     Get.to(const DujoLoginScren());
