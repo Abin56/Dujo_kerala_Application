@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
-import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -76,66 +75,69 @@ class StudentSignUpController extends GetxController {
     String imageId = "";
     String imageUrl = "";
     try {
-      isLoading.value = true;
       if (Get.find<GetImage>().pickedImage.isNotEmpty) {
+        isLoading.value = true;
         imageId = uuid.v1();
         final result = await FirebaseStorage.instance
             .ref(
                 "files/studentsProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.studentModel?.studentName}$imageId")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         imageUrl = await result.ref.getDownloadURL();
-      }
+        //getting firebase uid and updated it to collection
+        String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
-      //getting firebase uid and updated it to collection
-      String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
+        final studentModel = StudentModel(
+            admissionNumber:
+                UserCredentialsController.studentModel?.admissionNumber ?? "",
+            alPhoneNumber: altPhoneNoController.text,
+            bloodgroup: bloodGroup ?? "",
+            classId: UserCredentialsController.studentModel?.classId ?? "",
+            createDate:
+                UserCredentialsController.studentModel?.createDate ?? "",
+            dateofBirth: dateOfBirthController.text,
+            district: districtController.text,
+            docid: userUid,
+            gender: gender ?? "",
+            guardianId:
+                UserCredentialsController.studentModel?.guardianId ?? "",
+            houseName: houseNameController.text.trim(),
+            parentId: UserCredentialsController.studentModel?.parentId ?? "",
+            parentPhoneNumber:
+                UserCredentialsController.studentModel?.parentPhoneNumber ?? "",
+            place: placeController.text.trim(),
+            profileImageId: imageId,
+            profileImageUrl: imageUrl,
+            studentName:
+                UserCredentialsController.studentModel?.studentName ?? "",
+            studentemail: emailController.text.trim(),
+            userRole: UserCredentialsController.studentModel?.userRole ?? "");
 
-      final studentModel = StudentModel(
-          admissionNumber:
-              UserCredentialsController.studentModel?.admissionNumber ?? "",
-          alPhoneNumber: altPhoneNoController.text,
-          bloodgroup: bloodGroup ?? "",
-          classId: UserCredentialsController.studentModel?.classId ?? "",
-          createDate: UserCredentialsController.studentModel?.createDate ?? "",
-          dateofBirth: dateOfBirthController.text,
-          district: districtController.text,
-          docid: userUid,
-          gender: gender ?? "",
-          guardianId: UserCredentialsController.studentModel?.guardianId ?? "",
-          houseName: houseNameController.text.trim(),
-          parentId: UserCredentialsController.studentModel?.parentId ?? "",
-          parentPhoneNumber:
-              UserCredentialsController.studentModel?.parentPhoneNumber ?? "",
-          place: placeController.text.trim(),
-          profileImageId: imageId,
-          profileImageUrl: imageUrl,
-          studentName:
-              UserCredentialsController.studentModel?.studentName ?? "",
-          studentemail: emailController.text.trim(),
-          userRole: UserCredentialsController.studentModel?.userRole ?? "");
-
-      await
-      
-       firebaseData.doc(userUid).set(studentModel.toJson())
-       .then((value) {
-        firebaseDataTemp
-            .doc(UserCredentialsController.studentModel?.docid ?? "")
-            .delete()
+        await firebaseData
+            .doc(userUid)
+            .set(studentModel.toJson())
             .then((value) {
-          UserCredentialsController.studentModel = studentModel;
-          //updating data to all students field
+          firebaseDataTemp
+              .doc(UserCredentialsController.studentModel?.docid ?? "")
+              .delete()
+              .then((value) {
+            UserCredentialsController.studentModel = studentModel;
+            //updating data to all students field
 
-          FirebaseFirestore.instance
-              .collection("SchoolListCollection")
-              .doc(UserCredentialsController.schoolId)
-              .collection('AllStudents')
-              .doc(UserCredentialsController.studentModel?.docid)
-              .set(studentModel.toJson());
+            FirebaseFirestore.instance
+                .collection("SchoolListCollection")
+                .doc(UserCredentialsController.schoolId)
+                .collection('AllStudents')
+                .doc(UserCredentialsController.studentModel?.docid)
+                .set(studentModel.toJson());
+          });
         });
-      });
 
-      clearFields();
-      Get.find<GetImage>().pickedImage.value = "";
-      isLoading.value = false;
+        clearFields();
+        Get.find<GetImage>().pickedImage.value = "";
+        isLoading.value = false;
+      } else {
+        showToast(msg: "Please Upload Profile Picture");
+      }
     } catch (e) {
       showToast(msg: "Updation Failed");
       isLoading.value = false;

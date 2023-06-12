@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../constant/sizes/constant.dart';
+import '../../../../widgets/bottom_container_profile_photo_container.dart';
 
 class CircleAvatharImageSelectionWidget extends StatelessWidget {
-  const CircleAvatharImageSelectionWidget({
+  CircleAvatharImageSelectionWidget({
     super.key,
   });
-
+  GetImage getImageController = Get.put(GetImage());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +28,9 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
           child: Stack(
             children: [
               InkWell(
-                onTap: () async {},
+                onTap: () async {
+                  _getCameraAndGallery(context);
+                },
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
@@ -44,5 +49,33 @@ class CircleAvatharImageSelectionWidget extends StatelessWidget {
         )
       ],
     );
+  }
+
+  void _getCameraAndGallery(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return BottomProfilePhotoContainerWidget(
+              getImageController: getImageController);
+        }).then((value) {
+      if (getImageController.pickedImage.value.isNotEmpty) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Do you want to change profile picture'),
+                actions: [
+                  TextButton(onPressed: () {}, child: const Text('Update')),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        getImageController.pickedImage.value = "";
+                      },
+                      child: const Text('Cancel')),
+                ],
+              );
+            });
+      }
+    });
   }
 }

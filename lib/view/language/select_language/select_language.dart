@@ -34,9 +34,9 @@ class _SelectLanguageState extends State<SelectLanguage> {
     {'name': 'മലയാളം', 'locale': const Locale('ml', 'IN')},
   ];
 
-  updateLanguage(Locale locale) {
+  Future<void> updateLanguage(Locale locale) async {
     Get.back();
-    Get.updateLocale(locale);
+    await Get.updateLocale(locale);
     SharedPreferencesHelper.setString("langCode", locale.languageCode);
     SharedPreferencesHelper.setString("countryCode", locale.countryCode ?? "");
   }
@@ -77,10 +77,10 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           log(locale[index]['name']);
 
-                          updateLanguage(locale[index]['locale']);
+                          await updateLanguage(locale[index]['locale']);
                         },
                         child: Text(
                           locale[index]['name'],
@@ -125,6 +125,8 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   BoxDecoration(borderRadius: BorderRadius.circular(30)),
               child: ElevatedButton(
                   onPressed: () async {
+                    SharedPreferencesHelper.setString("langCode", "en");
+                    SharedPreferencesHelper.setString("countryCode", "US");
                     Get.offAll(const SplashScreen());
                   },
                   child: Text('Next'.tr)),
