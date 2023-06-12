@@ -6,20 +6,19 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/shared_pref_helper.dart';
 
 class SelectLanguage extends StatefulWidget {
-  SelectLanguage({super.key});
+  const SelectLanguage({super.key});
 
   @override
   State<SelectLanguage> createState() => _SelectLanguageState();
 }
 
 class _SelectLanguageState extends State<SelectLanguage> {
-
   NotificationServices notificationServices = NotificationServices();
 
   @override
-  
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -27,6 +26,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
     notificationServices.firebaseInit(context);
     notificationServices.setupInteractMessage(context);
   }
+
   final List locale = [
     {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
     {'name': 'ಕನ್ನಡ', 'locale': const Locale('kn', 'IN')},
@@ -34,32 +34,34 @@ class _SelectLanguageState extends State<SelectLanguage> {
     {'name': 'മലയാളം', 'locale': const Locale('ml', 'IN')},
   ];
 
-  updateLanguage(Locale locale) {
+  Future<void> updateLanguage(Locale locale) async {
     Get.back();
-    Get.updateLocale(locale);
+    await Get.updateLocale(locale);
+    SharedPreferencesHelper.setString("langCode", locale.languageCode);
+    SharedPreferencesHelper.setString("countryCode", locale.countryCode ?? "");
   }
-
 
   void userRequestPermission() async {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
 
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    log('User granted permission');
-  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    log('User granted provisional permission');
-  } else {
-    log('User declined or has not accepted permission');
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      log('User granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      log('User granted provisional permission');
+    } else {
+      log('User declined or has not accepted permission');
+    }
   }
-}
 
   builddialog(BuildContext context) {
     showDialog(
@@ -75,9 +77,10 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           log(locale[index]['name']);
-                          updateLanguage(locale[index]['locale']);
+
+                          await updateLanguage(locale[index]['locale']);
                         },
                         child: Text(
                           locale[index]['name'],
@@ -122,6 +125,8 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   BoxDecoration(borderRadius: BorderRadius.circular(30)),
               child: ElevatedButton(
                   onPressed: () async {
+                    SharedPreferencesHelper.setString("langCode", "en");
+                    SharedPreferencesHelper.setString("countryCode", "US");
                     Get.offAll(const SplashScreen());
                   },
                   child: Text('Next'.tr)),
@@ -132,12 +137,3 @@ class _SelectLanguageState extends State<SelectLanguage> {
     );
   }
 }
-    // SharedPreferences prefs =
-    //                     await SharedPreferences.getInstance();
-    //                 bool? isOnBoard = prefs.getBool('seenonboard');
-    //                 if (isOnBoard == true) {
-    //                   log("True");
-    //                   Get.offAll(OpeningPage());
-    //                 } else {
-    //                   Get.offAll(SelectLanguage());
-    //                 }

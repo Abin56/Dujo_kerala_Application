@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
@@ -6,6 +7,7 @@ class SharedPreferencesHelper {
   static String classIdKey = 'classId';
   static String userRoleKey = 'userRole';
   static late SharedPreferences _prefs;
+
 
   static Future<void> clearSharedPreferenceData() async {
     await setString(batchIdKey, "");
@@ -33,6 +35,7 @@ class SharedPreferencesHelper {
 
   static Future<bool> setInt(String key, int value) async {
     final result = await _prefs.setInt(key, value);
+
     return result;
   }
 

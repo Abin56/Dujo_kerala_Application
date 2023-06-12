@@ -8,7 +8,6 @@ import 'package:dujo_kerala_application/view/pages/chat_gpt/providers/models_pro
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -33,16 +32,24 @@ Future<void> main() async {
   //creating shared preference
   await SharedPreferencesHelper.initPrefs();
   ScreenUtil.ensureScreenSize();
-  
+
    SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
   runApp(const MyApp());
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  ///[languageCode]and[countryCode] will be change [updateLanguage] function on select language page
+  final String languageCode =
+      SharedPreferencesHelper.getString("langCode") ?? "en";
+  final String countryCode =
+      SharedPreferencesHelper.getString("langCode") ?? "US";
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +71,7 @@ class MyApp extends StatelessWidget {
               ],
               child: GetMaterialApp(
                 translations: GetxLanguage(),
-                locale: const Locale('en', 'US'),
+                locale: Locale(languageCode, countryCode),
                 debugShowCheckedModeBanner: false,
                 home: BlocBuilder<AuthCubit, AuthState>(
                   buildWhen: (oldState, newState) {
@@ -72,11 +79,25 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is AuthLoggedInState) {
-                      return SelectLanguage();
+                      if (SharedPreferencesHelper.getString("langCode") !=
+                          null) {
+                        return const SplashScreen();
+                      } else {
+                        return const SelectLanguage();
+                      }
                     } else if (state is AuthLoggedOutState) {
-                      return SelectLanguage();
+                      if (SharedPreferencesHelper.getString("langCode") !=
+                          null) {
+                        return const SplashScreen();
+                      } else {
+                        return const SelectLanguage();
+                      }
                     }
-                    return SelectLanguage();
+                    if (SharedPreferencesHelper.getString("langCode") != null) {
+                      return const SplashScreen();
+                    } else {
+                      return const SelectLanguage();
+                    }
                   },
                 ),
               ),

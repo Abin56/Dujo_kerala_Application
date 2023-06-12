@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/edit_image_selection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -50,7 +49,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
             children: [
               Stack(children: const [
                 SingleChildScrollView(
-                  child: CircleAvatharImageSelectionWidget(),
+                  child: CircleAvatharImageSelectionWidgetTeacher(),
                 ),
                 kHeight20,
               ]),
@@ -167,7 +166,7 @@ class TeacherEditListileWidget extends StatelessWidget {
                     },
                   ),
                   TextButton(
-                    child: const Text("OK"),
+                    child: const Text("Ok"),
                     onPressed: () {
                       Navigator.pop(context);
 
@@ -232,6 +231,49 @@ class TeacherEditListileWidget extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
+  const CircleAvatharImageSelectionWidgetTeacher({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CircleAvatar(
+          backgroundImage: UserCredentialsController.teacherModel?.imageUrl ==
+                      null ||
+                  UserCredentialsController.teacherModel!.imageUrl!.isEmpty
+              ? const NetworkImage(netWorkImagePathPerson)
+              : NetworkImage(
+                      UserCredentialsController.teacherModel?.imageUrl ?? " ")
+                  as ImageProvider,
+          radius: 60,
+          child: Stack(
+            children: [
+              InkWell(
+                onTap: () async {},
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: const Color.fromARGB(255, 52, 50, 50),
+                    child: IconButton(
+                      icon: const Icon(Icons.edit),
+                      color: Colors.white,
+                      onPressed: () async {},
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

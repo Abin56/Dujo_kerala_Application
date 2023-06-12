@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/shared_pref_helper.dart';
+import '../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../utils/utils.dart';
 import '../../../view/pages/login/dujo_login_screen.dart';
 import '../../userCredentials/user_credentials.dart';
@@ -83,6 +87,41 @@ class StudentProfileEditController {
       }
 
       showToast(msg: errorMessage);
+    }
+  }
+
+  Future<void> updateProfilePicture() async {
+    try {
+      if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+        isLoading.value = true;
+        final result = await FirebaseStorage.instance
+            .ref(
+                "files/studentsProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.studentModel?.profileImageId}")
+            .putFile(File(Get.find<GetImage>().pickedImage.value));
+        final imageUrl = await result.ref.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection(UserCredentialsController.batchId ?? "")
+            .doc(UserCredentialsController.batchId ?? "")
+            .collection("classes")
+            .doc(UserCredentialsController.classId)
+            .collection("Students")
+            .doc(UserCredentialsController.studentModel?.docid)
+            .update({"profileImageUrl": imageUrl});
+
+        FirebaseFirestore.instance
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection('AllStudents')
+            .doc(UserCredentialsController.studentModel?.docid)
+            .update({"profileImageUrl": imageUrl});
+        showToast(msg: "Update successfully");
+        isLoading.value = false;
+      }
+    } catch (e) {
+      isLoading.value = false;
+      showToast(msg: "Something Went Wrong");
     }
   }
 }
