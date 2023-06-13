@@ -50,9 +50,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   List<String> tokenList2 = [];
   DateTime? attendanceTime;
 
-
-  List<Map<String, dynamic>> parentListOfAbsentees = []; 
-  List<Map<String, dynamic>> guardianListOfAbsentees = []; 
+  List<Map<String, dynamic>> parentListOfAbsentees = [];
+  List<Map<String, dynamic>> guardianListOfAbsentees = [];
 
   Future<void> sendPushMessage(String token, String body, String title) async {
     try {
@@ -110,13 +109,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
     getTime();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text('Take Attendance'.tr),
         backgroundColor: adminePrimayColor,
       ),
@@ -223,13 +219,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .doc(widget.periodTokenID)
                                       .set({
                                     "docid": widget.periodTokenID,
-                                    'peroid': widget.periodNumber,
-                                    "studentName": snapshot.data!.docs[index]
-                                        ['studentName'],
-                                    "uid": snapshot.data!.docs[index]['docid'],
-                                    "present": true,
-                                    "Date": DateTime.now().toString(),
-                                    "docid": widget.subjectID,
+                                    'period': widget.periodNumber,
                                     'subject': widget.subjectName,
                                     'date': DateTime.now().toString(),
                                     'onSubmit': false,
@@ -253,10 +243,11 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                         .set({
                                       "studentName": snapshot.data!.docs[index]
                                           ['studentName'],
+                                      "uid": snapshot.data!.docs[index]
+                                          ['docid'],
                                       "present": true,
                                       "Date": DateTime.now().toString(),
                                     });
-
                                   });
                                 });
                               });
@@ -321,7 +312,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .doc(widget.periodTokenID)
                                       .set({
                                     "docid": widget.periodTokenID,
-                                    'peroid': widget.periodNumber,
+                                    'period': widget.periodNumber,
                                     'subject': widget.subjectName,
                                     'date': DateTime.now().toString(),
                                     'onSubmit': false,
@@ -346,10 +337,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       "studentName": snapshot.data!.docs[index]
                                           ['studentName'],
                                       "present": false,
-                                              "uid": snapshot.data!.docs[index]['docid'],
+                                      "uid": snapshot.data!.docs[index]
+                                          ['docid'],
                                       "Date": DateTime.now().toString(),
                                     });
-                
                                   });
                                 });
                               });
@@ -486,8 +477,9 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
               onPressed: () async {
                 Navigator.of(context).pop();
                 attendanceTime = DateTime.now();
-                 String formattedDate = DateFormat.yMMMMd().format(attendanceTime!);
-                  String formattedTime = DateFormat.jm().format(DateTime.now()); 
+                String formattedDate =
+                    DateFormat.yMMMMd().format(attendanceTime!);
+                String formattedTime = DateFormat.jm().format(DateTime.now());
                 Future<QuerySnapshot<Map<String, dynamic>>> absentStudentsList =
                     FirebaseFirestore.instance
                         .collection("SchoolListCollection")
@@ -502,8 +494,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                         .doc(widget.subjectID)
                         .collection('PresentList')
                         .where('present', isEqualTo: false)
-                        .get(); 
-
+                        .get();
 
                 QuerySnapshot<Map<String, dynamic>> snapshot =
                     await absentStudentsList;
@@ -519,7 +510,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                         .collection("classes")
                         .doc(widget.classID)
                         .collection('ParentCollection')
-                        .get(); 
+                        .get();
 
                 Future<QuerySnapshot<Map<String, dynamic>>> guardianss =
                     FirebaseFirestore.instance
@@ -534,10 +525,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
 
                 QuerySnapshot<Map<String, dynamic>> snapshot2 = await parentss;
                 List<Map<String, dynamic>> parentsList =
-                    snapshot2.docs.map((doc) => doc.data()).toList();  
+                    snapshot2.docs.map((doc) => doc.data()).toList();
 
-
-                 QuerySnapshot<Map<String, dynamic>> snapshot3 = await guardianss;
+                QuerySnapshot<Map<String, dynamic>> snapshot3 =
+                    await guardianss;
                 List<Map<String, dynamic>> guardiansList =
                     snapshot2.docs.map((doc) => doc.data()).toList();
 
@@ -557,7 +548,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                   //parentListOfAbsentees
                 }
 
-                 for (var item1 in guardiansList) {
+                for (var item1 in guardiansList) {
                   for (var item2 in mappedAbsentStudentsList) {
                     if (item1['studentID'] == item2['uid']) {
                       log('yesss!!!!!');
@@ -574,25 +565,30 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                 log('HWG: $parentListOfAbsentees');
                 for (var k in parentListOfAbsentees) {
                   tokenList.add(k['deviceToken']);
-                } 
-
-                    for (var r in guardianListOfAbsentees) {
-                  tokenList2.add(r['deviceToken']);
                 }
 
+                for (var r in guardianListOfAbsentees) {
+                  tokenList2.add(r['deviceToken']);
+                }
 
                 Timer(Duration(hours: int.parse(timer)), () {
                   // Function to be executed after the duration
 
                   for (var l in tokenList) {
                     for (var i = 0; i < tokenList.length; i++) {
-                      sendPushMessage(tokenList[i], 'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.', 'Absent Notification');
+                      sendPushMessage(
+                          tokenList[i],
+                          'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.',
+                          'Absent Notification');
                     }
-                  } 
+                  }
 
-                   for (var m in tokenList2) {
+                  for (var m in tokenList2) {
                     for (var i = 0; i < tokenList2.length; i++) {
-                      sendPushMessage(tokenList2[i], 'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.', 'Absent Notification');
+                      sendPushMessage(
+                          tokenList2[i],
+                          'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.',
+                          'Absent Notification');
                     }
                   }
                 });
