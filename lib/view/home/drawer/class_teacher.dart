@@ -7,7 +7,6 @@ import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teach
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
-import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence_subject_listView.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
@@ -19,6 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../helper/shared_pref_helper.dart';
+import '../../pages/attentence/select_period.dart';
 import '../../language/language_change_drawer.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
@@ -215,7 +215,7 @@ Widget MyDrawerList(context) {
         MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
-            () => TakeAttentenceSubjectWise(
+            () => SelectPeriodWiseScreen(
                 batchId: UserCredentialsController.batchId!,
                 classID: UserCredentialsController.classId!,
                 schoolId: UserCredentialsController.schoolId!),

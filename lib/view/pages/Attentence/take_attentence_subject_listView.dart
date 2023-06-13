@@ -12,11 +12,15 @@ import 'package:google_fonts/google_fonts.dart';
 class TakeAttentenceSubjectWise extends StatelessWidget {
   String schoolId;
   String batchId;
+  String periodTokenID;
+  int periodNumber;
   String classID;
   TakeAttentenceSubjectWise(
       {required this.batchId,
       required this.classID,
       required this.schoolId,
+      required this.periodTokenID,
+      required this.periodNumber,
       super.key});
 
   @override
@@ -68,6 +72,8 @@ class TakeAttentenceSubjectWise extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               Get.to(TakeAttenenceScreen(
+                              periodNumber: periodNumber.toString(),
+                                periodTokenID:periodTokenID ,
                                 subjectID:snapshot.data!.docs[index]['docid'] ,
                                 subjectName: snapshot.data!.docs[index]['subjectName'],
                                   classID: classID,
