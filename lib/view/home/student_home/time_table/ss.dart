@@ -87,8 +87,10 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin{
   Widget build(BuildContext context) {
     return  Scaffold(
    appBar: AppBar(
-    title: GoogleMonstserratWidgets(text: 'Time Table', fontsize: 15, color: adminePrimayColor, fontWeight: FontWeight.bold,),
-    
+    title: GoogleMonstserratWidgets(text: 'Time Table', fontsize: 17, color: adminePrimayColor, fontWeight: FontWeight.bold,),
+     iconTheme: const IconThemeData(
+    color: adminePrimayColor //change your color here
+  ),
     backgroundColor: Colors.transparent,
     elevation: 0,
     bottom:  TabBar(
@@ -99,7 +101,7 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin{
       labelStyle: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w500),
       controller: _tabController,
             tabs: const [
-              Tab(text: 'MON'),
+              Tab(text: 'MON'), 
               Tab(text: 'TUE'),
               Tab(text: 'WED'),
                Tab(text: 'THUR'),
@@ -154,16 +156,19 @@ class PeriodShowingWidget extends StatelessWidget {
                    
                    Padding(
                      padding: const EdgeInsets.only(left: 10.0),
-                     child: CircleAvatar(
-                      radius: 15,
-                      backgroundColor: adminePrimayColor,child: GoogleMonstserratWidgets(text: '${index+1}', fontsize: 12),),
+                     child: Container(
+                      
+                      color: adminePrimayColor,child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: GoogleMonstserratWidgets(text: 'Hour : ${index+1}', fontsize: 12, fontWeight: FontWeight.bold,color: Colors.white,),
+                      ),),
                    ),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           snapshot.data!.docs.where((element) => element.id== dayName).first [ periodList[index]][ periodList[index]] == ''?  GoogleMonstserratWidgets(text: 'No Period Added', fontsize: 16, color: adminePrimayColor, fontWeight: FontWeight.w500,) : GoogleMonstserratWidgets(text: snapshot.data!.docs.where((element) => element.id== dayName).first [ periodList[index]][ periodList[index]], color: adminePrimayColor, fontsize: 16, fontWeight: FontWeight.w500,),
-                          GoogleMonstserratWidgets(text: 'Teacher : '+ snapshot.data!.docs.where((element) => element.id== dayName).first [ periodList[index]][ teacherList[index]], color: adminePrimayColor.withOpacity(0.7), fontsize: 13, fontWeight: FontWeight.w500,),
+                          snapshot.data!.docs.where((element) => element.id== dayName).first [ periodList[index]][ teacherList[index]] == ''? const SizedBox(): GoogleMonstserratWidgets(text: 'Teacher : '+ snapshot.data!.docs.where((element) => element.id== dayName).first [ periodList[index]][ teacherList[index]], color: adminePrimayColor.withOpacity(0.7), fontsize: 13, fontWeight: FontWeight.w500,),
                         ],
                       ),
                     ),
