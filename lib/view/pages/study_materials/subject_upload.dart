@@ -13,22 +13,18 @@ class SubjectUploading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-              title: Row(
-                children: const [
-                
-                
-                  Text("Subject Upload "),
-                ],
-              ),
-              backgroundColor: adminePrimayColor,
-            ),
-           body: Column(
+        title: Row(
+          children: const [
+            Text("Subject Upload "),
+          ],
+        ),
+        backgroundColor: adminePrimayColor,
+      ),
+      body: Column(
         children: [
           kHeight20,
-          ExamUploadTextFormFeild(
-              text: "Teacher's Name", hintText: "Name"),
+          ExamUploadTextFormFeild(text: "Teacher's Name", hintText: "Name"),
           kHeight20,
-          
           ExamUploadTextFormFeild(
               text: "Subject Name", hintText: "Subject Name"),
           kHeight20,
