@@ -14,12 +14,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
+import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../language/language_change_drawer.dart';
-import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
-  const ParentHeaderDrawer({Key? key}) : super(key: key);
+
+   const ParentHeaderDrawer({
+    Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,7 @@ class ParentHeaderDrawer extends StatelessWidget {
             onPressed: () async {
               await userLogOut(context);
             },
-            child: Text("Logout".tr),
+            child:  Text("Logout".tr),
           )
         ],
       ),
@@ -142,7 +144,7 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/information.png', 'General Instructions',
+           MenuItem(1, 'assets/images/information.png', 'General Instructions',
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
@@ -150,22 +152,22 @@ Widget MyDrawerList(context) {
         }),
         MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => AttendenceBookScreenSelectMonth(
-                schoolId: UserCredentialsController.schoolId!,
-                batchId: UserCredentialsController.batchId!,
-                classID: UserCredentialsController.classId!),
+Get.to(
+            () =>      AttendenceBookScreenSelectMonth(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!),
           );
         }),
         MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
-          Get.to(
+   Get.to(
             () => const UserExmNotifications(),
           );
         }),
         MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-          Get.to(
+         Get.to(
             () => const StudentShowTimeTable(),
           );
         }),
@@ -175,7 +177,7 @@ Widget MyDrawerList(context) {
         // }),
         MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-          Get.to(
+             Get.to(
             () => const ViewHomeWorks(),
           );
         }),
@@ -188,19 +190,18 @@ Widget MyDrawerList(context) {
 
         MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => ProgressReportListViewScreen(
-                schoolId: UserCredentialsController.schoolId!,
-                classID: UserCredentialsController.classId!,
-                studentId:
-                    UserCredentialsController.parentModel?.studentID ?? "",
-                batchId: UserCredentialsController.batchId!),
+         Get.to(
+            () =>       ProgressReportListViewScreen(
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: UserCredentialsController.parentModel?.studentID ?? "",
+          batchId: UserCredentialsController.batchId!),
           );
         }),
 
-        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+         MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
+              Get.to(const PrivacyViewScreen());
         }),
         MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
@@ -301,6 +302,6 @@ Widget emptyDisplay(String section) {
           textAlign: TextAlign.center,
         ),
       ],
-    ),
-  );
+),
+);
 }

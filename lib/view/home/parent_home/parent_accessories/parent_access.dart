@@ -8,11 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../utils/utils.dart';
-import '../../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
+import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
+import '../../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../events/event_list.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
@@ -34,7 +35,7 @@ class ParentAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!),
       //Attendence
-      const UserExmNotifications(), // Exams
+       const UserExmNotifications(), // Exams
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.parentModel!.parentName!,
@@ -163,4 +164,5 @@ var _acc_images = [
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
+
 ];

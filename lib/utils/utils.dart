@@ -93,9 +93,6 @@ void handleFirebaseError(FirebaseAuthException error) {
   }
 }
 
-String translateString(String key) {
-  return key.tr;
-}
 void landScapeBlockFunction(){
   SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -104,3 +101,6 @@ void landScapeBlockFunction(){
 }
 
 
+String translateString(String key) {
+  return key.tr;
+}

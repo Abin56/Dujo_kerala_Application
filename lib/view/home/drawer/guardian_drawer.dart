@@ -14,8 +14,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
+import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../language/language_change_drawer.dart';
-import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
 
@@ -142,7 +142,7 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/information.png', 'General Instructions',
+         MenuItem(1, 'assets/images/information.png', 'General Instructions',
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
@@ -159,39 +159,42 @@ Widget MyDrawerList(context) {
         }),
         MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
-          Get.to(
+           Get.to(
             () => const UserExmNotifications(),
           );
         }),
         MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-          Get.to(
+      Get.to(
             () => const StudentShowTimeTable(),
           );
         }),
+
         MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-          Get.to(
+         Get.to(
             () => const ViewHomeWorks(),
           );
         }),
         MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
-          Get.to(
+     Get.to(
             () => NoticePage(),
           );
         }),
+
         MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => ProgressReportListViewScreen(
-                schoolId: UserCredentialsController.schoolId!,
-                classID: UserCredentialsController.classId!,
-                studentId: UserCredentialsController.guardianModel!.studentID!,
-                batchId: UserCredentialsController.batchId!),
+          schoolId: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          studentId: UserCredentialsController.guardianModel!.studentID!,
+          batchId: UserCredentialsController.batchId!),
           );
         }),
-        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+
+         MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
