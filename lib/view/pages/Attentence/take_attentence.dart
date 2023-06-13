@@ -223,6 +223,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     'subject': widget.subjectName,
                                     'date': DateTime.now().toString(),
                                     'onSubmit': false,
+                                    'exTime': DateTime.now().add(Duration(
+                                        minutes: int.parse(schoolTimer))).toString()
                                   }).then((value) {
                                     FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
@@ -263,13 +265,11 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     ['studentName']!] = false;
                                 log(present.toString());
                               });
-
                               final date = DateTime.now();
                               DateTime parseDate =
                                   DateTime.parse(date.toString());
                               final month = DateFormat('MMMM-yyyy');
                               String monthwise = month.format(parseDate);
-
                               final DateFormat formatter =
                                   DateFormat('dd-MM-yyyy');
                               String formatted = formatter.format(parseDate);
@@ -302,6 +302,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   FirebaseFirestore.instance
                                       .collection("SchoolListCollection")
                                       .doc(widget.schoolID)
+                                      .collection(widget.batchId)
+                                      .doc(widget.batchId)
                                       .collection("classes")
                                       .doc(widget.classID)
                                       .collection("Attendence")
@@ -316,6 +318,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     'subject': widget.subjectName,
                                     'date': DateTime.now().toString(),
                                     'onSubmit': false,
+                                    'exTime': DateTime.now().add(Duration(
+                                        minutes: int.parse(schoolTimer))).toString()
                                   }).then((value) {
                                     FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
@@ -336,9 +340,9 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                         .set({
                                       "studentName": snapshot.data!.docs[index]
                                           ['studentName'],
-                                      "present": false,
                                       "uid": snapshot.data!.docs[index]
                                           ['docid'],
+                                      "present": false,
                                       "Date": DateTime.now().toString(),
                                     });
                                   });

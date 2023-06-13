@@ -30,6 +30,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    pageTimeexprided();
     int columnCount = 3;
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -142,240 +143,315 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.end,
                                                 children: [
-                                                  CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.green,
-                                                    radius: 13,
-                                                    child: Center(
-                                                        child: IconButton(
-                                                            onPressed: () {
-                                                              showDialog(
-                                                                context:
-                                                                    context,
-                                                                barrierDismissible:
-                                                                    false, // user must tap button!
-                                                                builder:
-                                                                    (BuildContext
-                                                                        context) {
-                                                                  return AlertDialog(
-                                                                    title: const Text(
-                                                                        'Attendance List '),
-                                                                    content:
-                                                                        SingleChildScrollView(
-                                                                      child:
-                                                                          ListBody(
-                                                                        children: <
-                                                                            Widget>[
-                                                                          SizedBox(
-                                                                            height:
-                                                                                400,
-                                                                            width:
-                                                                                400,
-                                                                            child: StreamBuilder(
-                                                                                stream: FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").orderBy("studentName", descending: false).snapshots(),
-                                                                                builder: (context, snapsh) {
-                                                                                  if (snapsh.hasData) {
-                                                                                    return ListView.separated(
-                                                                                        itemBuilder: (context, index2) {
-                                                                                          if (snapsh.data!.docs[index2]['present'] == true) {
-                                                                                            return Container(
-                                                                                              color: Colors.green.withOpacity(0.4),
-                                                                                              height: 40,
-                                                                                              child: Row(
-                                                                                                children: [
-                                                                                                  Text('${index2 + 1}'),
-                                                                                                  kWidth20,
-                                                                                                  Text(snapsh.data!.docs[index2]['studentName']),
-                                                                                                  const Spacer(),
-                                                                                                  IconButton(
-                                                                                                      onPressed: () async {
-                                                                                                        return showDialog(
-                                                                                                          context: context,
-                                                                                                          barrierDismissible: false, // user must tap button!
-                                                                                                          builder: (BuildContext context) {
-                                                                                                            return AlertDialog(
-                                                                                                              title: const Text('Update Attendence'),
-                                                                                                              content: SingleChildScrollView(
-                                                                                                                child: ListBody(
-                                                                                                                  children: <Widget>[
-                                                                                                                    Row(
-                                                                                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                                                                                      children: [
-                                                                                                                        GestureDetector(
-                                                                                                                          onTap: () async {
-                                                                                                                            log('index${snapshot.data!.docs[index]}');
-                                                                                                                            log('Studentname?????${snapsh.data!.docs[index2]['studentName']}');
-
-                                                                                                                            await FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': true}).then((value) {
-                                                                                                                              showToast(msg: 'Changed');
-                                                                                                                              Get.back();
-                                                                                                                            });
-                                                                                                                          },
-                                                                                                                          child: Container(
-                                                                                                                            color: Colors.green.withOpacity(0.4),
-                                                                                                                            height: 40,
-                                                                                                                            width: 120,
-                                                                                                                            child: const Center(
-                                                                                                                              child: Text('Present'),
-                                                                                                                            ),
-                                                                                                                          ),
-                                                                                                                        ),
-                                                                                                                        GestureDetector(
-                                                                                                                          onTap: () async {
-                                                                                                                            log('Studentname${snapsh.data!.docs[index2]['studentName']}');
-
-                                                                                                                            FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': false}).then((value) {
-                                                                                                                              showToast(msg: 'Changed');
-                                                                                                                              Get.back();
-                                                                                                                            });
-                                                                                                                          },
-                                                                                                                          child: Container(
-                                                                                                                            color: Colors.red.withOpacity(0.4),
-                                                                                                                            height: 40,
-                                                                                                                            width: 120,
-                                                                                                                            child: const Center(
-                                                                                                                              child: Text("Absent"),
-                                                                                                                            ),
-                                                                                                                          ),
-                                                                                                                        )
-                                                                                                                      ],
-                                                                                                                    )
-                                                                                                                  ],
-                                                                                                                ),
-                                                                                                              ),
-                                                                                                              actions: <Widget>[
-                                                                                                                TextButton(
-                                                                                                                  child: const Text('ok'),
-                                                                                                                  onPressed: () {
-                                                                                                                    Navigator.of(context).pop();
-                                                                                                                  },
-                                                                                                                ),
-                                                                                                              ],
-                                                                                                            );
-                                                                                                          },
-                                                                                                        );
-                                                                                                      },
-                                                                                                      icon: const Icon(Icons.edit))
-                                                                                                ],
-                                                                                              ),
-                                                                                            );
-                                                                                          } else {
-                                                                                            return Container(
-                                                                                              color: Colors.red.withOpacity(0.4),
-                                                                                              height: 40,
-                                                                                              child: Row(
-                                                                                                children: [
-                                                                                                  Text('${index2 + 1}'),
-                                                                                                  kWidth20,
-                                                                                                  Text(snapsh.data!.docs[index2]['studentName']),
-                                                                                                  const Spacer(),
-                                                                                                  IconButton(
-                                                                                                      onPressed: () async {
-                                                                                                        return showDialog(
-                                                                                                          context: context,
-                                                                                                          barrierDismissible: false, // user must tap button!
-                                                                                                          builder: (BuildContext context) {
-                                                                                                            return AlertDialog(
-                                                                                                              title: const Text('Update Attendence'),
-                                                                                                              content: SingleChildScrollView(
-                                                                                                                child: ListBody(
-                                                                                                                  children: <Widget>[
-                                                                                                                    Row(
-                                                                                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                                                                                      children: [
-                                                                                                                        GestureDetector(
-                                                                                                                          onTap: () async {
-                                                                                                                            log('index${snapshot.data!.docs[index]}');
-                                                                                                                            log('Studentname?????${snapsh.data!.docs[index2]['studentName']}');
-
-                                                                                                                            await FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': true}).then((value) {
-                                                                                                                              showToast(msg: 'Changed');
-                                                                                                                              Get.back();
-                                                                                                                            });
-                                                                                                                          },
-                                                                                                                          child: Container(
-                                                                                                                            color: Colors.green.withOpacity(0.4),
-                                                                                                                            height: 40,
-                                                                                                                            width: 120,
-                                                                                                                            child: const Center(
-                                                                                                                              child: Text('Present'),
-                                                                                                                            ),
-                                                                                                                          ),
-                                                                                                                        ),
-                                                                                                                        GestureDetector(
-                                                                                                                          onTap: () async {
-                                                                                                                            log('Studentname${snapsh.data!.docs[index2]['studentName']}');
-
-                                                                                                                            FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': false}).then((value) {
-                                                                                                                              showToast(msg: 'Changed');
-                                                                                                                              Get.back();
-                                                                                                                            });
-                                                                                                                          },
-                                                                                                                          child: Container(
-                                                                                                                            color: Colors.red.withOpacity(0.4),
-                                                                                                                            height: 40,
-                                                                                                                            width: 120,
-                                                                                                                            child: const Center(
-                                                                                                                              child: Text("Absent"),
-                                                                                                                            ),
-                                                                                                                          ),
-                                                                                                                        )
-                                                                                                                      ],
-                                                                                                                    )
-                                                                                                                  ],
-                                                                                                                ),
-                                                                                                              ),
-                                                                                                              actions: <Widget>[
-                                                                                                                TextButton(
-                                                                                                                  child: const Text('ok'),
-                                                                                                                  onPressed: () {
-                                                                                                                    Navigator.of(context).pop();
-                                                                                                                  },
-                                                                                                                ),
-                                                                                                              ],
-                                                                                                            );
-                                                                                                          },
-                                                                                                        );
-                                                                                                      },
-                                                                                                      icon: const Icon(Icons.edit))
-                                                                                                ],
-                                                                                              ),
-                                                                                            );
-                                                                                          }
-                                                                                        },
-                                                                                        separatorBuilder: (context, index2) {
-                                                                                          return const Divider();
-                                                                                        },
-                                                                                        itemCount: snapsh.data!.docs.length);
-                                                                                  } else {
-                                                                                    return const Center();
-                                                                                  }
-                                                                                }),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    actions: <
-                                                                        Widget>[
-                                                                      TextButton(
-                                                                        child: const Text(
-                                                                            'ok'),
+                                                  FutureBuilder(
+                                                      future: FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                              "SchoolListCollection")
+                                                          .doc(schoolId)
+                                                          .collection(batchId)
+                                                          .doc(batchId)
+                                                          .collection("classes")
+                                                          .doc(classID)
+                                                          .collection(
+                                                              "Attendence")
+                                                          .doc(month)
+                                                          .collection(month)
+                                                          .doc(date)
+                                                          .collection(
+                                                              "Subjects")
+                                                          .doc(snapshot.data!
+                                                                  .docs[index]
+                                                              ['docid'])
+                                                          .get(),
+                                                      builder: (context,
+                                                          checkingExTime) {
+                                                        if (checkingExTime
+                                                            .hasData) {
+                                                          final extime = DateTime
+                                                              .parse(checkingExTime
+                                                                      .data
+                                                                      ?.data()?[
+                                                                  'exTime']);
+                                                          if (extime.isBefore(
+                                                              DateTime.now())) {
+                                                            return CircleAvatar(
+                                                              backgroundColor:
+                                                                  Colors.red,
+                                                              radius: 13,
+                                                              child: Center(
+                                                                child:
+                                                                    IconButton(
                                                                         onPressed:
-                                                                            () {
-                                                                          Navigator.of(context)
-                                                                              .pop();
+                                                                            () async {
+                                                                          return showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            barrierDismissible:
+                                                                                false, // user must tap button!
+                                                                            builder:
+                                                                                (BuildContext context) {
+                                                                              return AlertDialog(
+                                                                                title: const Text('Message'),
+                                                                                content: SingleChildScrollView(
+                                                                                  child: ListBody(
+                                                                                    children: const <Widget>[
+                                                                                      Text('Sorry the time to edit to the attendance has exceeded!!')
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                                actions: <Widget>[
+                                                                                  TextButton(
+                                                                                    child: const Text('ok'),
+                                                                                    onPressed: () {
+                                                                                      Navigator.of(context).pop();
+                                                                                    },
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          );
                                                                         },
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-                                                            icon: const Icon(
-                                                              Icons.edit,
-                                                              size: 11,
-                                                            ))),
-                                                  )
+                                                                        icon:
+                                                                            const Icon(
+                                                                          Icons
+                                                                              .edit,
+                                                                          size:
+                                                                              10,
+                                                                        )),
+                                                              ),
+                                                            );
+                                                          } else {
+                                                            return CircleAvatar(
+                                                              backgroundColor:
+                                                                  Colors.green,
+                                                              radius: 13,
+                                                              child: Center(
+                                                                  child: IconButton(
+                                                                      onPressed: () {
+                                                                        showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          barrierDismissible:
+                                                                              false, // user must tap button!
+                                                                          builder:
+                                                                              (BuildContext context) {
+                                                                            return AlertDialog(
+                                                                              title: const Text('Attendance List '),
+                                                                              content: SingleChildScrollView(
+                                                                                child: ListBody(
+                                                                                  children: <Widget>[
+                                                                                    SizedBox(
+                                                                                      height: 400,
+                                                                                      width: 400,
+                                                                                      child: StreamBuilder(
+                                                                                          stream: FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").orderBy("studentName", descending: false).snapshots(),
+                                                                                          builder: (context, snapsh) {
+                                                                                            if (snapsh.hasData) {
+                                                                                              return ListView.separated(
+                                                                                                  itemBuilder: (context, index2) {
+                                                                                                    if (snapsh.data!.docs[index2]['present'] == true) {
+                                                                                                      return Container(
+                                                                                                        color: Colors.green.withOpacity(0.4),
+                                                                                                        height: 40,
+                                                                                                        child: Row(
+                                                                                                          children: [
+                                                                                                            Text('${index2 + 1}'),
+                                                                                                            kWidth20,
+                                                                                                            Text(snapsh.data!.docs[index2]['studentName']),
+                                                                                                            const Spacer(),
+                                                                                                            IconButton(
+                                                                                                                onPressed: () async {
+                                                                                                                  return showDialog(
+                                                                                                                    context: context,
+                                                                                                                    barrierDismissible: false, // user must tap button!
+                                                                                                                    builder: (BuildContext context) {
+                                                                                                                      return AlertDialog(
+                                                                                                                        title: const Text('Update Attendence'),
+                                                                                                                        content: SingleChildScrollView(
+                                                                                                                          child: ListBody(
+                                                                                                                            children: <Widget>[
+                                                                                                                              Row(
+                                                                                                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                                                                                children: [
+                                                                                                                                  GestureDetector(
+                                                                                                                                    onTap: () async {
+                                                                                                                                      log('index${snapshot.data!.docs[index]}');
+                                                                                                                                      log('Studentname?????${snapsh.data!.docs[index2]['studentName']}');
+
+                                                                                                                                      await FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': true}).then((value) {
+                                                                                                                                        showToast(msg: 'Changed');
+                                                                                                                                        Get.back();
+                                                                                                                                      });
+                                                                                                                                    },
+                                                                                                                                    child: Container(
+                                                                                                                                      color: Colors.green.withOpacity(0.4),
+                                                                                                                                      height: 40,
+                                                                                                                                      width: 120,
+                                                                                                                                      child: const Center(
+                                                                                                                                        child: Text('Present'),
+                                                                                                                                      ),
+                                                                                                                                    ),
+                                                                                                                                  ),
+                                                                                                                                  GestureDetector(
+                                                                                                                                    onTap: () async {
+                                                                                                                                      log('Studentname${snapsh.data!.docs[index2]['studentName']}');
+
+                                                                                                                                      FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': false}).then((value) {
+                                                                                                                                        showToast(msg: 'Changed');
+                                                                                                                                        Get.back();
+                                                                                                                                      });
+                                                                                                                                    },
+                                                                                                                                    child: Container(
+                                                                                                                                      color: Colors.red.withOpacity(0.4),
+                                                                                                                                      height: 40,
+                                                                                                                                      width: 120,
+                                                                                                                                      child: const Center(
+                                                                                                                                        child: Text("Absent"),
+                                                                                                                                      ),
+                                                                                                                                    ),
+                                                                                                                                  )
+                                                                                                                                ],
+                                                                                                                              )
+                                                                                                                            ],
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                        actions: <Widget>[
+                                                                                                                          TextButton(
+                                                                                                                            child: const Text('ok'),
+                                                                                                                            onPressed: () {
+                                                                                                                              Navigator.of(context).pop();
+                                                                                                                            },
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      );
+                                                                                                                    },
+                                                                                                                  );
+                                                                                                                },
+                                                                                                                icon: const Icon(Icons.edit))
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      );
+                                                                                                    } else {
+                                                                                                      return Container(
+                                                                                                        color: Colors.red.withOpacity(0.4),
+                                                                                                        height: 40,
+                                                                                                        child: Row(
+                                                                                                          children: [
+                                                                                                            Text('${index2 + 1}'),
+                                                                                                            kWidth20,
+                                                                                                            Text(snapsh.data!.docs[index2]['studentName']),
+                                                                                                            const Spacer(),
+                                                                                                            IconButton(
+                                                                                                                onPressed: () async {
+                                                                                                                  return showDialog(
+                                                                                                                    context: context,
+                                                                                                                    barrierDismissible: false, // user must tap button!
+                                                                                                                    builder: (BuildContext context) {
+                                                                                                                      return AlertDialog(
+                                                                                                                        title: const Text('Update Attendence'),
+                                                                                                                        content: SingleChildScrollView(
+                                                                                                                          child: ListBody(
+                                                                                                                            children: <Widget>[
+                                                                                                                              Row(
+                                                                                                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                                                                                children: [
+                                                                                                                                  GestureDetector(
+                                                                                                                                    onTap: () async {
+                                                                                                                                      log('index${snapshot.data!.docs[index]}');
+                                                                                                                                      log('Studentname?????${snapsh.data!.docs[index2]['studentName']}');
+
+                                                                                                                                      await FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': true}).then((value) {
+                                                                                                                                        showToast(msg: 'Changed');
+                                                                                                                                        Get.back();
+                                                                                                                                      });
+                                                                                                                                    },
+                                                                                                                                    child: Container(
+                                                                                                                                      color: Colors.green.withOpacity(0.4),
+                                                                                                                                      height: 40,
+                                                                                                                                      width: 120,
+                                                                                                                                      child: const Center(
+                                                                                                                                        child: Text('Present'),
+                                                                                                                                      ),
+                                                                                                                                    ),
+                                                                                                                                  ),
+                                                                                                                                  GestureDetector(
+                                                                                                                                    onTap: () async {
+                                                                                                                                      log('Studentname${snapsh.data!.docs[index2]['studentName']}');
+
+                                                                                                                                      FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolId).collection(batchId).doc(batchId).collection("classes").doc(classID).collection("Attendence").doc(month).collection(month).doc(date).collection("Subjects").doc(snapshot.data!.docs[index]['docid']).collection("PresentList").doc(snapsh.data!.docs[index2]['studentName']).update({'present': false}).then((value) {
+                                                                                                                                        showToast(msg: 'Changed');
+                                                                                                                                        Get.back();
+                                                                                                                                      });
+                                                                                                                                    },
+                                                                                                                                    child: Container(
+                                                                                                                                      color: Colors.red.withOpacity(0.4),
+                                                                                                                                      height: 40,
+                                                                                                                                      width: 120,
+                                                                                                                                      child: const Center(
+                                                                                                                                        child: Text("Absent"),
+                                                                                                                                      ),
+                                                                                                                                    ),
+                                                                                                                                  )
+                                                                                                                                ],
+                                                                                                                              )
+                                                                                                                            ],
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                        actions: <Widget>[
+                                                                                                                          TextButton(
+                                                                                                                            child: const Text('ok'),
+                                                                                                                            onPressed: () {
+                                                                                                                              Navigator.of(context).pop();
+                                                                                                                            },
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      );
+                                                                                                                    },
+                                                                                                                  );
+                                                                                                                },
+                                                                                                                icon: const Icon(Icons.edit))
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      );
+                                                                                                    }
+                                                                                                  },
+                                                                                                  separatorBuilder: (context, index2) {
+                                                                                                    return const Divider();
+                                                                                                  },
+                                                                                                  itemCount: snapsh.data!.docs.length);
+                                                                                            } else {
+                                                                                              return const Center();
+                                                                                            }
+                                                                                          }),
+                                                                                    )
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                              actions: <Widget>[
+                                                                                TextButton(
+                                                                                  child: const Text('ok'),
+                                                                                  onPressed: () {
+                                                                                    Navigator.of(context).pop();
+                                                                                  },
+                                                                                ),
+                                                                              ],
+                                                                            );
+                                                                          },
+                                                                        );
+                                                                      },
+                                                                      icon: const Icon(
+                                                                        Icons
+                                                                            .edit,
+                                                                        size:
+                                                                            11,
+                                                                      ))),
+                                                            );
+                                                          }
+                                                        } else {
+                                                          return const Text('');
+                                                        }
+                                                      })
                                                 ],
                                               );
                                             }
@@ -428,4 +504,11 @@ class AttendenceSubjectListScreen extends StatelessWidget {
       )),
     );
   }
+}
+
+pageTimeexprided() async {
+  await Future.delayed(const Duration(minutes: 1));
+  Get.back();
+  Get.back();
+  Get.back();
 }
