@@ -1,23 +1,19 @@
-import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/edit_image_selection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/student_controller/profile_edit_controllers/parent_profile_edit_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../widgets/Iconbackbutton.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/sizes/constant.dart';
 import '../../../constant/sizes/sizes.dart';
+import '../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
 class ParentEditProfileScreen extends StatelessWidget {
-  const 
-  
-  
-  
-  
-  ParentEditProfileScreen({super.key});
+  const ParentEditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +50,7 @@ class ParentEditProfileScreen extends StatelessWidget {
             children: [
               Stack(children: [
                 SingleChildScrollView(
-                  child: CircleAvatharImageSelectionWidget(),
+                  child: CircleAvatharImageSelectionWidgetParent(),
                 ),
                 kHeight20,
               ]),
@@ -228,5 +224,100 @@ class ParentEditListileWidget extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class CircleAvatharImageSelectionWidgetParent extends StatelessWidget {
+  CircleAvatharImageSelectionWidgetParent({
+    super.key,
+  });
+  final GetImage getImageController = Get.put(GetImage());
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CircleAvatar(
+          backgroundImage:
+              UserCredentialsController.parentModel?.profileImageURL == null ||
+                      UserCredentialsController
+                          .parentModel!.profileImageURL!.isEmpty
+                  ? const NetworkImage(netWorkImagePathPerson)
+                  : NetworkImage(
+                      UserCredentialsController.parentModel?.profileImageURL ??
+                          " ") as ImageProvider,
+          radius: 60,
+          child: Stack(
+            children: [
+              InkWell(
+                onTap: () async {
+                  _getCameraAndGallery(context);
+                },
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: const Color.fromARGB(255, 52, 50, 50),
+                    child: IconButton(
+                      icon: const Icon(Icons.edit),
+                      color: Colors.white,
+                      onPressed: () async {},
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  void _getCameraAndGallery(BuildContext context) {
+    showModalBottomSheet(
+      enableDrag: false,
+      isDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return BottomProfilePhotoContainerWidget(
+          getImageController: getImageController,
+        );
+      },
+    ).then((value) {
+      if (getImageController.pickedImage.value.isNotEmpty) {
+        showDialog(
+          context: context,
+          barrierDismissible:
+              false, // Added to prevent dialog dismissal on tap outside
+          builder: (context) {
+            return Obx(
+              () => Get.find<ParentProfileEditController>().isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : AlertDialog(
+                      title:
+                          const Text('Do you want to change profile picture?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Get.find<ParentProfileEditController>()
+                                .updateParentProfilePicture();
+                          },
+                          child: const Text('Update'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            getImageController.pickedImage.value = '';
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ],
+                    ),
+            );
+          },
+        );
+      }
+    });
   }
 }

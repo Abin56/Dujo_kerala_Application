@@ -17,6 +17,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../colors/colors.dart';
+import '../../language/language_change_drawer.dart';
+import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
 
@@ -193,10 +195,6 @@ Get.to(
             () => const StudentShowTimeTable(),
           );
         }),
-        // menuItem(4, "Share", Icons.share,
-        //     currentPage == DrawerSections.share ? true : false, () async {
-        //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
-        // }),
         menuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
        Get.to(
@@ -210,42 +208,28 @@ Get.to(
         }),
         menuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
-          // showAboutDialog(
-          //     context: context,
-          //     applicationIcon: const Image(
-          //       image: AssetImage('assets/images/SCIPRO.png'),
-          //       height: 100,
-          //       width: 100,
-          //     ),
-          //     applicationName: "SCI PRO",
-          //     applicationVersion: '1.0.2',
-          //     children: [
-          //       const Text(
-          //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
-          //     ]);
           Get.to(
             () => NoticePage(),
           );
         }),
-      
         menuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-       Get.to(
-            () =>  CreateExamNameScreen(
-          schooilID: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          teacherId: UserCredentialsController.teacherModel!.docid!,
-          batchId: UserCredentialsController.batchId!),
+          Get.to(
+            () => CreateExamNameScreen(
+                schooilID: UserCredentialsController.schoolId!,
+                classID: UserCredentialsController.classId!,
+                teacherId: UserCredentialsController.teacherModel!.docid!,
+                batchId: UserCredentialsController.batchId!),
           );
         }),
         menuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+          Get.to(const PrivacyViewScreen());
         }),
-        // menuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
-        //     currentPage == DrawerSections.dashboard ? true : false, () {
-        //   signOut(context);
-        // }),
+        menuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(LanguageChangeDrawerPage());
+        }),
         kHeight10,
         kHeight10,
         kHeight10,

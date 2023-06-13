@@ -6,6 +6,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
+
 class TeacherAccessories extends StatefulWidget {
   // var schoolId;
   // var teacherEmail;
@@ -107,7 +109,7 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
                               ),
                             ),
                             Text(
-                              _acc_text[index],
+                              translateString(_acc_text[index]),
                               style: GoogleFonts.montserrat(
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
@@ -129,16 +131,16 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
 }
 
 List<String> _acc_text = [
-  'Take Attendance'.tr,
-  'Attendance Book'.tr,
-  'Exams'.tr,
-  'TimeTable'.tr,
-  'HomeWorks'.tr,
-  'Notices'.tr,
-  'Events'.tr,
-  'Progress Report'.tr,
-  'Application List'.tr,
-  'Meetings'.tr,
+  'Take Attendance',
+  'Attendence Book',
+  'Exams',
+  'TimeTable',
+  'HomeWorks',
+  'Notices',
+  'Events',
+  'Progress Report',
+  'Application List',
+  'Meetings',
 ];
 var _acc_images = [
   'assets/images/attendance.png',

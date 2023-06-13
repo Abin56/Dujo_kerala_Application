@@ -101,3 +101,6 @@ void landScapeBlockFunction(){
 }
 
 
+String translateString(String key) {
+  return key.tr;
+}

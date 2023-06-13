@@ -19,6 +19,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../helper/shared_pref_helper.dart';
 import '../../pages/attentence/select_period.dart';
+import '../../language/language_change_drawer.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
 
@@ -269,10 +270,10 @@ Widget MyDrawerList(context) {
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
-        // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave',
-        //     currentPage == DrawerSections.dashboard ? true : false, () {
-        //   signOut(context);
-        // }),
+        MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(LanguageChangeDrawerPage());
+        }),
 
         kHeight10,
         kHeight10,

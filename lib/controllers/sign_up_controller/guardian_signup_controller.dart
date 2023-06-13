@@ -79,12 +79,12 @@ class GuardianSignUpController extends GetxController {
     String imageUrl = "";
     try {
       isLoading.value = true;
-
-      auth
-          .signInWithEmailAndPassword(
-              email: emailController.text.trim(), password: passwordController.text.trim())
-          .then((value) async {
-        if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+      if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+        auth
+            .signInWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim())
+            .then((value) async {
           imageId = uuid.v1();
           final result = await FirebaseStorage.instance
               .ref(
@@ -118,7 +118,7 @@ class GuardianSignUpController extends GetxController {
           await firebaseData
               .doc(value.user?.uid)
               .set(guardianModel.toMap())
-         .then((value) async {
+              .then((value) async {
             await firebaseDataTemp
                 .doc(UserCredentialsController.guardianModel?.docid)
                 .delete()
@@ -133,11 +133,11 @@ class GuardianSignUpController extends GetxController {
               GuardianLoginScreen(),
             );
           });
-        } else {
-          isLoading.value = false;
-          showToast(msg: 'Please Upload Image');
-        }
-      });
+        });
+      } else {
+        isLoading.value = false;
+        showToast(msg: 'Please Upload Image');
+      }
 
       //getting firebase uid and updated it to collection
     } catch (e) {

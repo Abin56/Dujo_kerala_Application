@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 
 import '../../../../controllers/student_controller/profile_edit_controllers/teacher_profile_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../model/Signup_Image_Selction/image_selection.dart';
 import '../../../../widgets/Iconbackbutton.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/sizes/constant.dart';
 import '../../../constant/sizes/sizes.dart';
+import '../../../widgets/bottom_container_profile_photo_container.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
 class TeacherEditProfileScreen extends StatelessWidget {
@@ -47,7 +49,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stack(children: const [
+              Stack(children: [
                 SingleChildScrollView(
                   child: CircleAvatharImageSelectionWidgetTeacher(),
                 ),
@@ -236,10 +238,10 @@ class TeacherEditListileWidget extends StatelessWidget {
 }
 
 class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
-  const CircleAvatharImageSelectionWidgetTeacher({
+  CircleAvatharImageSelectionWidgetTeacher({
     super.key,
   });
-
+  final GetImage getImageController = Get.put(GetImage());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -256,7 +258,9 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
           child: Stack(
             children: [
               InkWell(
-                onTap: () async {},
+                onTap: () async {
+                  _getCameraAndGallery(context);
+                },
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
@@ -275,5 +279,54 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
         )
       ],
     );
+  }
+
+  void _getCameraAndGallery(BuildContext context) {
+    showModalBottomSheet(
+      enableDrag: false,
+      isDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return BottomProfilePhotoContainerWidget(
+          getImageController: getImageController,
+        );
+      },
+    ).then((value) {
+      if (getImageController.pickedImage.value.isNotEmpty) {
+        showDialog(
+          context: context,
+          barrierDismissible:
+              false, // Added to prevent dialog dismissal on tap outside
+          builder: (context) {
+            return Obx(
+              () => Get.find<TeacherProfileController>().isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : AlertDialog(
+                      title:
+                          const Text('Do you want to change profile picture?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Get.find<TeacherProfileController>()
+                                .updateTeacherProfilePicture();
+                          },
+                          child: const Text('Update'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            getImageController.pickedImage.value = '';
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ],
+                    ),
+            );
+          },
+        );
+      }
+    });
   }
 }

@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
+import '../../language/language_change_drawer.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
 
@@ -150,10 +151,10 @@ Widget MyDrawerList(context) {
         MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
-            () =>      AttendenceBookScreenSelectMonth(
-          schoolId: UserCredentialsController.schoolId!,
-          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),
+            () => AttendenceBookScreenSelectMonth(
+                schoolId: UserCredentialsController.schoolId!,
+                batchId: UserCredentialsController.batchId!,
+                classID: UserCredentialsController.classId!),
           );
         }),
         MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
@@ -197,13 +198,10 @@ Widget MyDrawerList(context) {
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
-      //   MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave'.tr,
-      //       currentPage == DrawerSections.dashboard ? true : false, () {
-      // Get.to(
-      //       () => GeneralInstruction(),
-      //     );
-      //   }),
-       
+        MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(LanguageChangeDrawerPage());
+        }),
         kHeight,
         kHeight,
         Container(

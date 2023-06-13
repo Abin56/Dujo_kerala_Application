@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/shared_pref_helper.dart';
+import '../../../model/Signup_Image_Selction/image_selection.dart';
+import '../../../model/guardian_model/guardian_model.dart';
 import '../../../utils/utils.dart';
+import '../../../view/home/guardian_home/guardian_main_home.dart';
 import '../../../view/pages/login/dujo_login_screen.dart';
 import '../../userCredentials/user_credentials.dart';
 
@@ -77,6 +83,53 @@ class GuardianProfileController {
       }
 
       showToast(msg: errorMessage);
+    }
+  }
+
+  Future<void> updateGuardianProfilePicture() async {
+    try {
+      if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+        isLoading.value = true;
+        final result = await FirebaseStorage.instance
+            .ref(
+                "files/guardianProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.guardianModel?.profileImageID}")
+            .putFile(File(Get.find<GetImage>().pickedImage.value));
+        final imageUrl = await result.ref.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection(UserCredentialsController.batchId ?? "")
+            .doc(UserCredentialsController.batchId)
+            .collection("classes")
+            .doc(UserCredentialsController.classId)
+            .collection("GuardianCollection")
+            .doc(UserCredentialsController.guardianModel?.docid)
+            .update({"profileImageURL": imageUrl});
+
+        isLoading.value = false;
+
+        Get.find<GetImage>().pickedImage.value = "";
+        final DocumentSnapshot<Map<String, dynamic>> guardianData =
+            await FirebaseFirestore.instance
+                .collection("SchoolListCollection")
+                .doc(UserCredentialsController.schoolId)
+                .collection(UserCredentialsController.batchId ?? "")
+                .doc(UserCredentialsController.batchId)
+                .collection('classes')
+                .doc(UserCredentialsController.classId)
+                .collection('GuardianCollection')
+                .doc(UserCredentialsController.guardianModel?.docid)
+                .get();
+
+        if (guardianData.data() != null) {
+          UserCredentialsController.guardianModel =
+              GuardianModel.fromMap(guardianData.data()!);
+          Get.offAll(const GuardianMainHomeScreen());
+        }
+      }
+    } catch (e) {
+      isLoading.value = false;
+      showToast(msg: "Something Went Wrong");
     }
   }
 }

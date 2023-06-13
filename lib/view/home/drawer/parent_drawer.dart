@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
+import '../../language/language_change_drawer.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
@@ -202,18 +203,11 @@ Get.to(
             currentPage == DrawerSections.dashboard ? true : false, () {
               Get.to(const PrivacyViewScreen());
         }),
-        // MenuItem(8, 'assets/images/leave_apply.png', 'Apply Leave'.tr,
-        //     currentPage == DrawerSections.dashboard ? true : false, () {
-        //   // Get.to(
-        //   //   () =>    LeaveApplicationScreen(
-        //   // studentName: studentName,
-        //   // guardianName: UserCredentialsController.parentModel!.parentName!,
-        //   // classID: UserCredentialsController.classId!,
-        //   // schoolId: UserCredentialsController.schoolId!,
-        //   // studentID: UserCredentialsController.parentModel!.studentID!,
-        //   // batchId: UserCredentialsController.batchId!),
-        //   // );
-        // }),
+        MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(LanguageChangeDrawerPage());
+        }),
+
         kHeight,
         kHeight,
         Container(

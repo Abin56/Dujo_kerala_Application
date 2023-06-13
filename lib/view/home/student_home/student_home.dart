@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'Student Edit Profile/user_edit_profile.dart';
+import 'Student Edit Profile/student_edit_profile_page.dart';
 
 class StudentHomeScreen extends StatefulWidget {
   static String routeName = '';

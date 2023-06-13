@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/shared_pref_helper.dart';
+import '../../../model/Signup_Image_Selction/image_selection.dart';
+import '../../../model/parent_model/parent_model.dart';
 import '../../../utils/utils.dart';
 import '../../../view/pages/login/dujo_login_screen.dart';
 import '../../userCredentials/user_credentials.dart';
@@ -77,6 +83,53 @@ class ParentProfileEditController {
       }
 
       showToast(msg: errorMessage);
+    }
+  }
+
+  Future<void> updateParentProfilePicture() async {
+    try {
+      if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
+        isLoading.value = true;
+        final result = await FirebaseStorage.instance
+            .ref(
+                "files/parentProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.guardianModel?.profileImageID}")
+            .putFile(File(Get.find<GetImage>().pickedImage.value));
+        final imageUrl = await result.ref.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection("SchoolListCollection")
+            .doc(UserCredentialsController.schoolId)
+            .collection(UserCredentialsController.batchId ?? "")
+            .doc(UserCredentialsController.batchId)
+            .collection("classes")
+            .doc(UserCredentialsController.classId)
+            .collection("ParentCollection")
+            .doc(UserCredentialsController.parentModel?.docid)
+            .update({"profileImageURL": imageUrl});
+
+        isLoading.value = false;
+
+        Get.find<GetImage>().pickedImage.value = "";
+        final DocumentSnapshot<Map<String, dynamic>> parentData =
+            await FirebaseFirestore.instance
+                .collection("SchoolListCollection")
+                .doc(UserCredentialsController.schoolId)
+                .collection(UserCredentialsController.batchId ?? "")
+                .doc(UserCredentialsController.batchId)
+                .collection('classes')
+                .doc(UserCredentialsController.classId)
+                .collection('ParentCollection')
+                .doc(UserCredentialsController.parentModel?.docid)
+                .get();
+
+        if (parentData.data() != null) {
+          UserCredentialsController.parentModel =
+              ParentModel.fromMap(parentData.data()!);
+          Get.offAll(const ParentMainHomeScreen());
+        }
+      }
+    } catch (e) {
+      isLoading.value = false;
+      showToast(msg: "Something Went Wrong");
     }
   }
 }
