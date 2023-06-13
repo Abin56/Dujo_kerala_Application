@@ -14,6 +14,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../utils/utils.dart';
+import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
@@ -32,8 +34,8 @@ class StudentAccessories extends StatefulWidget {
 }
 
 class _StudentAccessoriesState extends State<StudentAccessories> {
-  
- 
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +122,7 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
                               ),
                             ),
                             Text(
-                              _acc_text[index],
+                              translateString(_acc_text[index]),
                               style: GoogleFonts.montserrat(
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
@@ -142,16 +144,16 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 }
 
 List<String> _acc_text = [
-  'Attendance'.tr,
-  'TimeTable'.tr,
-  'HomeWorks'.tr,
-  'Subjects/Materials'.tr,
-  'Teachers'.tr,
-  'Exams'.tr,  
-  'Notices'.tr,
-  'Events'.tr,
-  'Progress Report'.tr,  
-  'Meetings'.tr
+  'Attendance',
+  'TimeTable',
+  'HomeWorks',
+  'Subjects/Materials',
+  'Teachers',
+  'Exams',
+  'Notices',
+  'Events',
+  'Progress Report',
+  'Meetings'
 ];
 var _acc_images = [
   'assets/images/attendance.png',

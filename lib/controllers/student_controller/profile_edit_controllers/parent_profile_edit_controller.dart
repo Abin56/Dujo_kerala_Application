@@ -92,7 +92,7 @@ class ParentProfileEditController {
         isLoading.value = true;
         final result = await FirebaseStorage.instance
             .ref(
-                "files/ParentCollection/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.guardianModel?.profileImageID}")
+                "files/parentProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.guardianModel?.profileImageID}")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         final imageUrl = await result.ref.getDownloadURL();
         await FirebaseFirestore.instance
@@ -117,7 +117,7 @@ class ParentProfileEditController {
                 .doc(UserCredentialsController.batchId)
                 .collection('classes')
                 .doc(UserCredentialsController.classId)
-                .collection('GuardianCollection')
+                .collection('ParentCollection')
                 .doc(UserCredentialsController.parentModel?.docid)
                 .get();
 

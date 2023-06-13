@@ -10,6 +10,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
+import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
 import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
@@ -64,7 +66,7 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!), //Attendance Book
 
       const AddTimeTable(), //Exam
-
+    
       NoticePage(), //Notice
       const EventList(), //Events
       CreateExamNameScreen(
@@ -134,7 +136,7 @@ class ClassTeacherAccessories extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                _acc_text[index],
+                                translateString(_acc_text[index]),
                                 style: GoogleFonts.montserrat(
                                     color: Colors.black.withOpacity(0.5),
                                     fontSize: 13,
@@ -157,19 +159,19 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Take Attendance'.tr,
-  'TimeTable'.tr,
-  'Attendence Book'.tr,
-  'Leave Letters'.tr,
-  'Exams'.tr,
-  'HomeWorks'.tr,
-  'Notices'.tr,
-  'Events'.tr,
-  'Progress Report'.tr,
-  'Subjects'.tr,
-  'Teachers'.tr,
-  'Meetings'.tr,
-  'My Students'.tr
+  'Take Attendance',
+  'Attendence Book',
+  'TimeTable',
+  'Leave Letters',
+  'HomeWorks',
+  'My Students',
+  'Subjects',
+  'Meetings',
+  'Exams',
+  'Notices',
+  'Events',
+  'Progress Report',
+  'Teachers',
 ];
 var _acc_images = [
   'assets/images/attendance.png',

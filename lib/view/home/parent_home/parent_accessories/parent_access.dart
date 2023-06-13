@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../../utils/utils.dart';
+import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
@@ -116,7 +118,7 @@ class ParentAccessories extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _acc_text[index],
+                              translateString(_acc_text[index]),
                               style: GoogleFonts.montserrat(
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
@@ -138,18 +140,17 @@ class ParentAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance'.tr,
-   'Leave Letter'.tr,
-   'Notices'.tr,
-   'HomeWorks'.tr,
-   'TimeTable'.tr,
-   'Meetings'.tr,
-  'Exams'.tr,  
-  'Events'.tr,
-  'Progress Report'.tr,
-  'Subjects'.tr,
-  'Teachers'.tr,
-  
+  'Attendance',
+  'Leave Letter',
+  'Notices',
+  'HomeWorks',
+  'TimeTable',
+  'Meetings',
+  'Exams',
+  'Events',
+  'Progress Report',
+  'Subjects',
+  'Teachers',
 ];
 var _acc_images = [
   'assets/images/attendance.png',

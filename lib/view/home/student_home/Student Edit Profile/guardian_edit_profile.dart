@@ -238,14 +238,15 @@ class CircleAvatharImageSelectionWidgetGuardian extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
-          backgroundImage:
-              UserCredentialsController.guardianModel?.profileImageID == null ||
-                      UserCredentialsController
-                          .guardianModel!.profileImageID!.isEmpty
-                  ? const NetworkImage(netWorkImagePathPerson)
-                  : NetworkImage(
-                      UserCredentialsController.guardianModel?.profileImageID ??
-                          " ") as ImageProvider,
+          backgroundImage: UserCredentialsController
+                          .guardianModel?.profileImageURL ==
+                      null ||
+                  UserCredentialsController
+                      .guardianModel!.profileImageURL!.isEmpty
+              ? const NetworkImage(netWorkImagePathPerson)
+              : NetworkImage(
+                  UserCredentialsController.guardianModel?.profileImageURL ??
+                      " ") as ImageProvider,
           radius: 60,
           child: Stack(
             children: [
