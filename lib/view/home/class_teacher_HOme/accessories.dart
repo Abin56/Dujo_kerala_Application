@@ -10,6 +10,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/homework.dart';
@@ -32,34 +33,33 @@ class ClassTeacherAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!), //Take Attendance
-          AttendenceBookScreen(
+      AttendenceBookScreen(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendance Book
 
-          const StudentShowTimeTable(), //TimeTable
+      const StudentShowTimeTable(), //TimeTable
 
-          LeaveLettersListviewScreen(
+      LeaveLettersListviewScreen(
           schooilID: UserCredentialsController.schoolId!,
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
 
-          
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
         schoolID: UserCredentialsController.schoolId!,
         teacherID: UserCredentialsController.teacherModel!.docid!,
       ), //Home Work
-    
-    const MyStudents() , //My students
 
-     StudentSubjectHome(), //Subject
+      const MyStudents(), //My students
 
-     SchoolLevelMeetingPage(), //Meetings
- 
+      StudentSubjectHome(), //Subject
+
+      SchoolLevelMeetingPage(), //Meetings
+
       const AddTimeTable(), //Exam
-    
+
       NoticePage(), //Notice
       const EventList(), //Events
       CreateExamNameScreen(
@@ -67,12 +67,10 @@ class ClassTeacherAccessories extends StatelessWidget {
           classID: UserCredentialsController.classId!,
           teacherId: UserCredentialsController.teacherModel!.docid!,
           batchId: UserCredentialsController.batchId!), //Progress Report
-      
-     TeacherSubjectWiseList(), //Teachers
-      
-      // StudentSubjectHome(), 
 
-      
+      TeacherSubjectWiseList(), //Teachers
+
+      // StudentSubjectHome(),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -131,7 +129,7 @@ class ClassTeacherAccessories extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                _acc_text[index],
+                                translateString(_acc_text[index]),
                                 style: GoogleFonts.montserrat(
                                     color: Colors.black.withOpacity(0.5),
                                     fontSize: 13,
@@ -154,35 +152,32 @@ class ClassTeacherAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-
-  'Take Attendance'.tr,
-  'Attendence Book'.tr,
-  'TimeTable'.tr,  
-  'Leave Letters'.tr,
-    'HomeWorks'.tr,
-    'My Students'.tr,
-    'Subjects'.tr,
-    'Meetings'.tr,
-    'Exams'.tr,
-  'Notices'.tr,
-  'Events'.tr,
-  'Progress Report'.tr,  
-  'Teachers'.tr,  
+  'Take Attendance',
+  'Attendence Book',
+  'TimeTable',
+  'Leave Letters',
+  'HomeWorks',
+  'My Students',
+  'Subjects',
+  'Meetings',
+  'Exams',
+  'Notices',
+  'Events',
+  'Progress Report',
+  'Teachers',
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-   'assets/images/classroom.png',
-  'assets/images/library.png', 
+  'assets/images/classroom.png',
+  'assets/images/library.png',
   'assets/images/leaveapplica.png',
   'assets/images/homework.png',
   'assets/images/mystudents.png',
-   'assets/images/subjects.png',
-   'assets/images/meetings.png',
-  'assets/images/exam.png',  
+  'assets/images/subjects.png',
+  'assets/images/meetings.png',
+  'assets/images/exam.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
   'assets/images/teachers.png',
-   
-  
 ];

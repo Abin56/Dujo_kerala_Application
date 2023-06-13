@@ -238,12 +238,12 @@ class CircleAvatharImageSelectionWidgetParent extends StatelessWidget {
       children: [
         CircleAvatar(
           backgroundImage:
-              UserCredentialsController.parentModel?.profileImageID == null ||
+              UserCredentialsController.parentModel?.profileImageURL == null ||
                       UserCredentialsController
-                          .parentModel!.profileImageID!.isEmpty
+                          .parentModel!.profileImageURL!.isEmpty
                   ? const NetworkImage(netWorkImagePathPerson)
                   : NetworkImage(
-                      UserCredentialsController.parentModel?.profileImageID ??
+                      UserCredentialsController.parentModel?.profileImageURL ??
                           " ") as ImageProvider,
           radius: 60,
           child: Stack(

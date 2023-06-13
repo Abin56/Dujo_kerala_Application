@@ -6,7 +6,6 @@ import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_l
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/language/select_language/select_language.dart';
 import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
@@ -17,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
+import '../../language/language_change_drawer.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 
 class StudentsHeaderDrawer extends StatelessWidget {
@@ -149,7 +149,7 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/information.png', 'General Instructions',
+        MenuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
@@ -210,7 +210,7 @@ Widget MyDrawerList(context) {
         }),
         MenuItem(9, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.offAll(const SelectLanguage());
+          Get.to(LanguageChangeDrawerPage());
         }),
 
         kHeight10,

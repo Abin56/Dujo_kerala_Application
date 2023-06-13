@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
+import '../../../utils/utils.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
@@ -40,18 +41,13 @@ class GuardianAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.guardianModel!.studentID,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-          NoticePage(), //Notice
-          const ViewHomeWorks(), // Home Works
-           const StudentShowTimeTable(), // Time Table
-            SchoolLevelMeetingPage(), //Meetings
-
+      NoticePage(), //Notice
+      const ViewHomeWorks(), // Home Works
+      const StudentShowTimeTable(), // Time Table
+      SchoolLevelMeetingPage(), //Meetings
 
       const UserExmNotifications(), // Exams
-      
-     
 
-      
-      
       const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
@@ -61,7 +57,6 @@ class GuardianAccessories extends StatelessWidget {
       StudentSubjectHome(), //Subjects
 
       TeacherSubjectWiseList(), //Teachers
-     
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -120,7 +115,7 @@ class GuardianAccessories extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _acc_text[index],
+                              translateString(_acc_text[index]),
                               style: GoogleFonts.montserrat(
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
@@ -142,31 +137,28 @@ class GuardianAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance'.tr,
-  'Leave Application'.tr,
-  'Notices'.tr,
-  'HomeWorks'.tr,
-  'TimeTable'.tr,
-  'Meetings'.tr,
-
-  'Exams'.tr,  
-  'Events'.tr,
-  'Progress Report'.tr,
-  'Subjects'.tr,
-  'Teachers'.tr,
-  
+  'Attendance',
+  'Leave Application',
+  'Notices',
+  'HomeWorks',
+  'TimeTable',
+  'Meetings',
+  'Exams',
+  'Events',
+  'Progress Report',
+  'Subjects',
+  'Teachers',
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
-   'assets/images/notices.png',
-   'assets/images/homework.png',
-   'assets/images/library.png',
-   'assets/images/meetings.png',
-  'assets/images/exam.png', 
+  'assets/images/notices.png',
+  'assets/images/homework.png',
+  'assets/images/library.png',
+  'assets/images/meetings.png',
+  'assets/images/exam.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  
 ];

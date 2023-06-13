@@ -11,6 +11,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../utils/utils.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
@@ -35,18 +36,18 @@ class StudentAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
-           const StudentShowTimeTable(), //Time Table
-            const ViewHomeWorks(), // Home Works
-            StudentSubjectHome(), //Subjects
+      const StudentShowTimeTable(), //Time Table
+      const ViewHomeWorks(), // Home Works
+      StudentSubjectHome(), //Subjects
       TeacherSubjectWiseList(), //Teachers
-      const UserExmNotifications(), //Exam     
+      const UserExmNotifications(), //Exam
       NoticePage(), //Notice
       const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: FirebaseAuth.instance.currentUser!.uid,
-          batchId: UserCredentialsController.batchId!), //Progress Report      
+          batchId: UserCredentialsController.batchId!), //Progress Report
       SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;
@@ -109,7 +110,7 @@ class StudentAccessories extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _acc_text[index],
+                              translateString(_acc_text[index]),
                               style: GoogleFonts.montserrat(
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
@@ -131,26 +132,26 @@ class StudentAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance'.tr,
-  'TimeTable'.tr,
-  'HomeWorks'.tr,
-  'Subjects/Materials'.tr,
-  'Teachers'.tr,
-  'Exams'.tr,  
-  'Notices'.tr,
-  'Events'.tr,
-  'Progress Report'.tr,  
-  'Meetings'.tr
+  'Attendance',
+  'TimeTable',
+  'HomeWorks',
+  'Subjects/Materials',
+  'Teachers',
+  'Exams',
+  'Notices',
+  'Events',
+  'Progress Report',
+  'Meetings'
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-   'assets/images/library.png',
-   'assets/images/homework.png',
-   'assets/images/subjects.png',
-   'assets/images/teachers.png',
-  'assets/images/exam.png',  
+  'assets/images/library.png',
+  'assets/images/homework.png',
+  'assets/images/subjects.png',
+  'assets/images/teachers.png',
+  'assets/images/exam.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',  
+  'assets/images/progressreport.png',
   'assets/images/meetings.png',
 ];
