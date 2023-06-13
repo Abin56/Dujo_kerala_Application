@@ -3,8 +3,11 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/ss.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -17,14 +20,22 @@ import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
+import '../../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
-import '../time_table/time_table_display.dart';
 
-class StudentAccessories extends StatelessWidget {
+class StudentAccessories extends StatefulWidget {
   const StudentAccessories({
     super.key,
   });
+
+  @override
+  State<StudentAccessories> createState() => _StudentAccessoriesState();
+}
+
+class _StudentAccessoriesState extends State<StudentAccessories> {
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +43,23 @@ class StudentAccessories extends StatelessWidget {
       UserCredentialsController.studentModel!.docid,
     );
     final screenNavigation = [
-      AttendenceBookScreen(
+      AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
-      const StudentShowTimeTable(), //Time Table
-      const ViewHomeWorks(), // Home Works
-      StudentSubjectHome(), //Subjects
+          // const StudentShowTimeTable(), //Time Table
+          SS(),
+            const ViewHomeWorks(), // Home Works
+            StudentSubjectHome(), //Subjects
       TeacherSubjectWiseList(), //Teachers
-      const UserExmNotifications(), //Exam
+      const UserExmNotifications(), //Exam     
       NoticePage(), //Notice
       const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: FirebaseAuth.instance.currentUser!.uid,
-          batchId: UserCredentialsController.batchId!), //Progress Report
+          batchId: UserCredentialsController.batchId!), //Progress Report      
       SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;
@@ -145,13 +157,13 @@ List<String> _acc_text = [
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/library.png',
-  'assets/images/homework.png',
-  'assets/images/subjects.png',
-  'assets/images/teachers.png',
-  'assets/images/exam.png',
+   'assets/images/library.png',
+   'assets/images/homework.png',
+   'assets/images/subjects.png',
+   'assets/images/teachers.png',
+  'assets/images/exam.png',  
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  'assets/images/progressreport.png',  
   'assets/images/meetings.png',
 ];

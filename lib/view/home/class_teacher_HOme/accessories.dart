@@ -17,6 +17,7 @@ import '../../pages/Homework/homework.dart';
 import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
+import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/teacher_list/teacher_list.dart';
 import '../events/event_list.dart';
 import '../exam_Notification/teacher_adding/add_subject.dart';
@@ -33,12 +34,13 @@ class ClassTeacherAccessories extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!), //Take Attendance
-      AttendenceBookScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendance Book
 
       const StudentShowTimeTable(), //TimeTable
+      AttendenceBookScreenSelectMonth(
+        batchId: UserCredentialsController.batchId!,
+        classID: UserCredentialsController.classId!,
+        schoolId: UserCredentialsController.schoolId!,
+      ),
 
       LeaveLettersListviewScreen(
           schooilID: UserCredentialsController.schoolId!,
@@ -55,6 +57,13 @@ class ClassTeacherAccessories extends StatelessWidget {
       const MyStudents(), //My students
 
       StudentSubjectHome(), //Subject
+
+      SchoolLevelMeetingPage(), //Meetings
+
+      AttendenceBookScreenSelectMonth(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!), //Attendance Book
 
       SchoolLevelMeetingPage(), //Meetings
 
@@ -168,16 +177,16 @@ List<String> _acc_text = [
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/classroom.png',
   'assets/images/library.png',
+  'assets/images/classroom.png',
   'assets/images/leaveapplica.png',
-  'assets/images/homework.png',
-  'assets/images/mystudents.png',
-  'assets/images/subjects.png',
-  'assets/images/meetings.png',
   'assets/images/exam.png',
+  'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
+  'assets/images/subjects.png',
   'assets/images/teachers.png',
+  'assets/images/meetings.png',
+  'assets/images/mystudents.png'
 ];

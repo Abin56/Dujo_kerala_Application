@@ -7,6 +7,7 @@ import 'package:dujo_kerala_application/view/home/general_instructions/general_i
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
+import 'package:dujo_kerala_application/view/pages/attentence/take_attentence/attendence_book_status_month.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,8 @@ class TeacherHeaderDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("message");
-    return Container(
+  log("message");
+      return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
       height: 300,
@@ -67,12 +68,13 @@ class TeacherHeaderDrawer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+          
               TextButton.icon(
                   onPressed: () async {
                     userLogOutController.logOut(context);
                   },
                   icon: const Icon(Icons.key),
-                  label: Text(
+                  label:  Text(
                     'Logout'.tr,
                     style: const TextStyle(color: cblack),
                   ))
@@ -84,7 +86,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
                     Get.offAll(const ClassTeacherMainHomeScreen());
                   },
                   icon: const Icon(Icons.edit_note_rounded),
-                  label: Text(
+                  label:  Text(
                     'Switch to Class Teacher'.tr,
                     style: const TextStyle(color: cblack),
                   ))
@@ -166,7 +168,7 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        menuItem(1, 'assets/images/information.png', 'General Instructions',
+         menuItem(1, 'assets/images/information.png', 'General Instructions',
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
@@ -174,55 +176,73 @@ Widget MyDrawerList(context) {
         }),
         menuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => AttendenceBookScreen(
-                schoolId: UserCredentialsController.schoolId!,
-                batchId: UserCredentialsController.batchId!,
-                classID: UserCredentialsController.classId!), //Attendance Book,
+Get.to(
+            () => AttendenceBookScreenSelectMonth(
+          schoolId: UserCredentialsController.schoolId!,
+          batchId: UserCredentialsController.batchId!,
+          classID: UserCredentialsController.classId!), //Attendance Book,
           );
         }),
         menuItem(3, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
-          Get.to(
+Get.to(
             () => const AddTimeTable(),
           );
         }),
         menuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-          Get.to(
+         Get.to(
             () => const StudentShowTimeTable(),
           );
         }),
+        // menuItem(4, "Share", Icons.share,
+        //     currentPage == DrawerSections.share ? true : false, () async {
+        //   // await  Share.share('https://play.google.com/store/apps/details?id=in.brototype.BrotoPlayer');
+        // }),
         menuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-          Get.to(
-            () => HomeWorkUpload(
-              batchId: UserCredentialsController.batchId!,
-              classId: UserCredentialsController.classId!,
-              schoolID: UserCredentialsController.schoolId!,
-              teacherID: UserCredentialsController.teacherModel!.docid!,
-            ),
+       Get.to(
+            () =>   HomeWorkUpload(
+        batchId: UserCredentialsController.batchId!,
+        classId: UserCredentialsController.classId!,
+        schoolID: UserCredentialsController.schoolId!,
+        teacherID: UserCredentialsController.teacherModel!.docid!,
+      ),
           );
         }),
         menuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
+          // showAboutDialog(
+          //     context: context,
+          //     applicationIcon: const Image(
+          //       image: AssetImage('assets/images/SCIPRO.png'),
+          //       height: 100,
+          //       width: 100,
+          //     ),
+          //     applicationName: "SCI PRO",
+          //     applicationVersion: '1.0.2',
+          //     children: [
+          //       const Text(
+          //           'SCI PRO is a Education App created by VECTORWIND-TECHSYSTEMS PRIVATE LIMITED.')
+          //     ]);
           Get.to(
             () => NoticePage(),
           );
         }),
+      
         menuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => CreateExamNameScreen(
-                schooilID: UserCredentialsController.schoolId!,
-                classID: UserCredentialsController.classId!,
-                teacherId: UserCredentialsController.teacherModel!.docid!,
-                batchId: UserCredentialsController.batchId!),
+       Get.to(
+            () =>  CreateExamNameScreen(
+          schooilID: UserCredentialsController.schoolId!,
+          classID: UserCredentialsController.classId!,
+          teacherId: UserCredentialsController.teacherModel!.docid!,
+          batchId: UserCredentialsController.batchId!),
           );
         }),
         menuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
+              Get.to(const PrivacyViewScreen());
         }),
         menuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
@@ -324,6 +344,6 @@ Widget emptyDisplay(String section) {
           textAlign: TextAlign.center,
         ),
       ],
-    ),
-  );
+),
+);
 }

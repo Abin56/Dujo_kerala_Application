@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get_utils/get_utils.dart';
 
 class StudentShowTimeTable extends StatefulWidget {
@@ -33,31 +30,33 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
   List<String>days = ['Monday', 
   'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();  
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight, 
-       DeviceOrientation.landscapeLeft, 
-    ]
-    );
-    log(UserCredentialsController.classId!);
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    SystemChrome.setPreferredOrientations(
-      [
-      DeviceOrientation.landscapeRight, 
-       DeviceOrientation.landscapeLeft, 
-       DeviceOrientation.portraitUp, 
-       DeviceOrientation.portraitDown
-    ]
-    );
-    super.dispose();
-  }
+    
+      
+  //   SystemChrome.setPreferredOrientations([
+  //     DeviceOrientation.landscapeRight, 
+  //     DeviceOrientation.landscapeLeft, 
+  //   ]
+  //   );     
+  //   super.initState();
+  // }
+
+  // @override
+  // void dispose() {
+  // //  TODO: implement dispose
+  //   SystemChrome.setPreferredOrientations(
+  //     [
+  //     // DeviceOrientation.landscapeRight, 
+  //     //  DeviceOrientation.landscapeLeft, 
+  //      DeviceOrientation.portraitUp, 
+  //      DeviceOrientation.portraitDown
+  //   ]
+  //   );
+  //   super.dispose();
+  // }
   
 
   @override

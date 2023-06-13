@@ -96,7 +96,8 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 20),
+                                                   padding: const EdgeInsets.only(top: 20),
+
                               child: Container(
                                 height: 75,
                                 width: double.infinity,
@@ -127,13 +128,11 @@ class _TeacherAccessoriesState extends State<TeacherAccessories> {
       ),
     ));
   }
-
-
 }
 
 List<String> _acc_text = [
   'Take Attendance',
-  'Attendence Book',
+  'Attendance Book',
   'Exams',
   'TimeTable',
   'HomeWorks',

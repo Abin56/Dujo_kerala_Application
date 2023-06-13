@@ -123,7 +123,7 @@ List<String> _acc_text = [
   'Results',
   'leave application',
   'complaints',
-  'TimeTable',
+  'Time Table',
   'Study Materials',
   'Speical Classes',
   'Achivements',
