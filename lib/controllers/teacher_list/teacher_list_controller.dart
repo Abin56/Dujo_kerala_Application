@@ -39,6 +39,9 @@ class TeacherListController {
   }
 
   Future<TeacherModel?> getTeacherData(String teacherId) async {
+    if (teacherId.isEmpty) {
+      return null;
+    }
     try {
       final result = await FirebaseFirestore.instance
           .collection('SchoolListCollection')
@@ -53,7 +56,7 @@ class TeacherListController {
       }
     } catch (e) {
       showToast(msg: "Something went wrong");
-      log(e.toString());
+      //log(e.toString());
     }
     return null;
   }
