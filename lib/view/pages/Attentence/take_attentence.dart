@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +12,8 @@ import 'package:intl/intl.dart';
 import '../../widgets/button_container_widget.dart';
 
 class TakeAttenenceScreen extends StatefulWidget {
+  String periodNumber;
+  String periodTokenID;
   String schoolID;
   String classID;
   String teacheremailID;
@@ -24,6 +28,8 @@ class TakeAttenenceScreen extends StatefulWidget {
       required this.subjectID,
       required this.subjectName,
       required this.batchId,
+      required this.periodTokenID,
+      required this.periodNumber,
       super.key});
 
   @override
@@ -31,8 +37,16 @@ class TakeAttenenceScreen extends StatefulWidget {
 }
 
 class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
+  String schoolTimer = '';
+
   bool? present;
   Map<String, bool?> presentlist = {};
+  @override
+  void initState() {
+    getSchoolTimer();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +67,12 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
             .orderBy('studentName', descending: false)
             .snapshots(),
         builder: (context, snapshot) {
+          final date = DateTime.now();
+          DateTime parseDate = DateTime.parse(date.toString());
+          final month = DateFormat('MMMM-yyyy');
+          String monthwise = month.format(parseDate);
+          final DateFormat formatter = DateFormat('dd-MM-yyyy');
+          String formatted = formatter.format(parseDate);
           if (snapshot.hasData) {
             return ListView.separated(
                 itemBuilder: (context, index) {
@@ -72,8 +92,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                         : presentlist[snapshot.data!.docs[index]
                                     ['studentName']] ==
                                 true
-                            ? Colors.green
-                            : Colors.red,
+                            ? Colors.green.withOpacity(0.4)
+                            : Colors.red.withOpacity(0.4),
                     width: double.infinity,
                     child: Row(
                       children: [
@@ -134,11 +154,13 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       .collection(monthwise)
                                       .doc(formatted)
                                       .collection("Subjects")
-                                      .doc(widget.subjectID)
+                                      .doc(widget.periodTokenID)
                                       .set({
-                                    "docid": widget.subjectID,
+                                    "docid": widget.periodTokenID,
+                                    'peroid': widget.periodNumber,
                                     'subject': widget.subjectName,
-                                    'date': DateTime.now().toString()
+                                    'date': DateTime.now().toString(),
+                                    'onSubmit': false,
                                   }).then((value) {
                                     FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
@@ -152,7 +174,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                         .collection(monthwise)
                                         .doc(formatted)
                                         .collection("Subjects")
-                                        .doc(widget.subjectID)
+                                        .doc(widget.periodTokenID)
                                         .collection('PresentList')
                                         .doc(snapshot.data!.docs[index]
                                             ['studentName'])
@@ -160,7 +182,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                       "studentName": snapshot.data!.docs[index]
                                           ['studentName'],
                                       "present": true,
-                                      "Date": DateTime.now().toString()
+                                      "Date": DateTime.now().toString(),
                                     });
                                   });
                                 });
@@ -187,18 +209,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               final DateFormat formatter =
                                   DateFormat('dd-MM-yyyy');
                               String formatted = formatter.format(parseDate);
-                                      await FirebaseFirestore.instance
-                                  .collection("SchoolListCollection")
-                                  .doc(widget.schoolID)
-                                  .collection(widget.batchId)
-                                  .doc(widget.batchId)
-                                  .collection("classes")
-                                  .doc(widget.classID)
-                                  .collection("Attendence")
-                                  .doc(monthwise).set({
-                                    'id':monthwise
-                                  }).then((value) async{
-await FirebaseFirestore.instance
+                              await FirebaseFirestore.instance
                                   .collection("SchoolListCollection")
                                   .doc(widget.schoolID)
                                   .collection(widget.batchId)
@@ -207,34 +218,26 @@ await FirebaseFirestore.instance
                                   .doc(widget.classID)
                                   .collection("Attendence")
                                   .doc(monthwise)
-                                  .collection(monthwise)
-                                  .doc(formatted)
-                                  .set({
-                                "docid": formatted,
-                                'dDate': formattedd,
-                                'day': dayformattedd
-                              }, SetOptions(merge: true)).then((value) {
-                                FirebaseFirestore.instance
+                                  .set({'id': monthwise}).then((value) async {
+                                await FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
+                                    .collection(widget.batchId)
+                                    .doc(widget.batchId)
                                     .collection("classes")
                                     .doc(widget.classID)
                                     .collection("Attendence")
                                     .doc(monthwise)
                                     .collection(monthwise)
                                     .doc(formatted)
-                                    .collection("Subjects")
-                                    .doc(widget.subjectID)
                                     .set({
-                                  "docid": widget.subjectID,
-                                  'subject': widget.subjectName,
-                                  'date': DateTime.now().toString()
-                                }).then((value) {
+                                  "docid": formatted,
+                                  'dDate': formattedd,
+                                  'day': dayformattedd
+                                }, SetOptions(merge: true)).then((value) {
                                   FirebaseFirestore.instance
                                       .collection("SchoolListCollection")
                                       .doc(widget.schoolID)
-                                      .collection(widget.batchId)
-                                      .doc(widget.batchId)
                                       .collection("classes")
                                       .doc(widget.classID)
                                       .collection("Attendence")
@@ -242,21 +245,40 @@ await FirebaseFirestore.instance
                                       .collection(monthwise)
                                       .doc(formatted)
                                       .collection("Subjects")
-                                      .doc(widget.subjectID)
-                                      .collection('PresentList')
-                                      .doc(snapshot.data!.docs[index]
-                                          ['studentName'])
+                                      .doc(widget.periodTokenID)
                                       .set({
-                                    "studentName": snapshot.data!.docs[index]
-                                        ['studentName'],
-                                    "present": false,
-                                    "Date": DateTime.now().toString()
+                                    "docid": widget.periodTokenID,
+                                    'peroid': widget.periodNumber,
+                                    'subject': widget.subjectName,
+                                    'date': DateTime.now().toString(),
+                                    'onSubmit': false,
+                                  }).then((value) {
+                                    FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(widget.schoolID)
+                                        .collection(widget.batchId)
+                                        .doc(widget.batchId)
+                                        .collection("classes")
+                                        .doc(widget.classID)
+                                        .collection("Attendence")
+                                        .doc(monthwise)
+                                        .collection(monthwise)
+                                        .doc(formatted)
+                                        .collection("Subjects")
+                                        .doc(widget.periodTokenID)
+                                        .collection('PresentList')
+                                        .doc(snapshot.data!.docs[index]
+                                            ['studentName'])
+                                        .set({
+                                      "studentName": snapshot.data!.docs[index]
+                                          ['studentName'],
+                                      "present": false,
+                                      "Date": DateTime.now().toString(),
+                                    });
                                   });
                                 });
                               });
 
-                                  });
-                              
                               log(present.toString());
                             },
                             icon: const Icon(Icons.remove))
@@ -286,12 +308,26 @@ await FirebaseFirestore.instance
           width: 130,
           child: Center(
               child: Text(
-            'View'.tr,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            'Submit'.tr,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white),
           )),
         ),
       ),
     );
+  }
+
+  void getSchoolTimer() async {
+    var vari = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(UserCredentialsController.schoolId)
+        .collection('Notifications')
+        .doc('Attendance')
+        .get();
+    setState(() {
+      schoolTimer = vari.data()!['timeToDeliverAbsenceNotification'];
+      log('schoolTimer >>>>>>>>>>>>>$schoolTimer');
+    });
   }
 
   getAttedenceList() async {
@@ -337,16 +373,21 @@ await FirebaseFirestore.instance
                                 return Container(
                                   height: 40,
                                   width: double.maxFinite,
-                                  color: Colors.white,
-                                  child: Row(
-                                    children: [
-                                      Text('${index + 1}'),
-                                      const SizedBox(
-                                        width: 20,
-                                      ),
-                                      Text(snapshot.data!.docs[index]
-                                          ['studentName'])
-                                    ],
+                                  color: Colors.red.withOpacity(0.3),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Text('${index + 1}'),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(snapshot.data!.docs[index]
+                                            ['studentName']),
+                                        const Spacer(),
+                                        const Text(' - Ab')
+                                      ],
+                                    ),
                                   ),
                                 );
                               },
@@ -360,15 +401,62 @@ await FirebaseFirestore.instance
                           );
                         }
                       }),
-                )
+                ),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Ok'),
+              child: const Text('Edit'),
               onPressed: () {
                 Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Upload'),
+              onPressed: () async {
+                return showDialog(
+                  context: context,
+                  barrierDismissible: false, // user must tap button!
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Alert'),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: const <Widget>[
+                            Text(
+                                'Are you sure to continue with this absentees list?\nIf you want to edit, please do it before publishing from the Attendance book..')
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('Upload Attendence'),
+                          onPressed: () async {
+                            log('period document id ${widget.periodTokenID}');
+                            FirebaseFirestore.instance
+                                .collection("SchoolListCollection")
+                                .doc(widget.schoolID)
+                                .collection(widget.batchId)
+                                .doc(widget.batchId)
+                                .collection("classes")
+                                .doc(widget.classID)
+                                .collection("Attendence")
+                                .doc(monthwise)
+                                .collection(monthwise)
+                                .doc(formatted)
+                                .collection('PeriodCollection')
+                                .doc(widget.periodTokenID)
+                                .delete()
+                                .then((value) {
+                              Get.offAll(const TeacherMainHomeScreen());
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],

@@ -7,7 +7,6 @@ import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teach
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
-import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence_subject_listView.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
@@ -19,6 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../helper/shared_pref_helper.dart';
+import '../../pages/attentence/select_period.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
 
@@ -74,7 +74,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                     barrierDismissible: false, // user must tap button!
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title:  Text('Select Class'.tr),
+                        title: Text('Select Class'.tr),
                         content: SingleChildScrollView(
                           child: ListBody(
                             children: <Widget>[
@@ -102,7 +102,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.class_),
-                label:  Text(
+                label: Text(
                   "Change Class".tr,
                   style: const TextStyle(color: cblack),
                 ),
@@ -113,7 +113,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                     userLogOutController.logOut(context);
                   },
                   icon: const Icon(Icons.key),
-                  label:  Text(
+                  label: Text(
                     'Logout'.tr,
                     style: const TextStyle(color: cblack),
                   )),
@@ -213,23 +213,22 @@ Widget MyDrawerList(context) {
         }),
         MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
- Get.to(
-            () => TakeAttentenceSubjectWise(          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!,
-          schoolId: UserCredentialsController.schoolId!
-            
-            ),
+          Get.to(
+            () => SelectPeriodWiseScreen(
+                batchId: UserCredentialsController.batchId!,
+                classID: UserCredentialsController.classId!,
+                schoolId: UserCredentialsController.schoolId!),
           );
         }),
         MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
-  Get.to(
-            () =>  const AddTimeTable()  ,   
+          Get.to(
+            () => const AddTimeTable(),
           );
         }),
         MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-       Get.to(
+          Get.to(
             () => const StudentShowTimeTable(),
           );
         }),
@@ -239,13 +238,13 @@ Widget MyDrawerList(context) {
         // }),
         MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-         Get.to(
-            () =>   HomeWorkUpload(
-        batchId: UserCredentialsController.batchId!,
-        classId: UserCredentialsController.classId!,
-        schoolID: UserCredentialsController.schoolId!,
-        teacherID: UserCredentialsController.teacherModel!.docid!,
-      ),
+          Get.to(
+            () => HomeWorkUpload(
+              batchId: UserCredentialsController.batchId!,
+              classId: UserCredentialsController.classId!,
+              schoolID: UserCredentialsController.schoolId!,
+              teacherID: UserCredentialsController.teacherModel!.docid!,
+            ),
           );
         }),
         MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
@@ -254,19 +253,19 @@ Widget MyDrawerList(context) {
             () => NoticePage(),
           );
         }),
-      
+
         MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-           Get.to(
+          Get.to(
             () => CreateExamNameScreen(
-          schooilID: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          teacherId: UserCredentialsController.teacherModel!.docid!,
-          batchId: UserCredentialsController.batchId!),
+                schooilID: UserCredentialsController.schoolId!,
+                classID: UserCredentialsController.classId!,
+                teacherId: UserCredentialsController.teacherModel!.docid!,
+                batchId: UserCredentialsController.batchId!),
           );
         }),
 
-          MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
@@ -274,7 +273,7 @@ Widget MyDrawerList(context) {
         //     currentPage == DrawerSections.dashboard ? true : false, () {
         //   signOut(context);
         // }),
-        
+
         kHeight10,
         kHeight10,
         kHeight10,
