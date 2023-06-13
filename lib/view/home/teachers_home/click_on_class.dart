@@ -12,10 +12,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../colors/colors.dart';
+import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
+import '../../pages/Attentence/take_attentence_subject_listView.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
-import '../../pages/attentence/select_period.dart';
-import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
@@ -32,12 +32,12 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: classID), //Attendance Book
-            const UserExmNotifications(),  //Exam
+      const UserExmNotifications(), //Exam
       const StudentShowTimeTable(), //Time Table
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title:  Text("Notices".tr),
+          title: Text("Notices".tr),
         ),
         body: SchoolLevelNoticePage(),
       ),
@@ -46,7 +46,7 @@ class ClickOnClasss extends StatelessWidget {
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title:  Text("Events".tr),
+          title: Text("Events".tr),
         ),
         body: const SchoolLevelPage(),
       ),
@@ -61,7 +61,7 @@ class ClickOnClasss extends StatelessWidget {
       AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID:classID), //Attendance Book
+          classID: classID), //Attendance Book
 
       const UserExmNotifications(), //Exam
       const StudentShowTimeTable(), //TimeTable
@@ -89,7 +89,7 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID,
           schooilID:
               UserCredentialsController.schoolId!), //Progress Report view
-       TeacherSubjectHome(), // Subjects
+      TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
     ];

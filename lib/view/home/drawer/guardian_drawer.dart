@@ -14,8 +14,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
-import '../../pages/attentence/take_attentence/attendence_book_status_month.dart';
 import '../../language/language_change_drawer.dart';
+import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
 
@@ -169,7 +169,7 @@ Widget MyDrawerList(context) {
             () => const StudentShowTimeTable(),
           );
         }),
-       
+
         MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
          Get.to(
@@ -182,7 +182,7 @@ Widget MyDrawerList(context) {
             () => NoticePage(),
           );
         }),
-       
+
         MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
