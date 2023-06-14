@@ -17,6 +17,7 @@ import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
 import '../../pages/attentence/select_period.dart';
+import '../../pages/exam_results/select_exam.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
@@ -65,7 +66,7 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID), //Attendance Book
 
       const UserExmNotifications(), //Exam
-      const ExamResultsView(),//exam result upload
+       SelectExamLevelScreen(classId: classID),//exam result upload
       const StudentShowTimeTable(), //TimeTable
       const ViewHomeWorks(), //Home Works
 
