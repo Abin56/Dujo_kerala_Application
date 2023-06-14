@@ -5,15 +5,16 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AttendanceController extends GetxController {
-  final firebase = FirebaseFirestore.instance
+
+  dailyAttendanceController(String classID) async {
+      final firebase = FirebaseFirestore.instance
       .collection('SchoolListCollection')
       .doc(UserCredentialsController.schoolId)
       .collection(UserCredentialsController.batchId!)
       .doc(UserCredentialsController.batchId)
       .collection('classes')
-      .doc(UserCredentialsController.classId)
+      .doc(classID)
       .collection('Attendence');
-  dailyAttendanceController() async {
     final date = DateTime.now();
     DateTime parseDate = DateTime.parse(date.toString());
     final month = DateFormat('MMMM-yyyy');
@@ -22,7 +23,7 @@ class AttendanceController extends GetxController {
     String formatted = formatter.format(parseDate);
     ////////////////////////////
     ///
-    for (var i = 1; i <= 10; i++) {
+    for (var i = 1; i <= 15; i++) {
       final docid = uuid.v1();
      await firebase
           .doc(monthwise)
