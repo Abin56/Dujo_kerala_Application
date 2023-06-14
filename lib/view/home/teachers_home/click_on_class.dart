@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
+import 'package:dujo_kerala_application/view/pages/exam_results/upload_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -64,6 +65,7 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID), //Attendance Book
 
       const UserExmNotifications(), //Exam
+      const ExamResultsView(),//exam result upload
       const StudentShowTimeTable(), //TimeTable
       const ViewHomeWorks(), //Home Works
 
@@ -334,6 +336,7 @@ var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
   'assets/images/exam.png',
+    'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/notices.png',
@@ -346,6 +349,7 @@ List<String> hasDataText = [
   'Take Attendance'.tr,
   'Attendence Book'.tr,
   'Exams'.tr,
+  'Exam Results'.tr,
   'TimeTable'.tr,
   'HomeWorks'.tr,
   'Notices'.tr,

@@ -50,7 +50,7 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                   .collection(UserCredentialsController.batchId!)
                   .doc(UserCredentialsController.batchId)
                   .collection('classes')
-                  .doc(UserCredentialsController.classId)
+                  .doc(classID)
                   .collection('Attendence')
                   .doc(monthwise)
                   .collection(monthwise)
@@ -62,7 +62,7 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                   if (snapshots.data!.docs.isEmpty) {
                     return GestureDetector(
                         onTap: () {
-                          attendanceController.dailyAttendanceController();
+                          attendanceController.dailyAttendanceController(classID);
                         },
                         child: const Text('Turn on'));
                   } else {
@@ -81,7 +81,7 @@ class SelectPeriodWiseScreen extends StatelessWidget {
               .collection(UserCredentialsController.batchId!)
               .doc(UserCredentialsController.batchId)
               .collection('classes')
-              .doc(UserCredentialsController.classId)
+              .doc(classID)
               .collection('Attendence')
               .doc(monthwise)
               .collection(monthwise)
@@ -104,7 +104,7 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                       .collection(batchId)
                       .doc(batchId)
                       .collection('classes')
-                      .doc(UserCredentialsController.classId)
+                      .doc(classID)
                       .collection('Attendence')
                       .doc(monthwise)
                       .collection(monthwise)
