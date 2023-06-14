@@ -95,10 +95,10 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin{
     elevation: 0,
     bottom:  TabBar(
       unselectedLabelColor:adminePrimayColor,
-      unselectedLabelStyle: GoogleFonts.montserrat(fontSize: 12),
+      unselectedLabelStyle: GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.bold),
       dividerColor: adminePrimayColor,
       indicator: BoxDecoration(color: adminePrimayColor, borderRadius: BorderRadius.circular(50)),
-      labelStyle: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w500),
+      labelStyle: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.bold, ),
       controller: _tabController,
             tabs: const [
               Tab(text: 'MON'), 
@@ -178,6 +178,10 @@ class PeriodShowingWidget extends StatelessWidget {
         }) , separatorBuilder: (context, index){
           return const SizedBox(height: 10,);
         }, itemCount: 7);
+        }
+
+        if(snapshot.connectionState == ConnectionState.waiting){
+          return const Center(child: CircularProgressIndicator());
         }
 
         return const Text('No data');
