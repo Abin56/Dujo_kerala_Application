@@ -11,12 +11,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
 import '../../pages/Attentence/select_period.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
+import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 
@@ -92,6 +94,7 @@ class ClickOnClasss extends StatelessWidget {
       TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
+      RecordedClassMainPage(), // recorded class
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
@@ -282,7 +285,8 @@ class ClickOnClasss extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              hasDataText[index],
+                                              translateString(
+                                                  hasDataText[index]),
                                               style: GoogleFonts.montserrat(
                                                   color: Colors.black
                                                       .withOpacity(0.5),
@@ -341,16 +345,18 @@ var hasDataImages = [
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/meetings.png',
+  'assets/images/recorded_classes.png'
 ];
 List<String> hasDataText = [
-  'Take Attendance'.tr,
-  'Attendence Book'.tr,
-  'Exams'.tr,
-  'TimeTable'.tr,
-  'HomeWorks'.tr,
-  'Notices'.tr,
-  'Events'.tr,
-  'Progress Report'.tr,
-  'Subjects'.tr,
-  'Meetings'.tr,
+  'Take Attendance',
+  'Attendence Book',
+  'Exams',
+  'TimeTable',
+  'HomeWorks',
+  'Notices',
+  'Events',
+  'Progress Report',
+  'Subjects',
+  'Meetings',
+  'Recorded Classes'
 ];
