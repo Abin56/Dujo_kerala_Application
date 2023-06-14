@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../model/leave_letter_model/leave_letter.dart';
 import 'leave_letter_pdfviwer.dart';
 
-class LeaveLettersStudentListsScreen extends StatelessWidget {
+class LeaveLettersStudentListsScreen extends StatefulWidget {
   String schooilID;
   String classID;
   String date;
@@ -22,25 +22,41 @@ class LeaveLettersStudentListsScreen extends StatelessWidget {
       super.key});
 
   @override
+  State<LeaveLettersStudentListsScreen> createState() =>
+      _LeaveLettersStudentListsScreenState();
+}
+
+class _LeaveLettersStudentListsScreenState
+    extends State<LeaveLettersStudentListsScreen> {
+  String schoolName = '';
+  String schoolplaceName ='';
+
+  @override
+  void initState() {
+    getSchoolName();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     int columnCount = 3;
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Students"),backgroundColor: adminePrimayColor,
+        title: const Text("Students"),
+        backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("SchoolListCollection")
-                  .doc(schooilID)
-                  .collection(batchID)
-                  .doc(batchID)
+                  .doc(widget.schooilID)
+                  .collection(widget.batchID)
+                  .doc(widget.batchID)
                   .collection("classes")
-                  .doc(classID)
+                  .doc(widget.classID)
                   .collection("LeaveApplication")
-                  .doc(date)
+                  .doc(widget.date)
                   .collection('StudentsList')
                   .snapshots(),
               builder: (context, snapshot) {
@@ -69,6 +85,8 @@ class LeaveLettersStudentListsScreen extends StatelessWidget {
                                   onTap: () {
                                     Get.to(
                                       LeaveLettersScreen(
+                                        schoolplaceName:schoolplaceName,
+                                        schoolName: schoolName,
                                         id: data.id,
                                         applyLeaveDate: data.applyLeaveDate,
                                         leaveResontype: data.leaveResontype,
@@ -126,5 +144,16 @@ class LeaveLettersStudentListsScreen extends StatelessWidget {
                 }
               })),
     );
+  }
+
+  void getSchoolName() async {
+    var vari = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(widget.schooilID)
+        .get();
+    setState(() {
+      schoolName = vari.data()!['schoolName'];
+      schoolplaceName = vari.data()!['schoolName'];
+    });
   }
 }
