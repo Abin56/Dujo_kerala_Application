@@ -3,11 +3,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/controllers/get_parent&guardian/getx.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../model/teacher_model/progress_report_model/progress_report_model.dart';
@@ -55,11 +53,12 @@ class _StudentProgressReportScreenState
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     log(widget.studentImage);
     return Scaffold(
       body: SafeArea(
-          child: Container(
+          child: SizedBox(
         height: double.maxFinite,
         width: double.maxFinite,
         child: SingleChildScrollView(
@@ -122,7 +121,7 @@ class _StudentProgressReportScreenState
                   ),
                 ],
               ),
-              Container(
+              SizedBox(
                 height: 60,
                 width: double.infinity,
                 child: Padding(
@@ -138,7 +137,7 @@ class _StudentProgressReportScreenState
                       ),
                       Row(
                         children: [
-                          Text("Class :  ${className}"),
+                          Text("Class :  $className"),
                         ],
                       ),
                     ],
@@ -156,163 +155,164 @@ class _StudentProgressReportScreenState
                       .collection("subjects")
                       .snapshots(),
                   builder: (context, snapshot) {
-                    List<TextEditingController> _obtainedcontrollers =
-                        List.generate(
-                      snapshot.data!.docs.length,
-                      (index) => TextEditingController(),
-                    );
-                    List<TextEditingController> _totalMarkController =
-                        List.generate(
-                      snapshot.data!.docs.length,
-                      (index) => TextEditingController(),
-                    );
-                    log('${snapshot.data!.docs.length}');
+                    // log('${snapshot.data!.docs.length}');
                     if (snapshot.hasData) {
-                    if (snapshot.data!.docs.isNotEmpty) {
+                      if (snapshot.data!.docs.isNotEmpty) {
+                        List<TextEditingController> obtainedcontrollers =
+                            List.generate(
+                          snapshot.data!.docs.length,
+                          (index) => TextEditingController(),
+                        );
+                        List<TextEditingController> totalMarkController =
+                            List.generate(
+                          snapshot.data!.docs.length,
+                          (index) => TextEditingController(),
+                        );
                         return Container(
-                        color: Colors.amber,
-                        height: 600,
-                        child: Column(
-                          children: [
-                            SingleChildScrollView(
-                              child: DataTable(
-                                columns: const [
-                                  DataColumn(
-                                    label: Text('No'),
-                                  ),
-                                  DataColumn(
-                                    label: Text("Subjects"),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Obtained'),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Total'),
-                                  ),
-                                ],
-                                rows: [
-                                  for (int i = 0;
-                                      i <= snapshot.data!.docs.length - 1;
-                                      i++)
-                                    DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Text('${i + 1}'),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            '${snapshot.data?.docs[i].data()['subjectName']}',
+                          color: Colors.amber,
+                          height: 600,
+                          child: Column(
+                            children: [
+                              SingleChildScrollView(
+                                child: DataTable(
+                                  columns: const [
+                                    DataColumn(
+                                      label: Text('No'),
+                                    ),
+                                    DataColumn(
+                                      label: Text("Subjects"),
+                                    ),
+                                    DataColumn(
+                                      label: Text('Obtained'),
+                                    ),
+                                    DataColumn(
+                                      label: Text('Total'),
+                                    ),
+                                  ],
+                                  rows: [
+                                    for (int i = 0;
+                                        i <= snapshot.data!.docs.length - 1;
+                                        i++)
+                                      DataRow(
+                                        cells: [
+                                          DataCell(
+                                            Text('${i + 1}'),
                                           ),
-                                        ),
-                                        DataCell(TextFormField(
-                                          keyboardType: TextInputType.number,
-                                          controller: _obtainedcontrollers[i],
-                                        )),
-                                        DataCell(TextFormField(
+                                          DataCell(
+                                            Text(
+                                              '${snapshot.data?.docs[i].data()['subjectName']}',
+                                            ),
+                                          ),
+                                          DataCell(TextFormField(
                                             keyboardType: TextInputType.number,
-                                            controller:
-                                                _totalMarkController[i])),
-                                      ],
-                                    ),
-                                ],
+                                            controller: obtainedcontrollers[i],
+                                          )),
+                                          DataCell(TextFormField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              controller:
+                                                  totalMarkController[i])),
+                                        ],
+                                      ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                List<ExamReports> _examReports = [];
-                                for (int j = 0;
-                                    j < snapshot.data!.docs.length - 1;
-                                    j++) {
-                                  double _obtainedMarks = double.parse(
-                                      _obtainedcontrollers[j].text.trim());
-                                  double _totalMarks = double.parse(
-                                      _totalMarkController[j].text.trim());
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              GestureDetector(
+                                onTap: () async {
+                                  List<ExamReports> examReports = [];
+                                  for (int j = 0;
+                                      j < snapshot.data!.docs.length - 1;
+                                      j++) {
+                                    double obtainedMarks = double.parse(
+                                        obtainedcontrollers[j].text.trim());
+                                    double totalMarks = double.parse(
+                                        totalMarkController[j].text.trim());
 
-                                  _examReports.add(ExamReports(
-                                      obtainedMark: _obtainedMarks,
-                                      subject: snapshot.data?.docs[j]
-                                          .data()['subjectName'],
-                                      totalMark: _totalMarks));
-                                }
+                                    examReports.add(ExamReports(
+                                        obtainedMark: obtainedMarks,
+                                        subject: snapshot.data?.docs[j]
+                                            .data()['subjectName'],
+                                        totalMark: totalMarks));
+                                  }
 
-                                UploadProgressReportModel _subjectReport =
-                                    UploadProgressReportModel(
-                                  studentIMage: widget.studentImage,
-                                  schoolName: schoolName,
-                                  schoolPlace: schoolPlace,
-                                  teacherName: widget.teacherid,
-                                  id: widget.examName,
-                                  whichExam: widget.examName,
-                                  publishDate: DateTime.now().toString(),
-                                  studentName: widget.studentName,
-                                  rollNo: widget.rollNo,
-                                  wClass: widget.classID,
-                                  reports: _examReports,
-                                );
-                                AddProgressReportStatusToFireBase()
-                                    .addAProgressReportController(
-                                        _subjectReport,
-                                        context,
-                                        widget.schooilID,
-                                        widget.classID,
-                                        widget.studentId,
-                                        widget.examName,
-                                        widget.batchId)
-                                    .then((value) => {
-                                          showDialog(
-                                            context: context,
-                                            barrierDismissible:
-                                                false, // user must tap button!
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text('Message'),
-                                                content: SingleChildScrollView(
-                                                  child: ListBody(
-                                                    children: <Widget>[
-                                                      Text('Records Updated'),
-                                                    ],
+                                  UploadProgressReportModel subjectReport =
+                                      UploadProgressReportModel(
+                                    studentIMage: widget.studentImage,
+                                    schoolName: schoolName,
+                                    schoolPlace: schoolPlace,
+                                    teacherName: widget.teacherid,
+                                    id: widget.examName,
+                                    whichExam: widget.examName,
+                                    publishDate: DateTime.now().toString(),
+                                    studentName: widget.studentName,
+                                    rollNo: widget.rollNo,
+                                    wClass: widget.classID,
+                                    reports: examReports,
+                                  );
+                                  AddProgressReportStatusToFireBase()
+                                      .addAProgressReportController(
+                                          subjectReport,
+                                          context,
+                                          widget.schooilID,
+                                          widget.classID,
+                                          widget.studentId,
+                                          widget.examName,
+                                          widget.batchId)
+                                      .then((value) => {
+                                            showDialog(
+                                              context: context,
+                                              barrierDismissible:
+                                                  false, // user must tap button!
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text('Message'),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                    child: ListBody(
+                                                      children: const <Widget>[
+                                                        Text('Records Updated'),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: const Text('Ok'),
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                        });
-                              },
-                              child: ButtonContainerWidget(
-                                  colorindex: 2,
-                                  curving: 10,
-                                  height: 40,
-                                  width: 150,
-                                  child: Center(
-                                    child: Text(
-                                      "Submit",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  )),
-                            )
-                          ],
-                        ),
-                      );
-                      
-                    }else{
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: const Text('Ok'),
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                          });
+                                },
+                                child: ButtonContainerWidget(
+                                    colorindex: 2,
+                                    curving: 10,
+                                    height: 40,
+                                    width: 150,
+                                    child: const Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
                     } else {
                       return const Center(
                         child: CircularProgressIndicator(),
