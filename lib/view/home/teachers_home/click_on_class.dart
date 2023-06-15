@@ -5,20 +5,21 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
-import 'package:dujo_kerala_application/view/pages/exam_results/upload_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
+import '../../pages/Attentence/select_period.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
-import '../../pages/attentence/select_period.dart';
 import '../../pages/exam_results/select_exam.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
+import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 
@@ -66,7 +67,7 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID), //Attendance Book
 
       const UserExmNotifications(), //Exam
-       SelectExamLevelScreen(classId: classID),//exam result upload
+      SelectExamLevelScreen(classId: classID), //exam result upload
       const StudentShowTimeTable(), //TimeTable
       const ViewHomeWorks(), //Home Works
 
@@ -339,7 +340,7 @@ var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
   'assets/images/exam.png',
-    'assets/images/exam.png',
+  'assets/images/exam.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/notices.png',
