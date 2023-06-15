@@ -7,13 +7,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextFormFieldWidget extends StatelessWidget {
   TextFormFieldWidget({
     super.key,
-    required this.hintText,
+     this.labelText,
+     this.hintText,
     this.textEditingController,
     this.function,
     
   });
  final TextEditingController? textEditingController;
-  final String hintText;
+   String? hintText;
+  String? labelText;
   String? Function(String? fieldContent)? function;
  
 
@@ -30,7 +32,7 @@ class TextFormFieldWidget extends StatelessWidget {
     ),
     fillColor: cWhite, 
     filled: true,
-      
+      labelText: labelText,
         hintText: hintText,hintStyle: TextStyle(color: cblack)
       ),
     );

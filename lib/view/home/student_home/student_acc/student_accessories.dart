@@ -6,16 +6,13 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/ss.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
+import 'package:dujo_kerala_application/view/pages/exam_results/for_users/select_examlevel_uses.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../utils/utils.dart';
-import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
@@ -34,9 +31,6 @@ class StudentAccessories extends StatefulWidget {
 }
 
 class _StudentAccessoriesState extends State<StudentAccessories> {
-
-
-
   @override
   Widget build(BuildContext context) {
     log(
@@ -47,13 +41,16 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
-          // const StudentShowTimeTable(), //Time Table
-          SS(),
-            const ViewHomeWorks(), // Home Works
-            StudentSubjectHome(), //Subjects
+      // const StudentShowTimeTable(), //Time Table
+
+      const ViewHomeWorks(), // Home Works
+      StudentSubjectHome(), //Subjects
       TeacherSubjectWiseList(), //Teachers
       const UserExmNotifications(), //Exam
       NoticePage(), //Notice
+      UsersSelectExamLevelScreen(
+          classId: UserCredentialsController.classId!,
+          studentID: UserCredentialsController.studentModel!.docid),
       const EventList(), //Events
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
@@ -150,6 +147,7 @@ List<String> _acc_text = [
   'Subjects/Materials',
   'Teachers',
   'Exams',
+  'Exam Results',
   'Notices',
   'Events',
   'Progress Report',
@@ -157,12 +155,13 @@ List<String> _acc_text = [
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-   'assets/images/library.png',
-   'assets/images/homework.png',
-   'assets/images/subjects.png',
-   'assets/images/teachers.png',
+  'assets/images/library.png',
+  'assets/images/homework.png',
+  'assets/images/subjects.png',
+  'assets/images/teachers.png',
   'assets/images/exam.png',
-  'assets/images/notices.png',
+  'assets/images/exam.png',
+  'assets/images/exam.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
   'assets/images/meetings.png',
