@@ -354,6 +354,7 @@ List<String> hasDataText = [
   'Take Attendance',
   'Attendence Book',
   'Exams',
+  'Examresults',
   'TimeTable',
   'HomeWorks',
   'Notices',
