@@ -18,7 +18,7 @@ class ExamUploadTextFormFeild extends StatelessWidget {
     required this.hintText,
     this.validator,
     this.keyboardType,
-     this.textfromController,
+    this.textfromController,
     this.onTapFunction,
     // this.readOnly=false,
     this.maxLines,
@@ -48,15 +48,16 @@ class ExamUploadTextFormFeild extends StatelessWidget {
               // color: const Color.fromARGB(255, 211, 225, 236),
               child: Center(
                 child: TextFormField(
-                     controller: textfromController,
-                    
-                      // keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                         hintText: hintText,
-                        border: const OutlineInputBorder(),
-                        contentPadding: const EdgeInsets.all(7),
-                      ),
-                    ),
+                  controller: textfromController,
+                  validator: validator,
+
+                  // keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    hintText: hintText,
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.all(7),
+                  ),
+                ),
               ),
             )
           ],

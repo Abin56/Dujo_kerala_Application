@@ -18,8 +18,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../helper/shared_pref_helper.dart';
-import '../../pages/attentence/select_period.dart';
 import '../../language/language_change_drawer.dart';
+import '../../pages/Attentence/select_period.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
 

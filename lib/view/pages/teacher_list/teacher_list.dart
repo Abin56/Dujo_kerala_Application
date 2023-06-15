@@ -18,7 +18,7 @@ class TeacherSubjectWiseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(
+        title: Text(
           "Teachers".tr,
         ),
         backgroundColor: adminePrimayColor,

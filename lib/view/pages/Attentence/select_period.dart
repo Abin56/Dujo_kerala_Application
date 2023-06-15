@@ -4,12 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/attendence_controller/attendence_controller.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
-import 'package:dujo_kerala_application/view/pages/attentence/take_attentence_subject_listView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+
+import 'take_attentence_subject_listView.dart';
 
 class SelectPeriodWiseScreen extends StatelessWidget {
   AttendanceController attendanceController = Get.put(AttendanceController());

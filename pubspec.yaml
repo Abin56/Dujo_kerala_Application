@@ -62,6 +62,7 @@ dependencies:
   pdf:
   path_provider:
   provider: 
+  video_player: ^2.6.1
   animated_text_kit: 
   flutter_spinkit: 
   flutter_local_notifications:

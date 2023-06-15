@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/drawer/student_drawer.dart';
 import 'package:dujo_kerala_application/view/home/student_home/student_home.dart';
@@ -9,6 +10,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../pages/chat_gpt/screens/chat_screen.dart';
+import '../../pages/recorded_videos/select_subjects.dart';
 import '../../widgets/container_image.dart';
 import '../sample/under_maintance.dart';
 
@@ -46,7 +48,11 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       StudentHomeScreen(),
-      const UnderMaintanceScreen(text: ""),
+      RecSelectSubjectScreen(
+        batchId: UserCredentialsController.batchId!,
+        classID: UserCredentialsController.classId!,
+        schoolId: UserCredentialsController.schoolId!,
+      ),
       const StudentsRoomListScreen(),
       const ChatScreen(),
     ];
