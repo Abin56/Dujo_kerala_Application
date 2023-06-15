@@ -29,7 +29,7 @@ import 'helper/shared_pref_helper.dart';
           
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log('Handling  a background message ${message.messageId}');
-}
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
