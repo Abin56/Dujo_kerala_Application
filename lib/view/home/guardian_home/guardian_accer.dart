@@ -10,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../utils/utils.dart';
-import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
@@ -33,8 +32,9 @@ class GuardianAccessories extends StatelessWidget {
       AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),
-      //Attendence8
+          classID: UserCredentialsController.classId!),  //Attendence
+
+
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.guardianModel!.guardianName,
@@ -42,25 +42,33 @@ class GuardianAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.guardianModel!.studentID,
           batchId: UserCredentialsController.batchId!), //Leave Letter
+
+
+
           NoticePage(), //Notice
+
           const ViewHomeWorks(), // Home Works
+
+
            const StudentShowTimeTable(), // Time Table
+           
             SchoolLevelMeetingPage(), //Meetings
 
 
       const UserExmNotifications(), // Exams
 
 
-
-
-
       const EventList(), //Events
+
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: UserCredentialsController.guardianModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Progress Report
+
+
       StudentSubjectHome(), //Subjects
+      
 
       TeacherSubjectWiseList(), //Teachers
 
@@ -146,27 +154,37 @@ class GuardianAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Leave Application',
+
   'Notices',
   'HomeWorks',
+
   'TimeTable',
   'Meetings',
+
   'Exams',
   'Events',
+
   'Progress Report',
   'Subjects',
+
   'Teachers',
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
+
    'assets/images/notices.png',
    'assets/images/homework.png',
+
    'assets/images/library.png',
    'assets/images/meetings.png',
+
   'assets/images/exam.png',
   'assets/images/activity.png',
+
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
+
   'assets/images/teachers.png',
 
 ];

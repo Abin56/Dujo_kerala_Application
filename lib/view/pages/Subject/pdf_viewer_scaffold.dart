@@ -51,7 +51,7 @@
 //       final rect = _buildRect(context);
 //       if (_rect != rect) {
 //         _rect = rect;
-//         _resizeTimer?.cancel();
+//         _resizeTimer?.Cancel();
 //         _resizeTimer = new Timer(new Duration(milliseconds: 300), () {
 //           pdfViwerRef.resize(_rect!);
 //         });

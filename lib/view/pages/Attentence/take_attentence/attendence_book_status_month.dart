@@ -28,7 +28,7 @@ class AttendenceBookScreenSelectMonth extends StatelessWidget {
     log(classID);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Attendence Book'.tr),
+        title: Text('Attendance Book'.tr),
         backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(

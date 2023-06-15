@@ -17,7 +17,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../colors/colors.dart';
 import '../../language/language_change_drawer.dart';
-import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
@@ -32,7 +31,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
       return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 300,
+      height: 350.h,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +167,7 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-         menuItem(1, 'assets/images/information.png', 'General Instructions',
+         menuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
@@ -222,14 +221,15 @@ Get.to(
                 batchId: UserCredentialsController.batchId!),
           );
         }),
-        menuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
-        menuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
+         menuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());
         }),
+        menuItem(8, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(const PrivacyViewScreen());
+        }),
+       
         kHeight10,
         kHeight10,
         kHeight10,

@@ -15,6 +15,7 @@ import '../../widgets/fonts/google_poppins.dart';
 class ExamResultsView extends StatelessWidget {
   String classID;
   String examlevel;
+  final _formKey = GlobalKey<FormState>();
 
   ExamResultsView({super.key, required this.classID, required this.examlevel});
 
@@ -33,88 +34,72 @@ class ExamResultsView extends StatelessWidget {
               fontWeight: FontWeight.w500),
           backgroundColor: adminePrimayColor),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: 60.h,
-              width: 320.w,
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.all(Radius.circular(5.w))),
-              child: Center(
-                child: GetSchoolLevelExamDropDownButton(
-                  examType: examlevel,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+               // height: 60.h,
+                width: 320.w,
+                
+                child: Center(
+                  child: GetSchoolLevelExamDropDownButton(
+                    examType: examlevel,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              height: 60.h,
-              width: 320.w,
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.all(Radius.circular(5.w))),
-              child: Center(
-                child: GetTeachersSubjectsDropDownButton(
-                  classId: classID,
+              SizedBox(
+               // height: 75.h,
+                width: 320.w,
+               
+                child: Center(
+                  child: GetTeachersSubjectsDropDownButton(
+                    classId: classID,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              height: 60.h,
-              width: 320.w,
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.all(Radius.circular(5.w))),
-              child: Center(
-                  child: AllClassStudentsListDropDownButton(
-                classID: classID,
-              )),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 30.w,
-                right: 30.w,
+              SizedBox(
+               // height: 60.h,
+                width: 320.w,
+               
+                child: Center(
+                    child: AllClassStudentsListDropDownButton(
+                  classID: classID,
+                )),
               ),
-              child: TextFormFieldWidget(
-                textEditingController: obtainedMark,
-                labelText: "Obtained Mark",
-                function: checkFieldEmpty,
-                //textEditingController: ,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 30.w,
+                  right: 30.w,
+                ),
+                child: TextFormFieldWidget(
+                  textEditingController: obtainedMark,
+                  labelText: "Obtained Mark",
+                  function: checkFieldEmpty,
+                  //textEditingController: ,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 30.w,
-                right: 30.w,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 30.w,
+                  right: 30.w,
+                ),
+                child: TextFormFieldWidget(
+                  textEditingController: obtainedGrade,
+                  // hintText: "Obtained Grade",
+                  labelText: 'Obtained Grade',
+                  function: checkFieldEmpty,
+                  //textEditingController: ,
+                ),
               ),
-              child: TextFormFieldWidget(
-                textEditingController: obtainedGrade,
-                // hintText: "Obtained Grade",
-                labelText: 'Obtained Grade',
-                function: checkFieldEmpty,
-                //textEditingController: ,
-              ),
-            ),
-            GestureDetector(
-                onTap: () async {
-                  final docid = uuid.v1();
-                  if (schoolLevelExamistValue != null &&
-                      allClassStudentsListValue != null) {
-                    FirebaseFirestore.instance
-                        .collection('SchoolListCollection')
-                        .doc(UserCredentialsController.schoolId)
-                        .collection(UserCredentialsController.batchId!)
-                        .doc(UserCredentialsController.batchId!)
-                        .collection('classes')
-                        .doc(classID)
-                        .collection('Students')
-                        .doc(allClassStudentsListValue!['docid'])
-                        .collection(examlevel)
-                        .doc(schoolLevelExamistValue!['examName'])
-                        .set({
-                      'docid': schoolLevelExamistValue!['examName']
-                    }).then((value) {
+              GestureDetector(
+                  onTap: () async {
+                    final docid = uuid.v1();
+                    if(_formKey.currentState!.validate()){
+                    
+                    if (schoolLevelExamistValue != null &&
+                        allClassStudentsListValue != null) {
                       FirebaseFirestore.instance
                           .collection('SchoolListCollection')
                           .doc(UserCredentialsController.schoolId)
@@ -126,18 +111,9 @@ class ExamResultsView extends StatelessWidget {
                           .doc(allClassStudentsListValue!['docid'])
                           .collection(examlevel)
                           .doc(schoolLevelExamistValue!['examName'])
-                          .collection('Marks')
-                          .doc(teacherSubjectValue!['docid'])
                           .set({
-                        'docid': docid,
-                        'uploadDate': DateTime.now().toString(),
-                        'studentName':
-                            allClassStudentsListValue!['studentName'],
-                        'obtainedMark': obtainedMark.text.trim(),
-                        'obtainedGrade': obtainedGrade.text.trim(),
-                        'subjectName': teacherSubjectValue!['subjectName'],
-                        'studentid': allClassStudentsListValue!['docid'],
-                      }, SetOptions(merge: true)).then((value) {
+                        'docid': schoolLevelExamistValue!['examName']
+                      }).then((value) {
                         FirebaseFirestore.instance
                             .collection('SchoolListCollection')
                             .doc(UserCredentialsController.schoolId)
@@ -145,11 +121,22 @@ class ExamResultsView extends StatelessWidget {
                             .doc(UserCredentialsController.batchId!)
                             .collection('classes')
                             .doc(classID)
-                            .collection('Exam Results')
+                            .collection('Students')
+                            .doc(allClassStudentsListValue!['docid'])
+                            .collection(examlevel)
                             .doc(schoolLevelExamistValue!['examName'])
+                            .collection('Marks')
+                            .doc(teacherSubjectValue!['docid'])
                             .set({
-                          'docid': schoolLevelExamistValue!['examName']
-                        }).then((value) {
+                          'docid': docid,
+                          'uploadDate': DateTime.now().toString(),
+                          'studentName':
+                              allClassStudentsListValue!['studentName'],
+                          'obtainedMark': obtainedMark.text.trim(),
+                          'obtainedGrade': obtainedGrade.text.trim(),
+                          'subjectName': teacherSubjectValue!['subjectName'],
+                          'studentid': allClassStudentsListValue!['docid'],
+                        }, SetOptions(merge: true)).then((value) {
                           FirebaseFirestore.instance
                               .collection('SchoolListCollection')
                               .doc(UserCredentialsController.schoolId)
@@ -159,12 +146,8 @@ class ExamResultsView extends StatelessWidget {
                               .doc(classID)
                               .collection('Exam Results')
                               .doc(schoolLevelExamistValue!['examName'])
-                              .collection('Subjects')
-                              .doc(teacherSubjectValue!['docid'])
                               .set({
-                            'subject': teacherSubjectValue!['subjectName'],
-                            'subjectid': teacherSubjectValue!['docid'],
-      
+                            'docid': schoolLevelExamistValue!['examName']
                           }).then((value) {
                             FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
@@ -177,39 +160,57 @@ class ExamResultsView extends StatelessWidget {
                                 .doc(schoolLevelExamistValue!['examName'])
                                 .collection('Subjects')
                                 .doc(teacherSubjectValue!['docid'])
-                                .collection('MarkList')
-                                .doc(allClassStudentsListValue!['docid'])
                                 .set({
+                              'subject': teacherSubjectValue!['subjectName'],
                               'subjectid': teacherSubjectValue!['docid'],
-                              'teacherId': teacherSubjectValue!['teacherdocid'],
-                              'teachername':
-                                  teacherSubjectValue!['teacherName'],
-                              'examid': docid,
-                              'uploadDate': DateTime.now().toString(),
-                              'studentName':
-                                  allClassStudentsListValue!['studentName'],
-                              'obtainedMark': obtainedMark.text.trim(),
-                              'obtainedGrade': obtainedGrade.text.trim(),
-                              'subjectName':
-                                  teacherSubjectValue!['subjectName'],
-                              'studentid': allClassStudentsListValue!['docid'],
+              
                             }).then((value) {
-                              obtainedMark.clear();
-                              obtainedGrade.clear();
-                              showToast(msg: "Uploaded Successfully");
+                              FirebaseFirestore.instance
+                                  .collection('SchoolListCollection')
+                                  .doc(UserCredentialsController.schoolId)
+                                  .collection(UserCredentialsController.batchId!)
+                                  .doc(UserCredentialsController.batchId!)
+                                  .collection('classes')
+                                  .doc(classID)
+                                  .collection('Exam Results')
+                                  .doc(schoolLevelExamistValue!['examName'])
+                                  .collection('Subjects')
+                                  .doc(teacherSubjectValue!['docid'])
+                                  .collection('MarkList')
+                                  .doc(allClassStudentsListValue!['docid'])
+                                  .set({
+                                'subjectid': teacherSubjectValue!['docid'],
+                                'teacherId': teacherSubjectValue!['teacherdocid'],
+                                'teachername':
+                                    teacherSubjectValue!['teacherName'],
+                                'examid': docid,
+                                'uploadDate': DateTime.now().toString(),
+                                'studentName':
+                                    allClassStudentsListValue!['studentName'],
+                                'obtainedMark': obtainedMark.text.trim(),
+                                'obtainedGrade': obtainedGrade.text.trim(),
+                                'subjectName':
+                                    teacherSubjectValue!['subjectName'],
+                                'studentid': allClassStudentsListValue!['docid'],
+                              }).then((value) {
+                                obtainedMark.clear();
+                                obtainedGrade.clear();
+                                showToast(msg: "Uploaded Successfully");
+                              });
                             });
                           });
                         });
                       });
-                    });
-                  } else {
-                    return showToast(msg: 'Please check selected Items');
-                  }
-                },
-                child: SubmitButtonWidget(
-                  text: 'Submit',
-                ))
-          ],
+                    } else {
+                      return showToast(msg: 'Please check selected Items');
+                    }
+                    }
+                  },
+                  child: SubmitButtonWidget(
+                    text: 'Submit',
+                  ))
+            ],
+          ),
         ),
       ),
     );

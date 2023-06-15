@@ -8,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../utils/utils.dart';
-import '../../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
@@ -30,12 +29,17 @@ class ParentAccessories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
+
+
       AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),
-      //Attendence
-       const UserExmNotifications(), // Exams
+          classID: UserCredentialsController.classId!),  //Attendence
+
+       
+
+
+
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.parentModel!.parentName!,
@@ -43,20 +47,34 @@ class ParentAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-      const StudentShowTimeTable(), // Time Tabe
+
+      const StudentShowTimeTable(), // Time Table
+
+       SchoolLevelMeetingPage(), //Meetings
+
+      const UserExmNotifications(), // Exams
+
+
 
       const ViewHomeWorks(), // Home Works
+
       NoticePage(), //Notice
+
+
       const EventList(), //Events
+
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: UserCredentialsController.parentModel?.studentID ?? "",
           batchId: UserCredentialsController.batchId!), //Progress Report
+
+
       StudentSubjectHome(), //Subjects
 
       TeacherSubjectWiseList(), //Teachers
-      SchoolLevelMeetingPage(), //Meetings
+
+     
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -142,27 +160,43 @@ class ParentAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Leave Letter',
-  'Notices',
-  'HomeWorks',
+
   'TimeTable',
+  
   'Meetings',
+
   'Exams',
+
+   
+  'HomeWorks',
+  'Notices',
+  
   'Events',
+
   'Progress Report',
   'Subjects',
+
   'Teachers',
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
-  'assets/images/notices.png',
-  'assets/images/homework.png',
+
+  
+
   'assets/images/library.png',
   'assets/images/meetings.png',
+
   'assets/images/exam.png',
+  'assets/images/homework.png',
+
+
+  'assets/images/notices.png',
   'assets/images/activity.png',
+
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
+
   'assets/images/teachers.png',
 
 ];

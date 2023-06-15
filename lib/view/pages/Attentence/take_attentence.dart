@@ -659,7 +659,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                       ),
                       actions: <Widget>[
                         TextButton(
-                            child: const Text('Upload Attendence'),
+                            child: const Text('Upload Attendance'),
                             onPressed: () async {
                               log('period document id ${widget.periodTokenID}');
 

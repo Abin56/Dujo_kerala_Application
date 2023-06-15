@@ -71,7 +71,7 @@ class RecordedClassChapterUploadPage extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: MaterialButton(
-                                    child: const Text('OK'),
+                                    child: const Text('Ok'),
                                     onPressed: () => Navigator.pop(context),
                                   ),
                                 )

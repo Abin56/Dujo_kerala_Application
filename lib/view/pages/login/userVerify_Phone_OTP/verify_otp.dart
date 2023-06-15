@@ -5,7 +5,6 @@ import 'dart:developer';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/guardian_sign_up/guardian_signup.dart';
 import 'package:dujo_kerala_application/view/pages/login/sign_up/teacher_sign_up/teacher_sign_up.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -78,7 +77,7 @@ class UserVerifyOTPScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                      'We need to register your phone ${phoneNumber}before getting'),
+                      'We need to register your phone   $phoneNumber  before getting'),
                   const SizedBox(
                     height: 10,
                   ),

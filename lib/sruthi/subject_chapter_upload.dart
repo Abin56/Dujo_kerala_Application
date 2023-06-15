@@ -99,7 +99,7 @@ class ChapterUpoload extends StatelessWidget {
                   actions: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: MaterialButton(child:const Text('OK'), onPressed: () => Navigator.pop(context),),
+                      child: MaterialButton(child:const Text('Ok'), onPressed: () => Navigator.pop(context),),
                     )
                   ],
                 );

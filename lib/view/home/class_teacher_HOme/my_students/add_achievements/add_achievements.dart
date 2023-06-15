@@ -65,7 +65,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                       Navigator.of(context).pop();
                     }, color: Colors.blue, child: const Padding(
                       padding:  EdgeInsets.all(8.0),
-                      child:  Text('OK'),
+                      child:  Text('Ok'),
                     ),)
                   ],
                 );
