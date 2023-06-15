@@ -76,23 +76,22 @@ class RecordedClassSubjectWisePage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-
-                                              //StudyMaterials()
-                                              StudyMaterialsUploadedPage(
+                                              RecordedClassUploadPage(
                                                   subjectID: subjectID,
                                                   chapterName:
-                                                      snapshot.data!.docs[index]
+                                                      snapshot
+                                                              .data!.docs[index]
                                                           ['chapterName'],
-                                                  subjectName:
-                                                      snapshot.data!.docs[index]
-                                                          ['subjectName'],
+                                                  subjectName: snapshot.data!
+                                                          .docs[index]
+                                                      ['subjectName'],
                                                   chapterID: snapshot.data!
                                                       .docs[index]['docid'])));
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(top: 10.h),
                                   child: GooglePoppinsWidgets(
-                                    text: "Study Materials",
+                                    text: "Recorded Classes",
                                     fontsize: 16.h,
                                     color: adminePrimayColor,
                                   ),
@@ -144,7 +143,7 @@ class RecordedClassSubjectWisePage extends StatelessWidget {
 }
 
 class ListileCardChapterWidget extends StatelessWidget {
-  ListileCardChapterWidget({
+  const ListileCardChapterWidget({
     required this.leading,
     required this.title,
     required this.subtitle,
@@ -152,10 +151,10 @@ class ListileCardChapterWidget extends StatelessWidget {
     super.key,
   });
 
-  Widget leading;
-  Widget title;
-  Widget subtitle;
-  Widget? trailing;
+  final Widget leading;
+  final Widget title;
+  final Widget subtitle;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {

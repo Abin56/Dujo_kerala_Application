@@ -75,10 +75,11 @@ class RecordedClassMainPage extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) =>
 
-                                      //StudyMaterials()
                                       RecordedClassChapterUploadPage(
                                         subjectID: snapshot.data!.docs[index]
                                             ['docid'],
+                                        subjectName: snapshot.data!.docs[index]
+                                            ['subjectName'],
                                       )));
                         },
                         child: Container(
