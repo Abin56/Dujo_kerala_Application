@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
@@ -30,113 +31,127 @@ class EditExamResultScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-          child: SafeArea(
-              child: Column(
-        children: [
-          SizedBox(
-            height: 50,
-            child: GoogleMonstserratWidgets(
-              text: 'Mark List',
-              fontsize: 16,
-              fontWeight: FontWeight.bold,
+          child: Container(
+            margin: EdgeInsets.only(top: 20.h),
+            child: Column(
+                  children: [
+            SizedBox(
+              height: 50.w,       
+              child: GoogleMonstserratWidgets(
+            text: 'Mark List',
+            fontsize: 19.w,
+            fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Expanded(
-              child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('SchoolListCollection')
-                      .doc(UserCredentialsController.schoolId)
-                      .collection(UserCredentialsController.batchId!)
-                      .doc(UserCredentialsController.batchId!)
-                      .collection('classes')
-                      .doc(classID)
-                      .collection('Exam Results')
-                      .doc(examId)
-                      .collection('Subjects')
-                      .doc(subjectID)
-                      .collection('MarkList')
-                      .snapshots(),
-                  builder: (context, snaps) {
-                    if (snaps.hasData) {
-                      return ListView.separated(
-                          itemBuilder: (context, index) {
-                            return SizedBox(
-                              height: 40,
-                              child: Row(
-                                children: [
-                                  Text('${index + 1}'),
-                                  kWidth20,
-                                  Text(snaps.data!.docs[index]['studentName']),
-                                  const Spacer(),
-                                  Text(snaps.data!.docs[index]['obtainedMark']),
-                                  IconButton(
-                                      onPressed: () async {
-                                        editMark(
-                                            context,
-                                            classID,
-                                            examId,
-                                            subjectID,
-                                            snaps.data!.docs[index]
-                                                ['obtainedMark'],
-                                            snaps.data!.docs[index]
-                                                ['studentid'],
-                                            examlevel);
-                                      },
-                                      icon: const Icon(
-                                        Icons.edit,
-                                        color: Colors.green,
-                                      )),
-                                  kWidth10,
-                                  Text(
-                                      snaps.data!.docs[index]['obtainedGrade']),
-                                  IconButton(
-                                      onPressed: () async {
-                                        editGrade(
-                                            context,
-                                            classID,
-                                            examId,
-                                            subjectID,
-                                            snaps.data!.docs[index]
-                                                ['obtainedGrade'],
-                                            snaps.data!.docs[index]
-                                                ['studentid'],
-                                            examlevel);
-                                      },
-                                      icon: const Icon(
-                                        Icons.edit,
-                                        color: Colors.green,
-                                      )),
-                                  IconButton(
-                                      onPressed: () async {
-                                        deleteResult(
-                                            context,
-                                            classID,
-                                            examId,
-                                            subjectID,
-                                            snaps.data!.docs[index]
-                                                ['obtainedGrade'],
-                                            snaps.data!.docs[index]
-                                                ['studentid'],
-                                            examlevel);
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      )),
-                                ],
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Divider();
-                          },
-                          itemCount: snaps.data!.docs.length);
-                    } else {
-                      return const Text('');
-                    }
-                  }))
-        ],
-      ))),
+            Row(children: [
+              Container(child: GoogleMonstserratWidgets(text:"No:", fontsize: 16.w)), 
+
+               Container(child: GoogleMonstserratWidgets(text:"Name", fontsize: 16.w)), 
+
+                Container(child: GoogleMonstserratWidgets(text:"Mark:", fontsize: 16.w)), 
+
+                 Container(child: GoogleMonstserratWidgets(text:"Grade ", fontsize: 16.w)), 
+
+                  Container(child: GoogleMonstserratWidgets(text:"Delete:", fontsize: 16.w)), 
+
+            ],),
+            Expanded(
+            child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('SchoolListCollection')
+                    .doc(UserCredentialsController.schoolId)
+                    .collection(UserCredentialsController.batchId!)
+                    .doc(UserCredentialsController.batchId!)
+                    .collection('classes')
+                    .doc(classID)
+                    .collection('Exam Results')
+                    .doc(examId)
+                    .collection('Subjects')
+                    .doc(subjectID)
+                    .collection('MarkList')
+                    .snapshots(),
+                builder: (context, snaps) {
+                  if (snaps.hasData) {
+                    return ListView.separated(
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            height: 50.w,
+                            child: Row(
+                              children: [
+                                GoogleMonstserratWidgets(text: '${index + 1}',fontsize: 16.w),
+                                kWidth20,
+                                GoogleMonstserratWidgets(text: snaps.data!.docs[index]['studentName'],fontsize: 16.w),
+                                const Spacer(),
+                                GoogleMonstserratWidgets(text: snaps.data!.docs[index]['obtainedMark'],fontsize: 16.w),
+                                IconButton(
+                                    onPressed: () async {
+                                      editMark(
+                                          context,
+                                          classID,
+                                          examId,
+                                          subjectID,
+                                          snaps.data!.docs[index]
+                                              ['obtainedMark'],
+                                          snaps.data!.docs[index]
+                                              ['studentid'],
+                                          examlevel);
+                                    },
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.green,
+                                    )),
+                                kWidth10,
+                                GoogleMonstserratWidgets(text: 
+                                    snaps.data!.docs[index]['obtainedGrade'],fontsize: 16.w),
+                                IconButton(
+                                    onPressed: () async {
+                                      editGrade(
+                                          context,
+                                          classID,
+                                          examId,
+                                          subjectID,
+                                          snaps.data!.docs[index]
+                                              ['obtainedGrade'],
+                                          snaps.data!.docs[index]
+                                              ['studentid'],
+                                          examlevel);
+                                    },
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.green,
+                                    )),
+                                IconButton(
+                                    onPressed: () async {
+                                      deleteResult(
+                                          context,
+                                          classID,
+                                          examId,
+                                          subjectID,
+                                          snaps.data!.docs[index]
+                                              ['obtainedGrade'],
+                                          snaps.data!.docs[index]
+                                              ['studentid'],
+                                          examlevel);
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    )),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const Divider();
+                        },
+                        itemCount: snaps.data!.docs.length);
+                  } else {
+                    return const Text('');
+                  }
+                }))
+                  ],
+                ),
+          )),
     );
   }
 }

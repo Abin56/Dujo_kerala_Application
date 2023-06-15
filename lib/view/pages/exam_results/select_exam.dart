@@ -2,7 +2,9 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/examListview.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/upload_exam_screen.dart';
+import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/fonts/google_monstre.dart';
@@ -16,23 +18,61 @@ class SelectExamLevelScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton.icon(
-              onPressed: () async {
-                return getBottomSheet(classId, 'State Level');
-              },
-              icon: const Icon(Icons.list_alt),
-              label: const Text("School Level")),
-          kHeight30,
-          TextButton.icon(
-              onPressed: () async {
-                return getBottomSheet(classId, 'Public Level');
-              },
-              icon: const Icon(Icons.list_alt),
-              label: const Text("Public Level"))
-        ],
-      )),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              IconButtonBackWidget(color: cblack,),
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 300.h),
+                  child: Column(
+                        children: [
+                  Container(
+                    height: 80.h,
+                    width: 230.w,
+                   
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.w)
+                        ),
+                         color: cred,
+                        ),
+                    child: TextButton.icon(
+                        onPressed: () async {
+                          return getBottomSheet(classId, 'State Level');
+                        },
+                        icon: const Icon(Icons.list_alt,color: cWhite),
+                        label:  GoogleMonstserratWidgets(
+                          text:"School Level",fontsize: 18.w,
+                          color: cWhite,fontWeight: FontWeight.w500,
+                          )),
+                  ),
+                  kHeight30,
+                  Container(
+                      height: 80.h,
+                    width: 230.w,
+                   
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.w)
+                        ),
+                         color: cred,
+                        ),
+                    child: TextButton.icon(
+                        onPressed: () async {
+                          return getBottomSheet(classId, 'Public Level');
+                        },
+                        icon: const Icon(Icons.list_alt,color: cWhite),
+                        label:  GoogleMonstserratWidgets(
+                          text: "Public Level",fontsize: 18.w,
+                          color: cWhite,fontWeight: FontWeight.w500,)),
+                  ),
+                        ],
+                      ),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
@@ -40,7 +80,7 @@ class SelectExamLevelScreen extends StatelessWidget {
 getBottomSheet(String classId, String examlevel) {
   Get.bottomSheet(
       SizedBox(
-        height: 200,
+        height: 250.h,
         width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -52,10 +92,25 @@ getBottomSheet(String classId, String examlevel) {
                   examlevel: examlevel,
                 ));
               },
-              child: GoogleMonstserratWidgets(
-                text: 'Upload',
-                fontsize: 16,
-                fontWeight: FontWeight.w600,
+              child: Container(
+                height: 65.h,
+                width: 150.w,
+                color: cblue,
+                child: Container(
+                  margin:  EdgeInsets.only(left: 30.w),
+                  child: Row(
+                    children: [
+                      Icon(Icons.upload_sharp,color: cWhite,size: 20.w),
+                      SizedBox(width: 5.w,),
+                      GoogleMonstserratWidgets(
+                        text: 'Upload',
+                        fontsize: 16.w,
+                        color: cWhite,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
             GestureDetector(
@@ -65,10 +120,26 @@ getBottomSheet(String classId, String examlevel) {
                   examLevel: examlevel,
                 ));
               },
-              child: GoogleMonstserratWidgets(
-                text: 'View',
-                fontsize: 16,
-                fontWeight: FontWeight.w600,
+              child: Container(
+                 height: 65.h,
+                width: 150.w,
+                color: cblue,
+                child: Container(
+                    margin:  EdgeInsets.only(left: 30.w),
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                       Icon(Icons.view_headline_sharp,color: cWhite,size: 20.w),
+                         SizedBox(width: 5.w,),
+                      GoogleMonstserratWidgets(
+                        text: 'View',
+                        fontsize: 16.w,
+                        fontWeight: FontWeight.w700,
+                        color: cWhite,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             )
           ],

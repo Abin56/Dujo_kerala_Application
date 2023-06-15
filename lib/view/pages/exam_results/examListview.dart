@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/edit_result.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/select_subject.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -88,7 +89,7 @@ class SelectExamWiseScreen extends StatelessWidget {
                                       '${snapshots.data!.docs[index]['docid']}',
                                       style: GoogleFonts.poppins(
                                           color: Colors.black,
-                                          fontSize: 12,
+                                          fontSize: 12.w,
                                           fontWeight: FontWeight.w700),
                                     ),
                                   ),
