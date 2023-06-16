@@ -76,25 +76,25 @@ class _ClassTeacherMainHomeScreenState
           color: Colors.white,
           tabs:  [
             GButton(
-                iconSize: 20,
+                iconSize: 20.h,
                 icon: LineIcons.home,
                 text: 'Home'.tr,
                 style: GnavStyle.google),
             GButton(
-              iconSize: 20,
+              iconSize: 30.h,
               textSize: 20,
               icon: Icons.tv,
               text: 'Recorded\nClasses'.tr,
             ),
             GButton(
-              iconSize: 20,
+              iconSize: 30.h,
               // iconSize: 10,
               textSize: 20,
               icon: Icons.laptop,
               text: 'Live\nClasses'.tr,
             ),
             GButton(
-              iconSize: 30,
+              iconSize: 30.h,
               icon: Icons.chat,
                     textSize: 20,
               text: 'Ask\nDoubt'.tr,

@@ -6,7 +6,6 @@ import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_l
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -154,7 +153,7 @@ Widget MyDrawerList(context) {
             () => GeneralInstruction(),
           );
         }),
-        MenuItem(1, 'assets/images/attendance.png', 'Attendence'.tr,
+        MenuItem(1, 'assets/images/attendance.png', 'Attendance'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
            Get.to(
             () =>  AttendenceBookScreenSelectMonth(
@@ -185,17 +184,14 @@ Widget MyDrawerList(context) {
             () => const ViewHomeWorks(),
           );
         }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
+        MenuItem(5, 'assets/images/notices.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
            Get.to(
             () => NoticePage(),
           );
         }),
-        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
+    
+        MenuItem(6, 'assets/images/progressreport.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
            Get.to(
             () => ProgressReportListViewScreen(
@@ -207,7 +203,7 @@ Widget MyDrawerList(context) {
         }),
 
 
-        MenuItem(9, 'assets/images/languages.png', 'Change Language'.tr,
+        MenuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());
         }),

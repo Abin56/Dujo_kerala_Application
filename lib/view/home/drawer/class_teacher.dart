@@ -248,7 +248,7 @@ Widget MyDrawerList(context) {
             ),
           );
         }),
-        MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+        MenuItem(6, 'assets/images/noticess.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           Get.to(
             () => NoticePage(),

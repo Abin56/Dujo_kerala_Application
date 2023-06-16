@@ -51,9 +51,15 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   DateTime? attendanceTime;
   String substring = '';
    String finalSubjectName = '';
+   String schoolName = '';
 
   List<Map<String, dynamic>> parentListOfAbsentees = [];
   List<Map<String, dynamic>> guardianListOfAbsentees = []; 
+
+  getSchoolName()async{
+    final docRef = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).get();
+    schoolName = docRef['schoolName'];
+  }
 
   String subjectNameFormatting(){
      
@@ -128,7 +134,9 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
 
     getTime();
      finalSubjectName = subjectNameFormatting();
-            log(finalSubjectName);
+            log(finalSubjectName); 
+
+    getSchoolName();
   }
 
   @override
@@ -799,7 +807,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                       sendPushMessage(
                           tokenList[i],
                           'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
-                          'Absent Notification');
+                          'Absent Notification from $schoolName');
                     }
                   }
 
@@ -808,7 +816,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                       sendPushMessage(
                           tokenList2[i],
                           'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
-                          'Absent Notification');
+                          'Absent Notification from $schoolName');
                     }
                   }
 

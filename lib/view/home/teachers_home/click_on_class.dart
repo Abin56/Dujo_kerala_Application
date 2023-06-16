@@ -351,16 +351,16 @@ var hasDataImages = [
   'assets/images/recorded_classes.png'
 ];
 List<String> hasDataText = [
-  'Take Attendance',
-  'Attendance Book',
-  'Exams',
-  'Examresults',
-  'TimeTable',
-  'HomeWorks',
-  'Notices',
-  'Events',
-  'Progress Report',
-  'Subjects',
-  'Meetings',
-  'Recorded Classes'
+  'Take Attendance'.tr,
+  'Attendance Book'.tr,
+  'Exams'.tr,
+  'Examresults'.tr,
+  'TimeTable'.tr,
+  'HomeWorks'.tr,
+  'Notices'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Study Materials'.tr,
+  'Meetings'.tr,
+  'Recorded Classes'.tr
 ];

@@ -175,7 +175,7 @@ List<String> _acc_text = [
   'HomeWorks'.tr,
   'My Students'.tr,
 
-  'Subjects'.tr,
+  'Study Materials'.tr,
   'Meetings'.tr,
 
   'Exams'.tr,

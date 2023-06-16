@@ -57,7 +57,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         color: const Color.fromARGB(
                                             120, 4, 97, 174),
-                                        shape: BoxShape.circle,
+                                      //  shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(

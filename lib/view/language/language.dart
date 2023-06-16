@@ -250,7 +250,7 @@ class GetxLanguage extends Translations {
           'Chat': 'ചാറ്റ്',
           'Student': 'വിദ്യാർത്ഥി',
           //'Parent': 'രക്ഷാകർതൃ',
-          'Teacher': 'ടീച്ചർ',
+          //'Teacher': 'ടീച്ചർ',
           /////////Student Parent Profile
           'Sign Up': 'സൈൻ അപ്പ് ചെയ്യുക',
           'Sign in As': 'അതുപോലെ സൈൻ ഇൻ ചെയ്യുക',
@@ -297,6 +297,11 @@ class GetxLanguage extends Translations {
           'Contact us': 'കോൺടാക്ട് അസ് ',
           'About': 'എബൌട്ട് ',
           'Logout': 'ലോഗൗട്ട് ',
+          'General Instructions':'പൊതു നിർദ്ദേശങ്ങൾ',
+          'Leave Letters':'അവധി കത്തുകൾ',
+          'Study Materials':'സ്റ്റഡി മെറ്റീരിയൽസ് ',
+          
+
 
         },
 
