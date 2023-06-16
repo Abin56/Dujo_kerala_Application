@@ -162,12 +162,13 @@ class DayWidget extends StatelessWidget {
           if(snapshot.hasData){
               return ListView.separated(
                 separatorBuilder: (context, index){
-                  return SizedBox(height: 10,);
+                  return const SizedBox(height: 10,);
                 },
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   return Container(child: Card(
-
+                    child: Text(
+                     snapshot.data!.docs[index]['period']['periodName'])
                   ),);
                   // return Text(
                   //     snapshot.data!.docs[index]['period']['periodName']);
