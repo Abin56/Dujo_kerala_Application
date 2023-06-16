@@ -161,23 +161,23 @@ NoticePage(), //Notice
 }
 
 List<String> _acc_text = [
-  'Attendance',
-  'TimeTable',
+  'Attendance'.tr,
+  'Time Table'.tr,
 
-  'HomeWorks',
-  'Subjects/Materials',
+  'HomeWorks'.tr,
+  'Study Materials'.tr,
 
-  'Teachers',
-  'Exams',
+  'Teachers'.tr,
+  'Exams'.tr,
 
-  'Exam Results',
+  'Exam Results'.tr,
   
-  'Notices',
+  'Notices'.tr,
 
-  'Events',
-  'Progress Report',
+  'Events'.tr,
+  'Progress Report'.tr,
 
-  'Meetings'
+  'Meetings'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -189,7 +189,7 @@ var _acc_images = [
   'assets/images/teachers.png',
   'assets/images/exam.png',
 
-  'assets/images/exam.png',
+  'assets/images/examresult.png',
   'assets/images/notices.png',
 
   'assets/images/activity.png',

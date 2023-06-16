@@ -148,7 +148,7 @@ List<String> _acc_text = [
   'Leave Application',
   'Notices',
   'HomeWorks',
-  'TimeTable',
+  'Time Table',
   'Meetings',
   'Exams',
   'Events',

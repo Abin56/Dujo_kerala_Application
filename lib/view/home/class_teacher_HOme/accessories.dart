@@ -29,6 +29,8 @@ class ClassTeacherAccessories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
+
+
       SelectPeriodWiseScreen(
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
@@ -38,8 +40,7 @@ class ClassTeacherAccessories extends StatelessWidget {
       AttendenceBookScreenSelectMonth(
         batchId: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,
-        schoolId: UserCredentialsController.schoolId!,
-      ),  ////////////  Attendance book
+        schoolId: UserCredentialsController.schoolId!,),  ////////////  Attendance book
 
       const StudentShowTimeTable(), //TimeTable
 
@@ -54,8 +55,7 @@ class ClassTeacherAccessories extends StatelessWidget {
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
         schoolID: UserCredentialsController.schoolId!,
-        teacherID: UserCredentialsController.teacherModel!.docid!,
-      ), //////////Home Work
+        teacherID: UserCredentialsController.teacherModel!.docid!,), //////////Home Work
 
       const MyStudents(), //My students
 
@@ -169,7 +169,7 @@ List<String> _acc_text = [
   'Take Attendance'.tr,
   'Attendance Book'.tr,
 
-  'TimeTable'.tr,
+  'Time Table'.tr,
   'Leave Letters'.tr,
 
   'HomeWorks'.tr,

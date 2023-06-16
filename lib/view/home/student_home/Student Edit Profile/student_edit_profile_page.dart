@@ -204,20 +204,20 @@ class StudentCircleAvatarImgeWidget extends StatelessWidget {
                       )
                     : AlertDialog(
                         title:
-                            const Text('Do you want to change profile picture'),
+                             Text('Do you want to change profile picture'.tr),
                         actions: [
                           TextButton(
                               onPressed: () {
                                 Get.find<StudentProfileEditController>()
                                     .updateStudentProfilePicture();
                               },
-                              child: const Text('Update')),
+                              child:  Text('Update'.tr)),
                           TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                                 getImageController.pickedImage.value = "";
                               },
-                              child: const Text('Cancel')),
+                              child:  Text('Cancel'.tr)),
                         ],
                       ),
               );

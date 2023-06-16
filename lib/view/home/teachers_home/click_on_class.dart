@@ -321,7 +321,7 @@ class ClickOnClasss extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance Book'.tr,
   'Exams'.tr,
-  'TimeTable'.tr,
+  'Time Table'.tr,
   'Notices'.tr,
   'Subjects'.tr,
   'Events'.tr,
@@ -355,7 +355,7 @@ List<String> hasDataText = [
   'Attendance Book'.tr,
   'Exams'.tr,
   'Examresults'.tr,
-  'TimeTable'.tr,
+  'Time Table'.tr,
   'HomeWorks'.tr,
   'Notices'.tr,
   'Events'.tr,

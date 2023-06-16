@@ -4,8 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/students_attendence_list_view.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -195,8 +197,8 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                                 title: const Text('Message'),
                                                                                 content: SingleChildScrollView(
                                                                                   child: ListBody(
-                                                                                    children: const <Widget>[
-                                                                                      Text('Sorry the time to edit to the attendance has exceeded!!')
+                                                                                    children:  <Widget>[
+                                                                                    GoogleMonstserratWidgets(text: 'Sorry the time to edit to the attendance list has exceeded!!',fontsize: 15.w,)
                                                                                     ],
                                                                                   ),
                                                                                 ),

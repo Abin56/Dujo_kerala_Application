@@ -149,16 +149,16 @@ class ParentEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("Do you want change mail ?"),
+                title:  Text("Do you want change mail ?".tr),
                 actions: [
                   TextButton(
-                    child: const Text("Cancel"),
+                    child:  Text("Cancel".tr),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: const Text("Ok"),
+                    child:  Text("Ok".tr),
                     onPressed: () {
                       Navigator.pop(context);
 
@@ -172,21 +172,21 @@ class ParentEditListileWidget extends StatelessWidget {
                           return Form(
                             key: _formKey,
                             child: AlertDialog(
-                              title: const Text("Update Mail"),
+                              title:  Text("Update Mail".tr),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   TextFormField(
                                     validator: checkFieldEmailIsValid,
                                     controller: emailController,
-                                    decoration: const InputDecoration(
-                                        hintText: "Enter new email address"),
+                                    decoration:  InputDecoration(
+                                        hintText: "Enter new email address".tr),
                                   ),
                                   TextFormField(
                                     validator: checkFieldEmpty,
                                     controller: passwordController,
-                                    decoration: const InputDecoration(
-                                        hintText: "Password"),
+                                    decoration:  InputDecoration(
+                                        hintText: "Password".tr),
                                   ),
                                 ],
                               ),
@@ -197,7 +197,7 @@ class ParentEditListileWidget extends StatelessWidget {
                                         child: CircularProgressIndicator(),
                                       )
                                     : TextButton(
-                                        child: const Text("Update"),
+                                        child:  Text("Update".tr),
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -296,7 +296,7 @@ class CircleAvatharImageSelectionWidgetParent extends StatelessWidget {
                     )
                   : AlertDialog(
                       title:
-                          const Text('Do you want to change profile picture?'),
+                           Text('Do you want to change profile picture?'.tr),
                       actions: [
                         TextButton(
                           onPressed: () {

@@ -28,7 +28,7 @@ class StudentSubjectHome extends StatelessWidget {
               width: 90.h,
             ),
             GooglePoppinsWidgets(
-              text: "Subject",
+              text: "Subjects",
               fontsize: 20.h,
               color: cblack,
             )

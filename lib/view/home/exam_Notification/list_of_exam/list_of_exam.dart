@@ -23,7 +23,7 @@ class ViewSchoolExamScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: adminePrimayColor,title: Text("Exam TimeTable".tr),
+          backgroundColor: adminePrimayColor,title: Text("Exam Time Table".tr),
           bottom:  TabBar(tabs: [
             Tab(
               text: 'Public Level'.tr,
@@ -138,7 +138,7 @@ class _TPublicLevelState extends State<TPublicLevel> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  GooglePoppinsWidgets(text: 'Add Subject to TimeTable'.tr,fontsize: 14.w),
+          title:  GooglePoppinsWidgets(text: 'Add Subject to Time Table'.tr,fontsize: 14.w),
           content: SingleChildScrollView(
             
             child: Form(
@@ -411,7 +411,7 @@ class _TStateLevelState extends State<TStateLevel> {
                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                 
-                                  GooglePoppinsWidgets(text:"Exam Nam  :   ${data.examName}", fontsize: 16.h,color: cWhite),
+                                  GooglePoppinsWidgets(text:"Exam Name  :   ${data.examName}", fontsize: 16.h,color: cWhite),
                                   SizedBox(height: 5.w,),
                                       GooglePoppinsWidgets(text:"Published date :  ${stringTimeToDateConvert(data.publishDate)}", fontsize: 14.h,color: cWhite,),
                                       SizedBox(height: 5.w,),
@@ -444,7 +444,7 @@ final _formKey = GlobalKey<FormState>();
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  Text('Add Subject to TimeTable'.tr),
+          title:  Text('Add Subject to Time Table'.tr),
           content: SingleChildScrollView(
             child: Form(
               key: _formKey,

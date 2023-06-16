@@ -3,7 +3,6 @@ import 'package:dujo_kerala_application/sruthi/homeWork/homework_display.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../view/constant/sizes/sizes.dart';
@@ -50,7 +49,7 @@ class StudentHomeWorkPage extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.only(top: 10.h),
                                     child: GooglePoppinsWidgets(
-                                        text: "Subject : Maths",
+                                        text: "Subjects : Maths",
                                         fontsize: 15.h),
                                   ),
                                   Padding(
@@ -58,7 +57,7 @@ class StudentHomeWorkPage extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         GooglePoppinsWidgets(
-                                            text: "HomeWork : ",
+                                            text: "HomeWorks : ",
                                             fontsize: 15.h),
                                              InkWell(
                                               
@@ -67,7 +66,7 @@ class StudentHomeWorkPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              HomeWorkDisplay()));
+                                              const HomeWorkDisplay()));
                                                },
                                               
                                                child: GooglePoppinsWidgets(

@@ -161,7 +161,7 @@ List<String> _acc_text = [
   'Attendance',
   'Leave Letter',
 
-  'TimeTable',
+  'Time Table',
   
   'Meetings',
 

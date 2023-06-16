@@ -29,7 +29,7 @@ class ExamResultsView extends StatelessWidget {
       appBar: AppBar(
           centerTitle: true,
           title: GooglePoppinsWidgets(
-              text: 'Upload Exam Result',
+              text: 'Upload Exam Results',
               fontsize: 16.w,
               fontWeight: FontWeight.w500),
           backgroundColor: adminePrimayColor),

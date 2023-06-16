@@ -17,7 +17,7 @@ class SelectExamLevelScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: GoogleMonstserratWidgets(
-          text: 'Exam Result Upload', fontsize:15.w ),
+          text: 'Exam Results Upload', fontsize:15.w ),
           backgroundColor: adminePrimayColor),
       body: SafeArea(
           child: Center(
@@ -41,7 +41,7 @@ class SelectExamLevelScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.list_alt,color: cWhite),
                     label:  GoogleMonstserratWidgets(
-                      text:"School Level",fontsize: 18.w,
+                      text:"School Level".tr,fontsize: 18.w,
                       color: cWhite,fontWeight: FontWeight.w500,
                       )),
               ),

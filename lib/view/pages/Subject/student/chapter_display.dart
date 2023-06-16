@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/view/pages/Subject/upload_studymaterial.
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../chapterdisplay.dart';
 import '../show_teacher_studymaterials.dart';
@@ -21,7 +22,7 @@ class ChapterDisplay extends StatelessWidget {
         backgroundColor: const Color.fromARGB(136, 236, 221, 221),
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("Chapters"),
+          title:  Text("Chapters".tr),
         ),
         body: Container(
           color: Colors.white54,
@@ -81,7 +82,7 @@ class ChapterDisplay extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(top: 10.h),
                     child: GooglePoppinsWidgets(
-                      text: "Study Materials",
+                      text: "Study Materials".tr,
                       fontsize: 16.h,
                       color: adminePrimayColor,
                     ),
@@ -93,7 +94,7 @@ class ChapterDisplay extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GooglePoppinsWidgets(
-                          text: "Teacher Name : ",
+                          text: "Teacher Name : ".tr,
                           fontsize: 15.h,),
                            GooglePoppinsWidgets(
                           text: snapshot.data!.docs[index]['uploadedBy'] ,

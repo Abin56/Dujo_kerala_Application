@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/Subject/show_teacher_studymaterials.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -139,6 +140,8 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
 
   }
 
+ final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +157,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
         ),
         backgroundColor: Colors.white,
         title: Text(
-          "Study Material", 
+          "Study material", 
           style: GoogleFonts.montserrat(
             color: Colors.grey,
             fontSize: 20,
@@ -174,128 +177,139 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Column(
-                  /// mainAxisAlignment: MainAxisAlignment.start,
-                  /// crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GoogleMonstserratWidgets(
-                        text: 'Study Material upload',
-                        fontsize: 13.h,
-                        color: cgrey,
-                        fontWeight: FontWeight.w700),
-                    kWidth20,
-                    GestureDetector( 
-                      onTap: ()async{
-                         FilePickerResult? result =
-                                  await FilePicker.platform.pickFiles(allowedExtensions: ['pdf'], type: FileType.custom);
-
-                              if (result != null) {
-                                File file = File(result.files.single.path!); 
-                                setState(() {
-                                  filee = file;
-                                });
-                              } else {
-                                print('No file selected');
-                              } 
-
-                             
-                      },
-                      child: Container(
-                        height: 130.h,
-                        width: double.infinity - 20.w,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: cblue,
-                            width: 2.0,
-                          ),
-                        ),
-                        child: Row(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            
-                              Icon(Icons.attach_file_rounded,
-                                  color: cblue, size: 30.w, weight: 10),
-                    
-                              // icon: Image.asset(
-                              //   'assets/images/upload.png',
-                              //  width: 90.w,
-                              // height: 90.h,
-                              // ),
-                          
-                            GoogleMonstserratWidgets(
-                              text: (filee ==null)? 'Upload file here' : filee!.path.split('/').last,
-                              fontsize: 22,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    /// mainAxisAlignment: MainAxisAlignment.start,
+                    /// crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GoogleMonstserratWidgets(
+                          text: 'Study material upload',
+                          fontsize: 13.h,
+                          color: cgrey,
+                          fontWeight: FontWeight.w700),
+                      kWidth20,
+                      GestureDetector( 
+                        onTap: ()async{
+                           FilePickerResult? result =
+                                    await FilePicker.platform.pickFiles(allowedExtensions: ['pdf'], type: FileType.custom);
+                
+                                if (result != null) {
+                                  File file = File(result.files.single.path!); 
+                                  setState(() {
+                                    filee = file;
+                                  });
+                                } else {
+                                  print('No file selected');
+                                } 
+                
+                               
+                        },
+                        child: Container(
+                          height: 130.h,
+                          width: double.infinity - 20.w,
+                          decoration: BoxDecoration(
+                            border: Border.all(
                               color: cblue,
-                              fontWeight: FontWeight.bold, 
+                              width: 2.0,
                             ),
-                            kWidth20,
-                          ],
+                          ),
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              
+                                Icon(Icons.attach_file_rounded,
+                                    color: cblue, size: 30.w, weight: 10),
+                      
+                                // icon: Image.asset(
+                                //   'assets/images/upload.png',
+                                //  width: 90.w,
+                                // height: 90.h,
+                                // ),
+                            
+                              GoogleMonstserratWidgets(
+                                text: (filee ==null)? 'Upload file here' : filee!.path.split('/').last,
+                                fontsize: 22,
+                                color: cblue,
+                                fontWeight: FontWeight.bold, 
+                              ),
+                              kWidth20,
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    kWidth20,
-                    kHeight20,
+                      kWidth20,
+                      kHeight20,
+                
+                      //           FirebaseStorage.instance
+                      // .ref()
+                      // .child(
+                      //     "files/scholarshipimages/${studentListValue?['studentName']}/images/$uid")
+                      // .putData(file!);
+                      kHeight20,
+                      TextFormFieldWidget(
+                        function: checkFieldEmpty,
+                
+                        textEditingController: topicController,
+                        hintText: 'Enter Topic',
+                      ),
+                      kHeight20,
+                      TextFormFieldWidget(
+                         function: checkFieldEmpty,
+                        textEditingController: titleController,
+                        hintText: 'Enter Title',
+                      ),
+                      kHeight40,
+                  (widget.stat == true)? const Center(child: CircularProgressIndicator(),): GestureDetector(
+                        onTap: ()async {
 
-                    //           FirebaseStorage.instance
-                    // .ref()
-                    // .child(
-                    //     "files/scholarshipimages/${studentListValue?['studentName']}/images/$uid")
-                    // .putData(file!);
-                    kHeight20,
-                    TextFormFieldWidget(
-                      textEditingController: topicController,
-                      hintText: 'Enter Topic',
-                    ),
-                    kHeight20,
-                    TextFormFieldWidget(
-                      textEditingController: titleController,
-                      hintText: 'Enter Title',
-                    ),
-                    kHeight40,
-                (widget.stat == true)? const Center(child: CircularProgressIndicator(),): GestureDetector(
-                      onTap: ()async {
-                         await pickAFile(filee);
-                         uploadToFirebase();
-                      },
-                      child:  ButtonContainerWidget(
-                        curving: 18,
-                        colorindex: 2,
-                        height: 60.w,
-                        width: 300.w,
-                        child: Center(
-                          child: Text(
-                            "SUBMIT",
-                            style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700),
+                             if(_formKey.currentState!.validate()){
+                 await pickAFile(filee);
+                           uploadToFirebase();
+                          }
+                          
+                        },
+                        child:  ButtonContainerWidget(
+                          curving: 18,
+                          colorindex: 2,
+                          height: 60.w,
+                          width: 300.w,
+                          child: Center(
+                            child: Text(
+                              "SUBMIT",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontSize: 13.w,
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
                         ),
-                      ),
-                    ), 
-                    kHeight20,
-                    GestureDetector(
-                      onTap: ()async {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyMaterials(subjectID: widget.subjectID,chapterID: widget.chapterID,)));
-                      },
-                      child: ButtonContainerWidget(
-                        curving: 18,
-                        colorindex: 2,
-                        height: 60.w,
-                        width: 300.w,
-                        child: Center(
-                          child: Text(
-                            "UPLOADED STUDY MATERIALS",
-                            style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700),
+                      ), 
+                      kHeight20,
+                      GestureDetector(
+                        onTap: ()async {
+                       
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyMaterials(subjectID: widget.subjectID,chapterID: widget.chapterID,)));
+                        },
+                        child: ButtonContainerWidget(
+                          curving: 18,
+                          colorindex: 2,
+                          height: 60.w,
+                          width: 300.w,
+                          child: Center(
+                            child: Text(
+                              "UPLOADED STUDY MATERIALS",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

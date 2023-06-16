@@ -16,7 +16,7 @@ class UsersSelectExamLevelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Exam Result".tr),backgroundColor: adminePrimayColor,),
+      appBar: AppBar(title: Text("Exam Results".tr),backgroundColor: adminePrimayColor,),
       body: SafeArea(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +36,7 @@ class UsersSelectExamLevelScreen extends StatelessWidget {
                       ));
                     },
                     icon:  const Icon(Icons.receipt,color: cWhite,),
-                    label: GooglePoppinsWidgets(fontsize: 20.h, text: 'School Level',color: Colors.white)
+                    label: GooglePoppinsWidgets(fontsize: 20.h, text:'School Level'.tr,color: Colors.white)
                     ),
               ),
             ],
@@ -56,7 +56,7 @@ class UsersSelectExamLevelScreen extends StatelessWidget {
                   ));
                 },
                 icon: const Icon(Icons.receipt,color: cWhite,),
-                label: GooglePoppinsWidgets(fontsize: 20.h, text: 'School Level',color: Colors.white)),
+                label: GooglePoppinsWidgets(fontsize: 20.h, text:'Public Level'.tr,color: Colors.white)),
           )
         ],
       )),

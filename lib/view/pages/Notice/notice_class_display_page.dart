@@ -82,7 +82,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                     ),
                                     kHeight30,
                                     GooglePoppinsWidgets(
-                                        text: "Signed By :",
+                                        text: "Signed by :",
                                         fontsize: 18.h,
                                         fontWeight: FontWeight.w200),
                                     GooglePoppinsWidgets(

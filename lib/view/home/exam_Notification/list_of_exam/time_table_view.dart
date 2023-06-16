@@ -24,7 +24,7 @@ class TeacherExamTimeTableViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text("Exam TimeTable"),backgroundColor: adminePrimayColor,),
+    return Scaffold(appBar: AppBar(title: const Text("Exam Time Table"),backgroundColor: adminePrimayColor,),
       body: SafeArea(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
@@ -105,7 +105,7 @@ class TeacherExamTimeTableViewScreen extends StatelessWidget {
                                                   child: ListBody(
                                                     children: const <Widget>[
                                                       Text(
-                                                          'Do you want remove this timetable ?')
+                                                          'Do you want remove this time table ?')
                                                     ],
                                                   ),
                                                 ),
