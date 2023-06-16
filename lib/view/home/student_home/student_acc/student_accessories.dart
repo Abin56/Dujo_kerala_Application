@@ -6,7 +6,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/ss.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/for_users/select_examlevel_uses.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +42,10 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
+
+      const SS(),
           
-       const StudentShowTimeTable(), //Time Table
+      // const StudentShowTimeTable(), //Time Table
 
       const ViewHomeWorks(), // Home Works
       
