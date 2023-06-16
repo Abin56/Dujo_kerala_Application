@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/for_users/select_examlevel_uses.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -41,22 +42,39 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
-      // const StudentShowTimeTable(), //Time Table
+          
+       const StudentShowTimeTable(), //Time Table
 
       const ViewHomeWorks(), // Home Works
+      
       StudentSubjectHome(), //Subjects
+
       TeacherSubjectWiseList(), //Teachers
+
+
+
       const UserExmNotifications(), //Exam
-      NoticePage(), //Notice
+
+      
+
+
       UsersSelectExamLevelScreen(
           classId: UserCredentialsController.classId!,
-          studentID: UserCredentialsController.studentModel!.docid),
+          studentID: UserCredentialsController.studentModel!.docid),////// exam result
+
+NoticePage(), //Notice
+
       const EventList(), //Events
+
+
+
+
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: FirebaseAuth.instance.currentUser!.uid,
           batchId: UserCredentialsController.batchId!), //Progress Report
+
       SchoolLevelMeetingPage(), //Meetings
     ];
     int columnCount = 2;
@@ -143,26 +161,37 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 List<String> _acc_text = [
   'Attendance',
   'TimeTable',
+
   'HomeWorks',
   'Subjects/Materials',
+
   'Teachers',
   'Exams',
+
   'Exam Results',
+  
   'Notices',
+
   'Events',
   'Progress Report',
+
   'Meetings'
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/library.png',
+
   'assets/images/homework.png',
   'assets/images/subjects.png',
+
   'assets/images/teachers.png',
   'assets/images/exam.png',
+
   'assets/images/exam.png',
-  'assets/images/exam.png',
+  'assets/images/notices.png',
+
   'assets/images/activity.png',
   'assets/images/progressreport.png',
+
   'assets/images/meetings.png',
 ];

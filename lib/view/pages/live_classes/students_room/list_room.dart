@@ -56,7 +56,7 @@ class StudentsRoomListScreen extends StatelessWidget {
                             Row(
                               children: [
                                 GooglePoppinsWidgets(
-                                  text: '   Assign Teacher :  ',
+                                  text: '   Assigned Teacher :  ',
                                   fontsize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),

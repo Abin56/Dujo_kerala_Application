@@ -202,7 +202,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                                 ),
                                                                                 actions: <Widget>[
                                                                                   TextButton(
-                                                                                    child: const Text('ok'),
+                                                                                    child: const Text('Ok'),
                                                                                     onPressed: () {
                                                                                       Navigator.of(context).pop();
                                                                                     },
@@ -267,7 +267,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                                                                     barrierDismissible: false, // user must tap button!
                                                                                                                     builder: (BuildContext context) {
                                                                                                                       return AlertDialog(
-                                                                                                                        title: const Text('Update Attendence'),
+                                                                                                                        title: const Text('Update Attendance'),
                                                                                                                         content: SingleChildScrollView(
                                                                                                                           child: ListBody(
                                                                                                                             children: <Widget>[
@@ -318,7 +318,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                                                                         ),
                                                                                                                         actions: <Widget>[
                                                                                                                           TextButton(
-                                                                                                                            child: const Text('ok'),
+                                                                                                                            child: const Text('Ok'),
                                                                                                                             onPressed: () {
                                                                                                                               Navigator.of(context).pop();
                                                                                                                             },
@@ -349,7 +349,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                                                                     barrierDismissible: false, // user must tap button!
                                                                                                                     builder: (BuildContext context) {
                                                                                                                       return AlertDialog(
-                                                                                                                        title: const Text('Update Attendence'),
+                                                                                                                        title: const Text('Update Attendance'),
                                                                                                                         content: SingleChildScrollView(
                                                                                                                           child: ListBody(
                                                                                                                             children: <Widget>[
@@ -400,7 +400,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                                                                         ),
                                                                                                                         actions: <Widget>[
                                                                                                                           TextButton(
-                                                                                                                            child: const Text('ok'),
+                                                                                                                            child: const Text('Ok'),
                                                                                                                             onPressed: () {
                                                                                                                               Navigator.of(context).pop();
                                                                                                                             },
@@ -430,7 +430,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                               ),
                                                                               actions: <Widget>[
                                                                                 TextButton(
-                                                                                  child: const Text('ok'),
+                                                                                  child: const Text('Ok'),
                                                                                   onPressed: () {
                                                                                     Navigator.of(context).pop();
                                                                                   },

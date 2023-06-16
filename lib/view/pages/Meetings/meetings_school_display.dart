@@ -68,7 +68,7 @@ class MeetingDisplaySchoolLevel extends StatelessWidget {
                                 ),
                                 kHeight30,
                                 GooglePoppinsWidgets(
-                                  text: "Speacial Guest : ",
+                                  text: "Special guest : ",
                                   fontsize: 18.h,
                                   fontWeight: FontWeight.w200,
                                 ),

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
-import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ViewExamResultsScreen extends StatelessWidget {
@@ -25,7 +25,7 @@ class ViewExamResultsScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Exam'.tr),
+        title: Text('View Results'.tr),
         backgroundColor: adminePrimayColor,
       ),
       body: StreamBuilder(
@@ -44,27 +44,42 @@ class ViewExamResultsScreen extends StatelessWidget {
               .snapshots(),
           builder: (context, snaps) {
             if (snaps.hasData) {
-              return ListView.separated(
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 40,
-                      child: Row(
-                        children: [
-                          Text('${index + 1}'),
-                          kWidth20,
-                          Text(snaps.data!.docs[index]['subjectName']),
-                          const Spacer(),
-                          Text(snaps.data!.docs[index]['obtainedMark']),
-                          kWidth10,
-                          Text(snaps.data!.docs[index]['obtainedGrade']),
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider();
-                  },
-                  itemCount: snaps.data!.docs.length);
+              return
+                  Padding(
+                    padding:  EdgeInsets.all(15.h),
+                    child: Container(
+                      decoration: BoxDecoration(border: Border.all(width: 1,color:Colors.grey ),
+                      borderRadius: BorderRadius.circular(10)),
+                         
+                          child: Center(
+                            child: Column(
+                              children: [
+                                SingleChildScrollView(
+                                  child: DataTable(columns: const [
+                                    DataColumn(label: Text('S.No')),
+                                    DataColumn(label: Text('Subjects')),
+                                    DataColumn(label: Text('Mark')),
+                                    DataColumn(label: Text('Grade')),
+                                  ], rows: [
+                                    for (int i = 0;
+                                        i <= snaps.data!.docs.length - 1;
+                                        i++)
+                                      DataRow(cells: [
+                                        DataCell(Text('${i + 1}')),
+                                        DataCell(Text(snaps.data!.docs[i]
+                                            ['subjectName'])),
+                                        DataCell(Text(snaps.data!.docs[i]
+                                            ['obtainedMark'])),
+                                        DataCell(Text(snaps.data!.docs[i]
+                                            ['obtainedGrade'])),
+                                      ]),
+                                  ]),
+                            ),
+                              ],
+                            ))),
+                  );
+              
+                 
             } else {
               return const Text('');
             }

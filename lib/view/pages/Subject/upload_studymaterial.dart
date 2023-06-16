@@ -120,7 +120,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
             actions: [
               MaterialButton(onPressed: (){
                 Navigator.pop(context);
-              }, child: const Text('OK'),)
+              }, child: const Text('Ok'),)
             ],
           );
         }));

@@ -49,9 +49,29 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   List<String> tokenList = [];
   List<String> tokenList2 = [];
   DateTime? attendanceTime;
+  String substring = '';
+   String finalSubjectName = '';
 
   List<Map<String, dynamic>> parentListOfAbsentees = [];
-  List<Map<String, dynamic>> guardianListOfAbsentees = [];
+  List<Map<String, dynamic>> guardianListOfAbsentees = []; 
+
+  String subjectNameFormatting(){
+     
+   substring = getSubstringUntilNumber(widget.subjectID)!;
+  print(substring);
+  return substring;
+  }
+
+
+
+  String? getSubstringUntilNumber(String input) {
+  RegExp regex = RegExp(r'^\D+');
+  RegExpMatch? match = regex.firstMatch(input);
+  if (match != null) {
+    return match.group(0);
+  }
+  return '';
+}
 
   Future<void> sendPushMessage(String token, String body, String title) async {
     try {
@@ -107,6 +127,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
     getSchoolTimer();
 
     getTime();
+     finalSubjectName = subjectNameFormatting();
+            log(finalSubjectName);
   }
 
   @override
@@ -275,7 +297,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               final DateFormat formatter =
                                   DateFormat('dd-MM-yyyy');
                               String formatted = formatter.format(parseDate);
-                              await FirebaseFirestore.instance
+                                  await FirebaseFirestore.instance
                                   .collection("SchoolListCollection")
                                   .doc(widget.schoolID)
                                   .collection(widget.batchId)
@@ -637,7 +659,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                       ),
                       actions: <Widget>[
                         TextButton(
-                            child: const Text('Upload Attendence'),
+                            child: const Text('Upload Attendance'),
                             onPressed: () async {
                               log('period document id ${widget.periodTokenID}');
 
@@ -776,7 +798,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                     for (var i = 0; i < tokenList.length; i++) {
                       sendPushMessage(
                           tokenList[i],
-                          'Sir/Madam, your ward was absent on for ${widget.subjectID} period at $formattedTime on $formattedDate',
+                          'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
                           'Absent Notification');
                     }
                   }
@@ -785,7 +807,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                     for (var i = 0; i < tokenList2.length; i++) {
                       sendPushMessage(
                           tokenList2[i],
-                          'Sir/Madam, your ward was absent on for ${widget.subjectID} period at $formattedTime on $formattedDate',
+                          'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
                           'Absent Notification');
                     }
                   }

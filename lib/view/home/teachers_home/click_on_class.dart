@@ -256,7 +256,7 @@ class ClickOnClasss extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.5),
                                           borderRadius: const BorderRadius.all(
-                                              Radius.circular(30)),
+                                              Radius.circular(10)),
                                           boxShadow: [
                                             BoxShadow(
                                               color:
@@ -269,9 +269,9 @@ class ClickOnClasss extends StatelessWidget {
                                         height: h / 100,
                                         width: double.infinity,
                                         margin: EdgeInsets.only(
-                                            bottom: w / 10,
-                                            left: w / 50,
-                                            right: w / 50),
+                                            top: w / 30,
+                                            left: w / 30,
+                                            right: w / 30),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
@@ -319,7 +319,7 @@ class ClickOnClasss extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendence Book'.tr,
+  'Attendance Book'.tr,
   'Exams'.tr,
   'TimeTable'.tr,
   'Notices'.tr,
@@ -352,7 +352,7 @@ var hasDataImages = [
 ];
 List<String> hasDataText = [
   'Take Attendance',
-  'Attendence Book',
+  'Attendance Book',
   'Exams',
   'Examresults',
   'TimeTable',
