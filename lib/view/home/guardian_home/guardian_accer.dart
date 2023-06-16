@@ -14,7 +14,7 @@ import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
-import '../../pages/teacher_list/teacher_list.dart';
+import '../bus_route_page/all_bus_list.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../parent_home/progress_report/progress_report.dart';
 import '../student_home/time_table/time_table_display.dart';
@@ -32,8 +32,7 @@ class GuardianAccessories extends StatelessWidget {
       AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),  //Attendence
-
+          classID: UserCredentialsController.classId!), //Attendence
 
       LeaveApplicationScreen(
           studentName: studentName,
@@ -43,20 +42,15 @@ class GuardianAccessories extends StatelessWidget {
           studentID: UserCredentialsController.guardianModel!.studentID,
           batchId: UserCredentialsController.batchId!), //Leave Letter
 
+      NoticePage(), //Notice
 
+      const ViewHomeWorks(), // Home Works
 
-          NoticePage(), //Notice
+      const StudentShowTimeTable(), // Time Table
 
-          const ViewHomeWorks(), // Home Works
-
-
-           const StudentShowTimeTable(), // Time Table
-           
-            SchoolLevelMeetingPage(), //Meetings
-
+      SchoolLevelMeetingPage(), //Meetings
 
       const UserExmNotifications(), // Exams
-
 
       const EventList(), //Events
 
@@ -66,12 +60,10 @@ class GuardianAccessories extends StatelessWidget {
           studentId: UserCredentialsController.guardianModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Progress Report
 
-
       StudentSubjectHome(), //Subjects
-      
 
-      TeacherSubjectWiseList(), //Teachers
-
+      //TeacherSubjectWiseList(), //Teachers
+      BusRouteListPage()
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -154,37 +146,26 @@ class GuardianAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Leave Application',
-
   'Notices',
   'HomeWorks',
-
   'TimeTable',
   'Meetings',
-
   'Exams',
   'Events',
-
   'Progress Report',
   'Subjects',
-
   'Teachers',
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
-
-   'assets/images/notices.png',
-   'assets/images/homework.png',
-
-   'assets/images/library.png',
-   'assets/images/meetings.png',
-
+  'assets/images/notices.png',
+  'assets/images/homework.png',
+  'assets/images/library.png',
+  'assets/images/meetings.png',
   'assets/images/exam.png',
   'assets/images/activity.png',
-
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
-
   'assets/images/teachers.png',
-
 ];
