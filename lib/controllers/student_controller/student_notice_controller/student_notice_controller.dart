@@ -39,6 +39,7 @@ class StudentNoticeController extends GetxController {
       schoolLevelNoticeLists = noticeCollection.docs
           .map((e) => SchoolLevelNoticeModel.fromMap(e.data()))
           .toList();
+
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
