@@ -26,7 +26,6 @@ class SchoolLevelNoticePage extends StatelessWidget {
                 child: Text("No Data Found"),
               )
             : ListView.separated(
-                reverse: true,
                 itemCount:
                     studentNoticeController.schoolLevelNoticeLists.length,
                 itemBuilder: (BuildContext context, int index) {

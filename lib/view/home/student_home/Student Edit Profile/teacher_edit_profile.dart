@@ -269,7 +269,9 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
                     child: IconButton(
                       icon: const Icon(Icons.edit),
                       color: Colors.white,
-                      onPressed: () async {},
+                      onPressed: () async {
+                        _getCameraAndGallery(context);
+                      },
                     ),
                   ),
                 ),

@@ -40,6 +40,12 @@ class StudentNoticeController extends GetxController {
           .map((e) => SchoolLevelNoticeModel.fromMap(e.data()))
           .toList();
 
+      schoolLevelNoticeLists.sort(
+        (a, b) {
+          return a.publishedDate.compareTo(b.publishedDate);
+        },
+      );
+
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -64,6 +70,12 @@ class StudentNoticeController extends GetxController {
       classLevelNoticeLists = noticeCollection.docs
           .map((e) => ClassLevelNoticeModel.fromMap(e.data()))
           .toList();
+
+      classLevelNoticeLists.sort(
+        (a, b) {
+          return a.date.compareTo(b.date);
+        },
+      );
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
