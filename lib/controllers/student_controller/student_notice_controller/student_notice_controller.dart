@@ -42,7 +42,7 @@ class StudentNoticeController extends GetxController {
 
       schoolLevelNoticeLists.sort(
         (a, b) {
-          return a.publishedDate.compareTo(b.publishedDate);
+          return b.publishedDate.compareTo(a.publishedDate);
         },
       );
 
@@ -73,7 +73,7 @@ class StudentNoticeController extends GetxController {
 
       classLevelNoticeLists.sort(
         (a, b) {
-          return a.date.compareTo(b.date);
+          return b.date.compareTo(a.date);
         },
       );
       isLoading.value = false;
