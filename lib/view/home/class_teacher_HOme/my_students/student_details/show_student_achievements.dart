@@ -15,7 +15,7 @@ class ShowStudentAchievements extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Achievements'),
+          title:  Text('Achievements'.tr),
         ),
         body: FutureBuilder(
           future: FirebaseFirestore.instance
@@ -27,6 +27,7 @@ class ShowStudentAchievements extends StatelessWidget {
                 .doc(UserCredentialsController.classId)
                 .collection('Achievements')
           .where('studentID', isEqualTo: studentID)
+         // .orderBy('timestamp',descending: true)
           .get(),
           builder: (context, snapshot) {
 

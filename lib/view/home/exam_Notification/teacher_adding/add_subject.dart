@@ -16,7 +16,7 @@ class AddTimeTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-          backgroundColor: adminePrimayColor,title: const Text('Exam Time Table'),),
+          backgroundColor: adminePrimayColor,title:  Text('Exam Time Table'.tr),),
       body: SafeArea(
           child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center,

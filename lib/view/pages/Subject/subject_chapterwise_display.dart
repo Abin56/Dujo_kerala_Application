@@ -56,7 +56,7 @@ backgroundColor: adminePrimayColor,title: Text("Chapters".tr),
                                 child: Padding(
                                   padding:  EdgeInsets.only(top: 10.h),
                                   child: GooglePoppinsWidgets(
-                                    text: "Study Materials",
+                                    text: "Study Materials".tr,
                                     fontsize: 16.h,
                                     color: adminePrimayColor,
                                   ),

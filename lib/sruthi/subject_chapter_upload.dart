@@ -7,6 +7,7 @@ import 'package:dujo_kerala_application/view/widgets/button_container_widget.dar
 import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 
@@ -61,7 +62,7 @@ class ChapterUpoload extends StatelessWidget {
             IconButtonBackWidget(
               color: cWhite,
             ),
-            const Text("Chapter Upload"),
+             Text("Chapter Upload".tr),
           ],
         ),
         backgroundColor: adminePrimayColor,
@@ -71,18 +72,18 @@ class ChapterUpoload extends StatelessWidget {
           kHeight20,
           ExamUploadTextFormFeild(
               textfromController: chapterNumberController,
-              text: "Chapter No.",
-              hintText: "Chapter Number"),
+              text: "Chapter No.".tr,
+              hintText: "Chapter Number".tr),
           kHeight20,
           ExamUploadTextFormFeild(
               textfromController: chapterNameController,
-              text: "Chapter Name",
-              hintText: "Chapter Name"),
+              text: "Chapter Name".tr,
+              hintText: "Chapter Name".tr),
           kHeight20,
           ExamUploadTextFormFeild(
               textfromController: subjectNameController,
-              text: "Subject Name",
-              hintText: "Subject Name"),
+              text: "Subject Name".tr,
+              hintText: "Subject Name".tr),
           kHeight20,
           GestureDetector(
             onTap: () {
@@ -94,12 +95,12 @@ class ChapterUpoload extends StatelessWidget {
                 return showDialog(context: context, 
               builder: (context){
                 return  AlertDialog(
-                  title: const Text('Chapter Upload'),
-                  content: const Text('New Chapter Added!'),
+                  title:  Text('Chapter Upload'.tr),
+                  content:  Text('New Chapter Added!'.tr),
                   actions: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: MaterialButton(child:const Text('Ok'), onPressed: () => Navigator.pop(context),),
+                      child: MaterialButton(child: Text('Ok'.tr), onPressed: () => Navigator.pop(context),),
                     )
                   ],
                 );
@@ -112,7 +113,7 @@ class ChapterUpoload extends StatelessWidget {
               width: 300.w,
               child: Center(
                 child: Text(
-                  "SUBMIT",
+                  "SUBMIT".tr,
                   style: GoogleFonts.montserrat(
                       color: Colors.white,
                       fontSize: 13,
@@ -133,7 +134,7 @@ class ChapterUpoload extends StatelessWidget {
                 width: 300.w,
                 child: Center(
                   child: Text(
-                    "UPLOAD STUDY MATERIALS",
+                    "UPLOAD STUDY MATERIALS".tr,
                     style: GoogleFonts.montserrat(
                         color: Colors.white,
                         fontSize: 13,

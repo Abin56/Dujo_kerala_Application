@@ -181,7 +181,7 @@ Get.to(
             () => const ViewHomeWorks(),
           );
         }),
-        MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+        MenuItem(6, 'assets/images/notices.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           Get.to(
             () => NoticePage(),

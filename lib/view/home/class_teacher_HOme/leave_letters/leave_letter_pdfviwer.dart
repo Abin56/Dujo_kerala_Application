@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -176,29 +177,29 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
                         ),
                         pw.SizedBox(height: 15),
                         pw.Text(
-                            "I would like to inform you that due to  health issue ${widget.leaveReason}",
-                            style: const pw.TextStyle(fontSize: 16)),
+                            "I would like to inform you that due to ${widget.leaveReason}",
+                            style:  pw.TextStyle(fontSize: 16.w)),
                         pw.SizedBox(height: 5),
                         pw.Text(
                             "my child '${widget.studentName}' would not be able to attend the classes ",
-                            style: const pw.TextStyle(fontSize: 16)),
+                            style:  pw.TextStyle(fontSize: 16.w)),
                         pw.SizedBox(height: 5),
                         pw.Text(
-                            'from ${widget.leaveFromDate} to ${widget.leaveToDate}. Therefore I humbly request you to \ngrant leave.',
-                            style: const pw.TextStyle(fontSize: 16)),
+                            'from ${widget.leaveFromDate} to ${widget.leaveToDate}. Therefore I humbly request you to grant leave.',
+                            style:  pw.TextStyle(fontSize: 16.w)),
                         pw.SizedBox(height: 5),
                         pw.SizedBox(height: 20),
                         pw.Text('Thanking You,',
-                            style: const pw.TextStyle(fontSize: 16)),
+                            style:  pw.TextStyle(fontSize: 16.w)),
                         pw.SizedBox(height: 5),
                         pw.Text('Yours sincerely,',
-                            style: const pw.TextStyle(fontSize: 16)),
+                            style:  pw.TextStyle(fontSize: 16.w)),
                         pw.SizedBox(height: 5),
                         pw.Text(widget.studentParent,
-                            style: const pw.TextStyle(fontSize: 16)),
+                            style:  pw.TextStyle(fontSize: 16.w)),
                         pw.SizedBox(height: 5),
                         pw.Text('Date:${widget.applyLeaveDate}',
-                            style: const pw.TextStyle(fontSize: 16)),
+                            style:  pw.TextStyle(fontSize: 16.w)),
                       ])
                 ],
               ),

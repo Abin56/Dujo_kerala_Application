@@ -71,7 +71,7 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: GoogleMonstserratWidgets(text: 'View student',fontsize: 15.w,)),
+          title: GoogleMonstserratWidgets(text: 'View student'.tr,fontsize: 15.w,)),
         backgroundColor: adminePrimayColor,
         resizeToAvoidBottomInset: false,
         body: ListView(
@@ -214,13 +214,13 @@ class _ViewStudentsDetailsState extends State<ViewStudentsDetails> {
                       onPressed: (){
                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> 
                       ViewPD(studentID: widget.studentDetail['docid'])));
-                    }, color: Colors.blue, child: const Text('View Parent Details', style: TextStyle(color: Colors.white),),
+                    }, color: Colors.blue, child:  Text('View Parent Details'.tr, style: TextStyle(color: Colors.white),),
                     ), 
                     //kHeight20, 
                     MaterialButton(onPressed: (){
                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  
                       ViewGD(studentID: widget.studentDetail['docid']!)));
-                    }, color: Colors.blue, child: const Text('View Guardian Details', style: TextStyle(color: Colors.white),),
+                    }, color: Colors.blue, child:  Text('View Guardian Details'.tr, style: TextStyle(color: Colors.white),),
                     ), 
                    // kHeight20
                              ],

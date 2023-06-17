@@ -57,7 +57,7 @@ class ParentLoginScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 140.w,left: 10.w),
                       child: GoogleMonstserratWidgets(
-                        fontsize: 30.w,
+                        fontsize: 25.w,
                         text: 'Parent Login'.tr,
                         color: cblack,
                         fontWeight: FontWeight.w500,
@@ -67,7 +67,7 @@ class ParentLoginScreen extends StatelessWidget {
                     kHeight10,
                     SigninTextFormfield(
                         obscureText: false,
-                        hintText: 'Email id'.tr,
+                        hintText: 'Email ID'.tr,
                         labelText: 'Enter Mail ID',
                         prefixIcon: IconButton(
                           onPressed: () {},

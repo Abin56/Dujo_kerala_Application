@@ -45,7 +45,7 @@ class ForgotPassword extends StatelessWidget {
                    Form(key: formKey,
                         child: SigninTextFormfield(
                                 obscureText: false,
-                                hintText: 'Email id',
+                                hintText: 'Email ID',
                                 labelText: 'Enter Mail ID',
                                 prefixIcon: IconButton(
                                   onPressed: () {},

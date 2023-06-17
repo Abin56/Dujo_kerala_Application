@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ApplyLeveApplicationModel {
   String id;
@@ -150,11 +151,11 @@ class ApplyLeaveLetterStatusToFireBase {
             barrierDismissible: false, // user must tap button!
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Message'),
+                title:  Text('Message'),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text('Leave Application Sented SuccessFully'),
+                      Text('Leave Application Sented SuccessFully'.tr),
                     ],
                   ),
                 ),

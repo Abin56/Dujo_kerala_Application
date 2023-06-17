@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -73,6 +74,8 @@ class ParentAccessories extends StatelessWidget {
       StudentSubjectHome(), //Subjects
 
       TeacherSubjectWiseList(), //Teachers
+
+       BusRouteListPage(),   /////// all bus
 
      
     ];
@@ -159,7 +162,7 @@ class ParentAccessories extends StatelessWidget {
 
 List<String> _acc_text = [
   'Attendance',
-  'Leave Letter',
+  'Leave Letters',
 
   'Time Table',
   
@@ -177,6 +180,7 @@ List<String> _acc_text = [
   'Subjects',
 
   'Teachers',
+  'Bus Route'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -198,5 +202,6 @@ var _acc_images = [
   'assets/images/subjects.png',
 
   'assets/images/teachers.png',
+   'assets/images/bus.png'
 
 ];

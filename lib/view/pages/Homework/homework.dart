@@ -237,7 +237,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                       ],
                     ),
                   ),
-                       GooglePoppinsWidgets(text: "Time to complete should > 1 day".tr, fontsize: 13,fontWeight: FontWeight.w400,)
+                       GooglePoppinsWidgets(text: "Time to complete should be > 1 day".tr, fontsize: 13,fontWeight: FontWeight.w400,)
                 ],
               ),
             ),

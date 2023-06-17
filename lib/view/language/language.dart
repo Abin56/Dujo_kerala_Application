@@ -165,7 +165,7 @@ class GetxLanguage extends Translations {
           'Teacher': 'ടീച്ചർ',
           'Class Teacher': 'ക്ലാസ് ടീച്ചർ',
           'Login': 'ലോഗിൻ',
-          'Email id': 'ഇ - മെയിൽ ഐഡി',
+          'Email ID': 'ഇ - മെയിൽ ഐഡി',
           'Forgot Password?': 'പാസ് വേഡ് മറന്നോ?',
           'Password': 'പാസ് വേഡ്',
           "Don't Have an account?": 'ഒരു അക്കൗണ്ട് ഇല്ലേ ?',
@@ -195,6 +195,8 @@ class GetxLanguage extends Translations {
           'School Level':'സ്‌കൂൾ ലെവൽ',
          // 'Public Level':'പബ്ലിക് ലെവൽ',
           'Exam Results':'പരീക്ഷാ ഫലം',
+          'Exam Results Upload':'പരീക്ഷാ ഫലം അപ്‌ലോഡ്',
+
           //'Teachers':'ടീച്ചേർസ്',
           'View':'കാണുക',
           'Subject :':'സബ്ജക്ട് :',
@@ -215,7 +217,7 @@ class GetxLanguage extends Translations {
           'Feed your mind': "നിങ്ങളുടെ മനസ്സിനെ പോഷിപ്പിക്കുക",
           'Change the World': "ലോകത്തെ മാറ്റുക",
 'Add Subject to Time Table':'',
-'State Level':'',
+'State Level':'സ്റ്റേറ്റ് ലെവൽ',
 'Public Level':'പബ്ലിക് ലെവൽ',
 //'Exams':'',
 'Do you want to change profile picture?':'പ്രൊഫൈൽ പിക്ചർ മാറ്റണോ?',
@@ -226,7 +228,7 @@ class GetxLanguage extends Translations {
 'Live\nClasses':'ലൈവ്\nക്ലാസുകൾ',
 'Gallery':'ഗാലറി ',
 'Camera':'ക്യാമറ ',
-'Profile ഫോട്ടോ ':'Profile Photo',
+// 'Profile Photo':'പ്രൊഫൈൽ ഫോട്ടോ',
 // 'Add Subject to Time Table':'ടൈംടേബിളിലേക്ക് വിഷയം ചേർക്കുക',
 // 'State Level':'സ്റ്റേറ്റ് ലെവൽ',
 // 'Public Level':'പബ്ലിക് ലെവൽ',
@@ -236,13 +238,44 @@ class GetxLanguage extends Translations {
 
 'Create':'ക്രീയേറ്റ് ',
 'Add':'ചേർക്കുക',
+'Upload':'അപ്‌ലോഡ് ',
+'Upload Exam Results':'പരീക്ഷാ ഫലങ്ങൾ അപ്‌ലോഡ് ',
+'Select Exam':'പരീക്ഷ തിരഞ്ഞെടുക്കുക',
+'Select Subject':'വിഷയം തിരഞ്ഞെടുക്കുക',
+// 'Select Student':'',
+'Obtained Mark':'ലഭിച്ച മാർക്ക്',
+'Obtained Grade':'ലഭിച്ച ഗ്രേഡ്',
+'Attendance book':'ഹാജർ  ബുക്ക്'
+,
+'Bus Route':'ബസ്സ് റൂട്ട്',
+'View bus status':'ബസ്സ് സ്റ്റാറ്റസ് കാണുക',
+'No Recorded Classes Uploaded Yet!':'റെക്കോർഡ് ചെയ്ത ക്ലാസുകളൊന്നും ഇതുവരെ അപ്‌ലോഡ് ചെയ്തിട്ടില്ല!',
+'View Results':'റിസൾട്സ് കാണുക',
 
-'Time to complete should > 1 day':'പൂർത്തിയാക്കാനുള്ള സമയം > 1 ദിവസം ആയിരിക്കണം',
+'View Guardian Details':'',
+'View student':'',
+'View Parent Details':'',
+'View Guardian Details':'',
+'Parent Details not available':'',
+'':'',
+'':'',
+'':'',
+
+
+
+
+
+
+
+
+
+
+'Time to complete should be > 1 day':'പൂർത്തിയാക്കാനുള്ള സമയം > 1 ദിവസം ആയിരിക്കണം',
 'Exam Time Table':'പരീക്ഷ ടൈംടേബിൾ',
 'Starting Time':'ആരംഭിക്കുന്ന സമയം',
 'Ending Time':'അവസാനിക്കുന്ന സമയം',
 'Please select Time':'സമയം തിരഞ്ഞെടുക്കുക',
-'Upload Time Table':'ടൈംടേബിൾ അപ്‌ലോഡ് ചെയ്യുക',
+'Upload Time Table':'ടൈംടേബിൾ അപ്‌ലോഡ് ',
 'View Time Table':'ടൈംടേബിൾ കാണുക',
 'My Students':'എൻ്റെ വിദ്യാർത്ഥികൾ',
    'Leave Letters':'അവധി കത്തുകൾ',
@@ -253,7 +286,10 @@ class GetxLanguage extends Translations {
    'Teacher Login':'ടീച്ചർ ലോഗിൻ',
    'Chapters':'ചാപ്‌റ്റേഴ്‌സ്',
    '+---------------------------*':'',
-   'View Details':'',
+   'View Details':'വിശദാംശങ്ങൾ കാണുക',
+   'Select Period':'സെലക്ട് പീരീഡ്',
+   'Profile Photo':'പ്രൊഫൈൽ ഫോട്ടോ',
+   
 
 
           'page': 'പേജ്',
@@ -264,7 +300,7 @@ class GetxLanguage extends Translations {
           'Live Courses': 'ലൈവ് കോഴ്സുകൾ',
           'Hybrid': 'ഹൈബ്രിഡ്',
          // 'Take Attendance': 'അറ്റെൻഡൻസ് എടുക്കുക',
-         // 'Attendance Book': 'അറ്റെൻഡൻസ് ബുക്ക്',
+          'Attendance Book': 'അറ്റെൻഡൻസ് ബുക്ക്',
           'Subjects': 'വിഷയങ്ങൾ',
           'School': 'സ്കൂൾ',
           // 'Parent': 'രക്ഷാധികാരി',
@@ -340,8 +376,18 @@ class GetxLanguage extends Translations {
           'General Instructions':'പൊതു നിർദ്ദേശങ്ങൾ',
           'Leave Letters':'അവധി കത്തുകൾ',
           'Study Materials':'സ്റ്റഡി മെറ്റീരിയൽസ് ',
-          'Teacher Name : ':'',
+          'Teacher Name : ':'ടീച്ചർ നെയിം ',
+          'UPLOAD STUDY MATERIALS':'അപ്‌ലോഡ് സ്റ്റഡി മെറ്റീരിയൽസ് ',
+          'SUBMIT':'സുബ്മിറ്റ്',
+          'New Chapter Added!':'ന്യൂ ചാപ്റ്റർ ആഡ്! ',
+          'Chapter Upload':'ചാപ്റ്റർ അപ്‌ലോഡ് ',
+          'Subject Name':'സബ്ജെക്ട് നെയിം',
+          'Chapter Name':'ചാപ്റ്റർ നെയിം',
+          'Chapter Number':' ചാപ്റ്റർ നമ്പർ ',
+          'Chapter No.':'ചാപ്റ്റർ നമ്പർ',
           '':'',
+          '':'',
+
           
 
 

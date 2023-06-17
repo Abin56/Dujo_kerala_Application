@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
@@ -97,6 +98,8 @@ class ClickOnClasss extends StatelessWidget {
       SchoolLevelMeetingPage(),
       // Meetings
       RecordedClassMainPage(), // recorded class
+
+        BusRouteListPage(),   /////// all bus
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
@@ -340,7 +343,7 @@ var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
   'assets/images/exam.png',
-  'assets/images/exam.png',
+  'assets/images/exmresult1.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/notices.png',
@@ -348,13 +351,14 @@ var hasDataImages = [
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/meetings.png',
-  'assets/images/recorded_classes.png'
+  'assets/images/recorded_classes.png',
+  'assets/images/bus.png'
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,
   'Attendance Book'.tr,
   'Exams'.tr,
-  'Examresults'.tr,
+  'Exam Results'.tr,
   'Time Table'.tr,
   'HomeWorks'.tr,
   'Notices'.tr,
@@ -362,5 +366,6 @@ List<String> hasDataText = [
   'Progress Report'.tr,
   'Study Materials'.tr,
   'Meetings'.tr,
-  'Recorded Classes'.tr
+  'Recorded Classes'.tr,
+  'Bus Route'.tr,
 ];

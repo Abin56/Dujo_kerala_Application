@@ -29,7 +29,7 @@ class ViewSchoolExamScreen extends StatelessWidget {
               text: 'Public Level'.tr,
             ),
             Tab(
-              text: 'State Level'.tr,
+              text: 'School Level'.tr,
             )
           ]),
         ),
@@ -82,7 +82,7 @@ class _TPublicLevelState extends State<TPublicLevel> {
                 if (snaps.data!.docs.isEmpty) {
                   return Center(
                     child: GooglePoppinsWidgets(
-                        text: 'No Records Found', fontsize: 20),
+                        text: 'No Records Found'.tr, fontsize: 20),
                   );
                 } else {
                   return ListView.separated(
@@ -372,14 +372,14 @@ class _TStateLevelState extends State<TStateLevel> {
                 .doc(UserCredentialsController.schoolId)
                 .collection(UserCredentialsController.batchId!)
                 .doc(UserCredentialsController.batchId!)
-                .collection('State Level'.tr)
+                .collection('State Level')
                 .snapshots(),
             builder: (context, snaps) {
               if (snaps.hasData) {
                 if (snaps.data!.docs.isEmpty) {
                   return Center(
                     child: GooglePoppinsWidgets(
-                        text: 'No Records Found', fontsize: 20),
+                        text: 'No Records Found'.tr, fontsize: 20),
                   );
                 } else {
                   return ListView.separated(

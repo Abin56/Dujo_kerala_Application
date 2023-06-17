@@ -80,7 +80,7 @@ class GuardianSignUpFirstScreen extends StatelessWidget {
                   kHeight10,
                   SigninTextFormfield(
                       obscureText: false,
-                      hintText: 'Email id',
+                      hintText: 'Email ID',
                       labelText: 'Enter Mail ID',
                       prefixIcon: IconButton(
                         onPressed: () {},

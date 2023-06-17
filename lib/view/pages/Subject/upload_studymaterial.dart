@@ -12,6 +12,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 
@@ -116,12 +117,12 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
 
         }).then((value) => showDialog(context: context, builder: (context){
           return AlertDialog(
-            title: const Text('Study Materials'), 
-            content: const Text('New Study Material Added!'),
+            title:  Text('Study Materials'.tr), 
+            content:  Text('New Study Material Added!'.tr),
             actions: [
               MaterialButton(onPressed: (){
                 Navigator.pop(context);
-              }, child: const Text('Ok'),)
+              }, child:  Text('Ok'.tr),)
             ],
           );
         }));
@@ -157,7 +158,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
         ),
         backgroundColor: Colors.white,
         title: Text(
-          "Study material", 
+          "Study material".tr, 
           style: GoogleFonts.montserrat(
             color: Colors.grey,
             fontSize: 20,
@@ -184,7 +185,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                     /// crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GoogleMonstserratWidgets(
-                          text: 'Study material upload',
+                          text: 'Study material upload'.tr,
                           fontsize: 13.h,
                           color: cgrey,
                           fontWeight: FontWeight.w700),
@@ -277,7 +278,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                           width: 300.w,
                           child: Center(
                             child: Text(
-                              "SUBMIT",
+                              "SUBMIT".tr,
                               style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: 13.w,
@@ -299,7 +300,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                           width: 300.w,
                           child: Center(
                             child: Text(
-                              "UPLOADED STUDY MATERIALS",
+                              "UPLOADED STUDY MATERIALS".tr,
                               style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: 13,

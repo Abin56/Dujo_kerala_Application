@@ -15,21 +15,31 @@ class StudentShowTimeTable extends StatefulWidget {
 
 class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
   List<String> periodList = [
-    'firstPeriod',
-    'secondPeriod',
-    'thirdPeriod',
-    'fourthPeriod',
-    'fifthPeriod',
-    'sixthPeriod',
-    'seventhPeriod'
+    'First Period',
+    'Second Period',
+    'Third Period',
+    'Fourth Period',
+    'Fifth Period',
+    'Sixth Period',
+    'Seventh Period',
+    'Eighth Period',
+    'Ninth Period ',
+    'Tenth Period',
   ]; 
 
   List<String>periodNumbers = [
-    '1', '2', '3', '4', '5', '6', '7'
+    '1', '2', '3', '4', '5', '6', '7','8','9','10'
   ]; 
 
-  List<String>days = ['Monday', 
-  'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  List<String>days = [
+    'Monday', 
+  'Tuesday', 
+  'Wednesday',
+   'Thursday',
+    'Friday' ,
+    'Saturday'
+    
+    ];
 
   // @override
   // void initState() {
@@ -63,7 +73,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor, title:  Text('TimeTable'.tr),),
+    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor, title:  Text('Time Table'.tr),),
         body: Center(
           child: 
           ListView( 
@@ -169,8 +179,8 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                  ), 
                                Flexible(
                                  child: Container(
-                                  width: 100.w, 
-                                  height: 100.h,
+                                  width: 100, 
+                                  height: 100,
                                   color: const Color.fromARGB(255, 141, 188, 226),
                                   child:  const Center(
                                     child: Text('Monday', style: TextStyle(fontWeight: FontWeight.bold,color: cWhite,),),

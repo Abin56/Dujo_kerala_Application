@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/ss.dart';
@@ -78,6 +79,8 @@ NoticePage(), //Notice
           batchId: UserCredentialsController.batchId!), //Progress Report
 
       SchoolLevelMeetingPage(), //Meetings
+      
+       BusRouteListPage(),   /////// all bus
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -165,7 +168,7 @@ List<String> _acc_text = [
   'Time Table'.tr,
 
   'HomeWorks'.tr,
-  'Study Materials'.tr,
+  'Subjects'.tr,
 
   'Teachers'.tr,
   'Exams'.tr,
@@ -178,6 +181,9 @@ List<String> _acc_text = [
   'Progress Report'.tr,
 
   'Meetings'.tr,
+
+  'Bus Route'.tr,
+  
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -189,11 +195,13 @@ var _acc_images = [
   'assets/images/teachers.png',
   'assets/images/exam.png',
 
-  'assets/images/examresult.png',
+  'assets/images/exmresult1.png',
   'assets/images/notices.png',
 
   'assets/images/activity.png',
   'assets/images/progressreport.png',
 
   'assets/images/meetings.png',
+
+  'assets/images/bus.png'
 ];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../model/Signup_Image_Selction/image_selection.dart';
@@ -25,7 +26,7 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Profile Photo",
+                    "Profile Photo".tr,
                     style: DGoogleFonts.subHeadStyle,
                   ),
                   const Icon(Icons.delete)
@@ -56,7 +57,7 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                     ),
                     kHeight10,
                     Text(
-                      "Camera",
+                      "Camera".tr,
                       style: DGoogleFonts.smallTextStyle,
                     )
                   ],
@@ -82,7 +83,7 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                     ),
                     kHeight10,
                     Text(
-                      "Gallery",
+                      "Gallery".tr,
                       style: DGoogleFonts.smallTextStyle,
                     )
                   ],

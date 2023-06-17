@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../../utils/utils.dart';
 import '../../../widgets/drop_down/all_class_students.dart';
@@ -27,9 +28,9 @@ class ExamResultsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 239, 239, 239),
       appBar: AppBar(
-          centerTitle: true,
+         
           title: GooglePoppinsWidgets(
-              text: 'Upload Exam Results',
+              text: 'Upload Exam Results'.tr,
               fontsize: 16.w,
               fontWeight: FontWeight.w500),
           backgroundColor: adminePrimayColor),
@@ -75,7 +76,7 @@ class ExamResultsView extends StatelessWidget {
                 ),
                 child: TextFormFieldWidget(
                   textEditingController: obtainedMark,
-                  labelText: "Obtained Mark",
+                  labelText: "Obtained Mark".tr,
                   function: checkFieldEmpty,
                   //textEditingController: ,
                 ),
@@ -88,7 +89,7 @@ class ExamResultsView extends StatelessWidget {
                 child: TextFormFieldWidget(
                   textEditingController: obtainedGrade,
                   // hintText: "Obtained Grade",
-                  labelText: 'Obtained Grade',
+                  labelText: 'Obtained Grade'.tr,
                   function: checkFieldEmpty,
                   //textEditingController: ,
                 ),
@@ -207,7 +208,7 @@ class ExamResultsView extends StatelessWidget {
                     }
                   },
                   child: SubmitButtonWidget(
-                    text: 'Submit',
+                    text: 'Submit'.tr,
                   ))
             ],
           ),

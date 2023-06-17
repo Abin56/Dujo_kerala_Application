@@ -17,7 +17,7 @@ class SelectExamLevelScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: GoogleMonstserratWidgets(
-          text: 'Exam Results Upload', fontsize:15.w ),
+          text: 'Exam Results Upload'.tr, fontsize:15.w ,fontWeight: FontWeight.w700,),
           backgroundColor: adminePrimayColor),
       body: SafeArea(
           child: Center(
@@ -62,7 +62,7 @@ class SelectExamLevelScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.list_alt,color: cWhite),
                     label:  GoogleMonstserratWidgets(
-                      text: "Public Level",fontsize: 18.w,
+                      text: "Public Level".tr,fontsize: 18.w,
                       color: cWhite,fontWeight: FontWeight.w500,)),
               ),
                     ],
@@ -96,14 +96,14 @@ getBottomSheet(String classId, String examlevel) {
                 width: 150.w,
                 
                 child: Container(
-                  margin:  EdgeInsets.only(left: 30.w),
+                  margin:  EdgeInsets.only(left: 20.w),
                   child: Row(
                     children: [
                       Icon(Icons.upload_sharp,color: cWhite,size: 20.w),
-                      SizedBox(width: 5.w,),
+                      SizedBox(width: 2.w,),
                       GoogleMonstserratWidgets(
-                        text: 'Upload',
-                        fontsize: 16.w,
+                        text: 'Upload'.tr,
+                        fontsize: 15.w,
                         color: cWhite,
                         fontWeight: FontWeight.w600,
                       ),
@@ -127,14 +127,14 @@ getBottomSheet(String classId, String examlevel) {
                 width: 150.w,
                
                 child: Container(
-                    margin:  EdgeInsets.only(left: 30.w),
+                    margin:  EdgeInsets.only(left: 20.w),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                        Icon(Icons.view_headline_sharp,color: cWhite,size: 20.w),
-                         SizedBox(width: 5.w,),
+                         SizedBox(width: 2.w,),
                       GoogleMonstserratWidgets(
-                        text: 'View',
+                        text: 'View'.tr,
                         fontsize: 16.w,
                         fontWeight: FontWeight.w700,
                         color: cWhite,

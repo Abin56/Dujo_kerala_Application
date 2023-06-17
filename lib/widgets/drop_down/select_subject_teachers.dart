@@ -43,8 +43,8 @@ class _GetTeachersSubjectsDropDownButtonState
           if (snapshot.hasData) {
             return DropdownButtonFormField(
               hint: teacherSubjectValue == null
-                  ? const Text(
-                      "Select Subject",
+                  ?  Text(
+                      "Select Subject".tr,
                       style: TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
                     )

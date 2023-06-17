@@ -100,7 +100,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const ClassTeacherAccessories(),
+             ClassTeacherAccessories(classID: '',),
           ],
         ),
       ),
