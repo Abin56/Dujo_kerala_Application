@@ -12,7 +12,6 @@ import 'package:line_icons/line_icons.dart';
 import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../../pages/recorded_videos/select_subjects.dart';
 import '../../widgets/container_image.dart';
-import '../sample/under_maintance.dart';
 
 class StudentsMainHomeScreen extends StatefulWidget {
   // var schoolID;
