@@ -254,17 +254,18 @@ class CircleAvatharImageSelectionWidgetGuardian extends StatelessWidget {
                 onTap: () async {
                   _getCameraAndGallery(context);
                 },
-                child: const Align(
+                child: Align(
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor: Color.fromARGB(255, 52, 50, 50),
-                    child: Icon(Icons.edit),
-                      // color: Colors.white,
-                      // onPressed: () async {
-                      //     _getCameraAndGallery(context);
-                      // },
-                    
+                    backgroundColor: const Color.fromARGB(255, 52, 50, 50),
+                    child: IconButton(
+                      icon: const Icon(Icons.edit),
+                      color: Colors.white,
+                      onPressed: () async {
+                        _getCameraAndGallery(context);
+                      },
+                    ),
                   ),
                 ),
               ),
