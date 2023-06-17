@@ -1,11 +1,14 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/show_student_achievements.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
@@ -65,7 +68,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                     MaterialButton(onPressed: (){
                       Navigator.of(context).pop();
                     }, color: Colors.blue, child:  Padding(
-                      padding:  EdgeInsets.all(8.0),
+                      padding:  const EdgeInsets.all(8.0),
                       child:  Text('Ok'.tr),
                     ),)
                   ],
@@ -81,6 +84,8 @@ class _AddAchievementsState extends State<AddAchievements> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      appBar: AppBar(title:GooglePoppinsWidgets(text: 'Add Achievement'.tr,fontsize: 18.w),backgroundColor:adminePrimayColor ,),
       body: SafeArea(
         child: Center(
           child: Form(key: _formKey,
@@ -88,7 +93,7 @@ class _AddAchievementsState extends State<AddAchievements> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButtonBackWidget(color: cblack,),
+               // IconButtonBackWidget(color: cblack,),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center, 
@@ -113,10 +118,10 @@ class _AddAchievementsState extends State<AddAchievements> {
                         
                             validator: checkFieldEmpty,
                             controller: achievementController,
-                             decoration: const InputDecoration(
+                             decoration:  InputDecoration(
                                border: InputBorder.none, // Remove the default underline
                                contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
-                               hintText: 'Achievement', // Placeholder text
+                               hintText: 'Achievement'.tr, // Placeholder text
                              ),),
                          ),
                        ),
@@ -135,7 +140,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                             controller: dateOfAchievementController,
                              decoration:  InputDecoration(
                                border: InputBorder.none, // Remove the default underline
-                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               contentPadding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
                                hintText: 'Date of Achievement'.tr, // Placeholder text
                              ),),
                          ),
@@ -154,7 +159,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                             controller: descriptionController,
                              decoration:  InputDecoration(
                                border: InputBorder.none, // Remove the default underline
-                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               contentPadding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
                                hintText: 'Descriptions'.tr, // Placeholder text
                              ),),
                          ),
@@ -168,7 +173,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                              }
                        }, color: Colors.blue,
                         child:  Text('Add Achievement'.tr, 
-                        style: TextStyle(color: Colors.white),),), 
+                        style: const TextStyle(color: Colors.white),),), 
                         kHeight20, 
                         MaterialButton(
                           onPressed: (){
@@ -179,7 +184,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                         },
                          color: Colors.blue,
                          child: Text('Show Achievements of ${widget.studentDetail['studentName'].toString().capitalize}', 
-                         style:  TextStyle(color: Colors.white),),)
+                         style:  const TextStyle(color: Colors.white),),)
                       
                       
                     ]

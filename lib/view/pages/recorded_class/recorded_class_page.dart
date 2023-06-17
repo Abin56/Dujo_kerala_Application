@@ -31,7 +31,7 @@ class RecordedClassMainPage extends StatelessWidget {
               color: cWhite,
             ),
             GooglePoppinsWidgets(
-              text: "Subject",
+              text: "Subjects".tr,
               fontsize: 20.h,
               color: cWhite,
             )

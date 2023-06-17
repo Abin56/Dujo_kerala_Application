@@ -197,13 +197,13 @@ List<String> _acc_text = [
 
   'Teachers'.tr,
 
-  'Bus Route'.tr,
+  'All Bus'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/library.png',
-
   'assets/images/classroom.png',
+
+  'assets/images/library.png',
   'assets/images/leaveapplica.png',
   
   'assets/images/homework.png',

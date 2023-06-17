@@ -265,14 +265,8 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor: const Color.fromARGB(255, 52, 50, 50),
-                    child: IconButton(
-                      icon: const Icon(Icons.edit),
-                      color: Colors.white,
-                      onPressed: () async {
-                        _getCameraAndGallery(context);
-                      },
-                    ),
+                    backgroundColor: Color.fromARGB(255, 52, 50, 50),
+                    child: Icon(Icons.edit),
                   ),
                 ),
               ),
@@ -314,14 +308,14 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
                             Get.find<TeacherProfileController>()
                                 .updateTeacherProfilePicture();
                           },
-                          child: const Text('Update'),
+                          child:  Text('Update'.tr),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                             getImageController.pickedImage.value = '';
                           },
-                          child: const Text('Cancel'),
+                          child:  Text('Cancel'.tr),
                         ),
                       ],
                     ),
