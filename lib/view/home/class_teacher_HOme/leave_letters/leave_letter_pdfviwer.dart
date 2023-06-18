@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -71,7 +72,10 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
     // getInvoice();
     // databaseReference = dref.child("course");
     // _counter();
-    nextpage();
+    nextpage().then((value) async{
+      await Future.delayed(const Duration(seconds: 1));
+      Get.back();
+    });
 
     creatNewMeeting();
     getCurrentLiveTime();
@@ -108,7 +112,7 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
     
   }
 
-  nextpage() async {
+  Future<void>nextpage() async {
     await Future.delayed(const Duration(seconds: 1));
     Printing.layoutPdf(
                 onLayout: (PdfPageFormat format) {
