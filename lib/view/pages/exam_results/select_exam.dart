@@ -37,7 +37,7 @@ class SelectExamLevelScreen extends StatelessWidget {
                 ),
                 child: TextButton.icon(
                     onPressed: () async {
-                      return getBottomSheet(classId, 'State Level');
+                      return getBottomSheet(classId, 'School Level');
                     },
                     icon: const Icon(Icons.list_alt, color: cWhite),
                     label: GoogleMonstserratWidgets(
@@ -57,7 +57,7 @@ class SelectExamLevelScreen extends StatelessWidget {
                 ),
                 child: TextButton.icon(
                     onPressed: () async {
-                      return getBottomSheet(classId, 'Public Level');
+                      return getBottomSheet(classId, 'State Level');
                     },
                     icon: const Icon(Icons.list_alt, color: cWhite),
                     label: GoogleMonstserratWidgets(
