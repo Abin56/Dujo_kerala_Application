@@ -102,7 +102,7 @@ class ListofRoomsScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
                                 onTap: () async {
-                                  Get.to(LiveClassRoom(
+                                  Get.to(()=>LiveClassRoom(
                                       teacherName: data.ownerName,
                                       docId: data.docid,
                                       roomID: data.roomID));

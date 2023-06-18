@@ -59,7 +59,7 @@ class RecSelectSubjectScreen extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(RecSelectChapterScreen(
+                              Get.to(()=>RecSelectChapterScreen(
                                   schoolId: schoolId,
                                   batchId: batchId,
                                   classID: classID,

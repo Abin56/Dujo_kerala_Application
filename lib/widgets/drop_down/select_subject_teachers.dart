@@ -45,7 +45,7 @@ class _GetTeachersSubjectsDropDownButtonState
               hint: teacherSubjectValue == null
                   ?  Text(
                       "Select Subject".tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
                     )
                   : Text(teacherSubjectValue!["subjectName"]),

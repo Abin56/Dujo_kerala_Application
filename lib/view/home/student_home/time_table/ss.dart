@@ -157,32 +157,31 @@ class DayWidget extends StatelessWidget {
               .collection('timetables')
               .doc(dayName)
               .collection(dayName)
-              .orderBy('timestamp', descending: false)
               .snapshots(),
           builder: (context, snapshot) {
-          if(snapshot.hasData){
+            if (snapshot.hasData) {
               return ListView.separated(
-                separatorBuilder: (context, index){
-                  return const SizedBox(height: 10,);
-                },
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Text((index + 1).toString()),
+                      title: Text(
+                          snapshot.data!.docs[index]['period']['periodName']),
+                      subtitle: Text('Teacher : ' +
+                          snapshot.data!.docs[index]['period']
+                              ['periodTeacher']),
+                    );
 
-                  return ListTile(
-                    leading: Text((index+1).toString()),
-                    title: Text(
-                     snapshot.data!.docs[index]['period']['periodName']), 
-
-                     subtitle: Text('Teacher : '+ snapshot.data!.docs[index]['period']['periodTeacher']
-                     ),
-                  );
-              
-                  // return Text(
-                  //     snapshot.data!.docs[index]['period']['periodName']);
-                });
-
-          
-          } return const Text('No Data');
+                    // return Text(
+                    //     snapshot.data!.docs[index]['period']['periodName']);
+                  });
+            }
+            return const Text('No Data');
           }),
     );
   }

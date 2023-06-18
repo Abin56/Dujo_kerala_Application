@@ -21,8 +21,7 @@ class GuardianHomeScreen extends StatefulWidget {
 }
 
 class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
-
-   String deviceToken = '';
+  String deviceToken = '';
 
   void getDeviceToken() async {
     await FirebaseMessaging.instance.getToken().then((token) {
@@ -48,20 +47,17 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
             (value) => log('Device Token Saved To FIREBASE'));
 
     //AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp  apikey
-  } 
+  }
 
-   @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getDeviceToken();
-    
- //   sendPushMessage( deviceToken, 'Hello Everyone', 'DUJO APP');
-    
-    
+
+    //   sendPushMessage( deviceToken, 'Hello Everyone', 'DUJO APP');
   }
 
-  
   Widget build(BuildContext context) {
     String studentName = '';
     var screenSize = MediaQuery.of(context).size;
@@ -94,35 +90,35 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                             color: cWhite,
                           ),
                         ),
-                         GestureDetector(
-                              onTap: () {
-                                Get.to(const GuardianEditProfileScreen());
-                              },
-                              child: 
-                        Container(
-                          child: Stack(
-                            children: [
-                             CircleAvatar(
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => const GuardianEditProfileScreen());
+                          },
+                          child: Container(
+                            child: Stack(
+                              children: [
+                                CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       UserCredentialsController
                                               .guardianModel!.profileImageURL ??
                                           netWorkImagePathPerson),
                                   radius: 50.r,
                                 ),
-                               //
-                              Positioned(
-                                right: 6.r,
-                                bottom: 1.r,
-                                child: CircleAvatar(
-                                 // backgroundColor: cWhite,
-                                  radius: 12.r,
-                                  child: const Center(child: Icon(Icons.info)),
+                                //
+                                Positioned(
+                                  right: 6.r,
+                                  bottom: 1.r,
+                                  child: CircleAvatar(
+                                    // backgroundColor: cWhite,
+                                    radius: 12.r,
+                                    child:
+                                        const Center(child: Icon(Icons.info)),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                    ),
                       ],
                     ),
                   ),
@@ -141,6 +137,27 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                             text:
                                 'Student : ${snap.data?.data()?['studentName']} ',
                             fontsize: 14.5.sp,
+                            fontWeight: FontWeight.w500,
+                            color: cWhite.withOpacity(0.8),
+                          );
+                        } else {
+                          return const Text('');
+                        }
+                      }),
+                  FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('SchoolListCollection')
+                          .doc(UserCredentialsController.schoolId)
+                          .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .get(),
+                      builder: (context, snaps) {
+                        if (snaps.hasData) {
+                          return GoogleMonstserratWidgets(
+                            text: 'Class : ${snaps.data!.data()!['className']}',
+                            fontsize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: cWhite.withOpacity(0.8),
                           );

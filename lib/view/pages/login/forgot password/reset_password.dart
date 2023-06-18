@@ -114,7 +114,7 @@ class ResetPassword extends StatelessWidget {
             GestureDetector(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    Get.to(ForgotPassword());
+                    Get.to(()=>ForgotPassword());
                   }
                 },
                 child:

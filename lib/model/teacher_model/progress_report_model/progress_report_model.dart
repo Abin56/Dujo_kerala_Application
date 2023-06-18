@@ -205,10 +205,10 @@ class ExamReports {
 
 class AddProgressReportStatusToFireBase {
   Future addAProgressReportController(UploadProgressReportModel productModel,
-      context, schoolid, classId, studentID, examID,batchId) async {
+      context, schoolid, classId, studentID, examID, batchId) async {
     try {
       final firebase = FirebaseFirestore.instance;
-      final doc = firebase
+      firebase
           .collection("SchoolListCollection")
           .doc(schoolid)
           .collection(batchId)

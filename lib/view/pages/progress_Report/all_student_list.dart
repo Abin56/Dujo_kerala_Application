@@ -79,7 +79,7 @@ class AllStudentsListScreen extends StatelessWidget {
                               child: FadeInAnimation(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.to(StudentProgressReportScreen(
+                                    Get.to(()=>StudentProgressReportScreen(
                                       batchId: batchId,
                                       teacherid: teacherId,
                                       studentId: snapshot.data!.docs[index]

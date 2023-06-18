@@ -89,7 +89,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                 } else {
                                   return GestureDetector(
                                     onTap: () {
-                                      Get.to(const ListofRoomsScreen());
+                                      Get.to(()=>const ListofRoomsScreen());
                                     },
                                     child: Container(
                                       height: 40,

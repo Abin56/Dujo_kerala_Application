@@ -46,7 +46,7 @@ class TeacherClassListView extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(ClickOnClasss(
+                              Get.to(()=>ClickOnClasss(
                                 className:snapshot.data?.docs[index]['className']??"" ,
                                 classID: snapshot.data?.docs[index]['docid']??'',
                               ));

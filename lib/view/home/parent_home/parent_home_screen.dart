@@ -155,7 +155,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                         ),
                           GestureDetector(
                               onTap: () {
-                                Get.to(const ParentEditProfileScreen());
+                                Get.to(()=>const ParentEditProfileScreen());
                                 sendPushMessage(
                                     deviceToken,
                                     'sdf',
@@ -204,6 +204,27 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                             text:
                                 'Student : ${snap.data?.data()?['studentName']} ',
                             fontsize: 14.5.sp,
+                            fontWeight: FontWeight.w500,
+                            color: cWhite.withOpacity(0.8),
+                          );
+                        } else {
+                          return const Text('');
+                        }
+                      }),
+                        FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('SchoolListCollection')
+                          .doc(UserCredentialsController.schoolId)
+                          .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .get(),
+                      builder: (context, snaps) {
+                        if (snaps.hasData) {
+                          return GoogleMonstserratWidgets(
+                            text: 'Class : ${snaps.data!.data()!['className']}',
+                            fontsize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: cWhite.withOpacity(0.8),
                           );

@@ -4,7 +4,6 @@ import 'package:dujo_kerala_application/controllers/log_out/user_logout_controll
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
@@ -20,6 +19,7 @@ import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
+import '../student_home/time_table/ss.dart';
 
 class TeacherHeaderDrawer extends StatelessWidget {
   UserLogOutController userLogOutController = Get.put(UserLogOutController());
@@ -191,7 +191,7 @@ Get.to(
         menuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
          Get.to(
-            () => const StudentShowTimeTable(),
+            () => const SS(),
           );
         }),
         menuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,

@@ -7,6 +7,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../colors/colors.dart';
+
 class RecordedVideosListScreen extends StatelessWidget {
   String schoolId;
   String classID;
@@ -28,6 +30,10 @@ class RecordedVideosListScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     log(classID);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Select video'.tr),
+        backgroundColor: adminePrimayColor,
+      ),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -65,12 +71,10 @@ class RecordedVideosListScreen extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              // log("Video Url${snapshot.data!.docs[index]
-                              //         ['downloadUrl']}");
-                              Get.to(VideoScreen(
-                                  // name: snapshot.data!.docs[index]['title'],
-                                  videoLink: snapshot.data!.docs[index]
-                                      ['downloadUrl']));
+                              Get.to(() => Videoplayer(
+                                    videoUrl: snapshot.data!.docs[index]
+                                        ['downloadUrl'],
+                                  ));
                             },
                             child: Container(
                               height: h / 100,

@@ -9,9 +9,10 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../pages/chat_gpt/screens/chat_screen.dart';
+import '../../pages/recorded_videos/select_subjects.dart';
 import '../drawer/class_teacher.dart';
-import '../sample/under_maintance.dart';
 
 class ClassTeacherMainHomeScreen extends StatefulWidget {
   const ClassTeacherMainHomeScreen({Key? key}) : super(key: key);
@@ -41,7 +42,11 @@ class _ClassTeacherMainHomeScreenState
   Widget build(BuildContext context) {
     List<Widget> pages = [
       ClassTeacherHomeScreen(),
-      const UnderMaintanceScreen(text: ""),
+        RecSelectSubjectScreen(
+        batchId: UserCredentialsController.batchId!,
+        classID: UserCredentialsController.classId!,
+        schoolId: UserCredentialsController.schoolId!,
+      ),
       CreateRoomScreen(),
     const ChatScreen(),
     ];

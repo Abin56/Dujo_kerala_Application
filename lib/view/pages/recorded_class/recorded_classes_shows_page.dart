@@ -5,10 +5,10 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
 
 import '../../../sruthi/Subject 2/subject_chapterwise_display.dart';
-import 'recorded_classes_video_play_page.dart';
+import '../recorded_videos/play_video.dart';
 
 class RecordedClassesShowsPage extends StatelessWidget {
   const RecordedClassesShowsPage(
@@ -24,7 +24,7 @@ class RecordedClassesShowsPage extends StatelessWidget {
         backgroundColor: Colors.white70,
         appBar: AppBar(
           title: Row(
-            children:  [
+            children: [
               Text("Study Materials".tr),
             ],
           ),
@@ -111,14 +111,10 @@ class RecordedClassesShowsPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: adminePrimayColor),
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      RecordedClassVideoPlayerPage(
-                                        networkUrl: snapshot.data!.docs[index]
-                                            ['downloadUrl'],
-                                      )));
+                          Get.to(() => Videoplayer(
+                                videoUrl: snapshot.data!.docs[index]
+                                    ['downloadUrl'],
+                              ));
                         },
                       ),
                     );
@@ -128,8 +124,7 @@ class RecordedClassesShowsPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            return  Center(
-                child: Text('No Recorded Classes Uploaded Yet!'.tr));
+            return Center(child: Text('No Recorded Classes Uploaded Yet!'.tr));
           },
         ),
       ),

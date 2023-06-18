@@ -8,7 +8,9 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../pages/chat_gpt/screens/chat_screen.dart';
+import '../../pages/recorded_videos/select_subjects.dart';
 import '../drawer/parent_drawer.dart';
 
 class ParentMainHomeScreen extends StatefulWidget {
@@ -36,7 +38,11 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       ParentHomeScreen(),
-      const UnderMaintanceScreen(text: ""),
+         RecSelectSubjectScreen(
+        batchId: UserCredentialsController.batchId!,
+        classID: UserCredentialsController.classId!,
+        schoolId: UserCredentialsController.schoolId!,
+      ),
       const UnderMaintanceScreen(text: ""),
          const ChatScreen(),
     ];

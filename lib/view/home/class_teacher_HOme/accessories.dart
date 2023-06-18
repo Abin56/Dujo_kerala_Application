@@ -3,8 +3,7 @@
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/my_students.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/pages/exam_results/select_exam.dart';
+import 'package:dujo_kerala_application/view/home/student_home/time_table/ss.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -45,7 +44,7 @@ class ClassTeacherAccessories extends StatelessWidget {
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,),  ////////////  Attendance book
 
-      const StudentShowTimeTable(), //TimeTable
+      const SS(), //TimeTable
 
 
       LeaveLettersListviewScreen(
@@ -71,7 +70,7 @@ class ClassTeacherAccessories extends StatelessWidget {
 
       const AddTimeTable(), //Exam
 
-      SelectExamLevelScreen(classId: classID), //exam result upload
+      // SelectExamLevelScreen(classId: classID), //exam result upload
 
 
       NoticePage(), //Notice
@@ -189,7 +188,7 @@ List<String> _acc_text = [
 
   'Exams'.tr,
 
-  'Exam Results'.tr,
+  // 'Exam Results'.tr,
   'Notices'.tr,
 
   'Events'.tr,
@@ -213,7 +212,7 @@ var _acc_images = [
   'assets/images/meetings.png',
   
   'assets/images/exam.png',
-  'assets/images/exmresult1.png',
+  // 'assets/images/exmresult1.png',
   
   'assets/images/notices.png',
   'assets/images/activity.png',

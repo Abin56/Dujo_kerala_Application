@@ -22,7 +22,7 @@ class UserPublicLevel extends StatelessWidget {
                 .doc(UserCredentialsController.schoolId)
                 .collection(UserCredentialsController.batchId!)
                 .doc(UserCredentialsController.batchId!)
-                .collection('Public Level')
+                .collection('School Level')
                 .snapshots(),
             builder: (context, snaps) {
               if (snaps.hasData) {
@@ -38,59 +38,55 @@ class UserPublicLevel extends StatelessWidget {
                             snaps.data!.docs[index].data());
                         return GestureDetector(
                           onTap: () {
-                            Get.to(UsersExamTimeTableViewScreen(
+                            Get.to(()=>UsersExamTimeTableViewScreen(
                                 examID: data.docid,
-                                collectionName: 'Public Level',
+                                collectionName: 'School Level',
                                 date: stringTimeToDateConvert(data.publishDate),
                                 examName: data.examName));
                           },
-                          child: Expanded(
-                           
-                              child: Container(
-                                  margin: EdgeInsets.only(
-                                      top: 10.h, left: 10.h, right: 10.h),
-                                  height: 135.h,
-                                  width: 80.w,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.h),
-                                    color: adminePrimayColor,
-                                  ),
-                                  child: Padding(
-                                    padding:  EdgeInsets.only(top: 12.h,left: 10.h),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                        // Text(data.examName),
-                                      children: [
-                                                              
-                                        GooglePoppinsWidgets(
-                                            text:
-                                                "Exam Name  :   ${data.examName}",
-                                            fontsize: 16.h,
-                                            color: cWhite),
-                                        SizedBox(
-                                          height: 5.w,
-                                        ),
-                                        GooglePoppinsWidgets(
-                                          text:
-                                              "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
-                                          fontsize: 14.h,
-                                          color: cWhite,
-                                        ),
-                                        SizedBox(
-                                          height: 5.w,
-                                        ),
-                                        GooglePoppinsWidgets(
-                                            text:
-                                                "Starting date :  ${data.startingDate}",
-                                            fontsize: 14.h,
-                                            color: cWhite),
-                                      ],
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  top: 10.h, left: 10.h, right: 10.h),
+                              height: 135.h,
+                              width: 80.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.h),
+                                color: adminePrimayColor,
+                              ),
+                              child: Padding(
+                                padding:  EdgeInsets.only(top: 12.h,left: 10.h),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                    // Text(data.examName),
+                                  children: [
+                                                          
+                                    GooglePoppinsWidgets(
+                                        text:
+                                            "Exam Name  :   ${data.examName}",
+                                        fontsize: 16.h,
+                                        color: cWhite),
+                                    SizedBox(
+                                      height: 5.w,
                                     ),
-                                  )),
-                            
-                          ),
+                                    GooglePoppinsWidgets(
+                                      text:
+                                          "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
+                                      fontsize: 14.h,
+                                      color: cWhite,
+                                    ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    GooglePoppinsWidgets(
+                                        text:
+                                            "Starting date :  ${data.startingDate}",
+                                        fontsize: 14.h,
+                                        color: cWhite),
+                                  ],
+                                ),
+                              )),
                         );
                       },
                       separatorBuilder: (context, index) {

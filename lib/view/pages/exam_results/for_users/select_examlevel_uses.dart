@@ -29,7 +29,7 @@ class UsersSelectExamLevelScreen extends StatelessWidget {
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: adminePrimayColor),
                 child: TextButton.icon(
                     onPressed: () async {
-                      Get.to(UsersSelectExamWiseScreen(
+                      Get.to(()=>UsersSelectExamWiseScreen(
                         classID: classId,
                         examLevel: 'State Level',
                         studentId: studentID,
@@ -49,14 +49,14 @@ class UsersSelectExamLevelScreen extends StatelessWidget {
 
             child: TextButton.icon(
                 onPressed: () async {
-                        Get.to(UsersSelectExamWiseScreen(
+                        Get.to(()=>UsersSelectExamWiseScreen(
                     classID: classId,
                     examLevel: 'Public Level',
                     studentId: studentID,
                   ));
                 },
                 icon: const Icon(Icons.receipt,color: cWhite,),
-                label: GooglePoppinsWidgets(fontsize: 20.h, text:'Public Level'.tr,color: Colors.white)),
+                label: GooglePoppinsWidgets(fontsize: 20.h, text:'State Level'.tr,color: Colors.white)),
           )
         ],
       )),

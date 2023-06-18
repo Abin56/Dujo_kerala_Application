@@ -69,7 +69,7 @@ class RecSelectChapterScreen extends StatelessWidget {
                             onTap: () {
                               log("docid${snapshot.data!.docs[index]
                                       ['docid']}");
-                              Get.to(RecordedVideosListScreen(
+                              Get.to(()=>RecordedVideosListScreen(
                                   schoolId: schoolId,
                                   batchId: batchId,
                                   classID: classID,

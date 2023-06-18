@@ -196,7 +196,7 @@ class GuardianSignUpFirstScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(GuardianLoginScreen(
+                          Get.to(()=>GuardianLoginScreen(
                             pageIndex: 3,
                           ));
                         },
