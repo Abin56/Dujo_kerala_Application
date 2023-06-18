@@ -91,7 +91,7 @@ class EventDisplaySchoolLevel extends StatelessWidget {
                                 children: [
                                   GooglePoppinsEventsWidgets(
                                       text:
-                                          "Signed By : ${eventData["signedBy"]}",
+                                          "Signed by : ${eventData["signedBy"]}",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
                                 ],

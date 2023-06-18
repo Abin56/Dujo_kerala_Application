@@ -18,8 +18,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../helper/shared_pref_helper.dart';
-import '../../pages/attentence/select_period.dart';
 import '../../language/language_change_drawer.dart';
+import '../../pages/Attentence/select_period.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
 
@@ -125,8 +125,8 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                 Get.offAll(const TeacherMainHomeScreen());
               },
               icon: const Icon(Icons.edit_note_rounded),
-              label: const Text(
-                'Switch to Teacher',
+              label:  Text(
+                'Switch to Teacher'.tr,
                 style: TextStyle(color: cblack),
               ))
         ],
@@ -206,13 +206,13 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-        MenuItem(1, 'assets/images/information.png', 'General Instructions',
+        MenuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
           );
         }),
-        MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
+        MenuItem(2, 'assets/images/attendance.png', 'Attendance book'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => SelectPeriodWiseScreen(
@@ -227,7 +227,7 @@ Widget MyDrawerList(context) {
             () => const AddTimeTable(),
           );
         }),
-        MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
+        MenuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           Get.to(
             () => const StudentShowTimeTable(),
@@ -248,7 +248,7 @@ Widget MyDrawerList(context) {
             ),
           );
         }),
-        MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+        MenuItem(6, 'assets/images/notices.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           Get.to(
             () => NoticePage(),
@@ -266,13 +266,14 @@ Widget MyDrawerList(context) {
           );
         }),
 
-        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
         MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());
+        }),
+        
+        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(const PrivacyViewScreen());
         }),
 
         kHeight10,

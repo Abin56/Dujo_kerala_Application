@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -25,9 +26,10 @@ class CreateExamNameScreen extends StatelessWidget {
     int columnCount = 3;
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    final formkey=GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Exam List".tr),backgroundColor: adminePrimayColor,
+        title:  Text("Progress Report".tr),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -122,32 +124,36 @@ class CreateExamNameScreen extends StatelessWidget {
             barrierDismissible: false, // user must tap button!
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Enter Exam Name'),
+                title:  Text('Enter Exam Name'.tr),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      TextFormField(
-                        
-                          controller: _examNameController,
-                          decoration: InputDecoration(
-                            
-                              hintText: 'Enter Exam Name',
-
-                              // prefixIcon: Icon(Icons.email),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(19),
-                              )),
-                          style: const TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontSize: 18,
-                          )),
+                      Form(
+                        key: formkey,
+                        child: TextFormField(
+                          validator: checkFieldEmpty,
+                            controller: _examNameController,
+                            decoration: InputDecoration(
+                              
+                                hintText: 'Enter Exam Name'.tr,
+                      
+                                // prefixIcon: Icon(Icons.email),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(19),
+                                )),
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 18,
+                            )),
+                      ),
                     ],
                   ),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Create'),
+                    child:  Text('Create'.tr),
                     onPressed: () async {
+                      if(formkey.currentState?.validate()?? false){
                       await FirebaseFirestore.instance
                           .collection("SchoolListCollection")
                           .doc(schooilID)
@@ -161,10 +167,10 @@ class CreateExamNameScreen extends StatelessWidget {
                         'docid': _examNameController.text.trim(),
                         'date': DateTime.now().toString()
                       }).then((value) => Get.back());
-                    },
+                      }}
                   ),
                   TextButton(
-                    child: const Text('cancel'),
+                    child:  Text('Cancel'.tr),
                     onPressed: () async {
                       Get.back();
                     },

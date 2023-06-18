@@ -49,58 +49,63 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
               imagePath: 'assets/images/dujoo-removebg.png'),
           backgroundColor: adminePrimayColor),
       body: pages[_page],
-      bottomNavigationBar: Container(
-        height: 71,
-        decoration: BoxDecoration(
-          // color: Colors.white,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          border: Border.all(color: Colors.white.withOpacity(0.13)),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 6, 71, 157),
-              Color.fromARGB(255, 5, 85, 222)
-            ],
+      bottomNavigationBar: 
+        Container(
+          height: 71,
+          decoration: BoxDecoration(
+            // color: Colors.white,
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            border: Border.all(color: Colors.white.withOpacity(0.13)),
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromARGB(255, 6, 71, 157),
+                Color.fromARGB(255, 5, 85, 222)
+              ],
+            ),
           ),
-        ),
-        child: GNav(
-          gap: 8,
-          rippleColor: Colors.grey,
-          activeColor: Colors.white,
-          color: Colors.white,
-          tabs: [
-            GButton(
-                iconSize: 20,
-                icon: LineIcons.home,
-                text: 'Home'.tr,
-                style: GnavStyle.google),
-            GButton(
-              iconSize: 20,
-              textSize: 9,
-              icon: Icons.tv,
-              text: 'Recorded Classes'.tr,
+          child: 
+            GNav(
+              gap: 8,
+              rippleColor: Colors.grey,
+              activeColor: Colors.white,
+              color: Colors.white,
+              tabs: [
+                GButton(
+                    iconSize: 20,
+                    icon: LineIcons.home,
+                    text: 'Home'.tr,
+                    style: GnavStyle.google),
+                GButton(
+                  iconSize: 30,
+                  textSize: 20,
+                  icon: Icons.tv,
+                  text: 'Recorded\nClasses'.tr,
+                ),
+                GButton(
+                  iconSize: 30,
+                  // iconSize: 10,
+                  textSize: 20,
+                  icon: Icons.laptop,
+                  text: 'Live\nClasses'.tr,
+                ),
+                GButton(
+                  iconSize: 30,
+                  icon: Icons.chat,
+                   textSize: 20,
+                  text: 'Ask\nDoubt'.tr,
+                )
+              ],
+              selectedIndex: _page,
+              onTabChange: (value) {
+                onPageChanged(value);
+              },
             ),
-            GButton(
-              iconSize: 20,
-              // iconSize: 10,
-              textSize: 12,
-              icon: Icons.laptop,
-              text: 'Live Classes'.tr,
-            ),
-            GButton(
-              iconSize: 20,
-              icon: Icons.chat,
-              text: 'Chat With Bot'.tr,
-            )
-          ],
-          selectedIndex: _page,
-          onTabChange: (value) {
-            onPageChanged(value);
-          },
+          
         ),
-      ),
+    
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: SingleChildScrollView(

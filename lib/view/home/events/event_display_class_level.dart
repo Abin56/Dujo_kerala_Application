@@ -96,7 +96,7 @@ class EventDisplayClassLevel extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   GooglePoppinseventClassLevelWidgets(
-                                      text: "Signed By : $signedBy",
+                                      text: "Signed by : $signedBy",
                                       fontsize: 18.h,
                                       fontWeight: FontWeight.w200),
                                 ],

@@ -55,9 +55,9 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       height: 100,
                                       width: 100,
                                       decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            120, 4, 97, 174),
-                                        shape: BoxShape.circle,
+                                        // color: const Color.fromARGB(
+                                        //     120, 4, 97, 174),
+                                      //  shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
@@ -71,7 +71,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       right: 6.r,
                                       bottom: 1.r,
                                       child: CircleAvatar(
-                                        backgroundColor: cWhite,
+                                      //  backgroundColor: cWhite,
                                         radius: 12.r,
                                         child: const Center(
                                             child: Icon(Icons.info)),
@@ -100,7 +100,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const ClassTeacherAccessories(),
+             ClassTeacherAccessories(classID: '',),
           ],
         ),
       ),

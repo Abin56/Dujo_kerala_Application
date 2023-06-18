@@ -1,8 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
+import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
+import 'package:dujo_kerala_application/view/pages/teacher_list/teacher_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -10,12 +12,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../utils/utils.dart';
-import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
-import '../../pages/teacher_list/teacher_list.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../parent_home/progress_report/progress_report.dart';
 import '../student_home/time_table/time_table_display.dart';
@@ -33,8 +33,8 @@ class GuardianAccessories extends StatelessWidget {
       AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),
-      //Attendence8
+          classID: UserCredentialsController.classId!), //Attendence
+
       LeaveApplicationScreen(
           studentName: studentName,
           guardianName: UserCredentialsController.guardianModel!.guardianName,
@@ -42,27 +42,30 @@ class GuardianAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.guardianModel!.studentID,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-          NoticePage(), //Notice
-          const ViewHomeWorks(), // Home Works
-           const StudentShowTimeTable(), // Time Table
-            SchoolLevelMeetingPage(), //Meetings
 
+      NoticePage(), //Notice
+
+      const ViewHomeWorks(), // Home Works
+
+      const StudentShowTimeTable(), // Time Table
+
+      SchoolLevelMeetingPage(), //Meetings
 
       const UserExmNotifications(), // Exams
 
-
-
-
-
       const EventList(), //Events
+
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
           classID: UserCredentialsController.classId!,
           studentId: UserCredentialsController.guardianModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Progress Report
+
       StudentSubjectHome(), //Subjects
 
       TeacherSubjectWiseList(), //Teachers
+
+     BusRouteListPage(),   /////// all bus
 
     ];
     int columnCount = 2;
@@ -144,29 +147,30 @@ class GuardianAccessories extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendance',
-  'Leave Application',
-  'Notices',
-  'HomeWorks',
-  'TimeTable',
-  'Meetings',
-  'Exams',
-  'Events',
-  'Progress Report',
-  'Subjects',
-  'Teachers',
+  'Attendance'.tr,
+  'Leave Letters'.tr,
+  'Notices'.tr,
+  'HomeWorks'.tr,
+  'Time Table'.tr,
+  'Meetings'.tr,
+  'Exams'.tr,
+  'Events'.tr,
+  'Progress Report'.tr,
+  'Subjects'.tr,
+  'Teachers'.tr,
+  'Bus Route'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
-   'assets/images/notices.png',
-   'assets/images/homework.png',
-   'assets/images/library.png',
-   'assets/images/meetings.png',
+  'assets/images/notices.png',
+  'assets/images/homework.png',
+  'assets/images/library.png',
+  'assets/images/meetings.png',
   'assets/images/exam.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-
+  'assets/images/bus.png'
 ];

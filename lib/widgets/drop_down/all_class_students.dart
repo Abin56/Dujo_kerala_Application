@@ -41,8 +41,8 @@ class _AllClassStudentsListDropDownButtonState
           if (snapshot.hasData) {
             return DropdownButtonFormField(
               hint: allClassStudentsListValue == null
-                  ? const Text(
-                      "Select Student",
+                  ?  Text(
+                      "Select Student".tr,
                       style: TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
                     )

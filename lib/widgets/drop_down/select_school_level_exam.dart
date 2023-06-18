@@ -39,8 +39,8 @@ class _GetSchoolLevelExamDropDownButtonState
           if (snapshot.hasData) {
             return DropdownButtonFormField(
               hint: schoolLevelExamistValue == null
-                  ? const Text(
-                      "Select Exam",
+                  ? Text(
+                      "Select Exam".tr,
                       style: TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
                     )

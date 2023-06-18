@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/button_container_widget.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
@@ -236,6 +237,7 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                       ],
                     ),
                   ),
+                       GooglePoppinsWidgets(text: "Time to complete should be > 1 day".tr, fontsize: 13,fontWeight: FontWeight.w400,)
                 ],
               ),
             ),
@@ -291,7 +293,8 @@ class _HomeWorkUploadState extends State<HomeWorkUpload> {
                   )
                 ],
               ),
-            )
+            ),
+       
           ],
         ),
       ),

@@ -6,7 +6,6 @@ import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_l
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
-import 'package:dujo_kerala_application/view/pages/Attentence/take_attentence/attendence_book_status.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -148,13 +147,13 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-          MenuItem(1, 'assets/images/information.png', 'General Instructions',
+          MenuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
           );
         }),
-        MenuItem(1, 'assets/images/attendance.png', 'Attendence'.tr,
+        MenuItem(1, 'assets/images/attendance.png', 'Attendance book'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
            Get.to(
             () =>  AttendenceBookScreenSelectMonth(
@@ -169,7 +168,7 @@ Widget MyDrawerList(context) {
             () => const UserExmNotifications(),
           );
             }),
-        MenuItem(3, 'assets/images/library.png', 'TimeTable'.tr,
+        MenuItem(3, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           Get.to(
             () => const StudentShowTimeTable(),
@@ -185,17 +184,14 @@ Widget MyDrawerList(context) {
             () => const ViewHomeWorks(),
           );
         }),
-        MenuItem(5, 'assets/images/school_building.png', 'Notices'.tr,
+        MenuItem(5, 'assets/images/notices.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
            Get.to(
             () => NoticePage(),
           );
         }),
-        MenuItem(6, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
-        MenuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
+    
+        MenuItem(6, 'assets/images/progressreport.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
            Get.to(
             () => ProgressReportListViewScreen(
@@ -206,13 +202,14 @@ Widget MyDrawerList(context) {
           );
         }),
 
-        MenuItem(8, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
-        MenuItem(9, 'assets/images/languages.png', 'Change Language'.tr,
+
+        MenuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());
+        }),
+                MenuItem(8, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(const PrivacyViewScreen());
         }),
 
         kHeight10,

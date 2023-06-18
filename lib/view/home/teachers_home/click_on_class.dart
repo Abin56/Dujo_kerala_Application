@@ -2,23 +2,25 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
-import 'package:dujo_kerala_application/view/pages/exam_results/upload_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
+import '../../pages/Attentence/select_period.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
-import '../../pages/attentence/select_period.dart';
 import '../../pages/exam_results/select_exam.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
+import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 
@@ -66,7 +68,7 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID), //Attendance Book
 
       const UserExmNotifications(), //Exam
-       SelectExamLevelScreen(classId: classID),//exam result upload
+      SelectExamLevelScreen(classId: classID), //exam result upload
       const StudentShowTimeTable(), //TimeTable
       const ViewHomeWorks(), //Home Works
 
@@ -95,6 +97,9 @@ class ClickOnClasss extends StatelessWidget {
       TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
+      RecordedClassMainPage(), // recorded class
+
+        BusRouteListPage(),   /////// all bus
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
@@ -254,7 +259,7 @@ class ClickOnClasss extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.5),
                                           borderRadius: const BorderRadius.all(
-                                              Radius.circular(30)),
+                                              Radius.circular(10)),
                                           boxShadow: [
                                             BoxShadow(
                                               color:
@@ -267,9 +272,9 @@ class ClickOnClasss extends StatelessWidget {
                                         height: h / 100,
                                         width: double.infinity,
                                         margin: EdgeInsets.only(
-                                            bottom: w / 10,
-                                            left: w / 50,
-                                            right: w / 50),
+                                            top: w / 30,
+                                            left: w / 30,
+                                            right: w / 30),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
@@ -285,7 +290,8 @@ class ClickOnClasss extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              hasDataText[index],
+                                              translateString(
+                                                  hasDataText[index]),
                                               style: GoogleFonts.montserrat(
                                                   color: Colors.black
                                                       .withOpacity(0.5),
@@ -316,9 +322,9 @@ class ClickOnClasss extends StatelessWidget {
 }
 
 List<String> _acc_text = [
-  'Attendence Book'.tr,
+  'Attendance Book'.tr,
   'Exams'.tr,
-  'TimeTable'.tr,
+  'Time Table'.tr,
   'Notices'.tr,
   'Subjects'.tr,
   'Events'.tr,
@@ -337,7 +343,7 @@ var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
   'assets/images/exam.png',
-    'assets/images/exam.png',
+  'assets/images/exmresult1.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/notices.png',
@@ -345,17 +351,21 @@ var hasDataImages = [
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/meetings.png',
+  'assets/images/recorded_classes.png',
+  'assets/images/bus.png'
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,
-  'Attendence Book'.tr,
+  'Attendance Book'.tr,
   'Exams'.tr,
   'Exam Results'.tr,
-  'TimeTable'.tr,
+  'Time Table'.tr,
   'HomeWorks'.tr,
   'Notices'.tr,
   'Events'.tr,
   'Progress Report'.tr,
-  'Subjects'.tr,
+  'Study Materials'.tr,
   'Meetings'.tr,
+  'Recorded Classes'.tr,
+  'Bus Route'.tr,
 ];

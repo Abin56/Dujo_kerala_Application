@@ -17,7 +17,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../colors/colors.dart';
 import '../../language/language_change_drawer.dart';
-import '../../pages/Attentence/take_attentence/attendence_book_status.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../class_teacher_HOme/class_teacher_mainhome.dart';
@@ -32,7 +31,7 @@ class TeacherHeaderDrawer extends StatelessWidget {
       return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
-      height: 300,
+      height: 350.h,
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -168,13 +167,13 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-         menuItem(1, 'assets/images/information.png', 'General Instructions',
+         menuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
           );
         }),
-        menuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
+        menuItem(2, 'assets/images/attendance.png', 'Attendance book'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
 Get.to(
             () => AttendenceBookScreenSelectMonth(
@@ -189,7 +188,7 @@ Get.to(
             () => const AddTimeTable(),
           );
         }),
-        menuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
+        menuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
          Get.to(
             () => const StudentShowTimeTable(),
@@ -206,7 +205,7 @@ Get.to(
       ),
           );
         }),
-        menuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+        menuItem(6, 'assets/images/notices.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           Get.to(
             () => NoticePage(),
@@ -222,14 +221,15 @@ Get.to(
                 batchId: UserCredentialsController.batchId!),
           );
         }),
-        menuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(const PrivacyViewScreen());
-        }),
-        menuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
+         menuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());
         }),
+        menuItem(8, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+            currentPage == DrawerSections.dashboard ? true : false, () {
+          Get.to(const PrivacyViewScreen());
+        }),
+       
         kHeight10,
         kHeight10,
         kHeight10,

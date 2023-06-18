@@ -29,6 +29,11 @@ class StudentEventController extends GetxController {
             ),
           )
           .toList();
+      classEventsLists.sort(
+        (a, b) {
+          return b.eventDate.compareTo(a.eventDate);
+        },
+      );
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;

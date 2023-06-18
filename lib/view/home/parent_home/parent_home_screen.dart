@@ -153,35 +153,39 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                             color: cWhite,
                           ),
                         ),
-                        Stack(
-                          children: [
-                            GestureDetector(
+                          GestureDetector(
                               onTap: () {
-                                Get.to(ParentEditProfileScreen());
+                                Get.to(const ParentEditProfileScreen());
                                 sendPushMessage(
                                     deviceToken,
                                     'sdf',
                                     'zsd');
                               },
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    UserCredentialsController
-                                            .parentModel!.profileImageURL ??
-                                        ''),
-                                radius: 50.r,
+                              child:
+                        Container(
+                          child: Stack(
+                            children: [
+                             CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      UserCredentialsController
+                                              .parentModel!.profileImageURL ??
+                                          ''),
+                                  radius: 50.r,
+                                ),
+                              
+                              Positioned(
+                                right: 6.r,
+                                bottom: 1.r,
+                                child: CircleAvatar(
+                                //  backgroundColor: cWhite,
+                                  radius: 12.r,
+                                  child: const Center(child: Icon(Icons.info)),
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              right: 6.r,
-                              bottom: 1.r,
-                              child: CircleAvatar(
-                                backgroundColor: cWhite,
-                                radius: 12.r,
-                                child: const Center(child: Icon(Icons.info)),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
+                    ),
                       ],
                     ),
                   ),

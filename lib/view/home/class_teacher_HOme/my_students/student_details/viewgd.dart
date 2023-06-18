@@ -4,9 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/view_students_details.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../../controllers/userCredentials/user_credentials.dart';
 
@@ -62,13 +63,22 @@ class _ViewGDState extends State<ViewGD> {
   Widget build(BuildContext context) {
      var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: (widget.documentSnapshot == null)? Center(child: GoogleMonstserratWidgets(text: 'Guardian Details not available',fontsize: 14,)): ListView(
+      backgroundColor: adminePrimayColor,
+      appBar: AppBar(
+        backgroundColor: adminePrimayColor,
+        title: GooglePoppinsWidgets(
+        text: 'Guardian Details'.tr,fontsize: 18.w),),
+
+
+      body: (widget.documentSnapshot == null)? 
+      Center(child: GoogleMonstserratWidgets(
+        text: 'Guardian Details not available'.tr,fontsize: 14.w,)): ListView(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButtonBackWidget(color: cblack,),
+               // IconButtonBackWidget(color: cblack,),
                 Stack(
                   children: [
                  
@@ -83,7 +93,7 @@ class _ViewGDState extends State<ViewGD> {
                     height: screenSize.height,
                     width: double.infinity,
                     decoration:  BoxDecoration(
-                      color: Colors.blue.withOpacity(0.9),
+                      color: Colors.white,
                       borderRadius: BorderRadius.all(
                       Radius.circular(22.w)
                       

@@ -1,6 +1,6 @@
-
 import 'dart:developer';
 
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,8 +11,8 @@ class LanguageChangeDrawerPage extends StatelessWidget {
 
   final List<Map<String, dynamic>> locale = [
     {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
-    {'name': 'ಕನ್ನಡ', 'locale': const Locale('kn', 'IN')},
-    {'name': 'हिंदी', 'locale': const Locale('hi', 'IN')},
+    // {'name': 'ಕನ್ನಡ', 'locale': const Locale('kn', 'IN')},
+    // {'name': 'हिंदी', 'locale': const Locale('hi', 'IN')},
     {'name': 'മലയാളം', 'locale': const Locale('ml', 'IN')},
   ];
 
@@ -25,6 +25,9 @@ class LanguageChangeDrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title:  Text("Select Language".tr),backgroundColor: adminePrimayColor,
+      ),
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),

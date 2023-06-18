@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/student_controller/student_notice_controller/student_notice_controller.dart';
-import '../../../constant/sizes/sizes.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
 class SchoolLevelNoticePage extends StatelessWidget {
@@ -26,51 +25,53 @@ class SchoolLevelNoticePage extends StatelessWidget {
                 child: Text("No Data Found"),
               )
             : ListView.separated(
+             //   reverse: true,
                 itemCount:
                     studentNoticeController.schoolLevelNoticeLists.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return 
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10,right: 10,left: 10),
-                      child: Card(
-                        child: ListTile(
-                          shape: BeveledRectangleBorder(side: BorderSide(color: Colors.grey.withOpacity(0.2))),
-                          leading: const Image(
-                              image: NetworkImage(
-                                  "https://media.istockphoto.com/id/926144358/photo/portrait-of-a-little-bird-tit-flying-wide-spread-wings-and-flushing-feathers-on-white-isolated.jpg?b=1&s=170667a&w=0&k=20&c=DEARMqqAI_YoA5kXtRTyYTYU9CKzDZMqSIiBjOmqDNY=")),
-                          title: GooglePoppinsWidgets(
-                            fontsize: 22.h,
-                            text: studentNoticeController
-                                .schoolLevelNoticeLists[index].heading,
-                          ),
-                          subtitle: GooglePoppinsWidgets(
-                            fontsize: 14.h,
-                            text: studentNoticeController
-                                .schoolLevelNoticeLists[index].publishedDate,
-                          ),
-                          trailing: InkWell(
-                            child: GooglePoppinsWidgets(
-                                text: "View".tr,
-                                fontsize: 16.h,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.blue),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => NoticeClassDisplayPage(
-                                        noticeModel: studentNoticeController
-                                            .schoolLevelNoticeLists[index]),
-                                  ));
-                            },
-                          ),
+                  return Padding(
+                    padding:
+                         EdgeInsets.only(bottom: 10.h, right: 10.w, left: 10.w),
+                    child: Card(
+                      child: ListTile(
+                        shape: BeveledRectangleBorder(
+                            side: BorderSide(
+                                color: Colors.grey.withOpacity(0.2))),
+                        leading: const Image(
+                            image: NetworkImage(
+                                "https://media.istockphoto.com/id/926144358/photo/portrait-of-a-little-bird-tit-flying-wide-spread-wings-and-flushing-feathers-on-white-isolated.jpg?b=1&s=170667a&w=0&k=20&c=DEARMqqAI_YoA5kXtRTyYTYU9CKzDZMqSIiBjOmqDNY=")),
+                        title: GooglePoppinsWidgets(
+                          fontsize: 22.h,
+                          text: studentNoticeController
+                              .schoolLevelNoticeLists[index].heading,
+                        ),
+                        subtitle: GooglePoppinsWidgets(
+                          fontsize: 14.h,
+                          text: studentNoticeController
+                              .schoolLevelNoticeLists[index].publishedDate,
+                        ),
+                        trailing: InkWell(
+                          child: GooglePoppinsWidgets(
+                              text: "View".tr,
+                              fontsize: 16.h,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.blue),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => NoticeClassDisplayPage(
+                                      noticeModel: studentNoticeController
+                                          .schoolLevelNoticeLists[index]),
+                                ));
+                          },
                         ),
                       ),
-                    );
-                  
+                    ),
+                  );
                 },
                 separatorBuilder: (context, index) {
-                  return kHeight10;
+                  return const Text('');
                 },
               ));
   }

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
@@ -30,29 +32,50 @@ class EditExamResultScreen extends StatelessWidget {
     log('subjectid ::;$subjectID');
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: adminePrimayColor,
+        title: GoogleMonstserratWidgets(text: 'Mark List'.tr, fontsize: 19.w,fontWeight: FontWeight.w600),),
       body: SafeArea(
           child: Container(
             margin: EdgeInsets.only(top: 20.h),
             child: Column(
+             
                   children: [
-            SizedBox(
-              height: 50.w,       
-              child: GoogleMonstserratWidgets(
-            text: 'Mark List',
-            fontsize: 19.w,
-            fontWeight: FontWeight.bold,
-              ),
-            ),
+                  
+                    
+           
             Row(children: [
-              Container(child: GoogleMonstserratWidgets(text:"No:", fontsize: 16.w)), 
+              kWidth10,
+              SizedBox(
+                height: 35.w,
+                                    width: 30.w,
+                 // 
+                child: Center(child: GoogleMonstserratWidgets(text:"No:", fontsize: 14.w))), 
 
-               Container(child: GoogleMonstserratWidgets(text:"Name", fontsize: 16.w)), 
+               SizedBox(
+                 height: 35.w,
+                                    width: 160.w,
+              
+                //,
+                child: Center(child: GoogleMonstserratWidgets(text:"Name", fontsize: 14.w))), 
 
-                Container(child: GoogleMonstserratWidgets(text:"Mark:", fontsize: 16.w)), 
+                SizedBox(
+                  height: 35.w,
+                  width: 100.w,
+                
+                   // ,
+                  child: Center(child: GoogleMonstserratWidgets(text:"Mark", fontsize: 14.w))), 
 
-                 Container(child: GoogleMonstserratWidgets(text:"Grade ", fontsize: 16.w)), 
-
-                  Container(child: GoogleMonstserratWidgets(text:"Delete:", fontsize: 16.w)), 
+                 SizedBox(
+                  height: 35.w,
+                                    width: 50.w,
+                  child: Center(child: GoogleMonstserratWidgets(text:"Grade ", fontsize: 14.w))), 
+kWidth10,
+                  SizedBox(
+                   height: 35.w,
+                                    width: 60.w,
+                    
+                    child: Center(child: GoogleMonstserratWidgets(text:"Delete", fontsize: 14.w))), 
 
             ],),
             Expanded(
@@ -72,79 +95,119 @@ class EditExamResultScreen extends StatelessWidget {
                     .snapshots(),
                 builder: (context, snaps) {
                   if (snaps.hasData) {
-                    return ListView.separated(
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                            height: 50.w,
-                            child: Row(
-                              children: [
-                                GoogleMonstserratWidgets(text: '${index + 1}',fontsize: 16.w),
-                                kWidth20,
-                                GoogleMonstserratWidgets(text: snaps.data!.docs[index]['studentName'],fontsize: 16.w),
-                                const Spacer(),
-                                GoogleMonstserratWidgets(text: snaps.data!.docs[index]['obtainedMark'],fontsize: 16.w),
-                                IconButton(
-                                    onPressed: () async {
-                                      editMark(
-                                          context,
-                                          classID,
-                                          examId,
-                                          subjectID,
-                                          snaps.data!.docs[index]
-                                              ['obtainedMark'],
-                                          snaps.data!.docs[index]
-                                              ['studentid'],
-                                          examlevel);
-                                    },
-                                    icon: const Icon(
-                                      Icons.edit,
-                                      color: Colors.green,
-                                    )),
-                                kWidth10,
-                                GoogleMonstserratWidgets(text: 
-                                    snaps.data!.docs[index]['obtainedGrade'],fontsize: 16.w),
-                                IconButton(
-                                    onPressed: () async {
-                                      editGrade(
-                                          context,
-                                          classID,
-                                          examId,
-                                          subjectID,
-                                          snaps.data!.docs[index]
-                                              ['obtainedGrade'],
-                                          snaps.data!.docs[index]
-                                              ['studentid'],
-                                          examlevel);
-                                    },
-                                    icon: const Icon(
-                                      Icons.edit,
-                                      color: Colors.green,
-                                    )),
-                                IconButton(
-                                    onPressed: () async {
-                                      deleteResult(
-                                          context,
-                                          classID,
-                                          examId,
-                                          subjectID,
-                                          snaps.data!.docs[index]
-                                              ['obtainedGrade'],
-                                          snaps.data!.docs[index]
-                                              ['studentid'],
-                                          examlevel);
-                                    },
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      color: Colors.red,
-                                    )),
-                              ],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        },
-                        itemCount: snaps.data!.docs.length);
+                    return Padding(
+                      padding:  EdgeInsets.only(left: 10.w,right: 10.w),
+                      child: ListView.separated(
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              height: 50.w,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                     height: 35.w,
+                                    width: 30.w,
+                                  
+                                    child: Center(child: GoogleMonstserratWidgets(text: '${index + 1}',fontsize: 16.w))),
+                                 // kWidth20,
+                                  SizedBox(
+                                     height: 35.w,
+                                    width: 160.w,
+                                    
+                                    child: Center(child: GoogleMonstserratWidgets(text: snaps.data!.docs[index]['studentName'],fontsize: 14.w))),
+                                 // const Spacer(),
+                                  SizedBox(
+                                     height: 35.w,
+                                    width: 50.w,
+                                  
+                                    child: Center(child: GoogleMonstserratWidgets(text: snaps.data!.docs[index]['obtainedMark'],fontsize: 16.w))),
+                                  SizedBox(
+                                     height: 35.w,
+                                    width: 35.w,
+                                    
+                                    child: IconButton(
+                                        onPressed: () async {
+                                          editMark(
+                                              context,
+                                              classID,
+                                              examId,
+                                              subjectID,
+                                              snaps.data!.docs[index]
+                                                  ['obtainedMark'],
+                                              snaps.data!.docs[index]
+                                                  ['studentid'],
+                                              examlevel);
+                                        },
+                                        icon:  Icon(
+                                          Icons.edit,
+                                          color: Colors.green,
+                                          size: 25.w,
+                                        )),
+                                  ),
+                                //  kWidth10,
+                                  SizedBox(
+                                     height: 35.w,
+                                    width: 50.w,
+                                  
+                                    child: Center(
+                                      child: GoogleMonstserratWidgets(text: 
+                                          snaps.data!.docs[index]['obtainedGrade'],fontsize: 16.w),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                     height: 35.w,
+                                    width: 35.w,
+                                  
+                                    child: IconButton(
+                                        onPressed: () async {
+                                          editGrade(
+                                              context,
+                                              classID,
+                                              examId,
+                                              subjectID,
+                                              snaps.data!.docs[index]
+                                                  ['obtainedGrade'],
+                                              snaps.data!.docs[index]
+                                                  ['studentid'],
+                                              examlevel);
+                                        },
+                                        icon:  Icon(
+                                          Icons.edit,
+                                          color: Colors.green,
+                                        
+                                        size: 25.w,)),
+                                  ),
+                                  SizedBox(
+                                     height: 35.w,
+                                    width: 40.w,
+                                    
+                                    child: IconButton(
+                                        onPressed: () async {
+                                          deleteResult(
+                                              context,
+                                              classID,
+                                              examId,
+                                              subjectID,
+                                              snaps.data!.docs[index]
+                                                  ['obtainedGrade'],
+                                              snaps.data!.docs[index]
+                                                  ['studentid'],
+                                              examlevel);
+                                        },
+                                        icon:  Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                          size: 25.w,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
+                          itemCount: snaps.data!.docs.length),
+                    );
                   } else {
                     return const Text('');
                   }
@@ -162,6 +225,7 @@ editMark(BuildContext context, String classID, String examId, String subjectID,
   log('examid :::: $examId');
   log('subjectid :::$subjectID');
   log('studentid ::: $studentID');
+  final formkey =GlobalKey<FormState>();
   TextEditingController markController = TextEditingController();
   return showDialog(
     context: context,
@@ -172,24 +236,29 @@ editMark(BuildContext context, String classID, String examId, String subjectID,
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              TextFormField(
-                keyboardType: TextInputType.number,
-                controller: markController,
-                decoration: InputDecoration(hintText: mark),
+              Form(
+                key: formkey,
+                child: TextFormField(
+                  validator: checkFieldEmpty,
+                  keyboardType: TextInputType.number,
+                  controller: markController,
+                  decoration: InputDecoration(hintText: mark),
+                ),
               )
             ],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('cancel'),
+            child: const Text('Cancel'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: const Text('update'),
+            child: const Text('Update'),
             onPressed: () async {
+              if(formkey.currentState?.validate()?? false){
               FirebaseFirestore.instance
                   .collection('SchoolListCollection')
                   .doc(UserCredentialsController.schoolId)
@@ -224,7 +293,7 @@ editMark(BuildContext context, String classID, String examId, String subjectID,
                   Get.back();
                 });
               });
-            },
+             } },
           ),
         ],
       );
@@ -238,6 +307,7 @@ editGrade(BuildContext context, String classID, String examId, String subjectID,
   log('examid :::: $examId');
   log('subjectid :::$subjectID');
   log('studentid ::: $studentID');
+  final formKey = GlobalKey<FormState>();
   TextEditingController markController = TextEditingController();
   return showDialog(
     context: context,
@@ -248,23 +318,28 @@ editGrade(BuildContext context, String classID, String examId, String subjectID,
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              TextFormField(
-                controller: markController,
-                decoration: InputDecoration(hintText: mark),
+              Form(
+                key: formKey,
+                child: TextFormField(
+                  validator: checkFieldEmpty,
+                  controller: markController,
+                  decoration: InputDecoration(hintText: mark),
+                ),
               )
             ],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('cancel'),
+            child: const Text('Cancel'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: const Text('update'),
+            child: const Text('Update'),
             onPressed: () async {
+              if(formKey.currentState?.validate()?? false){
               FirebaseFirestore.instance
                   .collection('SchoolListCollection')
                   .doc(UserCredentialsController.schoolId)
@@ -299,7 +374,7 @@ editGrade(BuildContext context, String classID, String examId, String subjectID,
                   Get.back();
                 });
               });
-            },
+              }  },
           ),
         ],
       );
@@ -321,18 +396,18 @@ deleteResult(BuildContext context, String classID, String examId,
         title: const Text('Alert'),
         content: SingleChildScrollView(
           child: ListBody(
-            children: const <Widget>[Text('Are you shure remove result ?')],
+            children: const <Widget>[Text('Are you sure to remove result ?')],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('cancel'),
+            child: const Text('Cancel'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: const Text('update'),
+            child: const Text('Update'),
             onPressed: () async {
               FirebaseFirestore.instance
                   .collection('SchoolListCollection')
@@ -374,4 +449,4 @@ deleteResult(BuildContext context, String classID, String examId,
       );
     },
   );
-}
+    }

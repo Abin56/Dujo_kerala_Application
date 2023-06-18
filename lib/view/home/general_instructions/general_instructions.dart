@@ -22,7 +22,7 @@ class GeneralInstruction extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: adminePrimayColor,
         title:
-            GooglePoppinsWidgets(text: "General Instruction", fontsize: 20.h),
+            GooglePoppinsWidgets(text: "General Instructions".tr, fontsize: 20.h),
       ),
       body: FutureBuilder(
           future: generalInstructionsController.getInstruction(),

@@ -1,10 +1,11 @@
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../sruthi/Subject 2/subject_chapterwise_display.dart';
 import '../../colors/colors.dart';
 import '../../widgets/fonts/google_poppins.dart';
+import '../Subject/chapterdisplay.dart';
 
 
 
@@ -18,9 +19,9 @@ class StudyMaterials extends StatelessWidget {
           backgroundColor: Colors.white70,
             appBar: AppBar(
               title: Row(
-                children: const [
+                children:  [
            
-                  Text("Study Materials"),
+                  Text("Study Materials".tr),
                 ],
               ),
               backgroundColor: adminePrimayColor,
@@ -80,7 +81,7 @@ class StudyMaterials extends StatelessWidget {
                             ),
                             trailing: InkWell(
                               child: GooglePoppinsWidgets(
-                                  text: "View",
+                                  text: "View".tr,
                                   fontsize: 16.h,
                                   fontWeight: FontWeight.w500,
                                   color: adminePrimayColor),

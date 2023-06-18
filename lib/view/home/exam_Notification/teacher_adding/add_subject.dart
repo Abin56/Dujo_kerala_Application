@@ -16,7 +16,7 @@ class AddTimeTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-          backgroundColor: adminePrimayColor,title: const Text('Exam TimeTable'),),
+          backgroundColor: adminePrimayColor,title:  Text('Exam Time Table'.tr),),
       body: SafeArea(
           child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +31,7 @@ class AddTimeTable extends StatelessWidget {
                 child: SizedBox(
                   height: 80.h,
                   width: 250.w,
-                  child:  Center(child: GooglePoppinsWidgets(text: 'Upload TimeTable', fontsize: 15.w,color: cWhite,),)),
+                  child:  Center(child: GooglePoppinsWidgets(text: 'Upload Time Table'.tr, fontsize: 15.w,color: cWhite,),)),
                 ),
               ),
             kHeight30,
@@ -44,7 +44,7 @@ class AddTimeTable extends StatelessWidget {
                 child: SizedBox(
                   height: 80.h,
                   width: 250.w,
-                  child:  Center(child: GooglePoppinsWidgets(text: 'View TimeTable', fontsize: 15.w,color: cWhite,),)),
+                  child:  Center(child: GooglePoppinsWidgets(text: 'View Time Table'.tr, fontsize: 15.w,color: cWhite,),)),
                 ),
             ),
           ],

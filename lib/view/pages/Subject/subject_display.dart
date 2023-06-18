@@ -32,7 +32,7 @@ class StudentSubjectHome extends StatelessWidget {
               color: cWhite,
             ),
             GooglePoppinsWidgets(
-              text: "Subject",
+              text: "Subjects".tr,
               fontsize: 20.h,
               color: cWhite,
             )
@@ -142,12 +142,15 @@ class StudentSubjectHome extends StatelessWidget {
                                   kHeight20,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      GooglePoppinsWidgets(
-                                        text: snapshot.data!.docs[index]
-                                            ['subjectName'],
-                                        fontsize: 20.h,
-                                        color: cWhite,
+                                      Flexible(
+                                        child: GooglePoppinsWidgets(
+                                          text: snapshot.data!.docs[index]
+                                              ['subjectName'],
+                                          fontsize: 20.h,
+                                          color: cWhite,
+                                        ),
                                       ),
                                     ],
                                   ),

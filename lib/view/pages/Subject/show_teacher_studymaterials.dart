@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../../sruthi/Subject 2/subject_chapterwise_display.dart';
 import '../pdf_viewer/pdf_viewer.dart'; 
@@ -23,9 +24,9 @@ class StudyMaterials extends StatelessWidget {
           backgroundColor: Colors.white70,
             appBar: AppBar(
               title: Row(
-                children: const [
+                children:  [
            
-                  Text("Study Materials"),
+                  Text("Study Materials".tr),
                 ],
               ),
               backgroundColor: adminePrimayColor,
@@ -100,7 +101,7 @@ class StudyMaterials extends StatelessWidget {
                                 ),
                                 trailing: InkWell(
                                   child: GooglePoppinsWidgets(
-                                      text: "View",
+                                      text: "View".tr,
                                       fontsize: 16.h,
                                       fontWeight: FontWeight.w500,
                                       color: adminePrimayColor),
@@ -125,7 +126,7 @@ class StudyMaterials extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator(),);
                     
                   } 
-                  return const Center(child: Text('No Study Materials Uploaded Yet!'));
+                  return  Center(child: Text('No Study Materials Uploaded Yet!'.tr));
                
               }
             ))) ;

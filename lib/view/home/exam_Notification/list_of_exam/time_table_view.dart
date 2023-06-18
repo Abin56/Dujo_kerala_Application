@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../sruthi/Exam Notification/Teacher_Upload/exm_teacher_upload.dart';
@@ -24,7 +25,7 @@ class TeacherExamTimeTableViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text("Exam TimeTable"),backgroundColor: adminePrimayColor,),
+    return Scaffold(appBar: AppBar(title:  Text("Exam Time Table".tr),backgroundColor: adminePrimayColor,),
       body: SafeArea(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
@@ -44,7 +45,7 @@ class TeacherExamTimeTableViewScreen extends StatelessWidget {
                 if (snaps.data!.docs.isEmpty) {
                   return Center(
                     child: GooglePoppinsWidgets(
-                        text: "No Records Found", fontsize: 20),
+                        text: "No Records Found".tr, fontsize: 20),
                   );
                 } else {
                   return Column(
@@ -105,13 +106,13 @@ class TeacherExamTimeTableViewScreen extends StatelessWidget {
                                                   child: ListBody(
                                                     children: const <Widget>[
                                                       Text(
-                                                          'Do you want remove this timetable ?')
+                                                          'Do you want remove this time table ?')
                                                     ],
                                                   ),
                                                 ),
                                                 actions: <Widget>[
                                                   TextButton(
-                                                    child: const Text('cancel'),
+                                                    child: const Text('Cancel'),
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();

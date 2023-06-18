@@ -49,9 +49,35 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   List<String> tokenList = [];
   List<String> tokenList2 = [];
   DateTime? attendanceTime;
+  String substring = '';
+   String finalSubjectName = '';
+   String schoolName = '';
 
   List<Map<String, dynamic>> parentListOfAbsentees = [];
-  List<Map<String, dynamic>> guardianListOfAbsentees = [];
+  List<Map<String, dynamic>> guardianListOfAbsentees = []; 
+
+  getSchoolName()async{
+    final docRef = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).get();
+    schoolName = docRef['schoolName'];
+  }
+
+  String subjectNameFormatting(){
+     
+   substring = getSubstringUntilNumber(widget.subjectID)!;
+  print(substring);
+  return substring;
+  }
+
+
+
+  String? getSubstringUntilNumber(String input) {
+  RegExp regex = RegExp(r'^\D+');
+  RegExpMatch? match = regex.firstMatch(input);
+  if (match != null) {
+    return match.group(0);
+  }
+  return '';
+}
 
   Future<void> sendPushMessage(String token, String body, String title) async {
     try {
@@ -107,6 +133,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
     getSchoolTimer();
 
     getTime();
+     finalSubjectName = subjectNameFormatting();
+            log(finalSubjectName); 
+
+    getSchoolName();
   }
 
   @override
@@ -223,8 +253,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     'subject': widget.subjectName,
                                     'date': DateTime.now().toString(),
                                     'onSubmit': false,
-                                    'exTime': DateTime.now().add(Duration(
-                                        minutes: int.parse(schoolTimer))).toString()
+                                    'exTime': DateTime.now()
+                                        .add(Duration(
+                                            minutes: int.parse(schoolTimer)))
+                                        .toString()
                                   }).then((value) {
                                     FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
@@ -273,7 +305,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               final DateFormat formatter =
                                   DateFormat('dd-MM-yyyy');
                               String formatted = formatter.format(parseDate);
-                              await FirebaseFirestore.instance
+                                  await FirebaseFirestore.instance
                                   .collection("SchoolListCollection")
                                   .doc(widget.schoolID)
                                   .collection(widget.batchId)
@@ -318,8 +350,10 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                     'subject': widget.subjectName,
                                     'date': DateTime.now().toString(),
                                     'onSubmit': false,
-                                    'exTime': DateTime.now().add(Duration(
-                                        minutes: int.parse(schoolTimer))).toString()
+                                    'exTime': DateTime.now()
+                                        .add(Duration(
+                                            minutes: int.parse(schoolTimer)))
+                                        .toString()
                                   }).then((value) {
                                     FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
@@ -480,6 +514,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
               child: const Text('Edit'),
               onPressed: () async {
                 Navigator.of(context).pop();
+
                 attendanceTime = DateTime.now();
                 String formattedDate =
                     DateFormat.yMMMMd().format(attendanceTime!);
@@ -575,26 +610,26 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                   tokenList2.add(r['deviceToken']);
                 }
 
-                Timer(Duration(hours: int.parse(timer)), () {
+                Timer(Duration(hours: int.parse(timer)), () async {
                   // Function to be executed after the duration
 
-                  for (var l in tokenList) {
-                    for (var i = 0; i < tokenList.length; i++) {
-                      sendPushMessage(
-                          tokenList[i],
-                          'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.',
-                          'Absent Notification');
-                    }
-                  }
+                  // for (var l in tokenList) {
+                  //   for (var i = 0; i < tokenList.length; i++) {
+                  //     sendPushMessage(
+                  //         tokenList[i],
+                  //         'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.',
+                  //         'Absent Notification');
+                  //   }
+                  // }
 
-                  for (var m in tokenList2) {
-                    for (var i = 0; i < tokenList2.length; i++) {
-                      sendPushMessage(
-                          tokenList2[i],
-                          'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.',
-                          'Absent Notification');
-                    }
-                  }
+                  // for (var m in tokenList2) {
+                  //   for (var i = 0; i < tokenList2.length; i++) {
+                  //     sendPushMessage(
+                  //         tokenList2[i],
+                  //         'Sir/Madam, your ward was absent today at $formattedTime, on $formattedDate.',
+                  //         'Absent Notification');
+                  //   }
+                  // }
                 });
 
                 //                        for (String searchValue in mappedAbsentStudentsList[0]['uid']) {
@@ -632,28 +667,162 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                       ),
                       actions: <Widget>[
                         TextButton(
-                          child: const Text('Upload Attendence'),
-                          onPressed: () async {
-                            log('period document id ${widget.periodTokenID}');
-                            FirebaseFirestore.instance
-                                .collection("SchoolListCollection")
-                                .doc(widget.schoolID)
-                                .collection(widget.batchId)
-                                .doc(widget.batchId)
-                                .collection("classes")
-                                .doc(widget.classID)
-                                .collection("Attendence")
-                                .doc(monthwise)
-                                .collection(monthwise)
-                                .doc(formatted)
-                                .collection('PeriodCollection')
-                                .doc(widget.periodTokenID)
-                                .delete()
-                                .then((value) {
+                            child: const Text('Upload Attendance'),
+                            onPressed: () async {
+                              log('period document id ${widget.periodTokenID}');
+
+                               attendanceTime = DateTime.now();
+                String formattedDate =
+                    DateFormat.yMMMMd().format(attendanceTime!);
+                String formattedTime = DateFormat.jm().format(DateTime.now());
+                              
+                              FirebaseFirestore.instance
+                                  .collection("SchoolListCollection")
+                                  .doc(widget.schoolID)
+                                  .collection(widget.batchId)
+                                  .doc(widget.batchId)
+                                  .collection("classes")
+                                  .doc(widget.classID)
+                                  .collection("Attendence")
+                                  .doc(monthwise)
+                                  .collection(monthwise)
+                                  .doc(formatted)
+                                  .collection('PeriodCollection')
+                                  .doc(widget.periodTokenID)
+                                  .delete();
+
                               Get.offAll(const TeacherMainHomeScreen());
-                            });
-                          },
-                        ),
+
+                              Timer(const Duration(seconds: 2),
+                                  () async {
+                                    bool isValueEqual = false;
+                                QuerySnapshot<Map<String, dynamic>> snap =
+                                    await FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(widget.schoolID)
+                                        .collection(widget.batchId)
+                                        .doc(widget.batchId)
+                                        .collection("classes")
+                                        .doc(widget.classID)
+                                        .collection('Attendence')
+                                        .doc(monthwise)
+                                        .collection(monthwise)
+                                        .doc(formatted)
+                                        .collection("Subjects")
+                                        .doc(widget.periodTokenID)
+                                        .collection('PresentList')
+                                        .where('present', isEqualTo: false)
+                                        .get();
+
+                                List<Map<String, dynamic>>
+                                    mappedAbsentStudentsList =
+                                    snap.docs.map((doc) => doc.data()).toList(); 
+
+                                    ///////
+
+                                      Future<QuerySnapshot<Map<String, dynamic>>> parentss =
+                    FirebaseFirestore.instance
+                        .collection("SchoolListCollection")
+                        .doc(widget.schoolID)
+                        .collection(widget.batchId)
+                        .doc(widget.batchId)
+                        .collection("classes")
+                        .doc(widget.classID)
+                        .collection('ParentCollection')
+                        .get();
+
+                Future<QuerySnapshot<Map<String, dynamic>>> guardianss =
+                    FirebaseFirestore.instance
+                        .collection("SchoolListCollection")
+                        .doc(widget.schoolID)
+                        .collection(widget.batchId)
+                        .doc(widget.batchId)
+                        .collection("classes")
+                        .doc(widget.classID)
+                        .collection('GuardianCollection')
+                        .get(); 
+
+                        QuerySnapshot<Map<String, dynamic>> snapshot2 = await parentss; 
+                        QuerySnapshot<Map<String, dynamic>> snapshot3 = await guardianss; 
+
+
+                        List<Map<String, dynamic>> parentsList = snapshot2.docs.map((doc) => doc.data()).toList(); 
+
+                    List<Map<String, dynamic>> guardiansList = snapshot3.docs.map((doc) => doc.data()).toList();
+
+                       for (var item1 in parentsList) {
+                  for (var item2 in mappedAbsentStudentsList) {
+                    if (item1['studentID'] == item2['uid']) {
+                      log('yesss!!!!!');
+                      parentListOfAbsentees.add(item1);
+
+                      log('THE LIST : ${parentListOfAbsentees.length.toString()}');
+                      isValueEqual = true;// 
+                      break;
+                    } else{
+                      log('no');
+                    }
+                  }
+                  //parentListOfAbsentees
+                }
+
+                for (var item1 in guardiansList) {
+                  for (var item2 in mappedAbsentStudentsList) {
+                    if (item1['studentID'] == item2['uid']) {
+                      log('yesss!!!!!');
+                      guardianListOfAbsentees.add(item1);
+                  
+
+                      log('THE GLIST : ${guardianListOfAbsentees.length.toString()}');
+                      isValueEqual = true;
+                      break;
+                    } else{
+                      log('no2');
+                    }
+
+                    
+             
+
+
+                    /////
+
+                                for (var doc in snap.docs) {
+                                  final docData = doc.data();
+                                  log('CATCH THE LIST');
+                                  log(docData['studentName']);
+                                }}} 
+
+                                   log('HWG: ${parentListOfAbsentees[0]['studentID']}');
+                for (var k in parentListOfAbsentees) {
+                  tokenList.add(k['deviceToken']);
+                }
+
+                for (var r in guardianListOfAbsentees) {
+                  tokenList2.add(r['deviceToken']);
+                  log(tokenList2[0]);
+                }
+
+                 for (var l in tokenList) {
+                    for (var i = 0; i < tokenList.length; i++) {
+                      sendPushMessage(
+                          tokenList[i],
+                          'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
+                          'Absent Notification from $schoolName');
+                    }
+                  }
+
+                  for (var l in tokenList2) {
+                    for (var i = 0; i < tokenList2.length; i++) {
+                      sendPushMessage(
+                          tokenList2[i],
+                          'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
+                          'Absent Notification from $schoolName');
+                    }
+                  }
+
+                              });
+                              log('DONE');
+                            }),
                       ],
                     );
                   },

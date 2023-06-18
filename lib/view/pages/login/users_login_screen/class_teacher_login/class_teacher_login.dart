@@ -66,7 +66,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                     kHeight10,
                     SigninTextFormfield(
                         obscureText: false,
-                        hintText: 'Email id'.tr,
+                        hintText: 'Email ID'.tr,
                         labelText: 'Enter Mail ID',
                         prefixIcon: IconButton(
                           onPressed: () {},

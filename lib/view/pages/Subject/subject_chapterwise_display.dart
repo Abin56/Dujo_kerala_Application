@@ -2,6 +2,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../widgets/fonts/google_poppins.dart';
 import '../../../sruthi/Study Materials/study_materials_list.dart';
@@ -13,7 +14,7 @@ class SubjectWiseDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-backgroundColor: adminePrimayColor,title: Text("Chapters"),
+backgroundColor: adminePrimayColor,title: Text("Chapters".tr),
       ),
       body: Column(
         children: [
@@ -55,7 +56,7 @@ backgroundColor: adminePrimayColor,title: Text("Chapters"),
                                 child: Padding(
                                   padding:  EdgeInsets.only(top: 10.h),
                                   child: GooglePoppinsWidgets(
-                                    text: "Study Materials",
+                                    text: "Study Materials".tr,
                                     fontsize: 16.h,
                                     color: adminePrimayColor,
                                   ),
