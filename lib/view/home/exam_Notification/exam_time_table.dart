@@ -14,18 +14,18 @@ class ExmNotifications extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(title:  Text('Exams'.tr),
           backgroundColor: adminePrimayColor,
-          bottom:  TabBar(tabs: [
+          bottom:  const TabBar(tabs: [
             Tab(
-              text: 'Public Level'.tr,
+              text: 'State Level',
             ),
             Tab(
-              text: 'School Level'.tr,
+              text: 'School Level',
             )
           ]),
         ),
-        body:  SafeArea(
+        body:  const SafeArea(
           child: TabBarView(
-            children: [PublicLevel(), StateLevel()],
+            children: [StateLevel(),PublicLevel()],
           ),
         ),
       ),

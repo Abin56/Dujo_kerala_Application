@@ -57,7 +57,7 @@ class SelectExamSubjectScreen extends StatelessWidget {
                           child: FadeInAnimation(
                             child: GestureDetector(
                               onTap: () async {
-                                Get.to(EditExamResultScreen(
+                                Get.to(()=>EditExamResultScreen(
                                   examlevel: examLevel,
                                   subjectID:snapshots.data!.docs[index]['subjectid'] ,
                                     classID: classID,

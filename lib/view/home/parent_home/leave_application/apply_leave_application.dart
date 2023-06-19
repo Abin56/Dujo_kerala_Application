@@ -115,7 +115,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      studentController.getTeacherClassRoll(widget.studentName);
+      studentController.getTeacherClassRoll(widget.studentID);
       if (studentController.studentName.value.isEmpty) {
         return const Scaffold(
             body: Center(
@@ -391,6 +391,6 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
      _applyFromDateController.clear();
       _applyTODateController.clear();
        _leaveReasonController.clear();
-         
-  }
+
+}
 }

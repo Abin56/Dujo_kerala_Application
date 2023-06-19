@@ -46,7 +46,7 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 
       const SS(),
           
-      // const StudentShowTimeTable(), //Time Table
+      // const SS(), //Time Table
 
       const ViewHomeWorks(), // Home Works
       
@@ -107,7 +107,7 @@ NoticePage(), //Notice
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(screenNavigation[index]);
+                        Get.to(()=>screenNavigation[index]);
                       },
                       child: Container(
                         decoration: BoxDecoration(

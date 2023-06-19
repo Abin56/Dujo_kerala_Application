@@ -145,7 +145,7 @@ class TeacherLoginScreen extends StatelessWidget {
                             text: "Don't Have an account?".tr, fontsize: 15),
                         GestureDetector(
                           onTap: () {
-                            Get.to(TeachersSignUpScreen(
+                            Get.to(()=>TeachersSignUpScreen(
                               pageIndex: 3,
                             ));
                           },

@@ -7,7 +7,9 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../pages/chat_gpt/screens/chat_screen.dart';
+import '../../pages/recorded_videos/select_subjects.dart';
 import '../drawer/guardian_drawer.dart';
 import 'guradian_home.dart';
 
@@ -36,7 +38,11 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       GuardianHomeScreen(),
-      const UnderMaintanceScreen(text: ""),
+           RecSelectSubjectScreen(
+        batchId: UserCredentialsController.batchId!,
+        classID: UserCredentialsController.classId!,
+        schoolId: UserCredentialsController.schoolId!,
+      ),
       const UnderMaintanceScreen(text: ""),
          const ChatScreen(),
     ];

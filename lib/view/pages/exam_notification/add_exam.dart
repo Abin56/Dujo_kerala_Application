@@ -15,7 +15,7 @@ class ExamNotification extends StatelessWidget {
           GestureDetector(
             onTap: ()async {
               
-              Get.to(ViewExamsScreen());
+              Get.to(()=>ViewExamsScreen());
             },
             child: Text('View'))
         ],

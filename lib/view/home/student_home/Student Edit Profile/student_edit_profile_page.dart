@@ -94,13 +94,24 @@ class StudentProfileEditPage extends StatelessWidget {
             StudentEditListileWidget(
               icon: Icons.class_rounded,
               subtitle: FutureBuilder(
-                  future: getClassName(
-                      UserCredentialsController.studentModel?.classId ?? ""),
+                  future: FirebaseFirestore.instance
+                      .collection('SchoolListCollection')
+                      .doc(UserCredentialsController.schoolId)
+                      .collection(UserCredentialsController.batchId!)
+                      .doc(UserCredentialsController.batchId)
+                      .collection('classes')
+                      .doc(UserCredentialsController.classId)
+                      .get(),
                   builder: (context, snapshot) {
-                    return GooglePoppinsWidgets(
-                        text: snapshot.data ?? " ", fontsize: 19.h);
+                    if (snapshot.hasData) {
+                      return GooglePoppinsWidgets(
+                          text: snapshot.data!.data()!['className'],
+                          fontsize: 19.h);
+                    } else {
+                      return const Text('');
+                    }
                   }),
-              title: GooglePoppinsWidgets(text: "Class".tr, fontsize: 12.h),
+              title: GooglePoppinsWidgets(text: "Class ".tr, fontsize: 12.h),
             ),
             StudentEditListileWidget(
               icon: Icons.bloodtype_outlined,
@@ -199,21 +210,20 @@ class StudentCircleAvatarImgeWidget extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       )
                     : AlertDialog(
-                        title:
-                             Text('Do you want to change profile picture'.tr),
+                        title: Text('Do you want to change profile picture'.tr),
                         actions: [
                           TextButton(
                               onPressed: () {
                                 Get.find<StudentProfileEditController>()
                                     .updateStudentProfilePicture();
                               },
-                              child:  Text('Update'.tr)),
+                              child: Text('Update'.tr)),
                           TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                                 getImageController.pickedImage.value = "";
                               },
-                              child:  Text('Cancel'.tr)),
+                              child: Text('Cancel'.tr)),
                         ],
                       ),
               );

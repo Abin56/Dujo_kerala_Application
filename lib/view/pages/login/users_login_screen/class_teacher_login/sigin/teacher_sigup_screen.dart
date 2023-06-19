@@ -199,7 +199,7 @@ class TeachersSignUpScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(TeacherLoginScreen(
+                          Get.to(()=>TeacherLoginScreen(
                             pageIndex: 3,
                           ));
                         },

@@ -142,7 +142,7 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                                     child: FadeInAnimation(
                                       child: GestureDetector(
                                         onTap: () {
-                                          Get.to(TakeAttentenceSubjectWise(
+                                          Get.to(()=>TakeAttentenceSubjectWise(
                                             periodNumber:snapshot.data?.docs[index]['period'],
                                             periodTokenID: snapshot.data?.docs[index]['docid'],
                                               batchId: batchId,

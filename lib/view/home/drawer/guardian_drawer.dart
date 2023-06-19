@@ -18,6 +18,7 @@ import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
+import '../student_home/time_table/ss.dart';
 
 class GuardianHeaderDrawer extends StatelessWidget {
   const GuardianHeaderDrawer({Key? key}) : super(key: key);
@@ -166,7 +167,7 @@ Widget MyDrawerList(context) {
         MenuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
       Get.to(
-            () => const StudentShowTimeTable(),
+            () => const SS(),
           );
         }),
 

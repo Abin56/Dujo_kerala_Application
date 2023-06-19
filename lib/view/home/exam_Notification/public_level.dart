@@ -22,7 +22,7 @@ class PublicLevel extends StatelessWidget {
                 .doc(UserCredentialsController.schoolId)
                 .collection(UserCredentialsController.batchId!)
                 .doc(UserCredentialsController.batchId!)
-                .collection('Public Level')
+                .collection('School Level')
                 .snapshots(),
             builder: (context, snaps) {
               if (snaps.hasData) {
@@ -38,9 +38,9 @@ class PublicLevel extends StatelessWidget {
                             snaps.data!.docs[index].data());
                         return GestureDetector(
                           onTap: () {
-                            Get.to(TeacherExamTimeTableViewScreen(
+                            Get.to(()=>TeacherExamTimeTableViewScreen(
                                 examID: data.docid,
-                                collectionName: 'Public Level',
+                                collectionName: 'School Level',
                                 date: stringTimeToDateConvert(data.publishDate),
                                 examName: data.examName));
                           },

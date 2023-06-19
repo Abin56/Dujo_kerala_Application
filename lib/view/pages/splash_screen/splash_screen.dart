@@ -73,7 +73,7 @@ nextpage() async {
   log("userRole:${UserCredentialsController.userRole}");
 
   if (auth.currentUser == null) {
-    Get.to(const DujoLoginScren());
+    Get.to(()=>const DujoLoginScren());
   } else {
     final DocumentReference<Map<String, dynamic>> firebaseFirestore =
         FirebaseFirestore.instance
@@ -95,7 +95,7 @@ nextpage() async {
     } else if (UserCredentialsController.userRole == 'guardian') {
       await checkGuardian(firebaseFirestore, auth);
     } else {
-      Get.to(const DujoLoginScren());
+      Get.to(()=>const DujoLoginScren());
     }
   }
 }
@@ -115,10 +115,10 @@ Future<void> checkStudent(
   if (studentData.data() != null) {
     UserCredentialsController.studentModel =
         StudentModel.fromJson(studentData.data()!);
-    Get.to(const StudentsMainHomeScreen());
+    Get.to(()=>const StudentsMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(const DujoLoginScren());
+    Get.to(()=>const DujoLoginScren());
   }
 }
 
@@ -133,10 +133,10 @@ Future<void> checkTeacher(
   if (teacherData.data() != null) {
     UserCredentialsController.teacherModel =
         TeacherModel.fromMap(teacherData.data()!);
-    Get.to(const TeacherMainHomeScreen());
+    Get.to(()=>const TeacherMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(const DujoLoginScren());
+    Get.to(()=>const DujoLoginScren());
   }
 }
 
@@ -151,10 +151,10 @@ Future<void> checkClassTeacher(
   if (classTeacherData.data() != null) {
     UserCredentialsController.teacherModel =
         TeacherModel.fromMap(classTeacherData.data()!);
-    Get.to(const ClassTeacherMainHomeScreen());
+    Get.to(()=>const ClassTeacherMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(const DujoLoginScren());
+    Get.to(()=>const DujoLoginScren());
   }
 }
 
@@ -174,10 +174,10 @@ Future<void> checkParent(
   if (parentData.data() != null) {
     UserCredentialsController.parentModel =
         ParentModel.fromMap(parentData.data()!);
-    Get.to(const ParentMainHomeScreen());
+    Get.to(()=>const ParentMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(const DujoLoginScren());
+    Get.to(()=>const DujoLoginScren());
   }
 }
 
@@ -197,9 +197,9 @@ Future<void> checkGuardian(
   if (guardianData.data() != null) {
     UserCredentialsController.guardianModel =
         GuardianModel.fromMap(guardianData.data()!);
-    Get.to(const GuardianMainHomeScreen());
+    Get.to(()=>const GuardianMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(const DujoLoginScren());
+    Get.to(()=>const DujoLoginScren());
   }
 }

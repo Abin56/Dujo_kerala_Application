@@ -55,7 +55,7 @@ class UserSentOTPScreen extends StatelessWidget {
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is AuthCodeSentState) {
-                      Get.to(UserVerifyOTPScreen(
+                      Get.to(()=>UserVerifyOTPScreen(
                           userpageIndex: userpageIndex,
                           phoneNumber: phoneNumber,
                           userEmail: userEmail,

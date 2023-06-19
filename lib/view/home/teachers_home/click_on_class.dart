@@ -23,6 +23,7 @@ import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
+import '../student_home/time_table/ss.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -37,7 +38,7 @@ class ClickOnClasss extends StatelessWidget {
           batchId: UserCredentialsController.batchId!,
           classID: classID), //Attendance Book
       const UserExmNotifications(), //Exam
-      const StudentShowTimeTable(), //Time Table
+      const SS(), //Time Table
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
@@ -69,7 +70,7 @@ class ClickOnClasss extends StatelessWidget {
 
       const UserExmNotifications(), //Exam
       SelectExamLevelScreen(classId: classID), //exam result upload
-      const StudentShowTimeTable(), //TimeTable
+      const SS(), //TimeTable
       const ViewHomeWorks(), //Home Works
 
       Scaffold(
@@ -165,7 +166,7 @@ class ClickOnClasss extends StatelessWidget {
                                           padding: const EdgeInsets.all(8.0),
                                           child: GestureDetector(
                                             onTap: () {
-                                              Get.to(noDataNavigation[index]);
+                                              Get.to(()=>noDataNavigation[index]);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -253,7 +254,7 @@ class ClickOnClasss extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.to(hasDataNavigation[index]);
+                                        Get.to(()=>hasDataNavigation[index]);
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(

@@ -51,10 +51,10 @@ android {
     defaultConfig {
         applicationId "in.DujoSchools.leptonCommunications"
         minSdkVersion 24
-        multiDexEnabled true
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     signingConfigs {

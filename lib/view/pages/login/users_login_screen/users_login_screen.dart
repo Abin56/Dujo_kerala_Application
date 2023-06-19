@@ -58,15 +58,15 @@ class UsersLoginScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () async {
                               if (index == 0) {
-                                Get.to(StudentLoginScreen(
+                                Get.to(()=>StudentLoginScreen(
                                   pageIndex: 0,
                                 ));
                               } else if (index == 1) {
-                                Get.to(ParentLoginScreen(
+                                Get.to(()=>ParentLoginScreen(
                                   pageIndex: 1,
                                 ));
                               } else if (index == 2) {
-                                Get.to(GuardianLoginScreen(
+                                Get.to(()=>GuardianLoginScreen(
                                   pageIndex: 2,
                                 ));
                               } else if (index == 3) {
@@ -147,7 +147,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
       children: [
         GestureDetector(
           onTap: () {
-            Get.to(TeacherLoginScreen(
+            Get.to(()=>TeacherLoginScreen(
               pageIndex: teacherPageIndex,
             ));
           },
@@ -170,7 +170,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
         ),
         GestureDetector(
           onTap: () {
-            Get.to(ClassTeacherLoginScreen(
+            Get.to(()=>ClassTeacherLoginScreen(
               pageIndex: classTeacherPageIndex,
             ));
           },

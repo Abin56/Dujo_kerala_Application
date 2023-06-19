@@ -44,8 +44,7 @@ class StateLevel extends StatelessWidget {
                                 date: stringTimeToDateConvert(data.publishDate),
                                 examName: data.examName));
                           },
-                      
-                            child: Container(
+                          child: Container(
                               margin: EdgeInsets.only(
                                   top: 10.h, left: 10.h, right: 10.h),
                               height: 135.h,
@@ -55,37 +54,40 @@ class StateLevel extends StatelessWidget {
                                 color: adminePrimayColor,
                               ),
                               child: Padding(
-                               padding: EdgeInsets.only(top: 12.h, left: 20.w),
+                                padding: EdgeInsets.only(top: 12.h, left: 20.w),
                                 child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                //  Text(data.examName),
-                                 GooglePoppinsWidgets(
-                                          text: "Exam Name  :   ${data.examName}",
-                                          fontsize: 16.h,
-                                          color: cWhite),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      GooglePoppinsWidgets(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    //  Text(data.examName),
+                                    GooglePoppinsWidgets(
+                                        text: "Exam Name  :   ${data.examName}",
+                                        fontsize: 16.h,
+                                        color: cWhite),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    GooglePoppinsWidgets(
+                                      text:
+                                          "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
+                                      fontsize: 14.h,
+                                      color: cWhite,
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    GooglePoppinsWidgets(
                                         text:
-                                            "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
+                                            "Starting date :  ${data.startingDate}",
                                         fontsize: 14.h,
-                                        color: cWhite,
-                                      ),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      GooglePoppinsWidgets(
-                                          text:
-                                              "Starting date :  ${data.startingDate}",
-                                          fontsize: 14.h,
-                                          color: cWhite),
-                                ],
-                                                          ),
+                                        color: cWhite),
+                                    GooglePoppinsWidgets(
+                                        text: "Ending date :  ${data.endDate}",
+                                        fontsize: 14.h,
+                                        color: cWhite),
+                                  ],
+                                ),
                               )),
-                          
                         );
                       },
                       separatorBuilder: (context, index) {

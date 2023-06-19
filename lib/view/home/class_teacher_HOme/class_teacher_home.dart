@@ -1,5 +1,5 @@
-
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -55,9 +55,6 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       height: 100,
                                       width: 100,
                                       decoration: BoxDecoration(
-                                        // color: const Color.fromARGB(
-                                        //     120, 4, 97, 174),
-                                      //  shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
@@ -71,7 +68,6 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       right: 6.r,
                                       bottom: 1.r,
                                       child: CircleAvatar(
-                                      //  backgroundColor: cWhite,
                                         radius: 12.r,
                                         child: const Center(
                                             child: Icon(Icons.info)),
@@ -86,10 +82,31 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                   GoogleMonstserratWidgets(
                     text:
                         'ID : ${UserCredentialsController.teacherModel?.employeeID ?? " "}',
-                    fontsize: 14.5.sp,
+                    fontsize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: cWhite.withOpacity(0.8),
                   ),
+                  FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('SchoolListCollection')
+                          .doc(UserCredentialsController.schoolId)
+                          .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .get(),
+                      builder: (context, snaps) {
+                        if (snaps.hasData) {
+                          return GoogleMonstserratWidgets(
+                            text: 'Class : ${snaps.data!.data()!['className']}',
+                            fontsize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            color: cWhite.withOpacity(0.8),
+                          );
+                        } else {
+                          return const Text('');
+                        }
+                      }),
                   GoogleMonstserratWidgets(
                     text:
                         'email : ${UserCredentialsController.teacherModel?.teacherEmail ?? " "}',
@@ -100,7 +117,9 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-             ClassTeacherAccessories(classID: '',),
+            ClassTeacherAccessories(
+              classID: '',
+            ),
           ],
         ),
       ),

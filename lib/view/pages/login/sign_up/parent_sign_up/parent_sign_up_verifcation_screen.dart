@@ -192,7 +192,7 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(ParentLoginScreen(
+                          Get.to(()=>ParentLoginScreen(
                             pageIndex: 3,
                           ));
                         },

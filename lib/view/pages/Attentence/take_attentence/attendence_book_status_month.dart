@@ -67,7 +67,7 @@ class AttendenceBookScreenSelectMonth extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(AttendenceBookScreen(
+                              Get.to(()=>AttendenceBookScreen(
                                 batchId: batchId,
                                 schoolId: schoolId,
                                 classID: classID,

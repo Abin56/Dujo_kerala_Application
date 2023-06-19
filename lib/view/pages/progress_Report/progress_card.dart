@@ -58,7 +58,13 @@ class _StudentProgressReportScreenState
   @override
   Widget build(BuildContext context) {
     log(widget.studentImage);
-    return Scaffold(appBar: AppBar(backgroundColor: adminePrimayColor ,title:GooglePoppinsWidgets(fontsize: 18,text: "Progress Report",)),
+    return Scaffold(
+      appBar: AppBar(
+          backgroundColor: adminePrimayColor,
+          title: GooglePoppinsWidgets(
+            fontsize: 18,
+            text: "Progress Report",
+          )),
       backgroundColor: Colors.blue[100],
       body: SafeArea(
           child: SizedBox(
@@ -66,13 +72,13 @@ class _StudentProgressReportScreenState
         width: double.maxFinite,
         child: SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.only(top: 10.h),
+            padding: EdgeInsets.only(top: 10.h),
             child: Column(
               children: [
                 Text(
                   schoolName,
-                  style:
-                      const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 23, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 20.h,
@@ -174,8 +180,11 @@ class _StudentProgressReportScreenState
                             (index) => TextEditingController(),
                           );
                           return Container(
-                            decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),color:cWhite,),
-                         
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: cWhite,
+                            ),
                             child: Column(
                               children: [
                                 SingleChildScrollView(
@@ -209,14 +218,18 @@ class _StudentProgressReportScreenState
                                               ),
                                             ),
                                             DataCell(TextFormField(
-                                              keyboardType: TextInputType.number,
-                                              controller: obtainedcontrollers[i],
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              controller:
+                                                  obtainedcontrollers[i],
                                             )),
-                                            DataCell(TextFormField(
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                controller:
-                                                    totalMarkController[i])),
+                                            DataCell(
+                                              TextFormField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  controller:
+                                                      totalMarkController[i]),
+                                            ),
                                           ],
                                         ),
                                     ],
@@ -229,20 +242,21 @@ class _StudentProgressReportScreenState
                                   onTap: () async {
                                     List<ExamReports> examReports = [];
                                     for (int j = 0;
-                                        j < snapshot.data!.docs.length - 1;
+                                        j <= snapshot.data!.docs.length - 1;
                                         j++) {
                                       double obtainedMarks = double.parse(
                                           obtainedcontrollers[j].text.trim());
                                       double totalMarks = double.parse(
                                           totalMarkController[j].text.trim());
-          
+
                                       examReports.add(ExamReports(
                                           obtainedMark: obtainedMarks,
                                           subject: snapshot.data?.docs[j]
                                               .data()['subjectName'],
                                           totalMark: totalMarks));
                                     }
-          
+                                    log(examReports.toString());
+
                                     UploadProgressReportModel subjectReport =
                                         UploadProgressReportModel(
                                       studentIMage: widget.studentImage,
@@ -271,14 +285,18 @@ class _StudentProgressReportScreenState
                                                 context: context,
                                                 barrierDismissible:
                                                     false, // user must tap button!
-                                                builder: (BuildContext context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   return AlertDialog(
-                                                    title: const Text('Message'),
+                                                    title:
+                                                        const Text('Message'),
                                                     content:
                                                         SingleChildScrollView(
                                                       child: ListBody(
-                                                        children: const <Widget>[
-                                                          Text('Records Updated'),
+                                                        children: const <
+                                                            Widget>[
+                                                          Text(
+                                                              'Records Updated'),
                                                         ],
                                                       ),
                                                     ),
@@ -297,7 +315,7 @@ class _StudentProgressReportScreenState
                                             });
                                   },
                                   child: Padding(
-                                    padding:  EdgeInsets.only(bottom: 10.h),
+                                    padding: EdgeInsets.only(bottom: 10.h),
                                     child: ButtonContainerWidget(
                                         colorindex: 2,
                                         curving: 10,
@@ -350,11 +368,13 @@ class _StudentProgressReportScreenState
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
         .doc(widget.schooilID)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId!)
         .collection('classes')
         .doc(UserCredentialsController.classId)
         .get();
     setState(() {
-      className = vari.data()!['className'];
+      className = vari.data()?['className'];
     });
   }
 }

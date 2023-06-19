@@ -50,34 +50,34 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   List<String> tokenList2 = [];
   DateTime? attendanceTime;
   String substring = '';
-   String finalSubjectName = '';
-   String schoolName = '';
+  String finalSubjectName = '';
+  String schoolName = '';
 
   List<Map<String, dynamic>> parentListOfAbsentees = [];
-  List<Map<String, dynamic>> guardianListOfAbsentees = []; 
+  List<Map<String, dynamic>> guardianListOfAbsentees = [];
 
-  getSchoolName()async{
-    final docRef = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).get();
+  getSchoolName() async {
+    final docRef = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolID)
+        .get();
     schoolName = docRef['schoolName'];
   }
 
-  String subjectNameFormatting(){
-     
-   substring = getSubstringUntilNumber(widget.subjectID)!;
-  print(substring);
-  return substring;
+  String subjectNameFormatting() {
+    substring = getSubstringUntilNumber(widget.subjectID)!;
+    print(substring);
+    return substring;
   }
-
-
 
   String? getSubstringUntilNumber(String input) {
-  RegExp regex = RegExp(r'^\D+');
-  RegExpMatch? match = regex.firstMatch(input);
-  if (match != null) {
-    return match.group(0);
+    RegExp regex = RegExp(r'^\D+');
+    RegExpMatch? match = regex.firstMatch(input);
+    if (match != null) {
+      return match.group(0);
+    }
+    return '';
   }
-  return '';
-}
 
   Future<void> sendPushMessage(String token, String body, String title) async {
     try {
@@ -133,8 +133,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
     getSchoolTimer();
 
     getTime();
-     finalSubjectName = subjectNameFormatting();
-            log(finalSubjectName); 
+    finalSubjectName = subjectNameFormatting();
+    log(finalSubjectName);
 
     getSchoolName();
   }
@@ -305,7 +305,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                               final DateFormat formatter =
                                   DateFormat('dd-MM-yyyy');
                               String formatted = formatter.format(parseDate);
-                                  await FirebaseFirestore.instance
+                              await FirebaseFirestore.instance
                                   .collection("SchoolListCollection")
                                   .doc(widget.schoolID)
                                   .collection(widget.batchId)
@@ -446,7 +446,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
         final month = DateFormat('MMMM-yyyy');
         String monthwise = month.format(parseDate);
         return AlertDialog(
-          title: const Text('Absent List'),
+          title: const Text('Absentess List'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -466,39 +466,43 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                           .collection(monthwise)
                           .doc(formatted)
                           .collection("Subjects")
-                          .doc(widget.subjectID)
+                          .doc(widget.periodTokenID)
                           .collection('PresentList')
                           .where('present', isEqualTo: false)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return ListView.separated(
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  height: 40,
-                                  width: double.maxFinite,
-                                  color: Colors.red.withOpacity(0.3),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Text('${index + 1}'),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Text(snapshot.data!.docs[index]
-                                            ['studentName']),
-                                        const Spacer(),
-                                        const Text(' - Ab')
-                                      ],
+                          if (snapshot.data!.docs.isEmpty) {
+                            return const Center(child: Text('No Absentess'));
+                          } else {
+                            return ListView.separated(
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: 40,
+                                    width: double.maxFinite,
+                                    color: Colors.red.withOpacity(0.3),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          Text('${index + 1}'),
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text(snapshot.data!.docs[index]
+                                              ['studentName']),
+                                          const Spacer(),
+                                          const Text(' - Ab')
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return const Divider();
-                              },
-                              itemCount: snapshot.data!.docs.length);
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const Divider();
+                                },
+                                itemCount: snapshot.data!.docs.length);
+                          }
                         } else {
                           return const Center(
                             child: CircularProgressIndicator.adaptive(),
@@ -671,11 +675,12 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                             onPressed: () async {
                               log('period document id ${widget.periodTokenID}');
 
-                               attendanceTime = DateTime.now();
-                String formattedDate =
-                    DateFormat.yMMMMd().format(attendanceTime!);
-                String formattedTime = DateFormat.jm().format(DateTime.now());
-                              
+                              attendanceTime = DateTime.now();
+                              String formattedDate =
+                                  DateFormat.yMMMMd().format(attendanceTime!);
+                              String formattedTime =
+                                  DateFormat.jm().format(DateTime.now());
+
                               FirebaseFirestore.instance
                                   .collection("SchoolListCollection")
                                   .doc(widget.schoolID)
@@ -693,9 +698,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
 
                               Get.offAll(const TeacherMainHomeScreen());
 
-                              Timer(const Duration(seconds: 2),
-                                  () async {
-                                    bool isValueEqual = false;
+                              Timer(const Duration(seconds: 2), () async {
+                                bool isValueEqual = false;
                                 QuerySnapshot<Map<String, dynamic>> snap =
                                     await FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
@@ -716,110 +720,113 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
 
                                 List<Map<String, dynamic>>
                                     mappedAbsentStudentsList =
-                                    snap.docs.map((doc) => doc.data()).toList(); 
+                                    snap.docs.map((doc) => doc.data()).toList();
 
-                                    ///////
+                                ///////
 
-                                      Future<QuerySnapshot<Map<String, dynamic>>> parentss =
-                    FirebaseFirestore.instance
-                        .collection("SchoolListCollection")
-                        .doc(widget.schoolID)
-                        .collection(widget.batchId)
-                        .doc(widget.batchId)
-                        .collection("classes")
-                        .doc(widget.classID)
-                        .collection('ParentCollection')
-                        .get();
+                                Future<QuerySnapshot<Map<String, dynamic>>>
+                                    parentss = FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(widget.schoolID)
+                                        .collection(widget.batchId)
+                                        .doc(widget.batchId)
+                                        .collection("classes")
+                                        .doc(widget.classID)
+                                        .collection('ParentCollection')
+                                        .get();
 
-                Future<QuerySnapshot<Map<String, dynamic>>> guardianss =
-                    FirebaseFirestore.instance
-                        .collection("SchoolListCollection")
-                        .doc(widget.schoolID)
-                        .collection(widget.batchId)
-                        .doc(widget.batchId)
-                        .collection("classes")
-                        .doc(widget.classID)
-                        .collection('GuardianCollection')
-                        .get(); 
+                                Future<QuerySnapshot<Map<String, dynamic>>>
+                                    guardianss = FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(widget.schoolID)
+                                        .collection(widget.batchId)
+                                        .doc(widget.batchId)
+                                        .collection("classes")
+                                        .doc(widget.classID)
+                                        .collection('GuardianCollection')
+                                        .get();
 
-                        QuerySnapshot<Map<String, dynamic>> snapshot2 = await parentss; 
-                        QuerySnapshot<Map<String, dynamic>> snapshot3 = await guardianss; 
+                                QuerySnapshot<Map<String, dynamic>> snapshot2 =
+                                    await parentss;
+                                QuerySnapshot<Map<String, dynamic>> snapshot3 =
+                                    await guardianss;
 
+                                List<Map<String, dynamic>> parentsList =
+                                    snapshot2.docs
+                                        .map((doc) => doc.data())
+                                        .toList();
 
-                        List<Map<String, dynamic>> parentsList = snapshot2.docs.map((doc) => doc.data()).toList(); 
+                                List<Map<String, dynamic>> guardiansList =
+                                    snapshot3.docs
+                                        .map((doc) => doc.data())
+                                        .toList();
 
-                    List<Map<String, dynamic>> guardiansList = snapshot3.docs.map((doc) => doc.data()).toList();
+                                for (var item1 in parentsList) {
+                                  for (var item2 in mappedAbsentStudentsList) {
+                                    if (item1['studentID'] == item2['uid']) {
+                                      log('yesss!!!!!');
+                                      parentListOfAbsentees.add(item1);
 
-                       for (var item1 in parentsList) {
-                  for (var item2 in mappedAbsentStudentsList) {
-                    if (item1['studentID'] == item2['uid']) {
-                      log('yesss!!!!!');
-                      parentListOfAbsentees.add(item1);
+                                      log('THE LIST : ${parentListOfAbsentees.length.toString()}');
+                                      isValueEqual = true; //
+                                      break;
+                                    } else {
+                                      log('no');
+                                    }
+                                  }
+                                  //parentListOfAbsentees
+                                }
 
-                      log('THE LIST : ${parentListOfAbsentees.length.toString()}');
-                      isValueEqual = true;// 
-                      break;
-                    } else{
-                      log('no');
-                    }
-                  }
-                  //parentListOfAbsentees
-                }
+                                for (var item1 in guardiansList) {
+                                  for (var item2 in mappedAbsentStudentsList) {
+                                    if (item1['studentID'] == item2['uid']) {
+                                      log('yesss!!!!!');
+                                      guardianListOfAbsentees.add(item1);
 
-                for (var item1 in guardiansList) {
-                  for (var item2 in mappedAbsentStudentsList) {
-                    if (item1['studentID'] == item2['uid']) {
-                      log('yesss!!!!!');
-                      guardianListOfAbsentees.add(item1);
-                  
+                                      log('THE GLIST : ${guardianListOfAbsentees.length.toString()}');
+                                      isValueEqual = true;
+                                      break;
+                                    } else {
+                                      log('no2');
+                                    }
 
-                      log('THE GLIST : ${guardianListOfAbsentees.length.toString()}');
-                      isValueEqual = true;
-                      break;
-                    } else{
-                      log('no2');
-                    }
+                                    /////
 
-                    
-             
+                                    for (var doc in snap.docs) {
+                                      final docData = doc.data();
+                                      log('CATCH THE LIST');
+                                      log(docData['studentName']);
+                                    }
+                                  }
+                                }
 
+                                log('HWG: ${parentListOfAbsentees[0]['studentID']}');
+                                for (var k in parentListOfAbsentees) {
+                                  tokenList.add(k['deviceToken']);
+                                }
 
-                    /////
+                                for (var r in guardianListOfAbsentees) {
+                                  tokenList2.add(r['deviceToken']);
+                                  log(tokenList2[0]);
+                                }
 
-                                for (var doc in snap.docs) {
-                                  final docData = doc.data();
-                                  log('CATCH THE LIST');
-                                  log(docData['studentName']);
-                                }}} 
+                                for (var l in tokenList) {
+                                  for (var i = 0; i < tokenList.length; i++) {
+                                    sendPushMessage(
+                                        tokenList[i],
+                                        'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
+                                        'Absent Notification from $schoolName');
+                                  }
+                                }
 
-                                   log('HWG: ${parentListOfAbsentees[0]['studentID']}');
-                for (var k in parentListOfAbsentees) {
-                  tokenList.add(k['deviceToken']);
-                }
-
-                for (var r in guardianListOfAbsentees) {
-                  tokenList2.add(r['deviceToken']);
-                  log(tokenList2[0]);
-                }
-
-                 for (var l in tokenList) {
-                    for (var i = 0; i < tokenList.length; i++) {
-                      sendPushMessage(
-                          tokenList[i],
-                          'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
-                          'Absent Notification from $schoolName');
-                    }
-                  }
-
-                  for (var l in tokenList2) {
-                    for (var i = 0; i < tokenList2.length; i++) {
-                      sendPushMessage(
-                          tokenList2[i],
-                          'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
-                          'Absent Notification from $schoolName');
-                    }
-                  }
-
+                                for (var l in tokenList2) {
+                                  for (var i = 0; i < tokenList2.length; i++) {
+                                    sendPushMessage(
+                                        tokenList2[i],
+                                        'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate',
+                                        'Absent Notification from $schoolName');
+                                  }
+                                }
                               });
                               log('DONE');
                             }),

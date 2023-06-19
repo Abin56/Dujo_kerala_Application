@@ -22,6 +22,7 @@ import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/select_period.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../general_instructions/general_instructions.dart';
+import '../student_home/time_table/ss.dart';
 
 class ClassTeacherHeaderDrawer extends StatelessWidget {
   UserLogOutController userLogOutController = Get.put(UserLogOutController());
@@ -127,7 +128,7 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
               icon: const Icon(Icons.edit_note_rounded),
               label:  Text(
                 'Switch to Teacher'.tr,
-                style: TextStyle(color: cblack),
+                style: const TextStyle(color: cblack),
               ))
         ],
       ),
@@ -230,7 +231,7 @@ Widget MyDrawerList(context) {
         MenuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           Get.to(
-            () => const StudentShowTimeTable(),
+            () => const SS(),
           );
         }),
         // MenuItem(4, "Share", Icons.share,

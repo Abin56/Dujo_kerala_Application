@@ -201,7 +201,7 @@ class StudentSignInScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(StudentLoginScreen(
+                          Get.to(()=>StudentLoginScreen(
                             pageIndex: 3,
                           ));
                         },

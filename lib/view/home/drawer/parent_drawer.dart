@@ -17,6 +17,7 @@ import '../../../utils/utils.dart';
 import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
+import '../student_home/time_table/ss.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
 
@@ -168,7 +169,7 @@ Get.to(
         MenuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
          Get.to(
-            () => const StudentShowTimeTable(),
+            () => const SS(),
           );
         }),
         // MenuItem(4, "Share", Icons.share,

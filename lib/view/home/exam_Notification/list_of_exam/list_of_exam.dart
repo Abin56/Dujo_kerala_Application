@@ -26,7 +26,7 @@ class ViewSchoolExamScreen extends StatelessWidget {
           backgroundColor: adminePrimayColor,title: Text("Exam Time Table".tr),
           bottom:  TabBar(tabs: [
             Tab(
-              text: 'Public Level'.tr,
+              text: 'State Level'.tr,
             ),
             Tab(
               text: 'School Level'.tr,
@@ -35,7 +35,7 @@ class ViewSchoolExamScreen extends StatelessWidget {
         ),
         body: const SafeArea(
           child: TabBarView(
-            children: [TPublicLevel(), TStateLevel()],
+            children: [TStateLevel(),TPublicLevel(),],
           ),
         ),
       ),
@@ -75,7 +75,7 @@ class _TPublicLevelState extends State<TPublicLevel> {
                 .doc(UserCredentialsController.schoolId)
                 .collection(UserCredentialsController.batchId!)
                 .doc(UserCredentialsController.batchId!)
-                .collection('Public Level')
+                .collection('School Level')
                 .snapshots(),
             builder: (context, snaps) {
               if (snaps.hasData) {
@@ -260,7 +260,7 @@ class _TPublicLevelState extends State<TPublicLevel> {
               onPressed: () async{
                 if (_formKey.currentState!.validate()){
                 addExamTimeTableController.uploadSubject(
-                    'Public Level',
+                    'School Level',
                     examdocID,
                     allsubjectListValue!['subjectName'],
                     time1!,
@@ -343,7 +343,7 @@ const containerColor = [
 ];
 
 class TStateLevel extends StatefulWidget {
-  const TStateLevel({super.key});
+  const  TStateLevel({super.key});
 
   @override
   State<TStateLevel> createState() => _TStateLevelState();

@@ -150,7 +150,7 @@ class ParentLoginScreen extends StatelessWidget {
                             ParentSignUpController parentSignUpController =
                                 Get.put(ParentSignUpController());
                             await parentSignUpController.getAllParent();
-                            Get.to(ParentSignUpFirstScreen(
+                            Get.to(()=>ParentSignUpFirstScreen(
                               pageIndex: 1,
                             ));
                           },

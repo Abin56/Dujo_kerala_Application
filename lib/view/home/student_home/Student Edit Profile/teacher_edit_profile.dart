@@ -98,7 +98,25 @@ class TeacherEditProfileScreen extends StatelessWidget {
                     return GooglePoppinsWidgets(
                         text: snapshot.data ?? " ", fontsize: 19.h);
                   }),
-              title: GooglePoppinsWidgets(text: "Class".tr, fontsize: 12.h),
+              title: FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('SchoolListCollection')
+                      .doc(UserCredentialsController.schoolId)
+                      .collection(UserCredentialsController.batchId!)
+                      .doc(UserCredentialsController.batchId)
+                      .collection('classes')
+                      .doc(UserCredentialsController.classId)
+                      .get(),
+                  builder: (context, snaps) {
+                if (snaps.hasData) {
+                      return GooglePoppinsWidgets(
+                        text: 'Class : ${snaps.data!.data()!['className']}',
+                        fontsize: 13.h);
+                  
+                }else{
+                  return const Text('');
+                }
+                  }),
             ),
             TeacherEditListileWidget(
               icon: Icons.home,
@@ -159,16 +177,16 @@ class TeacherEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title:  Text("Do you want change mail ?".tr),
+                title: Text("Do you want change mail ?".tr),
                 actions: [
                   TextButton(
-                    child:  Text("Cancel".tr),
+                    child: Text("Cancel".tr),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child:  Text("Ok".tr),
+                    child: Text("Ok".tr),
                     onPressed: () {
                       Navigator.pop(context);
 
@@ -182,20 +200,20 @@ class TeacherEditListileWidget extends StatelessWidget {
                           return Form(
                             key: _formKey,
                             child: AlertDialog(
-                              title:  Text("Update Mail".tr),
+                              title: Text("Update Mail".tr),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   TextFormField(
                                     validator: checkFieldEmailIsValid,
                                     controller: emailController,
-                                    decoration:  InputDecoration(
+                                    decoration: InputDecoration(
                                         hintText: "Enter new email address".tr),
                                   ),
                                   TextFormField(
                                     validator: checkFieldEmpty,
                                     controller: passwordController,
-                                    decoration:  InputDecoration(
+                                    decoration: InputDecoration(
                                         hintText: "Password".tr),
                                   ),
                                 ],
@@ -207,7 +225,7 @@ class TeacherEditListileWidget extends StatelessWidget {
                                         child: CircularProgressIndicator(),
                                       )
                                     : TextButton(
-                                        child:  Text("Update".tr),
+                                        child: Text("Update".tr),
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -300,22 +318,21 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     )
                   : AlertDialog(
-                      title:
-                           Text('Do you want to change profile picture?'.tr),
+                      title: Text('Do you want to change profile picture?'.tr),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Get.find<TeacherProfileController>()
                                 .updateTeacherProfilePicture();
                           },
-                          child:  Text('Update'.tr),
+                          child: Text('Update'.tr),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                             getImageController.pickedImage.value = '';
                           },
-                          child:  Text('Cancel'.tr),
+                          child: Text('Cancel'.tr),
                         ),
                       ],
                     ),

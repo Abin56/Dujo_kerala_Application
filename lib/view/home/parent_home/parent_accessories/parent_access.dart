@@ -17,7 +17,7 @@ import '../../../pages/Subject/subject_display.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../events/event_list.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
-import '../../student_home/time_table/time_table_display.dart';
+import '../../student_home/time_table/ss.dart';
 import '../progress_report/progress_report.dart';
 
 class ParentAccessories extends StatelessWidget {
@@ -49,7 +49,7 @@ class ParentAccessories extends StatelessWidget {
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Leave Letter
 
-      const StudentShowTimeTable(), // Time Table
+      const SS(), // Time Table
 
        SchoolLevelMeetingPage(), //Meetings
 
@@ -104,7 +104,7 @@ class ParentAccessories extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(screenNavigation[index]);
+                        Get.to(()=>screenNavigation[index]);
                       },
                       child: Container(
                         decoration: BoxDecoration(

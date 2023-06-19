@@ -1,22 +1,26 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/view/pages/recorded_videos/select_sub_chapter.dart';
+import 'package:dujo_kerala_application/view/pages/recorded_videos/play_video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../model/teacher_model/attentence/attendance_model.dart';
+import '../../colors/colors.dart';
 
-class RecSelectSubjectScreen extends StatelessWidget {
+class RecordedVideosListScreen extends StatelessWidget {
   String schoolId;
   String classID;
   String batchId;
-  RecSelectSubjectScreen(
+  String subjectId;
+  String subrecID;
+  RecordedVideosListScreen(
       {required this.schoolId,
       required this.batchId,
       required this.classID,
+      required this.subjectId,
+      required this.subrecID,
       super.key});
 
   @override
@@ -26,6 +30,10 @@ class RecSelectSubjectScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     log(classID);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Select video'.tr),
+        backgroundColor: adminePrimayColor,
+      ),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -36,7 +44,11 @@ class RecSelectSubjectScreen extends StatelessWidget {
             .collection("classes")
             .doc(classID)
             .collection("subjects")
-            .orderBy('subjectName', descending: false)
+            .doc(subjectId)
+            .collection('recorded_classes_chapters')
+            .doc(subrecID)
+            .collection('RecordedClass')
+            .orderBy('title', descending: false)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -59,11 +71,10 @@ class RecSelectSubjectScreen extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(()=>RecSelectChapterScreen(
-                                  schoolId: schoolId,
-                                  batchId: batchId,
-                                  classID: classID,
-                                  subjectId: snapshot.data!.docs[index]['docid']));
+                              Get.to(() => Videoplayer(
+                                    videoUrl: snapshot.data!.docs[index]
+                                        ['downloadUrl'],
+                                  ));
                             },
                             child: Container(
                               height: h / 100,
@@ -87,12 +98,25 @@ class RecSelectSubjectScreen extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      snapshot.data!.docs[index]['subjectName'],
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          '${index + 1}',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        Text(
+                                          snapshot.data!.docs[index]['title'],
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ],
                                     ),
                                     // Text(
                                     //   snapshot.data!.docs[index]['day'],
