@@ -29,7 +29,12 @@ class BottomProfilePhotoContainerWidget extends StatelessWidget {
                     "Profile Photo".tr,
                     style: DGoogleFonts.subHeadStyle,
                   ),
-                  const Icon(Icons.delete)
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(
+                      Icons.close,
+                    ),
+                  )
                 ],
               ),
             ),

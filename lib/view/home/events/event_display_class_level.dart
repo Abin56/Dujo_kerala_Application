@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'event_display_school_level.dart';
+
 class EventDisplayClassLevel extends StatelessWidget {
   const EventDisplayClassLevel(
       {super.key,
@@ -71,8 +73,13 @@ class EventDisplayClassLevel extends StatelessWidget {
                                 ],
                               ),
                               kHeight20,
-                              GooglePoppinseventClassLevelWidgets(
-                                  text: description, fontsize: 18.h),
+                              Flexible(
+                                child: GooglePoppinsEventsWidgets(
+                                  text: description,
+                                  fontsize: 18.h,
+                                  fontWeight: FontWeight.w200,
+                                ),
+                              ),
                               kHeight10,
                               Row(
                                 children: [

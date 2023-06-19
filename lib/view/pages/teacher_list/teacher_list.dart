@@ -155,9 +155,7 @@ class TeacherSubjectWiseList extends StatelessWidget {
                                             ),
                                           );
                                         } else {
-                                          return const Center(
-                                            child: Text("No data found"),
-                                          );
+                                          return kHeight;
                                         }
                                       }),
                                 ),

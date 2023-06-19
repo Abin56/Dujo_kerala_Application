@@ -17,8 +17,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title:  Text("Notices.".tr
-          ),
+          title: Text("Notices".tr),
         ),
         body: SizedBox(
           height: double.infinity, // set the height to fill available space
@@ -31,7 +30,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                   child: ListView(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 17.h,right: 17.h),
+                        padding: EdgeInsets.only(left: 17.h, right: 17.h),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.h),
@@ -69,27 +68,23 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                   fontsize: 19.h,
                                 ),
                                 kHeight30,
-                                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    GooglePoppinsWidgets(
-                                      text: "Date : ",
-                                      fontsize: 18.h,
-                                      fontWeight: FontWeight.w200,
-                                    ),
-                                    GooglePoppinsWidgets(
-                                      text: classLevelNoticeModel.date,
-                                      fontsize: 19.h,
-                                    ),
-                                    kHeight30,
-                                    GooglePoppinsWidgets(
-                                        text: "Signed by :",
-                                        fontsize: 18.h,
-                                        fontWeight: FontWeight.w200),
-                                    GooglePoppinsWidgets(
-                                      text: classLevelNoticeModel.signedBy,
-                                      fontsize: 19.h,
-                                    ),
-                                  ],
+                                GooglePoppinsWidgets(
+                                  text: "Date : ",
+                                  fontsize: 18.h,
+                                  fontWeight: FontWeight.w200,
+                                ),
+                                GooglePoppinsWidgets(
+                                  text: classLevelNoticeModel.date,
+                                  fontsize: 19.h,
+                                ),
+                                kHeight30,
+                                GooglePoppinsWidgets(
+                                    text: "Signed by :",
+                                    fontsize: 18.h,
+                                    fontWeight: FontWeight.w200),
+                                GooglePoppinsWidgets(
+                                  text: classLevelNoticeModel.signedBy,
+                                  fontsize: 19.h,
                                 ),
                                 kHeight30,
                                 kHeight30,

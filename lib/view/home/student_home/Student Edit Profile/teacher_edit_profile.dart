@@ -89,35 +89,22 @@ class TeacherEditProfileScreen extends StatelessWidget {
               title: GooglePoppinsWidgets(text: "Email".tr, fontsize: 12.h),
               editicon: Icons.edit,
             ),
-            TeacherEditListileWidget(
-              icon: Icons.class_rounded,
-              subtitle: FutureBuilder(
-                  future: getClassName(
-                      UserCredentialsController.teacherModel?.classID ?? ""),
-                  builder: (context, snapshot) {
-                    return GooglePoppinsWidgets(
-                        text: snapshot.data ?? " ", fontsize: 19.h);
-                  }),
-              title: FutureBuilder(
-                  future: FirebaseFirestore.instance
-                      .collection('SchoolListCollection')
-                      .doc(UserCredentialsController.schoolId)
-                      .collection(UserCredentialsController.batchId!)
-                      .doc(UserCredentialsController.batchId)
-                      .collection('classes')
-                      .doc(UserCredentialsController.classId)
-                      .get(),
-                  builder: (context, snaps) {
-                if (snaps.hasData) {
-                      return GooglePoppinsWidgets(
-                        text: 'Class : ${snaps.data!.data()!['className']}',
-                        fontsize: 13.h);
-                  
-                }else{
-                  return const Text('');
-                }
-                  }),
-            ),
+            FutureBuilder(
+                future: FirebaseFirestore.instance
+                    .collection('SchoolListCollection')
+                    .doc(UserCredentialsController.schoolId)
+                    .collection(UserCredentialsController.batchId!)
+                    .doc(UserCredentialsController.batchId)
+                    .collection('classes')
+                    .doc(UserCredentialsController.classId)
+                    .get(),
+                builder: (context, snapshot) {
+                  return TeacherEditListileWidget(
+                    subtitle: Text('${snapshot.data!.data()!['className']}'),
+                    icon: Icons.class_rounded,
+                    title: GooglePoppinsWidgets(text: 'Class', fontsize: 13.h),
+                  );
+                }),
             TeacherEditListileWidget(
               icon: Icons.home,
               subtitle: GooglePoppinsWidgets(
@@ -177,7 +164,7 @@ class TeacherEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Do you want change mail ?".tr),
+                title: Text("Do you want to change mail ?".tr),
                 actions: [
                   TextButton(
                     child: Text("Cancel".tr),
