@@ -125,8 +125,8 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
                 Get.offAll(const TeacherMainHomeScreen());
               },
               icon: const Icon(Icons.edit_note_rounded),
-              label: const Text(
-                'Switch to Teacher',
+              label:  Text(
+                'Switch to Teacher'.tr,
                 style: TextStyle(color: cblack),
               ))
         ],
@@ -212,7 +212,7 @@ Widget MyDrawerList(context) {
             () => GeneralInstruction(),
           );
         }),
-        MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
+        MenuItem(2, 'assets/images/attendance.png', 'Attendance book'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => SelectPeriodWiseScreen(
@@ -227,7 +227,7 @@ Widget MyDrawerList(context) {
             () => const AddTimeTable(),
           );
         }),
-        MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
+        MenuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
           Get.to(
             () => const StudentShowTimeTable(),
@@ -248,7 +248,7 @@ Widget MyDrawerList(context) {
             ),
           );
         }),
-        MenuItem(6, 'assets/images/noticess.png', 'Notices'.tr,
+        MenuItem(6, 'assets/images/notices.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
           Get.to(
             () => NoticePage(),

@@ -9,6 +9,7 @@ import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../pages/teacher_list/teacher_chat.dart';
 import '../../../widgets/fonts/google_monstre.dart';
@@ -28,7 +29,7 @@ class StudentSubjectHome extends StatelessWidget {
               width: 90.h,
             ),
             GooglePoppinsWidgets(
-              text: "Subject",
+              text: "Subjects".tr,
               fontsize: 20.h,
               color: cblack,
             )

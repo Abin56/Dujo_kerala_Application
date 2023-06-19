@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 
 class StudentShowTimeTable extends StatefulWidget {
@@ -14,21 +15,31 @@ class StudentShowTimeTable extends StatefulWidget {
 
 class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
   List<String> periodList = [
-    'firstPeriod',
-    'secondPeriod',
-    'thirdPeriod',
-    'fourthPeriod',
-    'fifthPeriod',
-    'sixthPeriod',
-    'seventhPeriod'
+    'First Period',
+    'Second Period',
+    'Third Period',
+    'Fourth Period',
+    'Fifth Period',
+    'Sixth Period',
+    'Seventh Period',
+    'Eighth Period',
+    'Ninth Period ',
+    'Tenth Period',
   ]; 
 
   List<String>periodNumbers = [
-    '1', '2', '3', '4', '5', '6', '7'
+    '1', '2', '3', '4', '5', '6', '7','8','9','10'
   ]; 
 
-  List<String>days = ['Monday', 
-  'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  List<String>days = [
+    'Monday', 
+  'Tuesday', 
+  'Wednesday',
+   'Thursday',
+    'Friday' ,
+    'Saturday'
+    
+    ];
 
   // @override
   // void initState() {
@@ -62,7 +73,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor, title:  Text('TimeTable'.tr),),
+    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor, title:  Text('Time Table'.tr),),
         body: Center(
           child: 
           ListView( 
@@ -250,7 +261,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                         height: 100,
                                         color: const Color.fromARGB(255, 141, 188, 226),
                                         child:  Center(
-                                          child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(periodNumbers[index], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
+                                          child:(snapshot.data!.docs.isEmpty)?  Text('',style: TextStyle(fontSize: 13.w),): Text(periodNumbers[index], style: const TextStyle(fontWeight: FontWeight.bold,color: cWhite),),
                                           //     ? 'fouthPeriod'
                                           //     : periodList[index]][periodList[index]]),
                                         ),
@@ -262,7 +273,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                         height: 100,
                                         color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
-                                          child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Monday").first [ periodList[index]][ periodList[index]]),
+                                          child:(snapshot.data!.docs.isEmpty)?  Text('',style: TextStyle(fontSize: 13.w),): Text(snapshot.data!.docs.where((element) => element.id=="Monday").first [ periodList[index]][ periodList[index]]),
                                           // child: Text(widget.mon.data()![(index == 3)
                                           //     ? 'fouthPeriod'
                                           //     : periodList[index]][periodList[index]]),
@@ -275,7 +286,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                         height: 100,
                                         color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
-                                         child: (snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Tuesday").first [ periodList[index]] [ periodList[index]]),
+                                         child: (snapshot.data!.docs.isEmpty)?  Text('',style: TextStyle(fontSize: 13.w),): Text(snapshot.data!.docs.where((element) => element.id=="Tuesday").first [ periodList[index]] [ periodList[index]]),
                                           // child: Text(widget.tues.data()![(index == 3)
                                           //     ? 'fouthPeriod'
                                           //     : periodList[index]][periodList[index]]),
@@ -288,7 +299,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                         height: 100,
                                         color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
-                                         child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Wednesday").first[ periodList[index]] [ periodList[index]]),
+                                         child:(snapshot.data!.docs.isEmpty)?  Text('',style: TextStyle(fontSize: 13.w),): Text(snapshot.data!.docs.where((element) => element.id=="Wednesday").first[ periodList[index]] [ periodList[index]]),
                                           // child: Text(widget.wed.data()![(index == 3)
                                           //     ? 'fouthPeriod'
                                           //     : periodList[index]][periodList[index]]),
@@ -301,7 +312,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                         height: 100,
                                         color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
-                                          child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Thursday").first[ periodList[index]] [ periodList[index]]),
+                                          child:(snapshot.data!.docs.isEmpty)?  Text('',style: TextStyle(fontSize: 13.w),): Text(snapshot.data!.docs.where((element) => element.id=="Thursday").first[ periodList[index]] [ periodList[index]]),
                                           // child: Text(widget.thurs.data()![(index == 3)
                                           //     ? 'fouthPeriod'
                                           //     : periodList[index]][periodList[index]]),
@@ -314,7 +325,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                                         height: 100,
                                         color: const Color.fromARGB(255, 141, 188, 226),
                                         child: Center(
-                                          child:(snapshot.data!.docs.isEmpty)? const Text(''): Text(snapshot.data!.docs.where((element) => element.id=="Friday").first[ periodList[index]] [ periodList[index]]),
+                                          child:(snapshot.data!.docs.isEmpty)?  Text('',style: TextStyle(fontSize: 13.w),): Text(snapshot.data!.docs.where((element) => element.id=="Friday").first[ periodList[index]] [ periodList[index]]),
                                         //   child: Text(widget.fri.data()![(index == 3)
                                         //       ? 'fouthPeriod'
                                               
@@ -331,7 +342,7 @@ class _StudentShowTimeTableState extends State<StudentShowTimeTable> {
                       ); 
                   }  
                   if(!snapshot.hasData){
-                    return const Center(child: Text('No Timetable Added'),);
+                    return const Center(child: Text('No Time table Added'),);
                   }
                   return const Center(child: CircularProgressIndicator(),);
                 }

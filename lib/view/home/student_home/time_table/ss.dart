@@ -123,9 +123,9 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin {
         children: [
           DayWidget(dayName: 'Monday'),
           DayWidget(dayName: 'Tuesday'),
-          DayWidget(dayName: 'Monday'),
-          DayWidget(dayName: 'Tuesday'),
-          DayWidget(dayName: 'Monday'),
+          DayWidget(dayName: 'Wednesday'),
+          DayWidget(dayName: 'Thursday'),
+          DayWidget(dayName: 'Friday'),
 
           // PeriodShowingWidget(periodList: periodList, dayName: days[0], teacherList: teachersList),
           // PeriodShowingWidget(periodList: periodList, dayName: days[1], teacherList: teachersList),
@@ -157,6 +157,7 @@ class DayWidget extends StatelessWidget {
               .collection('timetables')
               .doc(dayName)
               .collection(dayName)
+              //.orderBy('timestamp', descending: false)
               .snapshots(),
           builder: (context, snapshot) {
           if(snapshot.hasData){
@@ -166,10 +167,31 @@ class DayWidget extends StatelessWidget {
                 },
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  return Container(child: Card(
-                    child: Text(
-                     snapshot.data!.docs[index]['period']['periodName'])
-                  ),);
+                  //MaterialColor color = colorMap[colorString.toLowerCase()] ?? Colors.grey;                                                          
+                //  snapshot.data!.docs[index]['color']
+                // int colorValue = int.tryParse(snapshot.data!.docs[index]['period']['color'], radix: 16)!;
+                 
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: 80,
+                      child: ListTile(
+                                      
+                        tileColor: adminePrimayColor,
+                        leading : GoogleMonstserratWidgets (text:"Period" " "+ (index+1).toString(),fontsize: 15,color: Colors.white,),
+                        //leading: Text(((index+1).toString())),
+                      // tileColor: C,
+                                     // tileColor: ,
+                      trailing: GoogleMonstserratWidgets(text: "${"Time: "+ snapshot.data!.docs[index]['period']['startTime']}--"+snapshot.data!.docs[index]['period'][ 'endTime'], fontsize: 15,color: Colors.white,),
+                        title: GoogleMonstserratWidgets(
+                        text: snapshot.data!.docs[index]['period']['periodName'], fontsize: 18, fontWeight: FontWeight.bold, color: Colors.white,), 
+                                      
+                         subtitle: GoogleMonstserratWidgets(text: 'Teacher : '+ snapshot.data!.docs[index]['period']['periodTeacher'], fontsize: 12, color: Colors.white
+                         )),
+                    ),
+                  );
+                  
+              
                   // return Text(
                   //     snapshot.data!.docs[index]['period']['periodName']);
                 });

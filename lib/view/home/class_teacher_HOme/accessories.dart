@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/leave_letters/leave_lettersList.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/my_students.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
+import 'package:dujo_kerala_application/view/pages/exam_results/select_exam.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -18,17 +19,21 @@ import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
 import '../../pages/teacher_list/teacher_list.dart';
+import '../bus_route_page/all_bus_list.dart';
 import '../events/event_list.dart';
 import '../exam_Notification/teacher_adding/add_subject.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
-  const ClassTeacherAccessories({
+  String classID;
+   ClassTeacherAccessories({required this.classID,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
+
+
       SelectPeriodWiseScreen(
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
@@ -38,8 +43,7 @@ class ClassTeacherAccessories extends StatelessWidget {
       AttendenceBookScreenSelectMonth(
         batchId: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,
-        schoolId: UserCredentialsController.schoolId!,
-      ),  ////////////  Attendance book
+        schoolId: UserCredentialsController.schoolId!,),  ////////////  Attendance book
 
       const StudentShowTimeTable(), //TimeTable
 
@@ -54,8 +58,7 @@ class ClassTeacherAccessories extends StatelessWidget {
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
         schoolID: UserCredentialsController.schoolId!,
-        teacherID: UserCredentialsController.teacherModel!.docid!,
-      ), //////////Home Work
+        teacherID: UserCredentialsController.teacherModel!.docid!,), //////////Home Work
 
       const MyStudents(), //My students
 
@@ -67,6 +70,8 @@ class ClassTeacherAccessories extends StatelessWidget {
 
 
       const AddTimeTable(), //Exam
+
+      SelectExamLevelScreen(classId: classID), //exam result upload
 
 
       NoticePage(), //Notice
@@ -83,6 +88,9 @@ class ClassTeacherAccessories extends StatelessWidget {
 
 
       TeacherSubjectWiseList(), //Teachers
+
+        BusRouteListPage(),   /////// all bus
+
 
  
     ];
@@ -167,9 +175,10 @@ class ClassTeacherAccessories extends StatelessWidget {
 
 List<String> _acc_text = [
   'Take Attendance'.tr,
+
   'Attendance Book'.tr,
 
-  'TimeTable'.tr,
+  'Time Table'.tr,
   'Leave Letters'.tr,
 
   'HomeWorks'.tr,
@@ -179,18 +188,22 @@ List<String> _acc_text = [
   'Meetings'.tr,
 
   'Exams'.tr,
+
+  'Exam Results'.tr,
   'Notices'.tr,
 
   'Events'.tr,
   'Progress Report'.tr,
 
   'Teachers'.tr,
+
+  'Bus Route'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
-  'assets/images/library.png',
-
   'assets/images/classroom.png',
+
+  'assets/images/library.png',
   'assets/images/leaveapplica.png',
   
   'assets/images/homework.png',
@@ -200,6 +213,7 @@ var _acc_images = [
   'assets/images/meetings.png',
   
   'assets/images/exam.png',
+  'assets/images/exmresult1.png',
   
   'assets/images/notices.png',
   'assets/images/activity.png',
@@ -208,5 +222,6 @@ var _acc_images = [
   'assets/images/progressreport.png',
   
    'assets/images/teachers.png',
+   'assets/images/bus.png'
   
 ];

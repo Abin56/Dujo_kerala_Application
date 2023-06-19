@@ -148,7 +148,7 @@ Widget MyDrawerList(context) {
             () => GeneralInstruction(),
           );
         }),
-        MenuItem(2, 'assets/images/attendance.png', 'Attendance'.tr,
+        MenuItem(2, 'assets/images/attendance.png', 'Attendance book'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => AttendenceBookScreenSelectMonth(
@@ -163,7 +163,7 @@ Widget MyDrawerList(context) {
             () => const UserExmNotifications(),
           );
         }),
-        MenuItem(4, 'assets/images/library.png', 'TimeTable'.tr,
+        MenuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
       Get.to(
             () => const StudentShowTimeTable(),
@@ -176,7 +176,7 @@ Widget MyDrawerList(context) {
             () => const ViewHomeWorks(),
           );
         }),
-        MenuItem(6, 'assets/images/school_building.png', 'Notices'.tr,
+        MenuItem(6, 'assets/images/notices.png', 'Notices'.tr,
             currentPage == DrawerSections.about ? true : false, () {
      Get.to(
             () => NoticePage(),

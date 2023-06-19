@@ -29,7 +29,7 @@ class StateLevel extends StatelessWidget {
                 if (snaps.data!.docs.isEmpty) {
                   return Center(
                     child: GooglePoppinsWidgets(
-                        text: 'No Records Found', fontsize: 20),
+                        text: 'No Records Found'.tr, fontsize: 20),
                   );
                 } else {
                   return ListView.separated(

@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -61,13 +62,14 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        kHeight20,
                         Text(
                           data.schoolName,
                           style: const TextStyle(
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 20.h,
+                          height: 5.h,
                         ),
                         Text(
                           data.schoolPlace,
@@ -180,8 +182,11 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 600,
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all()
+                          ),
+                         // height: 600.h,
                           child: Column(
                             children: [
                               SingleChildScrollView(

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../constant/sizes/sizes.dart';
 import '../../../widgets/fonts/google_poppins.dart';
 
 class ClassLevelNoticePage extends StatelessWidget {
@@ -22,13 +21,15 @@ class ClassLevelNoticePage extends StatelessWidget {
                 child: Text("Data Not Found"),
               )
             : ListView.separated(
+              //  reverse: true,
                 itemCount: studentNoticeController.classLevelNoticeLists.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 10, right: 10, left: 10),
+                             EdgeInsets.only(bottom: 5.h, right: 10.w, left: 10.w),
                         child: Card(
                           child: ListTile(
                             shape: BeveledRectangleBorder(
@@ -73,7 +74,7 @@ class ClassLevelNoticePage extends StatelessWidget {
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {
-                  return kHeight10;
+                  return const Text("");
                 },
               ));
   }

@@ -159,16 +159,16 @@ class TeacherEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("Do you want change mail ?"),
+                title:  Text("Do you want change mail ?".tr),
                 actions: [
                   TextButton(
-                    child: const Text("Cancel"),
+                    child:  Text("Cancel".tr),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: const Text("Ok"),
+                    child:  Text("Ok".tr),
                     onPressed: () {
                       Navigator.pop(context);
 
@@ -182,21 +182,21 @@ class TeacherEditListileWidget extends StatelessWidget {
                           return Form(
                             key: _formKey,
                             child: AlertDialog(
-                              title: const Text("Update Mail"),
+                              title:  Text("Update Mail".tr),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   TextFormField(
                                     validator: checkFieldEmailIsValid,
                                     controller: emailController,
-                                    decoration: const InputDecoration(
-                                        hintText: "Enter new email address"),
+                                    decoration:  InputDecoration(
+                                        hintText: "Enter new email address".tr),
                                   ),
                                   TextFormField(
                                     validator: checkFieldEmpty,
                                     controller: passwordController,
-                                    decoration: const InputDecoration(
-                                        hintText: "Password"),
+                                    decoration:  InputDecoration(
+                                        hintText: "Password".tr),
                                   ),
                                 ],
                               ),
@@ -207,7 +207,7 @@ class TeacherEditListileWidget extends StatelessWidget {
                                         child: CircularProgressIndicator(),
                                       )
                                     : TextButton(
-                                        child: const Text("Update"),
+                                        child:  Text("Update".tr),
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -261,18 +261,12 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
                 onTap: () async {
                   _getCameraAndGallery(context);
                 },
-                child: Align(
+                child: const Align(
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor: const Color.fromARGB(255, 52, 50, 50),
-                    child: IconButton(
-                      icon: const Icon(Icons.edit),
-                      color: Colors.white,
-                      onPressed: () async {
-                        _getCameraAndGallery(context);
-                      },
-                    ),
+                    backgroundColor: Color.fromARGB(255, 52, 50, 50),
+                    child: Icon(Icons.edit),
                   ),
                 ),
               ),
@@ -307,21 +301,21 @@ class CircleAvatharImageSelectionWidgetTeacher extends StatelessWidget {
                     )
                   : AlertDialog(
                       title:
-                          const Text('Do you want to change profile picture?'),
+                           Text('Do you want to change profile picture?'.tr),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Get.find<TeacherProfileController>()
                                 .updateTeacherProfilePicture();
                           },
-                          child: const Text('Update'),
+                          child:  Text('Update'.tr),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                             getImageController.pickedImage.value = '';
                           },
-                          child: const Text('Cancel'),
+                          child:  Text('Cancel'.tr),
                         ),
                       ],
                     ),

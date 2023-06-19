@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 class SubjectWiseDisplay extends StatelessWidget {
   const SubjectWiseDisplay({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class SubjectWiseDisplay extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: 10.h),
                 child: GooglePoppinsWidgets(
-                  text: "Study Materials",
+                  text: "Study Materials".tr,
                   fontsize: 16.h,
                   color: adminePrimayColor,
                 ),

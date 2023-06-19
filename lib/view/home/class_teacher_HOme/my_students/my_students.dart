@@ -42,7 +42,7 @@ class MyStudents extends StatelessWidget {
                     child: Card( 
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                      ), color: Colors.greenAccent,
+                      ), color: Colors.grey[300],
                       child: ListTile(
                         //tileColor: Colors.green.withOpacity(0.5),
                         leading:  Text('${index + 1}'),
@@ -60,14 +60,14 @@ class MyStudents extends StatelessWidget {
               // }
             },
             itemBuilder: (BuildContext context) {
-              return const [
+              return  [
                 PopupMenuItem<String>(
                   value: 'Add Achievement',
-                  child: Text('Add Achievement'),
+                  child: Text('Add Achievement'.tr),
                 ),
                 PopupMenuItem<String>(
                   value: 'View Details',
-                  child: Text('View Details'),
+                  child: Text('View Details'.tr),
                 ),
                 // PopupMenuItem<String>(
                 //   value: 'option3',

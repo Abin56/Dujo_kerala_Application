@@ -30,7 +30,7 @@ class RecordedClassChapterUploadPage extends StatelessWidget {
             IconButtonBackWidget(
               color: cWhite,
             ),
-            const Text("Chapter Upload"),
+             Text("Chapter Upload".tr),
           ],
         ),
         backgroundColor: adminePrimayColor,
@@ -45,15 +45,15 @@ class RecordedClassChapterUploadPage extends StatelessWidget {
                   validator: checkFieldEmpty,
                   textfromController:
                       _recordedClassController.chapterNumberController,
-                  text: "Chapter No.",
-                  hintText: "Chapter Number"),
+                  text: "Chapter No.".tr,
+                  hintText: "Chapter Number".tr),
               kHeight20,
               ExamUploadTextFormFeild(
                   validator: checkFieldEmpty,
                   textfromController:
                       _recordedClassController.chapterNameController,
-                  text: "Chapter Name",
-                  hintText: "Chapter Name"),
+                  text: "Chapter Name".tr,
+                  hintText: "Chapter Name".tr),
               kHeight20,
               GestureDetector(
                 onTap: () {
@@ -65,13 +65,13 @@ class RecordedClassChapterUploadPage extends StatelessWidget {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Chapter Upload'),
-                              content: const Text('New Chapter Added!'),
+                              title:  Text('Chapter Upload'.tr),
+                              content:  Text('New Chapter Added!'.tr),
                               actions: [
                                 Padding(
-                                  padding: const EdgeInsets.all(10.0),
+                                  padding:  EdgeInsets.all(10.0),
                                   child: MaterialButton(
-                                    child: const Text('Ok'),
+                                    child:  Text('Ok'.tr),
                                     onPressed: () => Navigator.pop(context),
                                   ),
                                 )
@@ -91,7 +91,7 @@ class RecordedClassChapterUploadPage extends StatelessWidget {
                         () => _recordedClassController.chapterIsLoading.value
                             ? const CircularProgressIndicator()
                             : Text(
-                                "Create Chapter",
+                                "Create Chapter".tr,
                                 style: GoogleFonts.montserrat(
                                     color: Colors.white,
                                     fontSize: 13,
@@ -119,7 +119,7 @@ class RecordedClassChapterUploadPage extends StatelessWidget {
                   width: 300.w,
                   child: Center(
                     child: Text(
-                      "Upload Recorded Classes",
+                      "Upload Recorded Classes".tr,
                       style: GoogleFonts.montserrat(
                           color: Colors.white,
                           fontSize: 13,

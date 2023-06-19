@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../model/bus_route_model/bus_route_model.dart';
 import '../../colors/colors.dart';
@@ -17,6 +18,10 @@ class BusRouteDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: adminePrimayColor,
+            title: GooglePoppinsWidgets(text: 'View bus status'.tr,
+           fontsize: 18.w)),
             body: Center(
       child: ListView(children: [
         Card(
@@ -73,7 +78,7 @@ class BusRouteDetailPage extends StatelessWidget {
               children: [
                 kHeight,
                 Text(
-                  "View Bus Status",
+                  "View bus status".tr,
                   style: TextStyle(color: cWhite, fontSize: 20.h),
                 ),
               ],
@@ -102,17 +107,24 @@ class BusRouteDetailPageListileWidget extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        onTap: onTap,
-        leading: leading,
-        title: title,
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            title1,
-            title2,
-          ],
+    return Padding(
+      padding:  EdgeInsets.only(left: 10.w,right: 10.w,top: 20.w),
+      child: Card(
+        child: ListTile(
+          onTap: onTap,
+          
+          leading: leading,
+          title: title,
+          
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              kHeight20,
+              title1,
+              kHeight20,
+              title2,
+            ],
+          ),
         ),
       ),
     );

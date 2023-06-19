@@ -23,7 +23,7 @@ class LeaveLettersListviewScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Leave Letter".tr),
+        title:  Text("Leave Letters".tr),
         backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(

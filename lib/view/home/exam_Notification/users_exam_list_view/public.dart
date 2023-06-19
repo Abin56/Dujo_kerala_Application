@@ -29,7 +29,7 @@ class UserPublicLevel extends StatelessWidget {
                 if (snaps.data!.docs.isEmpty) {
                   return Center(
                     child: GooglePoppinsWidgets(
-                        text: 'No Records Found', fontsize: 20.h),
+                        text: 'No Records Found'.tr, fontsize: 20.h),
                   );
                 } else {
                   return ListView.separated(

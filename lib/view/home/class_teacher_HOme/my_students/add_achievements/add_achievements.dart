@@ -1,11 +1,14 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/my_students/student_details/show_student_achievements.dart';
-import 'package:dujo_kerala_application/widgets/Iconbackbutton.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
@@ -49,6 +52,7 @@ class _AddAchievementsState extends State<AddAchievements> {
               .doc(uid)
               .set({
                 'studentName': widget.studentDetail['studentName'], 
+                //'timestamp': DateTime.now(),
                 'studentID': widget.studentDetail['docid'], 
                 'photoUrl': widget.studentDetail['profileImageUrl'], 
                 'description': descriptionController.text, 
@@ -58,14 +62,14 @@ class _AddAchievementsState extends State<AddAchievements> {
                 'docid':uid
               }).then((value) => showDialog(context: context, builder: (context){
                 return AlertDialog(
-                  title:const Text('Students Achievements'),
-                  content: const Text('New Achievement added!'),
+                  title: Text('Students Achievements'.tr),
+                  content:  Text('New Achievement added!'.tr),
                   actions: [
                     MaterialButton(onPressed: (){
                       Navigator.of(context).pop();
-                    }, color: Colors.blue, child: const Padding(
-                      padding:  EdgeInsets.all(8.0),
-                      child:  Text('Ok'),
+                    }, color: Colors.blue, child:  Padding(
+                      padding:  const EdgeInsets.all(8.0),
+                      child:  Text('Ok'.tr),
                     ),)
                   ],
                 );
@@ -80,6 +84,8 @@ class _AddAchievementsState extends State<AddAchievements> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      appBar: AppBar(title:GooglePoppinsWidgets(text: 'Add Achievement'.tr,fontsize: 18.w),backgroundColor:adminePrimayColor ,),
       body: SafeArea(
         child: Center(
           child: Form(key: _formKey,
@@ -87,7 +93,7 @@ class _AddAchievementsState extends State<AddAchievements> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButtonBackWidget(color: cblack,),
+               // IconButtonBackWidget(color: cblack,),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center, 
@@ -112,10 +118,10 @@ class _AddAchievementsState extends State<AddAchievements> {
                         
                             validator: checkFieldEmpty,
                             controller: achievementController,
-                             decoration: const InputDecoration(
+                             decoration:  InputDecoration(
                                border: InputBorder.none, // Remove the default underline
                                contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
-                               hintText: 'Achievement', // Placeholder text
+                               hintText: 'Achievement'.tr, // Placeholder text
                              ),),
                          ),
                        ),
@@ -132,10 +138,10 @@ class _AddAchievementsState extends State<AddAchievements> {
                            child: TextFormField(
                             validator: checkFieldEmpty,
                             controller: dateOfAchievementController,
-                             decoration: const InputDecoration(
+                             decoration:  InputDecoration(
                                border: InputBorder.none, // Remove the default underline
-                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
-                               hintText: 'Date of Achievement', // Placeholder text
+                               contentPadding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               hintText: 'Date of Achievement'.tr, // Placeholder text
                              ),),
                          ),
                        ), kHeight20,
@@ -151,10 +157,10 @@ class _AddAchievementsState extends State<AddAchievements> {
                            child: TextFormField(
                             validator: checkFieldEmpty,
                             controller: descriptionController,
-                             decoration: const InputDecoration(
+                             decoration:  InputDecoration(
                                border: InputBorder.none, // Remove the default underline
-                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
-                               hintText: 'Description', // Placeholder text
+                               contentPadding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               hintText: 'Descriptions'.tr, // Placeholder text
                              ),),
                          ),
                        ),kHeight20, 
@@ -163,14 +169,22 @@ class _AddAchievementsState extends State<AddAchievements> {
                           onPressed: (){
                              if (_formKey.currentState!.validate()) {
                         addClassTeacherAchievementsToFirebase();
+                         checkfield();
                              }
                        }, color: Colors.blue,
-                        child: const Text('Add Achievement', 
-                        style: TextStyle(color: Colors.white),),), 
+                        child:  Text('Add Achievement'.tr, 
+                        style: const TextStyle(color: Colors.white),),), 
                         kHeight20, 
-                        MaterialButton(onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>  ShowStudentAchievements(studentID: widget.studentDetail['docid'],)));
-                        }, color: Colors.blue,child: Text('Show Achievements of ${widget.studentDetail['studentName'].toString().capitalize}', style: const TextStyle(color: Colors.white),),)
+                        MaterialButton(
+                          onPressed: (){
+                           
+                          Navigator.push(context, MaterialPageRoute
+                          (builder: (context)=>  ShowStudentAchievements(
+                            studentID: widget.studentDetail['docid'],)));
+                        },
+                         color: Colors.blue,
+                         child: Text('Show Achievements of ${widget.studentDetail['studentName'].toString().capitalize}', 
+                         style:  const TextStyle(color: Colors.white),),)
                       
                       
                     ]
@@ -182,5 +196,11 @@ class _AddAchievementsState extends State<AddAchievements> {
         ),
       )
     );
+  }
+  void checkfield(){
+    dateOfAchievementController.clear();
+    achievementController.clear();
+    descriptionController.clear();
+
   }
 }

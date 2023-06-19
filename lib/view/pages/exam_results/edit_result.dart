@@ -34,7 +34,7 @@ class EditExamResultScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: adminePrimayColor,
-        title: GoogleMonstserratWidgets(text: 'Mark List', fontsize: 19.w,fontWeight: FontWeight.w600),),
+        title: GoogleMonstserratWidgets(text: 'Mark List'.tr, fontsize: 19.w,fontWeight: FontWeight.w600),),
       body: SafeArea(
           child: Container(
             margin: EdgeInsets.only(top: 20.h),
