@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -65,13 +67,15 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin {
 
   List<String> periodNumbers = ['1', '2', '3', '4', '5', '6', '7'];
 
-  List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']; 
+
+ 
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
   }
 
   @override
@@ -99,13 +103,13 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin {
         bottom: TabBar(
           unselectedLabelColor: adminePrimayColor,
           unselectedLabelStyle:
-              GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.bold),
+              GoogleFonts.montserrat(fontSize: 10, fontWeight: FontWeight.bold),
           dividerColor: adminePrimayColor,
           indicator: BoxDecoration(
               color: adminePrimayColor,
               borderRadius: BorderRadius.circular(50)),
           labelStyle: GoogleFonts.montserrat(
-            fontSize: 13,
+            fontSize: 11,
             fontWeight: FontWeight.bold,
           ),
           controller: _tabController,
@@ -113,8 +117,9 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin {
             Tab(text: 'MON'),
             Tab(text: 'TUE'),
             Tab(text: 'WED'),
-            Tab(text: 'THUR'),
+            Tab(text: 'THU'),
             Tab(text: 'FRI'),
+            Tab(text: 'SAT'),
           ],
         ),
       ),
@@ -126,6 +131,7 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin {
           DayWidget(dayName: 'Wednesday'),
           DayWidget(dayName: 'Thursday'),
           DayWidget(dayName: 'Friday'),
+          DayWidget(dayName: 'Saturday'),
 
           // PeriodShowingWidget(periodList: periodList, dayName: days[0], teacherList: teachersList),
           // PeriodShowingWidget(periodList: periodList, dayName: days[1], teacherList: teachersList),
@@ -142,6 +148,42 @@ class DayWidget extends StatelessWidget {
   DayWidget({super.key, required this.dayName});
 
   String dayName;
+   Color colorCheck(col){
+    if (col == 'Color(0x00fcfcfc)'){
+      return Colors.amber;
+    }
+    else if(col == 'Color(0xfff44336)'){
+      return Colors.red;
+    } 
+    else if(col == 'Color(0xff4caf50)'){
+      return Colors.green;
+    }
+    else if(col == 'Color(0xff2196f3)'){
+      return Colors.blue;
+    } 
+    else if(col == 'Color(0xffffeb3b)'){
+      return Colors.yellow;
+    } 
+    else if(col == 'Color(0xff795548)'){
+      return Colors.brown;
+    }
+    else if(col == 'Color(0xffff5722)'){
+      return Colors.deepOrange;
+    }
+    else if(col == 'Color(0xff673ab7)'){
+      return Colors.deepPurple;
+    }
+     else if(col == 'Color(0xffcddc39)'){
+      return Colors.lime;
+    }
+      else if(col == 'Color(0xff3f51b5)'){
+      return Colors.indigo;
+    }
+    else{
+    return Colors.grey;
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,27 +209,43 @@ class DayWidget extends StatelessWidget {
                 },
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
+                  Color coll = colorCheck(snapshot.data!.docs[index]['period']['color']);
                   //MaterialColor color = colorMap[colorString.toLowerCase()] ?? Colors.grey;                                                          
                 //  snapshot.data!.docs[index]['color']
-                // int colorValue = int.tryParse(snapshot.data!.docs[index]['period']['color'], radix: 16)!;
-                 
+              // int colorValue = int.tryParse(snapshot.data!.docs[index]['period']['color'], radix: 16)!;
+              String coco = snapshot.data!.docs[index]['period']['color'].toString().substring(6, snapshot.data!.docs[index]['period']['color'].toString().length-1);
+             //  Color colorr = Color(int.parse(coco, radix: 16));
+              
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
-                      height: 80,
-                      child: ListTile(
-                                      
-                        tileColor: adminePrimayColor,
-                        leading : GoogleMonstserratWidgets (text:"Period" " "+ (index+1).toString(),fontsize: 15,color: Colors.white,),
-                        //leading: Text(((index+1).toString())),
-                      // tileColor: C,
-                                     // tileColor: ,
-                      trailing: GoogleMonstserratWidgets(text: "${"Time: "+ snapshot.data!.docs[index]['period']['startTime']}--"+snapshot.data!.docs[index]['period'][ 'endTime'], fontsize: 15,color: Colors.white,),
-                        title: GoogleMonstserratWidgets(
-                        text: snapshot.data!.docs[index]['period']['periodName'], fontsize: 18, fontWeight: FontWeight.bold, color: Colors.white,), 
-                                      
-                         subtitle: GoogleMonstserratWidgets(text: 'Teacher : '+ snapshot.data!.docs[index]['period']['periodTeacher'], fontsize: 12, color: Colors.white
-                         )),
+                      height: 70,
+                      child: GestureDetector(
+                        onTap: (){
+                          log(coco);
+                        },
+                        child: ListTile(
+                                        
+                         tileColor: coll,
+                          leading : GoogleMonstserratWidgets (text:snapshot.data!.docs[index]['period']['timeStamp'],fontsize: 12
+                          ,color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,),
+                          //leading: Text(((index+1).toString())),
+                                        
+                        trailing: SizedBox(
+                          width: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GoogleMonstserratWidgets(text: "Time :", fontsize: 10,color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,),
+                              GoogleMonstserratWidgets(text: "${snapshot.data!.docs[index]['period']['startTime']}-"+snapshot.data!.docs[index]['period'][ 'endTime'], fontsize: 10,color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,),
+                            ],
+                          )),
+                          title: GoogleMonstserratWidgets(
+                          text: snapshot.data!.docs[index]['period']['periodName'], fontsize: 17, fontWeight: FontWeight.bold, color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,), 
+                                        
+                           subtitle: GoogleMonstserratWidgets(text: 'Teacher : '+ snapshot.data!.docs[index]['period']['periodTeacher'], fontsize: 12, color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white
+                           )),
+                      ),
                     ),
                   );
                   
@@ -197,9 +255,19 @@ class DayWidget extends StatelessWidget {
                 });
 
           
-          } return const Text('No Data');
+          } 
+          
+          return const Text('No Data',);
           }),
     );
+  }
+}
+
+class ColorParser {
+  static Color fromHex(String hexString) {
+    String formattedString = hexString.replaceAll("#", "");
+    int colorValue = int.parse(formattedString, radix: 16);
+    return Color(colorValue | 0xFF000000);
   }
 }
 

@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tools:node="remove" />
     <application
         tools:replace="android:label"
-        android:label="DuJo"
+        android:label="Lepton DuJo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

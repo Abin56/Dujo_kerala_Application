@@ -1,5 +1,5 @@
-// import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -12,8 +12,9 @@ class Videoplayer extends StatefulWidget {
 }
 
 class _VideoplayerState extends State<Videoplayer> {
-  FlickManager? flickManager;
+ FlickManager? flickManager;
   @override
+  
   void initState() {
     super.initState();
     flickManager = FlickManager(
@@ -24,14 +25,14 @@ class _VideoplayerState extends State<Videoplayer> {
 
   @override
   void dispose() {
-    flickManager!.dispose();
+   flickManager!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FlickVideoPlayer(flickManager: flickManager!),
+     child: FlickVideoPlayer(flickManager: flickManager!),
     );
   }
 }
