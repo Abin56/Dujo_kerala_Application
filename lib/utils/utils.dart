@@ -29,7 +29,7 @@ Future<String> dateTimePicker(BuildContext context) async {
   DateTime? dateTime = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime(1700),
       lastDate: DateTime(2500));
   if (dateTime != null) {
     return DateFormat("dd-M-yyyy").format(dateTime);

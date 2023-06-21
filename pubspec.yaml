@@ -67,10 +67,11 @@ dependencies:
   flutter_spinkit: 
   flutter_local_notifications:
   firebase_messaging:
+  flick_video_player:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/leptonlogo2.png"
+  image_path: "assets/images/leptonlogo.png"
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -83,6 +84,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter:
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
