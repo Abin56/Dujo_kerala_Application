@@ -71,7 +71,7 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/leptonlogo2.png"
+  image_path: "assets/images/leptonlogo.png"
 
 dev_dependencies:
   flutter_lints: ^2.0.0

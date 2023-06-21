@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -67,15 +65,34 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin {
 
   List<String> periodNumbers = ['1', '2', '3', '4', '5', '6', '7'];
 
-  List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']; 
-
- 
+  List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _tabController = TabController(length: 6, vsync: this);
+    if (DateTime.now().weekday == 0) {
+      _tabController!.animateTo(0);
+    }
+    if (DateTime.now().weekday == 1) {
+      _tabController!.animateTo(0);
+    }
+    if (DateTime.now().weekday == 2) {
+      _tabController!.animateTo(1);
+    }
+    if (DateTime.now().weekday == 3) {
+      _tabController!.animateTo(2);
+    }
+    if (DateTime.now().weekday == 4) {
+      _tabController!.animateTo(3);
+    }
+    if (DateTime.now().weekday == 5) {
+      _tabController!.animateTo(4);
+    }
+    if (DateTime.now().weekday == 6) {
+      _tabController!.animateTo(5);
+    }
   }
 
   @override
@@ -96,7 +113,7 @@ class _SSState extends State<SS> with SingleTickerProviderStateMixin {
           fontWeight: FontWeight.bold,
         ),
         iconTheme: const IconThemeData(
-            color: adminePrimayColor //change your color here
+            color: adminePrimayColor 
             ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -148,41 +165,30 @@ class DayWidget extends StatelessWidget {
   DayWidget({super.key, required this.dayName});
 
   String dayName;
-   Color colorCheck(col){
-    if (col == 'Color(0x00fcfcfc)'){
+  Color colorCheck(col) {
+    if (col == 'Color(0x00fcfcfc)') {
       return Colors.amber;
-    }
-    else if(col == 'Color(0xfff44336)'){
+    } else if (col == 'Color(0xfff44336)') {
       return Colors.red;
-    } 
-    else if(col == 'Color(0xff4caf50)'){
+    } else if (col == 'Color(0xff4caf50)') {
       return Colors.green;
-    }
-    else if(col == 'Color(0xff2196f3)'){
+    } else if (col == 'Color(0xff2196f3)') {
       return Colors.blue;
-    } 
-    else if(col == 'Color(0xffffeb3b)'){
+    } else if (col == 'Color(0xffffeb3b)') {
       return Colors.yellow;
-    } 
-    else if(col == 'Color(0xff795548)'){
+    } else if (col == 'Color(0xff795548)') {
       return Colors.brown;
-    }
-    else if(col == 'Color(0xffff5722)'){
+    } else if (col == 'Color(0xffff5722)') {
       return Colors.deepOrange;
-    }
-    else if(col == 'Color(0xff673ab7)'){
+    } else if (col == 'Color(0xff673ab7)') {
       return Colors.deepPurple;
-    }
-     else if(col == 'Color(0xffcddc39)'){
+    } else if (col == 'Color(0xffcddc39)') {
       return Colors.lime;
-    }
-      else if(col == 'Color(0xff3f51b5)'){
+    } else if (col == 'Color(0xff3f51b5)') {
       return Colors.indigo;
+    } else {
+      return Colors.grey;
     }
-    else{
-    return Colors.grey;
-    }
-
   }
 
   @override
@@ -202,62 +208,102 @@ class DayWidget extends StatelessWidget {
               //.orderBy('timestamp', descending: false)
               .snapshots(),
           builder: (context, snapshot) {
-          if(snapshot.hasData){
+            if (snapshot.hasData) {
               return ListView.separated(
-                separatorBuilder: (context, index){
-                  return const SizedBox(height: 10,);
-                },
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  Color coll = colorCheck(snapshot.data!.docs[index]['period']['color']);
-                  //MaterialColor color = colorMap[colorString.toLowerCase()] ?? Colors.grey;                                                          
-                //  snapshot.data!.docs[index]['color']
-              // int colorValue = int.tryParse(snapshot.data!.docs[index]['period']['color'], radix: 16)!;
-              String coco = snapshot.data!.docs[index]['period']['color'].toString().substring(6, snapshot.data!.docs[index]['period']['color'].toString().length-1);
-             //  Color colorr = Color(int.parse(coco, radix: 16));
-              
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 70,
-                      child: GestureDetector(
-                        onTap: (){
-                          log(coco);
-                        },
-                        child: ListTile(
-                                        
-                         tileColor: coll,
-                          leading : GoogleMonstserratWidgets (text:snapshot.data!.docs[index]['period']['timeStamp'],fontsize: 12
-                          ,color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,),
-                          //leading: Text(((index+1).toString())),
-                                        
-                        trailing: SizedBox(
-                          width: 100,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GoogleMonstserratWidgets(text: "Time :", fontsize: 10,color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,),
-                              GoogleMonstserratWidgets(text: "${snapshot.data!.docs[index]['period']['startTime']}-"+snapshot.data!.docs[index]['period'][ 'endTime'], fontsize: 10,color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,),
-                            ],
-                          )),
-                          title: GoogleMonstserratWidgets(
-                          text: snapshot.data!.docs[index]['period']['periodName'], fontsize: 17, fontWeight: FontWeight.bold, color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white,), 
-                                        
-                           subtitle: GoogleMonstserratWidgets(text: 'Teacher : '+ snapshot.data!.docs[index]['period']['periodTeacher'], fontsize: 12, color:(coll == Colors.amber || coll == Colors.yellow || coll == Colors.lime)? Colors.black: Colors.white
-                           )),
-                      ),
-                    ),
-                  );
-                  
-              
-                  // return Text(
-                  //     snapshot.data!.docs[index]['period']['periodName']);
-                });
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    Color coll = colorCheck(
+                        snapshot.data!.docs[index]['period']['color']);
+                    String coco = snapshot.data!.docs[index]['period']['color']
+                        .toString()
+                        .substring(
+                            6,
+                            snapshot.data!.docs[index]['period']['color']
+                                    .toString()
+                                    .length -
+                                1);
 
-          
-          } 
-          
-          return const Text('No Data',);
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: 70,
+                        child: ListTile(
+                            tileColor: coll,
+                            leading: GoogleMonstserratWidgets(
+                              text: snapshot.data!.docs[index]['period']
+                                  ['timeStamp'],
+                              fontsize: 12,
+                              color: (coll == Colors.amber ||
+                                      coll == Colors.yellow ||
+                                      coll == Colors.lime)
+                                  ? Colors.black
+                                  : Colors.white,
+                            ),
+                            trailing: SizedBox(
+                                width: 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GoogleMonstserratWidgets(
+                                      text: "Time :",
+                                      fontsize: 10,
+                                      color: (coll == Colors.amber ||
+                                              coll == Colors.yellow ||
+                                              coll == Colors.lime)
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
+                                    GoogleMonstserratWidgets(
+                                      text:
+                                          "${snapshot.data!.docs[index]['period']['startTime']}-" +
+                                              snapshot.data!.docs[index]
+                                                  ['period']['endTime'],
+                                      fontsize: 10,
+                                      color: (coll == Colors.amber ||
+                                              coll == Colors.yellow ||
+                                              coll == Colors.lime)
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
+                                  ],
+                                )),
+                            title: GoogleMonstserratWidgets(
+                              text: snapshot.data!.docs[index]['period']
+                                  ['periodName'],
+                              fontsize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: (coll == Colors.amber ||
+                                      coll == Colors.yellow ||
+                                      coll == Colors.lime)
+                                  ? Colors.black
+                                  : Colors.white,
+                            ),
+                            subtitle: GoogleMonstserratWidgets(
+                                text: 'Teacher : ' +
+                                    snapshot.data!.docs[index]['period']
+                                        ['periodTeacher'],
+                                fontsize: 12,
+                                color: (coll == Colors.amber ||
+                                        coll == Colors.yellow ||
+                                        coll == Colors.lime)
+                                    ? Colors.black
+                                    : Colors.white)),
+                      ),
+                    );
+
+                    // return Text(
+                    //     snapshot.data!.docs[index]['period']['periodName']);
+                  });
+            }
+
+            return const Text(
+              'No Data',
+            );
           }),
     );
   }

@@ -31,260 +31,267 @@ class ParentSignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    ContainerImage(
-                        height: 70.h,
-                        width: 100.w,
-                        imagePath: 'assets/images/leptonlogo.png'),
-                    GoogleMonstserratWidgets(
-                      text: 'Lepton Dujo',
-                      fontsize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ],
-                ),
-                GooglePoppinsWidgets(
-                  fontsize: 20,
-                  fontWeight: FontWeight.w400,
-                  text: 'Welcome..'.tr,
-                ),
-                kHeight20,
-                Center(
-                  child: GooglePoppinsWidgets(
-                    fontsize: 24,
-                    fontWeight: FontWeight.w600,
-                    text: 'Sign up'.tr,
+    return WillPopScope(
+       onWillPop: (){
+        getImageController.pickedImage.value="";
+        parentSignUpController.clearControllers();
+        return Future.value(true);
+      },
+      child: Scaffold(
+        body: SafeArea(
+            child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      ContainerImage(
+                          height: 70.h,
+                          width: 100.w,
+                          imagePath: 'assets/images/leptonlogo.png'),
+                      GoogleMonstserratWidgets(
+                        text: 'Lepton Dujo',
+                        fontsize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ],
                   ),
-                ),
-                kHeight10,
-                Center(
-                  child: GooglePoppinsWidgets(
+                  GooglePoppinsWidgets(
                     fontsize: 20,
-                    fontWeight: FontWeight.w300,
-                    text: 'Personal Data'.tr,
+                    fontWeight: FontWeight.w400,
+                    text: 'Welcome..'.tr,
                   ),
-                ),
-              ],
+                  kHeight20,
+                  Center(
+                    child: GooglePoppinsWidgets(
+                      fontsize: 24,
+                      fontWeight: FontWeight.w600,
+                      text: 'Sign up'.tr,
+                    ),
+                  ),
+                  kHeight10,
+                  Center(
+                    child: GooglePoppinsWidgets(
+                      fontsize: 20,
+                      fontWeight: FontWeight.w300,
+                      text: 'Personal Data'.tr,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          kHeight10,
-          Stack(children: [
-            SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    Obx(
-                      () => CircleAvatar(
-                        backgroundImage: getImageController
-                                .pickedImage.value.isEmpty
-                            ? const NetworkImage(netWorkImagePathPerson)
-                            : FileImage(
-                                    File(getImageController.pickedImage.value))
-                                as ImageProvider,
-                        radius: 60,
-                        child: Stack(
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                _getCameraAndGallery(context);
-                              },
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 95, 92, 92),
-                                  child: IconButton(
-                                    icon: const Icon(Icons.camera_alt),
-                                    color: Colors.white,
-                                    onPressed: () async {
-                                      _getCameraAndGallery(context);
-                                    },
+            kHeight10,
+            Stack(children: [
+              SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      Obx(
+                        () => CircleAvatar(
+                          backgroundImage: getImageController
+                                  .pickedImage.value.isEmpty
+                              ? const NetworkImage(netWorkImagePathPerson)
+                              : FileImage(
+                                      File(getImageController.pickedImage.value))
+                                  as ImageProvider,
+                          radius: 60,
+                          child: Stack(
+                            children: [
+                              InkWell(
+                                onTap: () async {
+                                  _getCameraAndGallery(context);
+                                },
+                                child: Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 95, 92, 92),
+                                    child: IconButton(
+                                      icon: const Icon(Icons.camera_alt),
+                                      color: Colors.white,
+                                      onPressed: () async {
+                                        _getCameraAndGallery(context);
+                                      },
+                                    ),
                                   ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      kHeight10,
+                      GooglePoppinsWidgets(
+                        text: "ID : 8934883839",
+                        fontsize: 14,
+                        fontWeight: FontWeight.w300,
+                      ),
+                      kWidth30,
+                      SinUpTextFromFiled(
+                        text: "Your Name".tr,
+                        hintText: 'Enter your Name'.tr,
+                        textfromController:
+                            parentSignUpController.userNameController,
+                        validator: checkFieldEmpty,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 8.h, right: 8.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GooglePoppinsWidgets(
+                              text: "Gender".tr,
+                              fontsize: 14,
+                              fontWeight: FontWeight.w300,
+                            ),
+                            kWidth30,
+                            Flexible(
+                              child: SizedBox(
+                                width: 330.w,
+                                child: DropdownSearch<String>(
+                                  selectedItem: 'Select Gender'.tr,
+                                  validator: (v) =>
+                                      v == null ? "required field" : null,
+                                  items: const ['Male', 'Female', 'Others'],
+                                  onChanged: (value) {
+                                    parentSignUpController.gender = value;
+                                  },
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                    kHeight10,
-                    GooglePoppinsWidgets(
-                      text: "ID : 8934883839",
-                      fontsize: 14,
-                      fontWeight: FontWeight.w300,
-                    ),
-                    kWidth30,
-                    SinUpTextFromFiled(
-                      text: "Your Name".tr,
-                      hintText: 'Enter your Name'.tr,
-                      textfromController:
-                          parentSignUpController.userNameController,
-                      validator: checkFieldEmpty,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.h, right: 8.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GooglePoppinsWidgets(
-                            text: "Gender".tr,
-                            fontsize: 14,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          kWidth30,
-                          Flexible(
-                            child: SizedBox(
-                              width: 330.w,
-                              child: DropdownSearch<String>(
-                                selectedItem: 'Select Gender'.tr,
-                                validator: (v) =>
-                                    v == null ? "required field" : null,
-                                items: ['Male', 'Female', 'Others'],
-                                onChanged: (value) {
-                                  parentSignUpController.gender = value;
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
+                      kHeight30,
+                      SinUpTextFromFiled(
+                        text: 'House Name'.tr,
+                        hintText: 'Enter your House Name'.tr,
+                        textfromController:
+                            parentSignUpController.houseNameController,
+                        validator: checkFieldEmpty,
                       ),
-                    ),
-                    kHeight30,
-                    SinUpTextFromFiled(
-                      text: 'House Name'.tr,
-                      hintText: 'Enter your House Name'.tr,
-                      textfromController:
-                          parentSignUpController.houseNameController,
-                      validator: checkFieldEmpty,
-                    ),
-                    SinUpTextFromFiled(
-                      keyboardType: TextInputType.number,
-                      text: 'House Number'.tr,
-                      hintText: 'Enter your House Number'.tr,
-                      textfromController:
-                          parentSignUpController.houseNumberController,
-                      validator: checkFieldEmpty,
-                    ),
-                    SinUpTextFromFiled(
-                      text: 'Place'.tr,
-                      hintText: 'Enter your Place'.tr,
-                      textfromController:
-                          parentSignUpController.placeController,
-                      validator: checkFieldEmpty,
-                    ),
-                    SinUpTextFromFiled(
-                      text: 'District'.tr,
-                      hintText: 'Enter your District'.tr,
-                      textfromController:
-                          parentSignUpController.districtController,
-                      validator: checkFieldEmpty,
-                    ),
-                    SinUpTextFromFiled(
-                      text: 'State'.tr,
-                      hintText: 'Enter your State'.tr,
-                      textfromController:
-                          parentSignUpController.stateController,
-                      validator: checkFieldEmpty,
-                    ),
-                    SinUpTextFromFiled(
-                      keyboardType: TextInputType.number,
-                      text: 'Pincode'.tr,
-                      hintText: 'Enter your Pincode'.tr,
-                      textfromController:
-                          parentSignUpController.pinCodeController,
-                      validator: checkFieldEmpty,
-                    ),
-                    SinUpTextFromFiled(
-                      keyboardType: TextInputType.number,
-                      text: ' Alternate Number'.tr,
-                      hintText: 'Alternate Number'.tr,
-                      textfromController:
-                          parentSignUpController.altPhoneNoController,
-                      validator: checkFieldPhoneNumberIsValid,
-                    ),
-                    kHeight30,
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: GestureDetector(
-                        onTap: () async {
-                          if (formKey.currentState?.validate() ?? false) {
-                            if (getImageController.pickedImage.value.isEmpty) {
-                              return showToast(msg: 'Please upload your image');
-                            } else {
-                              FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email:
-                                          UserEmailandPasswordSaver.userEmail,
-                                      password: UserEmailandPasswordSaver
-                                          .userPassword)
-                                  .then((value) async {
-                                await parentSignUpController
-                                    .updateParentData()
-                                    .then((value) {
-                                  return showDialog(
-                                    context: context,
-                                    barrierDismissible:
-                                        false, // user must tap button!
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Message'),
-                                        content: SingleChildScrollView(
-                                          child: ListBody(
-                                            children: const <Widget>[
-                                              Text(
-                                                  'Your Profile Created Successfully,\nPlease Login again')
-                                            ],
+                      SinUpTextFromFiled(
+                        keyboardType: TextInputType.number,
+                        text: 'House Number'.tr,
+                        hintText: 'Enter your House Number'.tr,
+                        textfromController:
+                            parentSignUpController.houseNumberController,
+                        validator: checkFieldEmpty,
+                      ),
+                      SinUpTextFromFiled(
+                        text: 'Place'.tr,
+                        hintText: 'Enter your Place'.tr,
+                        textfromController:
+                            parentSignUpController.placeController,
+                        validator: checkFieldEmpty,
+                      ),
+                      SinUpTextFromFiled(
+                        text: 'District'.tr,
+                        hintText: 'Enter your District'.tr,
+                        textfromController:
+                            parentSignUpController.districtController,
+                        validator: checkFieldEmpty,
+                      ),
+                      SinUpTextFromFiled(
+                        text: 'State'.tr,
+                        hintText: 'Enter your State'.tr,
+                        textfromController:
+                            parentSignUpController.stateController,
+                        validator: checkFieldEmpty,
+                      ),
+                      SinUpTextFromFiled(
+                        keyboardType: TextInputType.number,
+                        text: 'Pincode'.tr,
+                        hintText: 'Enter your Pincode'.tr,
+                        textfromController:
+                            parentSignUpController.pinCodeController,
+                        validator: checkFieldEmpty,
+                      ),
+                      SinUpTextFromFiled(
+                        keyboardType: TextInputType.number,
+                        text: ' Alternate Number'.tr,
+                        hintText: 'Alternate Number'.tr,
+                        textfromController:
+                            parentSignUpController.altPhoneNoController,
+                        validator: checkFieldPhoneNumberIsValid,
+                      ),
+                      kHeight30,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: GestureDetector(
+                          onTap: () async {
+                            if (formKey.currentState?.validate() ?? false) {
+                              if (getImageController.pickedImage.value.isEmpty) {
+                                return showToast(msg: 'Please upload your image');
+                              } else {
+                                FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
+                                        email:
+                                            UserEmailandPasswordSaver.userEmail,
+                                        password: UserEmailandPasswordSaver
+                                            .userPassword)
+                                    .then((value) async {
+                                  await parentSignUpController
+                                      .updateParentData()
+                                      .then((value) {
+                                    return showDialog(
+                                      context: context,
+                                      barrierDismissible:
+                                          false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Message'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: const <Widget>[
+                                                Text(
+                                                    'Your Profile Created Successfully,\nPlease Login again')
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: const Text('Ok'),
-                                            onPressed: () {
-                                              Navigator.pushAndRemoveUntil(
-                                                  context, MaterialPageRoute(
-                                                builder: (context) {
-                                                  return ParentLoginScreen();
-                                                },
-                                              ), (route) => false);
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: const Text('Ok'),
+                                              onPressed: () {
+                                                Navigator.pushAndRemoveUntil(
+                                                    context, MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return ParentLoginScreen();
+                                                  },
+                                                ), (route) => false);
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  });
                                 });
-                              });
+                              }
                             }
-                          }
-                        },
-                        child: Obx(
-                          () => parentSignUpController.isLoading.value
-                              ? circularProgressIndicatotWidget
-                              : loginButtonWidget(
-                                  height: 60, width: 180, text: 'Submit'.tr),
+                          },
+                          child: Obx(
+                            () => parentSignUpController.isLoading.value
+                                ? circularProgressIndicatotWidget
+                                : loginButtonWidget(
+                                    height: 60, width: 180, text: 'Submit'.tr),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ])
-        ],
-      )),
+            ])
+          ],
+        )),
+      ),
     );
   }
 
