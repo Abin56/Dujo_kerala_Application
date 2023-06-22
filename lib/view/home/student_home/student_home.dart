@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +15,8 @@ import 'Student Edit Profile/student_edit_profile_page.dart';
 
 class StudentHomeScreen extends StatefulWidget {
   static String routeName = '';
+
+  const StudentHomeScreen({super.key});
 
   @override
   State<StudentHomeScreen> createState() => _StudentHomeScreenState();
@@ -43,16 +44,28 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         .set({'deviceToken': deviceToken}, SetOptions(merge: true)).then(
             (value) => log('Device Token Saved To FIREBASE'));
 
+    await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId ?? "")
+        .doc(UserCredentialsController.batchId)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .collection("Students")
+        .doc(FirebaseAuth.instance.currentUser?.uid ?? "")
+        .set({'deviceToken': deviceToken}, SetOptions(merge: true)).then(
+            (value) => log('Device Token Saved To FIREBASE'));
+
     //AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp  apikey
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getDeviceToken();
   }
 
+  @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -86,7 +99,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(()=>const StudentProfileEditPage());
+                            Get.to(() => const StudentProfileEditPage());
                           },
                           child: Container(
                             child: Stack(
