@@ -242,12 +242,14 @@ class TeachersSignUpPage extends StatelessWidget {
                             if (getImageController.pickedImage.value.isEmpty) {
                               return showToast(msg: 'Please upload your image');
                             } else {
+                              teacherController.isLoading.value=true;
                               FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
                                       email: UserEmailandPasswordSaver.userEmail,
                                       password:
                                           UserEmailandPasswordSaver.userPassword)
                                   .then((value) {
+                                    teacherController.isLoading.value=false;
                                 teacherController
                                     .updateTeacherData()
                                     .then((value) {
@@ -280,6 +282,9 @@ class TeachersSignUpPage extends StatelessWidget {
                                 });
                                 // .then(
                                 //     (value) =>);
+                              }).catchError((error){
+                                teacherController.isLoading.value=false;
+                                showToast(msg: error.code);
                               });
                             }
                           }

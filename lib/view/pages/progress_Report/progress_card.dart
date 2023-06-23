@@ -81,7 +81,7 @@ class _StudentProgressReportScreenState
                       fontSize: 23, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 3.h,
                 ),
                 Text(
                   schoolPlace,

@@ -64,7 +64,7 @@ class EditExamResultScreen extends StatelessWidget {
                   width: 100.w,
                 
                    // ,
-                  child: Center(child: GoogleMonstserratWidgets(text:"Mark", fontsize: 14.w))), 
+                  child: Center(child: GoogleMonstserratWidgets(text:"Marks", fontsize: 14.w))), 
 
                  SizedBox(
                   height: 35.w,

@@ -157,7 +157,7 @@ class GuardianSignUp extends StatelessWidget {
                                   selectedItem: 'Select Gender'.tr,
                                   validator: (v) =>
                                       v == null ? "required field" : null,
-                                  items: ['Male', 'Female', 'Others'],
+                                  items: const ['Male', 'Female', 'Others'],
                                   onChanged: (value) {
                                     guardianSignUpController.gender = value;
                                   },
@@ -229,6 +229,7 @@ class GuardianSignUp extends StatelessWidget {
                               if (getImageController.pickedImage.value.isEmpty) {
                                 return showToast(msg: 'Please upload your image');
                               } else {
+                                guardianSignUpController.isLoading.value=true;
                                 FirebaseAuth.instance
                                     .createUserWithEmailAndPassword(
                                         email:
@@ -236,8 +237,12 @@ class GuardianSignUp extends StatelessWidget {
                                         password: UserEmailandPasswordSaver
                                             .userPassword)
                                     .then((value) async {
+                                      guardianSignUpController.isLoading.value=false;
                                   await guardianSignUpController
                                       .updateGuardianData();
+                                }).catchError((error){
+                                  guardianSignUpController.isLoading.value=false;
+                                   showToast(msg: error.code);
                                 });
                               }
                             }

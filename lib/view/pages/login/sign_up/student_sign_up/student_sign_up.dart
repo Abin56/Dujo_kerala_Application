@@ -259,13 +259,16 @@ class StudentSignInPageScreen extends StatelessWidget {
                                   showToast(msg: "All Fields are mandatory");
                                   return;
                                 } else {
-                                  FirebaseAuth.instance
+                                  try {
+                                    studentController.isLoading.value=true;
+                                    FirebaseAuth.instance
                                       .createUserWithEmailAndPassword(
                                           email:
                                               UserEmailandPasswordSaver.userEmail,
                                           password: UserEmailandPasswordSaver
                                               .userPassword)
-                                      .then((value) => {
+                                      .then((value)  {
+                                         studentController.isLoading.value=false;
                                             studentController
                                                 .updateStudentData()
                                                 .then((value) {
@@ -274,6 +277,7 @@ class StudentSignInPageScreen extends StatelessWidget {
                                                 barrierDismissible:
                                                     false, // user must tap button!
                                                 builder: (BuildContext context) {
+                                                  studentController.isLoading.value=false;
                                                   return AlertDialog(
                                                     title: const Text('Message'),
                                                     content:
@@ -303,8 +307,16 @@ class StudentSignInPageScreen extends StatelessWidget {
                                                   );
                                                 },
                                               );
-                                            })
+                                            });
+                                          }).catchError((error){
+                                             studentController.isLoading.value=false;
+                                    showToast(msg: error.code);
                                           });
+                                  }on FirebaseAuthException catch (e) {
+                                    studentController.isLoading.value=false;
+                                    showToast(msg: e.code);
+                                  }
+                                  
                                 }
                               }
                             }

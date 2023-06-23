@@ -230,6 +230,7 @@ class ParentSignUpPage extends StatelessWidget {
                               if (getImageController.pickedImage.value.isEmpty) {
                                 return showToast(msg: 'Please upload your image');
                               } else {
+                                parentSignUpController.isLoading.value=true;
                                 FirebaseAuth.instance
                                     .createUserWithEmailAndPassword(
                                         email:
@@ -237,6 +238,7 @@ class ParentSignUpPage extends StatelessWidget {
                                         password: UserEmailandPasswordSaver
                                             .userPassword)
                                     .then((value) async {
+                                      parentSignUpController.isLoading.value=false;
                                   await parentSignUpController
                                       .updateParentData()
                                       .then((value) {
@@ -272,6 +274,9 @@ class ParentSignUpPage extends StatelessWidget {
                                       },
                                     );
                                   });
+                                }).catchError((error){
+                                  parentSignUpController.isLoading.value=false;
+                                  showToast(msg: error.code);
                                 });
                               }
                             }

@@ -198,7 +198,7 @@ class AttendenceSubjectListScreen extends StatelessWidget {
                                                                                 content: SingleChildScrollView(
                                                                                   child: ListBody(
                                                                                     children:  <Widget>[
-                                                                                    GoogleMonstserratWidgets(text: 'Sorry the time to edit to the attendance list has exceeded!!',fontsize: 15.w,)
+                                                                                    GoogleMonstserratWidgets(text: 'Sorry the time exceeded!!',fontsize: 15.w,)
                                                                                     ],
                                                                                   ),
                                                                                 ),

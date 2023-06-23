@@ -69,7 +69,7 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 5.h,
+                          height: 3.h,
                         ),
                         Text(
                           data.schoolPlace,

@@ -106,7 +106,7 @@ class TeacherExamTimeTableViewScreen extends StatelessWidget {
                                                   child: ListBody(
                                                     children: const <Widget>[
                                                       Text(
-                                                          'Do you want remove this time table ?')
+                                                          'Do you want to remove this timetable ?')
                                                     ],
                                                   ),
                                                 ),
