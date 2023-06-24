@@ -155,6 +155,7 @@ class ClassTeacherAccessories extends StatelessWidget {
                                     color: Colors.black.withOpacity(0.5),
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600),
+                                    textAlign:TextAlign.center,
                               )
                             ],
                           ),

@@ -14,6 +14,7 @@ import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
+import '../../../pages/exam_results/for_users/select_examlevel_uses.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../events/event_list.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
@@ -54,6 +55,10 @@ class ParentAccessories extends StatelessWidget {
        SchoolLevelMeetingPage(), //Meetings
 
       const UserExmNotifications(), // Exams
+
+       UsersSelectExamLevelScreen(
+          classId: UserCredentialsController.classId!,
+          studentID: UserCredentialsController.parentModel!.studentID!),////// exam result
 
 
 
@@ -144,6 +149,7 @@ class ParentAccessories extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600),
+                                  textAlign:TextAlign.center,
                             )
                           ],
                         ),
@@ -170,7 +176,7 @@ List<String> _acc_text = [
 
   'Exams',
 
-   
+     'Exam Results'.tr,
   'HomeWorks',
   'Notices',
   
@@ -192,6 +198,7 @@ var _acc_images = [
   'assets/images/meetings.png',
 
   'assets/images/exam.png',
+   'assets/images/exmresult1.png',
   'assets/images/homework.png',
 
 

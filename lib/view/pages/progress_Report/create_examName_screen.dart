@@ -94,12 +94,14 @@ class CreateExamNameScreen extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: Text(
+                                        
                                         snapshot.data!.docs[index]
                                             .data()['docid'],
                                         style: GoogleFonts.poppins(
                                             color: Colors.black,
                                             fontSize: 12,
                                             fontWeight: FontWeight.w700),
+                                            textAlign: TextAlign.center,
                                       ),
                                     ),
                                   ),

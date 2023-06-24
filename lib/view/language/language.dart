@@ -125,7 +125,7 @@ class GetxLanguage extends Translations {
           'Update Mail': 'മെയിൽ അപ്ഡേറ്റ് ചെയ്യുക',
           'Ok': 'ഓക്കെ',
           'Cancel': 'ക്യാൻസൽ',
-          'Do you want to change mail ?': 'നിങ്ങൾക്ക് മെയിൽ മാറ്റണോ?',
+          'Do you want to change Email ID ?': 'നിങ്ങൾക്ക് മെയിൽ മാറ്റണോ?',
           'Email': 'ഇമെയിൽ',
           'Phone No.': 'ഫോൺ നമ്പർ',
           'Profile': 'പ്രൊഫൈൽ',
@@ -197,6 +197,9 @@ class GetxLanguage extends Translations {
           // 'State Level':'പബ്ലിക് ലെവൽ',
           'Exam Results': 'പരീക്ഷാ ഫലം',
           'Exam Results Upload': 'പരീക്ഷാ ഫലം അപ്‌ലോഡ്',
+         'Select Language':'ഭാഷ തിരഞ്ഞെടുക്കു',
+
+     //    ഭാഷ തിരഞ്ഞെടുക്കു
 
           //'Teachers':'ടീച്ചേർസ്',
           'View': 'കാണുക',
@@ -266,6 +269,7 @@ class GetxLanguage extends Translations {
           'Add Achievement': 'ആഡ് അചീവമെന്റ് ',
           'Date of Achievement': 'അചീവമെന്റ് ഡേറ്റ്',
           'Achievement': 'അചീവമെന്റ്',
+          '* Use a valid email':'യഥാർത്ഥ ഇമെയിൽ ഉപയോഗിക്കുക',
 
           'Time to complete should be > 1 day':
               'പൂർത്തിയാക്കാനുള്ള സമയം > 1 ദിവസം ആയിരിക്കണം',

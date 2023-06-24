@@ -150,7 +150,7 @@ class GuardianEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Do you want to change mail ?".tr),
+                title: Text("Do you want to change Email ID ?".tr),
                 actions: [
                   TextButton(
                     child: Text("Cancel".tr),

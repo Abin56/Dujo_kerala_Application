@@ -2,10 +2,12 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_application/controllers/sign_up_controller/student_sign_up_controller.dart';
 import 'package:dujo_kerala_application/model/Text_hiden_Controller/password_field.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/student%20login/student_login.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +102,20 @@ class StudentSignInScreen extends StatelessWidget {
                       textEditingController:
                           studentSignUpController.emailController,
                       function: checkFieldEmailIsValid),
+                  kHeight10,
+                  Padding(
+                    padding: EdgeInsets.only(right: 29.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GooglePoppinsWidgets(
+                            text: "* Use a valid email".tr,
+                            fontsize: 13.w,
+                            fontWeight: FontWeight.w400,
+                            color: adminePrimayColor),
+                      ],
+                    ),
+                  ),
                   Obx(
                     () => SigninTextFormfield(
                       hintText: 'Password'.tr,
@@ -201,9 +217,9 @@ class StudentSignInScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(()=>StudentLoginScreen(
-                            pageIndex: 3,
-                          ));
+                          Get.to(() => StudentLoginScreen(
+                                pageIndex: 3,
+                              ));
                         },
                         child: Text(
                           "Login".tr,

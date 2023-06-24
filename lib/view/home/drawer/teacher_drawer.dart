@@ -32,15 +32,16 @@ class TeacherHeaderDrawer extends StatelessWidget {
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
       height: 350.h,
-      padding: const EdgeInsets.only(bottom: 20),
+      padding:  EdgeInsets.only(bottom: 5.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           kHeight30,
           Container(
             margin: const EdgeInsets.only(bottom: 0),
-            height: 90,
-            width: 150,
+            height: 90.h,
+            width: 150.w,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(

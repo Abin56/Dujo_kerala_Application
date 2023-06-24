@@ -69,7 +69,7 @@ class BusRouteDetailPage extends StatelessWidget {
         Center(
           child: Container(
             height: 65.h,
-            width: 200.w,
+            width: 220.w,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.elliptical(20, 20)),
                 color: adminePrimayColor),

@@ -21,7 +21,7 @@ class StudyMaterials extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white70,
+          backgroundColor: Colors.blue[50],
             appBar: AppBar(
               title: Row(
                 children:  [

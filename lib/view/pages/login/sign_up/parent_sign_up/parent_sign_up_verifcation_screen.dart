@@ -7,6 +7,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/users_login_screen/parent_login/parent_login.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:dujo_kerala_application/view/widgets/textformfield_login.dart';
 import 'package:dujo_kerala_application/widgets/login_button.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,22 @@ class ParentSignUpFirstScreen extends StatelessWidget {
                       textEditingController:
                           parentSignUpController.emailController,
                       function: checkFieldEmailIsValid),
+
+                       kHeight10,
+
+ Padding(
+                    padding: EdgeInsets.only(right: 29.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GooglePoppinsWidgets(
+                            text: "* Use a valid email".tr,
+                            fontsize: 13.w,
+                            fontWeight: FontWeight.w400,
+                            color: adminePrimayColor),
+                      ],
+                    ),
+                  ),
                   Obx(
                     () => SigninTextFormfield(
                       hintText: 'Password'.tr,

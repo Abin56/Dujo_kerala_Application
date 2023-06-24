@@ -30,7 +30,7 @@ class SchoolLevelMeetingPage extends StatelessWidget {
     return Obx(
       () => studentMeetingController.isLoading.value
           ? circularProgressIndicatotWidget
-          : Scaffold(backgroundColor: Colors.white70,
+          : Scaffold(backgroundColor: Colors.blue[50],
               appBar: AppBar(
                 backgroundColor: adminePrimayColor,
                 title:  Text("Meetings".tr),

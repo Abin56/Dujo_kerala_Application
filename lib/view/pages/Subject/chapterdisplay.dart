@@ -1,4 +1,3 @@
-import 'package:dujo_kerala_application/sruthi/Study%20Materials/study_materials_list.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
@@ -13,7 +12,7 @@ class SubjectWiseDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white54,
+        backgroundColor: Colors.blue[50],
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
           title: const Text("Chapters"),

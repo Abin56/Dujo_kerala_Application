@@ -314,8 +314,8 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                           minLines: 1,
                           maxLines: 10,
                           keyboardType: TextInputType.multiline,
-                          decoration: const InputDecoration(
-                            hintText: 'Respected ',
+                          decoration:  InputDecoration(
+                            hintText: 'Reason'.tr,
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(7),
                           ),

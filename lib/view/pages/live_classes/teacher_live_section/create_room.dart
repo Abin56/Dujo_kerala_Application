@@ -11,6 +11,7 @@ import 'package:dujo_kerala_application/view/widgets/button_container_widget.dar
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CreateRoomScreen extends StatefulWidget {
@@ -99,7 +100,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                       child: Center(
                                         child: GooglePoppinsWidgets(
                                           fontsize: 16,
-                                          text: 'View Rooms',
+                                          text: 'View session',
                                           color: cWhite,
                                         ),
                                       ),
@@ -137,13 +138,13 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                         kHeight40,
                         GooglePoppinsWidgets(
                           fontsize: 30,
-                          text: 'Create Live Room',
+                          text: 'Create live session',
                           fontWeight: FontWeight.bold,
                         ),
                         //  kHeight10,
                         GooglePoppinsWidgets(
                           fontsize: 16,
-                          text: 'Enter Room Details',
+                          text: 'Enter session details',
                         ),
                         kHeight30,
 
@@ -155,7 +156,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 8, left: 10),
                               child: GooglePoppinsWidgets(
-                                text: 'Room ID :  $randomID',
+                                text: 'Session ID :  $randomID',
                                 color: Colors.white,
                                 fontsize: 15,
                               ),
@@ -173,11 +174,11 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    GooglePoppinsWidgets(
-                                      fontsize: 12,
-                                      fontWeight: FontWeight.w300,
-                                      text: 'Room Name : ',
-                                    ),
+                                    // GooglePoppinsWidgets(
+                                    //   fontsize: 12,
+                                    //   fontWeight: FontWeight.w300,
+                                    //   text: 'Room Name : ',
+                                    // ),
                                     SizedBox(
                                       height: 50,
                                       width: 200,
@@ -193,7 +194,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                             }
                                           },
                                           decoration: const InputDecoration(
-                                            hintText: 'Enter Room Name',
+                                            hintText: 'Enter the topic',
                                             border: OutlineInputBorder(),
                                             contentPadding: EdgeInsets.all(7),
                                           ),
@@ -222,14 +223,14 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      GooglePoppinsWidgets(
-                                        fontsize: 12,
-                                        fontWeight: FontWeight.w300,
-                                        text: 'Select Time : ',
-                                      ),
+                                      // GooglePoppinsWidgets(
+                                      //   fontsize: 12,
+                                      //   fontWeight: FontWeight.w300,
+                                      //   text: 'Select Time : ',
+                                      // ),
                                       SizedBox(
-                                        height: 50,
-                                        width: 150,
+                                        height: 50.w,
+                                        width: 150.w,
                                         child: Center(
                                             child: TextFormField(
                                           validator: (value) {
@@ -282,7 +283,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                               width: 240,
                               child: Center(
                                   child: GooglePoppinsWidgets(
-                                text: 'Create Room ',
+                                text: 'Create Session ',
                                 fontsize: 18,
                                 color: cWhite,
                               ))),

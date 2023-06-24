@@ -52,6 +52,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   String substring = '';
   String finalSubjectName = '';
   String schoolName = '';
+  String studentName = '';
 
   List<Map<String, dynamic>> parentListOfAbsentees = [];
   List<Map<String, dynamic>> guardianListOfAbsentees = [];
@@ -65,16 +66,30 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
 
   }
 
-getStudentsCollectionList(String studentID){
-  final querySnap = FirebaseFirestore.instance
+getStudentsCollectionList(String studentID)async{
+  final querySnapshot = await FirebaseFirestore.instance
             .collection("SchoolListCollection")
             .doc(widget.schoolID)
             .collection(widget.batchId)
             .doc(widget.batchId)
             .collection("classes")
             .doc(widget.classID)
-            .collection('Students').where('docid', isEqualTo: studentID); 
+            .collection('Students').where('docid', isEqualTo: studentID).get();
 
+            
+  if (querySnapshot.docs.isNotEmpty) {
+    // Retrieve the first document that matches the query
+    DocumentSnapshot documentSnapshot = querySnapshot.docs[0];
+
+    // Access the desired field value from the document
+    var fieldValue = documentSnapshot.get('studentName');
+
+    log(fieldValue);
+
+    studentName = fieldValue;
+
+    // Use the fieldValue as needed
+  }
 }
  
 
@@ -809,6 +824,7 @@ getStudentsCollectionList(String studentID){
                                     for (var doc in snap.docs) {
                                       final docData = doc.data();
                                       log('CATCH THE LIST');
+                                      studentName = docData['studentName'];
                                       log(docData['studentName']);
                                     }
                                   }
@@ -817,18 +833,21 @@ getStudentsCollectionList(String studentID){
                                 log('HWG: ${parentListOfAbsentees[0]['studentID']}');
                                 for (var k in parentListOfAbsentees) {
                                   tokenList.add(k['deviceToken']);
+                                  getStudentsCollectionList(k['studentID']);
                                 }
 
                                 for (var r in guardianListOfAbsentees) {
                                   tokenList2.add(r['deviceToken']);
+                                  getStudentsCollectionList(r['studentID']);
                                   log(tokenList2[0]);
                                 }
 
                                 for (var l in tokenList) {
                                   for (var i = 0; i < tokenList.length; i++) {
+                                    
                                     sendPushMessage(
                                         tokenList[i],
-                                        'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate, സർ/മാഡം, $formattedDate തീയതി $formattedTimeന് ഉണ്ടായിരുന്ന $finalSubjectName പീരീഡിൽ നിങ്ങളുടെ കുട്ടി ഹാജരായിരുന്നില്ല'
+                                        'Sir/Madam, your child was absent on for $finalSubjectName period at $formattedTime on $formattedDate, സർ/മാഡം, $formattedDate തീയതി $formattedTimeന് ഉണ്ടായിരുന്ന $finalSubjectName പീരീഡിൽ നിങ്ങളുടെ കുട്ടി ഹാജരായിരുന്നില്ല'
                                         ,
                                         'Absent Notification from $schoolName');
                                   }
@@ -838,7 +857,7 @@ getStudentsCollectionList(String studentID){
                                   for (var i = 0; i < tokenList2.length; i++) {
                                     sendPushMessage(
                                         tokenList2[i],
-                                        'Sir/Madam, your ward was absent on for $finalSubjectName period at $formattedTime on $formattedDate, സർ/മാഡം, $formattedDate തീയതി $formattedTimeന് ഉണ്ടായിരുന്ന $finalSubjectName പീരീഡിൽ നിങ്ങളുടെ കുട്ടി ഹാജരായിരുന്നില്ല',
+                                        'Sir/Madam, your child was absent on for $finalSubjectName period at $formattedTime on $formattedDate, സർ/മാഡം, $formattedDate തീയതി $formattedTimeന് ഉണ്ടായിരുന്ന $finalSubjectName പീരീഡിൽ നിങ്ങളുടെ കുട്ടി ഹാജരായിരുന്നില്ല',
                                         'Absent Notification from $schoolName');
                                   }
                                 }

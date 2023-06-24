@@ -16,6 +16,7 @@ import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart
 import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
+import '../../pages/exam_results/for_users/select_examlevel_uses.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../parent_home/progress_report/progress_report.dart';
 import '../student_home/time_table/ss.dart';
@@ -51,7 +52,11 @@ class GuardianAccessories extends StatelessWidget {
 
       SchoolLevelMeetingPage(), //Meetings
 
-      const UserExmNotifications(), // Exams
+      const UserExmNotifications(),
+       // Exams
+            UsersSelectExamLevelScreen(
+          classId: UserCredentialsController.classId!,
+          studentID: UserCredentialsController.guardianModel!.studentID!),////// exam result
 
       const EventList(), //Events
 
@@ -130,6 +135,7 @@ class GuardianAccessories extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600),
+                                  textAlign:TextAlign.center,
                             )
                           ],
                         ),
@@ -154,6 +160,7 @@ List<String> _acc_text = [
   'Time Table'.tr,
   'Meetings'.tr,
   'Exams'.tr,
+  'Exam Results'.tr,
   'Events'.tr,
   'Progress Report'.tr,
   'Subjects'.tr,
@@ -168,6 +175,7 @@ var _acc_images = [
   'assets/images/library.png',
   'assets/images/meetings.png',
   'assets/images/exam.png',
+   'assets/images/exmresult1.png',
   'assets/images/activity.png',
   'assets/images/progressreport.png',
   'assets/images/subjects.png',

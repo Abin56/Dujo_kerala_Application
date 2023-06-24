@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import 'package:dujo_kerala_application/view/pages/Notice/Tabs/school_level_tab.dart';
 import 'package:flutter/material.dart';
@@ -298,6 +297,7 @@ class ClickOnClasss extends StatelessWidget {
                                                       .withOpacity(0.5),
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w600),
+                                                  textAlign:TextAlign.center,
                                             )
                                           ],
                                         ),

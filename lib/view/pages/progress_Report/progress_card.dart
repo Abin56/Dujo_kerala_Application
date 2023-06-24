@@ -188,6 +188,7 @@ class _StudentProgressReportScreenState
                             child: Column(
                               children: [
                                 SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
                                   child: DataTable(
                                     columns: const [
                                       DataColumn(

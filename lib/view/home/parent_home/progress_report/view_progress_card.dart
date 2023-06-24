@@ -108,15 +108,15 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
                               data.studentName,
                               style: GoogleFonts.poppins(
                                   color: Colors.black,
-                                  fontSize: 30,
+                                  fontSize: 30.w,
                                   fontWeight: FontWeight.w500),
                             ),
-                            const SizedBox(
-                              width: 20,
+                             SizedBox(
+                              width: 20.w,
                             ),
                             CircleAvatar(
                               backgroundImage: NetworkImage(data.studentIMage),
-                              radius: 60,
+                              radius: 60.w,
                             )
                           ],
                         ),
@@ -190,6 +190,7 @@ class ViewtProgressReportScreenState extends State<ViewProgressReportScreen> {
                           child: Column(
                             children: [
                               SingleChildScrollView(
+                                scrollDirection: Axis.horizontal ,
                                 child: DataTable(
                                   columns: const [
                                     DataColumn(

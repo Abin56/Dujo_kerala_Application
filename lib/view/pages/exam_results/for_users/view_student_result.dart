@@ -55,6 +55,7 @@ class ViewExamResultsScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
                                   child: DataTable(columns: const [
                                     DataColumn(label: Text('S.No')),
                                     DataColumn(label: Text('Subjects')),

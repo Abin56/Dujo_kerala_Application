@@ -196,9 +196,11 @@ class _LeaveLettersScreenState extends State<LeaveLettersScreen> {
                               style: const pw.TextStyle(fontSize: 16)),
                                pw.SizedBox(height: 5),
                                        pw.Text(
-                              'from ${widget.leaveFromDate} to ${widget.leaveToDate}. \nTherefore,\nI humbly requestyou to grant leave.',
+                              'from ${widget.leaveFromDate} to ${widget.leaveToDate}. Therefore,I humbly request',
                               style: const pw.TextStyle(fontSize: 16)),
                                pw.SizedBox(height: 5),
+                               pw.Text('you to grant leave.',
+                              style: const pw.TextStyle(fontSize: 16)),
                           pw.SizedBox(height: 20),
                           pw.Text('Thanking You,',
                               style: const pw.TextStyle(fontSize: 16)),

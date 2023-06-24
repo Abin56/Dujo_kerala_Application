@@ -93,6 +93,7 @@ class ViewExamsForProgressreport extends StatelessWidget {
                                             color: Colors.black,
                                             fontSize: 12,
                                             fontWeight: FontWeight.w700),
+                                            textAlign: TextAlign.center,
                                       ),
                                     ),
                                   ),
