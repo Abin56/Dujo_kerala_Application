@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/add_exam_time_table/add_exam_time_table.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/exam_list_model/exam_list.model.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -23,19 +24,20 @@ class ViewSchoolExamScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: adminePrimayColor,title: Text("Exam Time Table".tr),
-          bottom:  TabBar(tabs: [
-            Tab(
-              text: 'State Level'.tr,
-            ),
+          backgroundColor: adminePrimayColor,
+          title: Text("Exam Time Table".tr),
+          bottom: TabBar(tabs: [
             Tab(
               text: 'School Level'.tr,
-            )
+            ),
+            Tab(
+              text: 'Public Level'.tr,
+            ),
           ]),
         ),
         body: const SafeArea(
           child: TabBarView(
-            children: [TStateLevel(),TPublicLevel(),],
+            children: [TPublicLevel(), TStateLevel()],
           ),
         ),
       ),
@@ -94,31 +96,56 @@ class _TPublicLevelState extends State<TPublicLevel> {
                             _addSubjectsToServer(context, data.docid);
                           },
                           child: Container(
-                            margin: EdgeInsets.only(top: 10.h,left: 10.h,right: 10.h),
-                             height:120.h,
-                             width: 80.w,
-                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.h),color:adminePrimayColor,),
-                            
-                            child:Padding(
-                               padding:  EdgeInsets.only(top: 20.h,left: 20.w),
+                            margin: EdgeInsets.only(
+                                top: 10.h, left: 10.h, right: 10.h),
+                            height: 120.h,
+                            width: 80.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.h),
+                              color: adminePrimayColor,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 20.h, left: 20.w),
                               child: Column(
-                               mainAxisAlignment: MainAxisAlignment.start,
-                               crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                
-                                  GooglePoppinsWidgets(text:"Exam Name  :   ${data.examName}", fontsize: 16.h,color: cWhite),
-                                  SizedBox(height: 5.w,),
-                                      GooglePoppinsWidgets(text:"Published date :  ${stringTimeToDateConvert(data.publishDate)}", fontsize: 14.h,color: cWhite,),
-                                      SizedBox(height: 5.w,),
-                                          GooglePoppinsWidgets(text:"Starting date :  ${data.startingDate}", fontsize: 14.h,color: cWhite),
+                                  GooglePoppinsWidgets(
+                                      text: "Exam Name  :   ${data.examName}",
+                                      fontsize: 16.h,
+                                      color: cWhite),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  GooglePoppinsWidgets(
+                                    text:
+                                        "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
+                                    fontsize: 14.h,
+                                    color: cWhite,
+                                  ),
+                                  SizedBox(
+                                    height: 7.w,
+                                  ),
+                                  GooglePoppinsWidgets(
+                                      text:
+                                          "Starting date :  ${data.startingDate}",
+                                      fontsize: 12.h,
+                                      color: cWhite),
+                                                   GooglePoppinsWidgets(
+                                      text:
+                                          "Ending date :  ${data.endDate}",
+                                      fontsize: 12.h,
+                                      color: cWhite),
                                 ],
                               ),
-                            ) ,
+                            ),
                           ),
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return  SizedBox(height: 10.h,);
+                        return SizedBox(
+                          height: 10.h,
+                        );
                       },
                       itemCount: snaps.data!.docs.length);
                 }
@@ -129,23 +156,21 @@ class _TPublicLevelState extends State<TPublicLevel> {
               }
             }));
   }
+
   final _formKey = GlobalKey<FormState>();
   _addSubjectsToServer(BuildContext context, String examdocID) async {
-  
     return showDialog(
-      
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  GooglePoppinsWidgets(text: 'Add Subject to Time Table'.tr,fontsize: 14.w),
+          title: GooglePoppinsWidgets(
+              text: 'Add Subject to Time Table'.tr, fontsize: 14.w),
           content: SingleChildScrollView(
-            
             child: Form(
               key: _formKey,
               child: ListBody(
                 children: <Widget>[
-                  
                   GetAllSubjectListDropDownButton(
                       batchId: UserCredentialsController.batchId!,
                       classId: UserCredentialsController.classId!,
@@ -156,7 +181,7 @@ class _TPublicLevelState extends State<TPublicLevel> {
                       // GooglePoppinsWidgets(
                       //   fontsize: 12,
                       //   fontWeight: FontWeight.w300,
-            
+
                       //   text: 'Starting Time : ',
                       // ),
                       SizedBox(
@@ -172,12 +197,13 @@ class _TPublicLevelState extends State<TPublicLevel> {
                             }
                           },
                           controller: _timeController,
-                          decoration:  InputDecoration(
+                          decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(5.w))),
-                        
-                            labelText: 'Starting Time'.tr,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.w))),
+                            labelText: 'Starting Time  '.tr,
                           ),
+                          onTap: () => selectTime(context),
                           readOnly: true,
                         )),
                       ),
@@ -185,11 +211,12 @@ class _TPublicLevelState extends State<TPublicLevel> {
                           onPressed: () {
                             selectTime(context);
                           },
-                          icon:  const Icon(Icons.timer))
+                          icon: const Icon(Icons.timer))
                     ],
                   ),
-                  SizedBox(height: 10.h,),
-            
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -206,18 +233,18 @@ class _TPublicLevelState extends State<TPublicLevel> {
                             child: TextFormField(
                           validator: (value) {
                             if (_stimeController.text.isEmpty) {
-                              return "Please select Time";
+                              return "Please select Time ";
                             } else {
                               return null;
                             }
                           },
                           controller: _stimeController,
-                          decoration:  InputDecoration(
-                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(5.w))),
-                            
-                            labelText: 'EndTime'.tr
-                          ),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5.w))),
+                              labelText: 'EndTime'.tr),
+                          onTap: () => selectTimesec(context),
                           readOnly: true,
                         )),
                       ),
@@ -227,7 +254,10 @@ class _TPublicLevelState extends State<TPublicLevel> {
                           },
                           icon: const Icon(Icons.timer))
                     ],
-                  ),SizedBox(height: 10.h,),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   TextFormField(
                     validator: (value) {
                       if (applynewBatchYearContoller.text.isEmpty) {
@@ -250,31 +280,31 @@ class _TPublicLevelState extends State<TPublicLevel> {
           ),
           actions: <Widget>[
             TextButton(
-              child:  Text('Cancel'.tr),
+              child: Text('Cancel'.tr),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child:  Text('Add'.tr),
-              onPressed: () async{
-                if (_formKey.currentState!.validate()){
-                addExamTimeTableController.uploadSubject(
-                    'School Level',
-                    examdocID,
-                    allsubjectListValue!['subjectName'],
-                    time1!,
-                    time2!,
-                    applynewBatchYearContoller.text.trim(),
-                    _timeController.text.trim(),
-                    _stimeController.text.trim(),
-                    context);
-                   // .then((value) => showToast(msg: 'Successfully Added'));
-                    }
+              child: Text('Add'.tr),
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  addExamTimeTableController.uploadSubject(
+                      'School Level',
+                      examdocID,
+                      allsubjectListValue!['subjectName'],
+                      time1!,
+                      time2!,
+                      applynewBatchYearContoller.text.trim(),
+                      _timeController.text.trim(),
+                      _stimeController.text.trim(),
+                      context)
+                  .then((value) => showToast(msg: 'Successfully Added'));
+                }
                 _timeController.clear();
                 _stimeController.clear();
                 applynewBatchYearContoller.clear();
-                },
+              },
             ),
           ],
         );
@@ -343,7 +373,7 @@ const containerColor = [
 ];
 
 class TStateLevel extends StatefulWidget {
-  const  TStateLevel({super.key});
+  const TStateLevel({super.key});
 
   @override
   State<TStateLevel> createState() => _TStateLevelState();
@@ -372,7 +402,7 @@ class _TStateLevelState extends State<TStateLevel> {
                 .doc(UserCredentialsController.schoolId)
                 .collection(UserCredentialsController.batchId!)
                 .doc(UserCredentialsController.batchId!)
-                .collection('State Level')
+                .collection('Public Level')
                 .snapshots(),
             builder: (context, snaps) {
               if (snaps.hasData) {
@@ -390,41 +420,60 @@ class _TStateLevelState extends State<TStateLevel> {
                           onTap: () async {
                             _addSubjectsToServer(context, data.docid);
                           },
-
-
-
-
-
                           child: Padding(
-                            padding:  EdgeInsets.only(left: 10.h,right: 10.h),
+                            padding: EdgeInsets.only(left: 10.h, right: 10.h),
                             child: Container(
-                               margin: EdgeInsets.only(top: 10.h,left: 10.h,right: 10.h),
-                             height:140.h,
-                             width: 80.w,
-                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.h),color:adminePrimayColor,),
-
-
-                              child:Padding(
-                               padding:  EdgeInsets.only(top: 20.h,left: 20.w),
-                              child: Column(
-                               mainAxisAlignment: MainAxisAlignment.start,
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                
-                                  GooglePoppinsWidgets(text:"Exam Name  :   ${data.examName}", fontsize: 16.h,color: cWhite),
-                                  SizedBox(height: 5.w,),
-                                      GooglePoppinsWidgets(text:"Published date :  ${stringTimeToDateConvert(data.publishDate)}", fontsize: 14.h,color: cWhite,),
-                                      SizedBox(height: 5.w,),
-                                          GooglePoppinsWidgets(text:"Starting date :  ${data.startingDate}", fontsize: 14.h,color: cWhite),
-                                ],
+                              margin: EdgeInsets.only(
+                                  top: 10.h, left: 10.h, right: 10.h),
+                              height: 140.h,
+                              width: 80.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.h),
+                                color: adminePrimayColor,
                               ),
-                            ) ,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 20.h, left: 20.w),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    GooglePoppinsWidgets(
+                                        text: "Exam Name  :   ${data.examName}",
+                                        fontsize: 16.h,
+                                        color: cWhite),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    GooglePoppinsWidgets(
+                                      text:
+                                          "Published date :  ${stringTimeToDateConvert(data.publishDate)}",
+                                      fontsize: 14.h,
+                                      color: cWhite,
+                                    ),
+                                    SizedBox(
+                                      height: 10.w,
+                                    ),
+                                    GooglePoppinsWidgets(
+                                        text:
+                                            "Starting date :  ${data.startingDate}",
+                                        fontsize: 12.h,
+                                        color: cWhite),
+                                          GooglePoppinsWidgets(
+                                        text:
+                                            "Ending date :  ${data.endDate}",
+                                        fontsize: 12.h,
+                                        color: cWhite),
+                                  ],
+                                ),
                               ),
+                            ),
                           ),
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return SizedBox(height: 10.h,);
+                        return SizedBox(
+                          height: 10.h,
+                        );
                       },
                       itemCount: snaps.data!.docs.length);
                 }
@@ -436,7 +485,7 @@ class _TStateLevelState extends State<TStateLevel> {
             }));
   }
 
-final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   _addSubjectsToServer(BuildContext context, String examdocID) async {
     return showDialog(
@@ -444,7 +493,7 @@ final _formKey = GlobalKey<FormState>();
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  Text('Add Subject to Time Table'.tr),
+          title: Text('Add Subject to Time Table'.tr),
           content: SingleChildScrollView(
             child: Form(
               key: _formKey,
@@ -475,12 +524,13 @@ final _formKey = GlobalKey<FormState>();
                             }
                           },
                           controller: _timeController,
-                          decoration:  InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5.w))
-                      ),
-                             labelText: 'Starting Time'.tr,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.w))),
+                            labelText: 'Starting Time'.tr,
                           ),
+                          onTap: () => selectTime(context),
                           readOnly: true,
                         )),
                       ),
@@ -490,7 +540,8 @@ final _formKey = GlobalKey<FormState>();
                           },
                           icon: const Icon(Icons.timer))
                     ],
-                  ),kHeight10,
+                  ),
+                  kHeight10,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -512,11 +563,14 @@ final _formKey = GlobalKey<FormState>();
                             }
                           },
                           controller: _stimeController,
-                          decoration:  InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5.w))),
-                            
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.w))),
                             labelText: 'End Time'.tr,
                           ),
                           readOnly: true,
+                          onTap: () => selectTimesec(context),
                         )),
                       ),
                       IconButton(
@@ -525,7 +579,8 @@ final _formKey = GlobalKey<FormState>();
                           },
                           icon: const Icon(Icons.timer))
                     ],
-                  ),kHeight10,
+                  ),
+                  kHeight10,
                   TextFormField(
                     validator: (value) {
                       if (applynewBatchYearContoller.text.isEmpty) {
@@ -548,34 +603,31 @@ final _formKey = GlobalKey<FormState>();
           ),
           actions: <Widget>[
             TextButton(
-              child:  Text('Cancel'.tr),
+              child: Text('Cancel'.tr),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child:  Text('Add'.tr),
-              onPressed: () async{
-
-                if (_formKey.currentState!.validate()){
-                  addExamTimeTableController.uploadSubject(
-                    'State Level',
-                    examdocID,
-                    allsubjectListValue!['subjectName'],
-                    time1!,
-                    time2!,
-                    applynewBatchYearContoller.text.trim(),
-                    _timeController.text.trim(),
-                    _stimeController.text.trim(),
-                    context);
-                   // .then((value) => showToast(msg: 'Successfully Added'));
-                    }
-                     applynewBatchYearContoller.clear();
-                    _timeController.clear();
-                    _stimeController.clear();
-          
-              })
-               
+                child: Text('Add'.tr),
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    addExamTimeTableController.uploadSubject(
+                        'Public Level',
+                        examdocID,
+                        allsubjectListValue!['subjectName'],
+                        time1!,
+                        time2!,
+                        applynewBatchYearContoller.text.trim(),
+                        _timeController.text.trim(),
+                        _stimeController.text.trim(),
+                        context)
+                    .then((value) => showToast(msg: 'Successfully Added'));
+                  }
+                  applynewBatchYearContoller.clear();
+                  _timeController.clear();
+                  _stimeController.clear();
+                })
           ],
         );
       },

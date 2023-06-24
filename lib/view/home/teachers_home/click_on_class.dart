@@ -15,7 +15,7 @@ import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
 import '../../pages/Attentence/select_period.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
-import '../../pages/Homework/view_home_work.dart';
+import '../../pages/Homework/homework.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
 import '../../pages/exam_results/select_exam.dart';
 import '../../pages/progress_Report/view_report/view_exam_list.dart';
@@ -70,7 +70,12 @@ class ClickOnClasss extends StatelessWidget {
       const UserExmNotifications(), //Exam
       SelectExamLevelScreen(classId: classID), //exam result upload
       const SS(), //TimeTable
-      const ViewHomeWorks(), //Home Works
+      HomeWorkUpload(
+        batchId: UserCredentialsController.batchId!,
+        classId: UserCredentialsController.classId!,
+        schoolID: UserCredentialsController.schoolId!,
+        teacherID: UserCredentialsController.teacherModel!.docid!,
+      ), //////////Home Work, //Home Works
 
       Scaffold(
         appBar: AppBar(
@@ -99,7 +104,7 @@ class ClickOnClasss extends StatelessWidget {
       // Meetings
       RecordedClassMainPage(), // recorded class
 
-        BusRouteListPage(),   /////// all bus
+      BusRouteListPage(), /////// all bus
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
@@ -165,7 +170,8 @@ class ClickOnClasss extends StatelessWidget {
                                           padding: const EdgeInsets.all(8.0),
                                           child: GestureDetector(
                                             onTap: () {
-                                              Get.to(()=>noDataNavigation[index]);
+                                              Get.to(() =>
+                                                  noDataNavigation[index]);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -253,7 +259,7 @@ class ClickOnClasss extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.to(()=>hasDataNavigation[index]);
+                                        Get.to(() => hasDataNavigation[index]);
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -297,7 +303,7 @@ class ClickOnClasss extends StatelessWidget {
                                                       .withOpacity(0.5),
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w600),
-                                                  textAlign:TextAlign.center,
+                                              textAlign: TextAlign.center,
                                             )
                                           ],
                                         ),

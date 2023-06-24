@@ -151,7 +151,7 @@ class ApplyLeaveLetterStatusToFireBase {
             barrierDismissible: false, // user must tap button!
             builder: (BuildContext context) {
               return AlertDialog(
-                title:  Text('Message'),
+                title:  const Text('Message'),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[

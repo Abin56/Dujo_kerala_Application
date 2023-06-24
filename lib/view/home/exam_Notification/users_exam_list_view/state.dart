@@ -24,7 +24,7 @@ class UserStateLevel extends StatelessWidget {
                 .doc(UserCredentialsController.schoolId)
                 .collection(UserCredentialsController.batchId!)
                 .doc(UserCredentialsController.batchId!)
-                .collection('State Level')
+                .collection('Public Level')
                 .snapshots(),
             builder: (context, snaps) {
               if (snaps.hasData) {
@@ -42,7 +42,7 @@ class UserStateLevel extends StatelessWidget {
                           onTap: () {
                             Get.to(UsersExamTimeTableViewScreen(
                                 examID: data.docid,
-                                collectionName: 'State Level',
+                                collectionName: 'Public Level',
                                 date: stringTimeToDateConvert(data.publishDate),
                                 examName: data.examName));
                           },

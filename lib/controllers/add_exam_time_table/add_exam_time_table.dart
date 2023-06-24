@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/exam_list_model/add_ex_timeTable.dart';
-import '../../utils/utils.dart';
 import '../userCredentials/user_credentials.dart';
 
 class AddExamTimeTableController extends GetxController {
@@ -53,7 +52,7 @@ class AddExamTimeTableController extends GetxController {
         .doc(docids)
         .set(data.toMap())
         .then((value) {
-      showToast(msg: '');
+
       Navigator.pop(context);
     });
   }

@@ -31,7 +31,7 @@ class UsersSelectExamLevelScreen extends StatelessWidget {
                     onPressed: () async {
                       Get.to(()=>UsersSelectExamWiseScreen(
                         classID: classId,
-                        examLevel: 'State Level',
+                        examLevel: 'School Level',
                         studentId: studentID,
                       ));
                     },
@@ -56,7 +56,7 @@ class UsersSelectExamLevelScreen extends StatelessWidget {
                   ));
                 },
                 icon: const Icon(Icons.receipt,color: cWhite,),
-                label: GooglePoppinsWidgets(fontsize: 20.h, text:'State Level'.tr,color: Colors.white)),
+                label: GooglePoppinsWidgets(fontsize: 20.h, text:'Public Level'.tr,color: Colors.white)),
           )
         ],
       )),

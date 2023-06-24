@@ -1,12 +1,12 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/exam_results/examListview.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/upload_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/fonts/google_monstre.dart';
+import 'examListview.dart';
 
 class SelectExamLevelScreen extends StatelessWidget {
   String classId;
@@ -23,53 +23,97 @@ class SelectExamLevelScreen extends StatelessWidget {
           ),
           backgroundColor: adminePrimayColor),
       body: SafeArea(
-          child: Center(
-        child: Container(
-          margin: EdgeInsets.only(top: 300.h),
           child: Column(
-            children: [
-              Container(
-                height: 80.h,
-                width: 230.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.w)),
-                  color: adminePrimayColor,
-                ),
-                child: TextButton.icon(
-                    onPressed: () async {
-                      return getBottomSheet(classId, 'School Level');
-                    },
-                    icon: const Icon(Icons.list_alt, color: cWhite),
-                    label: GoogleMonstserratWidgets(
-                      text: "School Level".tr,
-                      fontsize: 18.w,
-                      color: cWhite,
-                      fontWeight: FontWeight.w500,
-                    )),
-              ),
-              kHeight30,
-              Container(
-                height: 80.h,
-                width: 230.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.w)),
-                  color: adminePrimayColor,
-                ),
-                child: TextButton.icon(
-                    onPressed: () async {
-                      return getBottomSheet(classId, 'State Level');
-                    },
-                    icon: const Icon(Icons.list_alt, color: cWhite),
-                    label: GoogleMonstserratWidgets(
-                      text: "State Level".tr,
-                      fontsize: 18.w,
-                      color: cWhite,
-                      fontWeight: FontWeight.w500,
-                    )),
-              ),
-            ],
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => SelectExamWiseScreen(
+                          classID: classId,
+                          examLevel: '',
+                        ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: adminePrimayColor,
+                        borderRadius: BorderRadius.all(Radius.circular(10.w))),
+                    height: 65.h,
+                    width: 150.w,
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20.w),
+                      child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(Icons.view_headline_sharp,
+                              color: cWhite, size: 20.w),
+                          SizedBox(
+                            width: 2.w,
+                          ),
+                          GoogleMonstserratWidgets(
+                            text: 'View'.tr,
+                            fontsize: 16.w,
+                            fontWeight: FontWeight.w700,
+                            color: cWhite,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 200),
+            child: Column(
+              children: [
+                Container(
+                  height: 80.h,
+                  width: 230.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.w)),
+                    color: adminePrimayColor,
+                  ),
+                  child: TextButton.icon(
+                      onPressed: () async {
+                        return getBottomSheet(classId, 'School Level');
+                      },
+                      icon: const Icon(Icons.list_alt, color: cWhite),
+                      label: GoogleMonstserratWidgets(
+                        text: "School Level".tr,
+                        fontsize: 18.w,
+                        color: cWhite,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
+                kHeight30,
+                Container(
+                  height: 80.h,
+                  width: 230.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.w)),
+                    color: adminePrimayColor,
+                  ),
+                  child: TextButton.icon(
+                      onPressed: () async {
+                        return getBottomSheet(classId, 'Public Level');
+                      },
+                      icon: const Icon(Icons.list_alt, color: cWhite),
+                      label: GoogleMonstserratWidgets(
+                        text: "Public Level".tr,
+                        fontsize: 18.w,
+                        color: cWhite,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
+              ],
+            ),
+          )
+        ],
       )),
     );
   }
@@ -115,40 +159,6 @@ getBottomSheet(String classId, String examlevel) {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => SelectExamWiseScreen(
-                      classID: classId,
-                      examLevel: examlevel,
-                    ));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: adminePrimayColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10.w))),
-                height: 65.h,
-                width: 150.w,
-                child: Container(
-                  margin: EdgeInsets.only(left: 20.w),
-                  child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(Icons.view_headline_sharp,
-                          color: cWhite, size: 20.w),
-                      SizedBox(
-                        width: 2.w,
-                      ),
-                      GoogleMonstserratWidgets(
-                        text: 'View'.tr,
-                        fontsize: 16.w,
-                        fontWeight: FontWeight.w700,
-                        color: cWhite,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),

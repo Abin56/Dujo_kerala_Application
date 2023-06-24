@@ -175,7 +175,7 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
                 ],
               ),
             ),
-            GuardianAccessories(studentName: studentName)
+            GuardianAccessories(studentName: UserCredentialsController.guardianModel!.studentID!)
           ],
         ),
       ),

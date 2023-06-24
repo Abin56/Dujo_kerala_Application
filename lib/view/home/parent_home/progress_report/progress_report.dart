@@ -10,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../model/teacher_model/progress_report_model/progress_report_model.dart';
 
-
 class ProgressReportListViewScreen extends StatelessWidget {
   String schoolId;
   String classID;
@@ -29,15 +28,16 @@ class ProgressReportListViewScreen extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     log(classID);
-        log(studentId);
+    log(studentId);
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Progress Report'.tr),backgroundColor: adminePrimayColor,
+        title: Text('Progress Report'.tr),
+        backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
-      .collection("SchoolListCollection")
+            .collection("SchoolListCollection")
             .doc(schoolId)
             .collection(batchId)
             .doc(batchId)
@@ -73,9 +73,9 @@ class ProgressReportListViewScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               log(studentId);
-                              Get.to(()=>ViewProgressReportScreen(
-                                batchId:batchId ,
-                                wexam:data.id,
+                              Get.to(() => ViewProgressReportScreen(
+                                  batchId: batchId,
+                                  wexam: data.id,
                                   schooilID: schoolId,
                                   classID: classID,
                                   studentId: studentId));
@@ -84,9 +84,7 @@ class ProgressReportListViewScreen extends StatelessWidget {
                               height: h / 100,
                               width: double.infinity,
                               margin: EdgeInsets.only(
-                                  bottom: w / 10,
-                                  left: w / 50,
-                                  right: w / 50),
+                                  bottom: w / 10, left: w / 50, right: w / 50),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(212, 67, 30, 203)
                                     .withOpacity(0.1),
@@ -101,13 +99,16 @@ class ProgressReportListViewScreen extends StatelessWidget {
                                 ],
                               ),
                               child: Center(
-                                child:    Text(
-                                      data.whichExam,
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    data.whichExam,
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
                               ),
                             ),
                           ),

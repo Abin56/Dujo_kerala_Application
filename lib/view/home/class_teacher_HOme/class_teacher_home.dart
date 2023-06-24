@@ -55,6 +55,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       height: 100,
                                       width: 100,
                                       decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
