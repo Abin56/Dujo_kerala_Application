@@ -251,7 +251,6 @@ class StudentSignInPageScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 20),
                         child: GestureDetector(
                           onTap: () {
-                            if (formKey1.currentState!.validate()) {
                               if (getImageController.pickedImage.value.isEmpty) {
                                 return showToast(msg: 'Please upload your image');
                               } else {
@@ -281,9 +280,9 @@ class StudentSignInPageScreen extends StatelessWidget {
                                                   return AlertDialog(
                                                     title: const Text('Message'),
                                                     content:
-                                                        SingleChildScrollView(
+                                                           SingleChildScrollView(
                                                       child: ListBody(
-                                                        children: const <Widget>[
+                                                        children: <Widget>[
                                                           Text(
                                                               'Your Profile Created Successfully,\nPlease Login again')
                                                         ],
@@ -316,11 +315,14 @@ class StudentSignInPageScreen extends StatelessWidget {
                                     studentController.isLoading.value=false;
                                     showToast(msg: e.code);
                                   }
-                                  
-                                }
-                              }
-                            }
-                          },
+
+
+                          
+                                }}
+                            },
+                              
+                            
+                          
                           child: Obx(() => studentController.isLoading.value
                               ? circularProgressIndicatotWidget
                               : loginButtonWidget(

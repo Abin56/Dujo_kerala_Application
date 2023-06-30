@@ -94,7 +94,7 @@ getStudentsCollectionList(String studentID)async{
  
 
   String subjectNameFormatting() {
-    substring = getSubstringUntilNumber(widget.subjectID)!;
+    substring = getSubstringUntilNumber(widget.subjectName)!;
     print(substring);
     return substring;
   }
