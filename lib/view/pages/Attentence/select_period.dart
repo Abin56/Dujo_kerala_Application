@@ -65,15 +65,40 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                     if (snapshots.data!.docs.isEmpty) {
                       return GestureDetector(
                           onTap: () {
-                            attendanceController.dailyAttendanceController(classID);
+                            attendanceController
+                                .dailyAttendanceController(classID);
                           },
                           child: Padding(
-                            padding:  EdgeInsets.only(right: 25.w,top: 10.h,bottom:10.h ),
+                            padding: EdgeInsets.only(
+                                right: 25.w, top: 10.h, bottom: 10.h),
                             child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                                color: cWhite,borderRadius: BorderRadius.circular(2)),
-                              child: Text('Turn on',style: TextStyle(fontSize: 16.w,fontWeight: FontWeight.w700,color: Colors.red),)),
+                              width: 100,
+                                decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Turn ',
+                                        style: TextStyle(
+                                            fontSize: 16.w,
+                                            fontWeight: FontWeight.w700,
+                                            ),
+                                      ),
+                                           Text(
+                                        'ON',
+                                        
+                                        style: TextStyle(
+                                          color: const Color.fromARGB(255, 43, 223, 49),
+                                            fontSize: 16.w,
+                                            fontWeight: FontWeight.w700,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                           ));
                     } else {
                       return const Text('');
@@ -103,7 +128,7 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                 if (turnOnSnaps.data!.docs.isEmpty) {
                   return const SafeArea(
                       child: Center(
-                    child: Text('Please turn on '),
+                    child: Text('Please Click TurnON button to take attendance '),
                   ));
                 } else {
                   return SafeArea(
@@ -142,12 +167,15 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                                     child: FadeInAnimation(
                                       child: GestureDetector(
                                         onTap: () {
-                                          Get.to(()=>TakeAttentenceSubjectWise(
-                                            periodNumber:snapshot.data?.docs[index]['period'],
-                                            periodTokenID: snapshot.data?.docs[index]['docid'],
-                                              batchId: batchId,
-                                              classID: classID,
-                                              schoolId: schoolId));
+                                          Get.to(() =>
+                                              TakeAttentenceSubjectWise(
+                                                  periodNumber: snapshot.data
+                                                      ?.docs[index]['period'],
+                                                  periodTokenID: snapshot.data
+                                                      ?.docs[index]['docid'],
+                                                  batchId: batchId,
+                                                  classID: classID,
+                                                  schoolId: schoolId));
                                         },
                                         child: Container(
                                           height: h / 100,
@@ -160,12 +188,13 @@ class SelectPeriodWiseScreen extends StatelessWidget {
                                             color: const Color.fromARGB(
                                                     212, 67, 30, 203)
                                                 .withOpacity(0.1),
-                                            borderRadius: const BorderRadius.all(
-                                                Radius.circular(10)),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10)),
                                             boxShadow: [
                                               BoxShadow(
-                                                color:
-                                                    Colors.black.withOpacity(0.1),
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
                                                 blurRadius: 40,
                                                 spreadRadius: 10,
                                               ),

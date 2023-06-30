@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/student_home/Student%20Edit%20Profile/widget/student_profile_edit_listtile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -60,78 +62,138 @@ class StudentProfileEditPage extends StatelessWidget {
           )
         ]),
       ),
-      SizedBox(
-        width: double.infinity,
-        height: 700.h,
-        child: ListView(
-          children: [
-            StudentEditListileWidget(
-              icon: Icons.person,
-              subtitle: GooglePoppinsWidgets(
-                  text:
-                      UserCredentialsController.studentModel?.studentName ?? "",
-                  fontsize: 19.h),
-              title: GooglePoppinsWidgets(text: "Name".tr, fontsize: 12.h),
-            ),
-            StudentEditListileWidget(
-              icon: Icons.call,
-              subtitle: GooglePoppinsWidgets(
-                  text: UserCredentialsController
-                          .studentModel?.parentPhoneNumber ??
-                      "",
-                  fontsize: 19.h),
-              title: GooglePoppinsWidgets(text: "Phone No.".tr, fontsize: 12.h),
-            ),
-            StudentEditListileWidget(
-              icon: Icons.email,
-              subtitle: GooglePoppinsWidgets(
-                  text: UserCredentialsController.studentModel?.studentemail ??
-                      "",
-                  fontsize: 19.h),
-              title: GooglePoppinsWidgets(text: "Email".tr, fontsize: 12.h),
-              editicon: Icons.edit,
-            ),
-            StudentEditListileWidget(
-              icon: Icons.class_rounded,
-              subtitle: FutureBuilder(
-                  future: FirebaseFirestore.instance
-                      .collection('SchoolListCollection')
-                      .doc(UserCredentialsController.schoolId)
-                      .collection(UserCredentialsController.batchId!)
-                      .doc(UserCredentialsController.batchId)
-                      .collection('classes')
-                      .doc(UserCredentialsController.classId)
-                      .get(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return GooglePoppinsWidgets(
-                          text: snapshot.data!.data()!['className'],
-                          fontsize: 19.h);
-                    } else {
-                      return const Text('');
-                    }
-                  }),
-              title: GooglePoppinsWidgets(text: "Class ".tr, fontsize: 12.h),
-            ),
-            StudentEditListileWidget(
-              icon: Icons.bloodtype_outlined,
-              subtitle:
-                  GooglePoppinsWidgets(text: "Blood Group".tr, fontsize: 19.h),
-              title: GooglePoppinsWidgets(
-                  text:
-                      UserCredentialsController.studentModel?.bloodgroup ?? "",
-                  fontsize: 12.h),
-            ),
-            StudentEditListileWidget(
-              icon: Icons.home,
-              subtitle: GooglePoppinsWidgets(
-                  text: UserCredentialsController.studentModel?.houseName ?? "",
-                  fontsize: 19.h),
-              title: GooglePoppinsWidgets(text: "Address".tr, fontsize: 12.h),
-            ),
-          ],
-        ),
-      ),
+      FutureBuilder(
+          future: FirebaseFirestore.instance
+              .collection('SchoolListCollection')
+              .doc(UserCredentialsController.schoolId)
+              .collection(UserCredentialsController.batchId!)
+              .doc(UserCredentialsController.batchId)
+              .collection('classes')
+              .doc(UserCredentialsController.classId)
+              .collection('Students')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .get(),
+          builder: (context, profilesnaps) {
+            if (profilesnaps.hasData) {
+              return SizedBox(
+                width: double.infinity,
+                height: 700.h,
+                child: ListView(
+                  children: [
+                    StudentEditListileWidget(
+                      icon: Icons.person,
+                      subtitle: GooglePoppinsWidgets(
+                          text: profilesnaps.data!.data()!['studentName'],
+                          fontsize: 19.h),
+                      title:
+                          GooglePoppinsWidgets(text: "Name".tr, fontsize: 12.h),
+                    ),
+                    StudentEditListileWidget(
+                      icon: Icons.call,
+                      subtitle: GooglePoppinsWidgets(
+                          text: profilesnaps.data!.data()!['parentPhoneNumber'],
+                          fontsize: 19.h),
+                      title: Row(
+                        children: [
+                          GooglePoppinsWidgets(
+                              text: "Phone No.".tr, fontsize: 12.h),
+                          IconButton(
+                              onPressed: () async {
+                                await changeStudentData(context, 'Phone Number',
+                                    'parentPhoneNumber');
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.green,
+                              ))
+                        ],
+                      ),
+                    ),
+                    StudentEditListileWidget(
+                      icon: Icons.email,
+                      subtitle: GooglePoppinsWidgets(
+                          text: UserCredentialsController
+                                  .studentModel?.studentemail ??
+                              "",
+                          fontsize: 19.h),
+                      title: GooglePoppinsWidgets(
+                          text: "Email".tr, fontsize: 12.h),
+                      editicon: Icons.edit,
+                    ),
+                    StudentEditListileWidget(
+                      icon: Icons.class_rounded,
+                      subtitle: FutureBuilder(
+                          future: FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(UserCredentialsController.schoolId)
+                              .collection(UserCredentialsController.batchId!)
+                              .doc(UserCredentialsController.batchId)
+                              .collection('classes')
+                              .doc(UserCredentialsController.classId)
+                              .get(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return GooglePoppinsWidgets(
+                                  text: snapshot.data!.data()!['className'],
+                                  fontsize: 19.h);
+                            } else {
+                              return const Text('');
+                            }
+                          }),
+                      title: GooglePoppinsWidgets(
+                          text: "Class ".tr, fontsize: 12.h),
+                    ),
+                    StudentEditListileWidget(
+                      icon: Icons.bloodtype_outlined,
+                      subtitle: GooglePoppinsWidgets(
+                          text: "Blood Group".tr, fontsize: 19.h),
+                      title: Row(
+                        children: [
+                          GooglePoppinsWidgets(
+                              text: profilesnaps.data!.data()!['bloodgroup'],
+                              fontsize: 12.h),
+                          IconButton(
+                              onPressed: () async {
+                                await changeStudentData(
+                                    context, 'Blood Group', 'bloodgroup');
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.green,
+                              ))
+                        ],
+                      ),
+                    ),
+                    StudentEditListileWidget(
+                      icon: Icons.home,
+                      subtitle: GooglePoppinsWidgets(
+                          text: profilesnaps.data!.data()!['houseName'],
+                          fontsize: 19.h),
+                      title: Row(
+                        children: [
+                          GooglePoppinsWidgets(
+                              text: "Address".tr, fontsize: 12.h),
+                          IconButton(
+                              onPressed: () async {
+                                await changeStudentData(
+                                    context, 'Address', 'houseName');
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.green,
+                              ))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
+            }
+          }),
     ])));
   }
 
@@ -231,4 +293,66 @@ class StudentCircleAvatarImgeWidget extends StatelessWidget {
       }
     });
   }
+}
+
+changeStudentData(BuildContext context, String hintText, String updateValue) {
+  final formkey = GlobalKey<FormState>();
+  TextEditingController editvalueController = TextEditingController();
+  return showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return Form(
+        key: formkey,
+        child: AlertDialog(
+          title: Text('Edit $hintText'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextFormField(
+                  validator: checkFieldEmpty,
+                  controller: editvalueController,
+                  decoration: InputDecoration(hintText: "Enter your $hintText"),
+                )
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Update'),
+              onPressed: () async {
+     if (formkey.currentState!.validate()) {
+                 await FirebaseFirestore.instance
+                    .collection("SchoolListCollection")
+                    .doc(UserCredentialsController.schoolId)
+                    .collection(UserCredentialsController.batchId!)
+                    .doc(UserCredentialsController.batchId!)
+                    .collection('classes')
+                    .doc(UserCredentialsController.classId)
+                    .collection('Students')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update({updateValue: editvalueController.text.trim()}).then(
+                        (value) {
+                  // UserCredentialsController.studentModel.parentPhoneNumber
+                  showToast(msg: '$hintText Updated Successfully');
+                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                });
+       
+     }else{
+      return;
+     }
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
