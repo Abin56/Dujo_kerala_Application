@@ -53,6 +53,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
   String finalSubjectName = '';
   String schoolName = '';
   String studentName = '';
+  bool notificationEnabledOrNot = true;
 
   List<Map<String, dynamic>> parentListOfAbsentees = [];
   List<Map<String, dynamic>> guardianListOfAbsentees = [];
@@ -152,8 +153,14 @@ getStudentsCollectionList(String studentID)async{
         .doc('Attendance')
         .get();
     log(timersnap.data()!['timeToDeliverAbsenceNotification']);
+    setState(() {
+      notificationEnabledOrNot = timersnap.data()!['notificationNeededOrNot'];
+      log('tof : $notificationEnabledOrNot');
+    });
+    
     timer = timersnap.data()!['timeToDeliverAbsenceNotification'];
   }
+
 
   @override
   void initState() {
@@ -727,7 +734,7 @@ getStudentsCollectionList(String studentID)async{
 
                               Get.offAll(const TeacherMainHomeScreen());
 
-                              Timer(const Duration(seconds: 2), () async {
+                              Timer( Duration(minutes: int.parse(timer)), () async {
                                 bool isValueEqual = false;
                                 QuerySnapshot<Map<String, dynamic>> snap =
                                     await FirebaseFirestore.instance
@@ -842,6 +849,8 @@ getStudentsCollectionList(String studentID)async{
                                   log(tokenList2[0]);
                                 }
 
+                                if(notificationEnabledOrNot){
+                                  
                                 for (var l in tokenList) {
                                   for (var i = 0; i < tokenList.length; i++) {
                                     
@@ -860,7 +869,11 @@ getStudentsCollectionList(String studentID)async{
                                         'Sir/Madam, your child was absent on for $finalSubjectName period at $formattedTime on $formattedDate, സർ/മാഡം, $formattedDate തീയതി $formattedTimeന് ഉണ്ടായിരുന്ന $finalSubjectName പീരീഡിൽ നിങ്ങളുടെ കുട്ടി ഹാജരായിരുന്നില്ല',
                                         'Absent Notification from $schoolName');
                                   }
+                                } 
                                 }
+
+
+
                               });
                               log('DONE');
                             }),
