@@ -63,35 +63,34 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
         .doc(widget.schoolID)
         .get();
     schoolName = docRef['schoolName'];
-
   }
 
-getStudentsCollectionList(String studentID)async{
-  final querySnapshot = await FirebaseFirestore.instance
-            .collection("SchoolListCollection")
-            .doc(widget.schoolID)
-            .collection(widget.batchId)
-            .doc(widget.batchId)
-            .collection("classes")
-            .doc(widget.classID)
-            .collection('Students').where('docid', isEqualTo: studentID).get();
+  getStudentsCollectionList(String studentID) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(widget.schoolID)
+        .collection(widget.batchId)
+        .doc(widget.batchId)
+        .collection("classes")
+        .doc(widget.classID)
+        .collection('Students')
+        .where('docid', isEqualTo: studentID)
+        .get();
 
-            
-  if (querySnapshot.docs.isNotEmpty) {
-    // Retrieve the first document that matches the query
-    DocumentSnapshot documentSnapshot = querySnapshot.docs[0];
+    if (querySnapshot.docs.isNotEmpty) {
+      // Retrieve the first document that matches the query
+      DocumentSnapshot documentSnapshot = querySnapshot.docs[0];
 
-    // Access the desired field value from the document
-    var fieldValue = documentSnapshot.get('studentName');
+      // Access the desired field value from the document
+      var fieldValue = documentSnapshot.get('studentName');
 
-    log(fieldValue);
+      log(fieldValue);
 
-    studentName = fieldValue;
+      studentName = fieldValue;
 
-    // Use the fieldValue as needed
+      // Use the fieldValue as needed
+    }
   }
-}
- 
 
   String subjectNameFormatting() {
     substring = getSubstringUntilNumber(widget.subjectName)!;
@@ -220,7 +219,14 @@ getStudentsCollectionList(String studentID)async{
                       children: [
                         Text('${index + 1}'),
                         kWidth20,
-                        Text(snapshot.data!.docs[index]['studentName']),
+                        SizedBox(
+                          width: 200,
+                          child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Center(
+                                  child: Text(snapshot.data!.docs[index]
+                                      ['studentName']))),
+                        ),
                         const Spacer(),
                         IconButton(
                             onPressed: () async {
@@ -844,11 +850,9 @@ getStudentsCollectionList(String studentID)async{
 
                                 for (var l in tokenList) {
                                   for (var i = 0; i < tokenList.length; i++) {
-                                    
                                     sendPushMessage(
                                         tokenList[i],
-                                        'Sir/Madam, your child was absent on for $finalSubjectName period at $formattedTime on $formattedDate, സർ/മാഡം, $formattedDate തീയതി $formattedTimeന് ഉണ്ടായിരുന്ന $finalSubjectName പീരീഡിൽ നിങ്ങളുടെ കുട്ടി ഹാജരായിരുന്നില്ല'
-                                        ,
+                                        'Sir/Madam, your child was absent on for $finalSubjectName period at $formattedTime on $formattedDate, സർ/മാഡം, $formattedDate തീയതി $formattedTimeന് ഉണ്ടായിരുന്ന $finalSubjectName പീരീഡിൽ നിങ്ങളുടെ കുട്ടി ഹാജരായിരുന്നില്ല',
                                         'Absent Notification from $schoolName');
                                   }
                                 }
