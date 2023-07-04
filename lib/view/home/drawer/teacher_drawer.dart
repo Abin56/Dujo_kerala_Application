@@ -5,7 +5,6 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
-import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -206,12 +205,7 @@ Get.to(
       ),
           );
         }),
-        menuItem(6, 'assets/images/notices.png', 'Notices'.tr,
-            currentPage == DrawerSections.about ? true : false, () {
-          Get.to(
-            () => NoticePage(),
-          );
-        }),
+
         menuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
