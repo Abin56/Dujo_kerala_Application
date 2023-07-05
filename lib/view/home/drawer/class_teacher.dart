@@ -5,10 +5,8 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
-import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:dujo_kerala_application/widgets/drop_down/select_class_classteacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -249,12 +247,12 @@ Widget MyDrawerList(context) {
             ),
           );
         }),
-        MenuItem(6, 'assets/images/notices.png', 'Notices'.tr,
-            currentPage == DrawerSections.about ? true : false, () {
-          Get.to(
-            () => NoticePage(),
-          );
-        }),
+        // MenuItem(6, 'assets/images/notices.png', 'Notices'.tr,
+        //     currentPage == DrawerSections.about ? true : false, () {
+        //   Get.to(
+        //     () => NoticePage(),
+        //   );
+        // }),
 
         MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
