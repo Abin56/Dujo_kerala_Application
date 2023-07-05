@@ -327,27 +327,35 @@ changeStudentData(BuildContext context, String hintText, String updateValue) {
             TextButton(
               child: const Text('Update'),
               onPressed: () async {
-     if (formkey.currentState!.validate()) {
-                 await FirebaseFirestore.instance
-                    .collection("SchoolListCollection")
-                    .doc(UserCredentialsController.schoolId)
-                    .collection(UserCredentialsController.batchId!)
-                    .doc(UserCredentialsController.batchId!)
-                    .collection('classes')
-                    .doc(UserCredentialsController.classId)
-                    .collection('Students')
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .update({updateValue: editvalueController.text.trim()}).then(
-                        (value) {
-                  // UserCredentialsController.studentModel.parentPhoneNumber
-                  showToast(msg: '$hintText Updated Successfully');
-                  Navigator.of(context).pop();
-                                  Navigator.of(context).pop();
-                });
-       
-     }else{
-      return;
-     }
+                if (formkey.currentState!.validate()) {
+                  await FirebaseFirestore.instance
+                      .collection("SchoolListCollection")
+                      .doc(UserCredentialsController.schoolId)
+                      .collection(UserCredentialsController.batchId!)
+                      .doc(UserCredentialsController.batchId!)
+                      .collection('classes')
+                      .doc(UserCredentialsController.classId)
+                      .collection('Students')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .update({
+                    updateValue: editvalueController.text.trim()
+                  }).then((value) async {
+                    await FirebaseFirestore.instance
+                        .collection("SchoolListCollection")
+                        .doc(UserCredentialsController.schoolId)
+                        .collection('AllStudents')
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .update({
+                      updateValue: editvalueController.text.trim()
+                    }).then((value) {
+                      showToast(msg: '$hintText Updated Successfully');
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    });
+                  });
+                } else {
+                  return;
+                }
               },
             ),
           ],

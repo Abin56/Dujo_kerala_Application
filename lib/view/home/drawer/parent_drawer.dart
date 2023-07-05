@@ -182,12 +182,7 @@ Get.to(
             () => const ViewHomeWorks(),
           );
         }),
-        // MenuItem(6, 'assets/images/notices.png', 'Notices'.tr,
-        //     currentPage == DrawerSections.about ? true : false, () {
-        //   Get.to(
-        //     () => NoticePage(),
-        //   );
-        // }),
+
 
         MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {

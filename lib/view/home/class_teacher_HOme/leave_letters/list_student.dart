@@ -82,6 +82,7 @@ class _LeaveLettersStudentListsScreenState
                               curve: Curves.fastLinearToSlowEaseIn,
                               child: FadeInAnimation(
                                 child: GestureDetector(
+                                  
                                   onTap: () {
                                     Get.to(
                                       LeaveLettersScreen(
