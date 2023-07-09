@@ -184,12 +184,7 @@ Widget MyDrawerList(context) {
             () => const ViewHomeWorks(),
           );
         }),
-        // MenuItem(5, 'assets/images/notices.png', 'Notices'.tr,
-        //     currentPage == DrawerSections.about ? true : false, () {
-        //    Get.to(
-        //     () => NoticePage(),
-        //   );
-        // }),
+
     
         MenuItem(6, 'assets/images/progressreport.png', 'Progress Report'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {

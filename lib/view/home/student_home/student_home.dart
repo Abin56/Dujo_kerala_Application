@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'Student Edit Profile/student_edit_profile_page.dart';
 
@@ -69,108 +71,117 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              color: cgraident,
-              width: double.infinity,
-              height: screenSize.width * 0.5,
-              padding: EdgeInsets.all(15.h),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: screenSize.width / 2,
-                          child: GoogleMonstserratWidgets(
-                            overflow: TextOverflow.ellipsis,
-                            text: UserCredentialsController
-                                .studentModel!.studentName,
-                            fontsize: 23.sp,
-                            fontWeight: FontWeight.bold,
-                            color: cWhite,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(() => const StudentProfileEditPage());
-                          },
-                          child: Container(
-                            child: Stack(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      UserCredentialsController
-                                          .studentModel!.profileImageUrl),
-                                  onBackgroundImageError:
-                                      (exception, stackTrace) {
-                                    log(exception.toString());
-                                  },
-                                  radius: 50.r,
-                                ),
-                                Positioned(
-                                  right: 6.r,
-                                  bottom: 1.r,
-                                  child: CircleAvatar(
-                                    backgroundColor: cWhite,
-                                    radius: 12.r,
-                                    child:
-                                        const Center(child: Icon(Icons.info)),
-                                  ),
-                                ),
-                              ],
+      body: UpgradeAlert(
+        
+        upgrader: Upgrader(
+          shouldPopScope: () => true,
+          canDismissDialog: true,
+          durationUntilAlertAgain: const Duration(hours: 1),
+          dialogStyle: Platform.isIOS?UpgradeDialogStyle.cupertino:UpgradeDialogStyle.material
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                color: cgraident,
+                width: double.infinity,
+                height: screenSize.width * 0.5,
+                padding: EdgeInsets.all(15.h),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: screenSize.width / 2,
+                            child: GoogleMonstserratWidgets(
+                              overflow: TextOverflow.ellipsis,
+                              text: UserCredentialsController
+                                  .studentModel!.studentName,
+                              fontsize: 23.sp,
+                              fontWeight: FontWeight.bold,
+                              color: cWhite,
                             ),
                           ),
-                        ),
-                      ],
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => const StudentProfileEditPage());
+                            },
+                            child: Container(
+                              child: Stack(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        UserCredentialsController
+                                            .studentModel!.profileImageUrl),
+                                    onBackgroundImageError:
+                                        (exception, stackTrace) {
+                                      log(exception.toString());
+                                    },
+                                    radius: 50.r,
+                                  ),
+                                  Positioned(
+                                    right: 6.r,
+                                    bottom: 1.r,
+                                    child: CircleAvatar(
+                                      backgroundColor: cWhite,
+                                      radius: 12.r,
+                                      child:
+                                          const Center(child: Icon(Icons.info)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  FutureBuilder(
-                      future: FirebaseFirestore.instance
-                          .collection('SchoolListCollection')
-                          .doc(UserCredentialsController.schoolId)
-                          .collection(UserCredentialsController.batchId!)
-                          .doc(UserCredentialsController.batchId)
-                          .collection('classes')
-                          .doc(UserCredentialsController.classId)
-                          .get(),
-                      builder: (context, snaps) {
-                        if (snaps.hasData) {
-                          return GoogleMonstserratWidgets(
-                            text: 'Class : ${snaps.data!.data()!['className']}',
-                            fontsize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: cWhite.withOpacity(0.8),
-                          );
-                        } else {
-                          return const Text('');
-                        }
-                      }),
-                  GoogleMonstserratWidgets(
-                    text:
-                        'Ad No : ${UserCredentialsController.studentModel?.admissionNumber}',
-                    fontsize: 13.sp,
-                    fontWeight: FontWeight.w500,
-                    color: cWhite.withOpacity(0.8),
-                  ),
-                  GoogleMonstserratWidgets(
-                    text:
-                        'email : ${UserCredentialsController.studentModel?.studentemail}',
-                    fontsize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: cWhite.withOpacity(0.7),
-                  ),
-                ],
+                    FutureBuilder(
+                        future: FirebaseFirestore.instance
+                            .collection('SchoolListCollection')
+                            .doc(UserCredentialsController.schoolId)
+                            .collection(UserCredentialsController.batchId!)
+                            .doc(UserCredentialsController.batchId)
+                            .collection('classes')
+                            .doc(UserCredentialsController.classId)
+                            .get(),
+                        builder: (context, snaps) {
+                          if (snaps.hasData) {
+                            return GoogleMonstserratWidgets(
+                              text: 'Class : ${snaps.data!.data()!['className']}',
+                              fontsize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: cWhite.withOpacity(0.8),
+                            );
+                          } else {
+                            return const Text('');
+                          }
+                        }),
+                    GoogleMonstserratWidgets(
+                      text:
+                          'Ad No : ${UserCredentialsController.studentModel?.admissionNumber}',
+                      fontsize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: cWhite.withOpacity(0.8),
+                    ),
+                    GoogleMonstserratWidgets(
+                      text:
+                          'email : ${UserCredentialsController.studentModel?.studentemail}',
+                      fontsize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: cWhite.withOpacity(0.7),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const StudentAccessories(),
-          ],
+              const StudentAccessories(),
+            ],
+          ),
         ),
       ),
     );
