@@ -18,6 +18,7 @@ import '../../../pages/exam_results/for_users/select_examlevel_uses.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../events/event_list.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
+import '../../fees and bills/fees_page.dart';
 import '../../student_home/time_table/ss.dart';
 import '../progress_report/progress_report.dart';
 
@@ -80,7 +81,9 @@ class ParentAccessories extends StatelessWidget {
 
       TeacherSubjectWiseList(), //Teachers
 
-       BusRouteListPage(),   /////// all bus
+       BusRouteListPage(),  
+       /////// all bus
+       const FeesPage()
 
      
     ];
@@ -187,6 +190,7 @@ List<String> _acc_text = [
 
   'Teachers',
   'Bus Route'.tr,
+  'Fess & Bills',
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -209,6 +213,7 @@ var _acc_images = [
   'assets/images/subjects.png',
 
   'assets/images/teachers.png',
-   'assets/images/bus.png'
+   'assets/images/bus.png',
+   'assets/images/feesandbills.png',
 
 ];
