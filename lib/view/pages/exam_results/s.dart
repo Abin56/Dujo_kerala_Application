@@ -42,7 +42,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
   }
 
   Future<void> _getImageFromGallery() async {
-    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
