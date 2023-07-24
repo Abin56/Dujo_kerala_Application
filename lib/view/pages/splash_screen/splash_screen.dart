@@ -14,6 +14,7 @@ import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_hom
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -73,7 +74,7 @@ nextpage() async {
   log("userRole:${UserCredentialsController.userRole}");
 
   if (auth.currentUser == null) {
-    Get.to(()=>const DujoLoginScren());
+    Get.to(() => const DujoLoginScren());
   } else {
     final DocumentReference<Map<String, dynamic>> firebaseFirestore =
         FirebaseFirestore.instance
@@ -95,7 +96,7 @@ nextpage() async {
     } else if (UserCredentialsController.userRole == 'guardian') {
       await checkGuardian(firebaseFirestore, auth);
     } else {
-      Get.to(()=>const DujoLoginScren());
+      Get.to(() => const DujoLoginScren());
     }
   }
 }
@@ -115,10 +116,10 @@ Future<void> checkStudent(
   if (studentData.data() != null) {
     UserCredentialsController.studentModel =
         StudentModel.fromJson(studentData.data()!);
-    Get.to(()=>const StudentsMainHomeScreen());
+    Get.to(() => const StudentsMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(()=>const DujoLoginScren());
+    Get.to(() => const DujoLoginScren());
   }
 }
 
@@ -133,10 +134,10 @@ Future<void> checkTeacher(
   if (teacherData.data() != null) {
     UserCredentialsController.teacherModel =
         TeacherModel.fromMap(teacherData.data()!);
-    Get.to(()=>const TeacherMainHomeScreen());
+    Get.to(() => const TeacherMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(()=>const DujoLoginScren());
+    Get.to(() => const DujoLoginScren());
   }
 }
 
@@ -151,10 +152,10 @@ Future<void> checkClassTeacher(
   if (classTeacherData.data() != null) {
     UserCredentialsController.teacherModel =
         TeacherModel.fromMap(classTeacherData.data()!);
-    Get.to(()=>const ClassTeacherMainHomeScreen());
+    Get.to(() => const ClassTeacherMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(()=>const DujoLoginScren());
+    Get.to(() => const DujoLoginScren());
   }
 }
 
@@ -174,10 +175,10 @@ Future<void> checkParent(
   if (parentData.data() != null) {
     UserCredentialsController.parentModel =
         ParentModel.fromMap(parentData.data()!);
-    Get.to(()=>const ParentMainHomeScreen());
+    Get.to(() => const ParentMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(()=>const DujoLoginScren());
+    Get.to(() => const DujoLoginScren());
   }
 }
 
@@ -197,9 +198,43 @@ Future<void> checkGuardian(
   if (guardianData.data() != null) {
     UserCredentialsController.guardianModel =
         GuardianModel.fromMap(guardianData.data()!);
-    Get.to(()=>const GuardianMainHomeScreen());
+    Get.to(() => const GuardianMainHomeScreen());
   } else {
     showToast(msg: "Please login again");
-    Get.to(()=>const DujoLoginScren());
+    Get.to(() => const DujoLoginScren());
   }
 }
+
+Future<bool> onbackbuttonpressed(BuildContext context) async {
+  bool exitApp = await showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Alert'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[Text('Do you want to exit from Lepton Dujo ?')],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('No'),
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+          ),
+          TextButton(
+            child: const Text('Yes'),
+            onPressed: () {
+         SystemNavigator.pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+  return exitApp;
+}
+
+

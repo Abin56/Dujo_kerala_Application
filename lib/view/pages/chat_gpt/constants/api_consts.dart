@@ -1,5 +1,5 @@
 String BASE_URL = "https://api.openai.com/v1/chat";
-String API_KEY = "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";
+String API_KEY = "";
 class APIKey {
-  static const apiKey = "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";
-}
+  static const apiKey = "";
+} 
