@@ -34,7 +34,6 @@ migrate_working_dir/
 
 # .gitignore
 /lib/view/pages/chat_gpt/constants/api_consts.dart
-
 # Symbolication related
 app.*.symbols
 
@@ -46,3 +45,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 lib/view/pages/chat_gpt/constants/api_consts.dart
+config.dart
