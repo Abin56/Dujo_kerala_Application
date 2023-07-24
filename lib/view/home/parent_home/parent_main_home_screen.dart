@@ -1,6 +1,5 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,20 +37,22 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       ParentHomeScreen(),
-         RecSelectSubjectScreen(
+      RecSelectSubjectScreen(
         batchId: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,
       ),
-      const UnderMaintanceScreen(text: ""),
-         const ChatScreen(),
+      //const FeesPage(),
+      const ChatScreen(),
     ];
     return Scaffold(
       appBar: AppBar(
-     title: ContainerImage(
+        title: ContainerImage(
             height: 28.h,
             width: 90.w,
-            imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor,),
+            imagePath: 'assets/images/dujoo-removebg.png'),
+        backgroundColor: adminePrimayColor,
+      ),
       body: pages[_page],
       bottomNavigationBar: Container(
         height: 71,
@@ -74,7 +75,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
           rippleColor: Colors.grey,
           activeColor: Colors.white,
           color: Colors.white,
-          tabs:  [
+          tabs: [
             GButton(
                 iconSize: 20,
                 icon: LineIcons.home,
@@ -111,7 +112,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-               ParentHeaderDrawer(),
+              const ParentHeaderDrawer(),
               MyDrawerList(context),
             ],
           ),
