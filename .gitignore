@@ -33,8 +33,7 @@ migrate_working_dir/
 /build/
 
 # .gitignore
-/lib/view/pages/chat_gpt/constants/api_consts.dart
-config.dart
+/lib/config.dart
 # Symbolication related
 app.*.symbols
 

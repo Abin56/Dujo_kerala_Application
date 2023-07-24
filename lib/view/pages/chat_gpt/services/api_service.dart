@@ -2,10 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-
 import 'package:http/http.dart' as http;
 
-import '../constants/api_consts.dart';
+import '../../../../config.dart';
 import '../models/chat_model.dart';
 import '../models/models_model.dart';
 
@@ -14,7 +13,7 @@ class ApiService {
     try {
       var response = await http.get(
         Uri.parse("$BASE_URL/models"),
-        headers: {'Authorization': 'Bearer $API_KEY'},
+        headers: {'Authorization': 'Bearer $openApiKey'},
       );
 
       Map jsonResponse = jsonDecode(response.body);
@@ -44,7 +43,7 @@ class ApiService {
       var response = await http.post(
         Uri.parse("$BASE_URL/completions"),
         headers: {
-          'Authorization': 'Bearer $API_KEY',
+          'Authorization': 'Bearer $openApiKey',
           "Content-Type": "application/json"
         },
         body: jsonEncode(
@@ -92,7 +91,7 @@ class ApiService {
       var response = await http.post(
         Uri.parse("$BASE_URL/completions"),
         headers: {
-          'Authorization': 'Bearer $API_KEY',
+          'Authorization': 'Bearer $openApiKey',
           "Content-Type": "application/json"
         },
         body: jsonEncode(
