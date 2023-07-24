@@ -90,9 +90,22 @@ class ParentProfileEditController {
     try {
       if (Get.find<GetImage>().pickedImage.value.isNotEmpty) {
         isLoading.value = true;
+
+        String imageId =
+            "${DateTime.now().millisecondsSinceEpoch.toString()}${UserCredentialsController.parentModel?.parentName}";
+
+        if (UserCredentialsController.parentModel != null) {
+          if (UserCredentialsController
+                  .parentModel!.profileImageID?.isNotEmpty ??
+              false) {
+            imageId =
+                UserCredentialsController.parentModel?.profileImageID ?? "";
+          }
+        }
+
         final result = await FirebaseStorage.instance
             .ref(
-                "files/parentProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.guardianModel?.profileImageID}")
+                "files/parentProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/$imageId")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         final imageUrl = await result.ref.getDownloadURL();
         await FirebaseFirestore.instance
@@ -104,7 +117,10 @@ class ParentProfileEditController {
             .doc(UserCredentialsController.classId)
             .collection("ParentCollection")
             .doc(UserCredentialsController.parentModel?.docid)
-            .update({"profileImageURL": imageUrl});
+            .update({
+          "profileImageURL": imageUrl,
+          "profileImageID": imageId,
+        });
 
         isLoading.value = false;
 
