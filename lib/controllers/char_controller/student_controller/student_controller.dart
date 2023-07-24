@@ -177,7 +177,10 @@ class StudentChatController extends GetxController {
     }
   }
 
-  sentMessage(String teacherId) async {
+  sentMessage(String teacherId, int usercurrentIndex,
+      int studentchatCounterIndex) async {
+    int sentStudentChatIndex = studentchatCounterIndex + 1;
+    int sentIindex = usercurrentIndex + 1;
     log('Teacher Id$teacherId');
     log("Student id${FirebaseAuth.instance.currentUser!.uid}");
     final id = uuid.v1();
@@ -203,7 +206,7 @@ class StudentChatController extends GetxController {
         .doc(id)
         .set(sendMessage.toMap())
         .then((value) async {
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)
           .collection("Teachers")
@@ -213,7 +216,26 @@ class StudentChatController extends GetxController {
           .collection('messages')
           .doc(id)
           .set(sendMessage.toMap())
-          .then((value) => messageController.clear());
+          .then((value) async {
+        await FirebaseFirestore.instance
+            .collection('SchoolListCollection')
+            .doc(UserCredentialsController.schoolId)
+            .collection("Teachers")
+            .doc(teacherId)
+            .collection('StudentChats')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .update({'messageindex': sentIindex}).then((value) async {
+          FirebaseFirestore.instance
+              .collection('SchoolListCollection')
+              .doc(UserCredentialsController.schoolId)
+              .collection("Teachers")
+              .doc(teacherId)
+              .collection('StudentChatCounter')
+              .doc('F0Ikn1UouYIkqmRFKIpg')
+              .update({'chatIndex': sentStudentChatIndex}).then(
+                  (value) => messageController.clear());
+        });
+      });
     });
   }
 

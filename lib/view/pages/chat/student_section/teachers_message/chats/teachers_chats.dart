@@ -29,6 +29,10 @@ class _TeachersChatsScreenState extends State<TeachersChatsScreen> {
   final studentChatController = Get.put(StudentChatController());
 
   int currentStudentMessageIndex = 0;
+    int currentStudentMessageIndex2 = 0;
+  
+
+  
   @override
   void initState() {
     // getCurrentStudentMessageIndex().then((value) => resetUserMessageIndex());
@@ -161,8 +165,11 @@ class _TeachersChatsScreenState extends State<TeachersChatsScreen> {
                                       ),
                                       onPressed: () async {
                                         ///////////////////////////
-                                        studentChatController
-                                            .sentMessage(widget.teacherDocID);
+                                        studentChatController.sentMessage(
+                                          widget.teacherDocID,
+                                          await getCurrentStudentMessageIndex(),
+                                          await getStudentChatCounterIndex(),
+                                        );
                                         /////////////////////////
                                       }),
                                 ),
@@ -184,17 +191,28 @@ class _TeachersChatsScreenState extends State<TeachersChatsScreen> {
     );
   }
 
-  Future<void> getCurrentStudentMessageIndex() async {
+  Future<int> getCurrentStudentMessageIndex() async {
     var vari = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Teachers')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('StudentChats')
         .doc(widget.teacherDocID)
+        .collection('StudentChats')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
+    return currentStudentMessageIndex = vari.data()!['messageindex'];
+  }
 
-    currentStudentMessageIndex = vari.data()!['messageindex'];
+  Future<int> getStudentChatCounterIndex() async {
+    var vari = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(UserCredentialsController.schoolId)
+        .collection('Teachers')
+        .doc(widget.teacherDocID)
+        .collection('StudentChatCounter')
+        .doc('F0Ikn1UouYIkqmRFKIpg')
+        .get();
+    return currentStudentMessageIndex2 = vari.data()!['chatIndex'];
   }
 
   // resetUserMessageIndex() async {

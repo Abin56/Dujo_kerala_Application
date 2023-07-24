@@ -9,15 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controllers/char_controller/teacher_controller/teacher_controller.dart';
-
+import '../../../../../constant/sizes/constant.dart';
 
 class StudentsChatsScreen extends StatefulWidget {
-  int studentMessageCounter;
   String studentDocID;
   String studentName;
 
   StudentsChatsScreen(
-      {required this.studentMessageCounter,
+      {
       required this.studentDocID,
       required this.studentName,
       super.key});
@@ -219,8 +218,15 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
   }
 
   resetUserMessageIndex() async {
-    final messageIndexNotify =
-        widget.studentMessageCounter - currentStudentMessageIndex;
+    int zero=0;
+   final int messageIndexNotify =
+        MessageCounter.studentMessageCounter - currentStudentMessageIndex;
+        MessageCounter.studentMessageCounter=messageIndexNotify;
+  
+
+    log("StudentCounter${MessageCounter.studentMessageCounter}");
+    log("StudentIndex $currentStudentMessageIndex");
+        log("messageIndexNotify $messageIndexNotify");
     await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -228,7 +234,10 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('StudentChatCounter')
         .doc('F0Ikn1UouYIkqmRFKIpg')
-        .update({'chatIndex': messageIndexNotify}).then((value) async {
+        .update({
+          'chatIndex': messageIndexNotify==0?
+          zero:messageIndexNotify
+          }).then((value) async {
       await FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)

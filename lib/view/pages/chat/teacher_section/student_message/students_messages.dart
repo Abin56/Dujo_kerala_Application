@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'chats/students_chats.dart';
 
 class StudentsMessagesScreen extends StatelessWidget {
-  int studentMessageCounter;
-  StudentsMessagesScreen({required this.studentMessageCounter, super.key});
+
+  StudentsMessagesScreen({ super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class StudentsMessagesScreen extends StatelessWidget {
                     child: ListTile(
                       onTap: () {
                         Get.to(() => StudentsChatsScreen(
-                              studentMessageCounter: studentMessageCounter,
+                              
                               studentName: snapshots.data!.docs[index]
                                   ['studentname'],
                               studentDocID: snapshots.data!.docs[index]

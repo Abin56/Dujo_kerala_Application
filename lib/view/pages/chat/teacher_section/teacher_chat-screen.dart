@@ -87,7 +87,7 @@ class TeacherChatScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             StudentsMessagesScreen(
-                studentMessageCounter: MessageCounter.studentMessageCounter),
+                ),
             const Icon(Icons.directions_transit, size: 350),
             const Icon(Icons.directions_car, size: 350),
           ],
