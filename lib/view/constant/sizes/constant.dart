@@ -70,3 +70,9 @@ class UserEmailandPasswordSaver{
   static String userPassword='';
 }
 const uuid = Uuid();
+
+class MessageCounter{
+  static int studentMessageCounter=0;
+    static int teacherMessageCounter=0;
+  static String userPassword='';
+}
