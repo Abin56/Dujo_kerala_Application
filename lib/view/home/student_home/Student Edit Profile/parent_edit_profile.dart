@@ -78,6 +78,7 @@ class ParentEditProfileScreen extends StatelessWidget {
                       "",
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Phone No.".tr, fontsize: 12.h),
+              editicon: Icons.edit,             ``
             ),
             ParentEditListileWidget(
               icon: Icons.email,
@@ -94,6 +95,7 @@ class ParentEditProfileScreen extends StatelessWidget {
                   text: UserCredentialsController.parentModel?.houseName ?? "",
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Address".tr, fontsize: 12.h),
+              editicon: Icons.edit,
             ),
           ],
         ),
