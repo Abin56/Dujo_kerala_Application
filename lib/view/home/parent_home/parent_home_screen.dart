@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_accessories/parent_access.dart';
+import 'package:dujo_kerala_application/view/home/parent_home/parent_profile_edit/parent_edit_profile.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -14,8 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../student_home/Student Edit Profile/parent_edit_profile.dart';
 
 class ParentHomeScreen extends StatefulWidget {
   @override
@@ -115,10 +114,8 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
     // TODO: implement initState
     super.initState();
     getDeviceToken();
-    
- //   sendPushMessage( deviceToken, 'Hello Everyone', 'DUJO APP');
-    
-    
+
+    //   sendPushMessage( deviceToken, 'Hello Everyone', 'DUJO APP');
   }
 
   Widget build(BuildContext context) {
@@ -153,39 +150,35 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                             color: cWhite,
                           ),
                         ),
-                          GestureDetector(
-                              onTap: () {
-                                Get.to(()=>const ParentEditProfileScreen());
-                                sendPushMessage(
-                                    deviceToken,
-                                    'sdf',
-                                    'zsd');
-                              },
-                              child:
-                        Container(
-                          child: Stack(
-                            children: [
-                             CircleAvatar(
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => ParentEditProfileScreen());
+                            sendPushMessage(deviceToken, 'sdf', 'zsd');
+                          },
+                          child: Container(
+                            child: Stack(
+                              children: [
+                                CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       UserCredentialsController
                                               .parentModel!.profileImageURL ??
                                           ''),
                                   radius: 50.r,
                                 ),
-                              
-                              Positioned(
-                                right: 6.r,
-                                bottom: 1.r,
-                                child: CircleAvatar(
-                                //  backgroundColor: cWhite,
-                                  radius: 12.r,
-                                  child: const Center(child: Icon(Icons.info)),
+                                Positioned(
+                                  right: 6.r,
+                                  bottom: 1.r,
+                                  child: CircleAvatar(
+                                    //  backgroundColor: cWhite,
+                                    radius: 12.r,
+                                    child:
+                                        const Center(child: Icon(Icons.info)),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                    ),
                       ],
                     ),
                   ),
@@ -211,7 +204,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                           return const Text('');
                         }
                       }),
-                        FutureBuilder(
+                  FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection('SchoolListCollection')
                           .doc(UserCredentialsController.schoolId)

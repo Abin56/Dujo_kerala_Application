@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,10 +17,29 @@ import '../../userCredentials/user_credentials.dart';
 
 class ParentProfileEditController {
   RxBool isLoading = RxBool(false);
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController houseNameController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+  TextEditingController districtController = TextEditingController();
+  TextEditingController pincodeController = TextEditingController();
+  TextEditingController placeController = TextEditingController();
+  TextEditingController stateController = TextEditingController();
+
+  final DocumentReference<Map<String, dynamic>> parentDocumentCollection =
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(UserCredentialsController.schoolId)
+          .collection(UserCredentialsController.batchId ?? "")
+          .doc(UserCredentialsController.batchId)
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .collection('ParentCollection')
+          .doc(UserCredentialsController.parentModel?.docid);
   Future<void> changeParentEmail(
       String newEmail, BuildContext context, String password) async {
     final auth = FirebaseAuth.instance;
     String email = auth.currentUser?.email ?? "";
+
     try {
       isLoading.value = true;
       await auth
@@ -28,16 +48,7 @@ class ParentProfileEditController {
         await FirebaseAuth.instance.currentUser
             ?.updateEmail(newEmail)
             .then((value) async {
-          await FirebaseFirestore.instance
-              .collection('SchoolListCollection')
-              .doc(UserCredentialsController.schoolId)
-              .collection(UserCredentialsController.batchId ?? "")
-              .doc(UserCredentialsController.batchId)
-              .collection('classes')
-              .doc(UserCredentialsController.classId)
-              .collection('ParentCollection')
-              .doc(UserCredentialsController.parentModel?.docid)
-              .update({'parentEmail': newEmail});
+          await parentDocumentCollection.update({'parentEmail': newEmail});
 
           showToast(msg: 'Successfully Updated');
 
@@ -52,37 +63,7 @@ class ParentProfileEditController {
       isLoading.value = false;
     } on FirebaseAuthException catch (e) {
       isLoading.value = false;
-      String errorMessage = '';
-
-      switch (e.code) {
-        case 'requires-recent-login':
-          errorMessage =
-              'This action requires recent authentication. Please log in again.';
-          break;
-        case 'email-already-in-use':
-          errorMessage =
-              'The email address is already in use by another account.';
-          break;
-        case 'invalid-email':
-          errorMessage = 'The email address is invalid.';
-          break;
-        case 'too-many-requests':
-          errorMessage = 'Too many requests. Please try again later.';
-          break;
-        case 'user-disabled':
-          errorMessage = 'The user account has been disabled.';
-          break;
-        case 'user-not-found':
-          errorMessage = 'The user account was not found.';
-          break;
-        case 'weak-password':
-          errorMessage = 'The password is too weak.';
-          break;
-        default:
-          errorMessage = 'An error occurred. Please try again.';
-      }
-
-      showToast(msg: errorMessage);
+      showToast(msg: e.code);
     }
   }
 
@@ -108,16 +89,8 @@ class ParentProfileEditController {
                 "files/parentProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/$imageId")
             .putFile(File(Get.find<GetImage>().pickedImage.value));
         final imageUrl = await result.ref.getDownloadURL();
-        await FirebaseFirestore.instance
-            .collection("SchoolListCollection")
-            .doc(UserCredentialsController.schoolId)
-            .collection(UserCredentialsController.batchId ?? "")
-            .doc(UserCredentialsController.batchId)
-            .collection("classes")
-            .doc(UserCredentialsController.classId)
-            .collection("ParentCollection")
-            .doc(UserCredentialsController.parentModel?.docid)
-            .update({
+
+        await parentDocumentCollection.update({
           "profileImageURL": imageUrl,
           "profileImageID": imageId,
         });
@@ -126,16 +99,7 @@ class ParentProfileEditController {
 
         Get.find<GetImage>().pickedImage.value = "";
         final DocumentSnapshot<Map<String, dynamic>> parentData =
-            await FirebaseFirestore.instance
-                .collection("SchoolListCollection")
-                .doc(UserCredentialsController.schoolId)
-                .collection(UserCredentialsController.batchId ?? "")
-                .doc(UserCredentialsController.batchId)
-                .collection('classes')
-                .doc(UserCredentialsController.classId)
-                .collection('ParentCollection')
-                .doc(UserCredentialsController.parentModel?.docid)
-                .get();
+            await parentDocumentCollection.get();
 
         if (parentData.data() != null) {
           UserCredentialsController.parentModel =
@@ -146,6 +110,31 @@ class ParentProfileEditController {
     } catch (e) {
       isLoading.value = false;
       showToast(msg: "Something Went Wrong");
+    }
+  }
+
+  Future<void> updateParentProfile({
+    required String value,
+    required String documentKey,
+  }) async {
+    try {
+      isLoading.value = true;
+      await parentDocumentCollection.update({
+        documentKey: value,
+      });
+      final DocumentSnapshot<Map<String, dynamic>> parentData =
+          await parentDocumentCollection.get();
+      if (parentData.data() != null) {
+        UserCredentialsController.parentModel =
+            ParentModel.fromMap(parentData.data()!);
+
+        Get.offAll(const ParentMainHomeScreen());
+      }
+      isLoading.value = false;
+      phoneNumberController.clear();
+    } catch (e) {
+      log(e.toString());
+      isLoading.value = false;
     }
   }
 }
