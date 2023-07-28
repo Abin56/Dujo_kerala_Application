@@ -5,10 +5,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/teacher_home/class_test_controller/class_test_controller.dart';
 import 'click_on_class.dart';
 
 class TeacherClassListView extends StatelessWidget {
-  const TeacherClassListView({super.key});
+  TeacherClassListView({super.key});
+  final ClassTestController classTestController =
+      Get.put(ClassTestController());
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +49,23 @@ class TeacherClassListView extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(()=>ClickOnClasss(
-                                className:snapshot.data?.docs[index]['className']??"" ,
-                                classID: snapshot.data?.docs[index]['docid']??'',
-                              ));
+                              //this data add to classId for class test creation
+                              classTestController.classId =
+                                  snapshot.data?.docs[index]['docid'] ?? "";
+                              Get.to(() => ClickOnClasss(
+                                    className: snapshot.data?.docs[index]
+                                            ['className'] ??
+                                        "",
+                                    classID: snapshot.data?.docs[index]
+                                            ['docid'] ??
+                                        '',
+                                  ));
                             },
                             child: Container(
                               height: h / 100,
                               width: double.infinity,
                               margin: EdgeInsets.only(
-                                  bottom: w / 10,
-                                  left: w / 50,
-                                  right: w / 50),
+                                  bottom: w / 10, left: w / 50, right: w / 50),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(212, 67, 30, 203)
                                     .withOpacity(0.1),
@@ -73,7 +81,7 @@ class TeacherClassListView extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  snapshot.data?.docs[index]['className']??"",
+                                  snapshot.data?.docs[index]['className'] ?? "",
                                   style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontSize: 12,
