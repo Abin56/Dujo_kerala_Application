@@ -20,6 +20,7 @@ import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
+import '../../../pages/chat/student_section/student_chat_screen.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 
@@ -44,9 +45,10 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
 
-      const SS(),
-          
-      // const SS(), //Time Table
+      const SS(),//Time table
+
+      const StudentChatScreen(),// Chats
+
 
       const ViewHomeWorks(), // Home Works
       
@@ -167,6 +169,7 @@ NoticePage(), //Notice
 List<String> _acc_text = [
   'Attendance'.tr,
   'Time Table'.tr,
+  'Chats'.tr,
 
   'HomeWorks'.tr,
   'Subjects'.tr,
@@ -189,6 +192,7 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/library.png',
+    'assets/images/chat.png',
 
   'assets/images/homework.png',
   'assets/images/subjects.png',

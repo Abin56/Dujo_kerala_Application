@@ -14,6 +14,7 @@ import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
+import '../../../pages/chat/parent_section/parent_chat_screeen.dart';
 import '../../../pages/exam_results/for_users/select_examlevel_uses.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../events/event_list.dart';
@@ -32,16 +33,10 @@ class ParentAccessories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-
-
       AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),  //Attendence
-
-       
-
-
+          classID: UserCredentialsController.classId!), //Attendence
 
       LeaveApplicationScreen(
           studentName: studentName,
@@ -51,22 +46,22 @@ class ParentAccessories extends StatelessWidget {
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Leave Letter
 
+          const ParentChatScreen(),//Chats
+
       const SS(), // Time Table
 
-       SchoolLevelMeetingPage(), //Meetings
+      SchoolLevelMeetingPage(), //Meetings
 
       const UserExmNotifications(), // Exams
 
-       UsersSelectExamLevelScreen(
+      UsersSelectExamLevelScreen(
           classId: UserCredentialsController.classId!,
-          studentID: UserCredentialsController.parentModel!.studentID!),////// exam result
-
-
+          studentID: UserCredentialsController
+              .parentModel!.studentID!), ////// exam result
 
       const ViewHomeWorks(), // Home Works
 
       NoticePage(), //Notice
-
 
       const EventList(), //Events
 
@@ -76,16 +71,13 @@ class ParentAccessories extends StatelessWidget {
           studentId: UserCredentialsController.parentModel?.studentID ?? "",
           batchId: UserCredentialsController.batchId!), //Progress Report
 
-
       StudentSubjectHome(), //Subjects
 
       TeacherSubjectWiseList(), //Teachers
 
-       BusRouteListPage(),  
-       /////// all bus
-       const FeesPage()
-
-     
+      BusRouteListPage(),
+      /////// all bus
+      const FeesPage()
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -112,7 +104,7 @@ class ParentAccessories extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(()=>screenNavigation[index]);
+                        Get.to(() => screenNavigation[index]);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -152,7 +144,7 @@ class ParentAccessories extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600),
-                                  textAlign:TextAlign.center,
+                              textAlign: TextAlign.center,
                             )
                           ],
                         ),
@@ -172,22 +164,16 @@ class ParentAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Leave Letters',
-
+  'Chats'.tr,
   'Time Table',
-  
   'Meetings',
-
   'Exams',
-
-     'Exam Results'.tr,
+  'Exam Results'.tr,
   'HomeWorks',
   'Notices',
-  
   'Events',
-
   'Progress Report',
   'Subjects',
-
   'Teachers',
   'Bus Route'.tr,
   'Fess & Bills',
@@ -195,25 +181,17 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
-
-  
-
+  'assets/images/chat.png',
   'assets/images/library.png',
   'assets/images/meetings.png',
-
   'assets/images/exam.png',
-   'assets/images/exmresult1.png',
+  'assets/images/exmresult1.png',
   'assets/images/homework.png',
-
-
   'assets/images/notices.png',
   'assets/images/activity.png',
-
   'assets/images/progressreport.png',
   'assets/images/subjects.png',
-
   'assets/images/teachers.png',
-   'assets/images/bus.png',
-   'assets/images/feesandbills.png',
-
+  'assets/images/bus.png',
+  'assets/images/feesandbills.png',
 ];
