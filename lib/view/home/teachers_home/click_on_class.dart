@@ -23,6 +23,7 @@ import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../student_home/time_table/ss.dart';
+import 'class_test/class_test_page.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -56,6 +57,7 @@ class ClickOnClasss extends StatelessWidget {
       ),
       // Events
       SchoolLevelMeetingPage(), // Meetings
+      ClassTestPage(),
     ];
     final hasDataNavigation = [
       SelectPeriodWiseScreen(
@@ -105,6 +107,7 @@ class ClickOnClasss extends StatelessWidget {
       RecordedClassMainPage(), // recorded class
 
       BusRouteListPage(), /////// all bus
+      ClassTestPage(),
     ];
     int columnCount = 2;
     double w = MediaQuery.of(context).size.width;
@@ -336,6 +339,7 @@ List<String> _acc_text = [
   'Subjects'.tr,
   'Events'.tr,
   'Meetings'.tr,
+  'Class Test'.tr,
 ];
 var _acc_images = [
   'assets/images/classroom.png',
@@ -345,6 +349,7 @@ var _acc_images = [
   'assets/images/subjects.png',
   'assets/images/activity.png',
   'assets/images/meetings.png',
+  'assets/images/exmresult1.png',
 ];
 var hasDataImages = [
   'assets/images/attendance.png',
@@ -359,7 +364,8 @@ var hasDataImages = [
   'assets/images/subjects.png',
   'assets/images/meetings.png',
   'assets/images/recorded_classes.png',
-  'assets/images/bus.png'
+  'assets/images/bus.png',
+  'assets/images/exmresult1.png',
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,
@@ -375,4 +381,5 @@ List<String> hasDataText = [
   'Meetings'.tr,
   'Recorded Classes'.tr,
   'Bus Route'.tr,
+  'Class Test'.tr,
 ];
