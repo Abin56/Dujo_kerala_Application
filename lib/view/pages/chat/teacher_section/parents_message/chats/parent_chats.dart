@@ -8,39 +8,39 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/chat_controller/teacher_controller/teacher_controller.dart';
+import '../../../../../../controllers/chat_controller/teacher_controller/parent_teacher_controller.dart';
 import '../../../../../constant/sizes/constant.dart';
 
-class StudentsChatsScreen extends StatefulWidget {
-  String studentDocID;
-  String studentName;
+class ParentsChatsScreen extends StatefulWidget {
+  String parentDocID;
+  String parentName;
 
-  StudentsChatsScreen(
-      {required this.studentDocID, required this.studentName, super.key});
+  ParentsChatsScreen(
+      {required this.parentDocID, required this.parentName, super.key});
 
   @override
-  State<StudentsChatsScreen> createState() => _StudentsChatsScreenState();
+  State<ParentsChatsScreen> createState() => _ParentsChatsScreenState();
 }
 
-class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
-  final teacherChatController = Get.put(TeacherChatController());
+class _ParentsChatsScreenState extends State<ParentsChatsScreen> {
+  final teacherParentChatController = Get.put(TeacherParentChatController());
 
   int currentStudentMessageIndex = 0;
   @override
   void initState() {
-    connectingCurrentStudentToteacher();
-    connectingTeacherToStudent();
-    fectingStudentChatStatus();
+    connectingCurrentParentToteacher();
+    connectingTeacherToParent();
+    fectingParentChatStatus();
 
 
-    getCurrentStudentMessageIndex().then((value) => resetUserMessageIndex());
+    getCurrentParenttMessageIndex().then((value) => resetUserMessageIndex());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    log('studentName${widget.studentName}');
+    log('parentName${widget.parentName}');
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 245, 242, 224),
       resizeToAvoidBottomInset: true,
@@ -49,7 +49,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           children: [
             const CircleAvatar(),
             kWidth10,
-            Text(widget.studentName),
+            Text(widget.parentName),
           ],
         ),
         actions: [
@@ -63,8 +63,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                       .doc(UserCredentialsController.schoolId)
                       .collection("Teachers")
                       .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .collection('StudentChats')
-                      .doc(widget.studentDocID)
+                      .collection('ParentChats')
+                      .doc(widget.parentDocID)
                       .set({'block': true}, SetOptions(merge: true));
                 },
                 child: const Center(child: Text('Block')),
@@ -86,8 +86,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                       .doc(UserCredentialsController.schoolId)
                       .collection("Teachers")
                       .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .collection('StudentChats')
-                      .doc(widget.studentDocID)
+                      .collection('ParentChats')
+                      .doc(widget.parentDocID)
                       .collection('messages')
                       .orderBy('sendTime', descending: true)
                       .snapshots(),
@@ -100,8 +100,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                         itemCount: snaps.data!.docs.length,
                         itemBuilder: (context, index) {
                           ///////////////////////////////////
-                          return teacherChatController.messageTitles(
-                              widget.studentDocID,
+                          return teacherParentChatController.messageTitles(
+                              widget.parentDocID,
                               size,
                               snaps.data!.docs[index]['chatid'],
                               snaps.data!.docs[index]['message'],
@@ -123,16 +123,16 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                     .doc(UserCredentialsController.schoolId)
                     .collection("Teachers")
                     .doc(FirebaseAuth.instance.currentUser?.uid)
-                    .collection('StudentChats')
-                    .doc(widget.studentDocID)
+                    .collection('ParentChats')
+                    .doc(widget.parentDocID)
                     .snapshots(),
                 builder: (context, checkingblock) {
                   if (checkingblock.hasData) {
                     if (checkingblock.data?.data()?['block'] == true) {
                       return GestureDetector(
                         onTap: () async {
-                          await teacherChatController.unBlockuser(
-                              widget.studentDocID, context);
+                          await teacherParentChatController.unBlockuser(
+                              widget.parentDocID, context);
                         },
                         child: SizedBox(
                           height: size.height / 15,
@@ -164,7 +164,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                                 width: size.width / 1.3,
                                 child: TextField(
                                   controller:
-                                      teacherChatController.messageController,
+                                      teacherParentChatController.messageController,
                                   decoration: InputDecoration(
                                       hintText: "Send Message",
                                       border: OutlineInputBorder(
@@ -183,8 +183,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                                       ),
                                       onPressed: () async {
                                         ///////////////////////////
-                                        teacherChatController
-                                            .sentMessage(widget.studentDocID);
+                                        teacherParentChatController
+                                            .sentMessage(widget.parentDocID);
                                         /////////////////////////
                                       }),
                                 ),
@@ -209,14 +209,14 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     );
   }
 
-  Future<void> getCurrentStudentMessageIndex() async {
+  Future<void> getCurrentParenttMessageIndex() async {
     var vari = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Teachers')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('StudentChats')
-        .doc(widget.studentDocID)
+        .collection('ParentChats')
+        .doc(widget.parentDocID)
         .get();
 
     currentStudentMessageIndex = vari.data()!['messageindex'];
@@ -236,7 +236,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
         .doc(UserCredentialsController.schoolId)
         .collection('Teachers')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('StudentChatCounter')
+        .collection('ParentChatCounter')
         .doc('F0Ikn1UouYIkqmRFKIpg')
         .update({
       'chatIndex': messageIndexNotify == 0 ? zero : messageIndexNotify
@@ -246,13 +246,13 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           .doc(UserCredentialsController.schoolId)
           .collection('Teachers')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('StudentChats')
-          .doc(widget.studentDocID)
+          .collection('ParentChats')
+          .doc(widget.parentDocID)
           .update({'messageindex': 0});
     });
   }
 
-  Future connectingCurrentStudentToteacher() async {
+  Future connectingCurrentParentToteacher() async {
     final checkuser = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -260,8 +260,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
         .doc(UserCredentialsController.batchId!)
         .collection('classes')
         .doc(UserCredentialsController.classId)
-        .collection('Students')
-        .doc(widget.studentDocID)
+        .collection('ParentCollection')
+        .doc(widget.parentDocID)
         .collection('TeacherChats')
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .get();
@@ -273,8 +273,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           .doc(UserCredentialsController.batchId!)
           .collection('classes')
           .doc(UserCredentialsController.classId)
-          .collection('Students')
-          .doc(widget.studentDocID)
+          .collection('ParentCollection')
+          .doc(widget.parentDocID)
           .collection('TeacherChats')
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .set({
@@ -286,7 +286,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     }
   }
 
-  Future connectingTeacherToStudent() async {
+  Future connectingTeacherToParent() async {
     final checkuser = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -294,8 +294,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
         .doc(UserCredentialsController.batchId!)
         .collection('classes')
         .doc(UserCredentialsController.classId)
-        .collection('Students')
-        .doc(widget.studentDocID)
+        .collection('ParentCollection')
+        .doc(widget.parentDocID)
         .collection('TeacherChats')
         .get();
     if (checkuser.docs.isEmpty) {
@@ -306,8 +306,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           .doc(UserCredentialsController.batchId!)
           .collection('classes')
           .doc(UserCredentialsController.classId)
-          .collection('Students')
-          .doc(widget.studentDocID)
+          .collection('ParentCollection')
+          .doc(widget.parentDocID)
           .collection('TeacherChats')
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .set({
@@ -319,7 +319,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     }
   }
 
-  Future fectingStudentChatStatus() async {
+  Future fectingParentChatStatus() async {
     final firebasecollection = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -327,8 +327,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
         .doc(UserCredentialsController.batchId!)
         .collection('classes')
         .doc(UserCredentialsController.classId)
-        .collection('Students')
-        .doc(widget.studentDocID)
+        .collection('ParentCollection')
+        .doc(widget.parentDocID)
         .collection('TeachersChatCounter')
         .get();
 
@@ -341,8 +341,8 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           .doc(UserCredentialsController.batchId!)
           .collection('classes')
           .doc(UserCredentialsController.classId)
-          .collection('Students')
-          .doc(widget.studentDocID)
+          .collection('ParentCollection')
+          .doc(widget.parentDocID)
           .collection('TeachersChatCounter')
           .doc('c3cDX5ymHfITQ3AXcwSp')
           .set({'chatIndex': 0, 'docid': "c3cDX5ymHfITQ3AXcwSp"});

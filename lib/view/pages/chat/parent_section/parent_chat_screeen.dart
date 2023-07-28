@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/pages/chat/parent_section/teacher_messages/teachers_messages.dart';
 import 'package:dujo_kerala_application/view/pages/chat/student_section/search/search_teachers.dart';
-import 'package:dujo_kerala_application/view/pages/chat/student_section/teachers_message/teacher_messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
 
-class StudentChatScreen extends StatelessWidget {
-  const StudentChatScreen({super.key});
+class ParentChatScreen extends StatelessWidget {
+  const ParentChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class StudentChatScreen extends StatelessWidget {
                                 .doc(UserCredentialsController.batchId)
                                 .collection('classes')
                                 .doc(UserCredentialsController.classId)
-                                .collection('Students')
+                                .collection('ParentCollection')
                                 .doc(FirebaseAuth.instance.currentUser?.uid)
                                 .collection("TeachersChatCounter")
                                 .doc("c3cDX5ymHfITQ3AXcwSp")
@@ -98,7 +98,7 @@ class StudentChatScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            TeachersMessagesScreen(),
+            ParentTeachersMessagesScreen(),
             // const Icon(Icons.directions_transit, size: 350),
             const Icon(Icons.directions_car, size: 350),
           ],

@@ -4,11 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'chats/teachers_chats.dart';
+import 'chats/teachers_vs_parents.dart';
 
-class TeachersMessagesScreen extends StatelessWidget {
+// import 'chats/teachers_chats.dart';
 
-  TeachersMessagesScreen({ super.key});
+class ParentTeachersMessagesScreen extends StatelessWidget {
+
+  const ParentTeachersMessagesScreen({ super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class TeachersMessagesScreen extends StatelessWidget {
             .doc(UserCredentialsController.batchId)
             .collection('classes')
             .doc(UserCredentialsController.classId)
-            .collection('Students')
+            .collection('ParentCollection')
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .collection("TeacherChats")
             .snapshots(),
@@ -32,7 +34,7 @@ class TeachersMessagesScreen extends StatelessWidget {
                     height: 70,
                     child: ListTile(
                       onTap: () {
-                        Get.to(() => TeachersChatsScreen(
+                        Get.to(() => ParentTeachersChatsScreen(
                               
                               teacherName: snapshots.data!.docs[index]
                                   ['teacherName'],

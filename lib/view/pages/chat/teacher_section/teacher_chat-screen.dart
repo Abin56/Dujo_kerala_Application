@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/pages/chat/teacher_section/parents_message/parents_messages.dart';
 import 'package:dujo_kerala_application/view/pages/chat/teacher_section/student_message/students_messages.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class TeacherChatScreen extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(
-                icon: Column(
+                icon: ListView(
                   children: [
                     const Padding(
                       padding: EdgeInsets.only(right: 0),
@@ -33,28 +34,56 @@ class TeacherChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Students"),
+                        const Text("Students "),
                         StreamBuilder(
-                            stream: FirebaseFirestore.instance
-                                .collection('SchoolListCollection')
-                                .doc(UserCredentialsController.schoolId)
-                                .collection("Teachers")
-                                .doc(UserCredentialsController
-                                    .teacherModel!.docid)
-                                .collection('StudentChatCounter')
-                                .doc('F0Ikn1UouYIkqmRFKIpg')
-                                .snapshots(),
-                            builder: (context, messageIndex) {
-                              if (messageIndex.hasData) {
+                          stream: FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(UserCredentialsController.schoolId)
+                              .collection("Teachers")
+                              .doc(
+                                  UserCredentialsController.teacherModel?.docid)
+                              .collection('StudentChatCounter')
+                              .doc('F0Ikn1UouYIkqmRFKIpg')
+                              .snapshots(),
+                          builder: (context, messageIndex) {
+                            if (messageIndex.hasData) {
+                              if (messageIndex.data!.data() == null) {
+                                return const Text('');
+                              } else if (messageIndex.data!
+                                      .data()!['chatIndex'] <=
+                                  0) {
+                                FirebaseFirestore.instance
+                                    .collection('SchoolListCollection')
+                                    .doc(UserCredentialsController.schoolId)
+                                    .collection("Teachers")
+                                    .doc(UserCredentialsController
+                                        .teacherModel?.docid)
+                                    .collection('StudentChatCounter')
+                                    .doc('F0Ikn1UouYIkqmRFKIpg')
+                                    .update({'chatIndex': 0});
+                                return const CircleAvatar(
+                                  radius: 10,
+                                  backgroundColor: Colors.white,
+                                  child: Center(
+                                    child: Text(
+                                      '0',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                );
+                              } else {
                                 MessageCounter.studentMessageCounter =
-                                    messageIndex.data!.data()!['chatIndex'];
+                                    messageIndex.data?.data()?['chatIndex'];
                                 return Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: CircleAvatar(
-                                      radius: 10,
-                                      backgroundColor: Colors.white,
-                                      child: Center(
-                                          child: Text(
+                                    radius: 10,
+                                    backgroundColor: Colors.white,
+                                    child: Center(
+                                      child: Text(
                                         messageIndex.data!
                                             .data()!['chatIndex']
                                             .toString(),
@@ -62,20 +91,108 @@ class TeacherChatScreen extends StatelessWidget {
                                             color: Colors.black,
                                             fontSize: 10,
                                             fontWeight: FontWeight.bold),
-                                      ))),
-                                );
-                              } else {
-                                return const Center(
-                                  child: CircularProgressIndicator.adaptive(),
+                                      ),
+                                    ),
+                                  ),
                                 );
                               }
-                            }),
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              );
+                            }
+                          },
+                        ),
                       ],
                     )
                   ],
                 ),
               ),
-              const Tab(icon: Icon(Icons.groups_2), text: 'Parents'),
+                  Tab(
+                icon: ListView(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(right: 0),
+                      child: Icon(Icons.group),
+                    ),
+                    //////////////////////////////////////////////////////////////////////////////////////////////////
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Parents "),
+                        StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(UserCredentialsController.schoolId)
+                              .collection("Teachers")
+                              .doc(
+                                  UserCredentialsController.teacherModel?.docid)
+                              .collection('ParentChatCounter')
+                              .doc('F0Ikn1UouYIkqmRFKIpg')
+                              .snapshots(),
+                          builder: (context, messageIndex) {
+                            if (messageIndex.hasData) {
+                              if (messageIndex.data!.data() == null) {
+                                return const Text('');
+                              } else if (messageIndex.data!
+                                      .data()!['chatIndex'] <=
+                                  0) {
+                                FirebaseFirestore.instance
+                                    .collection('SchoolListCollection')
+                                    .doc(UserCredentialsController.schoolId)
+                                    .collection("Teachers")
+                                    .doc(UserCredentialsController
+                                        .teacherModel?.docid)
+                                    .collection('ParentChatCounter')
+                                    .doc('F0Ikn1UouYIkqmRFKIpg')
+                                    .update({'chatIndex': 0});
+                                return const CircleAvatar(
+                                  radius: 10,
+                                  backgroundColor: Colors.white,
+                                  child: Center(
+                                    child: Text(
+                                      '0',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                MessageCounter.parentMessageCounter =
+                                    messageIndex.data?.data()?['chatIndex'];
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: CircleAvatar(
+                                    radius: 10,
+                                    backgroundColor: Colors.white,
+                                    child: Center(
+                                      child: Text(
+                                        messageIndex.data!
+                                            .data()!['chatIndex']
+                                            .toString(),
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
               const Tab(
                   icon: Icon(
                     Icons.class_,
@@ -84,12 +201,11 @@ class TeacherChatScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            StudentsMessagesScreen(
-                ),
-            const Icon(Icons.directions_transit, size: 350),
-            const Icon(Icons.directions_car, size: 350),
+            StudentsMessagesScreen(),
+            ParentMessagesScreen(),
+            Icon(Icons.directions_car, size: 350),
           ],
         ),
       ),

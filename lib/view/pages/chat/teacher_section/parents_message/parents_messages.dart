@@ -5,17 +5,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../search_students/search_students.dart';
-import 'chats/students_chats.dart';
+import '../search_parents/search_parents.dart';
+import 'chats/parent_chats.dart';
+// import 'chats/students_chats.dart';
 
-class StudentsMessagesScreen extends StatelessWidget {
-  const StudentsMessagesScreen({super.key});
+class ParentMessagesScreen extends StatelessWidget {
+  const ParentMessagesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-                Future<void> _showSearch() async {
-    await showSearch(context: context, delegate: SearchStudentsForChat());
-  }
+    Future<void> _showSearch() async {
+      await showSearch(context: context, delegate: SearchParentsForChat());
+    }
+
     final size = MediaQuery.of(context).size;
     return StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -23,7 +25,7 @@ class StudentsMessagesScreen extends StatelessWidget {
             .doc(UserCredentialsController.schoolId)
             .collection('Teachers')
             .doc(FirebaseAuth.instance.currentUser!.uid)
-            .collection("StudentChats")
+            .collection("ParentChats")
             .snapshots(),
         builder: (context, snapshots) {
           if (snapshots.hasData) {
@@ -37,18 +39,18 @@ class StudentsMessagesScreen extends StatelessWidget {
                           height: 70,
                           child: ListTile(
                             onTap: () {
-                              Get.to(() => StudentsChatsScreen(
-                                    studentName: snapshots.data!.docs[index]
-                                        ['studentname'],
-                                    studentDocID: snapshots.data!.docs[index]
+                              Get.to(() => ParentsChatsScreen(
+                                    parentDocID: snapshots.data!.docs[index]
                                         ['docid'],
+                                    parentName: snapshots.data!.docs[index]
+                                        ['parentname'],
                                   ));
                             },
                             leading: const CircleAvatar(
                               radius: 30,
                             ),
                             title: Text(
-                                snapshots.data!.docs[index]['studentname'],
+                                snapshots.data!.docs[index]['parentname'],
                                 style: const TextStyle(color: Colors.black)),
                             contentPadding: const EdgeInsetsDirectional.all(1),
                             subtitle: const Text(
@@ -95,18 +97,22 @@ class StudentsMessagesScreen extends StatelessWidget {
                         },
                         child: Container(
                           decoration: const BoxDecoration(
-                            borderRadius:BorderRadius.all(Radius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
                               color: Color.fromARGB(255, 232, 224, 224)),
                           height: 50,
                           width: 200,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children:  [
+                              children: [
                                 const Icon(Icons.search),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: GooglePoppinsWidgets(text: 'Search Students', fontsize: 15,),
+                                  child: GooglePoppinsWidgets(
+                                    text: 'Search Parents',
+                                    fontsize: 15,
+                                  ),
                                 ),
                               ],
                             ),
