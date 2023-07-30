@@ -7,9 +7,11 @@ import '../../colors/colors.dart';
 import 'all_class_data_show.dart';
 
 class AllClassTestPage extends StatelessWidget {
-  AllClassTestPage({super.key});
+  AllClassTestPage({super.key, required this.pageNameFrom});
   final AllClassListShowController allClassListShowController =
       Get.put(AllClassListShowController());
+
+  final String pageNameFrom;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class AllClassTestPage extends StatelessWidget {
                               allClassListShowController
                                   .allClassTestList[index];
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => AllClassTestShowPage()));
+                              builder: (context) => AllClassTestShowPage(navigationPageName: pageNameFrom,)));
                         },
                       ),
                     );

@@ -9,9 +9,10 @@ import '../../constant/responsive.dart';
 import '../../constant/sizes/sizes.dart';
 
 class AllClassTestShowPage extends StatelessWidget {
-  AllClassTestShowPage({super.key});
+  AllClassTestShowPage({super.key, required this.navigationPageName});
   final AllClassListShowController allClassListShowController =
       Get.put(AllClassListShowController());
+  final String navigationPageName;
 
   @override
   Widget build(BuildContext context) {
@@ -122,64 +123,125 @@ class AllClassTestShowPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ListView.builder(
-                  controller: ScrollController(),
-                  shrinkWrap: true,
-                  itemCount: allClassListShowController
-                          .classTestModel?.studentDetails.length ??
-                      0,
-                  itemBuilder: (context, index) {
-                    if (allClassListShowController
-                            .classTestModel?.studentDetails[index].studentId ==
-                        UserCredentialsController.studentModel?.docid) {
-                      final num? mark = allClassListShowController
-                          .classTestModel?.studentDetails[index].mark;
+                    controller: ScrollController(),
+                    shrinkWrap: true,
+                    itemCount: allClassListShowController
+                            .classTestModel?.studentDetails.length ??
+                        0,
+                    itemBuilder: (context, index) {
+                      String value = "";
+                      if (navigationPageName == "student") {
+                        if (allClassListShowController.classTestModel
+                                ?.studentDetails[index].studentId ==
+                            UserCredentialsController.studentModel?.docid) {
+                          final num? mark = allClassListShowController
+                              .classTestModel?.studentDetails[index].mark;
 
-                      final String value =
-                          (mark == -1 ? "Mark not entered" : mark).toString();
+                          value = (mark == -1 ? "Mark not entered" : mark)
+                              .toString();
 
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Flexible(
-                            child: FutureBuilder(
-                                future:
-                                    allClassListShowController.getStudentData(
-                                  studentId: allClassListShowController
-                                          .classTestModel
-                                          ?.studentDetails[index]
-                                          .studentId ??
-                                      "",
-                                ),
-                                builder: (
-                                  context,
-                                  snapshot,
-                                ) {
-                                  return SizedBox(
-                                    width: ResponsiveApp.mq.size.width / 2,
-                                    child: Text(
-                                      snapshot.data?.studentName ?? "",
-                                      style: const TextStyle(fontSize: 19),
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Flexible(
+                                child: FutureBuilder(
+                                    future: allClassListShowController
+                                        .getStudentData(
+                                      studentId: allClassListShowController
+                                              .classTestModel
+                                              ?.studentDetails[index]
+                                              .studentId ??
+                                          "",
                                     ),
-                                  );
-                                }),
-                          ),
-                          Flexible(
-                            child: SizedBox(
-                              width: 80,
-                              height: 50,
-                              child: Text(
-                                (value).toString(),
-                                style: const TextStyle(fontSize: 19),
+                                    builder: (
+                                      context,
+                                      snapshot,
+                                    ) {
+                                      return SizedBox(
+                                        width: ResponsiveApp.mq.size.width / 2,
+                                        child: Text(
+                                          snapshot.data?.studentName ?? "",
+                                          style: const TextStyle(fontSize: 19),
+                                        ),
+                                      );
+                                    }),
                               ),
-                            ),
-                          )
-                        ],
-                      );
-                    } else {
+                              Flexible(
+                                child: SizedBox(
+                                  width: 80,
+                                  child: Text(
+                                    (value).toString(),
+                                    style: const TextStyle(fontSize: 19),
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      } else if (navigationPageName == "parent") {
+                        if (allClassListShowController.classTestModel
+                                ?.studentDetails[index].studentId ==
+                            UserCredentialsController.parentModel?.studentID) {
+                          final num? mark = allClassListShowController
+                              .classTestModel?.studentDetails[index].mark;
+
+                          value = (mark == -1 ? "Mark not entered" : mark)
+                              .toString();
+
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Flexible(
+                                child: FutureBuilder(
+                                    future: allClassListShowController
+                                        .getStudentData(
+                                      studentId: allClassListShowController
+                                              .classTestModel
+                                              ?.studentDetails[index]
+                                              .studentId ??
+                                          "",
+                                    ),
+                                    builder: (
+                                      context,
+                                      snapshot,
+                                    ) {
+                                      if (snapshot.hasData) {
+                                        return SizedBox(
+                                          width:
+                                              ResponsiveApp.mq.size.width / 2,
+                                          child: Text(
+                                            snapshot.data?.studentName ?? "",
+                                            style:
+                                                const TextStyle(fontSize: 19),
+                                          ),
+                                        );
+                                      } else if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return circularProgressIndicatotWidget;
+                                      } else {
+                                        return const SizedBox();
+                                      }
+                                    }),
+                              ),
+                              Flexible(
+                                child: SizedBox(
+                                  width: 80,
+                                  child: Text(
+                                    (value).toString(),
+                                    style: const TextStyle(fontSize: 19),
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        }
+                      } else {
+                        return const SizedBox();
+                      }
                       return const SizedBox();
-                    }
-                  },
-                ),
+                    }),
               ),
             ),
           ],

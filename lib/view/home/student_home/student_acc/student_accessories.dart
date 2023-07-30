@@ -75,7 +75,9 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 
       SchoolLevelMeetingPage(), //Meetings
       BusRouteListPage(),
-      AllClassTestPage() //class test page
+      AllClassTestPage(
+        pageNameFrom: "student",
+      ) //class test page
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
