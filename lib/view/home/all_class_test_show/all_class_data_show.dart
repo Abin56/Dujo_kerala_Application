@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/all_class_test_show/all_class_test_show_controller.dart';
+import '../../../controllers/userCredentials/user_credentials.dart';
+import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
 import '../../constant/sizes/sizes.dart';
 
@@ -24,7 +26,59 @@ class AllClassTestShowPage extends StatelessWidget {
           children: <Widget>[
             //Test Details
 
-            // TestDataWidget(size: size),
+            Container(
+              height: size.height / 2.2,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: cgrey1,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: ListView(
+                controller: ScrollController(),
+                shrinkWrap: true,
+                children: [
+                  kHeight10,
+                  const Text(
+                    "Test Details",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  kHeight30,
+                  AllClassTestDetailsWidget(
+                    testName: "Test Name",
+                    testDetails:
+                        allClassListShowController.classTestModel?.testName ??
+                            "",
+                  ),
+                  kHeight10,
+                  AllClassTestDetailsWidget(
+                    testName: "Subject Name",
+                    testDetails: allClassListShowController
+                            .classTestModel?.subjectName ??
+                        "",
+                  ),
+                  kHeight10,
+                  AllClassTestDetailsWidget(
+                      testName: "Date",
+                      testDetails: timeStampToDateFormat(
+                          allClassListShowController.classTestModel?.date ??
+                              -1)),
+                  kHeight10,
+                  AllClassTestDetailsWidget(
+                      testName: "Time",
+                      testDetails:
+                          allClassListShowController.classTestModel?.time ??
+                              ""),
+                  kHeight10,
+                  AllClassTestDetailsWidget(
+                    testName: "Description",
+                    testDetails: allClassListShowController
+                            .classTestModel?.description ??
+                        "",
+                  ),
+                ],
+              ),
+            ),
             //Student Score
             kHeight20,
             DecoratedBox(
@@ -43,13 +97,17 @@ class AllClassTestShowPage extends StatelessWidget {
                               style: TextStyle(fontSize: 20),
                             ))),
                     Flexible(
-                        child: SizedBox(
-                            width: 80,
-                            height: 50,
-                            child: Text((allClassListShowController
-                                        .classTestModel?.totalMark ??
-                                    "")
-                                .toString())))
+                      child: SizedBox(
+                        width: 80,
+                        child: Text(
+                          (allClassListShowController
+                                      .classTestModel?.totalMark ??
+                                  "")
+                              .toString(),
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -62,56 +120,60 @@ class AllClassTestShowPage extends StatelessWidget {
                   color: cgrey1, borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: ListView.separated(
+                child: ListView.builder(
                   controller: ScrollController(),
                   shrinkWrap: true,
                   itemCount: allClassListShowController
                           .classTestModel?.studentDetails.length ??
                       0,
                   itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Flexible(
-                          child: FutureBuilder(
-                              future: allClassListShowController.getStudentData(
-                                studentId: allClassListShowController
-                                        .classTestModel
-                                        ?.studentDetails[index]
-                                        .studentId ??
-                                    "",
-                              ),
-                              builder: (
-                                context,
-                                snapshot,
-                              ) {
-                                return SizedBox(
-                                  width: size.width / 2,
-                                  child: Text(
-                                    snapshot.data?.studentName ?? "",
-                                    style: const TextStyle(fontSize: 19),
-                                  ),
-                                );
-                              }),
-                        ),
-                        Flexible(
-                          child: SizedBox(
-                            width: 80,
-                            height: 50,
-                            child: Text(
-                              (allClassListShowController.classTestModel
-                                          ?.studentDetails[index].mark ??
-                                      "")
-                                  .toString(),
-                              style: const TextStyle(fontSize: 19),
-                            ),
+                    if (allClassListShowController
+                            .classTestModel?.studentDetails[index].studentId ==
+                        UserCredentialsController.studentModel?.docid) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Flexible(
+                            child: FutureBuilder(
+                                future:
+                                    allClassListShowController.getStudentData(
+                                  studentId: allClassListShowController
+                                          .classTestModel
+                                          ?.studentDetails[index]
+                                          .studentId ??
+                                      "",
+                                ),
+                                builder: (
+                                  context,
+                                  snapshot,
+                                ) {
+                                  return SizedBox(
+                                    width: size.width / 2,
+                                    child: Text(
+                                      snapshot.data?.studentName ?? "",
+                                      style: const TextStyle(fontSize: 19),
+                                    ),
+                                  );
+                                }),
                           ),
-                        )
-                      ],
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return kHeight20;
+                          Flexible(
+                            child: SizedBox(
+                              width: 80,
+                              height: 50,
+                              child: Text(
+                                (allClassListShowController.classTestModel
+                                            ?.studentDetails[index].mark ??
+                                        "")
+                                    .toString(),
+                                style: const TextStyle(fontSize: 19),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
                   },
                 ),
               ),
@@ -119,6 +181,39 @@ class AllClassTestShowPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AllClassTestDetailsWidget extends StatelessWidget {
+  const AllClassTestDetailsWidget({
+    super.key,
+    required this.testName,
+    required this.testDetails,
+  });
+  final String testName;
+  final String testDetails;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        Flexible(
+            child: SizedBox(
+                width: 200,
+                child: Text(
+                  testName,
+                  style: const TextStyle(fontSize: 18),
+                ))),
+        const Flexible(child: Text(":")),
+        SizedBox(
+            width: 200,
+            child: Text(
+              testDetails,
+              style: const TextStyle(fontSize: 15),
+            )),
+      ],
     );
   }
 }

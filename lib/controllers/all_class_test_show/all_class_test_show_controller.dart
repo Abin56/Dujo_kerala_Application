@@ -27,9 +27,10 @@ class AllClassListShowController {
               .collection("ClassTest")
               .get();
       isLoading.value = false;
-      allClassTestList.value = allClassTest.docs
-          .map((e) => ClassTestModel.fromMap(e.data()))
-          .toList();
+      allClassTestList.value = allClassTest.docs.map((e) {
+        return ClassTestModel.fromMap(e.data());
+      }).toList();
+
       allClassTestList.refresh();
     } catch (e) {
       isLoading.value = false;
