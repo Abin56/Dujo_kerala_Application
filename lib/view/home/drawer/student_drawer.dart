@@ -17,7 +17,6 @@ import '../../../utils/utils.dart';
 import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
-import '../all_class_test_show/all_class_list_show.dart';
 
 class StudentsHeaderDrawer extends StatelessWidget {
   const StudentsHeaderDrawer({Key? key}) : super(key: key);
@@ -205,10 +204,6 @@ Widget MyDrawerList(context) {
         MenuItem(8, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
-        }),
-        MenuItem(9, 'assets/images/attendance.png', 'Class Test'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(AllClassTestPage());
         }),
 
         kHeight10,

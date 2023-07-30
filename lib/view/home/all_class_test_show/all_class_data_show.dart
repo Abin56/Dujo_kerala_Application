@@ -5,6 +5,7 @@ import '../../../controllers/all_class_test_show/all_class_test_show_controller.
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
+import '../../constant/responsive.dart';
 import '../../constant/sizes/sizes.dart';
 
 class AllClassTestShowPage extends StatelessWidget {
@@ -14,7 +15,10 @@ class AllClassTestShowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final num? totalMark = allClassListShowController.classTestModel?.totalMark;
+
+    final String totalMarkvalue =
+        (totalMark == -1 ? "Mark not entered" : totalMark).toString();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: adminePrimayColor,
@@ -27,7 +31,7 @@ class AllClassTestShowPage extends StatelessWidget {
             //Test Details
 
             Container(
-              height: size.height / 2.2,
+              height: ResponsiveApp.mq.size.height / 2.2,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: cgrey1,
@@ -91,7 +95,7 @@ class AllClassTestShowPage extends StatelessWidget {
                   children: <Widget>[
                     Flexible(
                         child: SizedBox(
-                            width: size.width / 2,
+                            width: ResponsiveApp.mq.size.width / 2,
                             child: const Text(
                               "Out Of Mark",
                               style: TextStyle(fontSize: 20),
@@ -100,10 +104,7 @@ class AllClassTestShowPage extends StatelessWidget {
                       child: SizedBox(
                         width: 80,
                         child: Text(
-                          (allClassListShowController
-                                      .classTestModel?.totalMark ??
-                                  "")
-                              .toString(),
+                          (totalMarkvalue).toString(),
                           style: const TextStyle(fontSize: 20),
                         ),
                       ),
@@ -130,6 +131,12 @@ class AllClassTestShowPage extends StatelessWidget {
                     if (allClassListShowController
                             .classTestModel?.studentDetails[index].studentId ==
                         UserCredentialsController.studentModel?.docid) {
+                      final num? mark = allClassListShowController
+                          .classTestModel?.studentDetails[index].mark;
+
+                      final String value =
+                          (mark == -1 ? "Mark not entered" : mark).toString();
+
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -148,7 +155,7 @@ class AllClassTestShowPage extends StatelessWidget {
                                   snapshot,
                                 ) {
                                   return SizedBox(
-                                    width: size.width / 2,
+                                    width: ResponsiveApp.mq.size.width / 2,
                                     child: Text(
                                       snapshot.data?.studentName ?? "",
                                       style: const TextStyle(fontSize: 19),
@@ -161,10 +168,7 @@ class AllClassTestShowPage extends StatelessWidget {
                               width: 80,
                               height: 50,
                               child: Text(
-                                (allClassListShowController.classTestModel
-                                            ?.studentDetails[index].mark ??
-                                        "")
-                                    .toString(),
+                                (value).toString(),
                                 style: const TextStyle(fontSize: 19),
                               ),
                             ),
@@ -200,12 +204,14 @@ class AllClassTestDetailsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Flexible(
-            child: SizedBox(
-                width: 200,
-                child: Text(
-                  testName,
-                  style: const TextStyle(fontSize: 18),
-                ))),
+          child: SizedBox(
+            width: 200,
+            child: Text(
+              testName,
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
         const Flexible(child: Text(":")),
         SizedBox(
             width: 200,

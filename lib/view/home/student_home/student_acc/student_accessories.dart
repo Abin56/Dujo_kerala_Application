@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
+import 'package:dujo_kerala_application/view/home/all_class_test_show/all_class_list_show.dart';
 import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
@@ -45,34 +46,26 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Attendence
 
-      const SS(),//Time table
+      const SS(), //Time table
 
-      const StudentChatScreen(),// Chats
-
+      const StudentChatScreen(), // Chats
 
       const ViewHomeWorks(), // Home Works
-      
+
       StudentSubjectHome(), //Subjects
 
       TeacherSubjectWiseList(), //Teachers
 
-
-
       const UserExmNotifications(), //Exam
-
-      
-
 
       UsersSelectExamLevelScreen(
           classId: UserCredentialsController.classId!,
-          studentID: UserCredentialsController.studentModel!.docid),////// exam result
+          studentID:
+              UserCredentialsController.studentModel!.docid), ////// exam result
 
-NoticePage(), //Notice
+      NoticePage(), //Notice
 
       const EventList(), //Events
-
-
-
 
       ProgressReportListViewScreen(
           schoolId: UserCredentialsController.schoolId!,
@@ -81,8 +74,8 @@ NoticePage(), //Notice
           batchId: UserCredentialsController.batchId!), //Progress Report
 
       SchoolLevelMeetingPage(), //Meetings
-      
-       BusRouteListPage(),   /////// all bus
+      BusRouteListPage(),
+      AllClassTestPage() //class test page
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -109,7 +102,7 @@ NoticePage(), //Notice
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(()=>screenNavigation[index]);
+                        Get.to(() => screenNavigation[index]);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -149,7 +142,7 @@ NoticePage(), //Notice
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600),
-                                  textAlign:TextAlign.center,
+                              textAlign: TextAlign.center,
                             )
                           ],
                         ),
@@ -170,43 +163,31 @@ List<String> _acc_text = [
   'Attendance'.tr,
   'Time Table'.tr,
   'Chats'.tr,
-
   'HomeWorks'.tr,
   'Subjects'.tr,
-
   'Teachers'.tr,
   'Exams'.tr,
-
   'Exam Results'.tr,
-  
   'Notices'.tr,
-
   'Events'.tr,
   'Progress Report'.tr,
-
   'Meetings'.tr,
-
   'Bus Route'.tr,
-  
+  'Class Test'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/library.png',
-    'assets/images/chat.png',
-
+  'assets/images/chat.png',
   'assets/images/homework.png',
   'assets/images/subjects.png',
-
   'assets/images/teachers.png',
   'assets/images/exam.png',
-
   'assets/images/exmresult1.png',
   'assets/images/notices.png',
-
   'assets/images/activity.png',
   'assets/images/progressreport.png',
-
   'assets/images/meetings.png',
-
-  'assets/images/bus.png'
+  'assets/images/bus.png',
+  'assets/images/examtest.png'
 ];
