@@ -112,7 +112,7 @@ class TestDataWidget extends StatelessWidget {
             ),
             TextButton(
               onPressed: () async {
-                if (textEditingController.text.isEmpty) {
+                if (textEditingController.text.isNotEmpty) {
                   Navigator.pop(context);
                   await classShowController.updateStudentsData(
                       key: key, value: textEditingController.text);

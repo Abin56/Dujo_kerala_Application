@@ -78,19 +78,12 @@ class ClassTestPage extends StatelessWidget {
                         TestTextFormWidget(
                           textEditingController:
                               classTestController.testNameController,
-                          voidCallback: (title) {
-                            classTestController.testNameController.text = title;
-                          },
                           icons: Icons.title,
                           label: "Test Name",
                         ),
                         TestTextFormWidget(
                           textEditingController:
                               classTestController.descriptionController,
-                          voidCallback: (description) {
-                            classTestController.descriptionController.text =
-                                description;
-                          },
                           icons: Icons.note,
                           label: "Description",
                         ),

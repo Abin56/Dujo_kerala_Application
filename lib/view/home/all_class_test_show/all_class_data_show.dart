@@ -73,15 +73,26 @@ class AllClassTestShowPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Flexible(
-                          child: SizedBox(
-                            width: size.width / 2,
-                            child: Text(
-                              allClassListShowController.classTestModel
-                                      ?.studentDetails[index].studentId ??
-                                  "",
-                              style: const TextStyle(fontSize: 19),
-                            ),
-                          ),
+                          child: FutureBuilder(
+                              future: allClassListShowController.getStudentData(
+                                studentId: allClassListShowController
+                                        .classTestModel
+                                        ?.studentDetails[index]
+                                        .studentId ??
+                                    "",
+                              ),
+                              builder: (
+                                context,
+                                snapshot,
+                              ) {
+                                return SizedBox(
+                                  width: size.width / 2,
+                                  child: Text(
+                                    snapshot.data?.studentName ?? "",
+                                    style: const TextStyle(fontSize: 19),
+                                  ),
+                                );
+                              }),
                         ),
                         Flexible(
                           child: SizedBox(

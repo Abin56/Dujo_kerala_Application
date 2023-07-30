@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
+import 'package:dujo_kerala_application/view/constant/responsive.dart';
 import 'package:dujo_kerala_application/view/language/language.dart';
 import 'package:dujo_kerala_application/view/language/select_language/select_language.dart';
 import 'package:dujo_kerala_application/view/pages/chat_gpt/providers/chats_provider.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
                     return oldState is AuthInitialState;
                   },
                   builder: (context, state) {
+                    ResponsiveApp.serMq(context);
                     if (state is AuthLoggedInState) {
                       if (SharedPreferencesHelper.getString("langCode") !=
                           null) {
@@ -114,15 +116,13 @@ class MyApp extends StatelessWidget {
 ////
 
 checkingSchoolActivate(BuildContext context) async {
-
   final checking = await FirebaseFirestore.instance
       .collection('SchoolListCollection')
       .doc(UserCredentialsController.schoolId)
       .get();
 
   if (checking.data()!['deactive'] == true) {
-    
-     Get.offAll(() => const DujoLoginScren());
+    Get.offAll(() => const DujoLoginScren());
     // ignore: use_build_context_synchronously
     return showDialog(
       context: context,
@@ -144,7 +144,6 @@ checkingSchoolActivate(BuildContext context) async {
                   UserCredentialsController.clearUserCredentials();
                   Get.offAll(() => const DujoLoginScren());
                 });
-   
               },
             ),
           ],

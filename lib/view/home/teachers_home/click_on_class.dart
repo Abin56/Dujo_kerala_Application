@@ -13,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
+import '../../constant/responsive.dart';
 import '../../pages/Attentence/select_period.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/homework.dart';
@@ -110,8 +111,8 @@ class ClickOnClasss extends StatelessWidget {
       ClassTestPage(),
     ];
     int columnCount = 2;
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    double w = ResponsiveApp.mq.size.width;
+    double h = ResponsiveApp.mq.size.height;
     log('Teacher class iddddddd$classID');
     return Scaffold(
       appBar: AppBar(
