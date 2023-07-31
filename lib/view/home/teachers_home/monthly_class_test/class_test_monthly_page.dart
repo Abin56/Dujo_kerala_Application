@@ -40,7 +40,7 @@ class ClassMonthlyTestPage extends StatelessWidget {
                 color: adminePrimayColor,
               ),
               const Text(
-                'Create Class Test',
+                'Create Monthly Test',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,

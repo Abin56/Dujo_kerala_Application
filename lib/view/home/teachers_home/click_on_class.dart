@@ -18,15 +18,14 @@ import '../../pages/Attentence/select_period.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/homework.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
+import '../../pages/chat/teacher_section/teacher_chat-screen.dart';
 import '../../pages/exam_results/select_exam.dart';
-import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../student_home/time_table/ss.dart';
 import 'class_test/class_test_page.dart';
 import 'monthly_class_test/class_test_monthly_page.dart';
-import 'class_test/class_test_page.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -71,7 +70,7 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: classID), //Attendance Book
-
+      const TeacherChatScreen(),// Chats
       const UserExmNotifications(), //Exam
       SelectExamLevelScreen(classId: classID), //exam result upload
       const SS(), //TimeTable
@@ -358,6 +357,7 @@ var _acc_images = [
 var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
+    'assets/images/chat.png',
   'assets/images/exam.png',
   'assets/images/exmresult1.png',
   'assets/images/library.png',
@@ -370,10 +370,12 @@ var hasDataImages = [
   'assets/images/recorded_classes.png',
   'assets/images/bus.png',
   'assets/images/exmresult1.png',
+    'assets/images/exmresult1.png',
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,
   'Attendance Book'.tr,
+    'Chats'.tr,
   'Exams'.tr,
   'Exam Results'.tr,
   'Time Table'.tr,
