@@ -25,6 +25,7 @@ import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../student_home/time_table/ss.dart';
 import 'class_test/class_test_page.dart';
+import 'monthly_class_test/class_test_monthly_page.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -107,8 +108,9 @@ class ClickOnClasss extends StatelessWidget {
       // Meetings
       RecordedClassMainPage(), // recorded class
 
-      BusRouteListPage(), /////// all bus
+      BusRouteListPage(), 
       ClassTestPage(),
+      ClassMonthlyTestPage(), //class test monthly
     ];
     int columnCount = 2;
     double w = ResponsiveApp.mq.size.width;
@@ -367,6 +369,7 @@ var hasDataImages = [
   'assets/images/recorded_classes.png',
   'assets/images/bus.png',
   'assets/images/exmresult1.png',
+  'assets/images/exmresult1.png',
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,
@@ -383,4 +386,5 @@ List<String> hasDataText = [
   'Recorded Classes'.tr,
   'Bus Route'.tr,
   'Class Test'.tr,
+  'Monthly Class Test'.tr,
 ];

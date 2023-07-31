@@ -17,6 +17,7 @@ import '../../../pages/Subject/subject_display.dart';
 import '../../../pages/chat/parent_section/parent_chat_screeen.dart';
 import '../../../pages/exam_results/for_users/select_examlevel_uses.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
+import '../../all_class_test_monthly_show/all_class_list_monthly_show.dart';
 import '../../all_class_test_show/all_class_list_show.dart';
 import '../../events/event_list.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
@@ -81,7 +82,10 @@ class ParentAccessories extends StatelessWidget {
       const FeesPage(),
       AllClassTestPage(
         pageNameFrom: "parent",
-      ) //class test page
+      ), //class test page
+      AllClassTestMonthlyPage(
+        pageNameFrom: "parent",
+      ),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -182,6 +186,7 @@ List<String> _acc_text = [
   'Bus Route'.tr,
   'Fess & Bills'.tr,
   'Class Test'.tr,
+  'Class Test Monthly'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -199,5 +204,6 @@ var _acc_images = [
   'assets/images/teachers.png',
   'assets/images/bus.png',
   'assets/images/feesandbills.png',
+  'assets/images/examtest.png',
   'assets/images/examtest.png',
 ];

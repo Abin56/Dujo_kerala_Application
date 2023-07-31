@@ -6,12 +6,15 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/teacher_home/class_test_controller/class_test_controller.dart';
+import '../../../controllers/teacher_home/class_test_controller/monthly_controllers/class_test_monthly_controller.dart';
 import 'click_on_class.dart';
 
 class TeacherClassListView extends StatelessWidget {
   TeacherClassListView({super.key});
   final ClassTestController classTestController =
       Get.put(ClassTestController());
+  final ClassTestMonthlyController classTestMonthlyController =
+      Get.put(ClassTestMonthlyController());
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +54,8 @@ class TeacherClassListView extends StatelessWidget {
                             onTap: () {
                               //this data add to classId for class test creation
                               classTestController.classId =
+                                  snapshot.data?.docs[index]['docid'] ?? "";
+                              classTestMonthlyController.classId =
                                   snapshot.data?.docs[index]['docid'] ?? "";
                               Get.to(() => ClickOnClasss(
                                     className: snapshot.data?.docs[index]

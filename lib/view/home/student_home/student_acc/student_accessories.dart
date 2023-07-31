@@ -23,6 +23,7 @@ import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
 import '../../../pages/chat/student_section/student_chat_screen.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
+import '../../all_class_test_monthly_show/all_class_list_monthly_show.dart';
 import '../../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 
 class StudentAccessories extends StatefulWidget {
@@ -77,7 +78,10 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
       BusRouteListPage(),
       AllClassTestPage(
         pageNameFrom: "student",
-      ) //class test page
+      ), //class test page
+      AllClassTestMonthlyPage(
+        pageNameFrom: "student",
+      ),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -176,6 +180,7 @@ List<String> _acc_text = [
   'Meetings'.tr,
   'Bus Route'.tr,
   'Class Test'.tr,
+  'Class Test Monthly'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -191,5 +196,6 @@ var _acc_images = [
   'assets/images/progressreport.png',
   'assets/images/meetings.png',
   'assets/images/bus.png',
-  'assets/images/examtest.png'
+  'assets/images/examtest.png',
+  'assets/images/examtest.png',
 ];
