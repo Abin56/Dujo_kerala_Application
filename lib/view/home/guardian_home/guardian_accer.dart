@@ -60,15 +60,15 @@ class GuardianAccessories extends StatelessWidget {
 
       const EventList(), //Events
 
-      ProgressReportListViewScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          studentId: UserCredentialsController.guardianModel!.studentID!,
-          batchId: UserCredentialsController.batchId!), //Progress Report
+      // ProgressReportListViewScreen(
+      //     schoolId: UserCredentialsController.schoolId!,
+      //     classID: UserCredentialsController.classId!,
+      //     studentId: UserCredentialsController.guardianModel!.studentID!,
+      //     batchId: UserCredentialsController.batchId!), //Progress Report
 
       StudentSubjectHome(), //Subjects
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue: ''), //Teachers
 
      BusRouteListPage(),   /////// all bus
 
@@ -162,7 +162,7 @@ List<String> _acc_text = [
   'Exams'.tr,
   'Exam Results'.tr,
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
   'Subjects'.tr,
   'Teachers'.tr,
   'Bus Route'.tr,
@@ -177,8 +177,8 @@ var _acc_images = [
   'assets/images/exam.png',
    'assets/images/exmresult1.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
-  'assets/images/bus.png'
+  'assets/images/bus.png',
 ];

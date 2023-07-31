@@ -26,6 +26,7 @@ import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../student_home/time_table/ss.dart';
 import 'class_test/class_test_page.dart';
 import 'monthly_class_test/class_test_monthly_page.dart';
+import 'class_test/class_test_page.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -98,17 +99,17 @@ class ClickOnClasss extends StatelessWidget {
         body: const SchoolLevelPage(),
       ),
       // Events
-      ViewExamsForProgressreport(
-          batchId: UserCredentialsController.batchId!,
-          classID: classID,
-          schooilID:
-              UserCredentialsController.schoolId!), //Progress Report view
+      // ViewExamsForProgressreport(
+      //     batchId: UserCredentialsController.batchId!,
+      //     classID: classID,
+      //     schooilID:
+      //         UserCredentialsController.schoolId!), //Progress Report view
       TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
       RecordedClassMainPage(), // recorded class
 
-      BusRouteListPage(), 
+      BusRouteListPage(),
       ClassTestPage(),
       ClassMonthlyTestPage(), //class test monthly
     ];
@@ -363,12 +364,11 @@ var hasDataImages = [
   'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/meetings.png',
   'assets/images/recorded_classes.png',
   'assets/images/bus.png',
-  'assets/images/exmresult1.png',
   'assets/images/exmresult1.png',
 ];
 List<String> hasDataText = [
@@ -380,7 +380,7 @@ List<String> hasDataText = [
   'HomeWorks'.tr,
   'Notices'.tr,
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
   'Study Materials'.tr,
   'Meetings'.tr,
   'Recorded Classes'.tr,

@@ -55,7 +55,7 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 
       StudentSubjectHome(), //Subjects
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue:'student'), //Teachers
 
       const UserExmNotifications(), //Exam
 
@@ -68,11 +68,14 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 
       const EventList(), //Events
 
-      ProgressReportListViewScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          studentId: FirebaseAuth.instance.currentUser!.uid,
-          batchId: UserCredentialsController.batchId!), //Progress Report
+
+
+
+      // ProgressReportListViewScreen(
+      //     schoolId: UserCredentialsController.schoolId!,
+      //     classID: UserCredentialsController.classId!,
+      //     studentId: FirebaseAuth.instance.currentUser!.uid,
+      //     batchId: UserCredentialsController.batchId!), //Progress Report
 
       SchoolLevelMeetingPage(), //Meetings
       BusRouteListPage(),
@@ -176,7 +179,7 @@ List<String> _acc_text = [
   'Exam Results'.tr,
   'Notices'.tr,
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
   'Meetings'.tr,
   'Bus Route'.tr,
   'Class Test'.tr,
@@ -193,7 +196,7 @@ var _acc_images = [
   'assets/images/exmresult1.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
   'assets/images/meetings.png',
   'assets/images/bus.png',
   'assets/images/examtest.png',

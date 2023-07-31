@@ -67,15 +67,15 @@ class ParentAccessories extends StatelessWidget {
 
       const EventList(), //Events
 
-      ProgressReportListViewScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          studentId: UserCredentialsController.parentModel?.studentID ?? "",
-          batchId: UserCredentialsController.batchId!), //Progress Report
+      // ProgressReportListViewScreen(
+      //     schoolId: UserCredentialsController.schoolId!,
+      //     classID: UserCredentialsController.classId!,
+      //     studentId: UserCredentialsController.parentModel?.studentID ?? "",
+      //     batchId: UserCredentialsController.batchId!), //Progress Report
 
       StudentSubjectHome(), //Subjects
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue:'parent'), //Teachers
 
       BusRouteListPage(),
       /////// all bus
@@ -180,7 +180,7 @@ List<String> _acc_text = [
   'HomeWorks',
   'Notices',
   'Events',
-  'Progress Report',
+  // 'Progress Report',
   'Subjects',
   'Teachers',
   'Bus Route'.tr,
@@ -199,7 +199,7 @@ var _acc_images = [
   'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
   'assets/images/bus.png',

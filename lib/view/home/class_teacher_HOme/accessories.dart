@@ -75,13 +75,13 @@ class ClassTeacherAccessories extends StatelessWidget {
 
       const EventList(), //Events
 
-      CreateExamNameScreen(
-          schooilID: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          teacherId: UserCredentialsController.teacherModel!.docid!,
-          batchId: UserCredentialsController.batchId!), //Progress Report
+      // CreateExamNameScreen(
+      //     schooilID: UserCredentialsController.schoolId!,
+      //     classID: UserCredentialsController.classId!,
+      //     teacherId: UserCredentialsController.teacherModel!.docid!,
+      //     batchId: UserCredentialsController.batchId!), //Progress Report
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue: ''), //Teachers
 
       BusRouteListPage(), /////// all bus
     ];
@@ -186,7 +186,7 @@ List<String> _acc_text = [
   'Notices'.tr,
 
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
 
   'Teachers'.tr,
 
@@ -212,7 +212,7 @@ var _acc_images = [
   'assets/images/notices.png',
   'assets/images/activity.png',
 
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
 
   'assets/images/teachers.png',
   'assets/images/bus.png'

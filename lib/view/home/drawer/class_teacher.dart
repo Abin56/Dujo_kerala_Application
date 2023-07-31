@@ -5,11 +5,8 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/class_teacher_HOme/class_teacher_mainhome.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
-import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
-import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:dujo_kerala_application/widgets/drop_down/select_class_classteacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +18,7 @@ import '../../../helper/shared_pref_helper.dart';
 import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/select_period.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
+import '../../pages/progress_Report/view_report/for_teachers/select_exam.dart';
 import '../general_instructions/general_instructions.dart';
 import '../student_home/time_table/ss.dart';
 
@@ -250,16 +248,16 @@ Widget MyDrawerList(context) {
           );
         }),
   
-        MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => CreateExamNameScreen(
-                schooilID: UserCredentialsController.schoolId!,
-                classID: UserCredentialsController.classId!,
-                teacherId: UserCredentialsController.teacherModel!.docid!,
-                batchId: UserCredentialsController.batchId!),
-          );
-        }),
+        // MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
+        //     currentPage == DrawerSections.dashboard ? true : false, () {
+        //   Get.to(
+        //     () => SelectExamsForProgressreport(
+        //         schooilID: UserCredentialsController.schoolId!,
+        //         classID: UserCredentialsController.classId!,
+        //         // teacherId: UserCredentialsController.teacherModel!.docid!,
+        //         batchId: UserCredentialsController.batchId!),
+        //   );
+        // }),
 
         MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {

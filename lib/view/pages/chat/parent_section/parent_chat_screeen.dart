@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
+import '../../../widgets/fonts/google_monstre.dart';
 
 class ParentChatScreen extends StatelessWidget {
   const ParentChatScreen({super.key});
@@ -98,9 +99,11 @@ class ParentChatScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            ParentTeachersMessagesScreen(),
+            const ParentTeachersMessagesScreen(),
             // const Icon(Icons.directions_transit, size: 350),
-            const Icon(Icons.directions_car, size: 350),
+             Center(
+                child: GoogleMonstserratWidgets(
+                    text: 'Under maintenance', fontsize: 30,fontWeight: FontWeight.bold,)),
           ],
         ),
         floatingActionButton: CircleAvatar(

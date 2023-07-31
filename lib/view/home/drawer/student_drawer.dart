@@ -17,6 +17,7 @@ import '../../../utils/utils.dart';
 import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
+import '../all_class_test_show/all_class_list_show.dart';
 
 class StudentsHeaderDrawer extends StatelessWidget {
   const StudentsHeaderDrawer({Key? key}) : super(key: key);
@@ -186,16 +187,16 @@ Widget MyDrawerList(context) {
           );
         }),
 
-        MenuItem(6, 'assets/images/progressreport.png', 'Progress Report'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => ProgressReportListViewScreen(
-                schoolId: UserCredentialsController.schoolId!,
-                classID: UserCredentialsController.classId!,
-                studentId: FirebaseAuth.instance.currentUser!.uid,
-                batchId: UserCredentialsController.batchId!),
-          );
-        }),
+        // MenuItem(6, 'assets/images/progressreport.png', 'Progress Report'.tr,
+        //     currentPage == DrawerSections.dashboard ? true : false, () {
+        //   Get.to(
+        //     () => ProgressReportListViewScreen(
+        //         schoolId: UserCredentialsController.schoolId!,
+        //         classID: UserCredentialsController.classId!,
+        //         studentId: FirebaseAuth.instance.currentUser!.uid,
+        //         batchId: UserCredentialsController.batchId!),
+        //   );
+        // }),
 
         MenuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
