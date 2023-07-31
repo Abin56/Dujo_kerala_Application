@@ -96,11 +96,11 @@ class ClickOnClasss extends StatelessWidget {
         body: const SchoolLevelPage(),
       ),
       // Events
-      ViewExamsForProgressreport(
-          batchId: UserCredentialsController.batchId!,
-          classID: classID,
-          schooilID:
-              UserCredentialsController.schoolId!), //Progress Report view
+      // ViewExamsForProgressreport(
+      //     batchId: UserCredentialsController.batchId!,
+      //     classID: classID,
+      //     schooilID:
+      //         UserCredentialsController.schoolId!), //Progress Report view
       TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
@@ -360,7 +360,7 @@ var hasDataImages = [
   'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/meetings.png',
   'assets/images/recorded_classes.png',
@@ -376,7 +376,7 @@ List<String> hasDataText = [
   'HomeWorks'.tr,
   'Notices'.tr,
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
   'Study Materials'.tr,
   'Meetings'.tr,
   'Recorded Classes'.tr,

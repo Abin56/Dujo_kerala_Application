@@ -650,8 +650,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .collection('PeriodCollection')
                                   .doc(widget.periodTokenID)
                                   .delete()
-                                  .then((value) async {
-                                await showDialog(
+                                  .then((value) {
+                                return showDialog(
                                   context: context,
                                   barrierDismissible:
                                       false, // user must tap button!
@@ -662,7 +662,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                         child: ListBody(
                                           children: const <Widget>[
                                             Text(
-                                                'Attendance taken Successfully')
+                                                'Attendance uploaded Successfully!')
                                           ],
                                         ),
                                       ),
@@ -670,6 +670,11 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                         TextButton(
                                           child: const Text('ok'),
                                           onPressed: () {
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
                                             Navigator.of(context).pop();
                                           },
                                         ),
@@ -679,17 +684,7 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                 );
                               });
 
-                              Get.back();
-
-                              Get.back();
-
-                              Get.back();
-
-                              Get.back();
-
-                              Get.back();
-
-                              Get.back();
+             
 
                               Timer(Duration(minutes: int.parse(timer)),
                                   () async {

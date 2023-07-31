@@ -74,11 +74,11 @@ NoticePage(), //Notice
 
 
 
-      ProgressReportListViewScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          studentId: FirebaseAuth.instance.currentUser!.uid,
-          batchId: UserCredentialsController.batchId!), //Progress Report
+      // ProgressReportListViewScreen(
+      //     schoolId: UserCredentialsController.schoolId!,
+      //     classID: UserCredentialsController.classId!,
+      //     studentId: FirebaseAuth.instance.currentUser!.uid,
+      //     batchId: UserCredentialsController.batchId!), //Progress Report
 
       SchoolLevelMeetingPage(), //Meetings
       
@@ -182,7 +182,7 @@ List<String> _acc_text = [
   'Notices'.tr,
 
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
 
   'Meetings'.tr,
 
@@ -204,7 +204,7 @@ var _acc_images = [
   'assets/images/notices.png',
 
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
 
   'assets/images/meetings.png',
 

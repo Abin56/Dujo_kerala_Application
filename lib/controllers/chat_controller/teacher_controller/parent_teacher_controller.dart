@@ -292,7 +292,7 @@ class TeacherParentChatController extends GetxController {
           title: const Text('Alert'),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[Text('Do you want Unblock this user ?')],
+              children: const <Widget>[Text('Do you want to unblock this user ?')],
             ),
           ),
           actions: <Widget>[
@@ -311,7 +311,7 @@ class TeacherParentChatController extends GetxController {
               },
             ),
             TextButton(
-              child: const Text('Cancek'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

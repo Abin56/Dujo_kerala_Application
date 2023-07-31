@@ -179,16 +179,16 @@ Widget MyDrawerList(context) {
         }),
 
 
-        MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => ProgressReportListViewScreen(
-          schoolId: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          studentId: UserCredentialsController.guardianModel!.studentID!,
-          batchId: UserCredentialsController.batchId!),
-          );
-        }),
+        // MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
+        //     currentPage == DrawerSections.dashboard ? true : false, () {
+        //   Get.to(
+        //     () => ProgressReportListViewScreen(
+        //   schoolId: UserCredentialsController.schoolId!,
+        //   classID: UserCredentialsController.classId!,
+        //   studentId: UserCredentialsController.guardianModel!.studentID!,
+        //   batchId: UserCredentialsController.batchId!),
+        //   );
+        // }),
 
        
         MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
