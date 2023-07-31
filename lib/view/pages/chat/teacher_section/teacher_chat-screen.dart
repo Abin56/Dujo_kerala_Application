@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
+import '../../../widgets/fonts/google_monstre.dart';
 
 class TeacherChatScreen extends StatelessWidget {
   const TeacherChatScreen({super.key});
@@ -108,7 +109,7 @@ class TeacherChatScreen extends StatelessWidget {
                   ],
                 ),
               ),
-                  Tab(
+              Tab(
                 icon: ListView(
                   children: [
                     const Padding(
@@ -201,11 +202,13 @@ class TeacherChatScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(
+        body:  TabBarView(
           children: [
-            StudentsMessagesScreen(),
-            ParentMessagesScreen(),
-            Icon(Icons.directions_car, size: 350),
+            const StudentsMessagesScreen(),
+            const ParentMessagesScreen(),
+            Center(
+                child: GoogleMonstserratWidgets(
+                    text: 'Under maintenance', fontsize: 30,fontWeight: FontWeight.bold,)),
           ],
         ),
       ),

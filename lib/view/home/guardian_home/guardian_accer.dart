@@ -68,7 +68,7 @@ class GuardianAccessories extends StatelessWidget {
 
       StudentSubjectHome(), //Subjects
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue: ''), //Teachers
 
      BusRouteListPage(),   /////// all bus
 

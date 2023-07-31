@@ -73,7 +73,7 @@ class ParentAccessories extends StatelessWidget {
 
       StudentSubjectHome(), //Subjects
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue:'parent'), //Teachers
 
       BusRouteListPage(),
       /////// all bus

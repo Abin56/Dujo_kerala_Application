@@ -54,7 +54,7 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
       
       StudentSubjectHome(), //Subjects
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue:'student'), //Teachers
 
 
 

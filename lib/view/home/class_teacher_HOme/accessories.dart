@@ -81,7 +81,7 @@ class ClassTeacherAccessories extends StatelessWidget {
       //     teacherId: UserCredentialsController.teacherModel!.docid!,
       //     batchId: UserCredentialsController.batchId!), //Progress Report
 
-      TeacherSubjectWiseList(), //Teachers
+      TeacherSubjectWiseList(navValue: ''), //Teachers
 
       BusRouteListPage(), /////// all bus
     ];

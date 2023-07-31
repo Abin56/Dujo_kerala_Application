@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/chat/student_section/search/search_teachers.dart';
 import 'package:dujo_kerala_application/view/pages/chat/student_section/teachers_message/teacher_messages.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -100,7 +101,9 @@ class StudentChatScreen extends StatelessWidget {
           children: [
             TeachersMessagesScreen(),
             // const Icon(Icons.directions_transit, size: 350),
-            const Icon(Icons.directions_car, size: 350),
+                   Center(
+                child: GoogleMonstserratWidgets(
+                    text: 'Under maintenance', fontsize: 30,fontWeight: FontWeight.bold,)),
           ],
         ),
         floatingActionButton: CircleAvatar(

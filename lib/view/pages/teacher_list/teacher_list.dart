@@ -1,5 +1,4 @@
 import 'package:dujo_kerala_application/utils/utils.dart';
-import 'package:dujo_kerala_application/view/pages/teacher_list/teacher_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,8 @@ import '../../constant/sizes/sizes.dart';
 import '../../widgets/fonts/google_poppins.dart';
 
 class TeacherSubjectWiseList extends StatelessWidget {
-  TeacherSubjectWiseList({super.key});
+  String navValue;
+  TeacherSubjectWiseList({required this.navValue, super.key});
   final TeacherListController teacherListController =
       Get.put(TeacherListController());
 
@@ -141,18 +141,7 @@ class TeacherSubjectWiseList extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            trailing: GestureDetector(
-                                              child: const Icon(
-                                                  Icons.message_rounded),
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const SubjectChat(),
-                                                    ));
-                                              },
-                                            ),
+                                        
                                           );
                                         } else {
                                           return kHeight;
