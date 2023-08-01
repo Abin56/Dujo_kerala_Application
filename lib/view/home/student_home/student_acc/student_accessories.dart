@@ -63,14 +63,8 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
           classId: UserCredentialsController.classId!,
           studentID:
               UserCredentialsController.studentModel!.docid), ////// exam result
-
       NoticePage(), //Notice
-
       const EventList(), //Events
-
-
-
-
       // ProgressReportListViewScreen(
       //     schoolId: UserCredentialsController.schoolId!,
       //     classID: UserCredentialsController.classId!,
