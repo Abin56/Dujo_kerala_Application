@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
-import '../../../widgets/fonts/google_monstre.dart';
+import '../group_chats/group_chat.dart';
 
 class TeacherChatScreen extends StatelessWidget {
   const TeacherChatScreen({super.key});
@@ -206,9 +206,7 @@ class TeacherChatScreen extends StatelessWidget {
           children: [
             const StudentsMessagesScreen(),
             const ParentMessagesScreen(),
-            Center(
-                child: GoogleMonstserratWidgets(
-                    text: 'Under maintenance', fontsize: 30,fontWeight: FontWeight.bold,)),
+            GroupChatScreenForTeachers(),
           ],
         ),
       ),

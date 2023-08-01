@@ -98,7 +98,7 @@ class ExamResultsView extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       if (schoolLevelExamistValue != null &&
                           allClassStudentsListValue != null) {
-                        FirebaseFirestore.instance
+                        await FirebaseFirestore.instance
                             .collection('SchoolListCollection')
                             .doc(UserCredentialsController.schoolId)
                             .collection(UserCredentialsController.batchId!)
@@ -111,8 +111,8 @@ class ExamResultsView extends StatelessWidget {
                             .doc(schoolLevelExamistValue!['examName'])
                             .set({
                           'docid': schoolLevelExamistValue!['examName']
-                        }).then((value) {
-                          FirebaseFirestore.instance
+                        }).then((value) async {
+                          await FirebaseFirestore.instance
                               .collection('SchoolListCollection')
                               .doc(UserCredentialsController.schoolId)
                               .collection(UserCredentialsController.batchId!)
@@ -134,8 +134,8 @@ class ExamResultsView extends StatelessWidget {
                             'obtainedGrade': obtainedGrade.text.trim(),
                             'subjectName': teacherSubjectValue!['subjectName'],
                             'studentid': allClassStudentsListValue!['docid'],
-                          }, SetOptions(merge: true)).then((value) {
-                            FirebaseFirestore.instance
+                          }, SetOptions(merge: true)).then((value) async {
+                            await FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
                                 .doc(UserCredentialsController.schoolId)
                                 .collection(UserCredentialsController.batchId!)
@@ -146,8 +146,8 @@ class ExamResultsView extends StatelessWidget {
                                 .doc(schoolLevelExamistValue!['examName'])
                                 .set({
                               'docid': schoolLevelExamistValue!['examName']
-                            }).then((value) {
-                              FirebaseFirestore.instance
+                            }).then((value) async {
+                              await FirebaseFirestore.instance
                                   .collection('SchoolListCollection')
                                   .doc(UserCredentialsController.schoolId)
                                   .collection(
@@ -162,8 +162,8 @@ class ExamResultsView extends StatelessWidget {
                                   .set({
                                 'subject': teacherSubjectValue!['subjectName'],
                                 'subjectid': teacherSubjectValue!['docid'],
-                              }).then((value) {
-                                FirebaseFirestore.instance
+                              }).then((value) async {
+                                await FirebaseFirestore.instance
                                     .collection('SchoolListCollection')
                                     .doc(UserCredentialsController.schoolId)
                                     .collection(
