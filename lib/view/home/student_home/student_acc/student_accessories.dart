@@ -7,10 +7,8 @@ import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/home/all_class_test_show/all_class_list_show.dart';
 import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/events/event_list.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
 import 'package:dujo_kerala_application/view/home/student_home/time_table/ss.dart';
 import 'package:dujo_kerala_application/view/pages/exam_results/for_users/select_examlevel_uses.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -55,7 +53,7 @@ class _StudentAccessoriesState extends State<StudentAccessories> {
 
       StudentSubjectHome(), //Subjects
 
-      TeacherSubjectWiseList(navValue:'student'), //Teachers
+      TeacherSubjectWiseList(navValue: 'student'), //Teachers
 
       const UserExmNotifications(), //Exam
 
@@ -194,5 +192,5 @@ var _acc_images = [
   'assets/images/meetings.png',
   'assets/images/bus.png',
   'assets/images/examtest.png',
-  'assets/images/examtest.png',
+  'assets/images/test.png',
 ];

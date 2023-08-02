@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/all_class_test_show/all_class_test_monthly_show_controller.dart';
 import '../../../controllers/userCredentials/user_credentials.dart';
+import '../../../model/teacher_home/test_class_model/test_class_model.dart';
 import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
 import '../../constant/responsive.dart';
@@ -10,13 +11,17 @@ import '../../constant/sizes/sizes.dart';
 
 class AllClassTestMonthlyShowPage extends StatelessWidget {
   AllClassTestMonthlyShowPage({super.key, required this.navigationPageName});
-  final AllClassListMonthlyShowController allClassListShowController =
+  final AllClassListMonthlyShowController controller =
       Get.put(AllClassListMonthlyShowController());
   final String navigationPageName;
 
   @override
   Widget build(BuildContext context) {
-    final num? totalMark = allClassListShowController.classTestModel?.totalMark;
+    final ClassTestModel? studentModel = controller.classTestModel;
+    final num? totalMark = studentModel?.totalMark;
+
+    final List<StudentClassMarkModel>? studentList =
+        studentModel?.studentDetails;
 
     final String totalMarkvalue =
         (totalMark == -1 ? "Mark not entered" : totalMark).toString();
@@ -51,35 +56,26 @@ class AllClassTestMonthlyShowPage extends StatelessWidget {
                   kHeight30,
                   AllClassTestDetailsWidget(
                     testName: "Test Name",
-                    testDetails:
-                        allClassListShowController.classTestModel?.testName ??
-                            "",
+                    testDetails: controller.classTestModel?.testName ?? "",
                   ),
                   kHeight10,
                   AllClassTestDetailsWidget(
                     testName: "Subject Name",
-                    testDetails: allClassListShowController
-                            .classTestModel?.subjectName ??
-                        "",
+                    testDetails: controller.classTestModel?.subjectName ?? "",
                   ),
                   kHeight10,
                   AllClassTestDetailsWidget(
                       testName: "Date",
                       testDetails: timeStampToDateFormat(
-                          allClassListShowController.classTestModel?.date ??
-                              -1)),
+                          controller.classTestModel?.date ?? -1)),
                   kHeight10,
                   AllClassTestDetailsWidget(
                       testName: "Time",
-                      testDetails:
-                          allClassListShowController.classTestModel?.time ??
-                              ""),
+                      testDetails: controller.classTestModel?.time ?? ""),
                   kHeight10,
                   AllClassTestDetailsWidget(
                     testName: "Description",
-                    testDetails: allClassListShowController
-                            .classTestModel?.description ??
-                        "",
+                    testDetails: controller.classTestModel?.description ?? "",
                   ),
                 ],
               ),
@@ -125,122 +121,38 @@ class AllClassTestMonthlyShowPage extends StatelessWidget {
                 child: ListView.builder(
                     controller: ScrollController(),
                     shrinkWrap: true,
-                    itemCount: allClassListShowController
-                            .classTestModel?.studentDetails.length ??
-                        0,
+                    itemCount:
+                        controller.classTestModel?.studentDetails.length ?? 0,
                     itemBuilder: (context, index) {
-                      String value = "";
-                      if (navigationPageName == "student") {
-                        if (allClassListShowController.classTestModel
-                                ?.studentDetails[index].studentId ==
-                            UserCredentialsController.studentModel?.docid) {
-                          final num? mark = allClassListShowController
-                              .classTestModel?.studentDetails[index].mark;
+                      String mark = (studentList?[index].mark == -1
+                              ? "Mark not entered"
+                              : studentList?[index].mark)
+                          .toString();
 
-                          value = (mark == -1 ? "Mark not entered" : mark)
-                              .toString();
-
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Flexible(
-                                child: FutureBuilder(
-                                    future: allClassListShowController
-                                        .getStudentData(
-                                      studentId: allClassListShowController
-                                              .classTestModel
-                                              ?.studentDetails[index]
-                                              .studentId ??
-                                          "",
-                                    ),
-                                    builder: (
-                                      context,
-                                      snapshot,
-                                    ) {
-                                      return SizedBox(
-                                        width: ResponsiveApp.mq.size.width / 2,
-                                        child: Text(
-                                          snapshot.data?.studentName ?? "",
-                                          style: const TextStyle(fontSize: 19),
-                                        ),
-                                      );
-                                    }),
-                              ),
-                              Flexible(
-                                child: SizedBox(
-                                  width: 80,
-                                  child: Text(
-                                    (value).toString(),
-                                    style: const TextStyle(fontSize: 19),
-                                  ),
-                                ),
-                              )
-                            ],
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      } else if (navigationPageName == "parent") {
-                        if (allClassListShowController.classTestModel
-                                ?.studentDetails[index].studentId ==
-                            UserCredentialsController.parentModel?.studentID) {
-                          final num? mark = allClassListShowController
-                              .classTestModel?.studentDetails[index].mark;
-
-                          value = (mark == -1 ? "Mark not entered" : mark)
-                              .toString();
-
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Flexible(
-                                child: FutureBuilder(
-                                    future: allClassListShowController
-                                        .getStudentData(
-                                      studentId: allClassListShowController
-                                              .classTestModel
-                                              ?.studentDetails[index]
-                                              .studentId ??
-                                          "",
-                                    ),
-                                    builder: (
-                                      context,
-                                      snapshot,
-                                    ) {
-                                      if (snapshot.hasData) {
-                                        return SizedBox(
-                                          width:
-                                              ResponsiveApp.mq.size.width / 2,
-                                          child: Text(
-                                            snapshot.data?.studentName ?? "",
-                                            style:
-                                                const TextStyle(fontSize: 19),
-                                          ),
-                                        );
-                                      } else if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return circularProgressIndicatotWidget;
-                                      } else {
-                                        return const SizedBox();
-                                      }
-                                    }),
-                              ),
-                              Flexible(
-                                child: SizedBox(
-                                  width: 80,
-                                  child: Text(
-                                    (value).toString(),
-                                    style: const TextStyle(fontSize: 19),
-                                  ),
-                                ),
-                              )
-                            ],
-                          );
-                        }
+                      if (navigationPageName == "student" &&
+                          studentList?[index].studentId ==
+                              UserCredentialsController.studentModel?.docid) {
+                        return DataShowWidget(
+                          mark: mark,
+                          studentId: studentList?[index].studentId ?? "",
+                        );
+                      } else if (navigationPageName == "parent" &&
+                          studentList?[index].studentId ==
+                              UserCredentialsController.parentModel?.studentID) {
+                        return DataShowWidget(
+                          mark: mark,
+                          studentId: studentList?[index].studentId ?? "",
+                        );
+                      } else if (navigationPageName == "guardian" &&
+                          studentList?[index].studentId ==
+                              UserCredentialsController.guardianModel?.studentID) {
+                        return DataShowWidget(
+                          mark: mark,
+                          studentId: studentList?[index].studentId ?? "",
+                        );
                       } else {
                         return const SizedBox();
                       }
-                      return const SizedBox();
                     }),
               ),
             ),
@@ -283,5 +195,45 @@ class AllClassTestDetailsWidget extends StatelessWidget {
             )),
       ],
     );
+  }
+}
+
+class DataShowWidget extends StatelessWidget {
+  DataShowWidget({super.key, required this.mark, required this.studentId});
+
+  final String mark;
+  final String studentId;
+  final AllClassListMonthlyShowController controller =
+      Get.put(AllClassListMonthlyShowController());
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: controller.getStudentData(studentId: studentId),
+        builder: (context, snapshot) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Flexible(
+                child: SizedBox(
+                  width: ResponsiveApp.mq.size.width / 2,
+                  child: Text(
+                    snapshot.data?.studentName ?? "",
+                    style: const TextStyle(fontSize: 19),
+                  ),
+                ),
+              ),
+              Flexible(
+                child: SizedBox(
+                  width: 80,
+                  child: Text(
+                    mark,
+                    style: const TextStyle(fontSize: 19),
+                  ),
+                ),
+              )
+            ],
+          );
+        });
   }
 }
