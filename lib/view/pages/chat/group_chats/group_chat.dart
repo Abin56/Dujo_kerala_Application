@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,26 +38,26 @@ class GroupChatScreenForTeachers extends StatelessWidget {
               );
             } else {
               return DefaultTabController(
-                length: 3,
+                length: 2,
                 child: Scaffold(
                   appBar: AppBar(
-                    bottom: const TabBar(tabs: [
-                      Tab(
-                        icon: Icon(Icons.abc),
-                      ),
-                      Tab(
-                        icon: Icon(Icons.abc),
-                      ),
-                      Tab(
-                        icon: Icon(Icons.abc),
-                      )
-                    ]),
+                    bottom: TabBar(
+                      isScrollable: true,
+                      unselectedLabelColor: Colors.black,
+                      labelColor: Colors.black,
+                      indicator: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: adminePrimayColor),
+                      tabs: const [
+                        Tab(text: 'Students'),
+                        Tab(text: "Parents")
+                      ],
+                    ),
                   ),
-                  body: TabBarView(
+                  body: const TabBarView(
                     children: [
-                      const StudentsMessagesScreen(),
-                      const ParentMessagesScreen(),
-                      GroupChatScreenForTeachers(),
+                      StudentsMessagesScreen(),
+                      ParentMessagesScreen(),
                     ],
                   ),
                 ),

@@ -95,10 +95,21 @@ class ChapterDisplay extends StatelessWidget {
                             },
                             child: Padding(
                               padding: EdgeInsets.only(top: 10.h),
-                              child: GooglePoppinsWidgets(
-                                text: "Study Materials".tr,
-                                fontsize: 16.h,
-                                color: adminePrimayColor,
+                              child: Container(
+                                height: 36.h,
+                                width: 180.w,
+                                decoration: BoxDecoration(
+                                    color: adminePrimayColor.withOpacity(0.2),
+                                    border:
+                                        Border.all(color: adminePrimayColor),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                  child: GooglePoppinsWidgets(
+                                    text: "Study Materials".tr,
+                                    fontsize: 16.h,
+                                    color: adminePrimayColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
