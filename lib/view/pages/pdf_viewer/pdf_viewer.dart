@@ -45,24 +45,27 @@ class _PDFSectionScreenState extends State<PDFSectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    routingPDfPage(context);
-    return  SafeArea(
+    routingPDfPage(context).then((value) async {
+      await Future.delayed( const Duration(seconds: 2));
+      Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.pop(context);
+    });
+    return SafeArea(
       child: Scaffold(
-      appBar: AppBar(title: Text("Study Material"),backgroundColor: adminePrimayColor,),
-        body:  Column(
-          children: const [
-            Center(
-                child: CircularProgressIndicator(
-              color: Colors.red,
-            )),
-           
-          ],
+        appBar: AppBar(
+          title: const Text("Loading ...  "),
+          backgroundColor: adminePrimayColor,
         ),
+        body: const Center(
+            child: CircularProgressIndicator(
+          color: Colors.red,
+        )),
       ),
     );
   }
 
-  routingPDfPage(BuildContext context) async {
+  Future<void> routingPDfPage(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 1));
 
     // ignore: use_build_context_synchronously

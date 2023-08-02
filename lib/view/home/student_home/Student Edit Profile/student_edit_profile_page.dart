@@ -145,13 +145,11 @@ class StudentProfileEditPage extends StatelessWidget {
                     ),
                     StudentEditListileWidget(
                       icon: Icons.bloodtype_outlined,
-                      subtitle: GooglePoppinsWidgets(
-                          text: "Blood Group".tr, fontsize: 19.h),
-                      title: Row(
+                      subtitle:  Row(
                         children: [
                           GooglePoppinsWidgets(
                               text: profilesnaps.data!.data()!['bloodgroup'],
-                              fontsize: 12.h),
+                              fontsize: 19.h,),
                           IconButton(
                               onPressed: () async {
                                 await changeStudentData(
@@ -163,6 +161,10 @@ class StudentProfileEditPage extends StatelessWidget {
                               ))
                         ],
                       ),
+                      title:
+                                GooglePoppinsWidgets(
+                          text: "Blood Group".tr, fontsize: 12.h), 
+
                     ),
                     StudentEditListileWidget(
                       icon: Icons.home,
@@ -172,7 +174,7 @@ class StudentProfileEditPage extends StatelessWidget {
                       title: Row(
                         children: [
                           GooglePoppinsWidgets(
-                              text: "Address".tr, fontsize: 12.h),
+                              text: "Address".tr, fontsize: 13.h),
                           IconButton(
                               onPressed: () async {
                                 await changeStudentData(
