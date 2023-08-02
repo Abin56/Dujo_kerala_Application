@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,6 +12,7 @@ import 'package:intl/intl.dart';
 import '../controllers/userCredentials/user_credentials.dart';
 import '../helper/shared_pref_helper.dart';
 import '../view/pages/login/dujo_login_screen.dart';
+import 'package:http/http.dart' as http;
 
 void showToast({required String msg}) {
   Fluttertoast.showToast(
@@ -160,4 +163,39 @@ void landScapeBlockFunction() {
 
 String translateString(String key) {
   return key.tr;
+}
+
+Future<void> sendPushMessage(String token, String body, String title) async {
+  try {
+    final reponse = await http.post(
+      Uri.parse('https://fcm.googleapis.com/fcm/send'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization':
+            'key=AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp'
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'priority': 'high',
+          'data': <String, dynamic>{
+            'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+            'status': 'done',
+            'body': body,
+            'title': title,
+          },
+          "notification": <String, dynamic>{
+            'title': title,
+            'body': body,
+            'android_channel_id': 'high_importance_channel'
+          },
+          'to': token,
+        },
+      ),
+    );
+    log(reponse.body.toString());
+  } catch (e) {
+    if (kDebugMode) {
+      log("error push Notification");
+    }
+  }
 }

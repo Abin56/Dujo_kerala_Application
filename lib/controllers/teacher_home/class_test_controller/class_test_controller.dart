@@ -68,6 +68,7 @@ class ClassTestController {
           .doc(uniqueId)
           .set(data.toMap());
       clearAllFields();
+      showToast(msg: "Created Successfully");
     } catch (e) {
       showToast(msg: "Something Went Wrong");
       log(e.toString());

@@ -70,7 +70,7 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: classID), //Attendance Book
-      const TeacherChatScreen(),// Chats
+      const TeacherChatScreen(), // Chats
       const UserExmNotifications(), //Exam
       SelectExamLevelScreen(classId: classID), //exam result upload
       const SS(), //TimeTable
@@ -357,7 +357,7 @@ var _acc_images = [
 var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
-    'assets/images/chat.png',
+  'assets/images/chat.png',
   'assets/images/exam.png',
   'assets/images/exmresult1.png',
   'assets/images/library.png',
@@ -370,12 +370,12 @@ var hasDataImages = [
   'assets/images/recorded_classes.png',
   'assets/images/bus.png',
   'assets/images/exmresult1.png',
-    'assets/images/exmresult1.png',
+  'assets/images/test.png'
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,
   'Attendance Book'.tr,
-    'Chats'.tr,
+  'Chats'.tr,
   'Exams'.tr,
   'Exam Results'.tr,
   'Time Table'.tr,

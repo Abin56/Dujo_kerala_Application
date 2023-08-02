@@ -47,11 +47,8 @@ class ClassTestPage extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                 ),
               ),
-
               kHeight30,
-
               //text form field for creating text
-
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15), color: cgrey1),
@@ -136,13 +133,16 @@ class ClassTestPage extends StatelessWidget {
               kHeight20,
               //show button
               TestElevatedButton(
-                  title: "Show Created Test",
-                  voidCallback: () =>
-                      classListShowController.fetchAllClassTest().then((value) {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ClassTestListPage(),
-                        ));
-                      })),
+                title: "Show Created Test",
+                voidCallback: () =>
+                    classListShowController.fetchAllClassTest().then((value) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ClassTestListPage(),
+                    ),
+                  );
+                }),
+              ),
             ],
           ),
         ),
