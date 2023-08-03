@@ -2,11 +2,13 @@
 import 'dart:convert';
 
 class CreateGroupChatModel {
-String docid;
-bool admin;
-String groupName;
-String teacherId;  
+  bool activate;
+  String docid;
+  bool admin;
+  String groupName;
+  String teacherId;
   CreateGroupChatModel({
+    required this.activate,
     required this.docid,
     required this.admin,
     required this.groupName,
@@ -14,12 +16,14 @@ String teacherId;
   });
 
   CreateGroupChatModel copyWith({
+    bool? activate,
     String? docid,
     bool? admin,
     String? groupName,
     String? teacherId,
   }) {
     return CreateGroupChatModel(
+      activate: activate ?? this.activate,
       docid: docid ?? this.docid,
       admin: admin ?? this.admin,
       groupName: groupName ?? this.groupName,
@@ -29,6 +33,7 @@ String teacherId;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'activate': activate,
       'docid': docid,
       'admin': admin,
       'groupName': groupName,
@@ -38,6 +43,7 @@ String teacherId;
 
   factory CreateGroupChatModel.fromMap(Map<String, dynamic> map) {
     return CreateGroupChatModel(
+      activate: map['activate'] as bool,
       docid: map['docid'] as String,
       admin: map['admin'] as bool,
       groupName: map['groupName'] as String,
@@ -47,29 +53,31 @@ String teacherId;
 
   String toJson() => json.encode(toMap());
 
-  factory CreateGroupChatModel.fromJson(String source) => CreateGroupChatModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CreateGroupChatModel.fromJson(String source) =>
+      CreateGroupChatModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'CreateGroupChatModel(docid: $docid, admin: $admin, groupName: $groupName, teacherId: $teacherId)';
+    return 'CreateGroupChatModel(activate: $activate, docid: $docid, admin: $admin, groupName: $groupName, teacherId: $teacherId)';
   }
 
   @override
   bool operator ==(covariant CreateGroupChatModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.docid == docid &&
-      other.admin == admin &&
-      other.groupName == groupName &&
-      other.teacherId == teacherId;
+
+    return other.activate == activate &&
+        other.docid == docid &&
+        other.admin == admin &&
+        other.groupName == groupName &&
+        other.teacherId == teacherId;
   }
 
   @override
   int get hashCode {
-    return docid.hashCode ^
-      admin.hashCode ^
-      groupName.hashCode ^
-      teacherId.hashCode;
+    return activate.hashCode ^
+        docid.hashCode ^
+        admin.hashCode ^
+        groupName.hashCode ^
+        teacherId.hashCode;
   }
 }

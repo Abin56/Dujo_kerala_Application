@@ -9,6 +9,13 @@ import '../userCredentials/user_credentials.dart';
 import 'model/create_group_chat_model.dart';
 
 class TeacherGroupChatController extends GetxController {
+
+  addParticipants()async{
+    Get.bottomSheet(Container(
+      height: 200,
+      color: Colors.red,
+    ));
+  }
   createGroupChatForWho(BuildContext context) async {
     showDialog(
       context: context,
@@ -109,6 +116,7 @@ createChatGroups(BuildContext context, String chatValue) async {
                             FirebaseAuth.instance.currentUser!.uid) {
                           final docid = uuid.v1();
                           final groupInfoDetails = CreateGroupChatModel(
+                              activate: true,
                               docid: docid,
                               admin: true,
                               groupName: groupNameController.text,

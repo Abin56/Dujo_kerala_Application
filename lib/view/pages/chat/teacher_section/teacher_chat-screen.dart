@@ -202,7 +202,7 @@ class TeacherChatScreen extends StatelessWidget {
             ],
           ),
         ),
-        body:  TabBarView(
+        body: TabBarView(
           children: [
             const StudentsMessagesScreen(),
             const ParentMessagesScreen(),

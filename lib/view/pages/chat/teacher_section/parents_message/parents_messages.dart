@@ -53,10 +53,35 @@ class ParentMessagesScreen extends StatelessWidget {
                                 snapshots.data!.docs[index]['parentname'],
                                 style: const TextStyle(color: Colors.black)),
                             contentPadding: const EdgeInsetsDirectional.all(1),
-                            subtitle: const Text(
-                              'class',
-                              style: TextStyle(color: Colors.black),
-                            ),
+                            subtitle: FutureBuilder(
+                                future: FirebaseFirestore.instance
+                                    .collection('SchoolListCollection')
+                                    .doc(UserCredentialsController.schoolId)
+                                    .collection(
+                                        UserCredentialsController.batchId!)
+                                    .doc(UserCredentialsController.batchId!)
+                                    .collection('classes')
+                                    .doc(UserCredentialsController.classId!)
+                                    .get(),
+                                builder: (context, futuredata) {
+                                  if (futuredata.hasData) {
+                                    return Row(
+                                      children: [
+                                        const Text(
+                                          'class : ',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        Text(
+                                          futuredata.data?.data()?['className'],
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return const Center();
+                                  }
+                                }),
                             trailing: snapshots.data!.docs[index]
                                         ['messageindex'] ==
                                     0

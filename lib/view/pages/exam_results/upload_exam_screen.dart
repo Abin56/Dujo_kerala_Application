@@ -13,14 +13,23 @@ import '../../../widgets/textformfield.dart';
 import '../../constant/sizes/constant.dart';
 import '../../widgets/fonts/google_poppins.dart';
 
-class ExamResultsView extends StatelessWidget {
+class ExamResultsView extends StatefulWidget {
+  bool isLoading = false;
+
   String classID;
   String examlevel;
-  final _formKey = GlobalKey<FormState>();
 
   ExamResultsView({super.key, required this.classID, required this.examlevel});
 
+  @override
+  State<ExamResultsView> createState() => _ExamResultsViewState();
+}
+
+class _ExamResultsViewState extends State<ExamResultsView> {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController obtainedMark = TextEditingController();
+
   TextEditingController obtainedGrade = TextEditingController();
 
   @override
@@ -33,7 +42,8 @@ class ExamResultsView extends StatelessWidget {
               fontsize: 16.w,
               fontWeight: FontWeight.w500),
           backgroundColor: adminePrimayColor),
-      body: Center(
+      body:widget.isLoading?circularProgressIndicatotWidget:
+       Center(
         child: Form(
           key: _formKey,
           child: Column(
@@ -45,7 +55,7 @@ class ExamResultsView extends StatelessWidget {
 
                 child: Center(
                   child: GetSchoolLevelExamDropDownButton(
-                    examType: examlevel,
+                    examType: widget.examlevel,
                   ),
                 ),
               ),
@@ -55,7 +65,7 @@ class ExamResultsView extends StatelessWidget {
 
                 child: Center(
                   child: GetTeachersSubjectsDropDownButton(
-                    classId: classID,
+                    classId: widget.classID,
                   ),
                 ),
               ),
@@ -65,7 +75,7 @@ class ExamResultsView extends StatelessWidget {
 
                 child: Center(
                     child: AllClassStudentsListDropDownButton(
-                  classID: classID,
+                  classID: widget.classID,
                 )),
               ),
               Padding(
@@ -98,16 +108,19 @@ class ExamResultsView extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       if (schoolLevelExamistValue != null &&
                           allClassStudentsListValue != null) {
+                        setState(() {
+                          widget.isLoading = true;
+                        });
                         await FirebaseFirestore.instance
                             .collection('SchoolListCollection')
                             .doc(UserCredentialsController.schoolId)
                             .collection(UserCredentialsController.batchId!)
                             .doc(UserCredentialsController.batchId!)
                             .collection('classes')
-                            .doc(classID)
+                            .doc(widget.classID)
                             .collection('Students')
                             .doc(allClassStudentsListValue!['docid'])
-                            .collection(examlevel)
+                            .collection(widget.examlevel)
                             .doc(schoolLevelExamistValue!['examName'])
                             .set({
                           'docid': schoolLevelExamistValue!['examName']
@@ -118,10 +131,10 @@ class ExamResultsView extends StatelessWidget {
                               .collection(UserCredentialsController.batchId!)
                               .doc(UserCredentialsController.batchId!)
                               .collection('classes')
-                              .doc(classID)
+                              .doc(widget.classID)
                               .collection('Students')
                               .doc(allClassStudentsListValue!['docid'])
-                              .collection(examlevel)
+                              .collection(widget.examlevel)
                               .doc(schoolLevelExamistValue!['examName'])
                               .collection('Marks')
                               .doc(teacherSubjectValue!['docid'])
@@ -141,7 +154,7 @@ class ExamResultsView extends StatelessWidget {
                                 .collection(UserCredentialsController.batchId!)
                                 .doc(UserCredentialsController.batchId!)
                                 .collection('classes')
-                                .doc(classID)
+                                .doc(widget.classID)
                                 .collection('Exam Results')
                                 .doc(schoolLevelExamistValue!['examName'])
                                 .set({
@@ -154,7 +167,7 @@ class ExamResultsView extends StatelessWidget {
                                       UserCredentialsController.batchId!)
                                   .doc(UserCredentialsController.batchId!)
                                   .collection('classes')
-                                  .doc(classID)
+                                  .doc(widget.classID)
                                   .collection('Exam Results')
                                   .doc(schoolLevelExamistValue!['examName'])
                                   .collection('Subjects')
@@ -170,7 +183,7 @@ class ExamResultsView extends StatelessWidget {
                                         UserCredentialsController.batchId!)
                                     .doc(UserCredentialsController.batchId!)
                                     .collection('classes')
-                                    .doc(classID)
+                                    .doc(widget.classID)
                                     .collection('Exam Results')
                                     .doc(schoolLevelExamistValue!['examName'])
                                     .collection('Subjects')
@@ -194,6 +207,9 @@ class ExamResultsView extends StatelessWidget {
                                   'studentid':
                                       allClassStudentsListValue!['docid'],
                                 }).then((value) {
+                                  setState(() {
+                                    widget.isLoading = false;
+                                  });
                                   obtainedMark.clear();
                                   obtainedGrade.clear();
                                   showToast(msg: "Uploaded Successfully");
