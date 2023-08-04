@@ -25,7 +25,7 @@ class ClassMonthlyTestPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: adminePrimayColor,
-        title: const Text('Create Monthly Test'),
+        title:  Text('Create Monthly Test'.tr),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -39,8 +39,8 @@ class ClassMonthlyTestPage extends StatelessWidget {
                 Icons.sticky_note_2_outlined,
                 color: adminePrimayColor,
               ),
-              const Text(
-                'Create Monthly Test',
+               Text(
+                'Create Monthly Test'.tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,

@@ -10,7 +10,8 @@ import '../../../../../../controllers/chat_controller/student_controller/student
 import '../../../../../../controllers/group_chat_controller/group_chat_controller.dart';
 
 class StudentsGroupChats extends StatefulWidget {
-  TeacherGroupChatController teacherGroupChatController = Get.put(TeacherGroupChatController());
+  TeacherGroupChatController teacherGroupChatController =
+      Get.put(TeacherGroupChatController());
   String groupName;
   String groupId;
 
@@ -42,10 +43,10 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Row(
-          children: const [
-            CircleAvatar(),
+          children: [
+            const CircleAvatar(),
             kWidth10,
-            // Text(widget.teacherName),
+            Text(widget.groupName),
           ],
         ),
         backgroundColor: adminePrimayColor,
@@ -62,15 +63,16 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
               .doc('ChatGroups')
               .collection("Students")
               .doc(widget.groupId)
-              .collection('participants')
+              .collection('Participants')
               .snapshots(),
           builder: (context, checkingParticipantssnaps) {
             if (checkingParticipantssnaps.hasData) {
               if (checkingParticipantssnaps.data!.docs.isEmpty) {
                 return Center(
                   child: TextButton.icon(
-                      onPressed: ()async {
-                     widget.teacherGroupChatController.addParticipants();
+                      onPressed: () async {
+                        widget.teacherGroupChatController
+                            .addParticipants(widget.groupId);
                       },
                       icon: const Icon(Icons.add),
                       label: const Text("Add Participants")),
@@ -94,7 +96,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                 .doc('ChatGroups')
                                 .collection("Students")
                                 .doc(widget.groupId)
-                                .collection('participants')
+                                .collection('Participants')
                                 .snapshots(),
                             builder: (context, snaps) {
                               if (snaps.hasData) {

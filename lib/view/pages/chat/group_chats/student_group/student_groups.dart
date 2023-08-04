@@ -36,10 +36,12 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
                           height: 70,
                           child: ListTile(
                             onTap: () {
-                              Get.to(()=>StudentsGroupChats(
-                                groupId:snapshots.data!.docs[index]['docid'] ,
-                                groupName:snapshots.data!.docs[index]['groupName'] ,
-                              ));
+                              Get.to(() => StudentsGroupChats(
+                                    groupId: snapshots.data!.docs[index]
+                                        ['docid'],
+                                    groupName: snapshots.data!.docs[index]
+                                        ['groupName'],
+                                  ));
                             },
                             leading: const CircleAvatar(
                               radius: 30,
@@ -59,23 +61,23 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
                                     .doc(UserCredentialsController.classId!)
                                     .get(),
                                 builder: (context, futuredata) {
-                           if (futuredata.hasData) {
-                                   return Row(
-                                    children: [
-                                      const Text(
-                                        'class : ',
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                      Text(
-                                        futuredata.data?.data()?['className'],
-                                        style: const TextStyle(color: Colors.black),
-                                      ),
-                                    ],
-                                  );
-                             
-                           }else{
-                            return const Center();
-                           }
+                                  if (futuredata.hasData) {
+                                    return Row(
+                                      children: [
+                                        const Text(
+                                          'class : ',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        Text(
+                                          futuredata.data?.data()?['className'],
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return const Center();
+                                  }
                                 }),
                           ),
                         );

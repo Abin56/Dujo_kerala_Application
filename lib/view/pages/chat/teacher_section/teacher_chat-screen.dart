@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/chat/teacher_section/parents_message/parents_messages.dart';
 import 'package:dujo_kerala_application/view/pages/chat/teacher_section/student_message/students_messages.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
@@ -21,7 +22,7 @@ class TeacherChatScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text('Dujo Chat'),
+          title:  Text('Dujo Chat'.tr),
           bottom: TabBar(
             tabs: [
               Tab(
@@ -35,7 +36,7 @@ class TeacherChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Students "),
+                         Text("Students".tr),
                         StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('SchoolListCollection')
@@ -120,7 +121,7 @@ class TeacherChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Parents "),
+                         Text("Parents".tr),
                         StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('SchoolListCollection')
@@ -194,11 +195,11 @@ class TeacherChatScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Tab(
+               Tab(
                   icon: Icon(
                     Icons.class_,
                   ),
-                  text: 'Group'),
+                  text: 'Group'.tr),
             ],
           ),
         ),

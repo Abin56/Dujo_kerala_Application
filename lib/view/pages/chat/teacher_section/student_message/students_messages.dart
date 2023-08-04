@@ -131,7 +131,7 @@ class StudentsMessagesScreen extends StatelessWidget {
                                 const Icon(Icons.search),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: GooglePoppinsWidgets(text: 'Search Students', fontsize: 15,),
+                                  child: GooglePoppinsWidgets(text: 'Search Students'.tr, fontsize: 15,),
                                 ),
                               ],
                             ),

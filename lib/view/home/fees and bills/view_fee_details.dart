@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../../model/fees_bills_model/fees_model.dart';
 import '../../../model/student_model/data_base_model.dart';
@@ -23,7 +24,7 @@ class ViewFeeDetails extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
           title: GoogleMonstserratWidgets(
-              text: 'View Fee Details', fontsize: 18.w),
+              text: 'View Fee Details'.tr, fontsize: 18.w),
         ),
         body: Center(
           child: ListView(

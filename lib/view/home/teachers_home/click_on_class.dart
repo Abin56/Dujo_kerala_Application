@@ -60,6 +60,7 @@ class ClickOnClasss extends StatelessWidget {
       // Events
       SchoolLevelMeetingPage(), // Meetings
       ClassTestPage(),
+       ClassMonthlyTestPage(),
     ];
     final hasDataNavigation = [
       SelectPeriodWiseScreen(
@@ -198,9 +199,7 @@ class ClickOnClasss extends StatelessWidget {
                                               height: h / 100,
                                               width: double.infinity,
                                               margin: EdgeInsets.only(
-                                                  bottom: w / 10,
-                                                  left: w / 50,
-                                                  right: w / 50),
+                                                   top: w / 30, left: w / 30, right: w / 30),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -216,17 +215,19 @@ class ClickOnClasss extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                  Text(
-                                                    _acc_text[index],
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                            color: Colors.black
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
+                                                  Center(
+                                                    child: Text( textAlign: TextAlign.center,
+                                                      _acc_text[index],
+                                                      style:
+                                                          GoogleFonts.montserrat(
+                                                              color: Colors.black
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                    ),
                                                   )
                                                 ],
                                               ),
@@ -301,15 +302,17 @@ class ClickOnClasss extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            Text(
-                                              translateString(
-                                                  hasDataText[index]),
-                                              style: GoogleFonts.montserrat(
-                                                  color: Colors.black
-                                                      .withOpacity(0.5),
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w600),
-                                              textAlign: TextAlign.center,
+                                            Center(
+                                                                                            child: Text(
+                                                translateString(
+                                                    hasDataText[index]),
+                                                style: GoogleFonts.montserrat(
+                                                    color: Colors.black
+                                                        .withOpacity(0.5),
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600),
+                                                textAlign: TextAlign.center,
+                                              ),
                                             )
                                           ],
                                         ),
@@ -343,6 +346,7 @@ List<String> _acc_text = [
   'Events'.tr,
   'Meetings'.tr,
   'Class Test'.tr,
+  'Monthly Class Test'.tr,
 ];
 var _acc_images = [
   'assets/images/classroom.png',
@@ -353,6 +357,7 @@ var _acc_images = [
   'assets/images/activity.png',
   'assets/images/meetings.png',
   'assets/images/exmresult1.png',
+  'assets/images/test.png',
 ];
 var hasDataImages = [
   'assets/images/attendance.png',

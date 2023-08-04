@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/view/pages/chat/student_section/teachers
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
@@ -23,7 +24,7 @@ class StudentChatScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text('Dujo Chat'),
+          title:  Text('Dujo Chat'.tr),
           bottom: TabBar(
             tabs: [
               Tab(
@@ -37,7 +38,7 @@ class StudentChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Teachers"),
+                         Text("Teachers".tr),
                         StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
@@ -89,11 +90,11 @@ class StudentChatScreen extends StatelessWidget {
                 ),
               ),
               // const Tab(icon: Icon(Icons.groups_2), text: 'Parents'),
-              const Tab(
+               Tab(
                   icon: Icon(
                     Icons.class_,
                   ),
-                  text: 'Group'),
+                  text: 'Group'.tr),
             ],
           ),
         ),

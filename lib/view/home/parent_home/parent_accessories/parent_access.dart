@@ -183,7 +183,7 @@ List<String> _acc_text = [
   'Subjects',
   'Teachers',
   'Bus Route'.tr,
-  'Fess & Bills'.tr,
+  'Fees & Bills'.tr,
   'Class Test'.tr,
   'Class Test Monthly'.tr,
 ];
