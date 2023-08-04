@@ -99,37 +99,40 @@ class TeacherGroupChatController extends GetxController {
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Row(
                               children: [
-                                Container(
-                                  color: addStudentList[studentsSnaps.data!
-                                              .docs[index]['studentName']] ==
-                                          null
-                                      ? Colors.transparent
-                                      : addStudentList[studentsSnaps
+                                Obx(() => Container(
+                                      color: addStudentList[studentsSnaps
                                                       .data!.docs[index]
                                                   ['studentName']] ==
-                                              true
-                                          ? Colors.green.withOpacity(0.4)
-                                          : Colors.red.withOpacity(0.4),
-                                  height: 60.h,
-                                  child: Row(
-                                    children: [
-                                      Text("${index + 1}"),
-                                      const SizedBox(
-                                        width: 5,
+                                              null
+                                          ? Colors.transparent
+                                          : addStudentList[studentsSnaps
+                                                          .data!.docs[index]
+                                                      ['studentName']] ==
+                                                  true
+                                              ? Colors.green.withOpacity(0.4)
+                                              : Colors.red.withOpacity(0.4),
+                                      height: 60.h,
+                                      child: Row(
+                                        children: [
+                                          Text("${index + 1}"),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          SizedBox(
+                                              width: 200.w,
+                                              child: SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child:
+                                                      GooglePoppinsEventsWidgets(
+                                                    text: studentDetails
+                                                        .studentName!,
+                                                    fontsize: 11,
+                                                    fontWeight: FontWeight.w600,
+                                                  ))),
+                                        ],
                                       ),
-                                      SizedBox(
-                                          width: 200.w,
-                                          child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: GooglePoppinsEventsWidgets(
-                                                text:
-                                                    studentDetails.studentName!,
-                                                fontsize: 11,
-                                                fontWeight: FontWeight.w600,
-                                              ))),
-                                    ],
-                                  ),
-                                ),
+                                    )),
                                 const Spacer(),
                                 IconButton(
                                     onPressed: () async {
@@ -147,11 +150,10 @@ class TeacherGroupChatController extends GetxController {
                                 ),
                                 IconButton(
                                     onPressed: () async {
-                                      removeStudentToGroup(
-                                              studentDetails.docid!,
-                                              groupID,
-                                              studentDetails)
-                                          .then((value) {
+                                      await removeStudentToGroup(
+                                        studentDetails.docid!,
+                                        groupID,
+                                      ).then((value) {
                                         showToast(msg: "Removed");
                                         addStudentList[
                                             studentsSnaps.data?.docs[index]
@@ -197,9 +199,11 @@ class TeacherGroupChatController extends GetxController {
         .set(studentDetails.toMap());
   }
 
-  Future<void> removeStudentToGroup(String studentDocID, String groupID,
-      AddStudentModel studentDetails) async {
-    FirebaseFirestore.instance
+  Future<void> removeStudentToGroup(
+    String studentDocID,
+    String groupID,
+  ) async {
+    await FirebaseFirestore.instance
         .collection("SchoolListCollection")
         .doc(UserCredentialsController.schoolId)
         .collection(UserCredentialsController.batchId!)
@@ -238,25 +242,28 @@ class TeacherGroupChatController extends GetxController {
             ),
           ),
           Obx(
-            () => isLoading.value?circularProgressIndicatotWidget:GestureDetector(
-              onTap: () async {
-                await addAllStudents(
-                  groupID,
-                ).then((value) => showToast(msg: "All students added in this groups"));
-              },
-              child: Container(
-                decoration:
-                    BoxDecoration(color: adminePrimayColor.withOpacity(0.3)),
-                height: 60.h,
-                width: 150.w,
-                child: Center(
-                  child: GooglePoppinsEventsWidgets(
-                      text: 'Add All Students',
-                      fontsize: 15,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+            () => isLoading.value
+                ? circularProgressIndicatotWidget
+                : GestureDetector(
+                    onTap: () async {
+                      await addAllStudents(
+                        groupID,
+                      ).then((value) =>
+                          showToast(msg: "All students added in this groups"));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: adminePrimayColor.withOpacity(0.3)),
+                      height: 60.h,
+                      width: 150.w,
+                      child: Center(
+                        child: GooglePoppinsEventsWidgets(
+                            text: 'Add All Students',
+                            fontsize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
           )
         ],
       ),

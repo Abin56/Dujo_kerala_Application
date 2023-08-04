@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/pages/chat/group_chats/student_group/chats/chat_appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +45,12 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
       appBar: AppBar(
         title: Row(
           children: [
-            const CircleAvatar(),
+            GestureDetector(
+                onTap: () {
+                  showStudentsGroupAppBar(widget.groupName, '10', widget.groupId);
+
+                },
+                child: const CircleAvatar()),
             kWidth10,
             Text(widget.groupName),
           ],
