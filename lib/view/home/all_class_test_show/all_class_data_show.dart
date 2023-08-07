@@ -94,14 +94,14 @@ class AllClassTestShowPage extends StatelessWidget {
                             width: ResponsiveApp.mq.size.width / 2,
                             child: const Text(
                               "Out Of Mark",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 18),
                             ))),
                     Flexible(
                       child: SizedBox(
                         width: 80,
                         child: Text(
                           (totalMarkvalue).toString(),
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                     )
@@ -177,16 +177,16 @@ class AllClassTestDetailsWidget extends StatelessWidget {
       children: <Widget>[
         Flexible(
           child: SizedBox(
-            width: 200,
+            width: 250,
             child: Text(
               testName,
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 15),
             ),
           ),
         ),
         const Flexible(child: Text(":")),
         SizedBox(
-            width: 200,
+            width: 100,
             child: Text(
               testDetails,
               style: const TextStyle(fontSize: 15),
