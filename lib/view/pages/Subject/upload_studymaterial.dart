@@ -269,6 +269,10 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                  await pickAFile(filee);
                            uploadToFirebase();
                           }
+
+                          //check here
+                          topicController.clear();
+                          titleController.clear();
                           
                         },
                         child:  ButtonContainerWidget(

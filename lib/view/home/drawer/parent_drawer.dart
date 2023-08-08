@@ -67,7 +67,8 @@ class ParentHeaderDrawer extends StatelessWidget {
               await userLogOut(context);
             },
             child:  Text("Logout".tr),
-          )
+          ), 
+          
         ],
       ),
     );

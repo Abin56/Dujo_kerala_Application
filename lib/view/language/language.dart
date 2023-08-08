@@ -88,6 +88,9 @@ class GetxLanguage extends Translations {
           '': "",
         },
         'ml_IN': {
+
+
+          'Fees List':'',
           'Sign up': 'സൈൻ അപ്പ് ',
           'Personal Data': 'വ്യക്തിപരമായ വിവരങ്ങൾ',
           'Your Name': 'നിങ്ങളുടെ പേര്',
@@ -385,7 +388,7 @@ class GetxLanguage extends Translations {
           'Chapter Name': 'ചാപ്റ്റർ നെയിം',
           'Chapter Number': ' ചാപ്റ്റർ നമ്പർ ',
           'Chapter No.': 'ചാപ്റ്റർ നമ്പർ',
-          '': '',
+          'Fees & Bills': '',
           '': '',
         },
 

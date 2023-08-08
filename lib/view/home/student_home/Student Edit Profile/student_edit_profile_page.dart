@@ -141,7 +141,7 @@ class StudentProfileEditPage extends StatelessWidget {
                             }
                           }),
                       title: GooglePoppinsWidgets(
-                          text: "Class ".tr, fontsize: 12.h),
+                          text: "Class".tr, fontsize: 12.h),
                     ),
                     StudentEditListileWidget(
                       icon: Icons.bloodtype_outlined,

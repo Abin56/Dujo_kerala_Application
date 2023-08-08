@@ -156,10 +156,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                           GestureDetector(
                               onTap: () {
                                 Get.to(()=>const ParentEditProfileScreen());
-                                sendPushMessage(
-                                    deviceToken,
-                                    'sdf',
-                                    'zsd');
+                               
                               },
                               child:
                         Container(
@@ -189,6 +186,20 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       ],
                     ),
                   ),
+                  // StreamBuilder(
+                  //   stream: FirebaseFirestore.instance.collection('SchoolListCollection')
+                  //   .doc(UserCredentialsController.schoolId)
+                  //   .collection(UserCredentialsController.batchId!)
+                  //   .doc(UserCredentialsController.batchId)
+                  //   .collection('classes')
+                  //   .doc(UserCredentialsController.classId)
+                  //   .collection('ParentCollection')
+                  //   .doc(UserCredentialsController.parentModel!.docid).snapshots(),
+                  //   builder: ((context, snapshot) {
+                  //     if(snapshot.hasData){
+
+                  //     }
+                  //   })),
                   FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection("SchoolListCollection")

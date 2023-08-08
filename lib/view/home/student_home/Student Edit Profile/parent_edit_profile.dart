@@ -78,7 +78,7 @@ class ParentEditProfileScreen extends StatelessWidget {
                       "",
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Phone No.".tr, fontsize: 12.h),
-              editicon: Icons.edit,             ``
+              editicon: Icons.edit,            
             ),
             ParentEditListileWidget(
               icon: Icons.email,
@@ -176,7 +176,7 @@ class ParentEditListileWidget extends StatelessWidget {
                             child: AlertDialog(
                               title:  Text("Update Mail".tr),
                               content: Column(
-                                mainAxisSize: MainAxisSize.min,
+                                mainAxisSize: MainAxisSize.min, 
                                 children: [
                                   TextFormField(
                                     validator: checkFieldEmailIsValid,

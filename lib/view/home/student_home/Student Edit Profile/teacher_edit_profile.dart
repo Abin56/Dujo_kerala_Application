@@ -102,7 +102,7 @@ class TeacherEditProfileScreen extends StatelessWidget {
                   return TeacherEditListileWidget(
                     subtitle: Text('${snapshot.data!.data()!['className']}'),
                     icon: Icons.class_rounded,
-                    title: GooglePoppinsWidgets(text: 'Class', fontsize: 13.h),
+                    title: GooglePoppinsWidgets(text: 'Class'.tr, fontsize: 13.h),
                   );
                 }),
             TeacherEditListileWidget(

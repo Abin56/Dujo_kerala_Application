@@ -89,6 +89,7 @@ class ExamResultsView extends StatelessWidget {
                   textEditingController: obtainedGrade,
                   // hintText: "Obtained Grade",
                   labelText: 'Obtained Grade'.tr,
+
                   //textEditingController: ,
                 ),
               ),
@@ -111,6 +112,7 @@ class ExamResultsView extends StatelessWidget {
                             .doc(schoolLevelExamistValue!['examName'])
                             .set({
                           'docid': schoolLevelExamistValue!['examName']
+                          
                         }).then((value) {
                           FirebaseFirestore.instance
                               .collection('SchoolListCollection')

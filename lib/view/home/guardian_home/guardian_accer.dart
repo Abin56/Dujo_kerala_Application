@@ -116,7 +116,7 @@ class GuardianAccessories extends StatelessWidget {
                         height: _h / 100,
                         width: double.infinity,
                         margin: EdgeInsets.only(
-                            bottom: _w / 10, left: _w / 50, right: _w / 50),
+                            top: _w / 30, left: _w / 30, right: _w / 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
