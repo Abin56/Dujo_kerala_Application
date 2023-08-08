@@ -196,7 +196,7 @@ class TeacherChatScreen extends StatelessWidget {
                 ),
               ),
                Tab(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.class_,
                   ),
                   text: 'Group'.tr),

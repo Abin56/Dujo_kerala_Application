@@ -4,15 +4,14 @@ import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/chat/group_chats/student_group/chats/chat_appBar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/chat_controller/student_controller/student_controller.dart';
 import '../../../../../../controllers/group_chat_controller/group_chat_controller.dart';
+import '../../group_chat.dart';
 
 class StudentsGroupChats extends StatefulWidget {
-  TeacherGroupChatController teacherGroupChatController =
-      Get.put(TeacherGroupChatController());
   String groupName;
   String groupId;
 
@@ -24,17 +23,21 @@ class StudentsGroupChats extends StatefulWidget {
 }
 
 class _StudentsGroupChatsState extends State<StudentsGroupChats> {
-  final studentChatController = Get.put(StudentChatController());
+  TeacherGroupChatController teacherGroupChatController =
+      Get.put(TeacherGroupChatController());
 
   int currentStudentMessageIndex = 0;
+
   int currentStudentMessageIndex2 = 0;
+
   int teacherIndex = 0;
 
   @override
   void initState() {
+    userIndexBecomeZero(widget.groupId);
     super.initState();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -47,8 +50,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
           children: [
             GestureDetector(
                 onTap: () {
-                  showStudentsGroupAppBar(widget.groupName, '10', widget.groupId);
-
+                  showStudentsGroupAppBar(widget.groupName, '10', widget.groupId, context);
                 },
                 child: const CircleAvatar()),
             kWidth10,
@@ -77,8 +79,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                 return Center(
                   child: TextButton.icon(
                       onPressed: () async {
-                        widget.teacherGroupChatController
-                            .addParticipants(widget.groupId);
+                        teacherGroupChatController.addParticipants(widget.groupId);
                       },
                       icon: const Icon(Icons.add),
                       label: const Text("Add Participants")),
@@ -102,13 +103,14 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                 .doc('ChatGroups')
                                 .collection("Students")
                                 .doc(widget.groupId)
-                                .collection('Participants')
+                                .collection('chats')
+                                .orderBy('sendTime', descending: true)
                                 .snapshots(),
                             builder: (context, snaps) {
                               if (snaps.hasData) {
                                 if (snaps.data!.docs.isEmpty) {
                                   return const Center(
-                                    child: Text("data"),
+                                    child: Text(""),
                                   );
                                 } else {
                                   return ListView.builder(
@@ -117,16 +119,21 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                     reverse: true,
                                     itemCount: snaps.data!.docs.length,
                                     itemBuilder: (context, index) {
-                                      return const Text('data');
                                       ///////////////////////////////////
-                                      // return studentChatController.messageTitles(
-                                      //     widget.teacherDocID,
-                                      //     size,
-                                      //     snaps.data!.docs[index]['chatid'],
-                                      //     snaps.data!.docs[index]['message'],
-                                      //     snaps.data!.docs[index]['docid'],
-                                      //     snaps.data!.docs[index]['sendTime'],
-                                      //     context);
+                                      return teacherGroupChatController
+                                          .messageTitles(
+                                              size,
+                                              snaps.data!.docs[index]['chatid'],
+                                              snaps.data!.docs[index]
+                                                  ['message'],
+                                              snaps.data!.docs[index]['docid'],
+                                              snaps.data!.docs[index]
+                                                  ['sendTime'],
+                                              context,
+                                              widget.groupId,
+                                              snaps.data!.docs[index]['username']
+                                              
+                                              );
                                       ///////////////////////////////
                                     },
                                   );
@@ -138,55 +145,118 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                               }
                             }),
                       ),
-                      SizedBox(
-                        height: size.height / 15,
-                        width: size.width,
-                        // alignment: Alignment.center,
-                        child: SizedBox(
-                          height: size.height / 12,
-                          width: size.width / 1.1,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                height: size.height / 17,
-                                width: size.width / 1.3,
-                                child: TextField(
-                                  controller:
-                                      studentChatController.messageController,
-                                  decoration: InputDecoration(
-                                      hintText: "Send Message",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      )),
-                                ),
-                              ),
-                              CircleAvatar(
-                                radius: 28,
-                                backgroundColor: adminePrimayColor,
-                                child: Center(
-                                  child: IconButton(
-                                      icon: const Icon(
-                                        Icons.send,
-                                        color: Colors.white,
-                                      ),
-                                      onPressed: () async {
-                                        // log('teacherName >>>>  ${widget.teacherDocID}');
-                                        // ///////////////////////////
-                                        // ///
-                                        // studentChatController.sentMessage(
-                                        //   widget.teacherDocID,
-                                        //   await getCurrentTeacherMessageIndex(),
-                                        //   await getTeacherChatCounterIndex(),
-                                        // );
-                                        /////////////////////////
-                                      }),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(UserCredentialsController.schoolId)
+                              .collection(UserCredentialsController.batchId!)
+                              .doc(UserCredentialsController.batchId!)
+                              .collection('classes')
+                              .doc(UserCredentialsController.classId)
+                              .collection('ChatGroups')
+                              .doc('ChatGroups')
+                              .collection('Students')
+                              .doc(widget.groupId)
+                              .snapshots(),
+                          builder: (context, checkingblock) {
+                            if (checkingblock.hasData) {
+                              if (checkingblock.data?.data()?['activate'] ==
+                                  false) {
+                                return GestureDetector(
+                                  onTap: () async {},
+                                  child: SizedBox(
+                                    height: size.height / 15,
+                                    width: size.width,
+                                    child: Column(
+                                      children: const [
+                                        Text(
+                                            'Sorry!! This group is not active now.'),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return SizedBox(
+                                  height: size.height / 15,
+                                  width: size.width,
+                                  // alignment: Alignment.center,
+                                  child: SizedBox(
+                                    height: size.height / 12,
+                                    width: size.width / 1.1,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          height: size.height / 17,
+                                          width: size.width / 1.3,
+                                          child: TextField(
+                                            controller:
+                                                teacherGroupChatController
+                                                    .messageController,
+                                            decoration: InputDecoration(
+                                                hintText: "Send Message",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                )),
+                                          ),
+                                        ),
+                                        FutureBuilder(
+                                            future: FirebaseFirestore.instance
+                                                .collection(
+                                                    'SchoolListCollection')
+                                                .doc(UserCredentialsController
+                                                    .schoolId)
+                                                .collection('Teachers')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser!.uid)
+                                                .get(),
+                                            builder: (context, userName) {
+                                              if (userName.hasData) {
+                                                return CircleAvatar(
+                                                  radius: 28,
+                                                  backgroundColor:
+                                                      adminePrimayColor,
+                                                  child: Center(
+                                                    child: IconButton(
+                                                        icon: const Icon(
+                                                          Icons.send,
+                                                          color: Colors.white,
+                                                        ),
+                                                        onPressed: () async {
+                                                          ///////////////////////////
+                                                          ///
+                                                          teacherGroupChatController
+                                                              .sendMessage(
+                                                                  widget.groupId,
+                                                                  userName.data!
+                                                                          .data()![
+                                                                      'teacherName']);
+                                                          /////////////////////////
+                                                        }),
+                                                  ),
+                                                );
+                                              } else {
+                                                return const Center();
+                                              }
+                                            }),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                            } else if (checkingblock.data?.data() == null) {
+                              return const Text("data");
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              );
+                            }
+                          }),
                     ],
                   ),
                 );
@@ -199,6 +269,4 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
           }),
     );
   }
-
-  // }
 }

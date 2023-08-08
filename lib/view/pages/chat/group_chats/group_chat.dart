@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/chat/group_chats/student_group/student_groups.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -55,7 +58,9 @@ class GroupChatScreenForTeachers extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             color: adminePrimayColor),
                         tabs: const [
-                          Tab(text: 'Students'),
+                          Tab(
+                            text: 'Students',
+                          ),
                           Tab(text: "Parents")
                         ],
                       ),
@@ -67,6 +72,34 @@ class GroupChatScreenForTeachers extends StatelessWidget {
                       ParentMessagesScreen(),
                     ],
                   ),
+                  floatingActionButton: FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('SchoolListCollection')
+                          .doc(UserCredentialsController.schoolId)
+                          .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .get(),
+                      builder: (context, checkClassTeacher) {
+                        if (checkClassTeacher.hasData) {
+                          if (checkClassTeacher.data!
+                                  .data()!['classTeacherdocid'] ==
+                              FirebaseAuth.instance.currentUser!.uid) {
+                            return FloatingActionButton(
+                              child: const Icon(Icons.add),
+                              onPressed: () async {
+                                teacherGroupChatController
+                                    .createGroupChatForWho(context);
+                              },
+                            );
+                          } else {
+                            return const Text('');
+                          }
+                        } else {
+                          return const Text('');
+                        }
+                      }),
                 ),
               );
             }
@@ -76,5 +109,39 @@ class GroupChatScreenForTeachers extends StatelessWidget {
             );
           }
         });
+  }
+}
+
+userIndexBecomeZero(String docid) async {
+  log("message Caliingggggggggggggggggggggggggg");
+  final firebase = await FirebaseFirestore.instance
+      .collection('SchoolListCollection')
+      .doc(UserCredentialsController.schoolId)
+      .collection(UserCredentialsController.batchId!)
+      .doc(UserCredentialsController.batchId)
+      .collection('classes')
+      .doc(UserCredentialsController.classId)
+      .collection('ChatGroups')
+      .doc('ChatGroups')
+      .collection('Students')
+      .doc(docid)
+      .collection('Participants')
+      .get();
+  if (firebase.docs.isNotEmpty) {
+    addteacherTopaticipance(docid);
+    await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .collection('ChatGroups')
+        .doc('ChatGroups')
+        .collection('Students')
+        .doc(docid)
+        .collection('Participants')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .set({'messageIndex': 0}, SetOptions(merge: true));
   }
 }

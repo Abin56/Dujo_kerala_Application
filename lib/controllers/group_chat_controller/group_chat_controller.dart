@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/events/event_display_school_level.dart';
+import 'package:dujo_kerala_application/view/pages/chat/group_chats/group_chat.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../../model/chat_model/chat_model.dart';
 import '../../model/student_model/data_base_model.dart';
 import '../../utils/utils.dart';
 import '../../view/constant/sizes/constant.dart';
@@ -13,11 +18,290 @@ import '../userCredentials/user_credentials.dart';
 import 'model/create_group_chat_model.dart';
 
 class TeacherGroupChatController extends GetxController {
+  final TextEditingController messageController = TextEditingController();
   RxBool isLoading = false.obs;
+  messageTitles(Size size, String chatId, String message, String docid,
+      String time, BuildContext context, String groupID, String username) {
+    if (FirebaseAuth.instance.currentUser!.uid == chatId) {
+      //to get which <<<< DD//Month//Year   >>>>>
+      DateTime parseDatee = DateTime.parse(time.toString());
+      final DateFormat dayformatterr = DateFormat('dd MMMM yyy');
+      String dayformattedd = dayformatterr.format(parseDatee);
+      ///////////////////////
+      DateTime parseTime = DateTime.parse(time.toString());
+      final DateFormat timeformatterr = DateFormat('h:mm a');
+      String timeformattedd = timeformatterr.format(parseTime);
+////
+      return GestureDetector(
+        onLongPress: () async {
+          return showDialog(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Alert'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: const <Widget>[
+                      Text('Do you want Delete this message ?')
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Ok'),
+                    onPressed: () async {
+                      log(docid);
+                      await FirebaseFirestore.instance
+                          .collection("SchoolListCollection")
+                          .doc(UserCredentialsController.schoolId)
+                          .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId!)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .collection('ChatGroups')
+                          .doc('ChatGroups')
+                          .collection('Students')
+                          .doc(groupID)
+                          .collection('chats')
+                          .doc(docid)
+                          .delete()
+                          .then((value) => Navigator.pop(context));
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Container(
+            width: size.width,
+            alignment: Alignment.centerRight,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: GooglePoppinsEventsWidgets(
+                    text: 'You',
+                    fontsize: 12,
+                    color: adminePrimayColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: const Color.fromARGB(255, 194, 243, 189),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '$message              ',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ),
+                      Text(
+                        timeformattedd,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 90, 90, 90),
+                            fontSize: 10),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 05,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Text(
+                    dayformattedd,
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 90, 90, 90), fontSize: 10),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    } else {
+      //to get which <<<< DD//Month//Year   >>>>>
+      DateTime parseDatee = DateTime.parse(time.toString());
+      final DateFormat dayformatterr = DateFormat('dd MMMM yyy');
+      String dayformattedd = dayformatterr.format(parseDatee);
+      ///////////////////////
+      DateTime parseTime = DateTime.parse(time.toString());
+      final DateFormat timeformatterr = DateFormat('h:mm a');
+      String timeformattedd = timeformatterr.format(parseTime);
+////
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: Container(
+          width: size.width,
+          alignment: Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child:
+                      GooglePoppinsEventsWidgets(text: username, fontsize: 10)),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '$message              ',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ),
+                    Text(
+                      timeformattedd,
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 90, 90, 90), fontSize: 10),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 05,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Text(
+                  dayformattedd,
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 90, 90, 90), fontSize: 10),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
+  sendMessage(String groupID, String userName) async {
+    final id = uuid.v1();
+    final sendMessage = OnlineChatModel(
+        message: messageController.text,
+        messageindex: 1,
+        chatid: FirebaseAuth.instance.currentUser!.uid,
+        docid: id,
+        sendTime: DateTime.now().toString(),
+        username: '$userName T r');
+    await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId!)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .collection('ChatGroups')
+        .doc('ChatGroups')
+        .collection('Students')
+        .doc(groupID)
+        .collection('chats')
+        .doc(id)
+        .set(sendMessage.toMap())
+        .then((value) async {
+      await sendMessageIndexToAllUsers(groupID);
+      messageController.clear();
+    });
+  }
+
+  Future<void> sendMessageIndexToAllUsers(String groupID) async {
+    final firebase = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId!)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .collection('ChatGroups')
+        .doc('ChatGroups')
+        .collection('Students')
+        .doc(groupID)
+        .collection('Participants')
+        .get();
+
+    for (var i = 0; i < firebase.docs.length; i++) {
+      await FirebaseFirestore.instance
+          .collection("SchoolListCollection")
+          .doc(UserCredentialsController.schoolId)
+          .collection(UserCredentialsController.batchId!)
+          .doc(UserCredentialsController.batchId!)
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .collection('ChatGroups')
+          .doc('ChatGroups')
+          .collection('Students')
+          .doc(groupID)
+          .collection('Participants')
+          .doc(firebase.docs[i].data()['docid'])
+          .set({
+        'messageIndex': await fetchCurrentIndexByUser(
+                groupID, firebase.docs[i].data()['docid']) +
+            1
+      }, SetOptions(merge: true));
+    }
+  }
+
+  Future<int> fetchCurrentIndexByUser(String groupID, String userDocid) async {
+    final firebase = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId!)
+        .collection('classes')
+        .doc(UserCredentialsController.classId)
+        .collection('ChatGroups')
+        .doc('ChatGroups')
+        .collection('Students')
+        .doc(groupID)
+        .collection('Participants')
+        .doc(userDocid)
+        .get();
+
+    if (firebase.data()!['messageIndex'] == null) {
+      return 0;
+    } else {
+      return firebase.data()!['messageIndex'];
+    }
+  }
 
   Future<void> addAllStudents(
     String groupID,
   ) async {
+
     isLoading.value = true;
     final firabase = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
@@ -47,10 +331,12 @@ class TeacherGroupChatController extends GetxController {
           .doc(studentDetails.docid)
           .set(studentDetails.toMap());
     }
+         userIndexBecomeZero(groupID);
     isLoading.value = false;
   }
 
   customAddStudentInGroup(groupID) {
+    userIndexBecomeZero(groupID);
     RxMap<String, bool?> addStudentList = <String, bool?>{}.obs;
 
     List<AddStudentModel> featchingStudentlList = [];
@@ -153,6 +439,7 @@ class TeacherGroupChatController extends GetxController {
                                       await removeStudentToGroup(
                                         studentDetails.docid!,
                                         groupID,
+                                        context
                                       ).then((value) {
                                         showToast(msg: "Removed");
                                         addStudentList[
@@ -183,7 +470,7 @@ class TeacherGroupChatController extends GetxController {
 
   Future<void> addStudentToGroup(String studentDocID, String groupID,
       AddStudentModel studentDetails) async {
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection("SchoolListCollection")
         .doc(UserCredentialsController.schoolId)
         .collection(UserCredentialsController.batchId!)
@@ -202,6 +489,7 @@ class TeacherGroupChatController extends GetxController {
   Future<void> removeStudentToGroup(
     String studentDocID,
     String groupID,
+    BuildContext context
   ) async {
     await FirebaseFirestore.instance
         .collection("SchoolListCollection")
@@ -216,7 +504,7 @@ class TeacherGroupChatController extends GetxController {
         .doc(groupID)
         .collection('Participants')
         .doc(studentDocID)
-        .delete();
+        .delete().then((value) => Navigator.pop(context));
   }
 
   addParticipants(String groupID) async {
@@ -399,6 +687,9 @@ createChatGroups(BuildContext context, String chatValue) async {
                                 .doc(docid)
                                 .set(groupInfoDetails.toMap())
                                 .then((value) async {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                           
                               return showToast(
                                   msg: 'Group Created Successfully');
                             });

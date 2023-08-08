@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/chat/student_section/search/search_teachers.dart';
 import 'package:dujo_kerala_application/view/pages/chat/student_section/teachers_message/teacher_messages.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
+import 'group_message/student_message_group_screen.dart';
 
 class StudentChatScreen extends StatelessWidget {
   const StudentChatScreen({super.key});
@@ -91,7 +91,7 @@ class StudentChatScreen extends StatelessWidget {
               ),
               // const Tab(icon: Icon(Icons.groups_2), text: 'Parents'),
                Tab(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.class_,
                   ),
                   text: 'Group'.tr),
@@ -102,9 +102,7 @@ class StudentChatScreen extends StatelessWidget {
           children: [
             TeachersMessagesScreen(),
             // const Icon(Icons.directions_transit, size: 350),
-                   Center(
-                child: GoogleMonstserratWidgets(
-                    text: 'Under maintenance', fontsize: 30,fontWeight: FontWeight.bold,)),
+                 StudentsGroupMessagesScreen(),
           ],
         ),
         floatingActionButton: CircleAvatar(

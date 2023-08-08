@@ -9,6 +9,7 @@ class OnlineChatModel {
   String docid;
   String sendTime;
   String message;
+  String? username;
   OnlineChatModel({
     this.admin,
     this.block,
@@ -17,6 +18,7 @@ class OnlineChatModel {
     required this.docid,
     required this.sendTime,
     required this.message,
+    this.username,
   });
 
   OnlineChatModel copyWith({
@@ -27,6 +29,7 @@ class OnlineChatModel {
     String? docid,
     String? sendTime,
     String? message,
+    String? username,
   }) {
     return OnlineChatModel(
       admin: admin ?? this.admin,
@@ -36,6 +39,7 @@ class OnlineChatModel {
       docid: docid ?? this.docid,
       sendTime: sendTime ?? this.sendTime,
       message: message ?? this.message,
+      username: username ?? this.username,
     );
   }
 
@@ -48,6 +52,7 @@ class OnlineChatModel {
       'docid': docid,
       'sendTime': sendTime,
       'message': message,
+      'username': username,
     };
   }
 
@@ -60,6 +65,7 @@ class OnlineChatModel {
       docid: map['docid'] as String,
       sendTime: map['sendTime'] as String,
       message: map['message'] as String,
+      username: map['username'] != null ? map['username'] as String : null,
     );
   }
 
@@ -69,7 +75,7 @@ class OnlineChatModel {
 
   @override
   String toString() {
-    return 'OnlineChatModel(admin: $admin, block: $block, messageindex: $messageindex, chatid: $chatid, docid: $docid, sendTime: $sendTime, message: $message)';
+    return 'OnlineChatModel(admin: $admin, block: $block, messageindex: $messageindex, chatid: $chatid, docid: $docid, sendTime: $sendTime, message: $message, username: $username)';
   }
 
   @override
@@ -83,7 +89,8 @@ class OnlineChatModel {
       other.chatid == chatid &&
       other.docid == docid &&
       other.sendTime == sendTime &&
-      other.message == message;
+      other.message == message &&
+      other.username == username;
   }
 
   @override
@@ -94,6 +101,7 @@ class OnlineChatModel {
       chatid.hashCode ^
       docid.hashCode ^
       sendTime.hashCode ^
-      message.hashCode;
+      message.hashCode ^
+      username.hashCode;
   }
 }
