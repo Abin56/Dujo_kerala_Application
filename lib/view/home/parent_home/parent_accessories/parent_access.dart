@@ -47,7 +47,6 @@ class ParentAccessories extends StatelessWidget {
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Leave Letter
 
-      const ParentChatScreen(), //Chats
 
       const SS(), // Time Table
 
@@ -171,7 +170,6 @@ class ParentAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Leave Letters',
-  'Chats'.tr,
   'Time Table',
   'Meetings',
   'Exams',
@@ -190,7 +188,6 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
-  'assets/images/chat.png',
   'assets/images/library.png',
   'assets/images/meetings.png',
   'assets/images/exam.png',
