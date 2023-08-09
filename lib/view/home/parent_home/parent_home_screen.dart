@@ -170,10 +170,68 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                     .doc(UserCredentialsController.parentModel!.docid).get(),
                     builder: ((context, snapshot) {
                       if(snapshot.hasData){
-                        return (snapshot.data?.data()?['multipleChildren']==true)? GoogleMonstserratWidgets(text: 'Switch to ${snapshot.data?.data()?['childrenIDList'][1]}',  fontsize: 15.sp, overflow: TextOverflow.ellipsis,
-                            fontWeight: FontWeight.bold,
-                            color: cWhite,):
-                             const SizedBox();
+                         return FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection("SchoolListCollection")
+                          .doc(UserCredentialsController.schoolId)
+                          .collection("AllStudents")
+                          .doc(snapshot.data?.data()?['childrenIDList'][1])
+                          .get(),
+                      builder: (context, snap) {
+                        if (snap.hasData) {
+                          return GestureDetector( 
+                            onTap: ()async{
+                              DocumentSnapshot sur= await FirebaseFirestore.instance.collection('SchoolListCollection')
+                    .doc(UserCredentialsController.schoolId)
+                    .collection(UserCredentialsController.batchId!)
+                    .doc(UserCredentialsController.batchId)
+                    .collection('classes')
+                    .doc(UserCredentialsController.classId)
+                    .collection('ParentCollection').doc(UserCredentialsController.parentModel!.docid).get();
+
+                     DocumentSnapshot kur = await FirebaseFirestore.instance
+                          .collection("SchoolListCollection")
+                          .doc(UserCredentialsController.schoolId)
+                          .collection("AllStudents")
+                          .doc(snapshot.data?.data()?['childrenIDList'][0])
+                          .get();
+
+                    
+
+                    DocumentReference surRef = sur.reference; 
+
+                    List<String> listToUpdate = []; 
+                    listToUpdate.add(sur['childrenIDList'][1]); 
+                    listToUpdate.add(sur['childrenIDList'][0]);
+                    surRef.update({
+                      'childrenIDList' : listToUpdate, 
+                      'studentID' : listToUpdate[0]
+                    });
+
+                    UserCredentialsController.parentModel!.studentID = sur['childrenIDList'][0];
+                    UserCredentialsController.classId = kur['classID'];
+
+                    log(UserCredentialsController.parentModel!.studentID!);
+                    log(UserCredentialsController.classId!);
+                    
+                             
+                            },
+                            child: GoogleMonstserratWidgets(
+                              text:
+                                  'Switch to ${snap.data?.data()?['studentName']} ',
+                              fontsize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              color: cWhite,
+                            ),
+                          );
+                        } else {
+                          return const Text('');
+                        }
+                      });
+                        // return (snapshot.data?.data()?['multipleChildren']==true)? GoogleMonstserratWidgets(text: 'Switch to ${snapshot.data?.data()?['childrenIDList'][1]}',  fontsize: 15.sp, overflow: TextOverflow.ellipsis,
+                        //     fontWeight: FontWeight.bold,
+                        //     color: cWhite,):
+                        //      const SizedBox();
                       }
 
                       return const CircularProgressIndicator();
@@ -191,7 +249,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                         if (snap.hasData) {
                           return GoogleMonstserratWidgets(
                             text:
-                                'Student : ${snap.data?.data()?['studentName']} ',
+                                'Student : ${snap.data?.data()?['studentName']}',
                             fontsize: 14.5.sp,
                             fontWeight: FontWeight.w500,
                             color: cWhite.withOpacity(0.8),
