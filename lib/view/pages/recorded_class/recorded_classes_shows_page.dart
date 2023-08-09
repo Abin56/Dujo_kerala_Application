@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../sruthi/Subject 2/subject_chapterwise_display.dart';
+import '../recorded_videos/play_video.dart';
 
 class RecordedClassesShowsPage extends StatelessWidget {
   const RecordedClassesShowsPage(
@@ -110,10 +111,10 @@ class RecordedClassesShowsPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: adminePrimayColor),
                         onTap: () {
-                          // Get.to(() => Videoplayer(
-                          //       videoUrl: snapshot.data!.docs[index]
-                          //           ['downloadUrl'],
-                          //     ));
+                          Get.to(() => Videoplayer(
+                                videoUrl: snapshot.data!.docs[index]
+                                    ['downloadUrl'],
+                              ));
                         },
                       ),
                     );
