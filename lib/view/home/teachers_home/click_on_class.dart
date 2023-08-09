@@ -13,16 +13,19 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/utils.dart';
 import '../../colors/colors.dart';
+import '../../constant/responsive.dart';
 import '../../pages/Attentence/select_period.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
 import '../../pages/Homework/homework.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
+import '../../pages/chat/teacher_section/teacher_chat-screen.dart';
 import '../../pages/exam_results/select_exam.dart';
-import '../../pages/progress_Report/view_report/view_exam_list.dart';
 import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import '../student_home/time_table/ss.dart';
+import 'class_test/class_test_page.dart';
+import 'monthly_class_test/class_test_monthly_page.dart';
 
 class ClickOnClasss extends StatelessWidget {
   String classID;
@@ -56,6 +59,8 @@ class ClickOnClasss extends StatelessWidget {
       ),
       // Events
       SchoolLevelMeetingPage(), // Meetings
+      ClassTestPage(),
+       ClassMonthlyTestPage(),
     ];
     final hasDataNavigation = [
       SelectPeriodWiseScreen(
@@ -66,7 +71,7 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: classID), //Attendance Book
-
+      const TeacherChatScreen(), // Chats
       const UserExmNotifications(), //Exam
       SelectExamLevelScreen(classId: classID), //exam result upload
       const SS(), //TimeTable
@@ -94,21 +99,23 @@ class ClickOnClasss extends StatelessWidget {
         body: const SchoolLevelPage(),
       ),
       // Events
-      ViewExamsForProgressreport(
-          batchId: UserCredentialsController.batchId!,
-          classID: classID,
-          schooilID:
-              UserCredentialsController.schoolId!), //Progress Report view
+      // ViewExamsForProgressreport(
+      //     batchId: UserCredentialsController.batchId!,
+      //     classID: classID,
+      //     schooilID:
+      //         UserCredentialsController.schoolId!), //Progress Report view
       TeacherSubjectHome(), // Subjects
       SchoolLevelMeetingPage(),
       // Meetings
       RecordedClassMainPage(), // recorded class
 
-      BusRouteListPage(), /////// all bus
+      BusRouteListPage(),
+      ClassTestPage(),
+      ClassMonthlyTestPage(), //class test monthly
     ];
     int columnCount = 2;
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    double w = ResponsiveApp.mq.size.width;
+    double h = ResponsiveApp.mq.size.height;
     log('Teacher class iddddddd$classID');
     return Scaffold(
       appBar: AppBar(
@@ -192,9 +199,7 @@ class ClickOnClasss extends StatelessWidget {
                                               height: h / 100,
                                               width: double.infinity,
                                               margin: EdgeInsets.only(
-                                                  bottom: w / 10,
-                                                  left: w / 50,
-                                                  right: w / 50),
+                                                   top: w / 30, left: w / 30, right: w / 30),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -210,17 +215,19 @@ class ClickOnClasss extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                  Text(
-                                                    _acc_text[index],
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                            color: Colors.black
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
+                                                  Center(
+                                                    child: Text( textAlign: TextAlign.center,
+                                                      _acc_text[index],
+                                                      style:
+                                                          GoogleFonts.montserrat(
+                                                              color: Colors.black
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                    ),
                                                   )
                                                 ],
                                               ),
@@ -295,15 +302,17 @@ class ClickOnClasss extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            Text(
-                                              translateString(
-                                                  hasDataText[index]),
-                                              style: GoogleFonts.montserrat(
-                                                  color: Colors.black
-                                                      .withOpacity(0.5),
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w600),
-                                              textAlign: TextAlign.center,
+                                            Center(
+                                                                                            child: Text(
+                                                translateString(
+                                                    hasDataText[index]),
+                                                style: GoogleFonts.montserrat(
+                                                    color: Colors.black
+                                                        .withOpacity(0.5),
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600),
+                                                textAlign: TextAlign.center,
+                                              ),
                                             )
                                           ],
                                         ),
@@ -336,6 +345,8 @@ List<String> _acc_text = [
   'Subjects'.tr,
   'Events'.tr,
   'Meetings'.tr,
+  'Class Test'.tr,
+  'Monthly Class Test'.tr,
 ];
 var _acc_images = [
   'assets/images/classroom.png',
@@ -345,34 +356,42 @@ var _acc_images = [
   'assets/images/subjects.png',
   'assets/images/activity.png',
   'assets/images/meetings.png',
+  'assets/images/exmresult1.png',
+  'assets/images/test.png',
 ];
 var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
+  'assets/images/chat.png',
   'assets/images/exam.png',
   'assets/images/exmresult1.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
-  'assets/images/progressreport.png',
+  // 'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/meetings.png',
   'assets/images/recorded_classes.png',
-  'assets/images/bus.png'
+  'assets/images/bus.png',
+  'assets/images/exmresult1.png',
+  'assets/images/test.png'
 ];
 List<String> hasDataText = [
   'Take Attendance'.tr,
   'Attendance Book'.tr,
+  'Chats'.tr,
   'Exams'.tr,
   'Exam Results'.tr,
   'Time Table'.tr,
   'HomeWorks'.tr,
   'Notices'.tr,
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
   'Study Materials'.tr,
   'Meetings'.tr,
   'Recorded Classes'.tr,
   'Bus Route'.tr,
+  'Class Test'.tr,
+  'Monthly Class Test'.tr,
 ];

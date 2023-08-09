@@ -17,6 +17,7 @@ import '../../pages/Homework/homework.dart';
 import '../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
+import '../../pages/chat/teacher_section/teacher_chat-screen.dart';
 import '../../pages/teacher_list/teacher_list.dart';
 import '../bus_route_page/all_bus_list.dart';
 import '../events/event_list.dart';
@@ -24,74 +25,65 @@ import '../exam_Notification/teacher_adding/add_subject.dart';
 
 class ClassTeacherAccessories extends StatelessWidget {
   String classID;
-   ClassTeacherAccessories({required this.classID,
+  ClassTeacherAccessories({
+    required this.classID,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-
-
       SelectPeriodWiseScreen(
           batchId: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!,
           schoolId: UserCredentialsController.schoolId!), //Take Attendance
 
-
       AttendenceBookScreenSelectMonth(
         batchId: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,
-        schoolId: UserCredentialsController.schoolId!,),  ////////////  Attendance book
+        schoolId: UserCredentialsController.schoolId!,
+      ), ////////////  Attendance book
+
+      const TeacherChatScreen(),// Chats
+      
 
       const SS(), //TimeTable
-
 
       LeaveLettersListviewScreen(
           schooilID: UserCredentialsController.schoolId!,
           batchID: UserCredentialsController.batchId!,
           classID: UserCredentialsController.classId!), //Leave letters
 
-
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,
         schoolID: UserCredentialsController.schoolId!,
-        teacherID: UserCredentialsController.teacherModel!.docid!,), //////////Home Work
+        teacherID: UserCredentialsController.teacherModel!.docid!,
+      ), //////////Home Work
 
       const MyStudents(), //My students
-
-
 
       StudentSubjectHome(), //Subject
 
       SchoolLevelMeetingPage(), //Meetings
 
-
       const AddTimeTable(), //Exam
 
       // SelectExamLevelScreen(classId: classID), //exam result upload
 
-
       NoticePage(), //Notice
-
 
       const EventList(), //Events
 
-      CreateExamNameScreen(
-          schooilID: UserCredentialsController.schoolId!,
-          classID: UserCredentialsController.classId!,
-          teacherId: UserCredentialsController.teacherModel!.docid!,
-          batchId: UserCredentialsController.batchId!), //Progress Report
+      // CreateExamNameScreen(
+      //     schooilID: UserCredentialsController.schoolId!,
+      //     classID: UserCredentialsController.classId!,
+      //     teacherId: UserCredentialsController.teacherModel!.docid!,
+      //     batchId: UserCredentialsController.batchId!), //Progress Report
 
+      TeacherSubjectWiseList(navValue: ''), //Teachers
 
-
-      TeacherSubjectWiseList(), //Teachers
-
-        BusRouteListPage(),   /////// all bus
-
-
- 
+      BusRouteListPage(), /////// all bus
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -118,7 +110,7 @@ class ClassTeacherAccessories extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                          Get.to(screenNavigation[index]);
+                          Get.to(()=>screenNavigation[index]);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -155,7 +147,7 @@ class ClassTeacherAccessories extends StatelessWidget {
                                     color: Colors.black.withOpacity(0.5),
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600),
-                                    textAlign:TextAlign.center,
+                                textAlign: TextAlign.center,
                               )
                             ],
                           ),
@@ -177,6 +169,7 @@ List<String> _acc_text = [
   'Take Attendance'.tr,
 
   'Attendance Book'.tr,
+  'Chats'.tr,
 
   'Time Table'.tr,
   'Leave Letters'.tr,
@@ -193,7 +186,7 @@ List<String> _acc_text = [
   'Notices'.tr,
 
   'Events'.tr,
-  'Progress Report'.tr,
+  // 'Progress Report'.tr,
 
   'Teachers'.tr,
 
@@ -202,26 +195,25 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
+  'assets/images/chat.png',
 
   'assets/images/library.png',
   'assets/images/leaveapplica.png',
-  
+
   'assets/images/homework.png',
   'assets/images/mystudents.png',
 
   'assets/images/subjects.png',
   'assets/images/meetings.png',
-  
+
   'assets/images/exam.png',
   // 'assets/images/exmresult1.png',
-  
+
   'assets/images/notices.png',
   'assets/images/activity.png',
-  
 
-  'assets/images/progressreport.png',
-  
-   'assets/images/teachers.png',
-   'assets/images/bus.png'
-  
+  // 'assets/images/progressreport.png',
+
+  'assets/images/teachers.png',
+  'assets/images/bus.png'
 ];

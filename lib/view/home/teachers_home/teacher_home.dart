@@ -51,7 +51,7 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                             Get.to(()=>const TeacherEditProfileScreen());
+                            Get.to(() => const TeacherEditProfileScreen());
                           },
                           child: Container(
                             child: Stack(
@@ -92,7 +92,7 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                 ],
               ),
             ),
-            const TeacherClassListView(),
+            TeacherClassListView(),
           ],
         ),
       ),

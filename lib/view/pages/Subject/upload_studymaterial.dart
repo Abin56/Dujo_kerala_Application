@@ -46,9 +46,9 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
         setState(() {
       widget.stat = true;
     });
-          // log('gggggg${studentListValue?['studentName']}');
+
        String uid2 = const Uuid().v1();
-      //isImageUpload.value = true; 
+
       
       UploadTask uploadTask =  FirebaseStorage.instance.ref()
       .child("files/studymaterials/${widget.subjectName}/${widget.chapterName}/$uid2")
@@ -65,15 +65,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
 
  
 
-      // final path =   'teachernotes/${pickedFile!.name}';
-      //          final file =  pickedFile!.bytes;
-      //          log('this is path: $path');
-      //          final ref = FirebaseStorage.instance.ref().child(path);
-      //          ref.putData(file!);
-      //          log('completed ${ref.fullPath}'); 
 
-   ///////////////////////////////////////////////////////   
- 
      
       
      } catch(e){
@@ -169,8 +161,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          //  mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
+
           children: [
             kHeight10,
             SizedBox(
@@ -181,8 +172,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                 child: Form(
                   key: _formKey,
                   child: Column(
-                    /// mainAxisAlignment: MainAxisAlignment.start,
-                    /// crossAxisAlignment: CrossAxisAlignment.start,
+
                     children: [
                       GoogleMonstserratWidgets(
                           text: 'Study material upload'.tr,
@@ -216,18 +206,13 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                             ),
                           ),
                           child: Row(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
+
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               
                                 Icon(Icons.attach_file_rounded,
                                     color: cblue, size: 30.w, weight: 10),
-                      
-                                // icon: Image.asset(
-                                //   'assets/images/upload.png',
-                                //  width: 90.w,
-                                // height: 90.h,
-                                // ),
+
                             
                               GoogleMonstserratWidgets(
                                 text: (filee ==null)? 'Upload file here' : filee!.path.split('/').last,
@@ -242,12 +227,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                       ),
                       kWidth20,
                       kHeight20,
-                
-                      //           FirebaseStorage.instance
-                      // .ref()
-                      // .child(
-                      //     "files/scholarshipimages/${studentListValue?['studentName']}/images/$uid")
-                      // .putData(file!);
+
                       kHeight20,
                       TextFormFieldWidget(
                         function: checkFieldEmpty,
@@ -326,86 +306,4 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
   }
 }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(resizeToAvoidBottomInset: false,
-//       backgroundColor: cWhite,
-//       appBar: AppBar( title: Row(
-//           children: [
-//             IconButtonBackWidget(color: cblack),SizedBox(width: 50.h,),
-//             GoogleMonstserratWidgets(text: "Study Material upload", fontsize: 20.h,color: cblack,fontWeight: FontWeight.w600,)
-//           ],
-//         ),backgroundColor: cWhite),
-//     body: Column(mainAxisAlignment: MainAxisAlignment.center,
-//       children: [
-//       StudyContainerWidget(
-//         hintText: 'Subject Name',
-//         //hintText1: 'Enter Chapter Name',
-//         hintText2:'Enter Topic',
-//       hintText3:'Enter Title Name',
 
-//        ),
-//     ]),);
-//   }
-// }
-
-// class StudyContainerWidget extends StatelessWidget {
-//    StudyContainerWidget({
-//     required this.hintText,
-//     //required this.hintText1,
-//     required this.hintText2,
-//     required this. hintText3,
-
-//     super.key,
-//   });
-//   String hintText;
-//  // String hintText1;
-//   String hintText2;
-//   String hintText3;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: EdgeInsets.only(left: 15.h,right: 15.h),
-//       height: 600.h,
-//       width: double.infinity,
-//       decoration: BoxDecoration(color: Color.fromARGB(255, 71, 73, 167),
-//       borderRadius: BorderRadius.all(
-//         Radius.circular(20.h))
-//         ),
-//         child: Column(children: [
-//             TextFormFieldWidget(hintText: hintText,
-//            // textEditingController:
-//             ),
-//              SizedBox(
-//                             width: 330.w,
-//                             child: DropdownSearch<String>(
-//                               selectedItem: 'Chapter',
-//                               validator: (v) =>
-//                                   v == null ? "required field" : null,
-//                               items: const ['Chapter 1', 'Chapter 2', 'Chapter 3'],
-//                               onChanged: (value) {
-//                                // studentController.gender = value;
-//                               },
-//                             ),
-//                           ),
-//             // TextFormFieldWidget(hintText: hintText1,
-//              //textEditingController:
-//             //  ),
-//               TextFormFieldWidget(hintText: hintText2,
-//               //textEditingController:
-//               ),
-//               TextFormFieldWidget(hintText: hintText3,
-//              // textEditingController:
-//               ),
-
-//               kHeight20,
-
-//              UploadButtonWidget(text: 'Upload Doc'),
-//               kHeight20,
-//               UploadButtonWidget(text: 'Submit'),
-
-//           ]),
-//         );
-//   }
-// }

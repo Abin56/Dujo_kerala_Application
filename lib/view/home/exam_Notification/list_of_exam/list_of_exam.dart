@@ -131,9 +131,8 @@ class _TPublicLevelState extends State<TPublicLevel> {
                                           "Starting date :  ${data.startingDate}",
                                       fontsize: 12.h,
                                       color: cWhite),
-                                                   GooglePoppinsWidgets(
-                                      text:
-                                          "Ending date :  ${data.endDate}",
+                                  GooglePoppinsWidgets(
+                                      text: "Ending date :  ${data.endDate}",
                                       fontsize: 12.h,
                                       color: cWhite),
                                 ],
@@ -289,21 +288,24 @@ class _TPublicLevelState extends State<TPublicLevel> {
               child: Text('Add'.tr),
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  addExamTimeTableController.uploadSubject(
-                      'School Level',
-                      examdocID,
-                      allsubjectListValue!['subjectName'],
-                      time1!,
-                      time2!,
-                      applynewBatchYearContoller.text.trim(),
-                      _timeController.text.trim(),
-                      _stimeController.text.trim(),
-                      context)
-                  .then((value) => showToast(msg: 'Successfully Added'));
+                  addExamTimeTableController
+                      .uploadSubject(
+                          'School Level',
+                          examdocID,
+                          allsubjectListValue!['subjectName'],
+                          time1!,
+                          time2!,
+                          applynewBatchYearContoller.text.trim(),
+                          _timeController.text.trim(),
+                          _stimeController.text.trim(),
+                          context)
+                      .then((value) {
+                    _timeController.clear();
+                    _stimeController.clear();
+                    applynewBatchYearContoller.clear();
+                    showToast(msg: 'Successfully Added');
+                  });
                 }
-                _timeController.clear();
-                _stimeController.clear();
-                applynewBatchYearContoller.clear();
               },
             ),
           ],
@@ -458,9 +460,8 @@ class _TStateLevelState extends State<TStateLevel> {
                                             "Starting date :  ${data.startingDate}",
                                         fontsize: 12.h,
                                         color: cWhite),
-                                          GooglePoppinsWidgets(
-                                        text:
-                                            "Ending date :  ${data.endDate}",
+                                    GooglePoppinsWidgets(
+                                        text: "Ending date :  ${data.endDate}",
                                         fontsize: 12.h,
                                         color: cWhite),
                                   ],
@@ -545,11 +546,6 @@ class _TStateLevelState extends State<TStateLevel> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // GooglePoppinsWidgets(
-                      //   fontsize: 12,
-                      //   fontWeight: FontWeight.w300,
-                      //   text: 'End Time : ',
-                      // ),
                       SizedBox(
                         height: 50.h,
                         width: 200.w,
@@ -612,21 +608,24 @@ class _TStateLevelState extends State<TStateLevel> {
                 child: Text('Add'.tr),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    addExamTimeTableController.uploadSubject(
-                        'Public Level',
-                        examdocID,
-                        allsubjectListValue!['subjectName'],
-                        time1!,
-                        time2!,
-                        applynewBatchYearContoller.text.trim(),
-                        _timeController.text.trim(),
-                        _stimeController.text.trim(),
-                        context)
-                    .then((value) => showToast(msg: 'Successfully Added'));
+                    addExamTimeTableController
+                        .uploadSubject(
+                            'Public Level',
+                            examdocID,
+                            allsubjectListValue!['subjectName'],
+                            time1!,
+                            time2!,
+                            applynewBatchYearContoller.text.trim(),
+                            _timeController.text.trim(),
+                            _stimeController.text.trim(),
+                            context)
+                        .then((value) async {
+                      applynewBatchYearContoller.clear();
+                      _timeController.clear();
+                      _stimeController.clear();
+                      showToast(msg: 'Successfully Added');
+                    });
                   }
-                  applynewBatchYearContoller.clear();
-                  _timeController.clear();
-                  _stimeController.clear();
                 })
           ],
         );

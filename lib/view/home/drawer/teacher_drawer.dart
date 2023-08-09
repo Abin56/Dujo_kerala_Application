@@ -5,7 +5,6 @@ import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
-import 'package:dujo_kerala_application/view/pages/progress_Report/create_examName_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -206,16 +205,16 @@ Get.to(
           );
         }),
 
-        menuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
-            currentPage == DrawerSections.dashboard ? true : false, () {
-          Get.to(
-            () => CreateExamNameScreen(
-                schooilID: UserCredentialsController.schoolId!,
-                classID: UserCredentialsController.classId!,
-                teacherId: UserCredentialsController.teacherModel!.docid!,
-                batchId: UserCredentialsController.batchId!),
-          );
-        }),
+        // menuItem(7, 'assets/images/splash.png', 'Progress Report'.tr,
+        //     currentPage == DrawerSections.dashboard ? true : false, () {
+        //   Get.to(
+        //     () => CreateExamNameScreen(
+        //         schooilID: UserCredentialsController.schoolId!,
+        //         classID: UserCredentialsController.classId!,
+        //         teacherId: UserCredentialsController.teacherModel!.docid!,
+        //         batchId: UserCredentialsController.batchId!),
+        //   );
+        // }),
          menuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());

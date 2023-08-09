@@ -1,11 +1,9 @@
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 
 import '../../widgets/fonts/google_poppins.dart';
-import '../../../sruthi/Study Materials/study_materials_list.dart';
 
 class SubjectWiseDisplay extends StatelessWidget {
   const SubjectWiseDisplay({super.key});
@@ -26,7 +24,7 @@ backgroundColor: adminePrimayColor,title: Text("Chapters".tr),
                          Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>SubjectWiseDisplay()));
+                                          builder: (context) =>const SubjectWiseDisplay()));
                                                      
                     },
                       child: Container(height: 180.h,

@@ -8,6 +8,7 @@ class GetxLanguage extends Translations {
 
         ////////////////////
         'hi_IN': {
+          
           'Hello...': 'हैलो वर्ल्ड',
           'Change Language': "डुजो में आपका स्वागत है",
           'School Teacher Home Page': "स्कूल शिक्षक घर पेज",
@@ -88,9 +89,17 @@ class GetxLanguage extends Translations {
           '': "",
         },
         'ml_IN': {
-
-
-          'Fees List':'',
+        
+          'Group':'ഗ്രൂപ്പ് ',
+          'Public Level':'പബ്ലിക് ലെവൽ ',
+          'Class Test':'ക്ലാസ് ടെസ്റ്റ്',
+          'Monthly Class Test':'പ്രതിമാസ ക്ലാസ് പരീക്ഷ',
+          'Chats':'ചാറ്റുകൾ',
+          'Fees & Bills':'ഫീസ് & ബിൽ',
+          'Search Student':'സെർച്ച് സ്റ്റുഡൻറ്സ്',
+          'Select Student':'സെലക്ട് സ്റ്റുഡൻറ്സ്',
+          ''
+          
           'Sign up': 'സൈൻ അപ്പ് ',
           'Personal Data': 'വ്യക്തിപരമായ വിവരങ്ങൾ',
           'Your Name': 'നിങ്ങളുടെ പേര്',
@@ -208,7 +217,7 @@ class GetxLanguage extends Translations {
           'View': 'കാണുക',
           'Subject :': 'സബ്ജക്ട് :',
           'Write message...': 'സന്ദേശം എഴുതുക...',
-          'Select Student': 'വിദ്യാർത്ഥിയെ തിരഞ്ഞെടുക്കുക',
+          //'Select Student': 'വിദ്യാർത്ഥിയെ തിരഞ്ഞെടുക്കുക',
           'Please select student detail.': '',
           'Password Missmatch': 'പാസ്‌വേഡ് തെറ്റാണ്',
           'Confirm Password': 'പാസ്വേഡ് സ്ഥിരീകരിക്കുക',
@@ -294,7 +303,9 @@ class GetxLanguage extends Translations {
           'View Details': 'വിശദാംശങ്ങൾ കാണുക',
           'Select Period': 'സെലക്ട് പീരീഡ്',
           'Profile Photo': 'പ്രൊഫൈൽ ഫോട്ടോ',
-
+'Students':'സ്റ്റുഡൻറ്സ്',
+'Parents':'പാരെന്റ്സ്',
+'Dujo Chat':'ഡുജോ ചാറ്റ്',
           'page': 'പേജ്',
           'selected': 'തിരഞ്ഞെടുത്തത്',
           'School Student Home': 'സ്കൂൾ സ്റ്റുഡന്റ് ഹോം',
@@ -326,7 +337,7 @@ class GetxLanguage extends Translations {
           'Class': 'ക്ലാസ്',
           'Leave Letter': 'അവധി കത്ത്',
           //'Live Classes': 'ലൈവ് ക്ലാസുകൾ',
-          //  'Chat': 'ചാറ്റ്',
+           'Chats': 'ചാറ്റ്',
           //  'Student': 'വിദ്യാർത്ഥി',
           //'Parent': 'രക്ഷാകർതൃ',
           //'Teacher': 'ടീച്ചർ',
@@ -388,7 +399,7 @@ class GetxLanguage extends Translations {
           'Chapter Name': 'ചാപ്റ്റർ നെയിം',
           'Chapter Number': ' ചാപ്റ്റർ നമ്പർ ',
           'Chapter No.': 'ചാപ്റ്റർ നമ്പർ',
-          'Fees & Bills': '',
+          '': '',
           '': '',
         },
 

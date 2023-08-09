@@ -1,28 +1,29 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
-
 class SubjectModel {
   String subjectName;
   String docid;
- String date;
+  String teacherId;
+  String teacherName;
   SubjectModel({
     required this.subjectName,
     required this.docid,
-    required this.date,
+    required this.teacherId,
+    required this.teacherName,
   });
 
   SubjectModel copyWith({
     String? subjectName,
     String? docid,
-    String? date,
+    String? teacherId,
+    String? teacherName,
   }) {
     return SubjectModel(
       subjectName: subjectName ?? this.subjectName,
       docid: docid ?? this.docid,
-      date: date ?? this.date,
+      teacherId: teacherId ?? this.teacherId,
+      teacherName: teacherName ?? this.teacherName,
     );
   }
 
@@ -30,7 +31,8 @@ class SubjectModel {
     return <String, dynamic>{
       'subjectName': subjectName,
       'docid': docid,
-      'date': date,
+      'teacherId': teacherId,
+      'teacherName': teacherName,
     };
   }
 
@@ -38,29 +40,36 @@ class SubjectModel {
     return SubjectModel(
       subjectName: map['subjectName'] as String,
       docid: map['docid'] as String,
-      date: map['date'] as String,
+      teacherId: map['teacherId'] as String,
+      teacherName: map['teacherName'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SubjectModel.fromJson(String source) => SubjectModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SubjectModel.fromJson(String source) =>
+      SubjectModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'SubjectModel(subjectName: $subjectName, docid: $docid, date: $date)';
+  String toString() {
+    return 'SubjectModel(subjectName: $subjectName, docid: $docid, teacherId: $teacherId, teacherName: $teacherName)';
+  }
 
   @override
   bool operator ==(covariant SubjectModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.subjectName == subjectName &&
-      other.docid == docid &&
-      other.date == date;
+
+    return other.subjectName == subjectName &&
+        other.docid == docid &&
+        other.teacherId == teacherId &&
+        other.teacherName == teacherName;
   }
 
   @override
-  int get hashCode => subjectName.hashCode ^ docid.hashCode ^ date.hashCode;
+  int get hashCode {
+    return subjectName.hashCode ^
+        docid.hashCode ^
+        teacherId.hashCode ^
+        teacherName.hashCode;
+  }
 }
-
-

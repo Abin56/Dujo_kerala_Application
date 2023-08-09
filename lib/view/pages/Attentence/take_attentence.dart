@@ -7,7 +7,6 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/model/attendence_model/attendence-model.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -216,9 +215,11 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                       children: [
                         GestureDetector(
                           onTap: () async {
-                            List<AttendanceStudentModel> newlist = attendanceList
-                                .where((element) => element.present == false)
-                                .toList();
+                            List<AttendanceStudentModel> newlist =
+                                attendanceList
+                                    .where(
+                                        (element) => element.present == false)
+                                    .toList();
                             await getAttedenceList(newlist, attendanceList);
                           },
                           child: ButtonContainerWidget(
@@ -230,7 +231,8 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                 child: Text(
                               'Submit'.tr,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.white),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
                             )),
                           ),
                         ),
@@ -347,10 +349,13 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
 
   getAttedenceList(List<AttendanceStudentModel> list,
       List<AttendanceStudentModel> alllist) async {
+    log("message$list");
+
     final date = DateTime.now();
     DateTime parseDate = DateTime.parse(date.toString());
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     String formatted = formatter.format(parseDate);
+
     return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -365,36 +370,44 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                 SizedBox(
                   height: 400,
                   width: double.maxFinite,
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        if (list[index].present == false) {
-                          return Container(
-                            height: 40,
-                            width: double.maxFinite,
-                            color: Colors.red.withOpacity(0.3),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Text('${index + 1}'),
-                                  const SizedBox(
-                                    width: 20,
+                  child: list.isEmpty
+                      ? const Center(
+                          child: Text("No Absentess"),
+                        )
+                      : ListView.separated(
+                          itemBuilder: (context, index) {
+                            log(" List >>>>>>$list");
+                            if (list[index].present == false) {
+                              return Container(
+                                height: 40,
+                                width: double.maxFinite,
+                                color: Colors.red.withOpacity(0.3),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Text('${index + 1}'),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(list[index].studentName),
+                                      const Spacer(),
+                                      const Text(' - Ab')
+                                    ],
                                   ),
-                                  Text(list[index].studentName),
-                                  const Spacer(),
-                                  const Text(' - Ab')
-                                ],
-                              ),
-                            ),
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Divider();
-                      },
-                      itemCount: list.length),
+                                ),
+                              );
+                            } else if (list.isEmpty) {
+                              log("Emptyyyy");
+                              return const Center(child: Text("data"));
+                            } else {
+                              return const SizedBox();
+                            }
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
+                          itemCount: list.length),
                 ),
               ],
             ),
@@ -636,9 +649,42 @@ class _TakeAttenenceScreenState extends State<TakeAttenenceScreen> {
                                   .doc(formatted)
                                   .collection('PeriodCollection')
                                   .doc(widget.periodTokenID)
-                                  .delete();
+                                  .delete()
+                                  .then((value) {
+                                return showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Message'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'Attendance uploaded Successfully!')
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('ok'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              });
 
-                              Get.offAll(const TeacherMainHomeScreen());
+             
 
                               Timer(Duration(minutes: int.parse(timer)),
                                   () async {
