@@ -197,11 +197,14 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                     .doc(UserCredentialsController.parentModel!.docid).get(),
                     builder: ((context, snapshot) {
                       if(snapshot.hasData){
-                        return (snapshot.data?.data()?['multipleChildren']==true)? const Text('ra'): const SizedBox();
+                        return (snapshot.data?.data()?['multipleChildren']==true)? GoogleMonstserratWidgets(text: 'Switch to ${snapshot.data?.data()?['childrenIDList'][1]}',  fontsize: 15.sp, overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.bold,
+                            color: cWhite,):
+                             const SizedBox();
                       }
 
                       return const CircularProgressIndicator();
-                    })),
+                    })), const SizedBox(height: 5,),
                   FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection("SchoolListCollection")
