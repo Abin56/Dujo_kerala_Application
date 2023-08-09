@@ -31,132 +31,135 @@ class AllClassTestMonthlyShowPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            //Test Details
-
-            Container(
-              height: ResponsiveApp.mq.size.height / 2.2,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: cgrey1,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: ListView(
-                controller: ScrollController(),
-                shrinkWrap: true,
-                children: [
-                  kHeight10,
-                  const Text(
-                    "Test Details",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  kHeight30,
-                  AllClassTestDetailsWidget(
-                    testName: "Test Name",
-                    testDetails: controller.classTestModel?.testName ?? "",
-                  ),
-                  kHeight10,
-                  AllClassTestDetailsWidget(
-                    testName: "Subject Name",
-                    testDetails: controller.classTestModel?.subjectName ?? "",
-                  ),
-                  kHeight10,
-                  AllClassTestDetailsWidget(
-                      testName: "Date",
-                      testDetails: timeStampToDateFormat(
-                          controller.classTestModel?.date ?? -1)),
-                  kHeight10,
-                  AllClassTestDetailsWidget(
-                      testName: "Time",
-                      testDetails: controller.classTestModel?.time ?? ""),
-                  kHeight10,
-                  AllClassTestDetailsWidget(
-                    testName: "Description",
-                    testDetails: controller.classTestModel?.description ?? "",
-                  ),
-                ],
-              ),
-            ),
-            //Student Score
-            kHeight20,
-            DecoratedBox(
-              decoration: BoxDecoration(
-                  color: cgrey1, borderRadius: BorderRadius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Flexible(
-                        child: SizedBox(
-                            width: ResponsiveApp.mq.size.width / 2,
-                            child: const Text(
-                              "Out Of Mark",
-                              style: TextStyle(fontSize: 20),
-                            ))),
-                    Flexible(
-                      child: SizedBox(
-                        width: 80,
-                        child: Text(
-                          (totalMarkvalue).toString(),
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    )
+        child: Center(
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              //Test Details
+        
+              Container(
+                height: ResponsiveApp.height / 1.5,
+                padding: const EdgeInsets.all(10),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: cgrey1,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ListView(
+                  controller: ScrollController(),
+                  shrinkWrap: true,
+                  children: [
+                    kHeight10,
+                    const Text(
+                      "Test Details",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    kHeight30,
+                    AllClassTestDetailsWidget(
+                      testName: "Test Name",
+                      testDetails: controller.classTestModel?.testName ?? "",
+                    ),
+                    kHeight10,
+                    AllClassTestDetailsWidget(
+                      testName: "Subject Name",
+                      testDetails: controller.classTestModel?.subjectName ?? "",
+                    ),
+                    kHeight10,
+                    AllClassTestDetailsWidget(
+                        testName: "Date",
+                        testDetails: timeStampToDateFormat(
+                            controller.classTestModel?.date ?? -1)),
+                    kHeight10,
+                    AllClassTestDetailsWidget(
+                        testName: "Time",
+                        testDetails: controller.classTestModel?.time ?? ""),
+                    kHeight10,
+                    AllClassTestDetailsWidget(
+                      testName: "Description",
+                      testDetails: controller.classTestModel?.description ?? "",
+                    ),
                   ],
                 ),
               ),
-            ),
-
-            kHeight20,
-
-            DecoratedBox(
-              decoration: BoxDecoration(
-                  color: cgrey1, borderRadius: BorderRadius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ListView.builder(
-                    controller: ScrollController(),
-                    shrinkWrap: true,
-                    itemCount:
-                        controller.classTestModel?.studentDetails.length ?? 0,
-                    itemBuilder: (context, index) {
-                      String mark = (studentList?[index].mark == -1
-                              ? "Mark not entered"
-                              : studentList?[index].mark)
-                          .toString();
-
-                      if (navigationPageName == "student" &&
-                          studentList?[index].studentId ==
-                              UserCredentialsController.studentModel?.docid) {
-                        return DataShowWidget(
-                          mark: mark,
-                          studentId: studentList?[index].studentId ?? "",
-                        );
-                      } else if (navigationPageName == "parent" &&
-                          studentList?[index].studentId ==
-                              UserCredentialsController.parentModel?.studentID) {
-                        return DataShowWidget(
-                          mark: mark,
-                          studentId: studentList?[index].studentId ?? "",
-                        );
-                      } else if (navigationPageName == "guardian" &&
-                          studentList?[index].studentId ==
-                              UserCredentialsController.guardianModel?.studentID) {
-                        return DataShowWidget(
-                          mark: mark,
-                          studentId: studentList?[index].studentId ?? "",
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    }),
+              //Student Score
+              kHeight20,
+              DecoratedBox(
+                decoration: BoxDecoration(
+                    color: cgrey1, borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Flexible(
+                          child: SizedBox(
+                              width: ResponsiveApp.mq.size.width / 2,
+                              child: const Text(
+                                "Out of mark",
+                                style: TextStyle(fontSize: 18),
+                              ))),
+                      Flexible(
+                        child: SizedBox(
+                          width: 80,
+                          child: Text(
+                            (totalMarkvalue).toString(),
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
+        
+              kHeight20,
+        
+              DecoratedBox(
+                decoration: BoxDecoration(
+                    color: cgrey1, borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: ListView.builder(
+                      controller: ScrollController(),
+                      shrinkWrap: true,
+                      itemCount:
+                          controller.classTestModel?.studentDetails.length ?? 0,
+                      itemBuilder: (context, index) {
+                        String mark = (studentList?[index].mark == -1
+                                ? "Mark not entered"
+                                : studentList?[index].mark)
+                            .toString();
+        
+                        if (navigationPageName == "student" &&
+                            studentList?[index].studentId ==
+                                UserCredentialsController.studentModel?.docid) {
+                          return DataShowWidget(
+                            mark: mark,
+                            studentId: studentList?[index].studentId ?? "",
+                          );
+                        } else if (navigationPageName == "parent" &&
+                            studentList?[index].studentId ==
+                                UserCredentialsController.parentModel?.studentID) {
+                          return DataShowWidget(
+                            mark: mark,
+                            studentId: studentList?[index].studentId ?? "",
+                          );
+                        } else if (navigationPageName == "guardian" &&
+                            studentList?[index].studentId ==
+                                UserCredentialsController.guardianModel?.studentID) {
+                          return DataShowWidget(
+                            mark: mark,
+                            studentId: studentList?[index].studentId ?? "",
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      }),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -179,19 +182,19 @@ class AllClassTestDetailsWidget extends StatelessWidget {
       children: <Widget>[
         Flexible(
           child: SizedBox(
-            width: 200,
+            width: ResponsiveApp.mq.size.width/2,
             child: Text(
               testName,
-              style: const TextStyle(fontSize: 18),
+              style:  TextStyle(fontSize: ResponsiveApp.width*.04),
             ),
           ),
         ),
         const Flexible(child: Text(":")),
         SizedBox(
-            width: 200,
+            width: ResponsiveApp.mq.size.width/2.5,
             child: Text(
               testDetails,
-              style: const TextStyle(fontSize: 15),
+              style:  TextStyle(fontSize: ResponsiveApp.width*.04),
             )),
       ],
     );
@@ -216,10 +219,10 @@ class DataShowWidget extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: SizedBox(
-                  width: ResponsiveApp.mq.size.width / 2,
+                  width: ResponsiveApp.width / 2,
                   child: Text(
                     snapshot.data?.studentName ?? "",
-                    style: const TextStyle(fontSize: 19),
+                    style:  TextStyle(fontSize:  ResponsiveApp.width*.04),
                   ),
                 ),
               ),
@@ -228,7 +231,7 @@ class DataShowWidget extends StatelessWidget {
                   width: 80,
                   child: Text(
                     mark,
-                    style: const TextStyle(fontSize: 19),
+                    style:  TextStyle(fontSize:  ResponsiveApp.width*.04),
                   ),
                 ),
               )

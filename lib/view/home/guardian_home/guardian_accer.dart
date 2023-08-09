@@ -17,8 +17,9 @@ import '../../pages/Homework/view_home_work.dart';
 import '../../pages/Notice/notice_list.dart';
 import '../../pages/Subject/subject_display.dart';
 import '../../pages/exam_results/for_users/select_examlevel_uses.dart';
+import '../all_class_test_monthly_show/all_class_list_monthly_show.dart';
+import '../all_class_test_show/all_class_list_show.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
-import '../parent_home/progress_report/progress_report.dart';
 import '../student_home/time_table/ss.dart';
 
 class GuardianAccessories extends StatelessWidget {
@@ -53,10 +54,11 @@ class GuardianAccessories extends StatelessWidget {
       SchoolLevelMeetingPage(), //Meetings
 
       const UserExmNotifications(),
-       // Exams
-            UsersSelectExamLevelScreen(
+      // Exams
+      UsersSelectExamLevelScreen(
           classId: UserCredentialsController.classId!,
-          studentID: UserCredentialsController.guardianModel!.studentID!),////// exam result
+          studentID: UserCredentialsController
+              .guardianModel!.studentID!), ////// exam result
 
       const EventList(), //Events
 
@@ -70,8 +72,13 @@ class GuardianAccessories extends StatelessWidget {
 
       TeacherSubjectWiseList(navValue: ''), //Teachers
 
-     BusRouteListPage(),   /////// all bus
-
+      BusRouteListPage(), /////// all bus
+      AllClassTestPage(
+        pageNameFrom: "guardian",
+      ), //class test page
+      AllClassTestMonthlyPage(
+        pageNameFrom: "guardian",
+      ),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;
@@ -98,7 +105,7 @@ class GuardianAccessories extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(()=>screenNavigation[index]);
+                        Get.to(() => screenNavigation[index]);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -135,7 +142,7 @@ class GuardianAccessories extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.5),
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600),
-                                  textAlign:TextAlign.center,
+                              textAlign: TextAlign.center,
                             )
                           ],
                         ),
@@ -166,6 +173,8 @@ List<String> _acc_text = [
   'Subjects'.tr,
   'Teachers'.tr,
   'Bus Route'.tr,
+  'Class Test'.tr,
+  'Class Test Monthly'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
@@ -175,10 +184,12 @@ var _acc_images = [
   'assets/images/library.png',
   'assets/images/meetings.png',
   'assets/images/exam.png',
-   'assets/images/exmresult1.png',
+  'assets/images/exmresult1.png',
   'assets/images/activity.png',
   // 'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/teachers.png',
   'assets/images/bus.png',
+  'assets/images/examtest.png',
+  'assets/images/test.png',
 ];
