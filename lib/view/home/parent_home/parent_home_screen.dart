@@ -117,15 +117,21 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: screenSize.width / 2,
-                          child: GoogleMonstserratWidgets(
-                            overflow: TextOverflow.ellipsis,
-                            text: UserCredentialsController
-                                .parentModel!.parentName!,
-                            fontsize: 23.sp,
-                            fontWeight: FontWeight.bold,
-                            color: cWhite,
+                        GestureDetector( 
+                          onTap: (){
+                            log(UserCredentialsController.parentModel!.studentID!);
+          
+                          },
+                          child: SizedBox(
+                            width: screenSize.width / 2,
+                            child: GoogleMonstserratWidgets(
+                              overflow: TextOverflow.ellipsis,
+                              text: UserCredentialsController
+                                  .parentModel!.parentName!,
+                              fontsize: 23.sp,
+                              fontWeight: FontWeight.bold,
+                              color: cWhite,
+                            ),
                           ),
                         ),
                           GestureDetector(
@@ -159,24 +165,24 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       ],
                     ),
                   ),
-                  FutureBuilder(
-                    future: FirebaseFirestore.instance.collection('SchoolListCollection')
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('SchoolListCollection')
                     .doc(UserCredentialsController.schoolId)
                     .collection(UserCredentialsController.batchId!)
                     .doc(UserCredentialsController.batchId)
                     .collection('classes')
                     .doc(UserCredentialsController.classId)
                     .collection('ParentCollection')
-                    .doc(UserCredentialsController.parentModel!.docid).get(),
+                    .doc(UserCredentialsController.parentModel!.docid).snapshots(),
                     builder: ((context, snapshot) {
                       if(snapshot.hasData){
-                         return FutureBuilder(
-                      future: FirebaseFirestore.instance
+                         return StreamBuilder(
+                      stream: FirebaseFirestore.instance
                           .collection("SchoolListCollection")
                           .doc(UserCredentialsController.schoolId)
                           .collection("AllStudents")
                           .doc(snapshot.data?.data()?['childrenIDList'][1])
-                          .get(),
+                          .snapshots(),
                       builder: (context, snap) {
                         if (snap.hasData) {
                           return GestureDetector( 
@@ -208,11 +214,20 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       'studentID' : listToUpdate[0]
                     });
 
-                    UserCredentialsController.parentModel!.studentID = sur['childrenIDList'][0];
-                    UserCredentialsController.classId = kur['classID'];
+                    UserCredentialsController.parentModel!.studentID = await sur['childrenIDList'][0];
+                    UserCredentialsController.classId = await kur['classID'];
+                    UserCredentialsController.parentModel!.studentID = await kur['docid'];
+                  
+                
+                    log('STUDENT ID :${UserCredentialsController.parentModel!.studentID!}');
+                    log( 'CLASS ID :${UserCredentialsController.classId!}');
 
-                    log(UserCredentialsController.parentModel!.studentID!);
-                    log(UserCredentialsController.classId!);
+                //     await FirebaseAuth.instance.signOut().then((value) async {
+                // await SharedPreferencesHelper.clearSharedPreferenceData();
+                // UserCredentialsController.clearUserCredentials();
+                // Get.offAll(() => ParentLoginScreen());
+                
+              /////  });
                     
                              
                             },
