@@ -19,7 +19,8 @@ class ParentTeachersChatsScreen extends StatefulWidget {
       {required this.teacherDocID, required this.teacherName, super.key});
 
   @override
-  State<ParentTeachersChatsScreen> createState() => Parent_TeachersChatsScreenState();
+  State<ParentTeachersChatsScreen> createState() =>
+      Parent_TeachersChatsScreenState();
 }
 
 class Parent_TeachersChatsScreenState extends State<ParentTeachersChatsScreen> {
@@ -337,7 +338,25 @@ class Parent_TeachersChatsScreenState extends State<ParentTeachersChatsScreen> {
         'block': false,
         'docid': FirebaseAuth.instance.currentUser?.uid,
         'messageindex': 0,
-        'Parentname': UserCredentialsController.parentModel?.parentName,
+        'parentname': UserCredentialsController.parentModel?.parentName,
+      }).then((value) async{
+              await FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(UserCredentialsController.schoolId)
+          .collection(UserCredentialsController.batchId!)
+          .doc(UserCredentialsController.batchId!)
+          .collection('classes')
+          .doc(UserCredentialsController.classId)
+          .collection('ParentCollection')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('TeacherChats')
+          .doc(widget.teacherDocID).set({
+            'block':false,
+            'docid':widget.teacherDocID,
+            'messageindex':0,
+            'teacherName':widget.teacherName,
+          });
+
       });
     }
   }

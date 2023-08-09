@@ -32,7 +32,6 @@ class _ParentsChatsScreenState extends State<ParentsChatsScreen> {
     connectingTeacherToParent();
     fectingParentChatStatus();
 
-
     getCurrentParenttMessageIndex().then((value) => resetUserMessageIndex());
     super.initState();
   }
@@ -163,8 +162,8 @@ class _ParentsChatsScreenState extends State<ParentsChatsScreen> {
                                 height: size.height / 17,
                                 width: size.width / 1.3,
                                 child: TextField(
-                                  controller:
-                                      teacherParentChatController.messageController,
+                                  controller: teacherParentChatController
+                                      .messageController,
                                   decoration: InputDecoration(
                                       hintText: "Send Message",
                                       border: OutlineInputBorder(
@@ -194,10 +193,9 @@ class _ParentsChatsScreenState extends State<ParentsChatsScreen> {
                         ),
                       );
                     }
-                  } else if (checkingblock.data?.data() == null){
-                     return const Text("data");
-
-                  }else {
+                  } else if (checkingblock.data?.data() == null) {
+                    return const Text("data");
+                  } else {
                     return const Center(
                       child: CircularProgressIndicator.adaptive(),
                     );
@@ -282,6 +280,20 @@ class _ParentsChatsScreenState extends State<ParentsChatsScreen> {
         'docid': FirebaseAuth.instance.currentUser?.uid,
         'messageindex': 0,
         'teacherName': UserCredentialsController.teacherModel?.teacherName,
+      }).then((value) async {
+        await FirebaseFirestore.instance
+            .collection('SchoolListCollection')
+            .doc(UserCredentialsController.schoolId)
+            .collection('Teachers')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('ParentChats')
+            .doc(widget.parentDocID)
+            .set({
+          'block': false,
+          'docid': FirebaseAuth.instance.currentUser?.uid,
+          'messageindex': 0,
+          'parentname': UserCredentialsController.teacherModel?.teacherName,
+        });
       });
     }
   }

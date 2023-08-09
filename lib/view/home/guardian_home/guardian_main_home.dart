@@ -1,6 +1,5 @@
 import 'package:dujo_kerala_application/main.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +45,6 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,
       ),
-      const UnderMaintanceScreen(text: ""),
       const ChatScreen(),
     ];
     return WillPopScope(
@@ -92,13 +90,6 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
                 textSize: 20,
                 icon: Icons.tv,
                 text: 'Recorded\nClasses'.tr,
-              ),
-              GButton(
-                iconSize: 30,
-                // iconSize: 10,
-                textSize: 20,
-                icon: Icons.laptop,
-                text: 'Live\nClasses'.tr,
               ),
               GButton(
                 iconSize: 30,
