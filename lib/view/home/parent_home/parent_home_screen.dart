@@ -152,7 +152,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                         ),
                           GestureDetector(
                               onTap: () {
-                                Get.to(()=>const ParentEditProfileScreen());
+                                Get.to(()=> ParentEditProfileScreen());
 
                               },
                               child:
