@@ -186,20 +186,22 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       ],
                     ),
                   ),
-                  // StreamBuilder(
-                  //   stream: FirebaseFirestore.instance.collection('SchoolListCollection')
-                  //   .doc(UserCredentialsController.schoolId)
-                  //   .collection(UserCredentialsController.batchId!)
-                  //   .doc(UserCredentialsController.batchId)
-                  //   .collection('classes')
-                  //   .doc(UserCredentialsController.classId)
-                  //   .collection('ParentCollection')
-                  //   .doc(UserCredentialsController.parentModel!.docid).snapshots(),
-                  //   builder: ((context, snapshot) {
-                  //     if(snapshot.hasData){
+                  FutureBuilder(
+                    future: FirebaseFirestore.instance.collection('SchoolListCollection')
+                    .doc(UserCredentialsController.schoolId)
+                    .collection(UserCredentialsController.batchId!)
+                    .doc(UserCredentialsController.batchId)
+                    .collection('classes')
+                    .doc(UserCredentialsController.classId)
+                    .collection('ParentCollection')
+                    .doc(UserCredentialsController.parentModel!.docid).get(),
+                    builder: ((context, snapshot) {
+                      if(snapshot.hasData){
+                        return (snapshot.data?.data()?['multipleChildren']==true)? const Text('ra'): const SizedBox();
+                      }
 
-                  //     }
-                  //   })),
+                      return const CircularProgressIndicator();
+                    })),
                   FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection("SchoolListCollection")
