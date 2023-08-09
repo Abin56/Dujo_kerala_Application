@@ -15,6 +15,7 @@ import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../../pages/recorded_videos/select_subjects.dart';
 import '../../pages/splash_screen/splash_screen.dart';
 import '../drawer/class_teacher.dart';
+import '../teachers_home/teacher_classes_list.dart';
 
 class ClassTeacherMainHomeScreen extends StatefulWidget {
   const ClassTeacherMainHomeScreen({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _ClassTeacherMainHomeScreenState
 
   @override
   void initState() {
+    backtoSwitchClass();
     super.initState();
   }
 

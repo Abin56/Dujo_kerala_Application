@@ -331,12 +331,12 @@ class TeacherGroupChatController extends GetxController {
           .doc(studentDetails.docid)
           .set(studentDetails.toMap());
     }
-         userIndexBecomeZero(groupID);
+         userIndexBecomeZero(groupID,'Students',teacherParameter: 'studentName');
     isLoading.value = false;
   }
 
   customAddStudentInGroup(groupID) {
-    userIndexBecomeZero(groupID);
+    userIndexBecomeZero(groupID,'Students',teacherParameter: 'studentName');
     RxMap<String, bool?> addStudentList = <String, bool?>{}.obs;
 
     List<AddStudentModel> featchingStudentlList = [];

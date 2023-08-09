@@ -47,31 +47,9 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
         .set({'deviceToken': deviceToken}, SetOptions(merge: true)).then(
             (value) => log('Device Token Saved To FIREBASE'));
 
-    //AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp  apikey
   }
 
-// Future<void> scheduleNotification(DateTime scheduledTime, String title, String body) async {
-//   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-//     'channel_id', // Replace with a unique channel ID
-//     'channel_name', // Replace with a channel name
-//     'channel_description', // Replace with a channel description
-//   );
 
-//   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-
-//   var platformChannelSpecifics = NotificationDetails(
-//     android: androidPlatformChannelSpecifics,
-//     iOS: iOSPlatformChannelSpecifics,
-//   );
-
-//   await flutterLocalNotificationsPlugin.schedule(
-//     0, // A unique notification ID
-//     title,
-//     body,
-//     scheduledTime,
-//     platformChannelSpecifics,
-//     androidAllowWhileIdle: true, // Allows the notification to be displayed even if the device is in Doze mode (Android only)
-//   );
 // }
 
   Future<void> sendPushMessage(String token, String body, String title) async {
@@ -156,28 +134,26 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
 
                               },
                               child:
-                        Container(
-                          child: Stack(
-                            children: [
-                             CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      UserCredentialsController
-                                              .parentModel!.profileImageURL ??
-                                          ''),
-                                  radius: 50.r,
+                        Stack(
+                          children: [
+                           CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    UserCredentialsController
+                                            .parentModel!.profileImageURL ??
+                                        ''),
+                                radius: 50.r,
+                              ),
+                              Positioned(
+                                right: 6.r,
+                                bottom: 1.r,
+                                child: CircleAvatar(
+                                  //  backgroundColor: cWhite,
+                                  radius: 12.r,
+                                  child:
+                                      const Center(child: Icon(Icons.info)),
                                 ),
-                                Positioned(
-                                  right: 6.r,
-                                  bottom: 1.r,
-                                  child: CircleAvatar(
-                                    //  backgroundColor: cWhite,
-                                    radius: 12.r,
-                                    child:
-                                        const Center(child: Icon(Icons.info)),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
