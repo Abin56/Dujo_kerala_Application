@@ -23,6 +23,7 @@ class ChapterUpoload extends StatelessWidget {
   String subjectID;
 
   Uuid idgen = const Uuid();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<void> uploadChapters(id) async {
     FirebaseFirestore.instance
@@ -67,74 +68,77 @@ class ChapterUpoload extends StatelessWidget {
         ),
         backgroundColor: adminePrimayColor,
       ),
-      body: Column(
-        children: [
-          kHeight20,
-          ExamUploadTextFormFeild(
-              textfromController: chapterNumberController,
-              text: "Chapter No.".tr,
-              hintText: "Chapter Number".tr),
-          kHeight20,
-          ExamUploadTextFormFeild(
-              textfromController: chapterNameController,
-              text: "Chapter Name".tr,
-              hintText: "Chapter Name".tr),
-          kHeight20,
-          ExamUploadTextFormFeild(
-              textfromController: subjectNameController,
-              text: "Subject Name".tr,
-              hintText: "Subject Name".tr),
-          kHeight20,
-          GestureDetector(
-            onTap: () {
-              //print('subjejctname: ${subjectNameController.text}');
-              String generatedDocID =  subjectNameController.text.trim()+idgen.v1();
-              uploadChapters(generatedDocID).then((value) { 
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            kHeight20,
+            ExamUploadTextFormFeild(
+              validator: (val){
+                if(val!.isEmpty){
+                  return 'Please enter values';
+                }
+                return null;
+              },
+                textfromController: chapterNumberController,
+                text: "Chapter No.".tr,
+                hintText: "Chapter Number".tr),
+            kHeight20,
+            ExamUploadTextFormFeild(
+                validator: (val){
+                if(val!.isEmpty){
+                  return 'Please enter values';
+                }
+                return null;
+              },
+                textfromController: chapterNameController,
+                text: "Chapter Name".tr,
+                hintText: "Chapter Name".tr),
+            kHeight20,
+            ExamUploadTextFormFeild(
+                validator: (val){
+                if(val!.isEmpty){
+                  return 'Please enter values';
+                }
+                return null;
+              },
+                textfromController: subjectNameController,
+                text: "Subject Name".tr,
+                hintText: "Subject Name".tr),
+            kHeight20,
+            GestureDetector(
+              onTap: () {
+                //print('subjejctname: ${subjectNameController.text}');
+
+                if(_formKey.currentState!.validate()){
 
                 
-                return showDialog(context: context, 
-              builder: (context){
-                return  AlertDialog(
-                  title:  Text('Chapter Upload'.tr),
-                  content:  Text('New Chapter Added!'.tr),
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: MaterialButton(child: Text('Ok'.tr), onPressed: () => Navigator.pop(context),),
-                    )
-                  ],
-                );
-              });});
-            },
-            child: ButtonContainerWidget(
-              curving: 18,
-              colorindex: 2,
-              height: 70.h,
-              width: 300.w,
-              child: Center(
-                child: Text(
-                  "SUBMIT".tr,
-                  style: GoogleFonts.montserrat(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-            ),
-          ), 
-          const SizedBox(height: 20,),
-          GestureDetector( 
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>  SubjectWiseDisplayTeacher(subjectID: subjectID),));
-            },
-            child: ButtonContainerWidget(
+                String generatedDocID =  subjectNameController.text.trim()+idgen.v1();
+                uploadChapters(generatedDocID).then((value) { 
+      
+                  
+                  return showDialog(context: context, 
+                builder: (context){
+                  return  AlertDialog(
+                    title:  Text('Chapter Upload'.tr),
+                    content:  Text('New Chapter Added!'.tr),
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: MaterialButton(child: Text('Ok'.tr), onPressed: () => Navigator.pop(context),),
+                      )
+                    ],
+                  );
+                });});}
+              },
+              child: ButtonContainerWidget(
                 curving: 18,
                 colorindex: 2,
                 height: 70.h,
                 width: 300.w,
                 child: Center(
                   child: Text(
-                    "UPLOAD STUDY MATERIALS".tr,
+                    "SUBMIT".tr,
                     style: GoogleFonts.montserrat(
                         color: Colors.white,
                         fontSize: 13,
@@ -142,8 +146,30 @@ class ChapterUpoload extends StatelessWidget {
                   ),
                 ),
               ),
-          ),
-        ],
+            ), 
+            const SizedBox(height: 20,),
+            GestureDetector( 
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>  SubjectWiseDisplayTeacher(subjectID: subjectID),));
+              },
+              child: ButtonContainerWidget(
+                  curving: 18,
+                  colorindex: 2,
+                  height: 70.h,
+                  width: 300.w,
+                  child: Center(
+                    child: Text(
+                      "UPLOAD STUDY MATERIALS".tr,
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ),
+            ),
+          ],
+        ),
       ),
     );
   }

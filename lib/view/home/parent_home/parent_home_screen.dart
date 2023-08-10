@@ -297,6 +297,22 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                     // })),
                     
                      const SizedBox(height: 5,),
+                     StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection('SchoolListCollection')
+                      .doc(UserCredentialsController.schoolId)
+                       .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .collection('ParentCollection')
+                          .doc(UserCredentialsController.parentModel!.docid).snapshots(),
+                      builder: (context, snapshot){
+                        if(snapshot.connectionState == ConnectionState.waiting){
+                          return const SizedBox();
+                        }
+                        return const SizedBox();
+                        //Text(snapshot.data!.data()!['parentName']);
+                      }),
                   FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection("SchoolListCollection")
