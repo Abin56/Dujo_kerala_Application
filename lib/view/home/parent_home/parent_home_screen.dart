@@ -1,4 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -198,83 +199,101 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                     .doc(UserCredentialsController.classId)
                     .collection('ParentCollection')
                     .doc(UserCredentialsController.parentModel!.docid).snapshots(),
-                    builder: ((context, snapshot) {
-                      if(snapshot.hasData){
-                         return StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection("SchoolListCollection")
-                          .doc(UserCredentialsController.schoolId)
-                          .collection("AllStudents")
-                          .doc(snapshot.data?.data()?['childrenIDList'][1])
-                          .snapshots(),
-                      builder: (context, snap) {
-                        if (snap.hasData) {
-                          return GestureDetector( 
-                            onTap: ()async{
-                              DocumentSnapshot sur= await FirebaseFirestore.instance.collection('SchoolListCollection')
-                    .doc(UserCredentialsController.schoolId)
-                    .collection(UserCredentialsController.batchId!)
-                    .doc(UserCredentialsController.batchId)
-                    .collection('classes')
-                    .doc(UserCredentialsController.classId)
-                    .collection('ParentCollection').doc(UserCredentialsController.parentModel!.docid).get();
+                    builder: (context, snapshot){
+                      return (snapshot.data!.data()!['multipleChildren']== null)? const SizedBox(): const Text('Switch to next child', style: TextStyle(color: Colors.white),) ;
+                  }),
+              //     StreamBuilder(
+              //       stream: FirebaseFirestore.instance.collection('SchoolListCollection')
+              //       .doc(UserCredentialsController.schoolId)
+              //       .collection(UserCredentialsController.batchId!)
+              //       .doc(UserCredentialsController.batchId)
+              //       .collection('classes')
+              //       .doc(UserCredentialsController.classId)
+              //       .collection('ParentCollection')
+              //       .doc(UserCredentialsController.parentModel!.docid).snapshots(),
+              //       builder: ((context, snapshot) {
+              //         if(snapshot.hasData){
+              //            return StreamBuilder(
+              //         stream: FirebaseFirestore.instance
+              //             .collection("SchoolListCollection")
+              //             .doc(UserCredentialsController.schoolId)
+              //             .collection("AllStudents")
+              //             .doc(snapshot.data?.data()?['childrenIDList'][1])
+              //             .snapshots(),
+              //         builder: (context, snap) {
+              //           if (snap.hasData) {
+              //             return GestureDetector( 
+              //               onTap: ()async{
+              //       //           DocumentSnapshot sur= await FirebaseFirestore.instance.collection('SchoolListCollection')
+              //       // .doc(UserCredentialsController.schoolId)
+              //       // .collection(UserCredentialsController.batchId!)
+              //       // .doc(UserCredentialsController.batchId)
+              //       // .collection('classes')
+              //       // .doc(UserCredentialsController.classId)
+              //       // .collection('ParentCollection').doc(UserCredentialsController.parentModel!.docid).get();
 
-                     DocumentSnapshot kur = await FirebaseFirestore.instance
-                          .collection("SchoolListCollection")
-                          .doc(UserCredentialsController.schoolId)
-                          .collection("AllStudents")
-                          .doc(snapshot.data?.data()?['childrenIDList'][0])
-                          .get();
+              //       //  DocumentSnapshot kur = await FirebaseFirestore.instance
+              //       //       .collection("SchoolListCollection")
+              //       //       .doc(UserCredentialsController.schoolId)
+              //       //       .collection("AllStudents")
+              //       //       .doc(snapshot.data?.data()?['childrenIDList'][0])
+              //       //       .get();
 
                     
 
-                    DocumentReference surRef = sur.reference; 
+              //       // DocumentReference surRef = sur.reference; 
 
-                    List<String> listToUpdate = []; 
-                    listToUpdate.add(sur['childrenIDList'][1]); 
-                    listToUpdate.add(sur['childrenIDList'][0]);
-                    surRef.update({
-                      'childrenIDList' : listToUpdate, 
-                      'studentID' : listToUpdate[0]
-                    });
+              //       // List<String> listToUpdate = []; 
+              //       // listToUpdate.add(sur['childrenIDList'][1]); 
+              //       // listToUpdate.add(sur['childrenIDList'][0]);
+              //       // surRef.update({
+              //       //   'childrenIDList' : listToUpdate, 
+              //       //   'studentID' : listToUpdate[0]
+              //       // });
 
-                    UserCredentialsController.parentModel!.studentID = await sur['childrenIDList'][0];
-                    UserCredentialsController.classId = await kur['classID'];
-                    UserCredentialsController.parentModel!.studentID = await kur['docid'];
+              //       // UserCredentialsController.parentModel!.studentID = await sur['childrenIDList'][0];
+              //       // UserCredentialsController.classId = await kur['classID'];
+              //       // UserCredentialsController.parentModel!.studentID = await kur['docid'];
+
+              //       // Timer(const Duration(seconds: 5), () { 
+              //       //   log('STUDENT ID :${UserCredentialsController.parentModel!.studentID!}');
+              //       // log( 'CLASS ID :${UserCredentialsController.classId!}');
+              //       // });
                   
                 
-                    log('STUDENT ID :${UserCredentialsController.parentModel!.studentID!}');
-                    log( 'CLASS ID :${UserCredentialsController.classId!}');
+                    
 
-                //     await FirebaseAuth.instance.signOut().then((value) async {
-                // await SharedPreferencesHelper.clearSharedPreferenceData();
-                // UserCredentialsController.clearUserCredentials();
-                // Get.offAll(() => ParentLoginScreen());
+              //   //     await FirebaseAuth.instance.signOut().then((value) async {
+              //   // await SharedPreferencesHelper.clearSharedPreferenceData();
+              //   // UserCredentialsController.clearUserCredentials();
+              //   // Get.offAll(() => ParentLoginScreen());
                 
-              /////  });
+              // /////  });
                     
                              
-                            },
-                            child: GoogleMonstserratWidgets(
-                              text:
-                                  'Switch to ${snap.data?.data()?['studentName']} ',
-                              fontsize: 15.sp,
-                              fontWeight: FontWeight.bold,
-                              color: cWhite,
-                            ),
-                          );
-                        } else {
-                          return const Text('');
-                        }
-                      });
+              //               },
+              //               child: GoogleMonstserratWidgets(
+              //                 text:
+              //                     'Switch to ${snap.data?.data()?['studentName']} ',
+              //                 fontsize: 15.sp,
+              //                 fontWeight: FontWeight.bold,
+              //                 color: cWhite,
+              //               ),
+              //             );
+              //           } else {
+              //             return const Text('');
+              //           }
+              //         });
                         // return (snapshot.data?.data()?['multipleChildren']==true)? GoogleMonstserratWidgets(text: 'Switch to ${snapshot.data?.data()?['childrenIDList'][1]}',  fontsize: 15.sp, overflow: TextOverflow.ellipsis,
                         //     fontWeight: FontWeight.bold,
                         //     color: cWhite,):
-                        //      const SizedBox();
-                      }
+                        //    ;
+                    //  }
 
-                      return const CircularProgressIndicator();
-                    })), const SizedBox(height: 5,),
+                    //   return const CircularProgressIndicator();
+                    // })),
+                    
+                     const SizedBox(height: 5,),
                   FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection("SchoolListCollection")
