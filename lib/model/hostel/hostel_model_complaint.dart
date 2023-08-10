@@ -1,29 +1,33 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class HostelModel {
+class HostelModelComplaint {
   String docId;
+  String title;
   String studentId;
   int date;
   String description;
   bool isCompleted;
-  HostelModel({
+  HostelModelComplaint({
     required this.docId,
+    required this.title,
     required this.studentId,
     required this.date,
     required this.description,
     required this.isCompleted,
   });
 
-  HostelModel copyWith({
+  HostelModelComplaint copyWith({
     String? docId,
+    String? title,
     String? studentId,
     int? date,
     String? description,
     bool? isCompleted,
   }) {
-    return HostelModel(
+    return HostelModelComplaint(
       docId: docId ?? this.docId,
+      title: title ?? this.title,
       studentId: studentId ?? this.studentId,
       date: date ?? this.date,
       description: description ?? this.description,
@@ -34,6 +38,7 @@ class HostelModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'docId': docId,
+      'title': title,
       'studentId': studentId,
       'date': date,
       'description': description,
@@ -41,9 +46,10 @@ class HostelModel {
     };
   }
 
-  factory HostelModel.fromMap(Map<String, dynamic> map) {
-    return HostelModel(
+  factory HostelModelComplaint.fromMap(Map<String, dynamic> map) {
+    return HostelModelComplaint(
       docId: map['docId'] as String,
+      title: map['title'] as String,
       studentId: map['studentId'] as String,
       date: map['date'] as int,
       description: map['description'] as String,
@@ -53,31 +59,34 @@ class HostelModel {
 
   String toJson() => json.encode(toMap());
 
-  factory HostelModel.fromJson(String source) =>
-      HostelModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory HostelModelComplaint.fromJson(String source) =>
+      HostelModelComplaint.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'HostelModel(docId: $docId, studentId: $studentId, date: $date, description: $description, isCompleted: $isCompleted)';
+    return 'HostelModelComplaint(docId: $docId, title: $title, studentId: $studentId, date: $date, description: $description, isCompleted: $isCompleted)';
   }
 
   @override
-  bool operator ==(covariant HostelModel other) {
+  bool operator ==(covariant HostelModelComplaint other) {
     if (identical(this, other)) return true;
-
-    return other.docId == docId &&
-        other.studentId == studentId &&
-        other.date == date &&
-        other.description == description &&
-        other.isCompleted == isCompleted;
+  
+    return 
+      other.docId == docId &&
+      other.title == title &&
+      other.studentId == studentId &&
+      other.date == date &&
+      other.description == description &&
+      other.isCompleted == isCompleted;
   }
 
   @override
   int get hashCode {
     return docId.hashCode ^
-        studentId.hashCode ^
-        date.hashCode ^
-        description.hashCode ^
-        isCompleted.hashCode;
+      title.hashCode ^
+      studentId.hashCode ^
+      date.hashCode ^
+      description.hashCode ^
+      isCompleted.hashCode;
   }
 }

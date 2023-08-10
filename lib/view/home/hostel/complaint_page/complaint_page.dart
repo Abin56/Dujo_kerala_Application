@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../controllers/hostel/hostel_complaint/hostel_complaint_create_controller.dart';
-import '../../../../model/hostel/hostel_model.dart';
+import '../../../../model/hostel/hostel_model_complaint.dart';
 import '../../../constant/responsive.dart';
 import 'complaint_list_page.dart';
 
@@ -44,6 +44,22 @@ class HostelComplaintPage extends StatelessWidget {
                           height: 40,
                         ),
                         SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller:
+                                _hostelController.complaintTitleController,
+                            textAlign: TextAlign.center,
+                            expands: true,
+                            maxLines: null,
+                            decoration: const InputDecoration(
+                                hintText: "Title",
+                                border: OutlineInputBorder()),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
                           height: 300,
                           child: TextFormField(
                             textAlign: TextAlign.center,
@@ -63,18 +79,24 @@ class HostelComplaintPage extends StatelessWidget {
                             shape: const StadiumBorder(),
                           ),
                           onPressed: () async {
-                            await _hostelController.createHostelComplaint(
-                              hostel: HostelModel(
-                                docId: "",
-                                studentId: UserCredentialsController
-                                        .studentModel?.docid ??
-                                    "",
-                                date: Timestamp.now().millisecondsSinceEpoch,
-                                description:
-                                    _hostelController.complaintController.text,
-                                isCompleted: false,
-                              ),
-                            );
+                            if (_hostelController.isValid()) {
+                              await _hostelController.createHostelComplaint(
+                                hostel: HostelModelComplaint(
+                                  docId: "",
+                                  title: _hostelController
+                                      .complaintTitleController.text,
+                                  studentId: UserCredentialsController
+                                          .studentModel?.docid ??
+                                      "",
+                                  date: Timestamp.now().millisecondsSinceEpoch,
+                                  description: _hostelController
+                                      .complaintController.text,
+                                  isCompleted: false,
+                                ),
+                              );
+                            } else {
+                              showToast(msg: "All fields are mandatory");
+                            }
                           },
                           child: const Text("Submit"),
                         ),
@@ -88,7 +110,7 @@ class HostelComplaintPage extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const ComplaintsListPage(),
+                              builder: (context) => ComplaintsListPage(),
                             ));
                           },
                           child: const Text("Show All Complaints"),
