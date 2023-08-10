@@ -200,7 +200,10 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                     .collection('ParentCollection')
                     .doc(UserCredentialsController.parentModel!.docid).snapshots(),
                     builder: (context, snapshot){
-                      return (snapshot.data!.data()!['multipleChildren']== null)? const SizedBox(): const Text('Switch to next child', style: TextStyle(color: Colors.white),) ;
+                      if(snapshot.connectionState == ConnectionState.waiting){
+                        return const SizedBox();
+                      }
+                      return (snapshot.data!.data()!['multipleChildren']== null)? const SizedBox(): const Text('Switch to next', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),) ;
                   }),
               //     StreamBuilder(
               //       stream: FirebaseFirestore.instance.collection('SchoolListCollection')
