@@ -84,14 +84,14 @@ class _AddAchievementsState extends State<AddAchievements> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+     // resizeToAvoidBottomInset: true,
       appBar: AppBar(title:GooglePoppinsWidgets(text: 'Add Achievement'.tr,fontsize: 18.w),backgroundColor:adminePrimayColor ,),
       body: SafeArea(
         child: Center(
           child: Form(key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.start,
               children: [
                // IconButtonBackWidget(color: cblack,),
                 Expanded(
@@ -120,7 +120,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                             controller: achievementController,
                              decoration:  InputDecoration(
                                border: InputBorder.none, // Remove the default underline
-                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
+                               contentPadding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the padding as needed
                                hintText: 'Achievement'.tr, // Placeholder text
                              ),),
                          ),
