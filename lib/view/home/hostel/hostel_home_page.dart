@@ -23,11 +23,11 @@ class HostelHomePage extends StatelessWidget {
   ];
 
   final List<Widget> raiseNavigation = [
-    const HostelComplaintPage(),
-    const HostelComplaintPage(),
-    const HostelComplaintPage(),
-    const HostelComplaintPage(),
-    const HostelComplaintPage(),
+    HostelComplaintPage(),
+    HostelComplaintPage(),
+    HostelComplaintPage(),
+    HostelComplaintPage(),
+    HostelComplaintPage(),
   ];
   final List<String> iconListSee = [
     'assets/images/menu.png',

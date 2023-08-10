@@ -1,8 +1,14 @@
+import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../controllers/hostel/hostel_complaint/hostel_complaint_controller.dart';
+import '../../../../model/hostel/hostel_model_complaint.dart';
 
 class ComplaintsShowPage extends StatelessWidget {
-  const ComplaintsShowPage({super.key});
+  const ComplaintsShowPage({super.key, required this.hostelModelComplaint});
+  final HostelModelComplaint hostelModelComplaint;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +25,20 @@ class ComplaintsShowPage extends StatelessWidget {
             //complainted student name
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                Text("Student Name  :  "),
-                Text("Rahul")
+              children: <Widget>[
+                const Flexible(child: Text("Student Name  : ")),
+                Flexible(
+                    child: FutureBuilder(
+                        future: Get.find<HostelComplaintController>()
+                            .getStudentData(
+                                studentId: hostelModelComplaint.studentId),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(snapshot.data?.studentName ?? "");
+                          } else {
+                            return const SizedBox();
+                          }
+                        }))
               ],
             ),
             const SizedBox(
@@ -30,9 +47,9 @@ class ComplaintsShowPage extends StatelessWidget {
             //date
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                Text("Complaint Date  :  "),
-                Text("10-11-2021")
+              children: <Widget>[
+                const Text("Complaint Date  :  "),
+                Text(timeStampToDateFormat(hostelModelComplaint.date))
               ],
             ),
             //complaint details
@@ -51,8 +68,7 @@ class ComplaintsShowPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Text(
-                "djfljsdfljsdlfjldjfjfjljdlfjl;adsjfljdsfldklsfjlsdjfljlsfjlsjflsjflsfsflsjfljsfjsfkjsfjslfjlsjfldsjfdsjfdsjfjerewioudkgj,xnvxkdhfgoaifjuoi"),
+            Text(hostelModelComplaint.description),
 
             //
           ],
