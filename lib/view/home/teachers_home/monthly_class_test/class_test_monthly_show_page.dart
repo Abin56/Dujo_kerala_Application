@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../controllers/teacher_home/class_test_controller/monthly_controllers/class_test_show_monthly_controller.dart';
 import '../../../colors/colors.dart';
+import '../../../constant/responsive.dart';
 import '../../../constant/sizes/sizes.dart';
 import 'widgets/test_button_monthly_widget.dart';
 import 'widgets/test_data_monthly_widget.dart';
@@ -46,13 +47,14 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                             Flexible(
                                 child: SizedBox(
                                     width: size.width / 2,
-                                    child: const Text(
+                                    child: Text(
                                       "Out Of Mark",
-                                      style: TextStyle(fontSize: 20),
+                                      style: TextStyle(
+                                          fontSize: ResponsiveApp.width * .04),
                                     ))),
                             Flexible(
                                 child: SizedBox(
-                                    width: 80,
+                                    width: 60,
                                     height: 50,
                                     child: TextField(
                                       controller: showTestController
@@ -99,8 +101,10 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                                                 return Text(
                                                   snapshot.data?.studentName ??
                                                       "",
-                                                  style: const TextStyle(
-                                                      fontSize: 19),
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          ResponsiveApp.width *
+                                                              .04),
                                                 );
                                               } else {
                                                 return const Text(" ");
@@ -108,7 +112,7 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                                             }))),
                                 Flexible(
                                   child: SizedBox(
-                                    width: 80,
+                                    width: 60,
                                     height: 50,
                                     child: TextField(
                                       controller: showTestController
