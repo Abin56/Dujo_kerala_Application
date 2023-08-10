@@ -33,7 +33,6 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     connectingTeacherToStudent();
     fectingStudentChatStatus();
 
-
     getCurrentStudentMessageIndex().then((value) => resetUserMessageIndex());
     super.initState();
   }
@@ -50,7 +49,10 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           children: [
             const CircleAvatar(),
             kWidth10,
-            Text(widget.studentName,style: TextStyle(fontSize: 17.sp),),
+            Text(
+              widget.studentName,
+              style: TextStyle(fontSize: 17.sp),
+            ),
           ],
         ),
         actions: [
@@ -195,10 +197,9 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                         ),
                       );
                     }
-                  } else if (checkingblock.data?.data() == null){
-                     return const Text("data");
-
-                  }else {
+                  } else if (checkingblock.data?.data() == null) {
+                    return const Text("data");
+                  } else {
                     return const Center(
                       child: CircularProgressIndicator.adaptive(),
                     );
@@ -210,7 +211,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     );
   }
 
-  Future<void> getCurrentStudentMessageIndex() async {
+  Future getCurrentStudentMessageIndex() async {
     var vari = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -219,8 +220,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
         .collection('StudentChats')
         .doc(widget.studentDocID)
         .get();
-
-    currentStudentMessageIndex = vari.data()!['messageindex'];
+    return currentStudentMessageIndex = vari.data()?['messageindex'];
   }
 
   resetUserMessageIndex() async {
@@ -291,31 +291,26 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     final checkuser = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
-        .collection(UserCredentialsController.batchId!)
-        .doc(UserCredentialsController.batchId!)
-        .collection('classes')
-        .doc(UserCredentialsController.classId)
-        .collection('Students')
+        .collection('Teachers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('StudentChats')
         .doc(widget.studentDocID)
-        .collection('TeacherChats')
         .get();
-    if (checkuser.docs.isEmpty) {
+    if (checkuser.data() == null) {
+      log("nullllllllllllll");
       await FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)
-          .collection(UserCredentialsController.batchId!)
-          .doc(UserCredentialsController.batchId!)
-          .collection('classes')
-          .doc(UserCredentialsController.classId)
-          .collection('Students')
+          .collection('Teachers')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('StudentChats')
           .doc(widget.studentDocID)
-          .collection('TeacherChats')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
           .set({
         'block': false,
-        'docid': FirebaseAuth.instance.currentUser?.uid,
+        'docid': widget.studentDocID,
         'messageindex': 0,
-        'teacherName': UserCredentialsController.teacherModel?.teacherName,
+        'classID': UserCredentialsController.classId,
+        'studentname': widget.studentName,
       });
     }
   }
