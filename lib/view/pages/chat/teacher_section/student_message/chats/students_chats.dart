@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controllers/chat_controller/teacher_controller/teacher_controller.dart';
@@ -49,7 +50,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           children: [
             const CircleAvatar(),
             kWidth10,
-            Text(widget.studentName),
+            Text(widget.studentName,style: TextStyle(fontSize: 17.sp),),
           ],
         ),
         actions: [
@@ -150,17 +151,17 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                       );
                     } else {
                       return SizedBox(
-                        height: size.height / 15,
+                        height: size.height / 15.h,
                         width: size.width,
                         // alignment: Alignment.center,
                         child: SizedBox(
-                          height: size.height / 12,
+                          height: size.height / 12.h,
                           width: size.width / 1.1,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(
-                                height: size.height / 17,
+                                height: size.height / 17.h,
                                 width: size.width / 1.3,
                                 child: TextField(
                                   controller:
@@ -173,7 +174,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                                 ),
                               ),
                               CircleAvatar(
-                                radius: 28,
+                                radius: 28.r,
                                 backgroundColor: adminePrimayColor,
                                 child: Center(
                                   child: IconButton(

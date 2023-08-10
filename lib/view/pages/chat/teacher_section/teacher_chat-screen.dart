@@ -5,6 +5,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/pages/chat/teacher_section/parents_message/parents_messages.dart';
 import 'package:dujo_kerala_application/view/pages/chat/teacher_section/student_message/students_messages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
@@ -36,7 +37,7 @@ class TeacherChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Text("Students".tr),
+                         Text("Students".tr,style: TextStyle(fontSize: 17.sp),),
                         StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('SchoolListCollection')
@@ -63,15 +64,15 @@ class TeacherChatScreen extends StatelessWidget {
                                     .collection('StudentChatCounter')
                                     .doc('F0Ikn1UouYIkqmRFKIpg')
                                     .update({'chatIndex': 0});
-                                return const CircleAvatar(
-                                  radius: 10,
+                                return  CircleAvatar(
+                                  radius: 10.sp,
                                   backgroundColor: Colors.white,
                                   child: Center(
                                     child: Text(
                                       '0',
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 10,
+                                          fontSize: 10.sp,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -121,7 +122,7 @@ class TeacherChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Text("Parents".tr),
+                         Text("Parents".tr,style: TextStyle(fontSize: 17.sp),),
                         StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('SchoolListCollection')
@@ -167,16 +168,16 @@ class TeacherChatScreen extends StatelessWidget {
                                 return Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: CircleAvatar(
-                                    radius: 10,
+                                    radius: 10.sp,
                                     backgroundColor: Colors.white,
                                     child: Center(
                                       child: Text(
                                         messageIndex.data!
                                             .data()!['chatIndex']
                                             .toString(),
-                                        style: const TextStyle(
+                                        style:  TextStyle(
                                             color: Colors.black,
-                                            fontSize: 10,
+                                            fontSize: 10.sp,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GooglePoppinsWidgets extends StatelessWidget {
@@ -22,7 +23,7 @@ class GooglePoppinsWidgets extends StatelessWidget {
       text,
       // overflow: TextOverflow.ellipsis,
       style: GoogleFonts.poppins(
-        fontSize: fontsize,
+        fontSize: fontsize.sp,
         fontWeight: fontWeight,
         color: color,
       ),

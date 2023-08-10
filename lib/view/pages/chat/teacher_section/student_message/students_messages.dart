@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../search_students/search_students.dart';
@@ -13,9 +14,10 @@ class StudentsMessagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-                Future<void> _showSearch() async {
-    await showSearch(context: context, delegate: SearchStudentsForChat());
-  }
+    Future<void> _showSearch() async {
+      await showSearch(context: context, delegate: SearchStudentsForChat());
+    }
+
     final size = MediaQuery.of(context).size;
     return StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -30,11 +32,11 @@ class StudentsMessagesScreen extends StatelessWidget {
             return ListView(
               children: [
                 SizedBox(
-                  height: size.height * 0.74,
+                  height: size.height * 0.72,
                   child: ListView.separated(
                       itemBuilder: (context, index) {
                         return SizedBox(
-                          height: 70,
+                          height: ScreenUtil().setHeight(70),
                           child: ListTile(
                             onTap: () {
                               Get.to(() => StudentsChatsScreen(
@@ -49,7 +51,8 @@ class StudentsMessagesScreen extends StatelessWidget {
                             ),
                             title: Text(
                                 snapshots.data!.docs[index]['studentname'],
-                                style: const TextStyle(color: Colors.black)),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20.sp)),
                             contentPadding: const EdgeInsetsDirectional.all(1),
                             subtitle: FutureBuilder(
                                 future: FirebaseFirestore.instance
@@ -59,26 +62,29 @@ class StudentsMessagesScreen extends StatelessWidget {
                                         UserCredentialsController.batchId!)
                                     .doc(UserCredentialsController.batchId!)
                                     .collection('classes')
-                                    .doc(UserCredentialsController.classId!)
+                                    .doc(snapshots.data?.docs[index]['classID'])
                                     .get(),
                                 builder: (context, futuredata) {
-                           if (futuredata.hasData) {
-                                   return Row(
-                                    children: [
-                                      const Text(
-                                        'class : ',
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                      Text(
-                                        futuredata.data?.data()?['className'],
-                                        style: const TextStyle(color: Colors.black),
-                                      ),
-                                    ],
-                                  );
-                             
-                           }else{
-                            return const Center();
-                           }
+                                  if (futuredata.hasData) {
+                                    return Row(
+                                      children: [
+                                        Text(
+                                          'class : ',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15.sp),
+                                        ),
+                                        Text(
+                                          futuredata.data?.data()?['className'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15.sp),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return const Center();
+                                  }
                                 }),
                             trailing: snapshots.data!.docs[index]
                                         ['messageindex'] ==
@@ -113,25 +119,29 @@ class StudentsMessagesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 8),
+                      padding: EdgeInsets.only(right: 8.sp),
                       child: GestureDetector(
                         onTap: () {
                           _showSearch();
                         },
                         child: Container(
-                          decoration: const BoxDecoration(
-                            borderRadius:BorderRadius.all(Radius.circular(30)),
-                              color: Color.fromARGB(255, 232, 224, 224)),
-                          height: 50,
-                          width: 200,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.sp)),
+                              color: const Color.fromARGB(255, 232, 224, 224)),
+                          height: ScreenUtil().setHeight(50),
+                          width: ScreenUtil().setWidth(200),
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children:  [
+                              children: [
                                 const Icon(Icons.search),
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: GooglePoppinsWidgets(text: 'Search Students'.tr, fontsize: 15,),
+                                  padding: EdgeInsets.only(right: 10.sp),
+                                  child: GooglePoppinsWidgets(
+                                    text: 'Search Students'.tr,
+                                    fontsize: 15.sp,
+                                  ),
                                 ),
                               ],
                             ),

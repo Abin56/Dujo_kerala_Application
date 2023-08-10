@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GoogleMonstserratWidgets extends StatelessWidget {
@@ -28,7 +29,7 @@ class GoogleMonstserratWidgets extends StatelessWidget {
       overflow: overflow, maxLines: 1,
       style: GoogleFonts.montserrat(
         letterSpacing: letterSpacing,
-        fontSize: fontsize,
+        fontSize: fontsize.sp,
         fontWeight: fontWeight,
         color: color,
       ),
