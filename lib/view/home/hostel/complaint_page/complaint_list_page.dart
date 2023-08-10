@@ -57,9 +57,13 @@ class ComplaintsListPage extends StatelessWidget {
                             trailing:
                                 const Icon(Icons.arrow_forward_ios, size: 17),
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ComplaintsShowPage()));
+                              if (snapshot.data?[index] != null) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ComplaintsShowPage(
+                                          hostelModelComplaint:
+                                              snapshot.data![index],
+                                        )));
+                              }
                             },
                           ),
                         );
@@ -90,9 +94,13 @@ class ComplaintsListPage extends StatelessWidget {
                             trailing:
                                 const Icon(Icons.arrow_forward_ios, size: 17),
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ComplaintsShowPage()));
+                              if (snapshot.data?[index] != null) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ComplaintsShowPage(
+                                          hostelModelComplaint:
+                                              snapshot.data![index],
+                                        )));
+                              }
                             },
                           ),
                         );

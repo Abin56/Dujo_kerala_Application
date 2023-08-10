@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 
 import '../../../model/hostel/hostel_model_complaint.dart';
+import '../../../model/student_model/student_model.dart';
 import '../../userCredentials/user_credentials.dart';
 
 class HostelComplaintController {
@@ -50,6 +51,25 @@ class HostelComplaintController {
       showToast(msg: "Something went wrong");
       log(e.toString(), name: className);
       return [];
+    }
+  }
+
+  Future<StudentModel?> getStudentData({required String studentId}) async {
+    try {
+      final studentData = await FirebaseFirestore.instance
+          .collection("SchoolListCollection")
+          .doc(UserCredentialsController.schoolId)
+          .collection(UserCredentialsController.batchId ?? "")
+          .doc(UserCredentialsController.batchId ?? "")
+          .collection("classes")
+          .doc(UserCredentialsController.classId)
+          .collection("Students")
+          .doc(studentId)
+          .get();
+
+      return StudentModel.fromJson(studentData.data() ?? {});
+    } catch (e) {
+      return null;
     }
   }
 }

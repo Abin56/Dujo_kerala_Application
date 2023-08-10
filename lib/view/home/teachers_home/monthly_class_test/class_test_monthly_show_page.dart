@@ -116,8 +116,8 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                                           .toList()[index],
                                       keyboardType: TextInputType.number,
                                       decoration: const InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          hintText: "Mark"),
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
                                   ),
                                 )

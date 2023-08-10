@@ -44,7 +44,7 @@ class HostelComplaintPage extends StatelessWidget {
                           height: 40,
                         ),
                         SizedBox(
-                          height: 50,
+                          height: 80,
                           child: TextFormField(
                             controller:
                                 _hostelController.complaintTitleController,

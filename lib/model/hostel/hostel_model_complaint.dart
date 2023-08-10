@@ -70,23 +70,22 @@ class HostelModelComplaint {
   @override
   bool operator ==(covariant HostelModelComplaint other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.docId == docId &&
-      other.title == title &&
-      other.studentId == studentId &&
-      other.date == date &&
-      other.description == description &&
-      other.isCompleted == isCompleted;
+
+    return other.docId == docId &&
+        other.title == title &&
+        other.studentId == studentId &&
+        other.date == date &&
+        other.description == description &&
+        other.isCompleted == isCompleted;
   }
 
   @override
   int get hashCode {
     return docId.hashCode ^
-      title.hashCode ^
-      studentId.hashCode ^
-      date.hashCode ^
-      description.hashCode ^
-      isCompleted.hashCode;
+        title.hashCode ^
+        studentId.hashCode ^
+        date.hashCode ^
+        description.hashCode ^
+        isCompleted.hashCode;
   }
 }
