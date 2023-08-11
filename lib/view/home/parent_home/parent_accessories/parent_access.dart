@@ -2,6 +2,7 @@
 
 import 'package:dujo_kerala_application/view/home/bus_route_page/all_bus_list.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/leave_application/apply_leave_application.dart';
+import 'package:dujo_kerala_application/view/pages/chat/parent_section/parent_chat_screeen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ import '../../../pages/Homework/view_home_work.dart';
 import '../../../pages/Meetings/Tabs/school_level_meetings_tab.dart';
 import '../../../pages/Notice/notice_list.dart';
 import '../../../pages/Subject/subject_display.dart';
-import '../../../pages/chat/parent_section/parent_chat_screeen.dart';
 import '../../../pages/exam_results/for_users/select_examlevel_uses.dart';
 import '../../../pages/teacher_list/teacher_list.dart';
 import '../../all_class_test_monthly_show/all_class_list_monthly_show.dart';
@@ -46,7 +46,7 @@ class ParentAccessories extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           studentID: UserCredentialsController.parentModel!.studentID!,
           batchId: UserCredentialsController.batchId!), //Leave Letter
-
+      const ParentChatScreen(),
 
       const SS(), // Time Table
 
@@ -170,6 +170,7 @@ class ParentAccessories extends StatelessWidget {
 List<String> _acc_text = [
   'Attendance',
   'Leave Letters',
+  'Chats'.tr,
   'Time Table',
   'Meetings',
   'Exams',
@@ -188,6 +189,7 @@ List<String> _acc_text = [
 var _acc_images = [
   'assets/images/attendance.png',
   'assets/images/leaveapplica.png',
+  'assets/images/chat.png',
   'assets/images/library.png',
   'assets/images/meetings.png',
   'assets/images/exam.png',
