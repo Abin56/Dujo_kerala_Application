@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../colors/colors.dart';
+import 'complaint_page/complaint_page.dart';
 import 'widgets/mobile_view_widget.dart';
 
 class HostelHomePage extends StatelessWidget {
@@ -19,6 +20,14 @@ class HostelHomePage extends StatelessWidget {
     'assets/images/emergency-sign.png',
     'assets/images/tickets.png',
     'assets/images/suggestion.png',
+  ];
+
+  final List<Widget> raiseNavigation = [
+    HostelComplaintPage(),
+    HostelComplaintPage(),
+    HostelComplaintPage(),
+    HostelComplaintPage(),
+    HostelComplaintPage(),
   ];
   final List<String> iconListSee = [
     'assets/images/menu.png',
@@ -55,13 +64,25 @@ class HostelHomePage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: <Widget>[
           MobileScreenHostelWidget(
-              title: 'RAISE', names: raiseNames, iconList: iconListRaise),
+            title: 'RAISE',
+            names: raiseNames,
+            iconList: iconListRaise,
+            navigations: raiseNavigation,
+          ),
           const SizedBox(height: 20),
           MobileScreenHostelWidget(
-              title: 'SEE', names: seeNames, iconList: iconListSee),
+            title: 'SEE',
+            names: seeNames,
+            iconList: iconListSee,
+            navigations: raiseNavigation,
+          ),
           const SizedBox(height: 20),
           MobileScreenHostelWidget(
-              title: 'PAY', names: payNames, iconList: iconListPay),
+            title: 'PAY',
+            names: payNames,
+            iconList: iconListPay,
+            navigations: raiseNavigation,
+          ),
         ],
       ),
     );

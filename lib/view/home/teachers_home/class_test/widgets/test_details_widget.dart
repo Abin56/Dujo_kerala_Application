@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../constant/responsive.dart';
+
 class TestDetailsWidget extends StatelessWidget {
   const TestDetailsWidget({
     super.key,
@@ -18,15 +20,15 @@ class TestDetailsWidget extends StatelessWidget {
       children: <Widget>[
         Flexible(
             child: SizedBox(
-                width: 200,
+                width: ResponsiveApp.width / 2,
                 child: Text(
                   testName,
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: ResponsiveApp.width * .04),
                 ))),
         const Flexible(child: Text(":")),
         Flexible(
           child: SizedBox(
-            width: 200,
+            width: ResponsiveApp.width / 2.5,
             child: Row(
               children: [
                 Flexible(child: Text(testDetails)),
@@ -35,7 +37,7 @@ class TestDetailsWidget extends StatelessWidget {
                     onPressed: voidCallback,
                     icon: const Icon(
                       Icons.edit,
-                      size: 17,
+                      size: 15,
                     ),
                   ),
                 )

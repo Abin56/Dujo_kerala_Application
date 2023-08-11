@@ -2,12 +2,12 @@ import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/teacher_home/class_test_controller/monthly_controllers/class_test_show_monthly_controller.dart';
-import '../../../colors/colors.dart';
-import '../../../constant/responsive.dart';
-import '../../../constant/sizes/sizes.dart';
-import 'widgets/test_button_monthly_widget.dart';
-import 'widgets/test_data_monthly_widget.dart';
+import '../../../../../controllers/teacher_home/class_test_controller/monthly_controllers/class_test_show_monthly_controller.dart';
+import '../../../../colors/colors.dart';
+import '../../../../constant/responsive.dart';
+import '../../../../constant/sizes/sizes.dart';
+import '../../class_test/widgets/test_button_widget.dart';
+import '../../monthly_class_test/widgets/test_data_monthly_widget.dart';
 
 class ClassTestMonthlyShowPage extends StatelessWidget {
   ClassTestMonthlyShowPage({super.key});
@@ -54,7 +54,7 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                                     ))),
                             Flexible(
                                 child: SizedBox(
-                                    width: 60,
+                                    width: 80,
                                     height: 50,
                                     child: TextField(
                                       controller: showTestController
@@ -112,7 +112,7 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                                             }))),
                                 Flexible(
                                   child: SizedBox(
-                                    width: 60,
+                                    width: 80,
                                     height: 50,
                                     child: TextField(
                                       controller: showTestController
@@ -120,8 +120,8 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                                           .toList()[index],
                                       keyboardType: TextInputType.number,
                                       decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                      ),
+                                          border: OutlineInputBorder(),
+                                          hintText: "Mark"),
                                     ),
                                   ),
                                 )
@@ -135,7 +135,7 @@ class ClassTestMonthlyShowPage extends StatelessWidget {
                       ),
                     ),
                     kHeight20,
-                    TestMonthlyElevatedButton(
+                    TestElevatedButton(
                       title: "Update",
                       voidCallback: () async {
                         await showTestController.updateStudentsMark(

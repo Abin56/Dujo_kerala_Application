@@ -36,7 +36,7 @@ class AllClassTestShowPage extends StatelessWidget {
             shrinkWrap: true,
             children: <Widget>[
               //Test Details
-        
+
               Container(
                 height: ResponsiveApp.mq.size.height / 1.5,
                 padding: const EdgeInsets.all(10),
@@ -72,7 +72,8 @@ class AllClassTestShowPage extends StatelessWidget {
                             timeStampToDateFormat(studentModel?.date ?? -1)),
                     kHeight10,
                     AllClassTestDetailsWidget(
-                        testName: "Time", testDetails: studentModel?.time ?? ""),
+                        testName: "Time",
+                        testDetails: studentModel?.time ?? ""),
                     kHeight10,
                     AllClassTestDetailsWidget(
                       testName: "Description",
@@ -94,16 +95,18 @@ class AllClassTestShowPage extends StatelessWidget {
                       Flexible(
                           child: SizedBox(
                               width: ResponsiveApp.mq.size.width / 2,
-                              child:  Text(
+                              child: Text(
                                 "Out of mark",
-                                style: TextStyle(fontSize:  ResponsiveApp.width*.04),
+                                style: TextStyle(
+                                    fontSize: ResponsiveApp.width * .04),
                               ))),
                       Flexible(
                         child: SizedBox(
                           width: 80,
                           child: Text(
                             (totalMarkvalue).toString(),
-                            style:  TextStyle(fontSize: ResponsiveApp.width*.04),
+                            style:
+                                TextStyle(fontSize: ResponsiveApp.width * .04),
                           ),
                         ),
                       )
@@ -111,9 +114,9 @@ class AllClassTestShowPage extends StatelessWidget {
                   ),
                 ),
               ),
-        
+
               kHeight20,
-        
+
               DecoratedBox(
                 decoration: BoxDecoration(
                     color: cgrey1, borderRadius: BorderRadius.circular(20)),
@@ -128,7 +131,7 @@ class AllClassTestShowPage extends StatelessWidget {
                                 ? "Mark not entered"
                                 : studentList?[index].mark)
                             .toString();
-        
+
                         if (navigationPageName == "student" &&
                             studentList?[index].studentId ==
                                 UserCredentialsController.studentModel?.docid) {
@@ -138,14 +141,16 @@ class AllClassTestShowPage extends StatelessWidget {
                           );
                         } else if (navigationPageName == "parent" &&
                             studentList?[index].studentId ==
-                                UserCredentialsController.parentModel?.studentID) {
+                                UserCredentialsController
+                                    .parentModel?.studentID) {
                           return DataShowWidget(
                             mark: mark,
                             studentId: studentList?[index].studentId ?? "",
                           );
                         } else if (navigationPageName == "guardian" &&
                             studentList?[index].studentId ==
-                                UserCredentialsController.guardianModel?.studentID) {
+                                UserCredentialsController
+                                    .guardianModel?.studentID) {
                           return DataShowWidget(
                             mark: mark,
                             studentId: studentList?[index].studentId ?? "",
@@ -180,19 +185,19 @@ class AllClassTestDetailsWidget extends StatelessWidget {
       children: <Widget>[
         Flexible(
           child: SizedBox(
-            width: ResponsiveApp.mq.size.width/2,
+            width: ResponsiveApp.width / 2,
             child: Text(
               testName,
-              style:  TextStyle(fontSize: ResponsiveApp.width*.04),
+              style: TextStyle(fontSize: ResponsiveApp.width * .04),
             ),
           ),
         ),
         const Flexible(child: Text(":")),
         SizedBox(
-            width: ResponsiveApp.mq.size.width/2.5,
+            width: ResponsiveApp.width / 2.5,
             child: Text(
               testDetails,
-              style:  TextStyle(fontSize: ResponsiveApp.width*.04),
+              style: TextStyle(fontSize: ResponsiveApp.width * .04),
             )),
       ],
     );
@@ -220,7 +225,7 @@ class DataShowWidget extends StatelessWidget {
                   width: ResponsiveApp.width / 2,
                   child: Text(
                     snapshot.data?.studentName ?? "",
-                    style:  TextStyle(fontSize: ResponsiveApp.width*.04),
+                    style: TextStyle(fontSize: ResponsiveApp.width * .04),
                   ),
                 ),
               ),
@@ -229,7 +234,7 @@ class DataShowWidget extends StatelessWidget {
                   width: 80,
                   child: Text(
                     mark,
-                    style:  TextStyle(fontSize: ResponsiveApp.width*.04),
+                    style: TextStyle(fontSize: ResponsiveApp.width * .04),
                   ),
                 ),
               )

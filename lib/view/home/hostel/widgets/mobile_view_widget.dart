@@ -8,11 +8,13 @@ class MobileScreenHostelWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.names,
-      required this.iconList});
+      required this.iconList,
+      required this.navigations});
 
   final String title;
   final List<String> names;
   final List<String> iconList;
+  final List<Widget> navigations;
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +27,18 @@ class MobileScreenHostelWidget extends StatelessWidget {
             names.length,
             (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: SizedBox(
-                    height: 200,
-                    width: double.infinity,
-                    child: HostelCardWidget(
-                        title: names[index], imagePath: iconList[index]),
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => navigations[index])),
+                    child: SizedBox(
+                      height: 200,
+                      width: double.infinity,
+                      child: HostelCardWidget(
+                          title: names[index], imagePath: iconList[index]),
+                    ),
                   ),
                 ))
       ],
     );
   }
 }
-
-
