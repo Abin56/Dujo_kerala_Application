@@ -25,6 +25,7 @@ class ShowTestMonthlyController {
   Map<String, TextEditingController> textEditingcontrollerMap = {};
 
   void assigningValuesToControllers() {
+    textEditingcontrollerMap.clear();
     String? totalValue = selectedClassTestModel!.totalMark == -1
         ? null
         : selectedClassTestModel!.totalMark.toString();
