@@ -174,7 +174,7 @@ List<String> _acc_text = [
   'Teachers'.tr,
   'Bus Route'.tr,
   'Class Test'.tr,
-  'Class Test Monthly'.tr,
+  'Monthly Class Test'.tr,
 ];
 var _acc_images = [
   'assets/images/attendance.png',
