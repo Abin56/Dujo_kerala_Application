@@ -219,6 +219,7 @@ class TeacherParentChatController extends GetxController {
         messageindex: await fectchingStudentCurrentMessageIndex(parentDocID),
         teacherName: UserCredentialsController.teacherModel!.teacherName!);
     final sendMessage = OnlineChatModel(
+      classID: UserCredentialsController.classId,
       message: messageController.text,
       messageindex: 1,
       chatid: FirebaseAuth.instance.currentUser!.uid,

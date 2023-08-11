@@ -313,6 +313,7 @@ class _TeachersChatsScreenState extends State<TeachersChatsScreen> {
         'docid': FirebaseAuth.instance.currentUser?.uid,
         'messageindex': 0,
         'studentname': UserCredentialsController.studentModel?.studentName,
+        'classID':UserCredentialsController.studentModel?.classId,
       });
     }
   }

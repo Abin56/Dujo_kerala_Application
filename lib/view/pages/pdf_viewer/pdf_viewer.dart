@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_viewer_flutter/pdf_viewer_flutter.dart';
 
@@ -45,12 +44,7 @@ class _PDFSectionScreenState extends State<PDFSectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    routingPDfPage(context).then((value) async {
-      await Future.delayed( const Duration(seconds: 2));
-      Navigator.pop(context);
-      Navigator.pop(context);
-      Navigator.pop(context);
-    });
+    routingPDfPage(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -71,27 +65,21 @@ class _PDFSectionScreenState extends State<PDFSectionScreen> {
     // ignore: use_build_context_synchronously
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
-        return PDFViewerScaffold(path: _pefFilePath);
+        return PDFViewerScaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back)),
+              backgroundColor: adminePrimayColor,
+              title: const Text("PDF"),
+              automaticallyImplyLeading: false,
+            ),
+            path: _pefFilePath);
       },
     ));
-  }
-}
-
-class PDFViewerScreen extends StatelessWidget {
-  final String? pefFilePath;
-  const PDFViewerScreen(this.pefFilePath, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return PDFViewerScaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(Icons.arrow_back)),
-          title: const Text("PDF Document"),
-        ),
-        path: pefFilePath);
   }
 }

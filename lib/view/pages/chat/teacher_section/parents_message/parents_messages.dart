@@ -3,6 +3,7 @@ import 'package:dujo_kerala_application/controllers/userCredentials/user_credent
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../search_parents/search_parents.dart';
@@ -32,11 +33,11 @@ class ParentMessagesScreen extends StatelessWidget {
             return ListView(
               children: [
                 SizedBox(
-                  height: size.height * 0.74,
+                  height: size.height * 0.72,
                   child: ListView.separated(
                       itemBuilder: (context, index) {
                         return SizedBox(
-                          height: 70,
+                          height: 70.h,
                           child: ListTile(
                             onTap: () {
                               Get.to(() => ParentsChatsScreen(
@@ -51,7 +52,7 @@ class ParentMessagesScreen extends StatelessWidget {
                             ),
                             title: Text(
                                 snapshots.data!.docs[index]['parentname'],
-                                style: const TextStyle(color: Colors.black)),
+                                style:  TextStyle(color: Colors.black,fontSize: 17.sp)),
                             contentPadding: const EdgeInsetsDirectional.all(1),
                             subtitle: FutureBuilder(
                                 future: FirebaseFirestore.instance
@@ -67,14 +68,14 @@ class ParentMessagesScreen extends StatelessWidget {
                                   if (futuredata.hasData) {
                                     return Row(
                                       children: [
-                                        const Text(
+                                         Text(
                                           'class : ',
-                                          style: TextStyle(color: Colors.black),
+                                          style: TextStyle(color: Colors.black,fontSize: 15.sp),
                                         ),
                                         Text(
                                           futuredata.data?.data()?['className'],
-                                          style: const TextStyle(
-                                              color: Colors.black),
+                                          style:  TextStyle(
+                                              color: Colors.black,fontSize: 15.sp),
                                         ),
                                       ],
                                     );
@@ -115,7 +116,7 @@ class ParentMessagesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 8),
+                      padding:  EdgeInsets.only(right: 8.sp),
                       child: GestureDetector(
                         onTap: () {
                           _showSearch();
@@ -125,8 +126,8 @@ class ParentMessagesScreen extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
                               color: Color.fromARGB(255, 232, 224, 224)),
-                          height: 50,
-                          width: 200,
+                          height: 50.h,
+                          width: 200.w,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -136,7 +137,7 @@ class ParentMessagesScreen extends StatelessWidget {
                                   padding: const EdgeInsets.only(right: 10),
                                   child: GooglePoppinsWidgets(
                                     text: 'Search Parents',
-                                    fontsize: 15,
+                                    fontsize: 15.sp,
                                   ),
                                 ),
                               ],

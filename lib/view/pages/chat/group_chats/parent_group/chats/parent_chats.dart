@@ -1,30 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/group_chat_controller/group_ParentsTeacher_chat_controller.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/chat/group_chats/student_group/chats/chat_appBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/group_chat_controller/group_StudentsTeacher_chat_controller.dart';
 import '../../group_chat.dart';
+import 'chats_appBar.dart';
 
-class StudentsGroupChats extends StatefulWidget {
+class ParentsGroupChats extends StatefulWidget {
   String groupName;
   String groupId;
 
-  StudentsGroupChats(
+  ParentsGroupChats(
       {required this.groupId, required this.groupName, super.key});
 
   @override
-  State<StudentsGroupChats> createState() => _StudentsGroupChatsState();
+  State<ParentsGroupChats> createState() => _ParentsGroupChatsState();
 }
 
-class _StudentsGroupChatsState extends State<StudentsGroupChats> {
-  TeacherGroupChatController teacherGroupChatController =
-      Get.put(TeacherGroupChatController());
+class _ParentsGroupChatsState extends State<ParentsGroupChats> {
+  TeacherParentGroupChatController teacherParentGroupChatController =
+      Get.put(TeacherParentGroupChatController());
 
   int currentStudentMessageIndex = 0;
 
@@ -34,10 +34,11 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
 
   @override
   void initState() {
-    userIndexBecomeZero(widget.groupId,'Students',teacherParameter: 'studentName');
+    userIndexBecomeZero(widget.groupId, 'Parents',
+        teacherParameter: 'parentName');
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -50,7 +51,8 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
           children: [
             GestureDetector(
                 onTap: () {
-                  showStudentsGroupAppBar(widget.groupName, '10', widget.groupId, context);
+                  showParentsGroupAppBar(
+                      widget.groupName, '10', widget.groupId, context);
                 },
                 child: const CircleAvatar()),
             kWidth10,
@@ -69,7 +71,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
               .doc(UserCredentialsController.classId!)
               .collection('ChatGroups')
               .doc('ChatGroups')
-              .collection("Students")
+              .collection("Parents")
               .doc(widget.groupId)
               .collection('Participants')
               .snapshots(),
@@ -79,7 +81,8 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                 return Center(
                   child: TextButton.icon(
                       onPressed: () async {
-                        teacherGroupChatController.addParticipants(widget.groupId);
+                        teacherParentGroupChatController
+                            .addParticipants(widget.groupId);
                       },
                       icon: const Icon(Icons.add),
                       label: const Text("Add Participants")),
@@ -101,7 +104,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                 .doc(UserCredentialsController.classId!)
                                 .collection('ChatGroups')
                                 .doc('ChatGroups')
-                                .collection("Students")
+                                .collection("Parents")
                                 .doc(widget.groupId)
                                 .collection('chats')
                                 .orderBy('sendTime', descending: true)
@@ -120,7 +123,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                     itemCount: snaps.data!.docs.length,
                                     itemBuilder: (context, index) {
                                       ///////////////////////////////////
-                                      return teacherGroupChatController
+                                      return teacherParentGroupChatController
                                           .messageTitles(
                                               size,
                                               snaps.data!.docs[index]['chatid'],
@@ -131,9 +134,8 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                                   ['sendTime'],
                                               context,
                                               widget.groupId,
-                                              snaps.data!.docs[index]['username']
-                                              
-                                              );
+                                              snaps.data!.docs[index]
+                                                  ['username']);
                                       ///////////////////////////////
                                     },
                                   );
@@ -155,7 +157,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                               .doc(UserCredentialsController.classId)
                               .collection('ChatGroups')
                               .doc('ChatGroups')
-                              .collection('Students')
+                              .collection('Parents')
                               .doc(widget.groupId)
                               .snapshots(),
                           builder: (context, checkingblock) {
@@ -195,7 +197,7 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                           width: size.width / 1.3,
                                           child: TextField(
                                             controller:
-                                                teacherGroupChatController
+                                                teacherParentGroupChatController
                                                     .messageController,
                                             decoration: InputDecoration(
                                                 hintText: "Send Message",
@@ -230,9 +232,10 @@ class _StudentsGroupChatsState extends State<StudentsGroupChats> {
                                                         onPressed: () async {
                                                           ///////////////////////////
                                                           ///
-                                                          teacherGroupChatController
+                                                          teacherParentGroupChatController
                                                               .sendMessage(
-                                                                  widget.groupId,
+                                                                  widget
+                                                                      .groupId,
                                                                   userName.data!
                                                                           .data()![
                                                                       'teacherName']);

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
-const SizedBox kHeight = SizedBox(height: 30);
-const SizedBox kHeight50 = SizedBox(height: 50);
+ SizedBox kHeight = SizedBox(height: ScreenUtil().setHeight(30));
+ SizedBox kHeight50 = SizedBox(height: ScreenUtil().setHeight(50));
 
-const SizedBox kHeight20 = SizedBox(height: 20);
-const SizedBox kHeight10 = SizedBox(height: 10);
-const SizedBox kHeight30 = SizedBox(height: 30);
-const SizedBox kHeight40 = SizedBox(height: 40);
+ SizedBox kHeight20 = SizedBox(height: ScreenUtil().setHeight(20));
+ SizedBox kHeight10 = SizedBox(height: ScreenUtil().setHeight(10));
+ SizedBox kHeight30 = SizedBox(height: ScreenUtil().setHeight(30));
+ SizedBox kHeight40 = SizedBox(height: ScreenUtil().setHeight(40));
 //
-const SizedBox kWidth50 = SizedBox(width: 50);
+ SizedBox kWidth50 = SizedBox(width: ScreenUtil().setWidth(50));
 
-const SizedBox kWidth20 = SizedBox(width: 20);
-const SizedBox kWidth10 = SizedBox(width: 10);
-const SizedBox kWidth30 = SizedBox(width: 30);
-const SizedBox kwidth40 = SizedBox(width: 40);
-const SizedBox kWidth60 = SizedBox(width: 60); 
+ SizedBox kWidth20 = SizedBox(width: ScreenUtil().setWidth(20));
+ SizedBox kWidth10 = SizedBox(width: ScreenUtil().setWidth(10));
+ SizedBox kWidth30 = SizedBox(width: ScreenUtil().setWidth(30));
+ SizedBox kwidth40 = SizedBox(width: ScreenUtil().setWidth(40));
+ SizedBox kWidth60 = SizedBox(width: ScreenUtil().setWidth(60)); 

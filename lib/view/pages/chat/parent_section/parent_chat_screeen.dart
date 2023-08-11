@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/pages/chat/parent_section/search/search_teachers.dart';
 import 'package:dujo_kerala_application/view/pages/chat/parent_section/teacher_messages/teachers_messages.dart';
 import 'package:dujo_kerala_application/view/pages/chat/student_section/search/search_teachers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +9,7 @@ import 'package:get/get_utils/get_utils.dart';
 
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../constant/sizes/constant.dart';
-import '../../../widgets/fonts/google_monstre.dart';
+import 'group_section/parent_message_group_screen.dart';
 
 class ParentChatScreen extends StatelessWidget {
   const ParentChatScreen({super.key});
@@ -16,7 +17,7 @@ class ParentChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showSearch() async {
-      await showSearch(context: context, delegate: SearchTeachers());
+      await showSearch(context: context, delegate: SearchTeachersForParents());
     }
 
     return DefaultTabController(
@@ -24,7 +25,7 @@ class ParentChatScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title:  Text('Dujo Chat'.tr),
+          title: Text('Dujo Chat'.tr),
           bottom: TabBar(
             tabs: [
               Tab(
@@ -38,7 +39,7 @@ class ParentChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Text("Teachers".tr),
+                        Text("Teachers".tr),
                         StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
@@ -90,21 +91,19 @@ class ParentChatScreen extends StatelessWidget {
                 ),
               ),
               // const Tab(icon: Icon(Icons.groups_2), text: 'Parents'),
-               Tab(
-                  icon: Icon(
+              Tab(
+                  icon: const Icon(
                     Icons.class_,
                   ),
                   text: 'Group'.tr),
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            const ParentTeachersMessagesScreen(),
+            ParentTeachersMessagesScreen(),
             // const Icon(Icons.directions_transit, size: 350),
-             Center(
-                child: GoogleMonstserratWidgets(
-                    text: 'Under maintenance', fontsize: 30,fontWeight: FontWeight.bold,)),
+            ParentsGroupMessagesScreen(),
           ],
         ),
         floatingActionButton: CircleAvatar(

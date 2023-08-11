@@ -3,13 +3,14 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/pages/chat/group_chats/parent_group/parent_groups.dart';
 import 'package:dujo_kerala_application/view/pages/chat/group_chats/student_group/student_groups.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/group_chat_controller/group_chat_controller.dart';
+import '../../../../controllers/group_chat_controller/group_StudentsTeacher_chat_controller.dart';
 import '../teacher_section/parents_message/parents_messages.dart';
 
 class GroupChatScreenForTeachers extends StatelessWidget {
@@ -69,7 +70,7 @@ class GroupChatScreenForTeachers extends StatelessWidget {
                   body: const TabBarView(
                     children: [
                       StudentsGroupsMessagesScreen(),
-                      ParentMessagesScreen(),
+                      ParentssGroupsMessagesScreen(),
                     ],
                   ),
                   floatingActionButton: FutureBuilder(
@@ -112,7 +113,7 @@ class GroupChatScreenForTeachers extends StatelessWidget {
   }
 }
 
-userIndexBecomeZero(String docid) async {
+userIndexBecomeZero(String docid,String groupName,{required String teacherParameter}) async {
   log("message Caliingggggggggggggggggggggggggg");
   final firebase = await FirebaseFirestore.instance
       .collection('SchoolListCollection')
@@ -123,12 +124,12 @@ userIndexBecomeZero(String docid) async {
       .doc(UserCredentialsController.classId)
       .collection('ChatGroups')
       .doc('ChatGroups')
-      .collection('Students')
+      .collection(groupName)
       .doc(docid)
       .collection('Participants')
       .get();
   if (firebase.docs.isNotEmpty) {
-    addteacherTopaticipance(docid);
+    addteacherTopaticipance(docid,groupName,teacherParameter:teacherParameter );
     await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -138,7 +139,7 @@ userIndexBecomeZero(String docid) async {
         .doc(UserCredentialsController.classId)
         .collection('ChatGroups')
         .doc('ChatGroups')
-        .collection('Students')
+        .collection(groupName)
         .doc(docid)
         .collection('Participants')
         .doc(FirebaseAuth.instance.currentUser?.uid)

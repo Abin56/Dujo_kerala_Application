@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -108,29 +109,29 @@ class TeacherChatController extends GetxController {
                   children: [
                     Text(
                       '$message              ',
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style:  TextStyle(
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: const Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
                     Text(
                       timeformattedd,
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 90, 90, 90), fontSize: 10),
+                      style:  TextStyle(
+                          color: const Color.fromARGB(255, 90, 90, 90), fontSize: 10.sp),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 05,
+               SizedBox(
+                height: 05.h,
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: Text(
                   dayformattedd,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 90, 90, 90), fontSize: 10),
+                  style:  TextStyle(
+                      color: const Color.fromARGB(255, 90, 90, 90), fontSize: 10.sp),
                 ),
               ),
             ],
@@ -165,29 +166,29 @@ class TeacherChatController extends GetxController {
                 children: [
                   Text(
                     '$message              ',
-                    style: const TextStyle(
-                      fontSize: 16,
+                    style:  TextStyle(
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: const Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
                   Text(
                     timeformattedd,
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 90, 90, 90), fontSize: 10),
+                    style:  TextStyle(
+                        color: const Color.fromARGB(255, 90, 90, 90), fontSize: 10.sp),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 05,
+             SizedBox(
+              height: 05.h,
             ),
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
                 dayformattedd,
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 90, 90, 90), fontSize: 10),
+                style:  TextStyle(
+                    color: const Color.fromARGB(255, 90, 90, 90), fontSize: 10.sp),
               ),
             ),
           ],
@@ -196,7 +197,7 @@ class TeacherChatController extends GetxController {
     }
   }
 
-  sentMessage(String studentDocID) async {
+  sentMessage(String studentDocID,) async {
     var countPlusone = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -218,6 +219,7 @@ class TeacherChatController extends GetxController {
         messageindex: await fectchingStudentCurrentMessageIndex(studentDocID),
         teacherName: UserCredentialsController.teacherModel!.teacherName!);
     final sendMessage = OnlineChatModel(
+      classID: UserCredentialsController.classId,
       message: messageController.text,
       messageindex: 1,
       chatid: FirebaseAuth.instance.currentUser!.uid,

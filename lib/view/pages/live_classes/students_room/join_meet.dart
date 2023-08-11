@@ -35,9 +35,9 @@ class Student_LiveClassRoomState extends State<StudentLiveClassRoom> {
   final emailText = TextEditingController(text: "");
   final iosAppBarRGBAColor =
       TextEditingController(text: "#0080FF80"); //transparent blue
-  bool? isAudioOnly = true;
-  bool? isAudioMuted = true;
-  bool? isVideoMuted = true;
+  bool? isAudioOnly = false;
+  bool? isAudioMuted = false;
+  bool? isVideoMuted = false;
 
   @override
   Widget build(BuildContext context) {

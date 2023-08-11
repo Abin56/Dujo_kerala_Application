@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/group_chat_controller/parentChat_controller/parent_group_chat_controller.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -8,24 +9,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/group_chat_controller/studentchat_controller/student_chat_controller.dart';
 import '../../../group_chats/group_chat.dart';
 
-class StudenstGroupChatsScreen extends StatefulWidget {
+class ParentGroupChatsScreen extends StatefulWidget {
   String groupID;
   String groupName;
 
-  StudenstGroupChatsScreen(
+  ParentGroupChatsScreen(
       {required this.groupID, required this.groupName, super.key});
 
   @override
-  State<StudenstGroupChatsScreen> createState() =>
-      _StudenstGroupChatsScreenState();
+  State<ParentGroupChatsScreen> createState() => ParenttGroupChatsScreenState();
 }
 
-class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
-  final studentGroupChatMessageController =
-      Get.put(StudentGroupChatMessageController());
+class ParenttGroupChatsScreenState extends State<ParentGroupChatsScreen> {
+  final parentGroupChatMessageController =
+      Get.put(ParentGroupChatMessageController());
 
   int currentStudentMessageIndex = 0;
 
@@ -35,7 +34,8 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
 
   @override
   void initState() {
-    userIndexBecomeZero(widget.groupID, 'Students',teacherParameter: 'studentName');
+    userIndexBecomeZero(widget.groupID, 'Parents',
+        teacherParameter: 'parentName');
     super.initState();
   }
 
@@ -73,7 +73,7 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
                       .doc(UserCredentialsController.classId)
                       .collection('ChatGroups')
                       .doc('ChatGroups')
-                      .collection('Students')
+                      .collection('Parents')
                       .doc(widget.groupID)
                       .collection('chats')
                       .orderBy('sendTime', descending: true)
@@ -87,16 +87,15 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
                         itemCount: snaps.data!.docs.length,
                         itemBuilder: (context, index) {
                           ///////////////////////////////////
-                          return studentGroupChatMessageController
-                              .messageTitles(
-                                  size,
-                                  snaps.data!.docs[index]['chatid'],
-                                  snaps.data!.docs[index]['message'],
-                                  snaps.data!.docs[index]['docid'],
-                                  snaps.data!.docs[index]['sendTime'],
-                                  context,
-                                  widget.groupID,
-                                  snaps.data!.docs[index]['username']);
+                          return parentGroupChatMessageController.messageTitles(
+                              size,
+                              snaps.data!.docs[index]['chatid'],
+                              snaps.data!.docs[index]['message'],
+                              snaps.data!.docs[index]['docid'],
+                              snaps.data!.docs[index]['sendTime'],
+                              context,
+                              widget.groupID,
+                              snaps.data!.docs[index]['username']);
                           ///////////////////////////////
                         },
                       );
@@ -116,7 +115,7 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
                     .doc(UserCredentialsController.classId)
                     .collection('ChatGroups')
                     .doc('ChatGroups')
-                    .collection('Students')
+                    .collection('Parents')
                     .doc(widget.groupID)
                     .snapshots(),
                 builder: (context, checkingblock) {
@@ -152,7 +151,7 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
                                 height: size.height / 17,
                                 width: size.width / 1.3,
                                 child: TextField(
-                                  controller: studentGroupChatMessageController
+                                  controller: parentGroupChatMessageController
                                       .messageController,
                                   decoration: InputDecoration(
                                       hintText: "Send Message",
@@ -165,7 +164,12 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
                                   future: FirebaseFirestore.instance
                                       .collection('SchoolListCollection')
                                       .doc(UserCredentialsController.schoolId)
-                                      .collection('AllStudents')
+                                      .collection(
+                                          UserCredentialsController.batchId!)
+                                      .doc(UserCredentialsController.batchId)
+                                      .collection('classes')
+                                      .doc(UserCredentialsController.classId)
+                                      .collection('ParentCollection')
                                       .doc(FirebaseAuth
                                           .instance.currentUser!.uid)
                                       .get(),
@@ -183,11 +187,11 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
                                               onPressed: () async {
                                                 ///////////////////////////
                                                 ///
-                                                studentGroupChatMessageController
+                                                parentGroupChatMessageController
                                                     .sendMessage(
                                                         widget.groupID,
                                                         userName.data!.data()![
-                                                            'studentName']);
+                                                            'parentName']);
                                                 /////////////////////////
                                               }),
                                         ),

@@ -4,6 +4,7 @@ import 'dart:convert';
 class OnlineChatModel {
   bool? admin;
   bool? block;
+  String? classID;
   int messageindex;
   String chatid;
   String docid;
@@ -13,6 +14,7 @@ class OnlineChatModel {
   OnlineChatModel({
     this.admin,
     this.block,
+    this.classID,
     required this.messageindex,
     required this.chatid,
     required this.docid,
@@ -24,6 +26,7 @@ class OnlineChatModel {
   OnlineChatModel copyWith({
     bool? admin,
     bool? block,
+    String? classID,
     int? messageindex,
     String? chatid,
     String? docid,
@@ -34,6 +37,7 @@ class OnlineChatModel {
     return OnlineChatModel(
       admin: admin ?? this.admin,
       block: block ?? this.block,
+      classID: classID ?? this.classID,
       messageindex: messageindex ?? this.messageindex,
       chatid: chatid ?? this.chatid,
       docid: docid ?? this.docid,
@@ -47,6 +51,7 @@ class OnlineChatModel {
     return <String, dynamic>{
       'admin': admin,
       'block': block,
+      'classID': classID,
       'messageindex': messageindex,
       'chatid': chatid,
       'docid': docid,
@@ -60,6 +65,7 @@ class OnlineChatModel {
     return OnlineChatModel(
       admin: map['admin'] != null ? map['admin'] as bool : null,
       block: map['block'] != null ? map['block'] as bool : null,
+      classID: map['classID'] != null ? map['classID'] as String : null,
       messageindex: map['messageindex'] as int,
       chatid: map['chatid'] as String,
       docid: map['docid'] as String,
@@ -75,7 +81,7 @@ class OnlineChatModel {
 
   @override
   String toString() {
-    return 'OnlineChatModel(admin: $admin, block: $block, messageindex: $messageindex, chatid: $chatid, docid: $docid, sendTime: $sendTime, message: $message, username: $username)';
+    return 'OnlineChatModel(admin: $admin, block: $block, classID: $classID, messageindex: $messageindex, chatid: $chatid, docid: $docid, sendTime: $sendTime, message: $message, username: $username)';
   }
 
   @override
@@ -85,6 +91,7 @@ class OnlineChatModel {
     return 
       other.admin == admin &&
       other.block == block &&
+      other.classID == classID &&
       other.messageindex == messageindex &&
       other.chatid == chatid &&
       other.docid == docid &&
@@ -97,6 +104,7 @@ class OnlineChatModel {
   int get hashCode {
     return admin.hashCode ^
       block.hashCode ^
+      classID.hashCode ^
       messageindex.hashCode ^
       chatid.hashCode ^
       docid.hashCode ^

@@ -2,14 +2,15 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/model/student_model/data_base_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'chats/students_chats.dart';
+import 'chats/parent_chats.dart';
 
-class StudentsGroupsMessagesScreen extends StatelessWidget {
-  const StudentsGroupsMessagesScreen({super.key});
+class ParentssGroupsMessagesScreen extends StatelessWidget {
+  const ParentssGroupsMessagesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
             .doc(UserCredentialsController.classId!)
             .collection('ChatGroups')
             .doc('ChatGroups')
-            .collection("Students")
+            .collection("Parents")
             .snapshots(),
         builder: (context, snapshots) {
           if (snapshots.hasData) {
@@ -81,7 +82,7 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
                                                   .classId)
                                               .collection('ChatGroups')
                                               .doc('ChatGroups')
-                                              .collection("Students")
+                                              .collection("Parents")
                                               .doc(snapshots.data?.docs[index]
                                                   ['docid'])
                                               .delete()
@@ -122,13 +123,14 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
                                     firebase.data()!['classTeacherdocid'] ==
                                         FirebaseAuth
                                             .instance.currentUser!.uid) {
-                                  Get.to(() => StudentsGroupChats(
+                                  Get.to(() => ParentsGroupChats(
                                         groupId: snapshots.data!.docs[index]
                                             ['docid'],
                                         groupName: snapshots.data!.docs[index]
                                             ['groupName'],
                                       ));
                                 } else {
+                                  // ignore: use_build_context_synchronously
                                   showDialog(
                                     context: context,
                                     barrierDismissible:
@@ -206,7 +208,7 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
                                       .doc(UserCredentialsController.classId)
                                       .collection('ChatGroups')
                                       .doc('ChatGroups')
-                                      .collection("Students")
+                                      .collection("Parents")
                                       .doc(snapshots.data?.docs[index]['docid'])
                                       .collection('Participants')
                                       .doc(FirebaseAuth
@@ -262,29 +264,4 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
           }
         });
   }
-}
-
-addteacherTopaticipance(String groupId, String groupName,
-    {required String teacherParameter}) async {
-      log('teacherParameter >>>>>>>>>>>>>> $teacherParameter');
-  log("message Calinmggggggg");
-
-  await FirebaseFirestore.instance
-      .collection("SchoolListCollection")
-      .doc(UserCredentialsController.schoolId)
-      .collection(UserCredentialsController.batchId!)
-      .doc(UserCredentialsController.batchId)
-      .collection('classes')
-      .doc(UserCredentialsController.classId)
-      .collection('ChatGroups')
-      .doc('ChatGroups')
-      .collection(groupName)
-      .doc(groupId)
-      .collection('Participants')
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .set({
-    'docid': FirebaseAuth.instance.currentUser!.uid,
-    teacherParameter:
-        '${UserCredentialsController.teacherModel!.teacherName} T r'
-  });
 }

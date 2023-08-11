@@ -6,6 +6,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controllers/chat_controller/teacher_controller/teacher_controller.dart';
@@ -32,7 +33,6 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     connectingTeacherToStudent();
     fectingStudentChatStatus();
 
-
     getCurrentStudentMessageIndex().then((value) => resetUserMessageIndex());
     super.initState();
   }
@@ -49,7 +49,10 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
           children: [
             const CircleAvatar(),
             kWidth10,
-            Text(widget.studentName),
+            Text(
+              widget.studentName,
+              style: TextStyle(fontSize: 17.sp),
+            ),
           ],
         ),
         actions: [
@@ -150,17 +153,17 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                       );
                     } else {
                       return SizedBox(
-                        height: size.height / 15,
+                        height: size.height / 15.h,
                         width: size.width,
                         // alignment: Alignment.center,
                         child: SizedBox(
-                          height: size.height / 12,
+                          height: size.height / 12.h,
                           width: size.width / 1.1,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(
-                                height: size.height / 17,
+                                height: size.height / 17.h,
                                 width: size.width / 1.3,
                                 child: TextField(
                                   controller:
@@ -173,7 +176,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                                 ),
                               ),
                               CircleAvatar(
-                                radius: 28,
+                                radius: 28.r,
                                 backgroundColor: adminePrimayColor,
                                 child: Center(
                                   child: IconButton(
@@ -194,10 +197,9 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
                         ),
                       );
                     }
-                  } else if (checkingblock.data?.data() == null){
-                     return const Text("data");
-
-                  }else {
+                  } else if (checkingblock.data?.data() == null) {
+                    return const Text("data");
+                  } else {
                     return const Center(
                       child: CircularProgressIndicator.adaptive(),
                     );
@@ -209,7 +211,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     );
   }
 
-  Future<void> getCurrentStudentMessageIndex() async {
+  Future getCurrentStudentMessageIndex() async {
     var vari = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -218,8 +220,7 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
         .collection('StudentChats')
         .doc(widget.studentDocID)
         .get();
-
-    currentStudentMessageIndex = vari.data()!['messageindex'];
+    return currentStudentMessageIndex = vari.data()?['messageindex'];
   }
 
   resetUserMessageIndex() async {
@@ -290,31 +291,26 @@ class _StudentsChatsScreenState extends State<StudentsChatsScreen> {
     final checkuser = await FirebaseFirestore.instance
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
-        .collection(UserCredentialsController.batchId!)
-        .doc(UserCredentialsController.batchId!)
-        .collection('classes')
-        .doc(UserCredentialsController.classId)
-        .collection('Students')
+        .collection('Teachers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('StudentChats')
         .doc(widget.studentDocID)
-        .collection('TeacherChats')
         .get();
-    if (checkuser.docs.isEmpty) {
+    if (checkuser.data() == null) {
+      log("nullllllllllllll");
       await FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)
-          .collection(UserCredentialsController.batchId!)
-          .doc(UserCredentialsController.batchId!)
-          .collection('classes')
-          .doc(UserCredentialsController.classId)
-          .collection('Students')
+          .collection('Teachers')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('StudentChats')
           .doc(widget.studentDocID)
-          .collection('TeacherChats')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
           .set({
         'block': false,
-        'docid': FirebaseAuth.instance.currentUser?.uid,
+        'docid': widget.studentDocID,
         'messageindex': 0,
-        'teacherName': UserCredentialsController.teacherModel?.teacherName,
+        'classID': UserCredentialsController.classId,
+        'studentname': widget.studentName,
       });
     }
   }

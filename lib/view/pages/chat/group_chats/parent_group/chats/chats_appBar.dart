@@ -8,29 +8,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/group_chat_controller/group_StudentsTeacher_chat_controller.dart';
+import '../../../../../../controllers/group_chat_controller/group_ParentsTeacher_chat_controller.dart';
 import '../../../../../../widgets/drop_down/select_teachers.dart';
 
-showStudentsGroupAppBar(
+showParentsGroupAppBar(
   String groupName,
-  String totalStudents,
+  String totalParents,
   String groupID,
   BuildContext context,
 ) async {
   Get.to(() => BootomSheet(
-      groupID: groupID, groupName: groupName, totalStudents: totalStudents));
+      groupID: groupID, groupName: groupName, totalParents: totalParents));
 }
 
 class BootomSheet extends StatelessWidget {
-  TeacherGroupChatController teacherGroupChatController =
-      Get.put(TeacherGroupChatController());
+  TeacherParentGroupChatController teacherParentGroupChatController =
+      Get.put(TeacherParentGroupChatController());
   String groupName;
-  String totalStudents;
+  String totalParents;
   String groupID;
   BootomSheet(
       {required this.groupID,
       required this.groupName,
-      required this.totalStudents,
+      required this.totalParents,
       super.key});
 
   @override
@@ -46,7 +46,7 @@ class BootomSheet extends StatelessWidget {
               .doc(UserCredentialsController.classId!)
               .collection('ChatGroups')
               .doc('ChatGroups')
-              .collection("Students")
+              .collection("Parents")
               .doc(groupID)
               .collection('Participants')
               .get(),
@@ -108,7 +108,7 @@ class BootomSheet extends StatelessWidget {
                                                     .classId!)
                                                 .collection('ChatGroups')
                                                 .doc('ChatGroups')
-                                                .collection("Students")
+                                                .collection("Parents")
                                                 .doc(groupID)
                                                 .update({
                                               'teacherId':
@@ -162,7 +162,7 @@ class BootomSheet extends StatelessWidget {
                                   .doc(UserCredentialsController.classId!)
                                   .collection('ChatGroups')
                                   .doc('ChatGroups')
-                                  .collection("Students")
+                                  .collection("Parents")
                                   .doc(groupID)
                                   .snapshots(),
                               builder: (context, groupSnapShot) {
@@ -197,8 +197,9 @@ class BootomSheet extends StatelessWidget {
                                                             .instance
                                                             .collection(
                                                                 'SchoolListCollection')
-                                                            .doc(UserCredentialsController
-                                                                .schoolId)
+                                                            .doc(
+                                                                UserCredentialsController
+                                                                    .schoolId)
                                                             .collection(
                                                                 UserCredentialsController
                                                                     .batchId!)
@@ -214,7 +215,7 @@ class BootomSheet extends StatelessWidget {
                                                                 'ChatGroups')
                                                             .doc('ChatGroups')
                                                             .collection(
-                                                                "Students")
+                                                                "Parents")
                                                             .doc(groupID)
                                                             .update({
                                                           'activate': false
@@ -288,8 +289,9 @@ class BootomSheet extends StatelessWidget {
                                                             .instance
                                                             .collection(
                                                                 'SchoolListCollection')
-                                                            .doc(UserCredentialsController
-                                                                .schoolId)
+                                                            .doc(
+                                                                UserCredentialsController
+                                                                    .schoolId)
                                                             .collection(
                                                                 UserCredentialsController
                                                                     .batchId!)
@@ -305,7 +307,7 @@ class BootomSheet extends StatelessWidget {
                                                                 'ChatGroups')
                                                             .doc('ChatGroups')
                                                             .collection(
-                                                                "Students")
+                                                                "Parents")
                                                             .doc(groupID)
                                                             .update({
                                                           'activate': true
@@ -383,8 +385,8 @@ class BootomSheet extends StatelessWidget {
                             ),
                             IconButton(
                                 onPressed: () async {
-                                  teacherGroupChatController
-                                      .customAddStudentInGroup(groupID);
+                                  teacherParentGroupChatController
+                                      .customAddParentsInGroup(groupID);
                                 },
                                 icon: const Icon(Icons.person_add)),
                           ],
@@ -405,15 +407,15 @@ class BootomSheet extends StatelessWidget {
                                   .doc(UserCredentialsController.classId)
                                   .collection('ChatGroups')
                                   .doc('ChatGroups')
-                                  .collection('Students')
+                                  .collection('Parents')
                                   .doc(groupID)
                                   .collection('Participants')
                                   .snapshots(),
-                              builder: (context, studentssnapshots) {
-                                if (studentssnapshots.hasData) {
+                              builder: (context, parentssnapshots) {
+                                if (parentssnapshots.hasData) {
                                   return ListView.separated(
                                       itemBuilder: (context, index) {
-                                        if (studentssnapshots
+                                        if (parentssnapshots
                                                 .data!.docs.length ==
                                             index) {
                                           return SizedBox(
@@ -442,9 +444,9 @@ class BootomSheet extends StatelessWidget {
                                                     TextButton(
                                                       child: const Text('ok'),
                                                       onPressed: () async {
-                                                        await teacherGroupChatController
-                                                            .removeStudentToGroup(
-                                                                studentssnapshots
+                                                        await teacherParentGroupChatController
+                                                            .removeParentToGroup(
+                                                                parentssnapshots
                                                                         .data!
                                                                         .docs[index]
                                                                     ['docid'],
@@ -482,9 +484,9 @@ class BootomSheet extends StatelessWidget {
                                                     width: 20,
                                                   ),
                                                   GooglePoppinsEventsWidgets(
-                                                      text: studentssnapshots
+                                                      text: parentssnapshots
                                                               .data!.docs[index]
-                                                          ['studentName'],
+                                                          ['parentName'],
                                                       fontsize: 12)
                                                 ],
                                               ),
@@ -498,7 +500,7 @@ class BootomSheet extends StatelessWidget {
                                         );
                                       },
                                       itemCount:
-                                          studentssnapshots.data!.docs.length +
+                                          parentssnapshots.data!.docs.length +
                                               1);
                                 } else {
                                   return const Center(
