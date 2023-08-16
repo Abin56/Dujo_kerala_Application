@@ -79,6 +79,12 @@ class MultipileStudentsController extends GetxController {
             TextButton(
               child: const Text('ok'),
               onPressed: () async {
+                UserCredentialsController.schoolId =
+                    multipileStundentDOCIDValue!['schoolID'];
+                UserCredentialsController.batchId =
+                    multipileStundentDOCIDValue!['batchID'];
+                UserCredentialsController.classId =
+                    multipileStundentDOCIDValue!['classID'];
                 UserCredentialsController.parentModel!.studentID =
                     multipileStundentDOCIDValue!['studentID'];
 
