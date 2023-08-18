@@ -11,7 +11,7 @@ class StudentController extends GetxController {
         .collection("AllStudents")
         .doc(studentId)
         .get();
-    studentName.value = vari.data()!['studentName'];
+    studentName.value = vari.data()?['studentName'];
   }
   
 }

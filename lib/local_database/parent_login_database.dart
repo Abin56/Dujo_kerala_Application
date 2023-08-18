@@ -19,6 +19,10 @@ class DBParentLogin {
   final String emailID;
   @HiveField(7)
   final String parentDocID;
+  @HiveField(8)
+  final String parentEmail;
+  @HiveField(9)
+  final String parentPassword;
 
   DBParentLogin({
     required this.schoolID,
@@ -29,5 +33,7 @@ class DBParentLogin {
     required this.parentID,
     required this.emailID,
     required this.parentDocID,
+    required this.parentEmail,
+    required this.parentPassword,
   });
 }

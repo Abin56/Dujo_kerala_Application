@@ -65,16 +65,23 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
 class TeacherLoginIDSaver {
   static String id = '';
 }
-class UserEmailandPasswordSaver{
-  static String userEmail='';
-  static String userPassword='';
+
+class UserEmailandPasswordSaver {
+  static String userEmail = '';
+  static String userPassword = '';
 }
+
 const uuid = Uuid();
 
-class MessageCounter{
-  static int studentMessageCounter=0;
-    static int teacherMessageCounter=0;
-     static int parentMessageCounter=0;
+class MessageCounter {
+  static int studentMessageCounter = 0;
+  static int teacherMessageCounter = 0;
+  static int parentMessageCounter = 0;
 
-  static String userPassword='';
+  static String userPassword = '';
+}
+
+class ParentPasswordSaver {
+  static String parentPassword = '';
+  static String parentemailID = '';
 }

@@ -12,6 +12,7 @@ import '../../local_database/parent_login_database.dart';
 import '../../main.dart';
 import '../../model/parent_model/parent_model.dart';
 import '../../utils/utils.dart';
+import '../../view/pages/login/dujo_login_screen.dart';
 
 class MultipileStudentsController extends GetxController {
   RxBool isLoading = RxBool(false);
@@ -69,11 +70,14 @@ class MultipileStudentsController extends GetxController {
                                 return GestureDetector(
                                   onTap: () async {
                                     await parentsignIn(
-                                        context,
-                                        parentAuthlist[index].parentDocID,
-                                        parentAuthlist[index].classID,
-                                        parentAuthlist[index].schoolID,
-                                        parentAuthlist[index].batchID);
+                                      context,
+                                      parentAuthlist[index].parentDocID,
+                                      parentAuthlist[index].classID,
+                                      parentAuthlist[index].schoolID,
+                                      parentAuthlist[index].batchID,
+                                      parentAuthlist[index].parentEmail,
+                                      parentAuthlist[index].parentPassword,
+                                    );
                                   },
                                   child: Container(
                                     color: Colors.red,
@@ -104,51 +108,64 @@ class MultipileStudentsController extends GetxController {
     );
   }
 
-  Future<void> parentsignIn(BuildContext context, String parentDocID,
-      String classID, String schoolID, String batchID) async {
-    UserCredentialsController.batchId = batchID;
-    UserCredentialsController.classId = classID;
-
-    log("School ID ${schoolID}");
-    log("parentDocID ID ${parentDocID}");
-    log("batchID ID ${batchID}");
-    log("classID ID ${classID}");
+  Future<void> parentsignIn(
+      BuildContext context,
+      String parentDocID,
+      String classID,
+      String schoolID,
+      String batchID,
+      String parentemail,
+      String password) async {
     try {
       isLoading.value = true;
+      await FirebaseAuth.instance
+          .signOut()
+          .then((value) async {
+                await SharedPreferencesHelper.setString(
+              SharedPreferencesHelper.userRoleKey,'parent').then((value) => log('Added userRoll'));
+            // await SharedPreferencesHelper.clearSharedPreferenceData();
+            // UserCredentialsController.clearUserCredentials();
+          })
+          .then((value) async {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+          email: parentemail.trim(),
+          password: password.trim(),
+        )
+            .then((value) async {
+          log("Loggined sucess");
+          //fetching parent data from firebase
+          final DocumentSnapshot<Map<String, dynamic>> parentData =
+              await FirebaseFirestore.instance
+                  .collection('SchoolListCollection')
+                  .doc(schoolID)
+                  .collection(batchID)
+                  .doc(batchID)
+                  .collection('classes')
+                  .doc(classID)
+                  .collection('ParentCollection')
+                  .doc(parentDocID)
+                  .get();
+          log("fecting data....");
+          if (parentData.data() != null) {
+            UserCredentialsController.parentModel = ParentModel.fromMap(
+              parentData.data()!,
+            );
+          }
 
-      //fetching parent data from firebase
-      final parentData = await FirebaseFirestore.instance
-          .collection('SchoolListCollection')
-          .doc(schoolID)
-          .collection(batchID)
-          .doc(batchID)
-          .collection('classes')
-          .doc(classID)
-          .collection('ParentCollection')
-          .doc(parentDocID)
-          .get();
+          //assigining shared preference user role for app close
 
-      if (parentData.data() != null) {
-        UserCredentialsController.parentModel = ParentModel.fromMap(
-          parentData.data()!,
-        );
-      }
-      if (UserCredentialsController.parentModel?.userRole == "parent") {
-        //assigining shared preference user role for app close
-        log("Entered>>>>>>>>>>>");
-        await SharedPreferencesHelper.setString(
-            SharedPreferencesHelper.userRoleKey, 'parent');
-        await Future.delayed(const Duration(seconds: 3)).then((value) {
-          Get.offAll(ParentMainHomeScreen());
+          await SharedPreferencesHelper.setString(
+              SharedPreferencesHelper.userRoleKey,'parent').then((value) => log('Added userRoll'));
+          Get.offAll(const ParentMainHomeScreen());
+          isLoading.value = false;
+        }).catchError((error) {
+          if (error is FirebaseAuthException) {
+            isLoading.value = false;
+            handleFirebaseError(error);
+          }
         });
-        isLoading.value = false;
-      } else {
-        log("Access denied since you are not a parent");
-        showToast(
-          msg: "Access denied since you are not a parent",
-        );
-        isLoading.value = false;
-      }
+      });
     } catch (e) {
       isLoading.value = false;
       showToast(msg: "Sign in failed");

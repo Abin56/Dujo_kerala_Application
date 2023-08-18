@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/local_database/parent_login_database.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_accessories/parent_access.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_profile_edit/parent_edit_profile.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -103,7 +104,10 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
 
   Widget build(BuildContext context) {
     log("Parent DOCID :::::::::::::::::::  ${UserCredentialsController.parentModel?.docid}");
+    log("Firebase Auth DOCID :::::::::::::::::::  ${FirebaseAuth.instance.currentUser?.uid}");
     final parentAuth = DBParentLogin(
+        parentPassword: ParentPasswordSaver.parentPassword,
+        parentEmail: ParentPasswordSaver.parentemailID,
         schoolID: UserCredentialsController.schoolId!,
         batchID: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,
@@ -195,7 +199,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                             ConnectionState.waiting) {
                           return const SizedBox();
                         }
-                        return (snapshot.data!.data()!['multipleChildren'] ==
+                        return (snapshot.data?.data()?['multipleChildren'] ==
                                 null)
                             ? const SizedBox()
                             : const Text(
@@ -346,7 +350,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       builder: (context, snaps) {
                         if (snaps.hasData) {
                           return GoogleMonstserratWidgets(
-                            text: 'Class : ${snaps.data!.data()!['className']}',
+                            text: 'Class : ${snaps.data?.data()?['className']}',
                             fontsize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: cWhite.withOpacity(0.8),

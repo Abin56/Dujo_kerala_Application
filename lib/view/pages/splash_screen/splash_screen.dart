@@ -72,6 +72,9 @@ nextpage() async {
   log("batchId:${UserCredentialsController.batchId}");
   log("classId:${UserCredentialsController.classId}");
   log("userRole:${UserCredentialsController.userRole}");
+  log('Firebase Auth ${FirebaseAuth.instance.currentUser?.uid}');
+
+  
 
   if (auth.currentUser == null) {
     Get.to(() => const DujoLoginScren());

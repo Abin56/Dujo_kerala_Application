@@ -25,13 +25,15 @@ class DBParentLoginAdapter extends TypeAdapter<DBParentLogin> {
       parentID: fields[5] as String,
       emailID: fields[6] as String,
       parentDocID: fields[7] as String,
+      parentEmail: fields[8] as String,
+      parentPassword: fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, DBParentLogin obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.schoolID)
       ..writeByte(1)
@@ -47,7 +49,11 @@ class DBParentLoginAdapter extends TypeAdapter<DBParentLogin> {
       ..writeByte(6)
       ..write(obj.emailID)
       ..writeByte(7)
-      ..write(obj.parentDocID);
+      ..write(obj.parentDocID)
+      ..writeByte(8)
+      ..write(obj.parentEmail)
+      ..writeByte(9)
+      ..write(obj.parentPassword);
   }
 
   @override
