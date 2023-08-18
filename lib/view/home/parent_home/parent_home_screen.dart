@@ -23,6 +23,7 @@ class ParentHomeScreen extends StatefulWidget {
 }
 
 class _ParentHomeScreenState extends State<ParentHomeScreen> {
+  
   String deviceToken = '';
 
   void getDeviceToken() async {
