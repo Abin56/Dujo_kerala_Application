@@ -28,7 +28,7 @@ class StudentModel {
   String profileImageUrl;
   String studentName;
   String studentemail;
-  String userRole;
+  String userRole='student';
 
   StudentModel({
     required this.admissionNumber,

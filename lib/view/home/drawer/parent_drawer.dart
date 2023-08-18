@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, duplicate_ignore, empty_catches, unused_element
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/sign_in_controller/parent_login_controller.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
@@ -24,6 +25,8 @@ import '../student_home/time_table/ss.dart';
 class ParentHeaderDrawer extends StatelessWidget {
   MultipileStudentsController multipileStudentsController =
       Get.put(MultipileStudentsController());
+  ParentLoginController parentLoginController =
+      Get.put(ParentLoginController());
   ParentHeaderDrawer({Key? key}) : super(key: key);
 
   @override
@@ -70,49 +73,27 @@ class ParentHeaderDrawer extends StatelessWidget {
             },
             child: Text("Logout".tr),
           ),
-          StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('SchoolListCollection')
-                  .doc(UserCredentialsController.schoolId)
-                  .collection(UserCredentialsController.batchId!)
-                  .doc(UserCredentialsController.batchId)
-                  .collection('classes')
-                  .doc(UserCredentialsController.classId)
-                  .collection('ParentCollection')
-                  .doc(UserCredentialsController.parentModel?.docid)
-                  .collection('MultipleStudents')
-                  .snapshots(),
-              builder: (context, snaps) {
-                if (snaps.hasData) {
-                  if (snaps.data!.docs.isEmpty) {
-                    return const Text('');
-                  } else {
-                    return GestureDetector(
-                      onTap: () {
-                        multipileStudentsController.switchToStudent(context,
-                            UserCredentialsController.parentModel!.docid!);
-                      },
-                      child: Container(
-                        height: ScreenUtil().setHeight(30),
-                        width: ScreenUtil().setWidth(150),
-                        decoration: BoxDecoration(
-                            color: adminePrimayColor.withOpacity(0.1),
-                            border: Border.all(color: adminePrimayColor),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Center(
-                          child: GooglePoppinseventClassLevelWidgets(
-                            text: 'Switch Student',
-                            fontsize: 11.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                } else {
-                  return const Text('');
-                }
-              })
+          GestureDetector(
+            onTap: () async {
+              
+              await multipileStudentsController.switchStudent(context);
+            },
+            child: Container(
+              height: ScreenUtil().setHeight(30),
+              width: ScreenUtil().setWidth(150),
+              decoration: BoxDecoration(
+                  color: adminePrimayColor.withOpacity(0.1),
+                  border: Border.all(color: adminePrimayColor),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Center(
+                child: GooglePoppinseventClassLevelWidgets(
+                  text: 'Switch Student',
+                  fontsize: 11.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
