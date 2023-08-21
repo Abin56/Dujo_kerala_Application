@@ -17,13 +17,7 @@ import '../../userCredentials/user_credentials.dart';
 
 class ParentProfileEditController {
   RxBool isLoading = RxBool(false);
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController houseNameController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController districtController = TextEditingController();
-  TextEditingController pincodeController = TextEditingController();
-  TextEditingController placeController = TextEditingController();
-  TextEditingController stateController = TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
 
   final DocumentReference<Map<String, dynamic>> parentDocumentCollection =
       FirebaseFirestore.instance
@@ -131,8 +125,10 @@ class ParentProfileEditController {
         Get.offAll(const ParentMainHomeScreen());
       }
       isLoading.value = false;
-      phoneNumberController.clear();
+      textEditingController.clear();
+      showToast(msg: "Successfully Updated");
     } catch (e) {
+      showToast(msg: "Something went wrong");
       log(e.toString());
       isLoading.value = false;
     }

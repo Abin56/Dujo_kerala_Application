@@ -85,8 +85,20 @@ class StudentProfileEditPage extends StatelessWidget {
                       subtitle: GooglePoppinsWidgets(
                           text: profilesnaps.data!.data()!['studentName'],
                           fontsize: 19.h),
-                      title:
+                      title: Row(
+                        children: [
                           GooglePoppinsWidgets(text: "Name".tr, fontsize: 12.h),
+                          IconButton(
+                              onPressed: () async {
+                                await changeStudentData(
+                                    context, 'Name', 'studentName');
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.green,
+                              ))
+                        ],
+                      ),
                     ),
                     StudentEditListileWidget(
                       icon: Icons.call,
@@ -145,11 +157,12 @@ class StudentProfileEditPage extends StatelessWidget {
                     ),
                     StudentEditListileWidget(
                       icon: Icons.bloodtype_outlined,
-                      subtitle:  Row(
+                      subtitle: Row(
                         children: [
                           GooglePoppinsWidgets(
-                              text: profilesnaps.data!.data()!['bloodgroup'],
-                              fontsize: 19.h,),
+                            text: profilesnaps.data!.data()!['bloodgroup'],
+                            fontsize: 19.h,
+                          ),
                           IconButton(
                               onPressed: () async {
                                 await changeStudentData(
@@ -161,10 +174,8 @@ class StudentProfileEditPage extends StatelessWidget {
                               ))
                         ],
                       ),
-                      title:
-                                GooglePoppinsWidgets(
-                          text: "Blood Group".tr, fontsize: 12.h), 
-
+                      title: GooglePoppinsWidgets(
+                          text: "Blood Group".tr, fontsize: 12.h),
                     ),
                     StudentEditListileWidget(
                       icon: Icons.home,
@@ -354,8 +365,10 @@ changeStudentData(BuildContext context, String hintText, String updateValue) {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                     });
+                    showToast(msg: "Successfully Updated");
                   });
                 } else {
+                  showToast(msg: "Something went wrong");
                   return;
                 }
               },

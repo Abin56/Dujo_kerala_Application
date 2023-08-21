@@ -42,19 +42,29 @@ class ParentEditProfileScreen extends StatelessWidget {
               child: CircleAvatharImageSelectionWidgetParent(),
             ),
             ParentEditListileWidget(
-              voidCallback: () {},
+              voidCallback: () async {
+                await profileUpdate(
+                  context: context,
+                  textEditingController:
+                      parentProfileEditController.textEditingController,
+                  documentKey: "parentName",
+                  textInputType: TextInputType.text,
+                  hint: 'Name',
+                );
+              },
               icon: Icons.person,
               subtitle: UserCredentialsController.parentModel?.parentName ?? "",
               title: "Name",
+              editicon: Icons.edit,
             ),
 
             //phone number
             ParentEditListileWidget(
-              voidCallback: () {
-                profileUpdate(
+              voidCallback: () async {
+                await profileUpdate(
                   context: context,
                   textEditingController:
-                      parentProfileEditController.houseNameController,
+                      parentProfileEditController.textEditingController,
                   documentKey: "parentPhoneNumber",
                   textInputType: TextInputType.phone,
                   hint: 'Phone Number',
@@ -81,11 +91,11 @@ class ParentEditProfileScreen extends StatelessWidget {
 
             //House Name
             ParentEditListileWidget(
-              voidCallback: () {
-                profileUpdate(
+              voidCallback: () async {
+                await profileUpdate(
                   context: context,
                   textEditingController:
-                      parentProfileEditController.houseNameController,
+                      parentProfileEditController.textEditingController,
                   documentKey: "houseName",
                   textInputType: TextInputType.text,
                   hint: 'House Name',
@@ -99,11 +109,11 @@ class ParentEditProfileScreen extends StatelessWidget {
 
             //district
             ParentEditListileWidget(
-              voidCallback: () {
-                profileUpdate(
+              voidCallback: () async {
+                await profileUpdate(
                   context: context,
                   textEditingController:
-                      parentProfileEditController.districtController,
+                      parentProfileEditController.textEditingController,
                   documentKey: "district",
                   textInputType: TextInputType.text,
                   hint: 'District',
@@ -118,11 +128,11 @@ class ParentEditProfileScreen extends StatelessWidget {
             //Gender
 
             ParentEditListileWidget(
-              voidCallback: () {
-                profileUpdate(
+              voidCallback: () async {
+                await profileUpdate(
                   context: context,
                   textEditingController:
-                      parentProfileEditController.genderController,
+                      parentProfileEditController.textEditingController,
                   documentKey: "gender",
                   textInputType: TextInputType.text,
                   hint: 'Gender',
@@ -135,11 +145,11 @@ class ParentEditProfileScreen extends StatelessWidget {
             ),
             //pincode
             ParentEditListileWidget(
-              voidCallback: () {
-                profileUpdate(
+              voidCallback: () async {
+                await profileUpdate(
                   context: context,
                   textEditingController:
-                      parentProfileEditController.pincodeController,
+                      parentProfileEditController.textEditingController,
                   documentKey: "pincode",
                   textInputType: TextInputType.number,
                   hint: 'Pincode',
@@ -152,11 +162,11 @@ class ParentEditProfileScreen extends StatelessWidget {
             ),
             //place
             ParentEditListileWidget(
-              voidCallback: () {
-                profileUpdate(
+              voidCallback: () async {
+                await profileUpdate(
                   context: context,
                   textEditingController:
-                      parentProfileEditController.placeController,
+                      parentProfileEditController.textEditingController,
                   documentKey: "place",
                   textInputType: TextInputType.text,
                   hint: 'Place',
@@ -169,11 +179,11 @@ class ParentEditProfileScreen extends StatelessWidget {
             ),
             //state
             ParentEditListileWidget(
-              voidCallback: () {
-                profileUpdate(
+              voidCallback: () async {
+                await profileUpdate(
                   context: context,
                   textEditingController:
-                      parentProfileEditController.stateController,
+                      parentProfileEditController.textEditingController,
                   documentKey: "state",
                   textInputType: TextInputType.text,
                   hint: 'State',
@@ -203,9 +213,9 @@ class ParentEditProfileScreen extends StatelessWidget {
         context: context,
         hintText: hint,
         textEditingController: textEditingController,
-        voidCallback: () {
+        voidCallback: () async {
           if (textEditingController.text.isNotEmpty) {
-            parentProfileEditController.updateParentProfile(
+            await parentProfileEditController.updateParentProfile(
               value: textEditingController.text,
               documentKey: documentKey,
             );
