@@ -31,7 +31,7 @@ class GuardianModel {
     this.gender,
     this.profileImageID,
     this.profileImageURL,
-    this.userRole = 'parent',
+    this.userRole = 'guardian',
   });
 
   GuardianModel copyWith({

@@ -12,6 +12,7 @@ import '../../local_database/parent_login_database.dart';
 import '../../main.dart';
 import '../../model/parent_model/parent_model.dart';
 import '../../utils/utils.dart';
+import '../../view/colors/colors.dart';
 
 class MultipileStudentsController extends GetxController {
   RxBool isLoading = RxBool(false);
@@ -25,9 +26,13 @@ class MultipileStudentsController extends GetxController {
   }
 
   addParentAuthDetails(DBParentLogin dBParentLoginDetails) async {
-    parentdataDB.add(dBParentLoginDetails);
+    await parentdataDB.add(dBParentLoginDetails);
     parentAuthlist.add(dBParentLoginDetails);
-    log("parentdataDB.toString()>>>>>>>>>${parentAuthlist[0].batchID}");
+  }
+
+  Future<void> removeFromHive(int index) async {
+    await parentdataDB.deleteAt(index);
+    parentAuthlist.removeAt(index);
   }
 
   checkalreadyexist(String newParentDocID, DBParentLogin dBParentLoginDetails) {
@@ -57,45 +62,123 @@ class MultipileStudentsController extends GetxController {
           return isLoading.value
               ? circularProgressIndicatotWidget
               : AlertDialog(
-                  title: Text('Select Class'.tr),
+                  title: Text('Select Mail'.tr),
                   content: SingleChildScrollView(
                     child: ListBody(
                       children: <Widget>[
                         SizedBox(
-                          height: 500,
-                          width: 500,
-                          child: ListView.separated(
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () async {
-                                    await parentsignIn(
-                                      context,
-                                      parentAuthlist[index].parentDocID,
-                                      parentAuthlist[index].classID,
-                                      parentAuthlist[index].schoolID,
-                                      parentAuthlist[index].batchID,
-                                      parentAuthlist[index].parentEmail,
-                                      parentAuthlist[index].parentPassword,
+                          height: 400,
+                          width: 400,
+                          child: parentdataDB.isEmpty
+                              ? const Center(
+                                  child: Text('No Mail found'),
+                                )
+                              : ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () async {
+                                        await parentsignIn(
+                                          context,
+                                          parentAuthlist[index].parentDocID,
+                                          parentAuthlist[index].classID,
+                                          parentAuthlist[index].schoolID,
+                                          parentAuthlist[index].batchID,
+                                          parentAuthlist[index].parentEmail,
+                                          parentAuthlist[index].parentPassword,
+                                        );
+                                      },
+                                      child: Container(
+                                        color:
+                                            adminePrimayColor.withOpacity(0.2),
+                                        // width:100,
+                                        height: 40,
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 05),
+                                              child: Text(parentAuthlist[index]
+                                                  .emailID),
+                                            ),
+                                            const Spacer(),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 04),
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    barrierDismissible:
+                                                        false, // user must tap button!
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title:
+                                                            const Text('Alert'),
+                                                        content:
+                                                            SingleChildScrollView(
+                                                          child: ListBody(
+                                                            children: const <
+                                                                Widget>[
+                                                              Text(
+                                                                  'Do you want to remove this email')
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'Cancel'),
+                                                            onPressed:
+                                                                () async {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'Ok'),
+                                                            onPressed:
+                                                                () async {
+                                                              await removeFromHive(
+                                                                      index)
+                                                                  .then(
+                                                                      (value) {
+                                                                Navigator.pop(
+                                                                    context);
+                                                                Navigator.pop(
+                                                                    context);
+                                                              });
+                                                            },
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                icon: const Icon(
+                                                  Icons.delete,
+                                                ),
+                                                color:
+                                                    Colors.red.withOpacity(0.4),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     );
                                   },
-                                  child: Container(
-                                    color: Colors.red,
-                                    height: 40,
-                                    child: Text(parentAuthlist[index].emailID),
-                                  ),
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return const Divider();
-                              },
-                              itemCount: parentdataDB.length),
+                                  separatorBuilder: (context, index) {
+                                    return const Divider();
+                                  },
+                                  itemCount: parentdataDB.length),
                         )
                       ],
                     ),
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: const Text('cancel'),
+                      child: const Text('Cancel'),
                       onPressed: () {
                         Navigator.pop(context);
                       },

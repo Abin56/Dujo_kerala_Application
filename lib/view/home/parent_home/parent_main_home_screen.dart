@@ -14,6 +14,7 @@ import '../../../main.dart';
 import '../../pages/recorded_videos/select_subjects.dart';
 import '../../pages/splash_screen/splash_screen.dart';
 import '../drawer/parent_drawer.dart';
+import '../student_home/Student Edit Profile/parent_edit_profile.dart';
 
 class ParentMainHomeScreen extends StatefulWidget {
   const ParentMainHomeScreen({Key? key}) : super(key: key);
@@ -47,6 +48,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,
       ),
+      const ParentEditProfileScreen()
     ];
     return WillPopScope(
       onWillPop: () => onbackbuttonpressed(context),
@@ -94,9 +96,9 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
               ),
               GButton(
                 iconSize: 30,
-                icon: Icons.chat,
+                icon: Icons.assignment_ind_outlined,
                 textSize: 20,
-                text: 'Ask\nDoubt'.tr,
+                text: 'Profile'.tr,
               )
             ],
             selectedIndex: _page,

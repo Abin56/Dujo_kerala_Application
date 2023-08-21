@@ -8,10 +8,10 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
-import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../../pages/recorded_videos/select_subjects.dart';
 import '../../pages/splash_screen/splash_screen.dart';
 import '../drawer/guardian_drawer.dart';
+import '../student_home/Student Edit Profile/guardian_edit_profile.dart';
 import 'guradian_home.dart';
 
 class GuardianMainHomeScreen extends StatefulWidget {
@@ -45,7 +45,7 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,
       ),
-      const ChatScreen(),
+      const GuardianEditProfileScreen(),
     ];
     return WillPopScope(
       onWillPop: () => onbackbuttonpressed(context),
@@ -91,11 +91,11 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
                 icon: Icons.tv,
                 text: 'Recorded\nClasses'.tr,
               ),
-              GButton(
+             GButton(
                 iconSize: 30,
+                icon: Icons.assignment_ind_outlined,
                 textSize: 20,
-                icon: Icons.chat,
-                text: 'Ask\nDoubt'.tr,
+                text: 'Profile'.tr,
               )
             ],
             selectedIndex: _page,

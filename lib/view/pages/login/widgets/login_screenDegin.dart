@@ -45,11 +45,13 @@ class LoginScreenDesign extends StatelessWidget {
                 ),
               ],
             ),
-              Text('''                              Kerala State Co-Operative
+            Text(
+              '''                              Kerala State Co-Operative
                            Institute of Information Technology
                            Electronics & Communications Ltd No. 4435
-              ''',style: TextStyle(fontSize: 12
-              .sp,fontWeight: FontWeight.bold),),
+              ''',
+              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: ContainerImage(

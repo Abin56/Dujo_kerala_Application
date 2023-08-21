@@ -89,7 +89,7 @@ class TeacherSignUpController extends GetxController {
             teacherPhNo:
                 UserCredentialsController.teacherModel?.teacherPhNo ?? "",
             docid: value.user?.uid ?? "",
-            userRole: UserCredentialsController.teacherModel?.userRole ?? "",
+            userRole: "teacher",
             imageId: imageId,
             imageUrl: imageUrl,
           );
