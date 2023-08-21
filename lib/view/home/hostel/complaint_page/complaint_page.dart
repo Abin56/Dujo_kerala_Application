@@ -63,6 +63,7 @@ class HostelComplaintPage extends StatelessWidget {
                           height: 300,
                           child: TextFormField(
                             textAlign: TextAlign.center,
+                            controller: _hostelController.complaintController,
                             expands: true,
                             maxLines: null,
                             decoration: const InputDecoration(
@@ -82,17 +83,20 @@ class HostelComplaintPage extends StatelessWidget {
                             if (_hostelController.isValid()) {
                               await _hostelController.createHostelComplaint(
                                 hostel: HostelModelComplaint(
-                                  docId: "",
-                                  title: _hostelController
-                                      .complaintTitleController.text,
-                                  studentId: UserCredentialsController
-                                          .studentModel?.docid ??
-                                      "",
-                                  date: Timestamp.now().millisecondsSinceEpoch,
-                                  description: _hostelController
-                                      .complaintController.text,
-                                  isCompleted: false,
-                                ),
+                                    docId: "",
+                                    title: _hostelController
+                                        .complaintTitleController.text,
+                                    studentId: UserCredentialsController
+                                            .studentModel?.docid ??
+                                        "",
+                                    date:
+                                        Timestamp.now().millisecondsSinceEpoch,
+                                    description: _hostelController
+                                        .complaintController.text,
+                                    isCompleted: false,
+                                    classId: UserCredentialsController
+                                            .studentModel?.classId ??
+                                        ""),
                               );
                             } else {
                               showToast(msg: "All fields are mandatory");
