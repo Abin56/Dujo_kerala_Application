@@ -1,6 +1,6 @@
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_application/controllers/log_out/user_logout_controller.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,7 +12,6 @@ import '../../local_database/parent_login_database.dart';
 import '../../main.dart';
 import '../../model/parent_model/parent_model.dart';
 import '../../utils/utils.dart';
-import '../../view/pages/login/dujo_login_screen.dart';
 
 class MultipileStudentsController extends GetxController {
   RxBool isLoading = RxBool(false);
@@ -87,7 +86,7 @@ class MultipileStudentsController extends GetxController {
                                 );
                               },
                               separatorBuilder: (context, index) {
-                                return Divider();
+                                return const Divider();
                               },
                               itemCount: parentdataDB.length),
                         )
@@ -118,15 +117,16 @@ class MultipileStudentsController extends GetxController {
       String password) async {
     try {
       isLoading.value = true;
-      await FirebaseAuth.instance
-          .signOut()
-          .then((value) async {
-                await SharedPreferencesHelper.setString(
-              SharedPreferencesHelper.userRoleKey,'parent').then((value) => log('Added userRoll'));
-            // await SharedPreferencesHelper.clearSharedPreferenceData();
-            // UserCredentialsController.clearUserCredentials();
-          })
-          .then((value) async {
+      UserCredentialsController.schoolId = schoolID;
+      UserCredentialsController.batchId = batchID;
+      UserCredentialsController.classId = classID;
+      await FirebaseAuth.instance.signOut().then((value) async {
+        await SharedPreferencesHelper.setString(
+                SharedPreferencesHelper.userRoleKey, 'parent')
+            .then((value) => log('Added userRoll'));
+        // await SharedPreferencesHelper.clearSharedPreferenceData();
+        // UserCredentialsController.clearUserCredentials();
+      }).then((value) async {
         await FirebaseAuth.instance
             .signInWithEmailAndPassword(
           email: parentemail.trim(),
@@ -156,7 +156,8 @@ class MultipileStudentsController extends GetxController {
           //assigining shared preference user role for app close
 
           await SharedPreferencesHelper.setString(
-              SharedPreferencesHelper.userRoleKey,'parent').then((value) => log('Added userRoll'));
+                  SharedPreferencesHelper.userRoleKey, 'parent')
+              .then((value) => log('Added userRoll'));
           Get.offAll(const ParentMainHomeScreen());
           isLoading.value = false;
         }).catchError((error) {
