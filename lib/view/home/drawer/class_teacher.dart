@@ -69,37 +69,15 @@ class ClassTeacherHeaderDrawer extends StatelessWidget {
             children: [
               TextButton.icon(
                 onPressed: () async {
-                  return showDialog(
-                    context: context,
-                    barrierDismissible: false, // user must tap button!
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Select Class'.tr),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: <Widget>[
-                              GetClassTeacherListDropDownButton()
-                            ],
-                          ),
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            child: const Text('Ok'),
-                            onPressed: () {
-                              if (classIDListValue?['docid'] != null) {
-                                UserCredentialsController.classId =
-                                    classIDListValue['docid'];
-                                SharedPreferencesHelper.setString(
-                                    SharedPreferencesHelper.classIdKey,
-                                    classIDListValue['docid']);
-                                Get.offAll(const ClassTeacherMainHomeScreen());
-                              }
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
+        
+
+
+
+
+
+
+
+
                 },
                 icon: const Icon(Icons.class_),
                 label: Text(

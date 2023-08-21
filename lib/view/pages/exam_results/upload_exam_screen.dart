@@ -42,124 +42,76 @@ class _ExamResultsViewState extends State<ExamResultsView> {
               fontsize: 16.w,
               fontWeight: FontWeight.w500),
           backgroundColor: adminePrimayColor),
-      body:widget.isLoading?circularProgressIndicatotWidget:
-       Center(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                // height: 60.h,
-                width: 320.w,
+      body: widget.isLoading
+          ? circularProgressIndicatotWidget
+          : Center(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      // height: 60.h,
+                      width: 320.w,
 
-                child: Center(
-                  child: GetSchoolLevelExamDropDownButton(
-                    examType: widget.examlevel,
-                  ),
-                ),
-              ),
-              SizedBox(
-                // height: 75.h,
-                width: 320.w,
+                      child: Center(
+                        child: GetSchoolLevelExamDropDownButton(
+                          examType: widget.examlevel,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      // height: 75.h,
+                      width: 320.w,
 
-                child: Center(
-                  child: GetTeachersSubjectsDropDownButton(
-                    classId: widget.classID,
-                  ),
-                ),
-              ),
-              SizedBox(
-                // height: 60.h,
-                width: 320.w,
+                      child: Center(
+                        child: GetTeachersSubjectsDropDownButton(
+                          classId: widget.classID,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      // height: 60.h,
+                      width: 320.w,
 
-                child: Center(
-                    child: AllClassStudentsListDropDownButton(
-                  classID: widget.classID,
-                )),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 30.w,
-                  right: 30.w,
-                ),
-                child: TextFormFieldWidget(
-                  textEditingController: obtainedMark,
-                  labelText: "Obtained Mark".tr,
-                  function: checkFieldEmpty,
-                  //textEditingController: ,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 30.w,
-                  right: 30.w,
-                ),
-                child: TextFormFieldWidget(
-                  textEditingController: obtainedGrade,
-                  // hintText: "Obtained Grade",
-                  labelText: 'Obtained Grade'.tr,
-                  //textEditingController: ,
-                ),
-              ),
-              GestureDetector(
-                  onTap: () async {
-                    final docid = uuid.v1();
-                    if (_formKey.currentState!.validate()) {
-                      if (schoolLevelExamistValue != null &&
-                          allClassStudentsListValue != null) {
-                        setState(() {
-                          widget.isLoading = true;
-                        });
-                        await FirebaseFirestore.instance
-                            .collection('SchoolListCollection')
-                            .doc(UserCredentialsController.schoolId)
-                            .collection(UserCredentialsController.batchId!)
-                            .doc(UserCredentialsController.batchId!)
-                            .collection('classes')
-                            .doc(widget.classID)
-                            .collection('Students')
-                            .doc(allClassStudentsListValue!['docid'])
-                            .collection(widget.examlevel)
-                            .doc(schoolLevelExamistValue!['examName'])
-                            .set({
-                          'docid': schoolLevelExamistValue!['examName']
-                        }).then((value) async {
-                          await FirebaseFirestore.instance
-                              .collection('SchoolListCollection')
-                              .doc(UserCredentialsController.schoolId)
-                              .collection(UserCredentialsController.batchId!)
-                              .doc(UserCredentialsController.batchId!)
-                              .collection('classes')
-                              .doc(widget.classID)
-                              .collection('Students')
-                              .doc(allClassStudentsListValue!['docid'])
-                              .collection(widget.examlevel)
-                              .doc(schoolLevelExamistValue!['examName'])
-                              .collection('Marks')
-                              .doc(teacherSubjectValue!['docid'])
-                              .set({
-                            'docid': docid,
-                            'uploadDate': DateTime.now().toString(),
-                            'studentName':
-                                allClassStudentsListValue!['studentName'],
-                            'obtainedMark': obtainedMark.text.trim(),
-                            'obtainedGrade': obtainedGrade.text.trim(),
-                            'subjectName': teacherSubjectValue!['subjectName'],
-                            'studentid': allClassStudentsListValue!['docid'],
-                          }, SetOptions(merge: true)).then((value) async {
-                            await FirebaseFirestore.instance
-                                .collection('SchoolListCollection')
-                                .doc(UserCredentialsController.schoolId)
-                                .collection(UserCredentialsController.batchId!)
-                                .doc(UserCredentialsController.batchId!)
-                                .collection('classes')
-                                .doc(widget.classID)
-                                .collection('Exam Results')
-                                .doc(schoolLevelExamistValue!['examName'])
-                                .set({
-                              'docid': schoolLevelExamistValue!['examName']
-                            }).then((value) async {
+                      child: Center(
+                          child: AllClassStudentsListDropDownButton(
+                        classID: widget.classID,
+                      )),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 30.w,
+                        right: 30.w,
+                      ),
+                      child: TextFormFieldWidget(
+                        textEditingController: obtainedMark,
+                        labelText: "Obtained Mark".tr,
+                        function: checkFieldEmpty,
+                        //textEditingController: ,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 30.w,
+                        right: 30.w,
+                      ),
+                      child: TextFormFieldWidget(
+                        textEditingController: obtainedGrade,
+                        // hintText: "Obtained Grade",
+                        labelText: 'Obtained Grade'.tr,
+                        //textEditingController: ,
+                      ),
+                    ),
+                    GestureDetector(
+                        onTap: () async {
+                          final docid = uuid.v1();
+                          if (_formKey.currentState!.validate()) {
+                            if (schoolLevelExamistValue != null &&
+                                allClassStudentsListValue != null) {
+                              setState(() {
+                                widget.isLoading = true;
+                              });
                               await FirebaseFirestore.instance
                                   .collection('SchoolListCollection')
                                   .doc(UserCredentialsController.schoolId)
@@ -168,13 +120,12 @@ class _ExamResultsViewState extends State<ExamResultsView> {
                                   .doc(UserCredentialsController.batchId!)
                                   .collection('classes')
                                   .doc(widget.classID)
-                                  .collection('Exam Results')
+                                  .collection('Students')
+                                  .doc(allClassStudentsListValue!['docid'])
+                                  .collection(widget.examlevel)
                                   .doc(schoolLevelExamistValue!['examName'])
-                                  .collection('Subjects')
-                                  .doc(teacherSubjectValue!['docid'])
                                   .set({
-                                'subject': teacherSubjectValue!['subjectName'],
-                                'subjectid': teacherSubjectValue!['docid'],
+                                'docid': schoolLevelExamistValue!['examName']
                               }).then((value) async {
                                 await FirebaseFirestore.instance
                                     .collection('SchoolListCollection')
@@ -184,19 +135,14 @@ class _ExamResultsViewState extends State<ExamResultsView> {
                                     .doc(UserCredentialsController.batchId!)
                                     .collection('classes')
                                     .doc(widget.classID)
-                                    .collection('Exam Results')
-                                    .doc(schoolLevelExamistValue!['examName'])
-                                    .collection('Subjects')
-                                    .doc(teacherSubjectValue!['docid'])
-                                    .collection('MarkList')
+                                    .collection('Students')
                                     .doc(allClassStudentsListValue!['docid'])
+                                    .collection(widget.examlevel)
+                                    .doc(schoolLevelExamistValue!['examName'])
+                                    .collection('Marks')
+                                    .doc(teacherSubjectValue!['docid'])
                                     .set({
-                                  'subjectid': teacherSubjectValue!['docid'],
-                                  'teacherId':
-                                      teacherSubjectValue!['teacherdocid'],
-                                  'teachername':
-                                      teacherSubjectValue!['teacherName'],
-                                  'examid': docid,
+                                  'docid': docid,
                                   'uploadDate': DateTime.now().toString(),
                                   'studentName':
                                       allClassStudentsListValue!['studentName'],
@@ -206,30 +152,103 @@ class _ExamResultsViewState extends State<ExamResultsView> {
                                       teacherSubjectValue!['subjectName'],
                                   'studentid':
                                       allClassStudentsListValue!['docid'],
-                                }).then((value) {
-                                  setState(() {
-                                    widget.isLoading = false;
+                                }, SetOptions(merge: true)).then((value) async {
+                                  await FirebaseFirestore.instance
+                                      .collection('SchoolListCollection')
+                                      .doc(UserCredentialsController.schoolId)
+                                      .collection(
+                                          UserCredentialsController.batchId!)
+                                      .doc(UserCredentialsController.batchId!)
+                                      .collection('classes')
+                                      .doc(widget.classID)
+                                      .collection('Exam Results')
+                                      .doc(schoolLevelExamistValue!['examName'])
+                                      .set({
+                                    'docid':
+                                        schoolLevelExamistValue!['examName']
+                                  }).then((value) async {
+                                    await FirebaseFirestore.instance
+                                        .collection('SchoolListCollection')
+                                        .doc(UserCredentialsController.schoolId)
+                                        .collection(
+                                            UserCredentialsController.batchId!)
+                                        .doc(UserCredentialsController.batchId!)
+                                        .collection('classes')
+                                        .doc(widget.classID)
+                                        .collection('Exam Results')
+                                        .doc(schoolLevelExamistValue![
+                                            'examName'])
+                                        .collection('Subjects')
+                                        .doc(teacherSubjectValue!['docid'])
+                                        .set({
+                                      'subject':
+                                          teacherSubjectValue!['subjectName'],
+                                      'subjectid':
+                                          teacherSubjectValue!['docid'],
+                                    }).then((value) async {
+                                      await FirebaseFirestore.instance
+                                          .collection('SchoolListCollection')
+                                          .doc(UserCredentialsController
+                                              .schoolId)
+                                          .collection(UserCredentialsController
+                                              .batchId!)
+                                          .doc(UserCredentialsController
+                                              .batchId!)
+                                          .collection('classes')
+                                          .doc(widget.classID)
+                                          .collection('Exam Results')
+                                          .doc(schoolLevelExamistValue![
+                                              'examName'])
+                                          .collection('Subjects')
+                                          .doc(teacherSubjectValue!['docid'])
+                                          .collection('MarkList')
+                                          .doc(allClassStudentsListValue![
+                                              'docid'])
+                                          .set({
+                                        'subjectid':
+                                            teacherSubjectValue!['docid'],
+                                        'teacherId': teacherSubjectValue![
+                                            'teacherdocid'],
+                                        'teachername':
+                                            teacherSubjectValue!['teacherName'],
+                                        'examid': docid,
+                                        'uploadDate': DateTime.now().toString(),
+                                        'studentName':
+                                            allClassStudentsListValue![
+                                                'studentName'],
+                                        'obtainedMark':
+                                            obtainedMark.text.trim(),
+                                        'obtainedGrade':
+                                            obtainedGrade.text.trim(),
+                                        'subjectName':
+                                            teacherSubjectValue!['subjectName'],
+                                        'studentid':
+                                            allClassStudentsListValue!['docid'],
+                                      }).then((value) {
+                                        setState(() {
+                                          widget.isLoading = false;
+                                        });
+                                        obtainedMark.clear();
+                                        obtainedGrade.clear();
+                                        showToast(msg: "Uploaded Successfully");
+                                      });
+                                    });
                                   });
-                                  obtainedMark.clear();
-                                  obtainedGrade.clear();
-                                  showToast(msg: "Uploaded Successfully");
                                 });
                               });
-                            });
-                          });
-                        });
-                      } else {
-                        return showToast(msg: 'Please check selected Items');
-                      }
-                    }
-                  },
-                  child: SubmitButtonWidget(
-                    text: 'Submit'.tr,
-                  ))
-            ],
-          ),
-        ),
-      ),
+                            } else {
+                              return showToast(
+                                  msg: 'Please check selected Items');
+                            }
+                          }
+                        },
+                        child: SubmitButtonWidget(
+                          text: 'Submit'.tr,
+                        ))
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }

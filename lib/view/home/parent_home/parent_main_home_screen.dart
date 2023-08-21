@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
@@ -9,7 +11,6 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../main.dart';
-import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../../pages/recorded_videos/select_subjects.dart';
 import '../../pages/splash_screen/splash_screen.dart';
 import '../drawer/parent_drawer.dart';
@@ -37,24 +38,26 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-        checkingSchoolActivate(context);
+    log("Stundent IDD :::: ${UserCredentialsController.parentModel!.studentID}");
+    checkingSchoolActivate(context);
     List<Widget> pages = [
       ParentHomeScreen(),
-         RecSelectSubjectScreen(
+      RecSelectSubjectScreen(
         batchId: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,
       ),
-         const ChatScreen(),
     ];
     return WillPopScope(
-         onWillPop: () => onbackbuttonpressed(context),
+      onWillPop: () => onbackbuttonpressed(context),
       child: Scaffold(
         appBar: AppBar(
-       title: ContainerImage(
+          title: ContainerImage(
               height: 28.h,
               width: 90.w,
-              imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor,),
+              imagePath: 'assets/images/dujoo-removebg.png'),
+          backgroundColor: adminePrimayColor,
+        ),
         body: pages[_page],
         bottomNavigationBar: Container(
           height: 71,
@@ -77,7 +80,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
             rippleColor: Colors.grey,
             activeColor: Colors.white,
             color: Colors.white,
-            tabs:  [
+            tabs: [
               GButton(
                   iconSize: 20,
                   icon: LineIcons.home,
@@ -107,7 +110,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                 const ParentHeaderDrawer(),
+                ParentHeaderDrawer(),
                 MyDrawerList(context),
               ],
             ),

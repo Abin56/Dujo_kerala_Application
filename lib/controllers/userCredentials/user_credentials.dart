@@ -14,7 +14,7 @@ class UserCredentialsController {
   static GuardianModel? guardianModel;
   static TeacherModel? teacherModel;
 
-  static void clearUserCredentials() {
+  static void  clearUserCredentials() {
     schoolId = null;
     batchId = null;
     classId = null;

@@ -72,13 +72,13 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: UpgradeAlert(
-        
         upgrader: Upgrader(
-          shouldPopScope: () => true,
-          canDismissDialog: true,
-          durationUntilAlertAgain: const Duration(hours: 1),
-          dialogStyle: Platform.isIOS?UpgradeDialogStyle.cupertino:UpgradeDialogStyle.material
-        ),
+            shouldPopScope: () => true,
+            canDismissDialog: true,
+            durationUntilAlertAgain: const Duration(hours: 1),
+            dialogStyle: Platform.isIOS
+                ? UpgradeDialogStyle.cupertino
+                : UpgradeDialogStyle.material),
         child: SafeArea(
           child: Column(
             children: [
@@ -153,7 +153,8 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                         builder: (context, snaps) {
                           if (snaps.hasData) {
                             return GoogleMonstserratWidgets(
-                              text: 'Class : ${snaps.data!.data()!['className']}',
+                              text:
+                                  'Class : ${snaps.data!.data()!['className']}',
                               fontsize: 13.sp,
                               fontWeight: FontWeight.w500,
                               color: cWhite.withOpacity(0.8),

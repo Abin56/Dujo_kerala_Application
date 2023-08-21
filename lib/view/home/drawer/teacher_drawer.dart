@@ -81,8 +81,12 @@ class TeacherHeaderDrawer extends StatelessWidget {
           UserCredentialsController.teacherModel!.userRole == 'classTeacher'
               ? TextButton.icon(
                   onPressed: () async {
-                    await backtoSwitchClass().then((value) =>
-                        Get.offAll(const ClassTeacherMainHomeScreen()));
+                    await backtoSwitchClass().then((value) {
+                      UserCredentialsController.classId=value;
+                    log('Value Printing ::::: $value');
+                          Get.offAll(const ClassTeacherMainHomeScreen());
+                    }
+                    );
                   },
                   icon: const Icon(Icons.edit_note_rounded),
                   label: Text(

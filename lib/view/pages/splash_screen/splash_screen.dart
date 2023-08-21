@@ -12,6 +12,7 @@ import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_s
 import 'package:dujo_kerala_application/view/home/student_home/students_main_home.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
+import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,10 +44,22 @@ class SplashScreen extends StatelessWidget {
                       image: AssetImage('assets/images/leptonlogo.png'))),
             ),
           ),
-          Text(
-            "Lepton DuJo",
-            style: DGoogleFonts.headTextStyleMont,
-          )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GoogleMonstserratWidgets(
+                text: 'COSTECH',
+                fontsize: 27.sp,
+                color: const Color.fromARGB(255, 201, 14, 1),
+                fontWeight: FontWeight.bold,
+              ),
+              Text(
+                " DuJo",
+                style: DGoogleFonts.headTextStyleMont,
+              ),
+            ],
+          ),
+           Text('Kerala State Co-Operative',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold),)
         ],
       )),
     );
@@ -72,6 +85,7 @@ nextpage() async {
   log("batchId:${UserCredentialsController.batchId}");
   log("classId:${UserCredentialsController.classId}");
   log("userRole:${UserCredentialsController.userRole}");
+  log('Firebase Auth ${FirebaseAuth.instance.currentUser?.uid}');
 
   if (auth.currentUser == null) {
     Get.to(() => const DujoLoginScren());
@@ -214,7 +228,9 @@ Future<bool> onbackbuttonpressed(BuildContext context) async {
         title: const Text('Alert'),
         content: SingleChildScrollView(
           child: ListBody(
-            children: const <Widget>[Text('Do you want to exit from Lepton Dujo ?')],
+            children: const <Widget>[
+              Text('Do you want to exit from Lepton Dujo ?')
+            ],
           ),
         ),
         actions: <Widget>[
@@ -227,7 +243,7 @@ Future<bool> onbackbuttonpressed(BuildContext context) async {
           TextButton(
             child: const Text('Yes'),
             onPressed: () {
-         SystemNavigator.pop();
+              SystemNavigator.pop();
             },
           ),
         ],
@@ -236,5 +252,3 @@ Future<bool> onbackbuttonpressed(BuildContext context) async {
   );
   return exitApp;
 }
-
-

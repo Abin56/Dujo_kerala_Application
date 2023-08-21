@@ -90,6 +90,9 @@ class GetxLanguage extends Translations {
         },
         'ml_IN': {
         
+       // 'Create Monthly Test':'ക്രീയേറ്റ്'
+       //'Monthly Class Test':''
+       //'All Test':'എല്ലാ ടെസ്റ്റ് ',
           'Group':'ഗ്രൂപ്പ് ',
           'Public Level':'പബ്ലിക് ലെവൽ ',
           'Class Test':'ക്ലാസ് ടെസ്റ്റ്',
@@ -150,7 +153,7 @@ class GetxLanguage extends Translations {
           'Search  School': 'സ്കൂൾ തിരയുക',
           'Set Up Your App': 'നിങ്ങളുടെ ആപ്പ് സജ്ജീകരിക്കുക',
           'Welcome To': 'സ്വാഗതം',
-          'Select Who You Are ?': 'നിങ്ങൾ ആരാണെന്ന് തിരഞ്ഞെടുക്കുക?',
+          'Select who you are ?': 'നിങ്ങൾ ആരാണെന്ന് തിരഞ്ഞെടുക്കുക?',
           'Welcome..': 'സ്വാഗതം..',
           'Subjects': 'സബ്ജക്ട്',
           'Reason': 'കാരണം',

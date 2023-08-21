@@ -1,18 +1,21 @@
 // ignore_for_file: non_constant_identifier_names, duplicate_ignore, empty_catches, unused_element
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_application/controllers/sign_in_controller/parent_login_controller.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
+import 'package:dujo_kerala_application/view/home/events/event_display_class_level.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/users_exam_list_view/user_exam_acc.dart';
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
-import 'package:dujo_kerala_application/view/home/parent_home/progress_report/progress_report.dart';
-import 'package:dujo_kerala_application/view/home/student_home/time_table/time_table_display.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/view_home_work.dart';
-import 'package:dujo_kerala_application/view/pages/Notice/notice_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/multipile_students/multipile_students_controller.dart';
 import '../../../utils/utils.dart';
 import '../../language/language_change_drawer.dart';
 import '../../pages/Attentence/take_attentence/attendence_book_status_month.dart';
@@ -20,9 +23,11 @@ import '../../pages/privacy_policy/dialogs/privacy_policy.dart';
 import '../student_home/time_table/ss.dart';
 
 class ParentHeaderDrawer extends StatelessWidget {
-
-   const ParentHeaderDrawer({
-    Key? key}) : super(key: key);
+  MultipileStudentsController multipileStudentsController =
+      Get.put(MultipileStudentsController());
+  ParentLoginController parentLoginController =
+      Get.put(ParentLoginController());
+  ParentHeaderDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +71,29 @@ class ParentHeaderDrawer extends StatelessWidget {
             onPressed: () async {
               await userLogOut(context);
             },
-            child:  Text("Logout".tr),
-          ), 
-          
+            child: Text("Logout".tr),
+          ),
+          GestureDetector(
+            onTap: () async {
+              
+              await multipileStudentsController.switchStudent(context);
+            },
+            child: Container(
+              height: ScreenUtil().setHeight(30),
+              width: ScreenUtil().setWidth(150),
+              decoration: BoxDecoration(
+                  color: adminePrimayColor.withOpacity(0.1),
+                  border: Border.all(color: adminePrimayColor),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Center(
+                child: GooglePoppinseventClassLevelWidgets(
+                  text: 'Switch Student',
+                  fontsize: 11.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -146,7 +171,7 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-           MenuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
+        MenuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
@@ -154,22 +179,22 @@ Widget MyDrawerList(context) {
         }),
         MenuItem(2, 'assets/images/attendance.png', 'Attendance book'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-Get.to(
-            () =>      AttendenceBookScreenSelectMonth(
-          schoolId: UserCredentialsController.schoolId!,
-          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!),
+          Get.to(
+            () => AttendenceBookScreenSelectMonth(
+                schoolId: UserCredentialsController.schoolId!,
+                batchId: UserCredentialsController.batchId!,
+                classID: UserCredentialsController.classId!),
           );
         }),
         MenuItem(3, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
-   Get.to(
+          Get.to(
             () => const UserExmNotifications(),
           );
         }),
         MenuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-         Get.to(
+          Get.to(
             () => const SS(),
           );
         }),
@@ -179,11 +204,10 @@ Get.to(
         // }),
         MenuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-             Get.to(
+          Get.to(
             () => const ViewHomeWorks(),
           );
         }),
-
 
         // MenuItem(8, 'assets/images/splash.png', 'Progress Report'.tr,
         //     currentPage == DrawerSections.dashboard ? true : false, () {
@@ -196,14 +220,13 @@ Get.to(
         //   );
         // }),
 
-
         MenuItem(8, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());
         }),
-                 MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
+        MenuItem(7, 'assets/images/attendance.png', 'Privacy Policy'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-              Get.to(const PrivacyViewScreen());
+          Get.to(const PrivacyViewScreen());
         }),
 
         kHeight,
@@ -300,6 +323,6 @@ Widget emptyDisplay(String section) {
           textAlign: TextAlign.center,
         ),
       ],
-),
-);
+    ),
+  );
 }
