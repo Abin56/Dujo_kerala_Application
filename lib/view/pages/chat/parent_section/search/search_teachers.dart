@@ -2,17 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/model/teacher_model/teacher_model.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
-import 'package:dujo_kerala_application/view/pages/chat/student_section/teachers_message/chats/teachers_chats.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../controllers/chat_controller/student_controller/student_controller.dart';
+import '../../../../../controllers/chat_controller/parent_controller/parent_controller.dart';
 import '../../../../widgets/fonts/google_poppins.dart';
+import '../teacher_messages/chats/teachers_vs_parents.dart';
 
-class SearchTeachers extends SearchDelegate {
-  StudentChatController studentChatController =
-      Get.put(StudentChatController());
+class SearchTeachersForParents extends SearchDelegate {
+  ParentChatController parentChatController = Get.put(ParentChatController());
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -117,9 +116,9 @@ class SearchTeachers extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     final List<TeacherModel> buildSuggestionList;
     if (query.isEmpty) {
-      buildSuggestionList = studentChatController.searchTeacher;
+      buildSuggestionList = parentChatController.searchTeacher;
     } else {
-      buildSuggestionList = studentChatController.searchTeacher
+      buildSuggestionList = parentChatController.searchTeacher
           .where((item) =>
               item.teacherName!.toLowerCase().contains(query.toLowerCase()))
           .toList();
@@ -137,8 +136,7 @@ class SearchTeachers extends SearchDelegate {
               return GestureDetector(
                 onTap: () {
                   final data = buildSuggestionList[index];
-                  Get.to(TeachersChatsScreen(
-                     
+                  Get.to(ParentTeachersChatsScreen(
                       teacherDocID: data.docid!,
                       teacherName: data.teacherName!));
                 },

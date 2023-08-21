@@ -18,7 +18,7 @@ class FeesPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
           title: GoogleMonstserratWidgets(
-              text: 'Fees List', fontsize: 18.w, fontWeight: FontWeight.w700),
+              text: 'Fees List'.tr, fontsize: 18.w, fontWeight: FontWeight.w700),
           bottom: TabBar(
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorColor: Colors.white,

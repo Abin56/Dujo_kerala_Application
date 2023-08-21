@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
-import 'package:dujo_kerala_application/model/student_model/data_base_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -265,12 +264,11 @@ class StudentsGroupsMessagesScreen extends StatelessWidget {
   }
 }
 
-addteacherTopaticipance(String groupId) async {
+addteacherTopaticipance(String groupId, String groupName,
+    {required String teacherParameter}) async {
+      log('teacherParameter >>>>>>>>>>>>>> $teacherParameter');
   log("message Calinmggggggg");
-  final teacherDetails = AddStudentModel(
-      docid: FirebaseAuth.instance.currentUser!.uid,
-      studentName:
-          '${UserCredentialsController.teacherModel!.teacherName} T r');
+
   await FirebaseFirestore.instance
       .collection("SchoolListCollection")
       .doc(UserCredentialsController.schoolId)
@@ -280,9 +278,13 @@ addteacherTopaticipance(String groupId) async {
       .doc(UserCredentialsController.classId)
       .collection('ChatGroups')
       .doc('ChatGroups')
-      .collection('Students')
+      .collection(groupName)
       .doc(groupId)
       .collection('Participants')
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .set(teacherDetails.toMap());
+      .set({
+    'docid': FirebaseAuth.instance.currentUser!.uid,
+    teacherParameter:
+        '${UserCredentialsController.teacherModel!.teacherName} T r'
+  });
 }

@@ -4,6 +4,7 @@ import 'package:dujo_kerala_application/controllers/log_out/user_logout_controll
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/home/exam_Notification/teacher_adding/add_subject.dart';
 import 'package:dujo_kerala_application/view/home/general_instructions/general_instructions.dart';
+import 'package:dujo_kerala_application/view/home/teachers_home/teacher_classes_list.dart';
 import 'package:dujo_kerala_application/view/pages/Homework/homework.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,12 @@ class TeacherHeaderDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  log("message");
-      return Container(
+    log("message");
+    return Container(
       color: Colors.grey.withOpacity(0.2),
       width: double.infinity,
       height: 350.h,
-      padding:  EdgeInsets.only(bottom: 5.h),
+      padding: EdgeInsets.only(bottom: 5.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,13 +67,12 @@ class TeacherHeaderDrawer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               TextButton.icon(
                   onPressed: () async {
                     userLogOutController.logOut(context);
                   },
                   icon: const Icon(Icons.key),
-                  label:  Text(
+                  label: Text(
                     'Logout'.tr,
                     style: const TextStyle(color: cblack),
                   ))
@@ -81,10 +81,15 @@ class TeacherHeaderDrawer extends StatelessWidget {
           UserCredentialsController.teacherModel!.userRole == 'classTeacher'
               ? TextButton.icon(
                   onPressed: () async {
-                    Get.offAll(const ClassTeacherMainHomeScreen());
+                    await backtoSwitchClass().then((value) {
+                      UserCredentialsController.classId=value;
+                    log('Value Printing ::::: $value');
+                          Get.offAll(const ClassTeacherMainHomeScreen());
+                    }
+                    );
                   },
                   icon: const Icon(Icons.edit_note_rounded),
-                  label:  Text(
+                  label: Text(
                     'Switch to Class Teacher'.tr,
                     style: const TextStyle(color: cblack),
                   ))
@@ -166,7 +171,7 @@ Widget MyDrawerList(context) {
     child: Column(
       // show list  of menu drawer.........................
       children: [
-         menuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
+        menuItem(1, 'assets/images/information.png', 'General Instructions'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(
             () => GeneralInstruction(),
@@ -174,34 +179,34 @@ Widget MyDrawerList(context) {
         }),
         menuItem(2, 'assets/images/attendance.png', 'Attendance book'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
-Get.to(
+          Get.to(
             () => AttendenceBookScreenSelectMonth(
-          schoolId: UserCredentialsController.schoolId!,
-          batchId: UserCredentialsController.batchId!,
-          classID: UserCredentialsController.classId!), //Attendance Book,
+                schoolId: UserCredentialsController.schoolId!,
+                batchId: UserCredentialsController.batchId!,
+                classID: UserCredentialsController.classId!), //Attendance Book,
           );
         }),
         menuItem(3, 'assets/images/exam.png', 'Exams'.tr,
             currentPage == DrawerSections.favourites ? true : false, () {
-Get.to(
+          Get.to(
             () => const AddTimeTable(),
           );
         }),
         menuItem(4, 'assets/images/library.png', 'Time Table'.tr,
             currentPage == DrawerSections.setting ? true : false, () {
-         Get.to(
+          Get.to(
             () => const SS(),
           );
         }),
         menuItem(5, 'assets/images/homework.png', 'HomeWorks'.tr,
             currentPage == DrawerSections.contact ? true : false, () {
-       Get.to(
-            () =>   HomeWorkUpload(
-        batchId: UserCredentialsController.batchId!,
-        classId: UserCredentialsController.classId!,
-        schoolID: UserCredentialsController.schoolId!,
-        teacherID: UserCredentialsController.teacherModel!.docid!,
-      ),
+          Get.to(
+            () => HomeWorkUpload(
+              batchId: UserCredentialsController.batchId!,
+              classId: UserCredentialsController.classId!,
+              schoolID: UserCredentialsController.schoolId!,
+              teacherID: UserCredentialsController.teacherModel!.docid!,
+            ),
           );
         }),
 
@@ -215,7 +220,7 @@ Get.to(
         //         batchId: UserCredentialsController.batchId!),
         //   );
         // }),
-         menuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
+        menuItem(7, 'assets/images/languages.png', 'Change Language'.tr,
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(LanguageChangeDrawerPage());
         }),
@@ -223,7 +228,7 @@ Get.to(
             currentPage == DrawerSections.dashboard ? true : false, () {
           Get.to(const PrivacyViewScreen());
         }),
-       
+
         kHeight10,
         kHeight10,
         kHeight10,
@@ -320,6 +325,6 @@ Widget emptyDisplay(String section) {
           textAlign: TextAlign.center,
         ),
       ],
-),
-);
+    ),
+  );
 }

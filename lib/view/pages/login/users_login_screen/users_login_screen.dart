@@ -28,8 +28,8 @@ class UsersLoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: ContainerImage(
-            height: 28.h,
-            width: 90.w,
+            height: ScreenUtil().setHeight(28),
+            width: ScreenUtil().setWidth(90),
             imagePath: 'assets/images/dujoo-removebg.png'),
         backgroundColor: adminePrimayColor,
       ),
@@ -102,7 +102,7 @@ class UsersLoginScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   ContainerImage(
-                                      height: 60,
+                                      height: ScreenUtil().setHeight(60),
                                       width: 60,
                                       imagePath: icons[index]),
                                   GoogleMonstserratWidgets(
@@ -140,7 +140,7 @@ var icons = [
 getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
   Get.bottomSheet(Container(
     color: Colors.white,
-    height: 200.h,
+    height: ScreenUtil().setHeight(200),
     width: 200.w,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -156,7 +156,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
               borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
               color: Color.fromARGB(255, 171, 198, 249),
             ),
-            height: 80.h,
+            height: ScreenUtil().setHeight(80),
             width: 200.w,
             child: Center(
               child: GoogleMonstserratWidgets(
@@ -179,7 +179,7 @@ getWhichTeacher(int teacherPageIndex, int classTeacherPageIndex) {
               borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
               color: Color.fromARGB(255, 171, 198, 249),
             ),
-            height: 80.h,
+            height: ScreenUtil().setHeight(80),
             width: 200.w,
             child: Center(
               child: GoogleMonstserratWidgets(

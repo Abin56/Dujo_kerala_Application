@@ -39,8 +39,11 @@ class ClickOnClasss extends StatelessWidget {
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: classID), //Attendance Book
+
       const UserExmNotifications(), //Exam
+
       const SS(), //Time Table
+
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
@@ -48,8 +51,10 @@ class ClickOnClasss extends StatelessWidget {
         ),
         body: SchoolLevelNoticePage(),
       ),
+
       // Notice
       TeacherSubjectHome(),
+
       Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
@@ -59,22 +64,31 @@ class ClickOnClasss extends StatelessWidget {
       ),
       // Events
       SchoolLevelMeetingPage(), // Meetings
+
       ClassTestPage(),
+
        ClassMonthlyTestPage(),
     ];
     final hasDataNavigation = [
+
       SelectPeriodWiseScreen(
           batchId: UserCredentialsController.batchId!,
           classID: classID,
           schoolId: UserCredentialsController.schoolId!), //Take Attendance
+
       AttendenceBookScreenSelectMonth(
           schoolId: UserCredentialsController.schoolId!,
           batchId: UserCredentialsController.batchId!,
           classID: classID), //Attendance Book
+
       const TeacherChatScreen(), // Chats
+
       const UserExmNotifications(), //Exam
+
       SelectExamLevelScreen(classId: classID), //exam result upload
-      const SS(), //TimeTable
+
+      const SS(),  //TimeTable
+
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
         classId: UserCredentialsController.classId!,

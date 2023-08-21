@@ -108,7 +108,7 @@ class StudentSignUpController extends GetxController {
             studentName:
                 UserCredentialsController.studentModel?.studentName ?? "",
             studentemail: emailController.text.trim(),
-            userRole: UserCredentialsController.studentModel?.userRole ?? "");
+            userRole: "student");
 
         await firebaseData
             .doc(userUid)

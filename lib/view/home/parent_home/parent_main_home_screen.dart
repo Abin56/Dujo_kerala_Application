@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_home_screen.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,10 +11,10 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
 import '../../../main.dart';
-import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../../pages/recorded_videos/select_subjects.dart';
 import '../../pages/splash_screen/splash_screen.dart';
 import '../drawer/parent_drawer.dart';
+import '../student_home/Student Edit Profile/parent_edit_profile.dart';
 
 class ParentMainHomeScreen extends StatefulWidget {
   const ParentMainHomeScreen({Key? key}) : super(key: key);
@@ -38,25 +39,27 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-        checkingSchoolActivate(context);
+    log("Stundent IDD :::: ${UserCredentialsController.parentModel!.studentID}");
+    checkingSchoolActivate(context);
     List<Widget> pages = [
       ParentHomeScreen(),
-         RecSelectSubjectScreen(
+      RecSelectSubjectScreen(
         batchId: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,
       ),
-      const UnderMaintanceScreen(text: ""),
-         const ChatScreen(),
+      const ParentEditProfileScreen()
     ];
     return WillPopScope(
-         onWillPop: () => onbackbuttonpressed(context),
+      onWillPop: () => onbackbuttonpressed(context),
       child: Scaffold(
         appBar: AppBar(
-       title: ContainerImage(
+          title: ContainerImage(
               height: 28.h,
               width: 90.w,
-              imagePath: 'assets/images/dujoo-removebg.png'),backgroundColor: adminePrimayColor,),
+              imagePath: 'assets/images/dujoo-removebg.png'),
+          backgroundColor: adminePrimayColor,
+        ),
         body: pages[_page],
         bottomNavigationBar: Container(
           height: 71,
@@ -79,7 +82,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
             rippleColor: Colors.grey,
             activeColor: Colors.white,
             color: Colors.white,
-            tabs:  [
+            tabs: [
               GButton(
                   iconSize: 20,
                   icon: LineIcons.home,
@@ -93,16 +96,9 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
               ),
               GButton(
                 iconSize: 30,
-                // iconSize: 10,
+                icon: Icons.assignment_ind_outlined,
                 textSize: 20,
-                icon: Icons.laptop,
-                text: 'Live\nClasses'.tr,
-              ),
-              GButton(
-                iconSize: 30,
-                icon: Icons.chat,
-                textSize: 20,
-                text: 'Ask\nDoubt'.tr,
+                text: 'Profile'.tr,
               )
             ],
             selectedIndex: _page,
@@ -116,7 +112,7 @@ class _ParentMainHomeScreenState extends State<ParentMainHomeScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                 ParentHeaderDrawer(),
+                ParentHeaderDrawer(),
                 MyDrawerList(context),
               ],
             ),

@@ -23,7 +23,7 @@ class ClassMonthlyTestListPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("All Test"),
+          title:  Text("All Test".tr),
         ),
         body: Obx(
           () => classListShowController.isLoading.value

@@ -16,6 +16,7 @@ import '../../pages/splash_screen/splash_screen.dart';
 import '../drawer/teacher_drawer.dart';
 
 class TeacherMainHomeScreen extends StatefulWidget {
+
   const TeacherMainHomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -40,7 +41,9 @@ class _TeacherMainHomeScreenState extends State<TeacherMainHomeScreen> {
   Widget build(BuildContext context) {
         checkingSchoolActivate(context);
     List<Widget> pages = [
-      TeacherHomeScreen(),
+      TeacherHomeScreen(
+    
+      ),
         RecSelectSubjectScreen(
         batchId: UserCredentialsController.batchId!,
         classID: UserCredentialsController.classId!,

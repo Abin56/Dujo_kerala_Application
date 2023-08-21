@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/group_chat_controller/studentchat_controller.dart/student_chat_controller.dart';
+import '../../../../../../controllers/group_chat_controller/studentchat_controller/student_chat_controller.dart';
 import '../../../group_chats/group_chat.dart';
 
 class StudenstGroupChatsScreen extends StatefulWidget {
@@ -19,7 +19,8 @@ class StudenstGroupChatsScreen extends StatefulWidget {
       {required this.groupID, required this.groupName, super.key});
 
   @override
-  State<StudenstGroupChatsScreen> createState() => _StudenstGroupChatsScreenState();
+  State<StudenstGroupChatsScreen> createState() =>
+      _StudenstGroupChatsScreenState();
 }
 
 class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
@@ -34,9 +35,10 @@ class _StudenstGroupChatsScreenState extends State<StudenstGroupChatsScreen> {
 
   @override
   void initState() {
-   userIndexBecomeZero(widget.groupID);
+    userIndexBecomeZero(widget.groupID, 'Students',teacherParameter: 'studentName');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     log("getStudentTeacherChatIndex().toString()$teacherIndex");

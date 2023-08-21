@@ -9,14 +9,11 @@ import 'package:get/get.dart';
 
 import '../student_home/Student Edit Profile/teacher_edit_profile.dart';
 
-class TeacherHomeScreen extends StatefulWidget {
+class TeacherHomeScreen extends StatelessWidget {
+
+
   static String routeName = '';
 
-  @override
-  State<TeacherHomeScreen> createState() => _TeacherHomeScreenState();
-}
-
-class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -92,7 +89,9 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                 ],
               ),
             ),
-            TeacherClassListView(),
+            TeacherClassListView(
+         
+            ),
           ],
         ),
       ),

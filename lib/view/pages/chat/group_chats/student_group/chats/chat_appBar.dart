@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../controllers/group_chat_controller/group_chat_controller.dart';
+import '../../../../../../controllers/group_chat_controller/group_StudentsTeacher_chat_controller.dart';
 import '../../../../../../widgets/drop_down/select_teachers.dart';
 
 showStudentsGroupAppBar(

@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../controllers/schoo_selection_controller/school_class_selection_controller.dart';
 import '../../../widgets/fonts/google_monstre.dart';
+import '../../../widgets/fonts/google_poppins.dart';
 
 class SearchSchoolScreen extends StatelessWidget {
   SearchSchoolScreen({super.key});
@@ -63,10 +64,23 @@ class SearchSchoolScreen extends StatelessWidget {
                   fontsize: 25,
                   fontWeight: FontWeight.bold),
               kHeight20,
-              ContainerImage(
-                  height: 40.h,
-                  width: 130.w,
-                  imagePath: 'assets/images/dujoo.png'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GoogleMonstserratWidgets(
+                    text: 'COSTECH',
+                    fontsize: 20,
+                    color: const Color.fromARGB(255, 230, 18, 3),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  GoogleMonstserratWidgets(
+                    text: ' DuJo',
+                    fontsize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ],
+              ),
               kHeight20,
               GoogleMonstserratWidgets(
                   text: "Set Up Your App".tr,
@@ -82,6 +96,33 @@ class SearchSchoolScreen extends StatelessWidget {
                 },
                 child: LottieBuilder.network(
                     'https://assets2.lottiefiles.com/packages/lf20_itvvjtah.json'),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GooglePoppinsWidgets(text: "Developed by", fontsize: 12),
+                  kHeight10,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        height: 32,
+                        width: 32,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/leptonlogo.png'))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: GoogleMonstserratWidgets(
+                            text: "Lepton Communications",
+                            fontsize: 13,
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                ],
               )
             ],
           ),

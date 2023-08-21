@@ -1,6 +1,5 @@
 import 'package:dujo_kerala_application/main.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
-import 'package:dujo_kerala_application/view/home/sample/under_maintance.dart';
 import 'package:dujo_kerala_application/view/widgets/container_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,10 +8,10 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../controllers/userCredentials/user_credentials.dart';
-import '../../pages/chat_gpt/screens/chat_screen.dart';
 import '../../pages/recorded_videos/select_subjects.dart';
 import '../../pages/splash_screen/splash_screen.dart';
 import '../drawer/guardian_drawer.dart';
+import '../student_home/Student Edit Profile/guardian_edit_profile.dart';
 import 'guradian_home.dart';
 
 class GuardianMainHomeScreen extends StatefulWidget {
@@ -46,8 +45,7 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
         classID: UserCredentialsController.classId!,
         schoolId: UserCredentialsController.schoolId!,
       ),
-      const UnderMaintanceScreen(text: ""),
-      const ChatScreen(),
+      const GuardianEditProfileScreen(),
     ];
     return WillPopScope(
       onWillPop: () => onbackbuttonpressed(context),
@@ -93,18 +91,11 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
                 icon: Icons.tv,
                 text: 'Recorded\nClasses'.tr,
               ),
-              GButton(
+             GButton(
                 iconSize: 30,
-                // iconSize: 10,
+                icon: Icons.assignment_ind_outlined,
                 textSize: 20,
-                icon: Icons.laptop,
-                text: 'Live\nClasses'.tr,
-              ),
-              GButton(
-                iconSize: 30,
-                textSize: 20,
-                icon: Icons.chat,
-                text: 'Ask\nDoubt'.tr,
+                text: 'Profile'.tr,
               )
             ],
             selectedIndex: _page,

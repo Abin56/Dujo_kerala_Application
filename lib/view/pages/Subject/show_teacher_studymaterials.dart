@@ -125,6 +125,7 @@ class StudyMaterials extends StatelessWidget {
                                             PDFSectionScreen(
                                               urlPdf: snapshot.data!.docs[index]
                                                   ['downloadUrl'],
+                                                
                                             )));
                               },
                             ),

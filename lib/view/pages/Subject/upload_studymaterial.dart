@@ -78,7 +78,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
 
   } 
 
-  uploadToFirebase(){ 
+  Future<void>uploadToFirebase()async{ 
     
     try{
     
@@ -218,7 +218,7 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
                                 text: (filee ==null)? 'Upload file here' : filee!.path.split('/').last,
                                 fontsize: 22,
                                 color: cblue,
-                                fontWeight: FontWeight.bold, 
+                                fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis,
                               ),
                               kWidth20,
                             ],
@@ -247,9 +247,16 @@ class _UploadStudyMaterialState extends State<UploadStudyMaterial> {
 
                              if(_formKey.currentState!.validate()){
                  await pickAFile(filee);
-                           uploadToFirebase();
+                          await uploadToFirebase().then((value) {
+                            topicController.clear();
+                          titleController.clear();
+                          filee = null;
+                          } 
+                          );
                           }
-                          
+
+                          //check here
+                         
                         },
                         child:  ButtonContainerWidget(
                           curving: 18,

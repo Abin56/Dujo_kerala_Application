@@ -108,7 +108,7 @@ class ParentSignUpController extends GetxController {
               profileImageURL: imageUrl,
               state: stateController.text,
               studentID: UserCredentialsController.parentModel?.studentID ?? "",
-              userRole: UserCredentialsController.parentModel?.userRole ?? "");
+              userRole: 'parent');
 
           //add data to firebase
           await firebaseData

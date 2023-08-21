@@ -112,7 +112,7 @@ class GuardianSignUpController extends GetxController {
               studentID:
                   UserCredentialsController.guardianModel?.studentID ?? "",
               userRole:
-                  UserCredentialsController.guardianModel?.userRole ?? "");
+                  "guardian");
 
           //add data to firebase
           await firebaseData

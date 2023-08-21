@@ -1,10 +1,13 @@
 // ignore_for_file: use_key_in_widget_constructors, must_call_super, annotate_overrides, non_constant_identifier_names
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:dujo_kerala_application/local_database/parent_login_database.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
+import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_accessories/parent_access.dart';
 import 'package:dujo_kerala_application/view/home/parent_home/parent_profile_edit/parent_edit_profile.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -16,12 +19,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../controllers/multipile_students/multipile_students_controller.dart';
+
 class ParentHomeScreen extends StatefulWidget {
   @override
   State<ParentHomeScreen> createState() => _ParentHomeScreenState();
 }
 
 class _ParentHomeScreenState extends State<ParentHomeScreen> {
+  MultipileStudentsController multipileStudentsController =
+      Get.put(MultipileStudentsController());
+
   String deviceToken = '';
 
   void getDeviceToken() async {
@@ -46,32 +54,8 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({'deviceToken': deviceToken}, SetOptions(merge: true)).then(
             (value) => log('Device Token Saved To FIREBASE'));
-
-    //AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp  apikey
   }
 
-// Future<void> scheduleNotification(DateTime scheduledTime, String title, String body) async {
-//   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-//     'channel_id', // Replace with a unique channel ID
-//     'channel_name', // Replace with a channel name
-//     'channel_description', // Replace with a channel description
-//   );
-
-//   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-
-//   var platformChannelSpecifics = NotificationDetails(
-//     android: androidPlatformChannelSpecifics,
-//     iOS: iOSPlatformChannelSpecifics,
-//   );
-
-//   await flutterLocalNotificationsPlugin.schedule(
-//     0, // A unique notification ID
-//     title,
-//     body,
-//     scheduledTime,
-//     platformChannelSpecifics,
-//     androidAllowWhileIdle: true, // Allows the notification to be displayed even if the device is in Doze mode (Android only)
-//   );
 // }
 
   Future<void> sendPushMessage(String token, String body, String title) async {
@@ -119,6 +103,21 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
   }
 
   Widget build(BuildContext context) {
+    log("Parent DOCID :::::::::::::::::::  ${UserCredentialsController.parentModel?.docid}");
+    log("Firebase Auth DOCID :::::::::::::::::::  ${FirebaseAuth.instance.currentUser?.uid}");
+    final parentAuth = DBParentLogin(
+        parentPassword: ParentPasswordSaver.parentPassword,
+        parentEmail: ParentPasswordSaver.parentemailID,
+        schoolID: UserCredentialsController.schoolId!,
+        batchID: UserCredentialsController.batchId!,
+        classID: UserCredentialsController.classId!,
+        studentID: UserCredentialsController.parentModel!.studentID!,
+        parentID: FirebaseAuth.instance.currentUser!.uid,
+        emailID: FirebaseAuth.instance.currentUser!.email ?? "",
+        parentDocID: FirebaseAuth.instance.currentUser!.uid);
+    multipileStudentsController.checkalreadyexist(
+        FirebaseAuth.instance.currentUser!.uid, parentAuth);
+
     String studentName = '';
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -139,49 +138,184 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: screenSize.width / 2,
-                          child: GoogleMonstserratWidgets(
-                            overflow: TextOverflow.ellipsis,
-                            text: UserCredentialsController
-                                .parentModel!.parentName!,
-                            fontsize: 23.sp,
-                            fontWeight: FontWeight.bold,
-                            color: cWhite,
+                        GestureDetector(
+                          onTap: () {
+                            log(UserCredentialsController
+                                .parentModel!.studentID!);
+                          },
+                          child: SizedBox(
+                            width: screenSize.width / 2,
+                            child: GoogleMonstserratWidgets(
+                              overflow: TextOverflow.ellipsis,
+                              text: UserCredentialsController
+                                  .parentModel!.parentName!,
+                              fontsize: 23.sp,
+                              fontWeight: FontWeight.bold,
+                              color: cWhite,
+                            ),
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
                             Get.to(() => ParentEditProfileScreen());
-                            sendPushMessage(deviceToken, 'sdf', 'zsd');
                           },
-                          child: Container(
-                            child: Stack(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      UserCredentialsController
-                                              .parentModel!.profileImageURL ??
-                                          ''),
-                                  radius: 50.r,
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    UserCredentialsController
+                                            .parentModel!.profileImageURL ??
+                                        ''),
+                                radius: 50.r,
+                              ),
+                              Positioned(
+                                right: 6.r,
+                                bottom: 1.r,
+                                child: CircleAvatar(
+                                  //  backgroundColor: cWhite,
+                                  radius: 12.r,
+                                  child: const Center(child: Icon(Icons.info)),
                                 ),
-                                Positioned(
-                                  right: 6.r,
-                                  bottom: 1.r,
-                                  child: CircleAvatar(
-                                    //  backgroundColor: cWhite,
-                                    radius: 12.r,
-                                    child:
-                                        const Center(child: Icon(Icons.info)),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
+                  StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('SchoolListCollection')
+                          .doc(UserCredentialsController.schoolId)
+                          .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .collection('ParentCollection')
+                          .doc(UserCredentialsController.parentModel!.docid)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const SizedBox();
+                        }
+                        return (snapshot.data?.data()?['multipleChildren'] ==
+                                null)
+                            ? const SizedBox()
+                            : const Text(
+                                'Switch to next',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              );
+                      }),
+                  //     StreamBuilder(
+                  //       stream: FirebaseFirestore.instance.collection('SchoolListCollection')
+                  //       .doc(UserCredentialsController.schoolId)
+                  //       .collection(UserCredentialsController.batchId!)
+                  //       .doc(UserCredentialsController.batchId)
+                  //       .collection('classes')
+                  //       .doc(UserCredentialsController.classId)
+                  //       .collection('ParentCollection')
+                  //       .doc(UserCredentialsController.parentModel!.docid).snapshots(),
+                  //       builder: ((context, snapshot) {
+                  //         if(snapshot.hasData){
+                  //            return StreamBuilder(
+                  //         stream: FirebaseFirestore.instance
+                  //             .collection("SchoolListCollection")
+                  //             .doc(UserCredentialsController.schoolId)
+                  //             .collection("AllStudents")
+                  //             .doc(snapshot.data?.data()?['childrenIDList'][1])
+                  //             .snapshots(),
+                  //         builder: (context, snap) {
+                  //           if (snap.hasData) {
+                  //             return GestureDetector(
+                  //               onTap: ()async{
+                  //       //           DocumentSnapshot sur= await FirebaseFirestore.instance.collection('SchoolListCollection')
+                  //       // .doc(UserCredentialsController.schoolId)
+                  //       // .collection(UserCredentialsController.batchId!)
+                  //       // .doc(UserCredentialsController.batchId)
+                  //       // .collection('classes')
+                  //       // .doc(UserCredentialsController.classId)
+                  //       // .collection('ParentCollection').doc(UserCredentialsController.parentModel!.docid).get();
+
+                  //       //  DocumentSnapshot kur = await FirebaseFirestore.instance
+                  //       //       .collection("SchoolListCollection")
+                  //       //       .doc(UserCredentialsController.schoolId)
+                  //       //       .collection("AllStudents")
+                  //       //       .doc(snapshot.data?.data()?['childrenIDList'][0])
+                  //       //       .get();
+
+                  //       // DocumentReference surRef = sur.reference;
+
+                  //       // List<String> listToUpdate = [];
+                  //       // listToUpdate.add(sur['childrenIDList'][1]);
+                  //       // listToUpdate.add(sur['childrenIDList'][0]);
+                  //       // surRef.update({
+                  //       //   'childrenIDList' : listToUpdate,
+                  //       //   'studentID' : listToUpdate[0]
+                  //       // });
+
+                  //       // UserCredentialsController.parentModel!.studentID = await sur['childrenIDList'][0];
+                  //       // UserCredentialsController.classId = await kur['classID'];
+                  //       // UserCredentialsController.parentModel!.studentID = await kur['docid'];
+
+                  //       // Timer(const Duration(seconds: 5), () {
+                  //       //   log('STUDENT ID :${UserCredentialsController.parentModel!.studentID!}');
+                  //       // log( 'CLASS ID :${UserCredentialsController.classId!}');
+                  //       // });
+
+                  //   //     await FirebaseAuth.instance.signOut().then((value) async {
+                  //   // await SharedPreferencesHelper.clearSharedPreferenceData();
+                  //   // UserCredentialsController.clearUserCredentials();
+                  //   // Get.offAll(() => ParentLoginScreen());
+
+                  // /////  });
+
+                  //               },
+                  //               child: GoogleMonstserratWidgets(
+                  //                 text:
+                  //                     'Switch to ${snap.data?.data()?['studentName']} ',
+                  //                 fontsize: 15.sp,
+                  //                 fontWeight: FontWeight.bold,
+                  //                 color: cWhite,
+                  //               ),
+                  //             );
+                  //           } else {
+                  //             return const Text('');
+                  //           }
+                  //         });
+                  // return (snapshot.data?.data()?['multipleChildren']==true)? GoogleMonstserratWidgets(text: 'Switch to ${snapshot.data?.data()?['childrenIDList'][1]}',  fontsize: 15.sp, overflow: TextOverflow.ellipsis,
+                  //     fontWeight: FontWeight.bold,
+                  //     color: cWhite,):
+                  //    ;
+                  //  }
+
+                  //   return const CircularProgressIndicator();
+                  // })),
+
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('SchoolListCollection')
+                          .doc(UserCredentialsController.schoolId)
+                          .collection(UserCredentialsController.batchId!)
+                          .doc(UserCredentialsController.batchId)
+                          .collection('classes')
+                          .doc(UserCredentialsController.classId)
+                          .collection('ParentCollection')
+                          .doc(UserCredentialsController.parentModel!.docid)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const SizedBox();
+                        }
+                        return const SizedBox();
+                        //Text(snapshot.data!.data()!['parentName']);
+                      }),
                   FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection("SchoolListCollection")
@@ -195,7 +329,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                         if (snap.hasData) {
                           return GoogleMonstserratWidgets(
                             text:
-                                'Student : ${snap.data?.data()?['studentName']} ',
+                                'Student : ${snap.data?.data()?['studentName']}',
                             fontsize: 14.5.sp,
                             fontWeight: FontWeight.w500,
                             color: cWhite.withOpacity(0.8),
@@ -216,7 +350,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       builder: (context, snaps) {
                         if (snaps.hasData) {
                           return GoogleMonstserratWidgets(
-                            text: 'Class : ${snaps.data!.data()!['className']}',
+                            text: 'Class : ${snaps.data?.data()?['className']}',
                             fontsize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: cWhite.withOpacity(0.8),

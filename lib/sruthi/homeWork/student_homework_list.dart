@@ -94,7 +94,7 @@ class HomeWorkList extends StatelessWidget {
                                                                 const HomeWorkDisplay()));
                                                   },
                                                   child: GooglePoppinsWidgets(
-                                                    text: "View",
+                                                    text: "View".tr,
                                                     fontsize: 16.h,
                                                     color: adminePrimayColor,
                                                     fontWeight: FontWeight.w500,

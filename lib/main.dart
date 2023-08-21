@@ -18,11 +18,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/bloc/user_phone_otp/auth_cubit.dart';
 import 'controllers/bloc/user_phone_otp/auth_state.dart';
 import 'helper/shared_pref_helper.dart';
+import 'local_database/parent_login_database.dart';
+
+late Box<DBParentLogin> parentdataDB;
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log('Handling  a background message ${message.messageId}');
@@ -30,6 +35,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  if (!Hive.isAdapterRegistered(DBParentLoginAdapter().typeId)) {
+    Hive.registerAdapter(DBParentLoginAdapter());
+  }
+  parentdataDB = await Hive.openBox<DBParentLogin>('parentloginAuth');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -44,6 +55,7 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
   runApp(MyApp());
 }
 

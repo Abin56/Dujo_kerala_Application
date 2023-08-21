@@ -2,6 +2,7 @@ import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'event_display_school_level.dart';
@@ -26,7 +27,7 @@ class EventDisplayClassLevel extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title: const Text("Events"),
+          title:  Text("Events".tr),
         ),
         body: SizedBox(
           height: double.infinity, // set the height to fill available space

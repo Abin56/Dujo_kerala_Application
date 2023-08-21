@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -7,11 +10,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/teacher_home/class_test_controller/class_test_controller.dart';
 import '../../../controllers/teacher_home/class_test_controller/monthly_controllers/class_test_monthly_controller.dart';
-import '../../../controllers/teacher_home/class_test_controller/class_test_controller.dart';
 import 'click_on_class.dart';
 
 class TeacherClassListView extends StatelessWidget {
-  TeacherClassListView({super.key});
+  TeacherClassListView({
+    super.key,
+  });
   final ClassTestController classTestController =
       Get.put(ClassTestController());
   final ClassTestMonthlyController classTestMonthlyController =
@@ -53,6 +57,8 @@ class TeacherClassListView extends StatelessWidget {
                         child: FadeInAnimation(
                           child: GestureDetector(
                             onTap: () {
+                              UserCredentialsController.classId =
+                                  snapshot.data?.docs[index]['docid'] ?? '';
                               //this data add to classId for class test creation
                               classTestController.classId =
                                   snapshot.data?.docs[index]['docid'] ?? "";
@@ -66,6 +72,8 @@ class TeacherClassListView extends StatelessWidget {
                                             ['docid'] ??
                                         '',
                                   ));
+
+                              log('Pressed  Class teacher ID :::::   ${UserCredentialsController.classId}');
                             },
                             child: Container(
                               height: h / 100,
@@ -112,4 +120,17 @@ class TeacherClassListView extends StatelessWidget {
       ),
     );
   }
+}
+
+Future backtoSwitchClass() async {
+  String classDocID = '';
+  final firebase = await FirebaseFirestore.instance
+      .collection("SchoolListCollection")
+      .doc(UserCredentialsController.schoolId)
+      .collection("Teachers")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get();
+  classDocID = firebase.data()?['classID'];
+  log('Back To Class teacher ID :::::   $classDocID');
+  return classDocID;
 }
