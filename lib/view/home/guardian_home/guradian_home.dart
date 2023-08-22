@@ -44,7 +44,16 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
         .collection('GuardianCollection')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({'deviceToken': deviceToken}, SetOptions(merge: true)).then(
-            (value) => log('Device Token Saved To FIREBASE'));
+            (value) => log('Device Token Saved To FIREBASE')).then(
+            (value) => log('Device Token Saved To FIREBASE')).then((value) => FirebaseFirestore.instance.collection('SchoolListCollection').doc(deviceToken).set({
+              'deviceToken' : deviceToken, 
+              'schoolID': UserCredentialsController.schoolId, 
+              'batchID': UserCredentialsController.batchId, 
+              'classID': UserCredentialsController.classId, 
+              'personID' :FirebaseAuth.instance.currentUser!.uid, 
+              'role': 'Guardian'
+            }));
+
 
     //AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp  apikey
   }

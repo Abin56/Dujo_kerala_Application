@@ -53,7 +53,14 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
         .collection('ParentCollection')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({'deviceToken': deviceToken}, SetOptions(merge: true)).then(
-            (value) => log('Device Token Saved To FIREBASE'));
+            (value) => log('Device Token Saved To FIREBASE')).then((value) => FirebaseFirestore.instance.collection('SchoolListCollection').doc(deviceToken).set({
+              'deviceToken' : deviceToken, 
+              'schoolID': UserCredentialsController.schoolId, 
+              'batchID': UserCredentialsController.batchId, 
+              'classID': UserCredentialsController.classId, 
+              'personID' :FirebaseAuth.instance.currentUser!.uid, 
+              'role': 'Parent'
+            }));
   }
 
 // }
