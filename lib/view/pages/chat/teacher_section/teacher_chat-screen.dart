@@ -23,7 +23,7 @@ class TeacherChatScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: adminePrimayColor,
-          title:  Text('Dujo Chat'.tr),
+          title: Text('Dujo Chat'.tr),
           bottom: TabBar(
             tabs: [
               Tab(
@@ -37,7 +37,10 @@ class TeacherChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Text("Students".tr,style: TextStyle(fontSize: 17.sp),),
+                        Text(
+                          "Students".tr,
+                          style: TextStyle(fontSize: 17.sp),
+                        ),
                         StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('SchoolListCollection')
@@ -64,7 +67,7 @@ class TeacherChatScreen extends StatelessWidget {
                                     .collection('StudentChatCounter')
                                     .doc('F0Ikn1UouYIkqmRFKIpg')
                                     .update({'chatIndex': 0});
-                                return  CircleAvatar(
+                                return CircleAvatar(
                                   radius: 10.sp,
                                   backgroundColor: Colors.white,
                                   child: Center(
@@ -122,7 +125,10 @@ class TeacherChatScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Text("Parents".tr,style: TextStyle(fontSize: 17.sp),),
+                        Text(
+                          "Parents".tr,
+                          style: TextStyle(fontSize: 17.sp),
+                        ),
                         StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('SchoolListCollection')
@@ -175,7 +181,7 @@ class TeacherChatScreen extends StatelessWidget {
                                         messageIndex.data!
                                             .data()!['chatIndex']
                                             .toString(),
-                                        style:  TextStyle(
+                                        style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 10.sp,
                                             fontWeight: FontWeight.bold),
@@ -196,7 +202,7 @@ class TeacherChatScreen extends StatelessWidget {
                   ],
                 ),
               ),
-               Tab(
+              Tab(
                   icon: const Icon(
                     Icons.class_,
                   ),

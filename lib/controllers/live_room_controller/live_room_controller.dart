@@ -15,7 +15,7 @@ class LiveRoomController extends GetxController {
       .collection('classes')
       .doc(UserCredentialsController.classId)
       .collection('LiveRooms');
-  createRoom(
+Future<void>  createRoom(
     BuildContext context,
     String roomName,
     String scheduleTime,

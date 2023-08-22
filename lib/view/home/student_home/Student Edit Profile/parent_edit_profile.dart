@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../../controllers/student_controller/profile_edit_controllers/parent_profile_edit_controller.dart';
 import '../../../../controllers/userCredentials/user_credentials.dart';
 import '../../../../model/Signup_Image_Selction/image_selection.dart';
-import '../../../../widgets/Iconbackbutton.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/sizes/constant.dart';
 import '../../../constant/sizes/sizes.dart';
@@ -30,20 +29,20 @@ class ParentEditProfileScreen extends StatelessWidget {
           color: adminePrimayColor,
         ),
         child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              IconButtonBackWidget(
-                color: cWhite,
-              ),
-              kWidth50,
-              GooglePoppinsWidgets(
-                text: "Profile".tr,
-                fontsize: 22.h,
-                color: cWhite,
-              )
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   children: [
+          //     IconButtonBackWidget(
+          //       color: cWhite,
+          //     ),
+          //     kWidth50,
+          //     GooglePoppinsWidgets(
+          //       text: "Profile".tr,
+          //       fontsize: 22.h,
+          //       color: cWhite,
+          //     )
+          //   ],
+          // ),
           kHeight20,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +77,7 @@ class ParentEditProfileScreen extends StatelessWidget {
                       "",
                   fontsize: 19.h),
               title: GooglePoppinsWidgets(text: "Phone No.".tr, fontsize: 12.h),
-              editicon: Icons.edit,            
+              editicon: Icons.edit,
             ),
             ParentEditListileWidget(
               icon: Icons.email,
@@ -151,16 +150,16 @@ class ParentEditListileWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title:  Text("Do you want to change Email ID ?".tr),
+                title: Text("Do you want to change Email ID ?".tr),
                 actions: [
                   TextButton(
-                    child:  Text("Cancel".tr),
+                    child: Text("Cancel".tr),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child:  Text("Ok".tr),
+                    child: Text("Ok".tr),
                     onPressed: () {
                       Navigator.pop(context);
 
@@ -174,20 +173,20 @@ class ParentEditListileWidget extends StatelessWidget {
                           return Form(
                             key: _formKey,
                             child: AlertDialog(
-                              title:  Text("Update Mail".tr),
+                              title: Text("Update Mail".tr),
                               content: Column(
-                                mainAxisSize: MainAxisSize.min, 
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   TextFormField(
                                     validator: checkFieldEmailIsValid,
                                     controller: emailController,
-                                    decoration:  InputDecoration(
+                                    decoration: InputDecoration(
                                         hintText: "Enter new email address".tr),
                                   ),
                                   TextFormField(
                                     validator: checkFieldEmpty,
                                     controller: passwordController,
-                                    decoration:  InputDecoration(
+                                    decoration: InputDecoration(
                                         hintText: "Password".tr),
                                   ),
                                 ],
@@ -199,7 +198,7 @@ class ParentEditListileWidget extends StatelessWidget {
                                         child: CircularProgressIndicator(),
                                       )
                                     : TextButton(
-                                        child:  Text("Update".tr),
+                                        child: Text("Update".tr),
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -293,8 +292,7 @@ class CircleAvatharImageSelectionWidgetParent extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     )
                   : AlertDialog(
-                      title:
-                           Text('Do you want to change profile picture?'.tr),
+                      title: Text('Do you want to change profile picture?'.tr),
                       actions: [
                         TextButton(
                           onPressed: () {

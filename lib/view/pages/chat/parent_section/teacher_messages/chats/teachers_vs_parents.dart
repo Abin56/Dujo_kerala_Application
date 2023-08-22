@@ -312,6 +312,7 @@ class Parent_TeachersChatsScreenState extends State<ParentTeachersChatsScreen> {
           .set({
         'block': false,
         'docid': FirebaseAuth.instance.currentUser?.uid,
+        'classID': UserCredentialsController.classId,
         'messageindex': 0,
         'parentname': UserCredentialsController.parentModel?.parentName,
       });
@@ -337,26 +338,27 @@ class Parent_TeachersChatsScreenState extends State<ParentTeachersChatsScreen> {
           .set({
         'block': false,
         'docid': FirebaseAuth.instance.currentUser?.uid,
+        'classID': UserCredentialsController.classId,
         'messageindex': 0,
         'parentname': UserCredentialsController.parentModel?.parentName,
-      }).then((value) async{
-              await FirebaseFirestore.instance
-          .collection('SchoolListCollection')
-          .doc(UserCredentialsController.schoolId)
-          .collection(UserCredentialsController.batchId!)
-          .doc(UserCredentialsController.batchId!)
-          .collection('classes')
-          .doc(UserCredentialsController.classId)
-          .collection('ParentCollection')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('TeacherChats')
-          .doc(widget.teacherDocID).set({
-            'block':false,
-            'docid':widget.teacherDocID,
-            'messageindex':0,
-            'teacherName':widget.teacherName,
-          });
-
+      }).then((value) async {
+        await FirebaseFirestore.instance
+            .collection('SchoolListCollection')
+            .doc(UserCredentialsController.schoolId)
+            .collection(UserCredentialsController.batchId!)
+            .doc(UserCredentialsController.batchId!)
+            .collection('classes')
+            .doc(UserCredentialsController.classId)
+            .collection('ParentCollection')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('TeacherChats')
+            .doc(widget.teacherDocID)
+            .set({
+          'block': false,
+          'docid': widget.teacherDocID,
+          'messageindex': 0,
+          'teacherName': widget.teacherName,
+        });
       });
     }
   }

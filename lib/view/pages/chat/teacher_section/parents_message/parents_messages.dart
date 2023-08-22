@@ -50,9 +50,33 @@ class ParentMessagesScreen extends StatelessWidget {
                             leading: const CircleAvatar(
                               radius: 30,
                             ),
-                            title: Text(
-                                snapshots.data!.docs[index]['parentname'],
-                                style:  TextStyle(color: Colors.black,fontSize: 17.sp)),
+                            title: FutureBuilder(
+                                future: FirebaseFirestore.instance
+                                    .collection('SchoolListCollection')
+                                    .doc(UserCredentialsController.schoolId)
+                                    .collection(
+                                        UserCredentialsController.batchId!)
+                                    .doc(UserCredentialsController.batchId)
+                                    .collection('classes')
+                                    .doc(snapshots.data?.docs[index]['classID'])
+                                    .collection('ParentCollection')
+                                    .doc(snapshots.data?.docs[index]['docid'])
+                                    .get(),
+                                builder: (context, parentsnaps) {
+                                  // log('Getting parent name --->>>  ${parentsnaps.data?.get('parentName')}');
+                                  // log('Getting class ID--->>>  ${snapshots.data?.docs[index]['classID']}');
+                                  if (parentsnaps.hasData) {
+                                    return Text(
+                                        parentsnaps.data?.data()?['parentName'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17.sp));
+                                  } else {
+                                    return const Center(
+                                      child: Text(''),
+                                    );
+                                  }
+                                }),
                             contentPadding: const EdgeInsetsDirectional.all(1),
                             subtitle: FutureBuilder(
                                 future: FirebaseFirestore.instance
@@ -68,14 +92,17 @@ class ParentMessagesScreen extends StatelessWidget {
                                   if (futuredata.hasData) {
                                     return Row(
                                       children: [
-                                         Text(
+                                        Text(
                                           'class : ',
-                                          style: TextStyle(color: Colors.black,fontSize: 15.sp),
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15.sp),
                                         ),
                                         Text(
                                           futuredata.data?.data()?['className'],
-                                          style:  TextStyle(
-                                              color: Colors.black,fontSize: 15.sp),
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15.sp),
                                         ),
                                       ],
                                     );
@@ -116,7 +143,7 @@ class ParentMessagesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(right: 8.sp),
+                      padding: EdgeInsets.only(right: 8.sp),
                       child: GestureDetector(
                         onTap: () {
                           _showSearch();
@@ -156,3 +183,17 @@ class ParentMessagesScreen extends StatelessWidget {
         });
   }
 }
+
+
+
+// FutureBuilder(
+//               future: FirebaseFirestore.instance
+//                   .collection('SchoolListCollection')
+//                   .doc(UserCredentialsController.schoolId)
+//                   .collection(UserCredentialsController.batchId!)
+//                   .doc(UserCredentialsController.batchId)
+//                   .collection('classes')
+//                   .doc(UserCredentialsController.classId)
+//                   .collection('ParentCollection')
+//                   .doc(napshots.data!.docs[index]['docid'])
+//                   .get()

@@ -5,7 +5,6 @@ import 'package:dujo_kerala_application/controllers/live_room_controller/live_ro
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/sizes/constant.dart';
-import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/live_classes/teacher_live_section/list_of_rooms.dart';
 import 'package:dujo_kerala_application/view/widgets/button_container_widget.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
@@ -47,29 +46,28 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
         child: Stack(
           children: [
             Positioned(
-              bottom: 0,
-              left: 0,
-
-              right: 0,
-              top: 0,
+              bottom: 0.r,
+              left: 0.r,
+              right: 0.r,
+              top: 0.r,
               child: ButtonContainerWidget(
-                curving: 0,
+                curving: 0.r,
                 colorindex: 0,
-                height: 100,
+                height: ScreenUtil().setHeight(100),
                 width: double.infinity,
                 child: Column(
                   children: [
-                    kHeight30,
-                    kHeight30,
-                    kHeight30,
+                    SizedBox(
+                      height: ScreenUtil().setHeight(90),
+                    ),
                     GoogleMonstserratWidgets(
                         text: "DuJO Live",
-                        fontsize: 35,
+                        fontsize: 35.sp,
                         color: cWhite,
                         fontWeight: FontWeight.bold),
-                    kHeight20,
-                    kHeight20,
-                    kHeight20,
+                    SizedBox(
+                      height: ScreenUtil().setHeight(60),
+                    ),
                     Row(
                       children: [
                         const Spacer(),
@@ -90,18 +88,21 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                 } else {
                                   return GestureDetector(
                                     onTap: () {
-                                      Get.to(()=>const ListofRoomsScreen());
+                                      Get.to(() => const ListofRoomsScreen());
                                     },
-                                    child: Container(
-                                      height: 40,
-                                      width: 150,
-                                      color:
-                                          const Color.fromARGB(63, 255, 255, 255),
-                                      child: Center(
-                                        child: GooglePoppinsWidgets(
-                                          fontsize: 16,
-                                          text: 'View session',
-                                          color: cWhite,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 20),
+                                      child: Container(
+                                        height: ScreenUtil().setHeight(40),
+                                        width: ScreenUtil().setWidth(150),
+                                        color: const Color.fromARGB(
+                                            63, 255, 255, 255),
+                                        child: Center(
+                                          child: GooglePoppinsWidgets(
+                                            fontsize: 16.sp,
+                                            text: 'View session',
+                                            color: cWhite,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -120,53 +121,59 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
             Form(
               key: updateFormkey,
               child: Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                top: 300,
+                bottom: 0.r,
+                left: 0.r,
+                right: 0.r,
+                top: 300.r,
                 child: Container(
                   decoration: const BoxDecoration(
                       color: cWhite,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30))),
-                  height: 250,
+                  height: ScreenUtil().setHeight(250),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        kHeight40,
+                        SizedBox(
+                          height: ScreenUtil().setHeight(40),
+                        ),
                         GooglePoppinsWidgets(
-                          fontsize: 30,
+                          fontsize: 30.sp,
                           text: 'Create live session',
                           fontWeight: FontWeight.bold,
                         ),
                         //  kHeight10,
                         GooglePoppinsWidgets(
-                          fontsize: 16,
+                          fontsize: 16.sp,
                           text: 'Enter session details',
                         ),
-                        kHeight30,
+                        SizedBox(
+                          height: ScreenUtil().setHeight(30),
+                        ),
 
                         ButtonContainerWidget(
-                            curving: 10,
+                            curving: 10.r,
                             colorindex: 2,
-                            height: 40,
-                            width: 300,
+                            height: ScreenUtil().setHeight(40),
+                            width: ScreenUtil().setWidth(300),
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 8, left: 10),
-                              child: GooglePoppinsWidgets(
-                                text: 'Session ID :  $randomID',
-                                color: Colors.white,
-                                fontsize: 15,
+                              padding: EdgeInsets.only(top: 5.r, left: 10.r),
+                              child: Center(
+                                child: GooglePoppinsWidgets(
+                                    text: 'Session ID :  $randomID',
+                                    color: Colors.white,
+                                    fontsize: 15.sp),
                               ),
                             )),
-                        kHeight30,
                         SizedBox(
-                          height: 80,
+                          height: ScreenUtil().setHeight(30),
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(80),
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 8.0, right: 8.0),
+                            padding: EdgeInsets.only(left: 8.0.r, right: 8.0.r),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,10 +187,11 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                     //   text: 'Room Name : ',
                                     // ),
                                     SizedBox(
-                                      height: 50,
-                                      width: 200,
+                                      height: ScreenUtil().setHeight(50),
+                                      width: ScreenUtil().setWidth(200),
                                       child: Center(
                                         child: TextFormField(
+                                          style: TextStyle(fontSize: 16.sp),
                                           controller: _roomNameController,
                                           validator: (value) {
                                             if (_roomNameController
@@ -193,10 +201,11 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                               return null;
                                             }
                                           },
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             hintText: 'Enter the topic',
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.all(7),
+                                            border: const OutlineInputBorder(),
+                                            contentPadding:
+                                                const EdgeInsets.all(7).r,
                                           ),
                                         ),
                                       ),
@@ -212,10 +221,10 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                             selectTime(context);
                           },
                           child: SizedBox(
-                            height: 80,
+                            height: ScreenUtil().setHeight(80),
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(left: 8.0, right: 8.0),
+                                  EdgeInsets.only(left: 8.0.r, right: 8.0.r),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,16 +232,12 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      // GooglePoppinsWidgets(
-                                      //   fontsize: 12,
-                                      //   fontWeight: FontWeight.w300,
-                                      //   text: 'Select Time : ',
-                                      // ),
                                       SizedBox(
-                                        height: 50.w,
-                                        width: 150.w,
+                                        height: ScreenUtil().setHeight(50),
+                                        width: ScreenUtil().setWidth(150),
                                         child: Center(
                                             child: TextFormField(
+                                          style: TextStyle(fontSize: 16.sp),
                                           validator: (value) {
                                             if (_timeController.text.isEmpty) {
                                               return "Please select Time";
@@ -263,28 +268,35 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                         GestureDetector(
                           onTap: () async {
                             if (updateFormkey.currentState!.validate()) {
-                              await widget.liveRoomController.createRoom(
-                                  context,
-                                  _roomNameController.text.trim(),
-                                  _timeController.text,
-                                  uuid.v1(),
-                                  randomID,
-                                  UserCredentialsController
-                                          .teacherModel!.teacherName ??
-                                      "test");
+                              await widget.liveRoomController
+                                  .createRoom(
+                                      context,
+                                      _roomNameController.text.trim(),
+                                      _timeController.text,
+                                      uuid.v1(),
+                                      randomID,
+                                      UserCredentialsController
+                                              .teacherModel!.teacherName ??
+                                          "test")
+                                  .then((value) {
+                                _timeController.clear();
+                                _roomNameController.clear();
+
+                                ////
+                              });
                             } else {
                               return;
                             }
                           },
                           child: ButtonContainerWidget(
-                              curving: 10,
+                              curving: 10.r,
                               colorindex: 2,
-                              height: 50,
-                              width: 240,
+                              height: ScreenUtil().setHeight(50),
+                              width: ScreenUtil().setWidth(240),
                               child: Center(
                                   child: GooglePoppinsWidgets(
                                 text: 'Create Session ',
-                                fontsize: 18,
+                                fontsize: 18.sp,
                                 color: cWhite,
                               ))),
                         ),
@@ -292,14 +304,13 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, right: 20),
+                              padding: EdgeInsets.only(top: 10.r, right: 20.r),
                               child: Column(
                                 children: [
                                   GooglePoppinsWidgets(
                                       text:
                                           'Owner : ${UserCredentialsController.teacherModel?.teacherName}',
-                                      fontsize: 14),
+                                      fontsize: 14.sp),
                                 ],
                               ),
                             )
