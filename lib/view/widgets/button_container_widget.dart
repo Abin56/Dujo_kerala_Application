@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ButtonContainerWidget extends StatelessWidget {
   double curving;
@@ -20,8 +21,8 @@ class ButtonContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
-      width: width,
+      height: ScreenUtil().setHeight(height),
+      width: ScreenUtil().setWidth(width),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -32,12 +33,12 @@ class ButtonContainerWidget extends StatelessWidget {
           ),
         ],
         gradient: LinearGradient(
-            colors: containerColor[colorindex],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            ),
+          colors: containerColor[colorindex],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
         borderRadius: BorderRadius.all(
-          Radius.circular(curving),  
+          Radius.circular(curving),
         ),
         border: Border.all(
           color: Colors.blueGrey, // set the border color
@@ -50,8 +51,8 @@ class ButtonContainerWidget extends StatelessWidget {
 }
 
 const containerColor = [
-  [Color.fromARGB(226, 6, 71, 157),Color.fromARGB(255, 86, 59, 243) ],
-  [Color.fromARGB(255, 202, 141, 161),Color.fromARGB(255, 55, 124, 158)],
+  [Color.fromARGB(226, 6, 71, 157), Color.fromARGB(255, 86, 59, 243)],
+  [Color.fromARGB(255, 202, 141, 161), Color.fromARGB(255, 55, 124, 158)],
   [Color(0xff6448fe), Color(0xff5fc6ff)],
   [Color(0xfffe6197), Color.fromARGB(255, 159, 94, 25)],
   [Color.fromARGB(107, 2, 141, 64), Color.fromARGB(107, 2, 141, 64)],

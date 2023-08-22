@@ -1,4 +1,3 @@
-import 'package:dujo_kerala_application/view/constant/sizes/sizes.dart';
 import 'package:dujo_kerala_application/view/pages/login/widgets/login_screenDegin.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
@@ -26,11 +25,28 @@ class DujoLoginScren extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GoogleMonstserratWidgets(
-                  text: 'Hello..'.tr,
+                  text: 'Welcome To'.tr,
                   letterSpacing: 2,
-                  fontsize: 30,
+                  fontsize: 25,
                   fontWeight: FontWeight.w500,
                 ),
+                 Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GoogleMonstserratWidgets(
+                  text: 'COSTECH',
+                  fontsize: 25,
+                  color: const Color.fromARGB(255, 230, 18, 3),
+                  fontWeight: FontWeight.bold,
+                ),
+                GoogleMonstserratWidgets(
+                  text: ' DuJo',
+                  fontsize: 25,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
+            ),
                 GestureDetector(
                   onTap: () {
                     Get.to(() => SearchSchoolScreen());
@@ -44,11 +60,11 @@ class DujoLoginScren extends StatelessWidget {
                 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GooglePoppinsWidgets(text: "Developed by", fontsize: 12),
-                    kHeight10,
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           height: 32,

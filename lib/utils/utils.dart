@@ -5,14 +5,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../controllers/userCredentials/user_credentials.dart';
 import '../helper/shared_pref_helper.dart';
 import '../view/pages/login/dujo_login_screen.dart';
-import 'package:http/http.dart' as http;
 
 void showToast({required String msg}) {
   Fluttertoast.showToast(
@@ -22,7 +23,7 @@ void showToast({required String msg}) {
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.black,
     textColor: Colors.white,
-    fontSize: 16.0,
+    fontSize: 16.0.sp,
   );
 }
 
