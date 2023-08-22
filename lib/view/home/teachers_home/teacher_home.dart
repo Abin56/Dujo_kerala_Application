@@ -55,6 +55,7 @@ class TeacherHomeScreen extends StatelessWidget {
                               children: [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(
+                                    
                                       UserCredentialsController
                                               .teacherModel?.imageUrl ??
                                           ""),

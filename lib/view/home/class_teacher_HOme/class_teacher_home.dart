@@ -27,7 +27,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.all(8.h),
+                    padding: EdgeInsets.all(8.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -57,7 +57,7 @@ class ClassTeacherHomeScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.cover,
                                           image: NetworkImage(
                                               UserCredentialsController
                                                       .teacherModel?.imageUrl ??

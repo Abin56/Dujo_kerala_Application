@@ -99,11 +99,18 @@ class TeacherEditProfileScreen extends StatelessWidget {
                     .doc(UserCredentialsController.classId)
                     .get(),
                 builder: (context, snapshot) {
-                  return TeacherEditListileWidget(
-                    subtitle: Text('${snapshot.data!.data()!['className']}'),
-                    icon: Icons.class_rounded,
-                    title: GooglePoppinsWidgets(text: 'Class'.tr, fontsize: 13.h),
-                  );
+                  if (snapshot.hasData) {
+                    return TeacherEditListileWidget(
+                      subtitle: Text('${snapshot.data!.data()!['className']}'),
+                      icon: Icons.class_rounded,
+                      title: GooglePoppinsWidgets(
+                          text: 'Class'.tr, fontsize: 13.h),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
                 }),
             TeacherEditListileWidget(
               icon: Icons.home,
