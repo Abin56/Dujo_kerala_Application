@@ -84,10 +84,10 @@ class ParentEditListileWidgetEmail extends StatelessWidget {
                                       )
                                     : TextButton(
                                         child: Text("Update".tr),
-                                        onPressed: () {
+                                        onPressed: () async {
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            parentProfileEditController
+                                            await parentProfileEditController
                                                 .changeParentEmail(
                                                     emailController.text.trim(),
                                                     context,

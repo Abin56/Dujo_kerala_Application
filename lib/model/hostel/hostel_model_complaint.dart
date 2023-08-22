@@ -5,6 +5,7 @@ class HostelModelComplaint {
   String docId;
   String title;
   String studentId;
+  String classId;
   int date;
   String description;
   bool isCompleted;
@@ -12,6 +13,7 @@ class HostelModelComplaint {
     required this.docId,
     required this.title,
     required this.studentId,
+    required this.classId,
     required this.date,
     required this.description,
     required this.isCompleted,
@@ -21,6 +23,7 @@ class HostelModelComplaint {
     String? docId,
     String? title,
     String? studentId,
+    String? classId,
     int? date,
     String? description,
     bool? isCompleted,
@@ -29,6 +32,7 @@ class HostelModelComplaint {
       docId: docId ?? this.docId,
       title: title ?? this.title,
       studentId: studentId ?? this.studentId,
+      classId: classId ?? this.classId,
       date: date ?? this.date,
       description: description ?? this.description,
       isCompleted: isCompleted ?? this.isCompleted,
@@ -40,6 +44,7 @@ class HostelModelComplaint {
       'docId': docId,
       'title': title,
       'studentId': studentId,
+      'classId': classId,
       'date': date,
       'description': description,
       'isCompleted': isCompleted,
@@ -51,6 +56,7 @@ class HostelModelComplaint {
       docId: map['docId'] as String,
       title: map['title'] as String,
       studentId: map['studentId'] as String,
+      classId: map['classId'] as String,
       date: map['date'] as int,
       description: map['description'] as String,
       isCompleted: map['isCompleted'] as bool,
@@ -64,7 +70,7 @@ class HostelModelComplaint {
 
   @override
   String toString() {
-    return 'HostelModelComplaint(docId: $docId, title: $title, studentId: $studentId, date: $date, description: $description, isCompleted: $isCompleted)';
+    return 'HostelModelComplaint(docId: $docId, title: $title, studentId: $studentId, classId: $classId, date: $date, description: $description, isCompleted: $isCompleted)';
   }
 
   @override
@@ -74,6 +80,7 @@ class HostelModelComplaint {
     return other.docId == docId &&
         other.title == title &&
         other.studentId == studentId &&
+        other.classId == classId &&
         other.date == date &&
         other.description == description &&
         other.isCompleted == isCompleted;
@@ -84,6 +91,7 @@ class HostelModelComplaint {
     return docId.hashCode ^
         title.hashCode ^
         studentId.hashCode ^
+        classId.hashCode ^
         date.hashCode ^
         description.hashCode ^
         isCompleted.hashCode;
