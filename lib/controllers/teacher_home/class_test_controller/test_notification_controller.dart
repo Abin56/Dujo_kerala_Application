@@ -24,7 +24,7 @@ class TestNotificationController {
         fetchParentId(classId: classId),
         fetchStudentId(classId: classId),
         fetchGuardianId(classId: classId)
-      ]).then((value) => showToast(msg: "Suceesfully send Notification"));
+      ]).then((value) => showToast(msg: "Succesfully send Notification"));
     } catch (e) {
       showToast(msg: "Something went wrong");
       log(e.toString());

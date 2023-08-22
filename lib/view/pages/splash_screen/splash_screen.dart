@@ -12,16 +12,15 @@ import 'package:dujo_kerala_application/view/home/parent_home/parent_main_home_s
 import 'package:dujo_kerala_application/view/home/student_home/students_main_home.dart';
 import 'package:dujo_kerala_application/view/home/teachers_home/teacher_main_home.dart';
 import 'package:dujo_kerala_application/view/pages/login/dujo_login_screen.dart';
-import 'package:dujo_kerala_application/view/widgets/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/shared_pref_helper.dart';
 import '../../../model/guardian_model/guardian_model.dart';
-import '../../fonts/fonts.dart';
 import '../../home/guardian_home/guardian_main_home.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -34,32 +33,67 @@ class SplashScreen extends StatelessWidget {
       body: SafeArea(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Container(
-              height: 200.h,
-              width: 200.w,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/leptonlogo.png'))),
+           Center(
+            child: AnimationConfiguration.staggeredGrid(
+               position: 1,
+                            duration: const Duration(milliseconds: 4000),
+                            columnCount: 3,
+              child: ScaleAnimation(
+                  duration: const Duration(milliseconds: 900),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                child: FadeInAnimation(
+                  child: Container(
+                
+                    height: 220.h,
+                    width: 220.w,
+                    decoration: const BoxDecoration(
+                      
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/leptonlogo.png',), )),
+                  ),
+                ),
+              ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GoogleMonstserratWidgets(
-                text: 'COSTECH',
-                fontsize: 27.sp,
-                color: const Color.fromARGB(255, 201, 14, 1),
-                fontWeight: FontWeight.bold,
+          Center(
+            child: AnimationConfiguration.staggeredGrid(
+               position: 2,
+                            duration: const Duration(milliseconds: 4000),
+                            columnCount: 3,
+              child: ScaleAnimation(
+                  duration: const Duration(milliseconds: 900),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                child: FadeInAnimation(
+                  child: Container(
+                    height: 320.h,
+                    width: 320.w,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/cost.png',), )),
+                  ),
+                ),
               ),
-              Text(
-                " DuJo",
-                style: DGoogleFonts.headTextStyleMont,
-              ),
-            ],
+            ),
           ),
-           Text('Kerala State Co-Operative',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold),)
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     GoogleMonstserratWidgets(
+          //       text: 'COSTECH',
+          //       fontsize: 27.sp,
+          //       color: const Color.fromARGB(255, 201, 14, 1),
+          //       fontWeight: FontWeight.bold,
+          //     ),
+          //     Text(
+          //       " DuJo",
+                
+          //       style: DGoogleFonts.headTextStyleMont,
+          //     ),
+          //   ],
+          // ), const SizedBox(height: 10,),
+          
         ],
       )),
     );
