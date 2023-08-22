@@ -30,6 +30,10 @@ class StudentsGroupMessagesScreen extends StatelessWidget {
                   return SizedBox(
                     height: 70,
                     child: ListTile(
+                           subtitle: const Text(
+                        'Group',
+                        style: TextStyle(color: Colors.black),
+                      ),
                       onTap: () async {
                         final firebase = await FirebaseFirestore.instance
                             .collection('SchoolListCollection')

@@ -46,8 +46,8 @@ class TeachersMessagesScreen extends StatelessWidget {
                       title: Text(snapshots.data!.docs[index]['teacherName'],
                           style: const TextStyle(color: Colors.black)),
                       contentPadding: const EdgeInsetsDirectional.all(1),
-                      subtitle: const Text(
-                        'class',
+                        subtitle: const Text(
+                        'Teacher',
                         style: TextStyle(color: Colors.black),
                       ),
                       trailing: snapshots.data!.docs[index]['messageindex'] == 0
