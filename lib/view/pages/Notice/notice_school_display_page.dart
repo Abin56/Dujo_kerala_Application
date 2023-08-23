@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:photo_view/photo_view.dart';
 
 import '../../../model/notice_model/school_level_notice_model.dart';
 
@@ -31,15 +32,25 @@ class NoticeClassDisplayPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   kHeight30,
-                  SizedBox(
-                    height: 150,
-                    width: 150,
-                    child: Image(
-                      image: noticeModel.imageUrl.isEmpty
-                          ? const NetworkImage(
-                              "https://media.istockphoto.com/id/926144358/photo/portrait-of-a-little-bird-tit-flying-wide-spread-wings-and-flushing-feathers-on-white-isolated.jpg?b=1&s=170667a&w=0&k=20&c=DEARMqqAI_YoA5kXtRTyYTYU9CKzDZMqSIiBjOmqDNY=")
-                          : NetworkImage(noticeModel.imageUrl),
-                      fit: BoxFit.fill,
+                  GestureDetector(
+                    onTap: () {
+                      if (noticeModel.imageUrl.isNotEmpty) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              PhotoViewerWidget(imageurl: noticeModel.imageUrl),
+                        ));
+                      }
+                    },
+                    child: SizedBox(
+                      height: 150,
+                      width: 150,
+                      child: Image(
+                        image: noticeModel.imageUrl.isEmpty
+                            ? const NetworkImage(
+                                "https://media.istockphoto.com/id/926144358/photo/portrait-of-a-little-bird-tit-flying-wide-spread-wings-and-flushing-feathers-on-white-isolated.jpg?b=1&s=170667a&w=0&k=20&c=DEARMqqAI_YoA5kXtRTyYTYU9CKzDZMqSIiBjOmqDNY=")
+                            : NetworkImage(noticeModel.imageUrl),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                   kHeight30,
@@ -72,7 +83,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                   kHeight20,
                                   GooglePoppinsWidgetsNotice(
                                       text:
-                                          "This is to inform all the students that  ${noticeModel.customContent}  will be  conducted ${noticeModel.dateofoccation}  at ${noticeModel.venue} with various cultural programmes.${noticeModel.chiefGuest} will be grace the occasion. Student who would like to occasion in various programme should contact their\nrespective classteacher latest by ${noticeModel.dateofoccation} .",
+                                          "This is to inform all the students that  ${noticeModel.customContent}  will be  conducted on ${noticeModel.dateofoccation}, at the ${noticeModel.venue} with various cultural programs. The ${noticeModel.chiefGuest} will grace the occasion. Students who would like to participate in various programs should contact their\nrespective class teacher by ${noticeModel.dateofoccation}.",
                                       fontsize: 19.h),
                                   kHeight30,
                                   Row(
@@ -133,6 +144,23 @@ class GooglePoppinsWidgetsNotice extends StatelessWidget {
         fontSize: fontsize,
         fontWeight: fontWeight,
         color: color,
+      ),
+    );
+  }
+}
+
+class PhotoViewerWidget extends StatelessWidget {
+  const PhotoViewerWidget({super.key, required this.imageurl});
+  final String imageurl;
+
+  @override
+  Widget build(BuildContext context) {
+    return PhotoView(
+      loadingBuilder: (context, event) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+      imageProvider: NetworkImage(
+        imageurl,
       ),
     );
   }

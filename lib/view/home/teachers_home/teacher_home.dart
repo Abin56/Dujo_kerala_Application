@@ -119,6 +119,7 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
                               children: [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(
+                                    
                                       UserCredentialsController
                                               .teacherModel?.imageUrl ??
                                           ""),
