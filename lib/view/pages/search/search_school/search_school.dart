@@ -99,11 +99,12 @@ class SearchSchoolScreen extends StatelessWidget {
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
+                
                 children: [
                   GooglePoppinsWidgets(text: "Developed by", fontsize: 12),
                   kHeight10,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         height: 32,

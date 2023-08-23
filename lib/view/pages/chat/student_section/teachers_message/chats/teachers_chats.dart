@@ -313,7 +313,7 @@ class _TeachersChatsScreenState extends State<TeachersChatsScreen> {
         'docid': FirebaseAuth.instance.currentUser?.uid,
         'messageindex': 0,
         'studentname': UserCredentialsController.studentModel?.studentName,
-        'classID':UserCredentialsController.studentModel?.classId,
+        'classID': UserCredentialsController.classId,
       });
     }
   }
@@ -337,6 +337,7 @@ class _TeachersChatsScreenState extends State<TeachersChatsScreen> {
           .set({
         'block': false,
         'docid': FirebaseAuth.instance.currentUser?.uid,
+        'classID': UserCredentialsController.classId,
         'messageindex': 0,
         'studentname': UserCredentialsController.studentModel?.studentName,
       });

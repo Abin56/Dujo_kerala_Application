@@ -16,13 +16,12 @@ import '../../view/colors/colors.dart';
 
 class MultipileStudentsController extends GetxController {
   RxBool isLoading = RxBool(false);
-  var parentAuthlist = <DBParentLogin>[].obs;
-
+  List<DBParentLogin> parentAuthlist = <DBParentLogin>[].obs;
   @override
-  void onReady() {
+  void onInit() {
     parentAuthlist.clear();
     parentAuthlist.addAll(parentdataDB.values);
-    super.onReady();
+    super.onInit();
   }
 
   addParentAuthDetails(DBParentLogin dBParentLoginDetails) async {
