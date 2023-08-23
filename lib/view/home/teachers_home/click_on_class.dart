@@ -20,6 +20,7 @@ import '../../pages/Homework/homework.dart';
 import '../../pages/Subject/teacher_display_subjects.dart';
 import '../../pages/chat/teacher_section/teacher_chat-screen.dart';
 import '../../pages/exam_results/select_exam.dart';
+import '../../pages/live_classes/teacher_live_section/create_room.dart';
 import '../../pages/recorded_class/recorded_class_page.dart';
 import '../events/Tabs/school_level_tab.dart';
 import '../exam_Notification/users_exam_list_view/user_exam_acc.dart';
@@ -67,10 +68,9 @@ class ClickOnClasss extends StatelessWidget {
 
       ClassTestPage(),
 
-       ClassMonthlyTestPage(),
+      ClassMonthlyTestPage(),
     ];
     final hasDataNavigation = [
-
       SelectPeriodWiseScreen(
           batchId: UserCredentialsController.batchId!,
           classID: classID,
@@ -82,12 +82,13 @@ class ClickOnClasss extends StatelessWidget {
           classID: classID), //Attendance Book
 
       const TeacherChatScreen(), // Chats
+      CreateRoomScreen(), //Live Class
 
       const UserExmNotifications(), //Exam
 
       SelectExamLevelScreen(classId: classID), //exam result upload
 
-      const SS(),  //TimeTable
+      const SS(), //TimeTable
 
       HomeWorkUpload(
         batchId: UserCredentialsController.batchId!,
@@ -213,7 +214,9 @@ class ClickOnClasss extends StatelessWidget {
                                               height: h / 100,
                                               width: double.infinity,
                                               margin: EdgeInsets.only(
-                                                   top: w / 30, left: w / 30, right: w / 30),
+                                                  top: w / 30,
+                                                  left: w / 30,
+                                                  right: w / 30),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -230,11 +233,14 @@ class ClickOnClasss extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Center(
-                                                    child: Text( textAlign: TextAlign.center,
+                                                    child: Text(
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       _acc_text[index],
-                                                      style:
-                                                          GoogleFonts.montserrat(
-                                                              color: Colors.black
+                                                      style: GoogleFonts
+                                                          .montserrat(
+                                                              color: Colors
+                                                                  .black
                                                                   .withOpacity(
                                                                       0.5),
                                                               fontSize: 13,
@@ -317,14 +323,15 @@ class ClickOnClasss extends StatelessWidget {
                                               ),
                                             ),
                                             Center(
-                                                                                            child: Text(
+                                              child: Text(
                                                 translateString(
                                                     hasDataText[index]),
                                                 style: GoogleFonts.montserrat(
                                                     color: Colors.black
                                                         .withOpacity(0.5),
                                                     fontSize: 13,
-                                                    fontWeight: FontWeight.w600),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                                 textAlign: TextAlign.center,
                                               ),
                                             )
@@ -377,13 +384,13 @@ var hasDataImages = [
   'assets/images/attendance.png',
   'assets/images/classroom.png',
   'assets/images/chat.png',
+  'assets/images/virtual-class.png',
   'assets/images/exam.png',
   'assets/images/exmresult1.png',
   'assets/images/library.png',
   'assets/images/homework.png',
   'assets/images/notices.png',
   'assets/images/activity.png',
-  // 'assets/images/progressreport.png',
   'assets/images/subjects.png',
   'assets/images/meetings.png',
   'assets/images/recorded_classes.png',
@@ -395,13 +402,13 @@ List<String> hasDataText = [
   'Take Attendance'.tr,
   'Attendance Book'.tr,
   'Chats'.tr,
+  'Live Class'.tr,
   'Exams'.tr,
   'Exam Results'.tr,
   'Time Table'.tr,
   'HomeWorks'.tr,
   'Notices'.tr,
   'Events'.tr,
-  // 'Progress Report'.tr,
   'Study Materials'.tr,
   'Meetings'.tr,
   'Recorded Classes'.tr,
