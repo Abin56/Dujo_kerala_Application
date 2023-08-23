@@ -45,9 +45,18 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({'deviceToken': deviceToken}, SetOptions(merge: true)).then(
             (value) => log('Device Token Saved To FIREBASE')).then(
-            (value) => log('Device Token Saved To FIREBASE')).then((value) => FirebaseFirestore.instance.collection('SchoolListCollection').doc(deviceToken).set({
+            (value) => log('Device Token Saved To FIREBASE')).then((value) =>
+             FirebaseFirestore.instance.collection('PushNotificationToAll').doc(FirebaseAuth.instance.currentUser!.uid).set({
               'deviceToken' : deviceToken, 
               'schoolID': UserCredentialsController.schoolId, 
+              'batchID': UserCredentialsController.batchId, 
+              'classID': UserCredentialsController.classId, 
+              'personID' :FirebaseAuth.instance.currentUser!.uid, 
+              'role': 'Guardian'
+            })).then((value) => 
+            FirebaseFirestore.instance.collection('SchoolListCollection').doc(UserCredentialsController.schoolId).collection('PushNotificationList')
+            .doc(FirebaseAuth.instance.currentUser!.uid).set({
+              'deviceToken' : deviceToken, 
               'batchID': UserCredentialsController.batchId, 
               'classID': UserCredentialsController.classId, 
               'personID' :FirebaseAuth.instance.currentUser!.uid, 
@@ -57,6 +66,7 @@ class _GuardianHomeScreenState extends State<GuardianHomeScreen> {
 
     //AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp  apikey
   }
+
 
   @override
   void initState() {
