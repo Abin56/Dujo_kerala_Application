@@ -22,6 +22,7 @@ import 'package:get/get.dart';
 import '../../../helper/shared_pref_helper.dart';
 import '../../../model/guardian_model/guardian_model.dart';
 import '../../home/guardian_home/guardian_main_home.dart';
+import '../../widgets/fonts/google_monstre.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -66,13 +67,23 @@ class SplashScreen extends StatelessWidget {
                   duration: const Duration(milliseconds: 900),
                                 curve: Curves.fastLinearToSlowEaseIn,
                 child: FadeInAnimation(
-                  child: Container(
-                    height: 320.h,
-                    width: 320.w,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/cost.png',), )),
-                  ),
+                  child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GoogleMonstserratWidgets(
+                  text: 'COSTECH',
+                  fontsize: 25,
+                  color: const Color.fromARGB(255, 230, 18, 3),
+                  fontWeight: FontWeight.bold,
+                ),
+                GoogleMonstserratWidgets(
+                  text: ' DuJo',
+                  fontsize: 25,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
+            ),
                 ),
               ),
             ),
@@ -114,7 +125,7 @@ nextpage() async {
   UserCredentialsController.userRole =
       SharedPreferencesHelper.getString(SharedPreferencesHelper.userRoleKey);
 
-  await Future.delayed(const Duration(seconds: 3));
+  await Future.delayed(const Duration(seconds: 6));
   log("schoolId:${UserCredentialsController.schoolId}");
   log("batchId:${UserCredentialsController.batchId}");
   log("classId:${UserCredentialsController.classId}");
@@ -122,7 +133,8 @@ nextpage() async {
   log('Firebase Auth ${FirebaseAuth.instance.currentUser?.uid}');
 
   if (auth.currentUser == null) {
-    Get.to(() => const DujoLoginScren());
+   
+   Get.offAll(() => const DujoLoginScren());
   } else {
     final DocumentReference<Map<String, dynamic>> firebaseFirestore =
         FirebaseFirestore.instance
