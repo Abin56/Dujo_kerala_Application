@@ -16,36 +16,15 @@ class HostelComplaintController {
       .collection("Hostel")
       .doc("Hostel")
       .collection("Complaints");
-  Future<List<HostelModelComplaint>> fetchAllComplaintPending() async {
+  Future<List<HostelModelComplaint>> fetchAllComplaint() async {
     try {
       final QuerySnapshot<Map<String, dynamic>> complaints =
           await _firestore.get();
 
       final List<HostelModelComplaint> filteredData = complaints.docs
           .map((e) => HostelModelComplaint.fromMap(e.data()))
-          .toList()
-          .where((element) => !element.isCompleted)
           .toList();
-      filteredData.sort((a, b) => a.date.compareTo(b.date));
-      return filteredData;
-    } catch (e) {
-      showToast(msg: "Something went wrong");
-      log(e.toString(), name: className);
-      return [];
-    }
-  }
-
-  Future<List<HostelModelComplaint>> fetchAllComplaintCompleted() async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> complaints =
-          await _firestore.get();
-
-      final List<HostelModelComplaint> filteredData = complaints.docs
-          .map((e) => HostelModelComplaint.fromMap(e.data()))
-          .toList()
-          .where((element) => element.isCompleted)
-          .toList();
-      filteredData.sort((a, b) => a.date.compareTo(b.date));
+      filteredData.sort((a, b) => b.date.compareTo(a.date));
       return filteredData;
     } catch (e) {
       showToast(msg: "Something went wrong");

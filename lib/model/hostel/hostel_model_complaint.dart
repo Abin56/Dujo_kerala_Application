@@ -4,38 +4,46 @@ import 'dart:convert';
 class HostelModelComplaint {
   String docId;
   String title;
+  String description;
+  String actionsTaken;
   String studentId;
   String classId;
+  bool isAdminUpdated;
   int date;
-  String description;
-  bool isCompleted;
+  String status;
   HostelModelComplaint({
     required this.docId,
     required this.title,
+    required this.description,
+    required this.actionsTaken,
     required this.studentId,
     required this.classId,
+    required this.isAdminUpdated,
     required this.date,
-    required this.description,
-    required this.isCompleted,
+    required this.status,
   });
 
   HostelModelComplaint copyWith({
     String? docId,
     String? title,
+    String? description,
+    String? actionsTaken,
     String? studentId,
     String? classId,
+    bool? isAdminUpdated,
     int? date,
-    String? description,
-    bool? isCompleted,
+    String? status,
   }) {
     return HostelModelComplaint(
       docId: docId ?? this.docId,
       title: title ?? this.title,
+      description: description ?? this.description,
+      actionsTaken: actionsTaken ?? this.actionsTaken,
       studentId: studentId ?? this.studentId,
       classId: classId ?? this.classId,
+      isAdminUpdated: isAdminUpdated ?? this.isAdminUpdated,
       date: date ?? this.date,
-      description: description ?? this.description,
-      isCompleted: isCompleted ?? this.isCompleted,
+      status: status ?? this.status,
     );
   }
 
@@ -43,11 +51,13 @@ class HostelModelComplaint {
     return <String, dynamic>{
       'docId': docId,
       'title': title,
+      'description': description,
+      'actionsTaken': actionsTaken,
       'studentId': studentId,
       'classId': classId,
+      'isAdminUpdated': isAdminUpdated,
       'date': date,
-      'description': description,
-      'isCompleted': isCompleted,
+      'status': status,
     };
   }
 
@@ -55,11 +65,13 @@ class HostelModelComplaint {
     return HostelModelComplaint(
       docId: map['docId'] as String,
       title: map['title'] as String,
+      description: map['description'] as String,
+      actionsTaken: map['actionsTaken'] as String,
       studentId: map['studentId'] as String,
       classId: map['classId'] as String,
+      isAdminUpdated: map['isAdminUpdated'] as bool,
       date: map['date'] as int,
-      description: map['description'] as String,
-      isCompleted: map['isCompleted'] as bool,
+      status: map['status'] as String,
     );
   }
 
@@ -70,7 +82,7 @@ class HostelModelComplaint {
 
   @override
   String toString() {
-    return 'HostelModelComplaint(docId: $docId, title: $title, studentId: $studentId, classId: $classId, date: $date, description: $description, isCompleted: $isCompleted)';
+    return 'HostelModelComplaint(docId: $docId, title: $title, description: $description, actionsTaken: $actionsTaken, studentId: $studentId, classId: $classId, isAdminUpdated: $isAdminUpdated, date: $date, status: $status)';
   }
 
   @override
@@ -79,21 +91,25 @@ class HostelModelComplaint {
 
     return other.docId == docId &&
         other.title == title &&
+        other.description == description &&
+        other.actionsTaken == actionsTaken &&
         other.studentId == studentId &&
         other.classId == classId &&
+        other.isAdminUpdated == isAdminUpdated &&
         other.date == date &&
-        other.description == description &&
-        other.isCompleted == isCompleted;
+        other.status == status;
   }
 
   @override
   int get hashCode {
     return docId.hashCode ^
         title.hashCode ^
+        description.hashCode ^
+        actionsTaken.hashCode ^
         studentId.hashCode ^
         classId.hashCode ^
+        isAdminUpdated.hashCode ^
         date.hashCode ^
-        description.hashCode ^
-        isCompleted.hashCode;
+        status.hashCode;
   }
 }

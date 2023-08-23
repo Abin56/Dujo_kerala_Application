@@ -83,20 +83,22 @@ class HostelComplaintPage extends StatelessWidget {
                             if (_hostelController.isValid()) {
                               await _hostelController.createHostelComplaint(
                                 hostel: HostelModelComplaint(
-                                    docId: "",
-                                    title: _hostelController
-                                        .complaintTitleController.text,
-                                    studentId: UserCredentialsController
-                                            .studentModel?.docid ??
-                                        "",
-                                    date:
-                                        Timestamp.now().millisecondsSinceEpoch,
-                                    description: _hostelController
-                                        .complaintController.text,
-                                    isCompleted: false,
-                                    classId: UserCredentialsController
-                                            .studentModel?.classId ??
-                                        ""),
+                                  docId: "",
+                                  title: _hostelController
+                                      .complaintTitleController.text,
+                                  studentId: UserCredentialsController
+                                          .studentModel?.docid ??
+                                      "",
+                                  date: Timestamp.now().millisecondsSinceEpoch,
+                                  description: _hostelController
+                                      .complaintController.text,
+                                  status: "",
+                                  classId: UserCredentialsController
+                                          .studentModel?.classId ??
+                                      "",
+                                  actionsTaken: "",
+                                  isAdminUpdated: false,
+                                ),
                               );
                             } else {
                               showToast(msg: "All fields are mandatory");

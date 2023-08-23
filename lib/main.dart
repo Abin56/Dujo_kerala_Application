@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/firebase_options.dart';
+import 'package:dujo_kerala_application/view/colors/colors.dart';
 import 'package:dujo_kerala_application/view/constant/responsive.dart';
 import 'package:dujo_kerala_application/view/language/language.dart';
 import 'package:dujo_kerala_application/view/language/select_language/select_language.dart';
@@ -18,7 +19,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -87,6 +87,11 @@ class MyApp extends StatelessWidget {
                 ),
               ],
               child: GetMaterialApp(
+                theme: ThemeData(
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: adminePrimayColor,
+                  ),
+                ),
                 translations: GetxLanguage(),
                 locale: Locale(languageCode, countryCode),
                 debugShowCheckedModeBanner: false,
