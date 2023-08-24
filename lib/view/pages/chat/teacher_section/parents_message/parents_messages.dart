@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/controllers/userCredentials/user_credentials.dart';
 import 'package:dujo_kerala_application/view/widgets/fonts/google_poppins.dart';
@@ -63,7 +65,12 @@ class ParentMessagesScreen extends StatelessWidget {
                                     .doc(snapshots.data?.docs[index]['docid'])
                                     .get(),
                                 builder: (context, parentsnaps) {
-                                  // log('Getting parent name --->>>  ${parentsnaps.data?.get('parentName')}');
+                                  log("school Id ${UserCredentialsController.schoolId}");
+                                  log("school Id ${UserCredentialsController.batchId}");
+                                  log("school Id ${snapshots.data?.docs[index]['classID']}");
+                                  log("school Id ${snapshots.data?.docs[index]['docid']}");
+
+                                  log('Getting parent name --->>>  ${parentsnaps.data?.get('parentName')}');
                                   // log('Getting class ID--->>>  ${snapshots.data?.docs[index]['classID']}');
                                   if (parentsnaps.hasData) {
                                     return Text(
