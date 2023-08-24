@@ -92,7 +92,7 @@ class HostelComplaintPage extends StatelessWidget {
                                   date: Timestamp.now().millisecondsSinceEpoch,
                                   description: _hostelController
                                       .complaintController.text,
-                                  status: "",
+                                  status: "pending",
                                   classId: UserCredentialsController
                                           .studentModel?.classId ??
                                       "",
