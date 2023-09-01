@@ -83,7 +83,7 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                   kHeight20,
                                   GooglePoppinsWidgetsNotice(
                                       text:
-                                          "This is to inform all the students that  ${noticeModel.customContent}  will be  conducted on ${noticeModel.dateofoccation}, at the ${noticeModel.venue} with various cultural programs. The ${noticeModel.chiefGuest} will grace the occasion. Students who would like to participate in various programs should contact their\nrespective class teacher by ${noticeModel.dateofoccation}.",
+                                          "This is to inform all the students that  ${noticeModel.customContent}  will be  conducted on ${noticeModel.dateofoccation}, at the ${noticeModel.venue} with various cultural programs. The ${noticeModel.chiefGuest} will grace the occasion. Students who would like to participate in various programs should contact their\nrespective class teacher by ${noticeModel.dateOfSubmission}.",
                                       fontsize: 19.h),
                                   kHeight30,
                                   Row(

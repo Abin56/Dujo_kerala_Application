@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, sort_child_properties_last
 
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -179,9 +180,13 @@ class _LiveClassRoomState extends State<LiveClassRoom> {
                       width: double.maxFinite,
                       child: ElevatedButton(
                         onPressed: () async {
+                          log("r ${widget.roomID}");
+                          log("S ${roomText.text}");
+                          log("D ${widget.teacherName}");
+                          log("e ${nameText.text}");
                           if (updateFormkey.currentState!.validate() &&
-                              widget.roomID == roomText.text &&
-                              widget.teacherName == nameText.text) {
+                              widget.roomID == roomText.text.trim() &&
+                              nameText.text.trim().isNotEmpty) {
                             _joinMeeting();
                             Future.delayed(const Duration(seconds: 10))
                                 .then((value) async {
