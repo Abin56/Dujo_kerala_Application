@@ -34,10 +34,10 @@ class NoticeClassDisplayPage extends StatelessWidget {
                   kHeight30,
                   GestureDetector(
                     onTap: () {
-                      if (noticeModel.imageUrl.isNotEmpty) {
+                      if (noticeModel.imageUrl!.isNotEmpty) {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              PhotoViewerWidget(imageurl: noticeModel.imageUrl),
+                          builder: (context) => PhotoViewerWidget(
+                              imageurl: noticeModel.imageUrl ?? ""),
                         ));
                       }
                     },
@@ -45,10 +45,10 @@ class NoticeClassDisplayPage extends StatelessWidget {
                       height: 150,
                       width: 150,
                       child: Image(
-                        image: noticeModel.imageUrl.isEmpty
+                        image: noticeModel.imageUrl!.isEmpty
                             ? const NetworkImage(
                                 "https://media.istockphoto.com/id/926144358/photo/portrait-of-a-little-bird-tit-flying-wide-spread-wings-and-flushing-feathers-on-white-isolated.jpg?b=1&s=170667a&w=0&k=20&c=DEARMqqAI_YoA5kXtRTyYTYU9CKzDZMqSIiBjOmqDNY=")
-                            : NetworkImage(noticeModel.imageUrl),
+                            : NetworkImage(noticeModel.imageUrl ?? ""),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -74,17 +74,21 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       GooglePoppinsWidgetsNotice(
-                                        text: noticeModel.heading,
+                                        text: noticeModel.heading ?? "",
                                         fontsize: 22.h,
                                         fontWeight: FontWeight.w500,
                                       )
                                     ],
                                   ),
                                   kHeight20,
-                                  GooglePoppinsWidgetsNotice(
-                                      text:
-                                          "This is to inform all the students that  ${noticeModel.customContent}  will be  conducted on ${noticeModel.dateofoccation}, at the ${noticeModel.venue} with various cultural programs. The ${noticeModel.chiefGuest} will grace the occasion. Students who would like to participate in various programs should contact their\nrespective class teacher by ${noticeModel.dateOfSubmission}.",
-                                      fontsize: 19.h),
+                                  noticeModel.customContent!.isEmpty
+                                      ? GooglePoppinsWidgetsNotice(
+                                          text:
+                                              "This is to inform all the students that  ${noticeModel.subject}  will be  conducted on ${noticeModel.dateofoccation}, at the ${noticeModel.venue} with various cultural programs. The ${noticeModel.chiefGuest} will grace the occasion. Students who would like to participate in various programs should contact their\nrespective class teacher by ${noticeModel.dateOfSubmission}.",
+                                          fontsize: 19.h)
+                                      : GooglePoppinsWidgetsNotice(
+                                          text: noticeModel.customContent ?? "",
+                                          fontsize: 19.h),
                                   kHeight30,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -105,6 +109,24 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                           fontsize: 17.h)
                                     ],
                                   ),
+                                  kHeight10,
+                                  Visibility(
+                                    visible:
+                                        noticeModel.signedImageUrl!.isNotEmpty,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        SizedBox(
+                                          width: 80,
+                                          height: 30,
+                                          child: Image.network(
+                                            noticeModel.signedImageUrl ?? "",
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

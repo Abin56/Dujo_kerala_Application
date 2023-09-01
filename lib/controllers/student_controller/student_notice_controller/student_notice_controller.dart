@@ -42,7 +42,7 @@ class StudentNoticeController extends GetxController {
 
       schoolLevelNoticeLists.sort(
         (a, b) {
-          return b.publishedDate.compareTo(a.publishedDate);
+          return b.publishedDate!.compareTo(a.publishedDate!);
         },
       );
 
