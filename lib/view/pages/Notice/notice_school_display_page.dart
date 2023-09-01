@@ -90,15 +90,20 @@ class NoticeClassDisplayPage extends StatelessWidget {
                                           text: noticeModel.customContent ?? "",
                                           fontsize: 19.h),
                                   kHeight30,
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      GooglePoppinsWidgetsNotice(
-                                        text:
-                                            "Date : ${noticeModel.publishedDate}",
-                                        fontsize: 17.h,
-                                      ),
-                                    ],
+                                  Visibility(
+                                    visible:
+                                        noticeModel.publishedDate!.isNotEmpty,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        GooglePoppinsWidgetsNotice(
+                                          text:
+                                              "Date : ${noticeModel.publishedDate}",
+                                          fontsize: 17.h,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   kHeight10,
                                   Row(
