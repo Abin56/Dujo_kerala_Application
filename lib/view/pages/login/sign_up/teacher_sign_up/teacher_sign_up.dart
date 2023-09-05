@@ -36,10 +36,10 @@ class TeachersSignUpPage extends StatelessWidget {
 
   final TeacherSignUpController teacherController =
       Get.find<TeacherSignUpController>();
-      
+
   // final ImageProvider imageProvider;
   // final double radius;
-      
+
   // ValidatedCircleAvatar({
   //   required this.imageProvider,
   //   required this.radius,
@@ -61,8 +61,8 @@ class TeachersSignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: (){
-        getImageController.pickedImage.value="";
+      onWillPop: () {
+        getImageController.pickedImage.value = "";
         teacherController.clearFields();
         return Future.value(true);
       },
@@ -208,7 +208,8 @@ class TeachersSignUpPage extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       text: 'House Number'.tr,
                       hintText: 'Enter your House Number'.tr,
-                      textfromController: teacherController.houseNumberController,
+                      textfromController:
+                          teacherController.houseNumberController,
                       validator: checkFieldEmpty,
                     ),
                     SinUpTextFromFiled(
@@ -227,7 +228,8 @@ class TeachersSignUpPage extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       text: ' Alternate Number'.tr,
                       hintText: 'Alternate Number'.tr,
-                      textfromController: teacherController.altPhoneNoController,
+                      textfromController:
+                          teacherController.altPhoneNoController,
                       validator: checkFieldEmpty,
                     ),
                     kHeight30,
@@ -242,14 +244,15 @@ class TeachersSignUpPage extends StatelessWidget {
                             if (getImageController.pickedImage.value.isEmpty) {
                               return showToast(msg: 'Please upload your image');
                             } else {
-                              teacherController.isLoading.value=true;
+                              teacherController.isLoading.value = true;
                               FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
-                                      email: UserEmailandPasswordSaver.userEmail,
-                                      password:
-                                          UserEmailandPasswordSaver.userPassword)
+                                      email:
+                                          UserEmailandPasswordSaver.userEmail,
+                                      password: UserEmailandPasswordSaver
+                                          .userPassword)
                                   .then((value) {
-                                    teacherController.isLoading.value=false;
+                                teacherController.isLoading.value = false;
                                 teacherController
                                     .updateTeacherData()
                                     .then((value) {
@@ -282,15 +285,15 @@ class TeachersSignUpPage extends StatelessWidget {
                                 });
                                 // .then(
                                 //     (value) =>);
-                              }).catchError((error){
-                                teacherController.isLoading.value=false;
+                              }).catchError((error) {
+                                teacherController.isLoading.value = false;
                                 showToast(msg: error.code);
                               });
                             }
                           }
                         },
                         //   Get.offAll(const HomeScreen());
-    
+
                         child: Obx(() => teacherController.isLoading.value
                             ? circularProgressIndicatotWidget
                             : loginButtonWidget(

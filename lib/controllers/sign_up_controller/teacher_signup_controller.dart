@@ -140,7 +140,8 @@ class TeacherSignUpController extends GetxController {
         houseNumberController.text.isEmpty ||
         placeController.text.isEmpty ||
         districtController.text.isEmpty ||
-        altPhoneNoController.text.isEmpty) {
+        altPhoneNoController.text.isEmpty ||
+        gender == null) {
       return true;
     } else {
       return false;
