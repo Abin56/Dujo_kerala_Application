@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_application/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -73,14 +75,15 @@ class StudentSignUpController extends GetxController {
     String imageId = "";
     String imageUrl = "";
     try {
-      // if (Get.find<GetImage>().pickedImage.isNotEmpty) {
-      isLoading.value = true;
-      imageId = uuid.v1();
-      // final result = await FirebaseStorage.instance
-      //     .ref(
-      //         "files/studentsProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.studentModel?.studentName}$imageId")
-      //     .putFile(File(Get.find<GetImage>().pickedImage.value));
-      // imageUrl = await result.ref.getDownloadURL();
+      if (Get.find<GetImage>().pickedImage.isNotEmpty) {
+        isLoading.value = true;
+        imageId = uuid.v1();
+        final result = await FirebaseStorage.instance
+            .ref(
+                "files/studentsProfilePhotos/${UserCredentialsController.schoolId}/${UserCredentialsController.batchId}/${UserCredentialsController.studentModel?.studentName}$imageId")
+            .putFile(File(Get.find<GetImage>().pickedImage.value));
+        imageUrl = await result.ref.getDownloadURL();
+      }
       //getting firebase uid and updated it to collection
       String userUid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
